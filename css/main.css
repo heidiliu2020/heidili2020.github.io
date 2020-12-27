@@ -1191,7 +1191,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff9067;
+  background: #b90106;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2574,14 +2574,16 @@ body {
 .site-brand-container {
   background: #232323;
 }
-.power-by {
-  color: #000;
+.footer {
+  color: #fff;
+  background: rgba(0,0,0,0.2);
+  font-weight: 500;
 }
 .theme-link {
-  color: #338ccc;
+  color: #eee;
 }
 .theme-link:hover {
-  color: #ddd;
+  color: #fff;
 }
 .post-toc .nav .nav-child {
   display: block;
@@ -2589,11 +2591,8 @@ body {
 .post-toc ol {
   font-size: 13px;
 }
-.conten-wrap,
+.content-wrap,
+.header-inner,
 .sidebar {
-  background: rbga(255, 255, 255, 0.85);
-}
-.conten-wrap :hover,
-.sidebar :hover {
-  background: rbga(255, 255, 255, 0.95);
+  opacity: 0.9;
 }
