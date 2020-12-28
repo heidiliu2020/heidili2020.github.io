@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。 部落格 DEMO">
@@ -56,6 +58,15 @@
 
   <title>[week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -249,7 +260,7 @@
         <p>在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。</p>
 <p><a href="https://heidiliu2020.github.io/react-blog-test/#/">部落格 DEMO</a></p>
 <a id="more"></a>
-<h2 id="一、處理登入狀態的畫面閃爍"><a href="#一、處理登入狀態的畫面閃爍" class="headerlink" title="一、處理登入狀態的畫面閃爍"></a>一、處理登入狀態的畫面閃爍</h2><p>在 <a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-fe302-react-blog-login">[week 22] React：用 SPA 架構實作一個部落格（二）- 身分驗證</a> 這篇筆記中，有提到登入狀態時，重整頁面會出現畫面閃爍的問題，之所以會有這個現象，是因為畫面進行了兩次 render：</p>
+<h2 id="一、處理登入狀態的畫面閃爍"><a href="#一、處理登入狀態的畫面閃爍" class="headerlink" title="一、處理登入狀態的畫面閃爍"></a>一、處理登入狀態的畫面閃爍</h2><p>在 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMzAyLXJlYWN0LWJsb2ctbG9naW4=">[week 22] React：用 SPA 架構實作一個部落格（二）- 身分驗證<i class="fa fa-external-link-alt"></i></span> 這篇筆記中，有提到登入狀態時，重整頁面會出現畫面閃爍的問題，之所以會有這個現象，是因為畫面進行了兩次 render：</p>
 <ul>
 <li>預設為登出狀態（第一次 render）</li>
 <li>當我們發 API 確認有登入之後，才會顯示登入狀態（第二次 render）</li>
@@ -300,7 +311,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">HomePage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; isLoading, setIsLoading &#125; = useContext(LoadingContext);</span><br><span class="line">  <span class="keyword">const</span> [posts, setPosts] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setIsLoading(<span class="literal">true</span>);</span><br><span class="line">    getPosts()</span><br><span class="line">      .then(<span class="function">(<span class="params">posts</span>) =&gt;</span> setPosts(posts))</span><br><span class="line">      .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setIsLoading(<span class="literal">false</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;, [setIsLoading]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Root&gt;</span><br><span class="line">      &#123;isLoading ? (</span><br><span class="line">        &lt;Loading /&gt;</span><br><span class="line">      ) : (</span><br><span class="line">        &lt;PostsListContainer&gt;</span><br><span class="line">          &lt;PostsListTitle&gt;最新文章&lt;/PostsListTitle&gt;</span><br><span class="line">          &#123;posts &amp;&amp; posts.map(<span class="function">(<span class="params">post</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">PostList</span> <span class="attr">post</span>=<span class="string">&#123;post&#125;</span> <span class="attr">key</span>=<span class="string">&#123;post.id&#125;</span> /&gt;</span></span>)&#125;</span><br><span class="line">          &lt;ReadMore&gt;</span><br><span class="line">            &lt;Link to=<span class="string">&quot;/post-list&quot;</span>&gt;查看更多&lt;/Link&gt;</span><br><span class="line">          &lt;/ReadMore&gt;</span><br><span class="line">        &lt;/PostsListContainer&gt;</span><br><span class="line">      )&#125;</span><br><span class="line">    &lt;/Root&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="三、透過-react-spinner-設定-loading-畫面"><a href="#三、透過-react-spinner-設定-loading-畫面" class="headerlink" title="三、透過 react-spinner 設定 loading 畫面"></a>三、透過 react-spinner 設定 loading 畫面</h2><blockquote>
-<p>使用方法可參考 <a target="_blank" rel="noopener" href="https://github.com/davidhu2000/react-spinners">davidhu2000 / react-spinners</a> 介紹，以及樣式 <a target="_blank" rel="noopener" href="https://www.davidhu.io/react-spinners/">DEMO</a></p>
+<p>使用方法可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkaHUyMDAwL3JlYWN0LXNwaW5uZXJz">davidhu2000 / react-spinners<i class="fa fa-external-link-alt"></i></span> 介紹，以及樣式 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGF2aWRodS5pby9yZWFjdC1zcGlubmVycy8=">DEMO<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-spinners --save</span><br></pre></td></tr></table></figure>
 
@@ -445,10 +456,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -479,7 +490,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

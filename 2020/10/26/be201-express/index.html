@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  1234學習目標： P1 學習如何使用 Express 及其相關套件 P1 我理解為什麼會需要框架">
@@ -82,6 +84,15 @@
 
   <title>[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -273,12 +284,12 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be201-express-sequelize">[BE201] 後端中階：Express 與 Sequelize</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 學習如何使用 Express 及其相關套件</span><br><span class="line"> P1 我理解為什麼會需要框架</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
-<h2 id="要學框架，先從不用框架開始"><a href="#要學框架，先從不用框架開始" class="headerlink" title="要學框架，先從不用框架開始"></a>要學框架，先從不用框架開始</h2><p>在講解什麼是 Express 框架以前，先來談談什麼是 Server，其實 Server 也是一種程式，而 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a> 本身就有提供內建 Library，讓我們能透過引入 modeule 來使用 Server 的功能。 </p>
+<h2 id="要學框架，先從不用框架開始"><a href="#要學框架，先從不用框架開始" class="headerlink" title="要學框架，先從不用框架開始"></a>要學框架，先從不用框架開始</h2><p>在講解什麼是 Express 框架以前，先來談談什麼是 Server，其實 Server 也是一種程式，而 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">Node.js<i class="fa fa-external-link-alt"></i></span> 本身就有提供內建 Library，讓我們能透過引入 modeule 來使用 Server 的功能。 </p>
 <h3 id="範例：以-Node-js-實作一個-Server"><a href="#範例：以-Node-js-實作一個-Server" class="headerlink" title="範例：以 Node.js 實作一個 Server"></a>範例：以 Node.js 實作一個 Server</h3><p>建立一個 js 檔，並引入 Node.js 內建 http 相關 module，再以 createServer() 建立 server：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node.js 內建 http 相關 module</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="comment">// createServer() 要傳入的參數是 function</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(handler)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 兩個參數分別是 request 和 response，這裡使用命名慣例寫法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.url)  <span class="comment">// 印出 req 網址</span></span><br><span class="line">  res.write(<span class="string">&#x27;Hello World!&#x27;</span>)   <span class="comment">// 指定 respone 回傳內容</span></span><br><span class="line">  res.end()   <span class="comment">// 結束這個 response</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常見為 80 port，測試時使用 5001 port 就不易發生衝突</span></span><br><span class="line">server.listen(<span class="number">5001</span>)</span><br></pre></td></tr></table></figure>
 
@@ -308,7 +319,7 @@
 <p>簡言之，Express 是 Node.js 環境下提供的一個輕量後端框架，自由度極高，透過豐富的 HTTP 工具，能幫助快速開發後端應用程式。</p>
 <p>跟其他有完整 MVC 架構的框架相比，Express 其實鬆散（或者說自由）很多，許多地方並沒有強制規範，都只是按照前人的方法或者是慣例來實踐，十個人可能會有十種不同的寫法。</p>
 <h3 id="安裝-Express"><a href="#安裝-Express" class="headerlink" title="安裝 Express"></a>安裝 Express</h3><blockquote>
-<p>詳細步驟可參考<a target="_blank" rel="noopener" href="https://expressjs.com/zh-tw/starter/installing.html">官方文件</a>。</p>
+<p>詳細步驟可參考<span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tL3poLXR3L3N0YXJ0ZXIvaW5zdGFsbGluZy5odG1s">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 </blockquote>
 <h4 id="Step1-初始化-npm，過程都按確定，最後會在資料夾中建立一個-package-json-檔"><a href="#Step1-初始化-npm，過程都按確定，最後會在資料夾中建立一個-package-json-檔" class="headerlink" title="Step1. 初始化 npm，過程都按確定，最後會在資料夾中建立一個 package.json 檔"></a>Step1. 初始化 npm，過程都按確定，最後會在資料夾中建立一個 package.json 檔</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
 
@@ -317,7 +328,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express --save</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/qOagjRg.png"></p>
-<h4 id="Step3-實作範例：Hello-world"><a href="#Step3-實作範例：Hello-world" class="headerlink" title="Step3. 實作範例：Hello world"></a>Step3. 實作範例：Hello world</h4><p>接著可以跟著<a target="_blank" rel="noopener" href="https://expressjs.com/en/starter/hello-world.html">官方文件</a>來實作一個簡單範例，開啟 index.js 檔並輸入下列程式碼：</p>
+<h4 id="Step3-實作範例：Hello-world"><a href="#Step3-實作範例：Hello-world" class="headerlink" title="Step3. 實作範例：Hello world"></a>Step3. 實作範例：Hello world</h4><p>接著可以跟著<span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tL2VuL3N0YXJ0ZXIvaGVsbG8td29ybGQuaHRtbA==">官方文件<i class="fa fa-external-link-alt"></i></span>來實作一個簡單範例，開啟 index.js 檔並輸入下列程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 library</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// express 引入的是一個 function</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="comment">// 建立一個不易產生衝突的 port 用來測試</span></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">5001</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如何處理不同的 request，參數分別為 url 和要執行的 function</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;hello world!&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/bye&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;bye!&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 運行這個 port，參數分別為 port 和要執行的 function</span></span><br><span class="line">app.listen(port, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Example app listening at http://localhost:<span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>在 CLI 介面執行 index.js，出現下方文字代表有成功運行程式：</p>
@@ -327,11 +338,11 @@
 <p>如果發現修改後，網頁還是會導回先前設定的網址，可透過開發者工具來清除快取（cache），重整頁面就能看到結果：</p>
 <p><img src="https://i.imgur.com/6T6umyx.png"></p>
 <p>和最一開始的範例做比較的話，其實可以發現到，寫法和使用 Node.js 實作 Server 非常類似。</p>
-<p>但是藉由 Express 提供的<a target="_blank" rel="noopener" href="https://expressjs.com/zh-tw/guide/routing.html">路由（Routing）</a>系統，會將許多語法包裝好，在執行上也會方便許多。除了 <code>app.get()</code>，還有像是 <code>app.post()</code> 和 <code>app.delete()</code> 等針對不同 method 來進行操作，這部分我們後面會再詳細介紹。</p>
-<h3 id="Express-vs-Apache-PHP"><a href="#Express-vs-Apache-PHP" class="headerlink" title="Express vs Apache + PHP"></a>Express vs Apache + PHP</h3><p>在看完上面的範例後，我們可以試著比較 Express 和以前所學的 <a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-be101-php-and-mysql">Apache + PHP</a>，兩者的運作模式有何差別：</p>
+<p>但是藉由 Express 提供的<span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tL3poLXR3L2d1aWRlL3JvdXRpbmcuaHRtbA==">路由（Routing）<i class="fa fa-external-link-alt"></i></span>系統，會將許多語法包裝好，在執行上也會方便許多。除了 <code>app.get()</code>，還有像是 <code>app.post()</code> 和 <code>app.delete()</code> 等針對不同 method 來進行操作，這部分我們後面會再詳細介紹。</p>
+<h3 id="Express-vs-Apache-PHP"><a href="#Express-vs-Apache-PHP" class="headerlink" title="Express vs Apache + PHP"></a>Express vs Apache + PHP</h3><p>在看完上面的範例後，我們可以試著比較 Express 和以前所學的 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMTAxLXBocC1hbmQtbXlzcWw=">Apache + PHP<i class="fa fa-external-link-alt"></i></span>，兩者的運作模式有何差別：</p>
 <h4 id="Apache-PHP"><a href="#Apache-PHP" class="headerlink" title="Apache + PHP"></a>Apache + PHP</h4><ul>
 <li>瀏覽器會發 request 給 Apache Server，再交給 PHP 處理，處理完成後再傳 response 回去</li>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">檔案系統</a>：預設路徑長什麼樣子，在該資料夾底下就會有對應的 php 檔</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNiU5NiU4NyVFNCVCQiVCNiVFNyVCMyVCQiVFNyVCQiU5Rg==">檔案系統<i class="fa fa-external-link-alt"></i></span>：預設路徑長什麼樣子，在該資料夾底下就會有對應的 php 檔</li>
 </ul>
 <p><img src="https://i.imgur.com/EYfvLe0.png"></p>
 <h4 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h4><ul>
@@ -356,7 +367,7 @@
 <li>Controller 在過程中扮演 Model 和 View 中間的協調者，當不同路由（route）接收到 request 時，會呼叫 Controller 執行相對應的 Method。例如跟 Model 拿取資料，結合 View 提供的模版之後，再回傳 response</li>
 </ul>
 <p>這和我們之前使用 PHP 寫的網頁相比，在分工上是明確許多的。接下來我們要利用 Nodes.js 來實作一個簡單的 MVC 架構。</p>
-<h2 id="在-Node-js-上實作-MVC-架構"><a href="#在-Node-js-上實作-MVC-架構" class="headerlink" title="在 Node.js 上實作 MVC 架構"></a>在 Node.js 上實作 MVC 架構</h2><h3 id="透過-Express-提供的-template-engines-來實作-View"><a href="#透過-Express-提供的-template-engines-來實作-View" class="headerlink" title="透過 Express 提供的 template engines 來實作 View"></a>透過 Express 提供的 <a target="_blank" rel="noopener" href="https://expressjs.com/en/guide/using-template-engines.html">template engines</a> 來實作 View</h3><ol>
+<h2 id="在-Node-js-上實作-MVC-架構"><a href="#在-Node-js-上實作-MVC-架構" class="headerlink" title="在 Node.js 上實作 MVC 架構"></a>在 Node.js 上實作 MVC 架構</h2><h3 id="透過-Express-提供的-template-engines-來實作-View"><a href="#透過-Express-提供的-template-engines-來實作-View" class="headerlink" title="透過 Express 提供的 template engines 來實作 View"></a>透過 Express 提供的 <span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tL2VuL2d1aWRlL3VzaW5nLXRlbXBsYXRlLWVuZ2luZXMuaHRtbA==">template engines<i class="fa fa-external-link-alt"></i></span> 來實作 View</h3><ol>
 <li>選擇安裝一種 template engines（樣板處理器）使用，這裡以 EJS 做為範例，架構類似於之前學過的 PHP：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install ejs</span><br></pre></td></tr></table></figure>
@@ -456,12 +467,12 @@
 <blockquote>
 <p>注意不是用 Express 和 MySQL 溝通！我們要操作的是 Nodes.js，Express 提供的是框架！</p>
 </blockquote>
-<h3 id="Step1-安裝-MySQL"><a href="#Step1-安裝-MySQL" class="headerlink" title="Step1. 安裝 MySQL"></a>Step1. 安裝 MySQL</h3><p>在使用 Node.js 操作 MySQL 資料庫時，必須先安裝 MySQL 模組。搜尋 node.js mysql 會找到 GitHub 有個叫做 <a target="_blank" rel="noopener" href="https://github.com/mysqljs/mysql">mysqljs 的 Library</a>，執行安裝指令：</p>
+<h3 id="Step1-安裝-MySQL"><a href="#Step1-安裝-MySQL" class="headerlink" title="Step1. 安裝 MySQL"></a>Step1. 安裝 MySQL</h3><p>在使用 Node.js 操作 MySQL 資料庫時，必須先安裝 MySQL 模組。搜尋 node.js mysql 會找到 GitHub 有個叫做 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL215c3FsanMvbXlzcWw=">mysqljs 的 Library<i class="fa fa-external-link-alt"></i></span>，執行安裝指令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install mysql</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/tR8kezb.png"></p>
 <p>引入 MySQL 模組後，接著就可以進行資料庫的連線和其他操作了。</p>
-<h3 id="Step2-新增-app-資料庫-amp-todos-資料表"><a href="#Step2-新增-app-資料庫-amp-todos-資料表" class="headerlink" title="Step2. 新增 app 資料庫 &amp;  todos 資料表"></a>Step2. 新增 app 資料庫 &amp;  todos 資料表</h3><p>之前在<a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-be101-php-and-mysql">第九週學到如何使用 MySQL 資料庫</a>，這一次我們同樣可以透過 phpmyadmin 這個 GUI 介面來進行資料庫 CURD，步驟如下：</p>
+<h3 id="Step2-新增-app-資料庫-amp-todos-資料表"><a href="#Step2-新增-app-資料庫-amp-todos-資料表" class="headerlink" title="Step2. 新增 app 資料庫 &amp;  todos 資料表"></a>Step2. 新增 app 資料庫 &amp;  todos 資料表</h3><p>之前在<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMTAxLXBocC1hbmQtbXlzcWw=">第九週學到如何使用 MySQL 資料庫<i class="fa fa-external-link-alt"></i></span>，這一次我們同樣可以透過 phpmyadmin 這個 GUI 介面來進行資料庫 CURD，步驟如下：</p>
 <ol>
 <li>開啟 XAMPP 連線 MySQL，其實這樣就已經啟動資料庫了，但如果要使用 phpmyadmin 介面操作，就必須同時運行 Apache Server 才能使用：</li>
 </ol>
@@ -474,7 +485,7 @@
 <li>在 todos table 新增幾筆資料</li>
 </ol>
 <p><img src="https://i.imgur.com/Bd9TEJB.png"></p>
-<h3 id="Step3-串接-MySQL-資料庫"><a href="#Step3-串接-MySQL-資料庫" class="headerlink" title="Step3. 串接 MySQL 資料庫"></a>Step3. 串接 MySQL 資料庫</h3><p>確認本地端已經安裝資料庫並正常啟動，接著就可以新增一個 db.js 檔來進行連線，程式碼可<a target="_blank" rel="noopener" href="https://github.com/mysqljs/mysql#introduction">參考範例</a>：</p>
+<h3 id="Step3-串接-MySQL-資料庫"><a href="#Step3-串接-MySQL-資料庫" class="headerlink" title="Step3. 串接 MySQL 資料庫"></a>Step3. 串接 MySQL 資料庫</h3><p>確認本地端已經安裝資料庫並正常啟動，接著就可以新增一個 db.js 檔來進行連線，程式碼可<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL215c3FsanMvbXlzcWwjaW50cm9kdWN0aW9u">參考範例<i class="fa fa-external-link-alt"></i></span>：</p>
 <blockquote>
 <p>要等待回傳一定是使用 callback，好處就是從同步變成非同步。</p>
 </blockquote>
@@ -506,7 +517,7 @@
 <li>再來是修改 Models，MVC 架構的好處就是能像這樣明確分工：</li>
 </ol>
 <blockquote>
-<p>在使用 SQL 指令時須注意，字串拼接可能會有 SQL injection 的風險，可透過 <a target="_blank" rel="noopener" href="https://github.com/mysqljs/mysql#preparing-queries">Preparing Queries</a> 來避免，方法和 Prepared Statements 其實很類似。</p>
+<p>在使用 SQL 指令時須注意，字串拼接可能會有 SQL injection 的風險，可透過 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL215c3FsanMvbXlzcWwjcHJlcGFyaW5nLXF1ZXJpZXM=">Preparing Queries<i class="fa fa-external-link-alt"></i></span> 來避免，方法和 Prepared Statements 其實很類似。</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 db，也就是 connection</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="built_in">require</span>(<span class="string">&#x27;../db&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> todoModel = &#123;</span><br><span class="line">  <span class="comment">// 這裡要用 callback 來拿取資料</span></span><br><span class="line">  getAll: <span class="function">(<span class="params">cb</span>) =&gt;</span> &#123;</span><br><span class="line">    db.query(</span><br><span class="line">      <span class="string">&#x27;SELECT * FROM todos&#x27;</span>, <span class="function">(<span class="params">err, results</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</span><br><span class="line">      <span class="comment">// cb: 第一個參數為是否有錯誤，沒有的話就是 null，第二個才是結果</span></span><br><span class="line">      cb(<span class="literal">null</span>, results)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  get: <span class="function">(<span class="params">id, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    db.query(</span><br><span class="line">      <span class="string">&#x27;SELECT * FROM todos WHERE id = ?&#x27;</span>, [id], <span class="function">(<span class="params">err, results</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</span><br><span class="line">        cb(<span class="literal">null</span>, results)</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = todoModel</span><br></pre></td></tr></table></figure>
 
@@ -548,8 +559,8 @@
 <p>也透過實作來複習之前講解過的 MVC 框架，透過將程式碼分成 Model、View 和 Controller 三個部分，再搭配不同 Route 分別進行處理，不但能夠簡化程式碼，也能透過分工便於後續維護。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://cythilya.github.io/2014/11/23/nodejs-express-microblog/">使用 Node.js + Express 建構一個簡單的微博網站</a></li>
-<li><a target="_blank" rel="noopener" href="https://nicolakacha.coderbridge.io/2020/10/25/express-mvc-practice-1/">用 Express &amp; Sequelize 打造 MVC 餐廳網站（上）</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jeXRoaWx5YS5naXRodWIuaW8vMjAxNC8xMS8yMy9ub2RlanMtZXhwcmVzcy1taWNyb2Jsb2cv">使用 Node.js + Express 建構一個簡單的微博網站<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFrYWNoYS5jb2RlcmJyaWRnZS5pby8yMDIwLzEwLzI1L2V4cHJlc3MtbXZjLXByYWN0aWNlLTEv">用 Express &amp; Sequelize 打造 MVC 餐廳網站（上）<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -679,10 +690,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -713,7 +724,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

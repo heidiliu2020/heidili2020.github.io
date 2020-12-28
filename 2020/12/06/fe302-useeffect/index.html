@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  在 React Hooks 當中，最重要的就是 useState 和 useEffect，若能學會如何使用這兩個 hook，對於 React 應用也會更容易上手。">
@@ -59,6 +61,15 @@
 
   <title>[week 21] React Hooks API：useEffect & 實作一個自己的鉤子 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -250,13 +261,13 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe302-react-hooks">[FE302] React 基礎 - hooks 版本</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <p>在 React Hooks 當中，最重要的就是 useState 和 useEffect，若能學會如何使用這兩個 hook，對於 React 應用也會更容易上手。</p>
 <a id="more"></a>
 <hr>
 <h2 id="初探-useEffect"><a href="#初探-useEffect" class="headerlink" title="初探 useEffect"></a>初探 useEffect</h2><blockquote>
-<p>詳細可參考官方文件：<a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/hooks-effect.html">使用 Effect Hook</a>。</p>
+<p>詳細可參考官方文件：<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtZWZmZWN0Lmh0bWw=">使用 Effect Hook<i class="fa fa-external-link-alt"></i></span>。</p>
 </blockquote>
 <p>簡單來說，就是透過 useEffect 這個 hook，告訴 React「component 在 render 之後要做的事情」。</p>
 <p>有別於一般的 hook 是傳值進去，userEffect 傳入的是 function，使用方法如下：</p>
@@ -309,7 +320,7 @@
 <p>如此畫面就不會再閃一次初始的資料了：</p>
 <p><img src="https://i.imgur.com/HNXymGK.gif"></p>
 <p>至於為什麼會產生這個情況，可從 React 的 Hook Flow 談起。</p>
-<h3 id="Hook-Flow-流程圖"><a href="#Hook-Flow-流程圖" class="headerlink" title="Hook Flow 流程圖"></a>Hook Flow 流程圖</h3><p><img src="https://i.imgur.com/usOw4li.png"><br>（圖片來源：<a target="_blank" rel="noopener" href="https://github.com/donavon/hook-flow/blob/master/README.md%EF%BC%89">https://github.com/donavon/hook-flow/blob/master/README.md）</a></p>
+<h3 id="Hook-Flow-流程圖"><a href="#Hook-Flow-流程圖" class="headerlink" title="Hook Flow 流程圖"></a>Hook Flow 流程圖</h3><p><img src="https://i.imgur.com/usOw4li.png"><br>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvbmF2b24vaG9vay1mbG93L2Jsb2IvbWFzdGVyL1JFQURNRS5tZCVFRiVCQyU4OQ==">https://github.com/donavon/hook-flow/blob/master/README.md）<i class="fa fa-external-link-alt"></i></span></p>
 <p>Hook 執行流程可分為三個部分：</p>
 <ul>
 <li>Mount：把 component 放到畫面上</li>
@@ -356,13 +367,13 @@
 </ul>
 <p>那我們可以透過 useEffect 的 cleanup function 做什麼呢？例如：</p>
 <ul>
-<li>用來清除訂閱操作，避免記憶體洩漏，可參考<a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/hooks-effect.html">官網範例</a></li>
+<li>用來清除訂閱操作，避免記憶體洩漏，可參考<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtZWZmZWN0Lmh0bWw=">官網範例<i class="fa fa-external-link-alt"></i></span></li>
 <li>當 component 被 unmount 時要執行的事情</li>
 </ul>
 <p>以下方範例來說，代表「只有在這個 component 被 unmount 會執行 cleanup function」，又因為第二個參數是空陣列，所以這個 useEffect 只會執行一次：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;mount&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;unmount&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
 
-<h2 id="實作一個自己的鉤子"><a href="#實作一個自己的鉤子" class="headerlink" title="實作一個自己的鉤子"></a>實作一個自己的鉤子</h2><p>接下來要談談 hooks 最強大的地方，就是我們其實能寫一個自己 hook，又稱作 custom hook，命名開頭必須是 use 開頭，詳細內容可參考<a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/hooks-custom.html">官方文件</a>。</p>
+<h2 id="實作一個自己的鉤子"><a href="#實作一個自己的鉤子" class="headerlink" title="實作一個自己的鉤子"></a>實作一個自己的鉤子</h2><p>接下來要談談 hooks 最強大的地方，就是我們其實能寫一個自己 hook，又稱作 custom hook，命名開頭必須是 use 開頭，詳細內容可參考<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtY3VzdG9tLmh0bWw=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="實作一個-useInput"><a href="#實作一個-useInput" class="headerlink" title="實作一個 useInput"></a>實作一個 useInput</h3><p>以 input 元素為例，我們可以把 value 和 handleInputChange 等行為包在 useInput.js 檔案，寫法和之前的 APP.js 很類似：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 從 react 引入 useState</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匯出 useInput()</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">useInput</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="string">&quot;&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> handleChange = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setValue(e.target.value);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    value,</span><br><span class="line">    setValue,</span><br><span class="line">    handleChange,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -400,22 +411,22 @@
 </ul>
 </li>
 <li>自訂 hooks：把邏輯從 UI 抽出來寫一個 hook</li>
-<li>參考別人寫好的 hooks：<a target="_blank" rel="noopener" href="https://usehooks.com/">useHooks</a></li>
+<li>參考別人寫好的 hooks：<span class="exturl" data-url="aHR0cHM6Ly91c2Vob29rcy5jb20v">useHooks<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h2 id="補充資料"><a href="#補充資料" class="headerlink" title="補充資料"></a>補充資料</h2><p>推薦閱讀 Dan Abramov 所撰寫有關 React 的系列文章，裡面對於 useEffect 的原理有更詳細敘述：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://comus.dev/zh-hant/a-complete-guide-to-useeffect/">A Complete Guide to useEffect</a></li>
-<li><a target="_blank" rel="noopener" href="https://comus.dev/zh-hans/how-are-function-components-different-from-classes/">How Are Function Components Different from Classes?</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb211cy5kZXYvemgtaGFudC9hLWNvbXBsZXRlLWd1aWRlLXRvLXVzZWVmZmVjdC8=">A Complete Guide to useEffect<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb211cy5kZXYvemgtaGFucy9ob3ctYXJlLWZ1bmN0aW9uLWNvbXBvbmVudHMtZGlmZmVyZW50LWZyb20tY2xhc3Nlcy8=">How Are Function Components Different from Classes?<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>第 11 屆 iT 邦幫忙鐵人賽有關 React 的系列文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20103315/ironman/2668">從 Hooks 開始，讓你的網頁 React 起來</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEwMzMxNS9pcm9ubWFuLzI2Njg=">從 Hooks 開始，讓你的網頁 React 起來<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10252118">【Day.26】React進階 - useEffect v.s useLayoutEffect</a></li>
-<li><a target="_blank" rel="noopener" href="https://comus.dev/">Overreacted - Dan Abramov.</a></li>
-<li><a target="_blank" rel="noopener" href="https://pjchender.github.io/2019/08/07/reactdoc-react-hooks-useeffect/">[ReactDoc] React Hooks - useEffect</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDI1MjExOA==">【Day.26】React進階 - useEffect v.s useLayoutEffect<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb211cy5kZXYv">Overreacted - Dan Abramov.<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZ2l0aHViLmlvLzIwMTkvMDgvMDcvcmVhY3Rkb2MtcmVhY3QtaG9va3MtdXNlZWZmZWN0Lw==">[ReactDoc] React Hooks - useEffect<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -545,10 +556,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -579,7 +590,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

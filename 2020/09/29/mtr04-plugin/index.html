@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [MTR04] 第十三週 - 帶著做留言版 plugin 的學習筆記。如有錯誤歡迎指正。  前置作業需安裝好 webpack 以及其他套件，可跟著官方教學步驟 Getting Started 進行安裝： 1234mkdir webpack-democd webpack-demonpm init -ynpm install webpack webpack-cli --save-dev">
@@ -54,6 +56,15 @@
 
   <title>[week 13] MTR04 - 實作留言版 plugin | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -245,9 +256,9 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/mtr04">[MTR04] 第十三週 - 帶著做留言版 plugin</a> 的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbXRyMDQ=">[MTR04] 第十三週 - 帶著做留言版 plugin<i class="fa fa-external-link-alt"></i></span> 的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
-<h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p>需安裝好 webpack 以及其他套件，可跟著官方教學步驟 <a target="_blank" rel="noopener" href="https://webpack.js.org/guides/getting-started/">Getting Started</a> 進行安裝：</p>
+<h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p>需安裝好 webpack 以及其他套件，可跟著官方教學步驟 <span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvZ2V0dGluZy1zdGFydGVkLw==">Getting Started<i class="fa fa-external-link-alt"></i></span> 進行安裝：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-demo</span><br><span class="line">cd webpack-demo</span><br><span class="line">npm init -y</span><br><span class="line">npm install webpack webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h4 id="安裝使用-jquery"><a href="#安裝使用-jquery" class="headerlink" title="安裝使用 jquery"></a>安裝使用 jquery</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install jquery webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
@@ -286,7 +297,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;./dist/main.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="步驟五：引入-library"><a href="#步驟五：引入-library" class="headerlink" title="步驟五：引入 library"></a>步驟五：引入 library</h3><blockquote>
-<p>可參考官方文件：<a target="_blank" rel="noopener" href="https://webpack.js.org/guides/author-libraries/">https://webpack.js.org/guides/author-libraries/</a></p>
+<p>可參考官方文件：<span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvYXV0aG9yLWxpYnJhcmllcy8=">https://webpack.js.org/guides/author-libraries/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <ol>
 <li>將 index.js 的 <code>init()</code> 改為 export：</li>
@@ -442,10 +453,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -476,7 +487,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

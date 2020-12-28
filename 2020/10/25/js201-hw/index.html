@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="hw1：Event Loop hw2：Event Loop + Scope hw3：Hoisting hw4：What is this?">
@@ -50,6 +52,15 @@
 
   <title>[week 16] JavaScript 進階 - 作業練習 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -380,17 +391,17 @@
 </ol>
 <p>在不需要的地方呼叫 this 時，this 會被指定為全域物件。依照執行環境不同，其值也會改變，例如在瀏覽器執行會是 Window，在 node.js 執行則是會是 Global。<br>若是在<code>&#39;use strict&#39;;</code>（嚴格模式）下執行，this 的值會是 undefined。</p>
 <h2 id="這週學了一大堆以前搞不懂的東西，你有變得更懂了嗎？請寫下你的心得。"><a href="#這週學了一大堆以前搞不懂的東西，你有變得更懂了嗎？請寫下你的心得。" class="headerlink" title="這週學了一大堆以前搞不懂的東西，你有變得更懂了嗎？請寫下你的心得。"></a>這週學了一大堆以前搞不懂的東西，你有變得更懂了嗎？請寫下你的心得。</h2><h3 id="這週的學習筆記"><a href="#這週的學習筆記" class="headerlink" title="這週的學習筆記"></a>這週的學習筆記</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-data-type">[week 16] JavaScript 進階 - 關於變數與資料型態</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-hoisting">[week 16] JavaScript 進階 - 初探 Hoisting &amp; Execution Context</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-javascript-callback">[week 16] 淺談 JavaScript：同步與非同步 &amp; Callback Function &amp; Event Loop</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-closure">[week 16] JavaScript 進階 - 什麼是閉包？探討 Closure &amp; Scope Chain</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-oop-prototype">[week 16] JavaScript 進階 - 物件導向 &amp; Prototype</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-this">[week 16] JavaScript 進階 - What is this？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLWRhdGEtdHlwZQ==">[week 16] JavaScript 進階 - 關於變數與資料型態<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLWhvaXN0aW5n">[week 16] JavaScript 進階 - 初探 Hoisting &amp; Execution Context<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWphdmFzY3JpcHQtY2FsbGJhY2s=">[week 16] 淺談 JavaScript：同步與非同步 &amp; Callback Function &amp; Event Loop<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLWNsb3N1cmU=">[week 16] JavaScript 進階 - 什麼是閉包？探討 Closure &amp; Scope Chain<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLW9vcC1wcm90b3R5cGU=">[week 16] JavaScript 進階 - 物件導向 &amp; Prototype<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLXRoaXM=">[week 16] JavaScript 進階 - What is this？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h3 id="學習心得"><a href="#學習心得" class="headerlink" title="學習心得"></a>學習心得</h3><p>這一週的知識量其實蠻大的，從複習 JavaScript 的變數與資料型態，等號賦值與記憶體位置等等，在第二週的課程也有提到相關概念，到了第十六週則是要去瞭解程式背後是如何運作的。</p>
 <h4 id="Hoisting-amp-Execution-Contexts-amp-Variable-Object"><a href="#Hoisting-amp-Execution-Contexts-amp-Variable-Object" class="headerlink" title="Hoisting &amp; Execution Contexts &amp; Variable Object"></a>Hoisting &amp; Execution Contexts &amp; Variable Object</h4><p>從理解什麼是 Hoisting（提升），瞭解我們為什麼需要提升，再延伸到運作原理。過程中建立的 Execution Contexts（執行環境）、與之對應的 Variable Object（變數物件）等等，其實涉及到有關 JavaScript 的範圍非常廣。</p>
 <p>除了課堂影片提到的內容，自己也上網查了許多有關執行環境、執行堆疊的資料，雖然花費不少時間，卻也藉由瞭解 JavaScript 的編譯與執行過程，從建立到執行階段，加深對整個架構的理解。</p>
-<h4 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h4><p>在閱讀完 <a target="_blank" rel="noopener" href="https://blog.huli.tw/2019/10/04/javascript-async-sync-and-callback/">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！</a> 這篇文章，原本對 callback 概念薄弱的自己，對同步與非同步又有了新的一層認識。</p>
+<h4 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h4><p>在閱讀完 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOS8xMC8wNC9qYXZhc2NyaXB0LWFzeW5jLXN5bmMtYW5kLWNhbGxiYWNrLw==">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！<i class="fa fa-external-link-alt"></i></span> 這篇文章，原本對 callback 概念薄弱的自己，對同步與非同步又有了新的一層認識。</p>
 <p>尤其是才剛接著學完有關 Hoisting 的運作原理，在瞭解什麼是執行環境以後，再回來看 Event Loop 似乎也更能夠理解當中的執行流程。</p>
 <p>也想到再次看到 Node.js 是 JavaScript 的 runtime（執行環境）這句話時，會想到 Execution Context 的中文也被翻成執行環境，但其實兩者指的對象不同。前者指的是「執行時系統」（run-time system）；後者指的是 JavaScript 在執行時會建立的環境，又可分為全域與函式執行環境。翻成中文的壞處就是容易撞名混淆，還是讓自己盡量去理解原文的意思。</p>
 <h4 id="Closure-amp-Scope"><a href="#Closure-amp-Scope" class="headerlink" title="Closure &amp; Scope"></a>Closure &amp; Scope</h4><p>在學到 Closure（閉包）時，發現其實花了很多時間在瞭解有關 Scope（作用域）的概念。也是在這一單元瞭解到，原來之前在課程中學到的非同步操作，當中的 callback 其實就和閉包有關，有關 callback 的觀念真的非常重要，也難怪這些觀念會不斷在課程中被提到。</p>
@@ -428,7 +439,7 @@
 </li>
 </ul>
 <p>藉由瞭解什麼是物件導向，為什麼需要物件導向以後，對整體架構似乎又更加清楚一些。過程中也查了許多資料，在碰到新的名詞時總會感到慌張，像是 constructor（建構子）、prototype（原型）、instance（實例）等等，其實只要能夠先瞭解定義是什麼，就不難繼續理解整體架構。</p>
-<p>最後，在找相關資料的時候，有在這篇<a target="_blank" rel="noopener" href="https://igouist.github.io/post/2020/07/oo-5-polymorphism/">網誌</a>中，看到使用泡麵的例子來比喻物件導向，因為還蠻喜歡的也記錄在這裡：</p>
+<p>最後，在找相關資料的時候，有在這篇<span class="exturl" data-url="aHR0cHM6Ly9pZ291aXN0LmdpdGh1Yi5pby9wb3N0LzIwMjAvMDcvb28tNS1wb2x5bW9ycGhpc20v">網誌<i class="fa fa-external-link-alt"></i></span>中，看到使用泡麵的例子來比喻物件導向，因為還蠻喜歡的也記錄在這裡：</p>
 <ol>
 <li>由泡麵工廠製作麵和醬包，並包裝在一起，我們可以直接買來享用</li>
 <li>我們可以在泡麵中自己加料，或是不用泡的改用炒的</li>
@@ -596,10 +607,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -630,7 +641,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

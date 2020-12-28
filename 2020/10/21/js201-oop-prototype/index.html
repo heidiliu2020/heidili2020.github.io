@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [JS201] 進階 JavaScript：那些你一直搞不懂的地方 這門課程的學習筆記。如有錯誤歡迎指正！  12345學習目標： P1 你知道 Prototype 在 JavaScript 裡是什麼 P1 你知道大部分情況下 this 的值是什麼 P2 你知道物件導向的基本概念（類別、實體、繼承、封裝）">
@@ -55,6 +57,15 @@
 
   <title>[week 16] JavaScript 進階 - 物件導向 & Prototype | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -246,17 +257,17 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/js201-javascript">[JS201] 進階 JavaScript：那些你一直搞不懂的地方</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道 Prototype 在 JavaScript 裡是什麼</span><br><span class="line"> P1 你知道大部分情況下 this 的值是什麼</span><br><span class="line"> P2 你知道物件導向的基本概念（類別、實體、繼承、封裝）</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
-<h2 id="什麼是物件導向？"><a href="#什麼是物件導向？" class="headerlink" title="什麼是物件導向？"></a>什麼是物件導向？</h2><p>其實我們在上一篇 <a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-closure">Closure &amp; Scope Chain 筆記</a>中，就有稍微提到物件導向的相關觀念：</p>
+<h2 id="什麼是物件導向？"><a href="#什麼是物件導向？" class="headerlink" title="什麼是物件導向？"></a>什麼是物件導向？</h2><p>其實我們在上一篇 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLWNsb3N1cmU=">Closure &amp; Scope Chain 筆記<i class="fa fa-external-link-alt"></i></span>中，就有稍微提到物件導向的相關觀念：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWallet</span>(<span class="params">initMoney</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> money = initMoney;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    add: <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">      money += num;</span><br><span class="line">    &#125;,</span><br><span class="line">    deduct: <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (num &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">        money -= <span class="number">10</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        money -= num</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">getMoney</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> money;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myWallet = createWallet(<span class="number">99</span>);</span><br><span class="line">myWallet.add(<span class="number">1</span>);</span><br><span class="line">myWallet.deduct(<span class="number">100</span>);</span><br><span class="line"><span class="built_in">console</span>.log(myWallet.getMoney()); <span class="comment">// 90</span></span><br></pre></td></tr></table></figure>
 
 <p>在物件導向的世界，我們以呼叫 function 的方式進行操作，會比較像是在使用物件的形式。例如 myWallet.add() 這句的意思，就像是對 myWallet 這個物件做一些操作。</p>
 <p>像這樣透過塑造物件，就可以不需一直 Call function，也會使程式更模組化一些，並且能夠隱藏內部資訊。</p>
-<h3 id="建立物件實體（Object-instance）"><a href="#建立物件實體（Object-instance）" class="headerlink" title="建立物件實體（Object instance）"></a>建立物件實體（Object instance）</h3><p>根據 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/Object-oriented_JS">MDN</a> 說明，其實物件導向（Object-oriented）的基本概念就是：「採用物件（Objects）來模塑真實的實物世界」。</p>
+<h3 id="建立物件實體（Object-instance）"><a href="#建立物件實體（Object-instance）" class="headerlink" title="建立物件實體（Object instance）"></a>建立物件實體（Object instance）</h3><p>根據 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9MZWFybi9KYXZhU2NyaXB0L09iamVjdHMvT2JqZWN0LW9yaWVudGVkX0pT">MDN<i class="fa fa-external-link-alt"></i></span> 說明，其實物件導向（Object-oriented）的基本概念就是：「採用物件（Objects）來模塑真實的實物世界」。</p>
 <p>也就是說，我們可以在程式中透過 Objects（物件）來塑造其模型，而物件能夠存放其相關資料與程式碼，並且能使用方式（Method）來進行存取。</p>
 <p>舉個簡單的例子，以一隻狗來說，可能會有許多基本資訊，像是毛色、身高、名字、性別等，透過這些抽象概念或特質，我們能夠建立一個「Dog」範本，作為代表狗的物件類別（class）。</p>
 <p>接著我們可以從這個類別建立物件實體（Object instance），也就是該透過執行類別的「建構子函式（Constructor Function）」建立物件，而這段過程就稱為實體化（Instantiation）。</p>
@@ -308,7 +319,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name</span>) </span>&#123;    <span class="comment">// 等於 constructor</span></span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;say hello!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Dog(<span class="string">&#x27;dog A&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> Dog(<span class="string">&#x27;dog B&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.sayHello === b.sayHello);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>兩個 function 就會是相同的，因為 a 和 b 都是 prototype 上面的 function。如此一來，我們就可以使用同一個 function 去跑不同的 instance，透過這個方式實作 JavaScript 的物件導向。</p>
-<h3 id="proto-amp-prototype"><a href="#proto-amp-prototype" class="headerlink" title="__proto__ &amp; prototype"></a><code>__proto__</code> &amp; <code>prototype</code></h3><p>所以 prototype 是什麼？在 <a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/6.0/#sec-terms-and-definitions-prototype">ECMA5.1</a> 標準中，定義原型（prototype）是為其他對象提供共享屬性的對象：</p>
+<h3 id="proto-amp-prototype"><a href="#proto-amp-prototype" class="headerlink" title="__proto__ &amp; prototype"></a><code>__proto__</code> &amp; <code>prototype</code></h3><p>所以 prototype 是什麼？在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZWNtYS1pbnRlcm5hdGlvbmFsLm9yZy9lY21hLTI2Mi82LjAvI3NlYy10ZXJtcy1hbmQtZGVmaW5pdGlvbnMtcHJvdG90eXBl">ECMA5.1<i class="fa fa-external-link-alt"></i></span> 標準中，定義原型（prototype）是為其他對象提供共享屬性的對象：</p>
 <blockquote>
 <p>object that provides shared properties for other objects</p>
 </blockquote>
@@ -327,7 +338,7 @@
 <li>由 new 指令建立的物件，<code>__proto__</code> 屬性會指向該原型物件的 <code>prototype</code></li>
 <li>也就是說，當我們想找 obj 物件中的 X 屬性時，如果在 obj 中找不到，就會繼續沿著 <code>__proto__</code> 往下一層查找</li>
 </ul>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34183746">js中__proto__和prototype的區別和關係？</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM0MTgzNzQ2">js中__proto__和prototype的區別和關係？<i class="fa fa-external-link-alt"></i></span></p>
 <p>接著繼續沿用剛才的 Dog 範例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name</span>) </span>&#123;    <span class="comment">// 等於 constructor</span></span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;say hello!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Dog(<span class="string">&#x27;dog A&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> Dog(<span class="string">&#x27;dog B&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__);</span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__);</span><br><span class="line"><span class="comment">// Dog &#123; getName: [Function], sayHello: [Function] &#125;</span></span><br><span class="line"><span class="comment">// Dog &#123; getName: [Function], sayHello: [Function] &#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -420,7 +431,7 @@
 </li>
 </ul>
 <p>藉由瞭解什麼是物件導向，為什麼需要物件導向以後，對整體架構似乎又更加清楚一些。過程中也查了許多資料，在碰到新的名詞時總會感到慌張，像是 constructor（建構子）、prototype（原型）、instance（實例）等等，其實只要能夠先瞭解定義是什麼，就不難繼續理解整體架構。</p>
-<p>最後，在找相關資料的時候，有在這篇<a target="_blank" rel="noopener" href="https://igouist.github.io/post/2020/07/oo-5-polymorphism/">網誌</a>中，看到使用泡麵的例子來比喻物件導向，因為還蠻喜歡的也記錄在這裡：</p>
+<p>最後，在找相關資料的時候，有在這篇<span class="exturl" data-url="aHR0cHM6Ly9pZ291aXN0LmdpdGh1Yi5pby9wb3N0LzIwMjAvMDcvb28tNS1wb2x5bW9ycGhpc20v">網誌<i class="fa fa-external-link-alt"></i></span>中，看到使用泡麵的例子來比喻物件導向，因為還蠻喜歡的也記錄在這裡：</p>
 <ol>
 <li>由泡麵工廠製作麵和醬包，並包裝在一起，我們可以直接買來享用</li>
 <li>我們可以在泡麵中自己加料，或是不用泡的改用炒的</li>
@@ -428,9 +439,9 @@
 </ol>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.huli.tw/2017/08/27/the-javascripts-prototype-chain/">該來理解 JavaScript 的原型鍊了</a></li>
-<li><a target="_blank" rel="noopener" href="https://hugh-program-learning-diary-js.medium.com/%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%9A%8E-js%E4%BB%A4%E4%BA%BA%E6%90%9E%E4%B8%8D%E6%87%82%E7%9A%84%E5%9C%B0%E6%96%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91-cdea0e3266ee">[week 16] JavaScript 進階 - 淺談物件導向 &amp; this</a></li>
-<li><a target="_blank" rel="noopener" href="https://nicolakacha.coderbridge.io/2020/10/01/oop-prototype-this/">JavaScript: Object-oriented JavaScript, Prototype Chain &amp; This</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxNy8wOC8yNy90aGUtamF2YXNjcmlwdHMtcHJvdG90eXBlLWNoYWluLw==">該來理解 JavaScript 的原型鍊了<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9odWdoLXByb2dyYW0tbGVhcm5pbmctZGlhcnktanMubWVkaXVtLmNvbS8lRTUlODklOEQlRTclQUIlQUYlRTQlQjglQUQlRTklOUElOEUtanMlRTQlQkIlQTQlRTQlQkElQkElRTYlOTAlOUUlRTQlQjglOEQlRTYlODclODIlRTclOUElODQlRTUlOUMlQjAlRTYlOTYlQjktJUU3JTg5JUE5JUU0JUJCJUI2JUU1JUIwJThFJUU1JTkwJTkxLWNkZWEwZTMyNjZlZQ==">[week 16] JavaScript 進階 - 淺談物件導向 &amp; this<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFrYWNoYS5jb2RlcmJyaWRnZS5pby8yMDIwLzEwLzAxL29vcC1wcm90b3R5cGUtdGhpcy8=">JavaScript: Object-oriented JavaScript, Prototype Chain &amp; This<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -560,10 +571,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -594,7 +605,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  123456學習目標： P1 你知道捕獲與冒泡是什麼 P1 你知道什麼是事件代理（delegation） P2 你知道怎麼用 JavaScript 更改元素的 style P2 你知道 preventDefault 與 stopPropagation 的差異">
@@ -54,6 +56,15 @@
 
   <title>[week 7] DOM 事件傳遞機制：捕獲與冒泡、事件代理 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -245,7 +256,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe102-javascript">[FE102] 前端必備：JavaScript</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDItamF2YXNjcmlwdA==">[FE102] 前端必備：JavaScript<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道捕獲與冒泡是什麼</span><br><span class="line"> P1 你知道什麼是事件代理（delegation）</span><br><span class="line"> P2 你知道怎麼用 JavaScript 更改元素的 style</span><br><span class="line"> P2 你知道 preventDefault 與 stopPropagation 的差異</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -270,7 +281,7 @@
 <p><img src="https://i.imgur.com/6YDCa36.png"></p>
 <p>由此可知當點擊內部節點，同時也會點擊到外層節點。</p>
 <h2 id="捕獲與冒泡"><a href="#捕獲與冒泡" class="headerlink" title="捕獲與冒泡"></a>捕獲與冒泡</h2><blockquote>
-<p>參考文章：<a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/">DOM 的事件傳遞機制：捕獲與冒泡</a></p>
+<p>參考文章：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNy8wNy8xNS9qYXZhc2NyaXB0LWV2ZW50LXByb3BhZ2F0aW9uLw==">DOM 的事件傳遞機制：捕獲與冒泡<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>根據上述內容，可知 DOM 事件傳遞機制分成 3 階段：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1：Capturing Phase　捕獲階段</span><br><span class="line">2：Target Phase     傳遞到元素本身</span><br><span class="line">3：Bubbling Phase   冒泡階段</span><br></pre></td></tr></table></figure>
@@ -279,7 +290,7 @@
 <p>任何事件在傳遞時，都會按照這個順序下去傳遞。這也是為什麼，當觸發底層節點的事件同時，上層所有的節點也會被觸發。</p>
 <p><img src="https://i.imgur.com/zj2brCF.png"></p>
 <blockquote>
-<p>可參考：<a target="_blank" rel="noopener" href="https://www.w3.org/TR/DOM-Level-3-Events/#event-flow">W3C -  event flow 的示意圖</a></p>
+<p>可參考：<span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL0RPTS1MZXZlbC0zLUV2ZW50cy8jZXZlbnQtZmxvdw==">W3C -  event flow 的示意圖<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h3 id="事件傳遞的兩個原則"><a href="#事件傳遞的兩個原則" class="headerlink" title="事件傳遞的兩個原則"></a>事件傳遞的兩個原則</h3><ol>
 <li>先捕獲，再冒泡</li>
@@ -324,7 +335,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 事件代理 --&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;outer&quot;</span>&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;add-btn&quot;</span>&gt;add&lt;/button&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span> data-value=<span class="string">&quot;1&quot;</span>&gt;<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span> data-value=<span class="string">&quot;2&quot;</span>&gt;<span class="number">2</span>&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">let</span> num = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 動態新增按紐</span></span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.add-btn&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> newBtn = <span class="built_in">document</span>.createElement(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">    newBtn.classList.add(<span class="string">&#x27;btn&#x27;</span>)</span><br><span class="line">    newBtn.setAttribute(<span class="string">&#x27;data-value&#x27;</span>, num)</span><br><span class="line">    newBtn.innerText = num</span><br><span class="line">    num += <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.outer&#x27;</span>).appendChild(newBtn)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 不管有沒有進行事件監聽，事件捕獲冒泡機制都會進行</span></span><br><span class="line">  <span class="comment">// 新增監聽在父節點上</span></span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.outer&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// .classList.contains()：判斷是否包含該 class</span></span><br><span class="line">    <span class="keyword">if</span> (e.target.classList.contains(<span class="string">&#x27;btn&#x27;</span>)) &#123;</span><br><span class="line">      alert(e.target.getAttribute(<span class="string">&#x27;data-value&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 
-<p>參考資料：<a target="_blank" rel="noopener" href="https://github.com/RZ-Huang/About-Javascript/issues/2">Introduction to Javascript in Front-End #2</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JaLUh1YW5nL0Fib3V0LUphdmFzY3JpcHQvaXNzdWVzLzI=">Introduction to Javascript in Front-End #2<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
 
@@ -452,10 +463,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -486,7 +497,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

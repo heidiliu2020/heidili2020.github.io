@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為「程式導師實驗計畫：Lesson 8-2 之資料庫」這門課程的學習筆記。如有錯誤歡迎指正。">
@@ -54,6 +56,15 @@
 
   <title>[week 14] 後端基礎：資料庫 & 系統設計 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -257,7 +268,7 @@
 <li>瞭解什麼是系統設計</li>
 </ul>
 <hr>
-<h2 id="NoSQL（Not-Only-SQL）"><a href="#NoSQL（Not-Only-SQL）" class="headerlink" title="NoSQL（Not Only SQL）"></a>NoSQL（Not Only SQL）</h2><p>非關聯式資料庫，例如 <a target="_blank" rel="noopener" href="https://www.mongodb.com/cloud/atlas/lp/try2?utm_source=google&utm_campaign=gs_apac_taiwan_search_brand_atlas_desktop&utm_term=mongodb&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=6498554090&gclid=Cj0KCQjwuL_8BRCXARIsAGiC51A2fnn8cy0JQPdfGGGCluss0PuBCG96x3-NzTfSE9jy0ibAJMTLy1IaAhApEALw_wcB">mongodb</a>；與之對應的是關聯式資料庫，例如之前實作 PHP 留言板使用的 MySQL。</p>
+<h2 id="NoSQL（Not-Only-SQL）"><a href="#NoSQL（Not-Only-SQL）" class="headerlink" title="NoSQL（Not Only SQL）"></a>NoSQL（Not Only SQL）</h2><p>非關聯式資料庫，例如 <span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vY2xvdWQvYXRsYXMvbHAvdHJ5Mj91dG1fc291cmNlPWdvb2dsZSZ1dG1fY2FtcGFpZ249Z3NfYXBhY190YWl3YW5fc2VhcmNoX2JyYW5kX2F0bGFzX2Rlc2t0b3AmdXRtX3Rlcm09bW9uZ29kYiZ1dG1fbWVkaXVtPWNwY19wYWlkX3NlYXJjaCZ1dG1fYWQ9ZSZ1dG1fYWRfY2FtcGFpZ25faWQ9NjQ5ODU1NDA5MCZnY2xpZD1DajBLQ1Fqd3VMXzhCUkNYQVJJc0FHaUM1MUEyZm5uOGN5MEpRUGRmR0dHQ2x1c3MwUHVCQ0c5NngzLU56VGZTRTlqeTBpYkFKTVRMeTFJYUFoQXBFQUx3X3djQg==">mongodb<i class="fa fa-external-link-alt"></i></span>；與之對應的是關聯式資料庫，例如之前實作 PHP 留言板使用的 MySQL。</p>
 <ol>
 <li>沒有 Schema，可以想像成存 JSON 資料進 Database</li>
 <li>使用 key-value 儲存</li>
@@ -284,8 +295,8 @@
 </ul>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.ithome.com.tw/news/92506">了解NoSQL不可不知的5項觀念</a></li>
-<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/nosql/">NoSQL (非關聯式) 資料庫如何運作？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS50dy9uZXdzLzkyNTA2">了解NoSQL不可不知的5項觀念<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9ub3NxbC8=">NoSQL (非關聯式) 資料庫如何運作？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="Transaction-交易"><a href="#Transaction-交易" class="headerlink" title="Transaction 交易"></a>Transaction 交易</h2><ul>
@@ -317,7 +328,7 @@
 </ol>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31346392">如何理解數據庫事務中的一致性的概念？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzMxMzQ2Mzky">如何理解數據庫事務中的一致性的概念？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h3 id="如何在-MySQL-執行-Transaction"><a href="#如何在-MySQL-執行-Transaction" class="headerlink" title="如何在 MySQL 執行 Transaction"></a>如何在 MySQL 執行 Transaction</h3><p>一個 Transaction 可同時執行多個 SQL，以下列程式碼為例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$conn-&gt;autocommit(<span class="literal">FALSE</span>);    <span class="comment">// 避免每次自動變成 transaction</span></span><br><span class="line">$conn-&gt;begin_transaction();  <span class="comment">// 開始 transaction</span></span><br><span class="line">$conn-&gt;query(<span class="string">&quot;update from money set amount = 20&quot;</span>);</span><br><span class="line">$conn-&gt;query(<span class="string">&quot;update from money set sum = 10&quot;</span>);</span><br><span class="line">$conn-&gt;commit();        <span class="comment">// 當發出 commit 後才會執行</span></span><br></pre></td></tr></table></figure>
@@ -331,10 +342,10 @@
 <h3 id="什麼情況需要-Lock-鎖"><a href="#什麼情況需要-Lock-鎖" class="headerlink" title="什麼情況需要 Lock 鎖"></a>什麼情況需要 Lock 鎖</h3><p>舉例來說，當某個商品限定數量，造成搶購時可能會發生「超賣」情形，此現象又稱作 race condition（競爭危害）。若能在交易時加上 lock，即可避免同時讀取和寫入同一筆資料時產生的資料衝突，避免系統發生錯誤。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.qa-knowhow.com/?p=383">資料庫的交易鎖定 Locks</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucWEta25vd2hvdy5jb20vP3A9Mzgz">資料庫的交易鎖定 Locks<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
-<h2 id="再探-DNS"><a href="#再探-DNS" class="headerlink" title="再探 DNS"></a>再探 DNS</h2><p>在課程<a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week4_%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96.md">第四週的網路基礎概論</a>時我們也曾提過 DNS（域名系統）。</p>
+<h2 id="再探-DNS"><a href="#再探-DNS" class="headerlink" title="再探 DNS"></a>再探 DNS</h2><p>在課程<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrNF8lRTclQjYlQjIlRTglQjclQUYlRTUlOUYlQkElRTclQTQlOEUlRTYlQTYlODIlRTglQUIlOTYubWQ=">第四週的網路基礎概論<i class="fa fa-external-link-alt"></i></span>時我們也曾提過 DNS（域名系統）。</p>
 <ul>
 <li>全名是 Domain Name System</li>
 <li>負責將域名轉換成 IP 位置。可將 DNS 伺服器作為一個分散式資料庫<ul>
@@ -375,10 +386,10 @@
 <p><img src="https://i.imgur.com/ODL6mPz.png"></p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://medium.com/%E5%BE%8C%E7%AB%AF%E6%96%B0%E6%89%8B%E6%9D%91/backend-architecture-101-5c425e760a13">系統設計101—大型系統的演進（上）</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=-W9F__D3oY4">CS75 (Summer 2012) Lecture 9 Scalability Harvard Web Development David Malan</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.ayqy.net/blog/scalability_%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b01/">Scalability_系統設計筆記1</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/articles/1475241626.html">負載均衡常見問題之會話保持-粘滯會話(Sticky Sessions)</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFNSVCRSU4QyVFNyVBQiVBRiVFNiU5NiVCMCVFNiU4OSU4QiVFNiU5RCU5MS9iYWNrZW5kLWFyY2hpdGVjdHVyZS0xMDEtNWM0MjVlNzYwYTEz">系統設計101—大型系統的演進（上）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0tVzlGX19EM29ZNA==">CS75 (Summer 2012) Lecture 9 Scalability Harvard Web Development David Malan<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5heXF5Lm5ldC9ibG9nL3NjYWxhYmlsaXR5XyVlNyViMyViYiVlNyViYiU5ZiVlOCVhZSViZSVlOCVhZSVhMSVlNyVhYyU5NCVlOCVhZSViMDEv">Scalability_系統設計筆記1<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2FydGljbGVzLzE0NzUyNDE2MjYuaHRtbA==">負載均衡常見問題之會話保持-粘滯會話(Sticky Sessions)<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -508,10 +519,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -542,7 +553,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

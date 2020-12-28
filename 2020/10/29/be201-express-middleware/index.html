@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  1234學習目標： P1 學習如何使用 Express 及其相關套件 P1 我理解為什麼會需要框架">
@@ -69,6 +71,15 @@
 
   <title>[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -260,12 +271,12 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be201-express-sequelize">[BE201] 後端中階：Express 與 Sequelize</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 學習如何使用 Express 及其相關套件</span><br><span class="line"> P1 我理解為什麼會需要框架</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
-<h2 id="Middleware-中間介"><a href="#Middleware-中間介" class="headerlink" title="Middleware 中間介"></a>Middleware 中間介</h2><p>在上一篇筆記 <a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-be201-express-node">後端中階 - Node.js + Express 框架：建立一個靜態網頁</a>，我們學到如何透過 Node.js 搭配 Express 框架，來快速建立一個靜態網頁。並瞭解到什麼是 MVC 架構，以及如何串接 MySQL 資料庫。</p>
+<h2 id="Middleware-中間介"><a href="#Middleware-中間介" class="headerlink" title="Middleware 中間介"></a>Middleware 中間介</h2><p>在上一篇筆記 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMjAxLWV4cHJlc3Mtbm9kZQ==">後端中階 - Node.js + Express 框架：建立一個靜態網頁<i class="fa fa-external-link-alt"></i></span>，我們學到如何透過 Node.js 搭配 Express 框架，來快速建立一個靜態網頁。並瞭解到什麼是 MVC 架構，以及如何串接 MySQL 資料庫。</p>
 <p>而 Express 的核心，其實就是由 Routing（路由系統）和 Middleware（中間介）兩個部分所組成。</p>
 <p>也就是說，Express 會根據定義不同路由來執行接收到的 request，過程中會透過一連串的 middleware 處理，執行到最後產生 response。</p>
 <p><img src="https://i.imgur.com/uvrlRi6.png"></p>
@@ -316,7 +327,7 @@
 <p>但是 <code>/todos/:id</code> 這個路由不會受到影響，因為沒有加上 checkPermission() 這個 middleware：</p>
 <p><img src="https://i.imgur.com/wqOkqgg.png"></p>
 <p>在上一篇筆記的 todolist 範例中，之所以沒有寫到 next 來轉移控制權，是因為處理完就回傳 response 資料，既然不會用到 next 這個參數，就可省略宣告。</p>
-<h2 id="body-parser：用來解析-HTTP-Request"><a href="#body-parser：用來解析-HTTP-Request" class="headerlink" title="body-parser：用來解析 HTTP Request"></a>body-parser：用來解析 HTTP Request</h2><p>接著要來介紹 body-parser 這個很常使用到的 middleware，使用方法可參考 GitHub 上 <a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser#readme">expressjs/body-parser</a> 的範例。</p>
+<h2 id="body-parser：用來解析-HTTP-Request"><a href="#body-parser：用來解析-HTTP-Request" class="headerlink" title="body-parser：用來解析 HTTP Request"></a>body-parser：用來解析 HTTP Request</h2><p>接著要來介紹 body-parser 這個很常使用到的 middleware，使用方法可參考 GitHub 上 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4cHJlc3Nqcy9ib2R5LXBhcnNlciNyZWFkbWU=">expressjs/body-parser<i class="fa fa-external-link-alt"></i></span> 的範例。</p>
 <p>body-parser 是一個用來解析解析 HTTP Request 的中間介。前面有提到說，我透過 Express 內建的語法，我們只能拿到 query string，因此只適用於 GET method，但若是 POST method 就必須透過 middleware 才能拿到 request body。</p>
 <h3 id="安裝-body-parser"><a href="#安裝-body-parser" class="headerlink" title="安裝 body-parser"></a>安裝 body-parser</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install body-parser</span><br></pre></td></tr></table></figure>
 
@@ -393,7 +404,7 @@
 <p>回到瀏覽器確認是否能夠新增 todo：</p>
 <p><img src="https://i.imgur.com/Y9fPgmN.png"></p>
 <p>這樣就完成一個簡單的 Back-end 專案了！並且有 MVC 架構，也就是 View 顯示畫面，Model 處理資料，Controller 藉由不同路由接收 requset，會執行相對應的 method；還有透過 body-parser 這個 middleware 處理 POST 表單提交的資料。</p>
-<h2 id="express-session：負責管理-session"><a href="#express-session：負責管理-session" class="headerlink" title="express-session：負責管理 session"></a>express-session：負責管理 session</h2><p>再來介紹 Express 框架中，用來管理 session 的中間介：express-session，使用方法可參考 GitHub 的 <a target="_blank" rel="noopener" href="https://github.com/expressjs/session">expressjs/session</a> 頁面。</p>
+<h2 id="express-session：負責管理-session"><a href="#express-session：負責管理-session" class="headerlink" title="express-session：負責管理 session"></a>express-session：負責管理 session</h2><p>再來介紹 Express 框架中，用來管理 session 的中間介：express-session，使用方法可參考 GitHub 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4cHJlc3Nqcy9zZXNzaW9u">expressjs/session<i class="fa fa-external-link-alt"></i></span> 頁面。</p>
 <h3 id="安裝-express-session"><a href="#安裝-express-session" class="headerlink" title="安裝 express-session"></a>安裝 express-session</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express-session</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/jWw5ZYd.png"></p>
@@ -433,7 +444,7 @@
 <p>這樣就透過 express-session 中間介提供的功能，完成簡單的登入登出功能。</p>
 <p>但這種寫法其實會遇到一個問題，也就是每個 render 的頁面都要加上 isLogin 判斷登入狀態，我們再來要介紹的中間介就可以解決這個問題。</p>
 <h2 id="connect-flash：顯示錯誤訊息"><a href="#connect-flash：顯示錯誤訊息" class="headerlink" title="connect-flash：顯示錯誤訊息"></a>connect-flash：顯示錯誤訊息</h2><p>藉由 connect-flash 提供的 flash message 功能，我們就能在頁面顯示錯誤訊息等等，其實這背後的機制就是透過 session，能夠和 express-session 搭配使用。</p>
-<p>使用方法可參考 GitHub 的 <a target="_blank" rel="noopener" href="https://github.com/jaredhanson/connect-flash">jaredhanson/connect-flash</a> 頁面。</p>
+<p>使用方法可參考 GitHub 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phcmVkaGFuc29uL2Nvbm5lY3QtZmxhc2g=">jaredhanson/connect-flash<i class="fa fa-external-link-alt"></i></span> 頁面。</p>
 <h3 id="安裝-connect-flash"><a href="#安裝-connect-flash" class="headerlink" title="安裝 connect-flash"></a>安裝 connect-flash</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install connect-flash</span><br></pre></td></tr></table></figure>
 <h3 id="實作錯誤顯示功能"><a href="#實作錯誤顯示功能" class="headerlink" title="實作錯誤顯示功能"></a>實作錯誤顯示功能</h3><ol>
 <li>在 index.js引入 connect-flash 套件：</li>
@@ -485,8 +496,8 @@
 <p>在接下來的課程，我們會綜合之前所學的知識，來實作簡單的會員註冊系統以及留言版功能。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://medium.com/pierceshih/%E7%AD%86%E8%A8%98-%E4%BD%95%E8%AC%82-middleware-%E5%A6%82%E4%BD%95%E5%B9%AB%E5%8A%A9%E6%88%91%E5%80%91%E5%BB%BA%E7%AB%8B-express-%E7%9A%84%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F-19082b1d8e06">「筆記」- 何謂 Middleware？如何幫助我們建立 Express 的應用程式</a></li>
-<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004407008">bodyParser中间件的研究</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3BpZXJjZXNoaWgvJUU3JUFEJTg2JUU4JUE4JTk4LSVFNCVCRCU5NSVFOCVBQyU4Mi1taWRkbGV3YXJlLSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVCOSVBQiVFNSU4QSVBOSVFNiU4OCU5MSVFNSU4MCU5MSVFNSVCQiVCQSVFNyVBQiU4Qi1leHByZXNzLSVFNyU5QSU4NCVFNiU4NyU4OSVFNyU5NCVBOCVFNyVBOCU4QiVFNSVCQyU4Ri0xOTA4MmIxZDhlMDY=">「筆記」- 何謂 Middleware？如何幫助我們建立 Express 的應用程式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAwNDQwNzAwOA==">bodyParser中间件的研究<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -616,10 +627,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -650,7 +661,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

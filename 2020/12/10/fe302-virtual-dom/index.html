@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！">
@@ -62,6 +64,15 @@
 
   <title>[week 21] React 性能優化：Virtual DOM & 如何避免 re-render | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -253,10 +264,10 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe302-react-hooks">[FE302] React 基礎 - hooks 版本</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 React 課程最一開始，也就是<a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-fe302-review">實作 Todo List</a> 作為範例有提到，新增 todo 時「透過更改資料，畫面再根據資料進行渲染」，可確保兩者永遠一致：</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 React 課程最一開始，也就是<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMzAyLXJldmlldw==">實作 Todo List<i class="fa fa-external-link-alt"></i></span> 作為範例有提到，新增 todo 時「透過更改資料，畫面再根據資料進行渲染」，可確保兩者永遠一致：</p>
 <p><img src="https://i.imgur.com/k1STU0n.png"></p>
 <p>那時採取的是簡單暴力的作法，也就是當 State 改變，我們就清空畫面並重新渲染 DOM 元素：</p>
 <p><img src="https://i.imgur.com/vf17UN9.png"></p>
@@ -270,7 +281,7 @@
 <p><img src="https://i.imgur.com/ApLV4M6.png"></p>
 <h3 id="什麼是-Virtual-DOM？"><a href="#什麼是-Virtual-DOM？" class="headerlink" title="什麼是 Virtual DOM？"></a>什麼是 Virtual DOM？</h3><p>Virtual DOM 實際上就是用 JavaScript 物件來描述 DOM 結構。</p>
 <p>當 DOM 的節點需要更動時，不會直接修改 DOM，而是透過 DOM diff 演算法比較 Virtual DOM 修改前與修改後的樹狀結構，再批次更新真實的 DOM 節點。</p>
-<p><img src="https://i.imgur.com/ADMTzi4.png"><br>（圖片來源：<a target="_blank" rel="noopener" href="https://tutorialslink.com/Articles/What-is-Virtual-DOM/1580%EF%BC%89">https://tutorialslink.com/Articles/What-is-Virtual-DOM/1580）</a></p>
+<p><img src="https://i.imgur.com/ADMTzi4.png"><br>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly90dXRvcmlhbHNsaW5rLmNvbS9BcnRpY2xlcy9XaGF0LWlzLVZpcnR1YWwtRE9NLzE1ODAlRUYlQkMlODk=">https://tutorialslink.com/Articles/What-is-Virtual-DOM/1580）<i class="fa fa-external-link-alt"></i></span></p>
 <p>比如下方這段 DOM 結構：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className&#x3D;&quot;APP&quot;&gt;</span><br><span class="line">  &lt;TodoItem&gt;</span><br><span class="line">    Watch a Movie</span><br><span class="line">  &lt;&#x2F;TodoItem&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">若以 JavaScript 物件形式寫成 Virtual DOM：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;javascript&#x3D;</span><br><span class="line">&#123;</span><br><span class="line">  tag: &#39;div&#39;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      className: &#39;APP&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  children: [</span><br><span class="line">    &#123;</span><br><span class="line">      tag: &#39;TodoItem&#39;,</span><br><span class="line">      children: &#39;Watch a Movie&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
 
@@ -288,14 +299,14 @@
 </ul>
 <p>參考文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://cythilya.github.io/2017/03/31/virtual-dom/">Virtual DOM 概述</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/build-a-simple-virtual-dom-5cf12ccf379f">Virtual DOM | 為了瞭解原理，那就來實作一個簡易 Virtual DOM 吧！</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2019/02/04/vdom-from-scratch/">從頭打造一個簡單的 Virtual DOM</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jeXRoaWx5YS5naXRodWIuaW8vMjAxNy8wMy8zMS92aXJ0dWFsLWRvbS8=">Virtual DOM 概述<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFNiU4OSU4QiVFNSVBRiVBQiVFNyVBRCU4NiVFOCVBOCU5OC9idWlsZC1hLXNpbXBsZS12aXJ0dWFsLWRvbS01Y2YxMmNjZjM3OWY=">Virtual DOM | 為了瞭解原理，那就來實作一個簡易 Virtual DOM 吧！<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOS8wMi8wNC92ZG9tLWZyb20tc2NyYXRjaC8=">從頭打造一個簡單的 Virtual DOM<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="如何避免-re-render？"><a href="#如何避免-re-render？" class="headerlink" title="如何避免 re-render？"></a>如何避免 re-render？</h2><p>透過 React 的 Function Component，我們能將頁面切割成許多 Component 來方便管理。</p>
 <p>但需注意這樣的結構，一但 props 或 state 改變時就很容易觸發 re-render（重新渲染），這如果發生在大型專案，不斷重新渲染可能產生效能問題，加重伺服器的負擔。</p>
-<h3 id="memo：Higher-Order-Component"><a href="#memo：Higher-Order-Component" class="headerlink" title="memo：Higher Order Component"></a>memo：Higher Order Component</h3><p>React.memo 是一個 HOC（Higher Order Component），根據<a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/higher-order-components.html">官網說明</a>：</p>
+<h3 id="memo：Higher-Order-Component"><a href="#memo：Higher-Order-Component" class="headerlink" title="memo：Higher Order Component"></a>memo：Higher Order Component</h3><p>React.memo 是一個 HOC（Higher Order Component），根據<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaGlnaGVyLW9yZGVyLWNvbXBvbmVudHMuaHRtbA==">官網說明<i class="fa fa-external-link-alt"></i></span>：</p>
 <blockquote>
 <p>HOC: a higher-order component is a function that takes a component and returns a new component.<br>（把一個元件丟進 HOC 函數時，會經過一些處理並返回新元件）</p>
 </blockquote>
@@ -316,10 +327,10 @@
 <h3 id="什麼情況需要進行優化"><a href="#什麼情況需要進行優化" class="headerlink" title="什麼情況需要進行優化"></a>什麼情況需要進行優化</h3><p>性能優化總是會有成本，但並不總是帶來好處。具體來說，使用這類型的 hooks 可能會複雜化程式碼；也可能反而使性能下降。因此，除非需要進行昂貴的運算，否則必要的情況下不建議使用。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/react-optimize-performance-using-memo-usecallback-usememo-a76b6b272df3">React 性能優化那件大事，使用 memo、useCallback、useMemo</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10240296?sc=iThomeR">關於props的記憶，React Memo (新增範例及說明)</a></li>
-<li><a target="_blank" rel="noopener" href="https://jancat.github.io/post/2019/translation-usememo-and-usecallback/">【譯】什麼時候使用useMemo 和useCallback</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56975681">React Hooks 第一期：聊聊useCallback</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFNiU4OSU4QiVFNSVBRiVBQiVFNyVBRCU4NiVFOCVBOCU5OC9yZWFjdC1vcHRpbWl6ZS1wZXJmb3JtYW5jZS11c2luZy1tZW1vLXVzZWNhbGxiYWNrLXVzZW1lbW8tYTc2YjZiMjcyZGYz">React 性能優化那件大事，使用 memo、useCallback、useMemo<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDI0MDI5Nj9zYz1pVGhvbWVS">關於props的記憶，React Memo (新增範例及說明)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qYW5jYXQuZ2l0aHViLmlvL3Bvc3QvMjAxOS90cmFuc2xhdGlvbi11c2VtZW1vLWFuZC11c2VjYWxsYmFjay8=">【譯】什麼時候使用useMemo 和useCallback<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81Njk3NTY4MQ==">React Hooks 第一期：聊聊useCallback<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="React-事件機制"><a href="#React-事件機制" class="headerlink" title="React 事件機制"></a>React 事件機制</h2><p>在 React 的事件機制，其實是透過 root 這層進行事件代理，而不是綁在 button 等 DOM 節點上。</p>
@@ -337,12 +348,12 @@
 <p>而 useContext 可以解決這個問題。useContext 是用來接收與父元件傳遞資料時的 Hooks，用途和 props 相同，</p>
 <p>參考文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/07/21/advanced-react-component-patterns-note-II/">進階 React Component Patterns 筆記（下）</a></li>
-<li><a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2019/07/react-react-context-api.html">[React] React Context API 以及 useContext Hook 的使用</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/enjoy-life-enjoy-coding/react-%E5%9C%A8-hooks-%E4%B8%AD%E4%BB%A5-usecontext-%E8%88%87-usereducer-%E5%AF%A6%E7%8F%BE-redux-3a8aa403d9e4">React | 在 Hooks 中以 useContext 與 useReducer 實現 Redux</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOC8wNy8yMS9hZHZhbmNlZC1yZWFjdC1jb21wb25lbnQtcGF0dGVybnMtbm90ZS1JSS8=">進階 React Component Patterns 筆記（下）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuYmxvZ3Nwb3QuY29tLzIwMTkvMDcvcmVhY3QtcmVhY3QtY29udGV4dC1hcGkuaHRtbA==">[React] React Context API 以及 useContext Hook 的使用<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2Vuam95LWxpZmUtZW5qb3ktY29kaW5nL3JlYWN0LSVFNSU5QyVBOC1ob29rcy0lRTQlQjglQUQlRTQlQkIlQTUtdXNlY29udGV4dC0lRTglODglODctdXNlcmVkdWNlci0lRTUlQUYlQTYlRTclOEYlQkUtcmVkdXgtM2E4YWE0MDNkOWU0">React | 在 Hooks 中以 useContext 與 useReducer 實現 Redux<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
-<h2 id="補充：Virtual-DOM-的起源"><a href="#補充：Virtual-DOM-的起源" class="headerlink" title="補充：Virtual DOM 的起源"></a>補充：Virtual DOM 的起源</h2><p>推薦這篇：<a target="_blank" rel="noopener" href="https://github.com/MrErHu/blog/issues/26">了不起的Virtual DOM(一)：起源</a>，有談到 Virtual DOM 的起源，其實任何技術或工具的誕生都是有原因的，例如框架是因應逐漸擴大的程式規模，為了可維護性與便於開發而出現。</p>
+<h2 id="補充：Virtual-DOM-的起源"><a href="#補充：Virtual-DOM-的起源" class="headerlink" title="補充：Virtual DOM 的起源"></a>補充：Virtual DOM 的起源</h2><p>推薦這篇：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01yRXJIdS9ibG9nL2lzc3Vlcy8yNg==">了不起的Virtual DOM(一)：起源<i class="fa fa-external-link-alt"></i></span>，有談到 Virtual DOM 的起源，其實任何技術或工具的誕生都是有原因的，例如框架是因應逐漸擴大的程式規模，為了可維護性與便於開發而出現。</p>
 <p>前端在 MVC 模式中，隨著應用規模增加，Model 與 View 之間的複雜關係使得開發難度增加。</p>
 <p><img src="https://i.imgur.com/09TAbTq.png"></p>
 <p>而為了改善 MVC 模式，之後就出現了 MVP 模式，將 MVC 中的 Controller 改為 Presenter，使 Model 和 View 兩者之間相互獨立，但這同樣有個缺點，就是 Presenter 需要承擔的功能過多，難以後續維護。</p>
@@ -478,10 +489,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -512,7 +523,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

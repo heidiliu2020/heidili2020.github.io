@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  123456學習目標： P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡 P1 你知道 DOM 是什麼 P1 你知道如何用 JavaScript 操控 DOM 物件 P1 你知道如何幫一個按鈕加上 event listener">
@@ -64,6 +66,15 @@
 
   <title>[week 7] DOM 介面、瀏覽器事件處理 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -255,7 +266,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe102-javascript">[FE102] 前端必備：JavaScript</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDItamF2YXNjcmlwdA==">[FE102] 前端必備：JavaScript<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡</span><br><span class="line"> P1 你知道 DOM 是什麼</span><br><span class="line"> P1 你知道如何用 JavaScript 操控 DOM 物件</span><br><span class="line"> P1 你知道如何幫一個按鈕加上 event listener</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -381,15 +392,15 @@
 </ol>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A4%8E-javascript%E7%AF%87-javascript-%E8%88%87%E7%80%8F%E8%A6%BD%E5%99%A8%E7%9A%84%E6%BA%9D%E9%80%9A-e00ff05d0fdc">前端基礎JavaScript篇：JavaScript 與瀏覽器的溝通| by Hugh’s Program learning</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.happycoding.today/posts/43">JavaScript入門系列：BOM和DOM筆記| 快樂學程式</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/dom-obj-document.html">HTML DOM 元素</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWdoX1Byb2dyYW1fbGVhcm5pbmdfZGlhcnlfSnMvJUU1JTg5JThEJUU3JUFCJUFGJUU1JTlGJUJBJUU3JUE0JThFLWphdmFzY3JpcHQlRTclQUYlODctamF2YXNjcmlwdC0lRTglODglODclRTclODAlOEYlRTglQTYlQkQlRTUlOTklQTglRTclOUElODQlRTYlQkElOUQlRTklODAlOUEtZTAwZmYwNWQwZmRj">前端基礎JavaScript篇：JavaScript 與瀏覽器的溝通| by Hugh’s Program learning<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaGFwcHljb2RpbmcudG9kYXkvcG9zdHMvNDM=">JavaScript入門系列：BOM和DOM筆記| 快樂學程式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9qc3JlZi9kb20tb2JqLWRvY3VtZW50Lmh0bWw=">HTML DOM 元素<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="JavaScript-網頁事件處理"><a href="#JavaScript-網頁事件處理" class="headerlink" title="JavaScript 網頁事件處理"></a>JavaScript 網頁事件處理</h2><p>JavaScript 是以事件驅動（Event-driven）的程式語言。</p>
 <p>也就是說，當 JS 被瀏覽器載入後並不會馬上執行，而是透過使用者操作來觸發事件，才會啟動對應程式。例如：滑鼠點擊、鍵盤輸入等。</p>
 <blockquote>
-<p>可參考：<a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Event 對象列表</a></p>
+<p>可參考：<span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNvbS9qc3JlZi9kb21fb2JqX2V2ZW50LmFzcA==">HTML DOM Event 對象列表<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h3 id="監聽事件-addEventListener"><a href="#監聽事件-addEventListener" class="headerlink" title="監聽事件 addEventListener()"></a>監聽事件 <code>addEventListener()</code></h3><p>在處理事件時，通常會需要指派監聽者（Event listeners）來監聽事件觸發。</p>
 <p>也就是監測 DOM 中的某一元素，當使用者觸發某事件時，就會執行後續動作，語法如下：</p>
@@ -398,7 +409,7 @@
 <h3 id="參數值說明"><a href="#參數值說明" class="headerlink" title="參數值說明"></a>參數值說明</h3><h4 id="1-event-事件"><a href="#1-event-事件" class="headerlink" title="1. event 事件"></a>1. event 事件</h4><ul>
 <li>必須</li>
 <li>指定事件類型</li>
-<li>常見的事件類別：（詳見 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Events">MDN</a>）<ul>
+<li>常見的事件類別：（詳見 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvRXZlbnRz">MDN<i class="fa fa-external-link-alt"></i></span>）<ul>
 <li>滑鼠相關：click、mousedown、mouseenter、mouseleave</li>
 <li>鍵盤相關：keydown、keypress、keyup</li>
 <li>瀏覽器相關：scroll、resize</li>
@@ -429,8 +440,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191970">重新認識 JavaScript: Day 14 事件機制的原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-addeventlistener.html">HTML DOM addEventListener()方法</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MTk3MA==">重新認識 JavaScript: Day 14 事件機制的原理<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9qc3JlZi9tZXQtZWxlbWVudC1hZGRldmVudGxpc3RlbmVyLmh0bWw=">HTML DOM addEventListener()方法<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <h3 id="事件資訊-event-e"><a href="#事件資訊-event-e" class="headerlink" title="事件資訊 event(e)"></a>事件資訊 <code>event(e)</code></h3><p>一個事件的發生會包含各種資訊。event 資訊會放在 callback function 的第一個參數。通常取名 <code>event</code> 或簡寫 <code>e</code>，可以當作是一個「物件」，裡面放著關於此事件的參數值。</p>
 <p>以 click 事件為例：</p>
@@ -468,8 +479,8 @@
 <p><img src="https://i.imgur.com/vjBsv0i.png"></p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w7_DOM.html">[第七週] DOM - 操作 DOM 介面、事件監聽 - Yakim</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@miahsuwork/%E7%AC%AC%E5%85%AB%E9%80%B1-dom-%E7%80%8F%E8%A6%BD%E5%99%A8%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86-fb8f6178178a">[第八週]DOM — 瀏覽器事件處理 - Miahsu</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c3X0RPTS5odG1s">[第七週] DOM - 操作 DOM 介面、事件監聽 - Yakim<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNSU4NSVBQiVFOSU4MCVCMS1kb20tJUU3JTgwJThGJUU4JUE2JUJEJUU1JTk5JUE4JUU0JUJBJThCJUU0JUJCJUI2JUU4JTk5JTk1JUU3JTkwJTg2LWZiOGY2MTc4MTc4YQ==">[第八週]DOM — 瀏覽器事件處理 - Miahsu<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -599,10 +610,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -633,7 +644,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！ 這篇文章的學習筆記。">
@@ -56,6 +58,15 @@
 
   <title>[week 16] 淺談 JavaScript：同步與非同步 & Callback Function & Event Loop | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -246,7 +257,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本篇為 <a target="_blank" rel="noopener" href="https://blog.huli.tw/2019/10/04/javascript-async-sync-and-callback/">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！</a> 這篇文章的學習筆記。</p>
+        <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOS8xMC8wNC9qYXZhc2NyaXB0LWFzeW5jLXN5bmMtYW5kLWNhbGxiYWNrLw==">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！<i class="fa fa-external-link-alt"></i></span> 這篇文章的學習筆記。</p>
 <a id="more"></a>
 
 <h2 id="JavaScript-的執行環境"><a href="#JavaScript-的執行環境" class="headerlink" title="JavaScript 的執行環境"></a>JavaScript 的執行環境</h2><p>JavaScript 是一個程式語言，會有程式語言本身規範能用的東西，例如 var 宣告變數，if else 判斷式，或者是使用 function 宣告函式。</p>
@@ -297,7 +308,7 @@
 <p>這裡以 setTimeout() 來作為範例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正確</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="number">2000</span>, tick)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;時間到！&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">===以下是錯誤範例===</span><br><span class="line"></span><br><span class="line"><span class="comment">// 錯誤</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="number">2000</span>, tick())</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;時間到！&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面錯誤會等同於</span></span><br><span class="line"><span class="keyword">let</span> fn = tick()</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="number">2000</span>, fn)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;時間到！&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="Node-js-上的同步與非同步"><a href="#Node-js-上的同步與非同步" class="headerlink" title="Node.js 上的同步與非同步"></a>Node.js 上的同步與非同步</h2><p>其實到這邊已經差不多把同步與非同步的觀念講完了。而在 <a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">Node.js 的官方文件</a>是這麼說的：</p>
+<h2 id="Node-js-上的同步與非同步"><a href="#Node-js-上的同步與非同步" class="headerlink" title="Node.js 上的同步與非同步"></a>Node.js 上的同步與非同步</h2><p>其實到這邊已經差不多把同步與非同步的觀念講完了。而在 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2RvY3MvZ3VpZGVzL2Jsb2NraW5nLXZzLW5vbi1ibG9ja2luZy8=">Node.js 的官方文件<i class="fa fa-external-link-alt"></i></span>是這麼說的：</p>
 <blockquote>
 <p>Blocking methods execute synchronously and non-blocking methods execute asynchronously.</p>
 </blockquote>
@@ -322,7 +333,7 @@
 
 <hr>
 <h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><blockquote>
-<p>推薦影片：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">What the heck is the event loop anyway? | Philip Roberts | JSConf EU</a><br>影片中的 Demo：<a target="_blank" rel="noopener" href="http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4=">Event Loop 流程</a></p>
+<p>推薦影片：<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj04YUdoWlFrb0ZiUQ==">What the heck is the event loop anyway? | Philip Roberts | JSConf EU<i class="fa fa-external-link-alt"></i></span><br>影片中的 Demo：<span class="exturl" data-url="aHR0cDovL2xhdGVudGZsaXAuY29tL2xvdXBlLz9jb2RlPUpDNXZiaWduWW5WMGRHOXVKeXdnSjJOc2FXTnJKeXdnWm5WdVkzUnBiMjRnYjI1RGJHbGpheWdwSUhzS0lDQWdJSE5sZEZScGJXVnZkWFFvWm5WdVkzUnBiMjRnZEdsdFpYSW9LU0I3Q2lBZ0lDQWdJQ0FnWTI5dWMyOXNaUzVzYjJjb0oxbHZkU0JqYkdsamEyVmtJSFJvWlNCaWRYUjBiMjRoSnlrN0lDQWdJQW9nSUNBZ2ZTd2dNakF3TUNrN0NuMHBPd29LWTI5dWMyOXNaUzVzYjJjb0lraHBJU0lwT3dvS2MyVjBWR2x0Wlc5MWRDaG1kVzVqZEdsdmJpQjBhVzFsYjNWMEtDa2dld29nSUNBZ1kyOXVjMjlzWlM1c2IyY29Ja05zYVdOcklIUm9aU0JpZFhSMGIyNGhJaWs3Q24wc0lEVXdNREFwT3dvS1kyOXVjMjlzWlM1c2IyY29JbGRsYkdOdmJXVWdkRzhnYkc5MWNHVXVJaWs3ISEhUEdKMWRIUnZiajVEYkdsamF5QnRaU0U4TDJKMWRIUnZiajQ9">Event Loop 流程<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>因為 JavaScript 是單執行緒（single thread）的程式語言，用白話文解釋就是「JavaScript 一次只能做一件事情」，因此 JS 中等待執行的任務會被放入 Call Stack。</p>
 <p>JavaScript 在調用一個執行環境時，其實會經過兩個階段：</p>
@@ -337,7 +348,7 @@
 </ol>
 <p>接著 JavaScript 會優先處理執行堆疊中最上面的執行環境。一旦執行完該 function 後，該執行環境就會從最上面被移除（pop off），同時儲存在該 function 中的資訊也會被銷毀，然後再回到之前的執行環境，直到回到 Global EC 為止。</p>
 <p>可參考下方示意圖：</p>
-<p><img src="https://i.imgur.com/SiRxsOL.png"><br>（參考來源：<a target="_blank" rel="noopener" href="https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc%EF%BC%89">https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc）</a></p>
+<p><img src="https://i.imgur.com/SiRxsOL.png"><br>（參考來源：<span class="exturl" data-url="aHR0cHM6Ly9kZXYudG8vYWhtZWR0YWhpci93aGF0LWlzLXRoZS1leGVjdXRpb24tY29udGV4dC1leGVjdXRpb24tc3RhY2stc2NvcGUtY2hhaW4taW4tanMtMjZuYyVFRiVCQyU4OQ==">https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc）<i class="fa fa-external-link-alt"></i></span></p>
 <p>但 call stack 能夠存取的內容是有限的，一旦超出 stack 負荷就有可能出現錯誤 stack overflow。例如遞迴呼叫一個 function 十萬次，因為 stack 沒辦法存這麼多東西，就會拋出錯誤。</p>
 <p>既然 JavaScript 同一個時間只能執行一件事，那要如何達到非同步操作呢？回到先前談的執行環境。</p>
 <p>這裡以 setTimeout 為例：</p>
@@ -345,7 +356,7 @@
 <p>當這些其他 thread 的事情做完以後，要再重新丟回 main thread 執行 JavaScript，這就是 Event Loop 在做的事情。</p>
 <p>可參考這張 Event Loop 示意圖：</p>
 <p><img src="https://i.imgur.com/F4oAQmS.png"></p>
-<p>（圖片來源：<a target="_blank" rel="noopener" href="https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd">Understanding Event Loop, Call Stack, Event &amp; Job Queue in Javascript</a>）</p>
+<p>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BSYWh1bHgxL3VuZGVyc3RhbmRpbmctZXZlbnQtbG9vcC1jYWxsLXN0YWNrLWV2ZW50LWpvYi1xdWV1ZS1pbi1qYXZhc2NyaXB0LTYzZGNkMmM3MWVjZA==">Understanding Event Loop, Call Stack, Event &amp; Job Queue in Javascript<i class="fa fa-external-link-alt"></i></span>）</p>
 <p>以執行 setTimeout(fn, 2000) 這行程式碼來說，步驟可想像成：</p>
 <ol>
 <li>執行 setTimeout(fn, 2000)，先把 setTimeout(fn, 2000) 丟到 call stack 去執行</li>
@@ -372,7 +383,7 @@
 <p>因此輸出順序會先是 <code>hello</code>，然後才是 <code>零秒出手</code>。</p>
 <hr>
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>閱讀完這篇文章，原本對 callback 概念薄弱的自己，對同步與非同步又有了新的一層認識。</p>
-<p>尤其是前幾天才剛學完有關 <a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-hoisting">Hoisting</a> 的運作原理，瞭解什麼是執行環境以及執行堆疊以後，再回來看 Event Loop 似乎也更能夠理解當中的執行流程。</p>
+<p>尤其是前幾天才剛學完有關 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLWhvaXN0aW5n">Hoisting<i class="fa fa-external-link-alt"></i></span> 的運作原理，瞭解什麼是執行環境以及執行堆疊以後，再回來看 Event Loop 似乎也更能夠理解當中的執行流程。</p>
 <p>是說現在再次看到 Node.js 是 JavaScript 的 runtime（執行環境）這句話時，會想到 Execution context 中文也被翻成執行環境，但兩者指的對象不同。前者指的是「執行時系統」（run-time system）；後者指的是 JavaScript 在執行時會建立的環境，又可分為全域與函式執行環境。翻成中文的壞處就是容易撞名混淆，還是讓自己盡量去理解原文的意思。</p>
 
     </div>
@@ -502,10 +513,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -536,7 +547,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

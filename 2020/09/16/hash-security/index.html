@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL [week 9] 利用 PHP 實作留言板 - 初階實作篇">
@@ -57,6 +59,15 @@
 
   <title>[week 11] 資訊安全 - 雜湊與加密 & 常見攻擊：SQL Injection、XSS | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,18 +259,18 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be101-php-mysql">[BE101] 用 PHP 與 MySQL 學習後端基礎</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <p>相關筆記：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week9_%E5%BE%8C%E7%AB%AF%E5%9F%BA%E7%A4%8E_PHP%E3%80%81MySQL.md">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/week11/week9_%E5%88%A9%E7%94%A8PHP%E5%AF%A6%E4%BD%9C%E7%95%99%E8%A8%80%E6%9D%BF-%E5%88%9D%E9%9A%8E%E5%AF%A6%E4%BD%9C%E7%AF%87.md">[week 9] 利用 PHP 實作留言板 - 初階實作篇</a><a id="more"></a>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道什麼是雜湊（Hash function）</span><br><span class="line"> P1 你知道什麼是加密（Encryption）</span><br><span class="line"> P1 你知道雜湊與加密的差別</span><br><span class="line"> P1 你知道什麼是 SQL Injection 以及如何防範</span><br><span class="line"> P1 你知道什麼是 XSS 以及如何防範</span><br><span class="line"> P1 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證</span><br><span class="line"> P2 你知道什麼是 CSRF 以及如何防範</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <hr>
-<h2 id="資訊安全"><a href="#資訊安全" class="headerlink" title="資訊安全"></a>資訊安全</h2><p>我們先前<a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week9_%E5%88%A9%E7%94%A8PHP%E5%AF%A6%E4%BD%9C%E7%95%99%E8%A8%80%E6%9D%BF-%E5%88%9D%E9%9A%8E%E5%AF%A6%E4%BD%9C%E7%AF%87.md">利用 PHP 實作的初階留言板</a>，其實暗藏許多安全性漏洞，接下來的重點，就是說明這些漏洞如何產生，以及該如何解決這些問題。</p>
+<h2 id="資訊安全"><a href="#資訊安全" class="headerlink" title="資訊安全"></a>資訊安全</h2><p>我們先前<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">利用 PHP 實作的初階留言板<i class="fa fa-external-link-alt"></i></span>，其實暗藏許多安全性漏洞，接下來的重點，就是說明這些漏洞如何產生，以及該如何解決這些問題。</p>
 <h2 id="用雜湊保護密碼"><a href="#用雜湊保護密碼" class="headerlink" title="用雜湊保護密碼"></a>用雜湊保護密碼</h2><p>當我們以「明文」方式將密碼存在資料庫時，可能面臨下列資安風險：</p>
 <ul>
 <li>網站管理者隨時能夠查看使用者帳密</li>
@@ -313,7 +324,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="PHP-內建雜湊函式：password-hash"><a href="#PHP-內建雜湊函式：password-hash" class="headerlink" title="PHP 內建雜湊函式：password_hash()"></a>PHP 內建雜湊函式：<code>password_hash()</code></h3><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/en/function.password-hash.php">PHP 提供內建函式 </a><code>password_hash()</code> 能夠實現加密， 指令如下：</p>
+<h3 id="PHP-內建雜湊函式：password-hash"><a href="#PHP-內建雜湊函式：password-hash" class="headerlink" title="PHP 內建雜湊函式：password_hash()"></a>PHP 內建雜湊函式：<code>password_hash()</code></h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucGhwLm5ldC9tYW51YWwvZW4vZnVuY3Rpb24ucGFzc3dvcmQtaGFzaC5waHA=">PHP 提供內建函式 <i class="fa fa-external-link-alt"></i></span><code>password_hash()</code> 能夠實現加密， 指令如下：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">$hash = password_hash(<span class="string">&quot;要加密的字串&quot;</span>, PASSWORD_DEFAULT);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>驗證指令：<code>password_verify(&quot;要驗證的字串&quot;, &quot;加密過的字串&quot;)</code>，會回傳一個 boolean</p>
@@ -321,11 +332,11 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://tinyurl.com/y65pgo4w">[資訊安全] 密碼存明碼，怎麼不直接去裸奔算了？淺談 Hash , 用雜湊保護密碼</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/starbugs/what-are-encoding-encrypt-and-hashing-4b03d40e7b0c">一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.m157q.tw/posts/2017/12/25/differences-between-encryption-and-hashing/">加密和雜湊有什麼不一樣？ | Just for noting</a></li>
-<li><a target="_blank" rel="noopener" href="https://adon988.logdown.com/posts/2513623-modern-php-password-hash-hash-encryption-using-random-salt-uses">現代PHP password_hash 雜湊加密採用隨機SALT 使用方式</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/php/php-password_hash.html">PHP password_hash() 函数| 菜鸟教程</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly90aW55dXJsLmNvbS95NjVwZ280dw==">[資訊安全] 密碼存明碼，怎麼不直接去裸奔算了？淺談 Hash , 用雜湊保護密碼<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3N0YXJidWdzL3doYXQtYXJlLWVuY29kaW5nLWVuY3J5cHQtYW5kLWhhc2hpbmctNGIwM2Q0MGU3YjBj">一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm0xNTdxLnR3L3Bvc3RzLzIwMTcvMTIvMjUvZGlmZmVyZW5jZXMtYmV0d2Vlbi1lbmNyeXB0aW9uLWFuZC1oYXNoaW5nLw==">加密和雜湊有什麼不一樣？ | Just for noting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hZG9uOTg4LmxvZ2Rvd24uY29tL3Bvc3RzLzI1MTM2MjMtbW9kZXJuLXBocC1wYXNzd29yZC1oYXNoLWhhc2gtZW5jcnlwdGlvbi11c2luZy1yYW5kb20tc2FsdC11c2Vz">現代PHP password_hash 雜湊加密採用隨機SALT 使用方式<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9waHAvcGhwLXBhc3N3b3JkX2hhc2guaHRtbA==">PHP password_hash() 函数| 菜鸟教程<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="常見資安攻擊"><a href="#常見資安攻擊" class="headerlink" title="常見資安攻擊"></a>常見資安攻擊</h2><p>以下介紹幾種常見的資安攻擊，其原理與防範方法。</p>
@@ -378,9 +389,9 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10189201">[Postx1] 攻擊行為－SQL 資料隱碼攻擊 SQL injection</a></li>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/240808/">Php中用PDO查詢Mysql來避免SQL隱碼攻擊風險的方法</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/p/1403324.html">PreparedStatement 如何防止SQL注入</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4OTIwMQ==">[Postx1] 攻擊行為－SQL 資料隱碼攻擊 SQL injection<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvMjQwODA4Lw==">Php中用PDO查詢Mysql來避免SQL隱碼攻擊風險的方法<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL3AvMTQwMzMyNC5odG1s">PreparedStatement 如何防止SQL注入<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="XSS-攻擊"><a href="#XSS-攻擊" class="headerlink" title="XSS 攻擊"></a>XSS 攻擊</h2><p>全名是 Cross Site Scripting（跨網站指令碼攻擊），為了不與 CSS 混淆，故簡稱 XSS。</p>
@@ -414,9 +425,9 @@
 </ol>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://cms.aaasec.com.tw/index.php/2018/09/21/code-injection-attack-cross-site-scripting-attack/">Code Injection Attack – Cross-Site Scripting Attack – 三甲科技</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1544575149.html">前端安全系列（一）：如何防止XSS攻擊？</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10188646">[Day24] 攻擊行為－反射式跨網站指令碼 Reflected XSS</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jbXMuYWFhc2VjLmNvbS50dy9pbmRleC5waHAvMjAxOC8wOS8yMS9jb2RlLWluamVjdGlvbi1hdHRhY2stY3Jvc3Mtc2l0ZS1zY3JpcHRpbmctYXR0YWNrLw==">Code Injection Attack – Cross-Site Scripting Attack – 三甲科技<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NDU3NTE0OS5odG1s">前端安全系列（一）：如何防止XSS攻擊？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4ODY0Ng==">[Day24] 攻擊行為－反射式跨網站指令碼 Reflected XSS<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>全名是  Cross Site Request Forgery（跨站請求偽造）。也被稱為 one-click attack 或 session riding。</p>
@@ -513,10 +524,10 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/02/25/csrf-introduction/">讓我們來談談CSRF - TechBridge 技術共筆部落格</a></li>
-<li><a target="_blank" rel="noopener" href="https://cyrilwang.pixnet.net/blog/post/31813568-%5B%E6%8A%80%E8%A1%93%E5%88%86%E4%BA%AB%5D-cross-site-request-forgery-(part-1)">[技術分享] Cross-site Request Forgery (Part 1)</a></li>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w12_Info_Security-CSRF.html">[第十二週] 資訊安全 - 常見攻擊：CSRF</a></li>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/109775/">程式猿必讀-防範CSRF跨站請求偽造</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNy8wMi8yNS9jc3JmLWludHJvZHVjdGlvbi8=">讓我們來談談CSRF - TechBridge 技術共筆部落格<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jeXJpbHdhbmcucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzE4MTM1NjgtJTVCJUU2JThBJTgwJUU4JUExJTkzJUU1JTg4JTg2JUU0JUJBJUFCJTVELWNyb3NzLXNpdGUtcmVxdWVzdC1mb3JnZXJ5LShwYXJ0LTEp">[技術分享] Cross-site Request Forgery (Part 1)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3cxMl9JbmZvX1NlY3VyaXR5LUNTUkYuaHRtbA==">[第十二週] 資訊安全 - 常見攻擊：CSRF<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvMTA5Nzc1Lw==">程式猿必讀-防範CSRF跨站請求偽造<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -646,10 +657,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -680,7 +691,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  12345學習目標： P1 你知道 HTML 是在做什麼的 P1 你知道如何使用有語意的（semantic）標籤 P1 你知道基本 SEO 的概念">
@@ -57,6 +59,15 @@
 
   <title>[week 6] HTML - 認識基礎標籤 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,7 +259,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe101-html-css">[FE101] 前端基礎：HTML 與 CSS</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道 HTML 是在做什麼的</span><br><span class="line"> P1 你知道如何使用有語意的（semantic）標籤</span><br><span class="line"> P1 你知道基本 SEO 的概念</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -274,7 +285,7 @@
 <h2 id="lt-head-gt-內常見的標籤"><a href="#lt-head-gt-內常見的標籤" class="headerlink" title="&lt;head&gt; 內常見的標籤"></a><code>&lt;head&gt;</code> 內常見的標籤</h2><p>head 中的文檔並不會呈現在瀏覽器上，通常會包含一些資訊，例如：標題（<code>&lt;title&gt;</code>）、meatadata（提供網頁資訊給瀏覽器或搜尋引擎）、引入 CSS 或 JavaScript 文件並應用於 HTML 檔。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;!-- 聲明該頁面的編碼方式 --&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt; </span><br><span class="line">        </span><br><span class="line">  　&lt;!-- 在 RWD 網頁，用來設定在不同裝置下的顯示方式：</span><br><span class="line">        width&#x3D;device-width：符合裝置寬度最佳解析度</span><br><span class="line">        initial-scale&#x3D;1.0：設定手機螢幕畫面的初始縮放比例為 100% </span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 在瀏覽器 tab 標籤上的標題 --&gt;</span><br><span class="line">    &lt;title&gt;網頁標題&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;!-- 在瀏覽器 tab 標籤上的小圖示 --&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;icon&quot; href&#x3D;&quot;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;!-- 引入 main.css --&gt;</span><br><span class="line">    &lt;link href&#x3D;&quot;main.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line">    &lt;!-- 引入 common.js --&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;common.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
 
-<p>參考資料：<a target="_blank" rel="noopener" href="https://www.wibibi.com/info.php?tid=415">HTML meta 標籤- Wibibi</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2liaWJpLmNvbS9pbmZvLnBocD90aWQ9NDE1">HTML meta 標籤- Wibibi<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="lt-body-gt-內常見的標籤"><a href="#lt-body-gt-內常見的標籤" class="headerlink" title="&lt;body&gt; 內常見的標籤"></a><code>&lt;body&gt;</code> 內常見的標籤</h2><ul>
 <li><code>&lt;div&gt;</code>：為區塊元素（block）</li>
@@ -360,13 +371,13 @@
 <p><img src="https://i.imgur.com/2mddzqX.png" alt="table"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 上述表格程式碼如下 --&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;A&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;B&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;C&lt;&#x2F;th&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;內容&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;td&gt;漢堡&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;薯條&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;炸雞&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;價格&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;td&gt;99&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;25&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;70&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="lt-form-gt-：表單"><a href="#lt-form-gt-：表單" class="headerlink" title="&lt;form&gt;：表單"></a><code>&lt;form&gt;</code>：表單</h3><p>其實 <a target="_blank" rel="noopener" href="https://www.google.com.tw/">Google 首頁</a>中央的搜尋框，就是最為人熟知的表單。除此之外，表單還提供其他線上功能，例如：註冊網站會員、網路購物、問卷調查等。</p>
+<h3 id="lt-form-gt-：表單"><a href="#lt-form-gt-：表單" class="headerlink" title="&lt;form&gt;：表單"></a><code>&lt;form&gt;</code>：表單</h3><p>其實 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS50dy8=">Google 首頁<i class="fa fa-external-link-alt"></i></span>中央的搜尋框，就是最為人熟知的表單。除此之外，表單還提供其他線上功能，例如：註冊網站會員、網路購物、問卷調查等。</p>
 <p>表單控制項：<br>from、input、textarea</p>
 <p><code>text</code>：純文字<br><code>password</code>：顯示會以符號代替文字<br>可以使用 maxlength and minlength 來控制輸入字數<br><code>email</code>：會自動做簡單驗證<br><code>search</code>：搜尋框<br><code>tel</code>：電話<br><code>url</code>：網址</p>
 <p>（待補）</p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w6_HTML_form.html">[第六週] HTML - 表單 form 介紹 - Yakim shu</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c2X0hUTUxfZm9ybS5odG1s">[第六週] HTML - 表單 form 介紹 - Yakim shu<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <h3 id="語意化元素（Semantic-Elements）"><a href="#語意化元素（Semantic-Elements）" class="headerlink" title="語意化元素（Semantic Elements）"></a>語意化元素（Semantic Elements）</h3><p>使用 HTML5 的語意化元素取代 <code>&lt;div&gt;</code> 有以下優點：</p>
 <ol>
@@ -375,7 +386,7 @@
 </ol>
 <p><img src="https://i.imgur.com/o04CF37.png"></p>
 <blockquote>
-<p>圖片來源：<a target="_blank" rel="noopener" href="https://medium.com/@changru.studio/%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3html%E8%AA%9E%E6%84%8F%E5%8C%96%E6%A8%99%E7%B1%A4-33dd8247d779">快速了解HTML語意化標籤| by Kira Yang | Medium</a></p>
+<p>圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BjaGFuZ3J1LnN0dWRpby8lRTUlQkYlQUIlRTklODAlOUYlRTQlQkElODYlRTglQTclQTNodG1sJUU4JUFBJTlFJUU2JTg0JThGJUU1JThDJTk2JUU2JUE4JTk5JUU3JUIxJUE0LTMzZGQ4MjQ3ZDc3OQ==">快速了解HTML語意化標籤| by Kira Yang | Medium<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <ul>
 <li><code>&lt;header&gt;</code> 頁首：常包含 Logo 圖案、導航列、搜尋欄位</li>
@@ -388,10 +399,10 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20112550/ironman/2072">金魚都能懂 網頁設計入門 : 網頁入門第一步 (第二天)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.tenlong.com.tw/products/9789862765012">HTML&amp;CSS：網站設計建置優化之道</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@miahsuwork/%E7%AC%AC%E5%85%AD%E9%80%B1-api-%E5%9F%BA%E7%A4%8E-html-tag-%E5%9F%BA%E6%9C%AC%E6%A8%99%E7%B1%A4%E8%AA%8D%E8%AD%98-d2d9a1c66449">[第七週] HTML — Tag 基本標籤認識 - Miashu</a></li>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w6_HTML_tag.html">[第六週] HTML - tag 基礎標籤介紹 - Yakim</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDExMjU1MC9pcm9ubWFuLzIwNzI=">金魚都能懂 網頁設計入門 : 網頁入門第一步 (第二天)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudGVubG9uZy5jb20udHcvcHJvZHVjdHMvOTc4OTg2Mjc2NTAxMg==">HTML&amp;CSS：網站設計建置優化之道<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNSU4NSVBRCVFOSU4MCVCMS1hcGktJUU1JTlGJUJBJUU3JUE0JThFLWh0bWwtdGFnLSVFNSU5RiVCQSVFNiU5QyVBQyVFNiVBOCU5OSVFNyVCMSVBNCVFOCVBQSU4RCVFOCVBRCU5OC1kMmQ5YTFjNjY0NDk=">[第七週] HTML — Tag 基本標籤認識 - Miashu<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c2X0hUTUxfdGFnLmh0bWw=">[第六週] HTML - tag 基礎標籤介紹 - Yakim<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h3 id="補充：如何引入-js-檔案"><a href="#補充：如何引入-js-檔案" class="headerlink" title="補充：如何引入 js 檔案"></a>補充：如何引入 js 檔案</h3><ol>
@@ -411,8 +422,8 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://hiskio.com/courses/51/lectures/856">JavaScript 寫在哪裡？ - HiSKIO</a></li>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/First_steps/What_is_JavaScript">JavaScript 是什麼? - 學習該如何開發Web | MDN</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oaXNraW8uY29tL2NvdXJzZXMvNTEvbGVjdHVyZXMvODU2">JavaScript 寫在哪裡？ - HiSKIO<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9MZWFybi9KYXZhU2NyaXB0L0ZpcnN0X3N0ZXBzL1doYXRfaXNfSmF2YVNjcmlwdA==">JavaScript 是什麼? - 學習該如何開發Web | MDN<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -541,10 +552,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -575,7 +586,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

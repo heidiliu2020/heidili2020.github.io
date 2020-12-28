@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest 這門課程的學習筆記。如有錯誤歡迎指正！  12345678學習目標： 理解常用內建函式如何使用 熟悉程式語法並知道如何解決基礎問題 了解為什麼我們需要 unit test 了解什麼是 unit test 了解如何寫 unit test 了解如何測試一個 function">
@@ -72,6 +74,15 @@
 
   <title>[week 3] JavaScript：ES6 語法 + npm + Jest | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -263,7 +274,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/js102-javascript-es6-npm">[JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDItamF2YXNjcmlwdC1lczYtbnBt">[JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> 理解常用內建函式如何使用</span><br><span class="line"> 熟悉程式語法並知道如何解決基礎問題</span><br><span class="line"> 了解為什麼我們需要 unit test</span><br><span class="line"> 了解什麼是 unit test</span><br><span class="line"> 了解如何寫 unit test</span><br><span class="line"> 了解如何測試一個 function</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -271,7 +282,7 @@
 <h2 id="何謂-Modules-模組（模塊）？"><a href="#何謂-Modules-模組（模塊）？" class="headerlink" title="何謂 Modules 模組（模塊）？"></a>何謂 Modules 模組（模塊）？</h2><p>在開發過程中，若將各種功能放在一起，程式間可能會互相影響甚至產生 bug，日後也不易進行維護。</p>
 <p>因此，我們可以將不同功能視為一個模組（Module），例如：金流、登入、權限、會員等等，再用主程式將所有模組串接起來，透過模組化統一進行管理。</p>
 <p><img src="https://i.imgur.com/di0LXxg.png"></p>
-<h2 id="Modeule-相關操作"><a href="#Modeule-相關操作" class="headerlink" title="Ｍodeule 相關操作"></a>Ｍodeule 相關操作</h2><h3 id="require-：引入模組"><a href="#require-：引入模組" class="headerlink" title="require()：引入模組"></a><code>require()</code>：引入模組</h3><p>以引入 <a target="_blank" rel="noopener" href="https://nodejs.org/api/os.html#os_os_platform">Node.js 提供的 os</a> 這個模組為例：</p>
+<h2 id="Modeule-相關操作"><a href="#Modeule-相關操作" class="headerlink" title="Ｍodeule 相關操作"></a>Ｍodeule 相關操作</h2><h3 id="require-：引入模組"><a href="#require-：引入模組" class="headerlink" title="require()：引入模組"></a><code>require()</code>：引入模組</h3><p>以引入 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9vcy5odG1sI29zX29zX3BsYXRmb3Jt">Node.js 提供的 os<i class="fa fa-external-link-alt"></i></span> 這個模組為例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">&#x27;os&#x27;</span>)      <span class="comment">// 引入 &#x27;os&#x27; 這個模組，變數 os 可隨意命名</span></span><br><span class="line"><span class="built_in">console</span>.log(os.platform())</span><br><span class="line"><span class="comment">// 印出 win32，代表當前作業系統</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/ubLcpXY.png"></p>
@@ -301,12 +312,12 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@miahsuwork/%E7%AC%AC%E4%B8%89%E9%80%B1-node-js-%E5%9F%BA%E7%A4%8E-module-exports-%E5%92%8C-require-2f9f6915d9f0">[第三週] Node.js 基礎 — module.exports 和 require</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNCVCOCU4OSVFOSU4MCVCMS1ub2RlLWpzLSVFNSU5RiVCQSVFNyVBNCU4RS1tb2R1bGUtZXhwb3J0cy0lRTUlOTIlOEMtcmVxdWlyZS0yZjlmNjkxNWQ5ZjA=">[第三週] Node.js 基礎 — module.exports 和 require<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
-<h2 id="NPM-線上套件庫"><a href="#NPM-線上套件庫" class="headerlink" title="NPM 線上套件庫"></a>NPM 線上套件庫</h2><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/">NPM</a> 是 Node Package Manager 的簡稱。是用來管理 Node.js 套件的系統（Library），可以下載別人已經寫好的 Javascript 套件來使用。</p>
+<h2 id="NPM-線上套件庫"><a href="#NPM-線上套件庫" class="headerlink" title="NPM 線上套件庫"></a>NPM 線上套件庫</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnBtanMuY29tLw==">NPM<i class="fa fa-external-link-alt"></i></span> 是 Node Package Manager 的簡稱。是用來管理 Node.js 套件的系統（Library），可以下載別人已經寫好的 Javascript 套件來使用。</p>
 <blockquote>
-<p>也可使用由 Facebook 團隊開發的 <a target="_blank" rel="noopener" href="https://yarnpkg.com/">Yarn</a>，同樣能從 npm 安裝套件，優點是速度較快。<br>參考資料：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191745">[Day-5] 用Yarn取代npm加速開發</a></p>
+<p>也可使用由 Facebook 團隊開發的 <span class="exturl" data-url="aHR0cHM6Ly95YXJucGtnLmNvbS8=">Yarn<i class="fa fa-external-link-alt"></i></span>，同樣能從 npm 安裝套件，優點是速度較快。<br>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MTc0NQ==">[Day-5] 用Yarn取代npm加速開發<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><h4 id="npm-v：查看-npm-版本。"><a href="#npm-v：查看-npm-版本。" class="headerlink" title="npm -v：查看 npm 版本。"></a><code>npm -v</code>：查看 npm 版本。</h4><p>通常在安裝 node.js 時就會一起安裝。</p>
 <p><img src="https://i.imgur.com/zZMyERG.png" alt="npm -v"></p>
@@ -342,7 +353,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 優化測試資料：</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(repeat(<span class="string">&#x27;a&#x27;</span>, <span class="number">5</span>) === <span class="string">&#x27;aaaaa&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(repeat(<span class="string">&#x27;z!Z!Z!!&#x27;</span>, <span class="number">2</span>) === <span class="string">&#x27;z!Z!Z!!z!Z!Z!!&#x27;</span>); </span><br><span class="line"><span class="built_in">console</span>.log(repeat(<span class="string">&#x27;&#x27;</span>, <span class="number">3</span>) === <span class="string">&#x27;&#x27;</span>); </span><br><span class="line"><span class="built_in">console</span>.log(repeat(<span class="string">&#x27;abc&#x27;</span>, <span class="number">0</span>) === <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="comment">// 均印出 true</span></span><br></pre></td></tr></table></figure>
 
 <p>這是最簡單的測試方法，但這麼做的缺點是很難「規模化」。我們可以利用別人寫好的框架來便利測試。</p>
-<h3 id="利用現成的框架-Jest-測試"><a href="#利用現成的框架-Jest-測試" class="headerlink" title="利用現成的框架 Jest 測試"></a>利用現成的框架 <a target="_blank" rel="noopener" href="https://jestjs.io/">Jest</a> 測試</h3><ol>
+<h3 id="利用現成的框架-Jest-測試"><a href="#利用現成的框架-Jest-測試" class="headerlink" title="利用現成的框架 Jest 測試"></a>利用現成的框架 <span class="exturl" data-url="aHR0cHM6Ly9qZXN0anMuaW8v">Jest<i class="fa fa-external-link-alt"></i></span> 測試</h3><ol>
 <li>用 npm 下載 Jest：輸入指令 <code>npm install -save-dev jest</code></li>
 </ol>
 <p><img src="https://i.imgur.com/P2V2LzG.png"></p>
@@ -394,7 +405,7 @@
 <p><img src="https://i.imgur.com/4OCokvV.png" alt="UTF-8"></p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/facebook/jest/issues/3877">Colorful output in Bash terminal does not work (–colors option) </a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL2plc3QvaXNzdWVzLzM4Nzc=">Colorful output in Bash terminal does not work (–colors option) <i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h3 id="先寫測試再寫程式：TDD"><a href="#先寫測試再寫程式：TDD" class="headerlink" title="先寫測試再寫程式：TDD"></a>先寫測試再寫程式：TDD</h3><p>Test-driven Development（測試驅動開發），是一種開發流程，簡言之就是「先寫測試在開發」。相較於傳統的「先開發在寫測試」模式，TDD 有幾項優點：</p>
@@ -403,7 +414,7 @@
 <li>從使用方觀點切入，有助於在開發初期釐清程式介面如何設計</li>
 <li>便於日後 Debug</li>
 </ol>
-<h3 id="實作-TDD"><a href="#實作-TDD" class="headerlink" title="實作 TDD"></a>實作 TDD</h3><p>可利用 Jest 模組，先建立 <code>test()</code> 架構，再來撰寫主要程式碼。步驟可參考：<a target="_blank" rel="noopener" href="https://tw.alphacamp.co/blog/tdd-test-driven-development-example">TDD 開發五步驟，帶你實戰 Test-Driven Development 範例</a></p>
+<h3 id="實作-TDD"><a href="#實作-TDD" class="headerlink" title="實作 TDD"></a>實作 TDD</h3><p>可利用 Jest 模組，先建立 <code>test()</code> 架構，再來撰寫主要程式碼。步驟可參考：<span class="exturl" data-url="aHR0cHM6Ly90dy5hbHBoYWNhbXAuY28vYmxvZy90ZGQtdGVzdC1kcml2ZW4tZGV2ZWxvcG1lbnQtZXhhbXBsZQ==">TDD 開發五步驟，帶你實戰 Test-Driven Development 範例<i class="fa fa-external-link-alt"></i></span></p>
 <h4 id="步驟一、選定一個目標功能，來新增測試案例"><a href="#步驟一、選定一個目標功能，來新增測試案例" class="headerlink" title="步驟一、選定一個目標功能，來新增測試案例"></a>步驟一、選定一個目標功能，來新增測試案例</h4><p>先寫好測試預期結果，並盡量列出邊界條件。在這個步驟還不會撰寫目標程式內容。這裡用 <code>reverse</code> 函式為例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先寫出預期結果：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reverse = <span class="built_in">require</span>(<span class="string">&#x27;./index&#x27;</span>)</span><br><span class="line"></span><br><span class="line">describe(<span class="string">&#x27;測試 reverse&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  test(<span class="string">&#x27;123 reverse 要等於 321&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    expect(reverse(<span class="string">&#x27;123&#x27;</span>)).toBe(<span class="string">&#x27;321&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  test(<span class="string">&#x27;!!! reverse 要等於 !!!&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    expect(reverse(<span class="string">&#x27;!!!&#x27;</span>)).toBe(<span class="string">&#x27;!!!&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  test(<span class="string">&#x27; &quot;&quot; reverse 要等於 &quot;&quot;&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    expect(reverse(<span class="string">&#x27;&#x27;</span>)).toBe(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
@@ -465,8 +476,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@hulitw/variable-and-frontdesk-a53a0440af3c">從博物館寄物櫃理解變數儲存模型</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@miahsuwork/%E7%AC%AC%E5%9B%9B%E9%80%B1-javascript-es6-%E8%88%87-babel-5b5e25450767">[第五週] JavaScript — ES6 與 Babel</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvdmFyaWFibGUtYW5kLWZyb250ZGVzay1hNTNhMDQ0MGFmM2M=">從博物館寄物櫃理解變數儲存模型<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNSU5QiU5QiVFOSU4MCVCMS1qYXZhc2NyaXB0LWVzNi0lRTglODglODctYmFiZWwtNWI1ZTI1NDUwNzY3">[第五週] JavaScript — ES6 與 Babel<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -596,10 +607,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -630,7 +641,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

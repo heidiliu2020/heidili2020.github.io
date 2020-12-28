@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [NET101] 網路基礎概論（搭配 JS 實作練習） 這門課程的學習筆記。如有錯誤歡迎指正。  12345678910111213學習目標： 知道網路背後大概的運作模式 知道什麼是 Request 跟 Response 知道什麼是 DNS 以及運作原理 知道 HTTP 與 HTTPS 的差異 知道 localhost 跟 127.0.0.1 是什麼 知道 GET 與 POST 的差別">
@@ -81,6 +83,15 @@
 
   <title>[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -272,13 +283,13 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/net101-js">[NET101] 網路基礎概論（搭配 JS 實作練習）</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbmV0MTAxLWpz">[NET101] 網路基礎概論（搭配 JS 實作練習）<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> 知道網路背後大概的運作模式</span><br><span class="line"> 知道什麼是 Request 跟 Response</span><br><span class="line"> 知道什麼是 DNS 以及運作原理</span><br><span class="line"> 知道 HTTP 與 HTTPS 的差異</span><br><span class="line"> 知道 localhost 跟 127.0.0.1 是什麼</span><br><span class="line"> 知道 GET 與 POST 的差別</span><br><span class="line"> 知道常用的 HTTP Header</span><br><span class="line"> 知道什麼是 API</span><br><span class="line"> 會使用 node.js 寫出串接 API 的程式</span><br><span class="line"> 知道 HTTP method 有哪些</span><br><span class="line"> 知道基本的 HTTP statud code，像是 200、301、400、404、500</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <h2 id="HTTP-是什麼？"><a href="#HTTP-是什麼？" class="headerlink" title="HTTP 是什麼？"></a>HTTP 是什麼？</h2><p>全名是 HyperText Transfer Protocol，中文翻作「 超文本傳輸協定」。</p>
-<p>HTTP 是一套網路傳輸協定，為<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE">全球資訊網的資料通訊的基礎</a>。也就是說，網頁前端和後端在溝通時，就是透過 HTTP 協定進行。</p>
+<p>HTTP 是一套網路傳輸協定，為<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCNiU4NSVFNiU5NiU4NyVFNiU5QyVBQyVFNCVCQyVBMCVFOCVCRSU5MyVFNSU4RCU4RiVFOCVBRSVBRQ==">全球資訊網的資料通訊的基礎<i class="fa fa-external-link-alt"></i></span>。也就是說，網頁前端和後端在溝通時，就是透過 HTTP 協定進行。</p>
 <h3 id="為什麼我們需要-Protocol（協定）？"><a href="#為什麼我們需要-Protocol（協定）？" class="headerlink" title="為什麼我們需要 Protocol（協定）？"></a>為什麼我們需要 Protocol（協定）？</h3><p>簡言之，協定就是一個「標準」。協定是為了讓彼此溝通而建立的規範，制定標準以統一格式，如此能夠進行規模化。</p>
 <h2 id="Client-amp-Server"><a href="#Client-amp-Server" class="headerlink" title="Client &amp; Server"></a>Client &amp; Server</h2><p>而透過協議溝通的兩端，通常可分為客戶端（Client）和伺服器端（Server）。</p>
 <p><img src="https://i.imgur.com/EYmEfr8.png"></p>
@@ -287,7 +298,7 @@
 <li>header：額外資訊</li>
 <li>body：主要內容</li>
 </ul>
-<p>我們可透過瀏覽器的開發者工具、或是 <a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547377087.html">HTTP 抓包工具 Charles</a> 來查看詳細資訊，過程大致如下：</p>
+<p>我們可透過瀏覽器的開發者工具、或是 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NzM3NzA4Ny5odG1s">HTTP 抓包工具 Charles<i class="fa fa-external-link-alt"></i></span> 來查看詳細資訊，過程大致如下：</p>
 <ol>
 <li>瀏覽器（Client）產生 HTTP「request」傳給 Server</li>
 <li>Server 經過處理後，回傳一個「response」</li>
@@ -312,14 +323,14 @@
 <li>回覆正確地址：台北市信義區信義路五段7號（IP）</li>
 </ol>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google_Public_DNS">Google 提供免費的 DNS 伺服器</a> 8.8.8.8 和8.8.4.4，如此可透過搜尋引擎來蒐集大數據。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvR29vZ2xlX1B1YmxpY19ETlM=">Google 提供免費的 DNS 伺服器<i class="fa fa-external-link-alt"></i></span> 8.8.8.8 和8.8.4.4，如此可透過搜尋引擎來蒐集大數據。</p>
 </blockquote>
 <h3 id="以-GitHub-網站為例"><a href="#以-GitHub-網站為例" class="headerlink" title="以 GitHub 網站為例"></a>以 GitHub 網站為例</h3><p>就是透過 DNS 把 Request URL（github.com） 轉換成實際 IP 位置（13.250.177.223）。</p>
 <p><img src="https://i.imgur.com/LsnJjwB.png" alt="DNS"></p>
 <h3 id="nslookup-指令"><a href="#nslookup-指令" class="headerlink" title="nslookup 指令"></a><code>nslookup</code> 指令</h3><p>在終端機輸入 <code>nslookup &#39;網址&#39;</code>：可查詢 DNS 伺服器。有可能出現多個結果，代表對應到多個 server。</p>
 <p><img src="https://i.imgur.com/wTIOWZF.png" alt="nslookup"></p>
 <h2 id="瀏覽器只是一個程式"><a href="#瀏覽器只是一個程式" class="headerlink" title="瀏覽器只是一個程式"></a>瀏覽器只是一個程式</h2><p>即使我們沒有瀏覽器，也能夠過其他方式發送 request 跟取得 response。 </p>
-<h3 id="實做一個-Client-端發送-request"><a href="#實做一個-Client-端發送-request" class="headerlink" title="實做一個 Client 端發送 request"></a>實做一個 Client 端發送 request</h3><p>利用 Node.js 的一套 library：<a target="_blank" rel="noopener" href="https://github.com/request/request">request - Simplified HTTP client</a>，來模擬瀏覽器發送 request 的過程，步驟如下：</p>
+<h3 id="實做一個-Client-端發送-request"><a href="#實做一個-Client-端發送-request" class="headerlink" title="實做一個 Client 端發送 request"></a>實做一個 Client 端發送 request</h3><p>利用 Node.js 的一套 library：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">request - Simplified HTTP client<i class="fa fa-external-link-alt"></i></span>，來模擬瀏覽器發送 request 的過程，步驟如下：</p>
 <ol>
 <li>安裝套件：<code>npm install request</code></li>
 <li>使用方法：複製官網提供的範本，貼到 index.js 裡</li>
@@ -338,7 +349,7 @@
 <li>或是利用 <code>node index.js &gt; github.html</code> 導入程式碼，一樣能打開網頁</li>
 </ol>
 <hr>
-<h2 id="HTTP-Request-Method-請求方法"><a href="#HTTP-Request-Method-請求方法" class="headerlink" title="HTTP Request Method 請求方法"></a>HTTP Request Method 請求方法</h2><p>什麼是 <code>HTTP Method</code>？在 HTTP 1.1 協定中，定義了八種方法，來以不同方式操作指定的資源。詳細可參考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods">HTTP 請求方法- HTTP | MDN</a>：</p>
+<h2 id="HTTP-Request-Method-請求方法"><a href="#HTTP-Request-Method-請求方法" class="headerlink" title="HTTP Request Method 請求方法"></a>HTTP Request Method 請求方法</h2><p>什麼是 <code>HTTP Method</code>？在 HTTP 1.1 協定中，定義了八種方法，來以不同方式操作指定的資源。詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSFRUUC9NZXRob2Rz">HTTP 請求方法- HTTP | MDN<i class="fa fa-external-link-alt"></i></span>：</p>
 <ul>
 <li>GET：只應用於取得資料</li>
 <li>HEAD：只獲取回應的 header，但沒有 body。較少使用，通常應用在只想知道 response 資訊時</li>
@@ -351,7 +362,7 @@
 <li>CONNECT</li>
 </ul>
 <p>這是為了讓 Server 能夠清楚辨別 request 的目的。</p>
-<h3 id="CRUD-原則"><a href="#CRUD-原則" class="headerlink" title="CRUD 原則"></a>CRUD 原則</h3><p>常用的幾個動作分別為：GET / POST / PUT / DELETE，正好對應到資料庫基本操作 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">CRUD 增刪查改</a>：</p>
+<h3 id="CRUD-原則"><a href="#CRUD-原則" class="headerlink" title="CRUD 原則"></a>CRUD 原則</h3><p>常用的幾個動作分別為：GET / POST / PUT / DELETE，正好對應到資料庫基本操作 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JUEyJTlFJUU1JTg4JUFBJUU2JTlGJUE1JUU2JTk0JUI5">CRUD 增刪查改<i class="fa fa-external-link-alt"></i></span>：</p>
 <ul>
 <li>Create：新增（POST）</li>
 <li>Delete：刪除（DELETE）</li>
@@ -372,7 +383,7 @@
 <blockquote>
 <p>如果用 HTML 來比喻，寫網頁時我們可以全部使用 div 標籤，但為了幫助理解，通常會使用 li、section、article 等具有語意的標籤，即可從結構看出內容的作用。</p>
 </blockquote>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://medium.com/itsems-frontend/api-%E6%98%AF%E4%BB%80%E9%BA%BC-restful-api-%E5%8F%88%E6%98%AF%E4%BB%80%E9%BA%BC-a001a85ab638">API 是什麼? RESTful API 又是什麼? - Medium</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2l0c2Vtcy1mcm9udGVuZC9hcGktJUU2JTk4JUFGJUU0JUJCJTgwJUU5JUJBJUJDLXJlc3RmdWwtYXBpLSVFNSU4RiU4OCVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQy1hMDAxYTg1YWI2Mzg=">API 是什麼? RESTful API 又是什麼? - Medium<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="GET-amp-POST-請求的區別"><a href="#GET-amp-POST-請求的區別" class="headerlink" title="GET &amp; POST 請求的區別"></a>GET &amp; POST 請求的區別</h3><p>當中又以 <code>GET</code> 和 <code>POST</code> 兩種，為最常使用的 HTTP 請求方法。兩者最直觀的區別是「資料傳遞方式」與「安全性」。</p>
 <h4 id="GET：向指定的資源要求資料，類似於查詢操作。"><a href="#GET：向指定的資源要求資料，類似於查詢操作。" class="headerlink" title="GET：向指定的資源要求資料，類似於查詢操作。"></a><code>GET</code>：向指定的資源要求資料，類似於查詢操作。</h4><ul>
 <li>資料傳遞方式：將引數由 URL 帶至 Server 端</li>
@@ -388,7 +399,7 @@
 <p><img src="https://i.imgur.com/K7UVu6f.png" alt="POST"></p>
 <p>在最下方夾帶 request 資訊：</p>
 <p><img src="https://i.imgur.com/7dixXCe.png" alt="request body"></p>
-<h3 id="HTTP-Status-Code-狀態碼"><a href="#HTTP-Status-Code-狀態碼" class="headerlink" title="HTTP Status Code 狀態碼"></a>HTTP Status Code 狀態碼</h3><p>是 HTTP 用「3 位數字代碼」來表示回應狀態，通常以開頭的數字來進行區分。詳細可參考 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP狀態碼- 維基百科</a>：</p>
+<h3 id="HTTP-Status-Code-狀態碼"><a href="#HTTP-Status-Code-狀態碼" class="headerlink" title="HTTP Status Code 狀態碼"></a>HTTP Status Code 狀態碼</h3><p>是 HTTP 用「3 位數字代碼」來表示回應狀態，通常以開頭的數字來進行區分。詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvSFRUUCVFNyU4QSVCNiVFNiU4MCU4MSVFNyVBMCU4MQ==">HTTP狀態碼- 維基百科<i class="fa fa-external-link-alt"></i></span>：</p>
 <h4 id="1xx：訊息（較少見）"><a href="#1xx：訊息（較少見）" class="headerlink" title="1xx：訊息（較少見）"></a>1xx：訊息（較少見）</h4><h4 id="2xx：Success-成功"><a href="#2xx：Success-成功" class="headerlink" title="2xx：Success 成功"></a>2xx：Success 成功</h4><ul>
 <li><code>200 OK</code>：代表成功</li>
 <li><code>204 No Content</code>：伺服器成功處理了請求，沒有返回任何內容（例如發出 DELETE XXX 訊息，回傳 204 代表刪除成功）</li>
@@ -407,10 +418,10 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w4_Network_http.html">[第四週] 網路基礎 - HTTP、Request、Response - Yakim</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10192095">[Day 09] 表單中的 GET 與 POST</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1543571046.html">GET和POST請求的區別（面試和原理都得知道）</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@totoroLiu/http-post-%E5%92%8C-get-%E5%B7%AE%E7%95%B0-928829d29914">http Post 和 Get 差異</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c0X05ldHdvcmtfaHR0cC5odG1s">[第四週] 網路基礎 - HTTP、Request、Response - Yakim<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MjA5NQ==">[Day 09] 表單中的 GET 與 POST<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0MzU3MTA0Ni5odG1s">GET和POST請求的區別（面試和原理都得知道）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B0b3Rvcm9MaXUvaHR0cC1wb3N0LSVFNSU5MiU4Qy1nZXQtJUU1JUI3JUFFJUU3JTk1JUIwLTkyODgyOWQyOTkxNA==">http Post 和 Get 差異<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <h3 id="實作一個簡易-HTTP-Server-端"><a href="#實作一個簡易-HTTP-Server-端" class="headerlink" title="實作一個簡易 HTTP Server 端"></a>實作一個簡易 HTTP Server 端</h3><p>前面我們已經實作一個 Client 端，也就是利用 request 這個 library 來顯示出來。接下來我們要利用 Node.js 內建 <code>library：http</code> 來實作 Server 端：</p>
 <ol>
@@ -470,7 +481,7 @@
 <p><img src="https://i.imgur.com/wLsG4hH.png" alt="OSI"></p>
 <h3 id="TCP-IP-四層模型"><a href="#TCP-IP-四層模型" class="headerlink" title="TCP/IP 四層模型"></a>TCP/IP 四層模型</h3><p>TCP/IP 是由 OSI 七層協定簡化而來，為目前網路通訊的基礎架構。以下為兩者之間的比較圖與常見的通訊協定：</p>
 <p><img src="https://i.imgur.com/GFDpM8z.png" alt="OSI TCP/IP"></p>
-<p>參考資料：<a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_server/0110network_basic.php#whatisnetwork_tcpip">2.4 TCP/IP 的傳輸層相關封包與資料 - 鳥哥的Linux 私房菜</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cDovL2xpbnV4LnZiaXJkLm9yZy9saW51eF9zZXJ2ZXIvMDExMG5ldHdvcmtfYmFzaWMucGhwI3doYXRpc25ldHdvcmtfdGNwaXA=">2.4 TCP/IP 的傳輸層相關封包與資料 - 鳥哥的Linux 私房菜<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="網路層-IP-地址"><a href="#網路層-IP-地址" class="headerlink" title="網路層 - IP 地址"></a>網路層 - IP 地址</h2><p>IP 的全名是 Internet Protocol，中文是「網際網路協定」。</p>
 <p>可分為 IPv4、IPv6 這兩種協議，兩者最主要差異在於「IP 地址的不同」：</p>
@@ -495,7 +506,7 @@
 <p>通常以 <code>192.168</code> 或 <code>10.0</code> 開頭的，都是虛擬 IP。</p>
 </blockquote>
 <p><img src="https://i.imgur.com/TFcsKyY.png" alt="虛擬 IP"></p>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/questions/10000796">浮動 IP 與 固定 IP 有何不同?? 各有何優缺點??</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9xdWVzdGlvbnMvMTAwMDA3OTY=">浮動 IP 與 固定 IP 有何不同?? 各有何優缺點??<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="Port-連接埠（端口）"><a href="#Port-連接埠（端口）" class="headerlink" title="Port 連接埠（端口）"></a>Port 連接埠（端口）</h2><p>在應用層當中，每台電腦主機 IP 位置（localhost），可能對應到不同應用程式。例如：HTTP、FTP、信件收發等服務。</p>
 <p>而 Port 扮演網路通訊的端點，用來區分不同功能。如此即可辨認出，該連線要對應到哪個應用程式。</p>
@@ -509,7 +520,7 @@
 <li>FTP 21</li>
 <li>「測試」常用：3000、4000、8080、8000 等冷門 Port</li>
 </ul>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/box5068/2011/01/19/20901">[網路管理]常用 port 說明</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9kb3RibG9ncy5jb20udHcvYm94NTA2OC8yMDExLzAxLzE5LzIwOTAx">[網路管理]常用 port 說明<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="傳輸層-TCP-amp-UDP"><a href="#傳輸層-TCP-amp-UDP" class="headerlink" title="傳輸層 - TCP &amp; UDP"></a>傳輸層 - TCP &amp; UDP</h2><p>傳輸層（Transport Layer）協定提供不同主機之間的資料傳輸及控制。根據不同需求，又分為「可靠的 TCP」和「速度較快的 UDP」兩種協定：</p>
 <h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><ul>
@@ -527,10 +538,10 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE">TCP協議 - Wikipedia</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10000021">什麼是OSI的7層架構？和常聽到的Layer 7有關？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJDJUEwJUU4JUJFJTkzJUU2JThFJUE3JUU1JTg4JUI2JUU1JThEJThGJUU4JUFFJUFF">TCP協議 - Wikipedia<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDAwMDAyMQ==">什麼是OSI的7層架構？和常聽到的Layer 7有關？<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
-<h2 id="小結-從傳紙條概念看-TCP-IP"><a href="#小結-從傳紙條概念看-TCP-IP" class="headerlink" title="小結 - 從傳紙條概念看 TCP/IP"></a>小結 - 從傳紙條概念看 TCP/IP</h2><p>參考 <a target="_blank" rel="noopener" href="https://medium.com/@hulitw/learning-tcp-ip-http-via-sending-letter-5d3299203660">Huli - 從傳紙條輕鬆學習基本網路概念</a>，我們能夠透過傳紙條的例子，來試著理解網路通訊概念：</p>
+<h2 id="小結-從傳紙條概念看-TCP-IP"><a href="#小結-從傳紙條概念看-TCP-IP" class="headerlink" title="小結 - 從傳紙條概念看 TCP/IP"></a>小結 - 從傳紙條概念看 TCP/IP</h2><p>參考 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvbGVhcm5pbmctdGNwLWlwLWh0dHAtdmlhLXNlbmRpbmctbGV0dGVyLTVkMzI5OTIwMzY2MA==">Huli - 從傳紙條輕鬆學習基本網路概念<i class="fa fa-external-link-alt"></i></span>，我們能夠透過傳紙條的例子，來試著理解網路通訊概念：</p>
 <ul>
 <li>應用層（HTTP / FTP）：傳輸的資料內容</li>
 <li>傳輸層（TCP / UDP）：傳輸方式</li>
@@ -540,7 +551,7 @@
 <p><img src="https://i.imgur.com/oJPxLiH.png" alt="傳紙條概念"></p>
 <hr>
 <h2 id="淺談-API"><a href="#淺談-API" class="headerlink" title="淺談 API"></a>淺談 API</h2><blockquote>
-<p>可參考 <a target="_blank" rel="noopener" href="https://medium.com/@hulitw/ramen-and-api-6238437dc544">Huli - 從拉麵店的販賣機理解什麼是 API</a>，或是這部影片：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zvKadd9Cflc&feature=emb_logo">什麼是 API？</a>來瞭解。</p>
+<p>可參考 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvcmFtZW4tYW5kLWFwaS02MjM4NDM3ZGM1NDQ=">Huli - 從拉麵店的販賣機理解什麼是 API<i class="fa fa-external-link-alt"></i></span>，或是這部影片：<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj16dkthZGQ5Q2ZsYyZmZWF0dXJlPWVtYl9sb2dv">什麼是 API？<i class="fa fa-external-link-alt"></i></span>來瞭解。</p>
 </blockquote>
 <p>全名是 Application Programming ==Interface==，中文是「應用程式==介面==」。簡言之，就是方便溝通、交換資料的管道。</p>
 <p>API 是應用程式、裝置之間資料的交換，但不一定要透過網路才能有 API，例如：</p>
@@ -554,34 +565,34 @@
 <p>以下為實際的運用例子：</p>
 <ul>
 <li>會員登入系統：社群連結註冊登入（例如：設置 FB 或 Google 登入按鈕）</li>
-<li>社群嵌入：分享、留言版、按讚按鈕、影音（例如：<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api?locale=zh_TW">Facebook Graphic</a>）</li>
-<li>資料嵌入：<a target="_blank" rel="noopener" href="https://developer.yahoo.com/weather/?guccounter=1&guce_referrer=aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c0X05ldHdvcmtfQVBJLmh0bWw&guce_referrer_sig=AQAAABbKqoTfIecNtugMpoKKf5L53XwIJA_l1zPrrJUmPD2Yh1N-rcXbaJhbnPQAKW-UbnT_NJhQX_4isY374OTvbtR1q91DdGlYOK4qSQyQqr2bkr5XMPQuo8bQT874RICV6IF2sHsr2yp84UXMV4549R1aXFjHNt9lifII3YdTvbAY">Yahoo 氣象</a>、<a target="_blank" rel="noopener" href="https://developers.google.com/maps/documentation/timezone/start?hl=zh-tw">Google 地圖</a>、<a target="_blank" rel="noopener" href="https://developer.twitter.com/en/docs/tweets/timelines/overview">Tweet timelines</a></li>
-<li><a target="_blank" rel="noopener" href="https://pokeapi.co/">PokéAPI</a>：拿到寶可夢的資訊</li>
-<li><a target="_blank" rel="noopener" href="https://picsum.photos/">假圖 API</a>：隨機產生出圖片</li>
+<li>社群嵌入：分享、留言版、按讚按鈕、影音（例如：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmZhY2Vib29rLmNvbS9kb2NzL2dyYXBoLWFwaT9sb2NhbGU9emhfVFc=">Facebook Graphic<i class="fa fa-external-link-alt"></i></span>）</li>
+<li>資料嵌入：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIueWFob28uY29tL3dlYXRoZXIvP2d1Y2NvdW50ZXI9MSZndWNlX3JlZmVycmVyPWFIUjBjSE02THk5NVlXdHBiV2h6ZFM1amIyMHZjSEp2YW1WamRDOXdjbTlxWldOMFgzYzBYMDVsZEhkdmNtdGZRVkJKTG1oMGJXdyZndWNlX3JlZmVycmVyX3NpZz1BUUFBQUJiS3FvVGZJZWNOdHVnTXBvS0tmNUw1M1h3SUpBX2wxelByckpVbVBEMlloMU4tcmNYYmFKaGJuUFFBS1ctVWJuVF9OSmhRWF80aXNZMzc0T1R2YnRSMXE5MURkR2xZT0s0cVNReVFxcjJia3I1WE1QUXVvOGJRVDg3NFJJQ1Y2SUYyc0hzcjJ5cDg0VVhNVjQ1NDlSMWFYRmpITnQ5bGlmSUkzWWRUdmJBWQ==">Yahoo 氣象<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vbWFwcy9kb2N1bWVudGF0aW9uL3RpbWV6b25lL3N0YXJ0P2hsPXpoLXR3">Google 地圖<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIudHdpdHRlci5jb20vZW4vZG9jcy90d2VldHMvdGltZWxpbmVzL292ZXJ2aWV3">Tweet timelines<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wb2tlYXBpLmNvLw==">PokéAPI<i class="fa fa-external-link-alt"></i></span>：拿到寶可夢的資訊</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9waWNzdW0ucGhvdG9zLw==">假圖 API<i class="fa fa-external-link-alt"></i></span>：隨機產生出圖片</li>
 </ul>
 <p>透過 API 能夠達到省時、便利、營利等優點，因此我們也可以說，API 是一個「能讓生產者與消費者雙方溝通的介面」。</p>
 <h2 id="實際串接-API"><a href="#實際串接-API" class="headerlink" title="實際串接 API"></a>實際串接 API</h2><h3 id="串接的前置作業"><a href="#串接的前置作業" class="headerlink" title="串接的前置作業"></a>串接的前置作業</h3><ol>
-<li>準備 Client 端（發出端）：使用 node.js <a target="_blank" rel="noopener" href="https://github.com/request/request">library request</a> 實作一個 Client 端</li>
-<li>提供 API 的網站（接收端）：<a target="_blank" rel="noopener" href="https://reqres.in/">Regres</a> 是一個提供 API 測試的網站</li>
+<li>準備 Client 端（發出端）：使用 node.js <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">library request<i class="fa fa-external-link-alt"></i></span> 實作一個 Client 端</li>
+<li>提供 API 的網站（接收端）：<span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4v">Regres<i class="fa fa-external-link-alt"></i></span> 是一個提供 API 測試的網站</li>
 <li>能夠發出 request 的工具：終端機</li>
 </ol>
-<h3 id="實戰演練"><a href="#實戰演練" class="headerlink" title="實戰演練"></a>實戰演練</h3><h3 id="Step1-實作一個-Client-端"><a href="#Step1-實作一個-Client-端" class="headerlink" title="Step1. 實作一個 Client 端"></a>Step1. 實作一個 Client 端</h3><p>與先前「實做一個 Client 端發送 request」操作方式相同，是利用 <a target="_blank" rel="noopener" href="https://github.com/request/request">library request</a> 來模擬瀏覽器發送 request 的過程。</p>
+<h3 id="實戰演練"><a href="#實戰演練" class="headerlink" title="實戰演練"></a>實戰演練</h3><h3 id="Step1-實作一個-Client-端"><a href="#Step1-實作一個-Client-端" class="headerlink" title="Step1. 實作一個 Client 端"></a>Step1. 實作一個 Client 端</h3><p>與先前「實做一個 Client 端發送 request」操作方式相同，是利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">library request<i class="fa fa-external-link-alt"></i></span> 來模擬瀏覽器發送 request 的過程。</p>
 <ul>
-<li>新增 index.js 並貼上官網提供的<a target="_blank" rel="noopener" href="https://github.com/request/request#super-simple-to-use">範本</a>：</li>
+<li>新增 index.js 並貼上官網提供的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNzdXBlci1zaW1wbGUtdG8tdXNl">範本<i class="fa fa-external-link-alt"></i></span>：</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>);</span><br><span class="line">request(<span class="string">&#x27;http://www.google.com&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.error(<span class="string">&#x27;error:&#x27;</span>, error);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;statusCode:&#x27;</span>, response &amp;&amp; response.statusCode);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;head:&#x27;</span>, response.headers);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;body:&#x27;</span>, body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h3 id="Step2-串接-Regres-API"><a href="#Step2-串接-Regres-API" class="headerlink" title="Step2. 串接 Regres API"></a>Step2. 串接 <a target="_blank" rel="noopener" href="https://reqres.in/api/users">Regres</a> API</h3><p>將範本中的 google 網址改成 <code>https://reqres.in/api/users</code></p>
+<h3 id="Step2-串接-Regres-API"><a href="#Step2-串接-Regres-API" class="headerlink" title="Step2. 串接 Regres API"></a>Step2. 串接 <span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4vYXBpL3VzZXJz">Regres<i class="fa fa-external-link-alt"></i></span> API</h3><p>將範本中的 google 網址改成 <code>https://reqres.in/api/users</code></p>
 <h3 id="Step3-用-node-js-運行"><a href="#Step3-用-node-js-運行" class="headerlink" title="Step3. 用 node.js 運行"></a>Step3. 用 node.js 運行</h3><p>在終端機輸入 <code>node index.js</code>，即可獲得 Regres API 所提供的資訊：</p>
 <p><img src="https://i.imgur.com/DWirKxl.png" alt="運行"></p>
 <p>這樣其實就完成了簡單的 API 串接！透過丟一個 request 到網站，我們能夠獲取想要的資訊。</p>
-<h2 id="學會查看官方文件"><a href="#學會查看官方文件" class="headerlink" title="學會查看官方文件"></a>學會查看官方文件</h2><p>而透過 <a target="_blank" rel="noopener" href="https://github.com/request/request#forms">request 文件</a>，我們能找到不同的 <code>request.METHOD()</code>，瞭解如何使用各種方法：</p>
+<h2 id="學會查看官方文件"><a href="#學會查看官方文件" class="headerlink" title="學會查看官方文件"></a>學會查看官方文件</h2><p>而透過 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNmb3Jtcw==">request 文件<i class="fa fa-external-link-alt"></i></span>，我們能找到不同的 <code>request.METHOD()</code>，瞭解如何使用各種方法：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request.get(): Defaults to method: <span class="string">&quot;GET&quot;</span>.</span><br><span class="line">request.post(): Defaults to method: <span class="string">&quot;POST&quot;</span>.</span><br><span class="line">request.put(): Defaults to method: <span class="string">&quot;PUT&quot;</span>.</span><br><span class="line">request.patch(): Defaults to method: <span class="string">&quot;PATCH&quot;</span>.</span><br><span class="line">request.del() / request.delete(): Defaults to method: <span class="string">&quot;DELETE&quot;</span>.</span><br></pre></td></tr></table></figure>
 
 <h3 id="情境一：查詢不同使用者資料"><a href="#情境一：查詢不同使用者資料" class="headerlink" title="情境一：查詢不同使用者資料"></a>情境一：查詢不同使用者資料</h3><ul>
 <li>Method：GET（預設方法）</li>
 <li>url ：<code>https://reqres.in/api/users/&lt;userID&gt;</code></li>
-<li>透過 <a target="_blank" rel="noopener" href="https://reqres.in/">Reqres 官網</a>可知，更改 「Request 網址結尾」可獲得不同使用者資訊，以 <code>/api/users/2</code> 為例：</li>
+<li>透過 <span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4v">Reqres 官網<i class="fa fa-external-link-alt"></i></span>可知，更改 「Request 網址結尾」可獲得不同使用者資訊，以 <code>/api/users/2</code> 為例：</li>
 </ul>
 <p>方法一：直接將網址改成 <code>https://reqres.in/api/users/2</code></p>
 <p><img src="https://i.imgur.com/JiCCL5b.png" alt="id 2"></p>
@@ -598,7 +609,7 @@
 <h3 id="情境二：新增使用者資料"><a href="#情境二：新增使用者資料" class="headerlink" title="情境二：新增使用者資料"></a>情境二：新增使用者資料</h3><ul>
 <li>method：POST</li>
 <li>url ：<code>https://reqres.in/api/users/</code></li>
-<li>到 request library 的 Github 頁面，<a target="_blank" rel="noopener" href="https://github.com/request/request#forms">點選 forms</a>，填入相關程式碼來新增資料至 reqres</li>
+<li>到 request library 的 Github 頁面，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNmb3Jtcw==">點選 forms<i class="fa fa-external-link-alt"></i></span>，填入相關程式碼來新增資料至 reqres</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>);</span><br><span class="line"></span><br><span class="line">request.post(</span><br><span class="line">  &#123; </span><br><span class="line">    url: <span class="string">&#x27;https://reqres.in/api/users&#x27;</span>,</span><br><span class="line">     form: &#123; </span><br><span class="line">       name: <span class="string">&#x27;Heidi&#x27;</span>,</span><br><span class="line">       job: <span class="string">&#x27;web engineer&#x27;</span></span><br><span class="line">      &#125; </span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> json = <span class="built_in">JSON</span>.parse(body)      <span class="comment">// 轉成 JS 物件</span></span><br><span class="line">    <span class="built_in">console</span>.log(json);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
@@ -623,7 +634,7 @@
 
 <p>成功修改使用者資料：</p>
 <p><img src="https://i.imgur.com/HXbVmTk.png" alt="patch"></p>
-<h3 id="綜合應用"><a href="#綜合應用" class="headerlink" title="綜合應用"></a>綜合應用</h3><p>Base URL: <a target="_blank" rel="noopener" href="https://lidemy-book-store.herokuapp.com/">https://lidemy-book-store.herokuapp.com</a></p>
+<h3 id="綜合應用"><a href="#綜合應用" class="headerlink" title="綜合應用"></a>綜合應用</h3><p>Base URL: <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktYm9vay1zdG9yZS5oZXJva3VhcHAuY29tLw==">https://lidemy-book-store.herokuapp.com<i class="fa fa-external-link-alt"></i></span></p>
 <table>
 <thead>
 <tr>
@@ -683,7 +694,7 @@
 </ul>
 </li>
 </ol>
-<p>實際例子可參考<a target="_blank" rel="noopener" href="https://dev.twitch.tv/docs/v5">Twitch API v5</a> 文件，同樣支援這兩種方法：</p>
+<p>實際例子可參考<span class="exturl" data-url="aHR0cHM6Ly9kZXYudHdpdGNoLnR2L2RvY3MvdjU=">Twitch API v5<i class="fa fa-external-link-alt"></i></span> 文件，同樣支援這兩種方法：</p>
 <ol>
 <li>Request header (<code>Client-ID: XXXXX</code>)</li>
 <li>Query-string parameter<br>(<code>https://api.twitch.tv/kraken/users/44322889?client_id=XXXXX</code>)</li>
@@ -718,8 +729,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://blog.wu-boy.com/2011/04/%E4%BD%A0%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84-json-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/">你不可不知的 JSON 基本介紹</a></li>
-<li><a target="_blank" rel="noopener" href="https://jsoneditoronline.org/">JSON Editor online</a>：可將得到的資料轉成 JSON 格式</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnd1LWJveS5jb20vMjAxMS8wNC8lRTQlQkQlQTAlRTQlQjglOEQlRTUlOEYlQUYlRTQlQjglOEQlRTclOUYlQTUlRTclOUElODQtanNvbi0lRTUlOUYlQkElRTYlOUMlQUMlRTQlQkIlOEIlRTclQjQlQjkv">你不可不知的 JSON 基本介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qc29uZWRpdG9yb25saW5lLm9yZy8=">JSON Editor online<i class="fa fa-external-link-alt"></i></span>：可將得到的資料轉成 JSON 格式</li>
 </ol>
 <h3 id="實際來處理-JSON-格式字串"><a href="#實際來處理-JSON-格式字串" class="headerlink" title="實際來處理 JSON 格式字串"></a>實際來處理 JSON 格式字串</h3><p>同樣以串接 Reqres API 為例。得到 response 就是「JSON 格式的字串」，但這種資料並不易閱讀，也無法直接使用。</p>
 <p>因此使用內建函式 <code>JSON.parse()</code> 做處理，就會轉成「JS 物件」：</p>
@@ -732,7 +743,7 @@
 <p>反之，若想把「JS 物件」轉成「JSON 格式字串」，可以用： <code>JSON.stringify(&lt;object&gt;)</code></p>
 <hr>
 <h2 id="必學指令-curl"><a href="#必學指令-curl" class="headerlink" title="必學指令 curl"></a>必學指令 <code>curl</code></h2><blockquote>
-<p>在 <a target="_blank" rel="noopener" href="https://curl.haxx.se/">curl 官網</a>下載，安裝方法可參考 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10185923">Day14 - cURL 工具</a>，即可在終端機使用。</p>
+<p>在 <span class="exturl" data-url="aHR0cHM6Ly9jdXJsLmhheHguc2Uv">curl 官網<i class="fa fa-external-link-alt"></i></span>下載，安裝方法可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NTkyMw==">Day14 - cURL 工具<i class="fa fa-external-link-alt"></i></span>，即可在終端機使用。</p>
 </blockquote>
 <p>curl 做法非常簡單，只要在終端機輸入指令就可支援發 HTTP request 、下載及上傳檔案的功能，基本格式為：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl [options] [URL...]</span><br></pre></td></tr></table></figure>
@@ -745,8 +756,8 @@
 <p><img src="https://i.imgur.com/RbyGVvV.png"></p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/doiido/1564631">linux指令 curl指令详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/">Linux Curl Command 指令與基本操作入門教學</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9kb2lpZG8vMTU2NDYzMQ==">linux指令 curl指令详解<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOS8wMi8wMS9saW51eC1jdXJsLWNvbW1hbmQtdHV0b3JpYWwv">Linux Curl Command 指令與基本操作入門教學<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 
@@ -877,10 +888,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -911,7 +922,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

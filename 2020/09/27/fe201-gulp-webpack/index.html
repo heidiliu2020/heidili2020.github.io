@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE201] 前端中階：那些前端會用到的工具們 這門課程的學習筆記。如有錯誤歡迎指正。  前言在使用新工具之前，大致會依照下列步驟：  安裝工具 閱讀官方文件 更改設定檔">
@@ -56,6 +58,15 @@
 
   <title>[week 13] 前端工具之三 - gulp、webpack | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -247,7 +258,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe201">[FE201] 前端中階：那些前端會用到的工具們</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUyMDE=">[FE201] 前端中階：那些前端會用到的工具們<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用新工具之前，大致會依照下列步驟：</p>
 <ol>
@@ -257,7 +268,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="gulp：整合流程"><a href="#gulp：整合流程" class="headerlink" title="gulp：整合流程"></a>gulp：整合流程</h2><p><a target="_blank" rel="noopener" href="https://gulpjs.com/">gulp</a> 是一個前端自動化構建工具，開發者可使用它來建構自動化工作流程。</p>
+<h2 id="gulp：整合流程"><a href="#gulp：整合流程" class="headerlink" title="gulp：整合流程"></a>gulp：整合流程</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ndWxwanMuY29tLw==">gulp<i class="fa fa-external-link-alt"></i></span> 是一個前端自動化構建工具，開發者可使用它來建構自動化工作流程。</p>
 <h3 id="為什麼需要-glup？"><a href="#為什麼需要-glup？" class="headerlink" title="為什麼需要 glup？"></a>為什麼需要 glup？</h3><p>為了將工作流程自動化，也就是整合前端開發環境。藉由簡化工作量，可讓開發者將重點放在功能的開發上。</p>
 <p>例如下列功能：</p>
 <ul>
@@ -267,9 +278,9 @@
 <li>自訂任務流程..</li>
 </ul>
 <h3 id="如何安裝"><a href="#如何安裝" class="headerlink" title="如何安裝"></a>如何安裝</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a> 是一個讓 Javascript 運行在服務端的開發平台。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">Node.js<i class="fa fa-external-link-alt"></i></span> 是一個讓 Javascript 運行在服務端的開發平台。</p>
 </blockquote>
-<p>由於 gulp 是基於 Node.js 進行開發，使用前必須先安裝 node.js、npm。接著即可按照<a target="_blank" rel="noopener" href="https://gulpjs.com/docs/en/getting-started/quick-start/">官方文件 Quick Start</a> 安裝 gulp：</p>
+<p>由於 gulp 是基於 Node.js 進行開發，使用前必須先安裝 node.js、npm。接著即可按照<span class="exturl" data-url="aHR0cHM6Ly9ndWxwanMuY29tL2RvY3MvZW4vZ2V0dGluZy1zdGFydGVkL3F1aWNrLXN0YXJ0Lw==">官方文件 Quick Start<i class="fa fa-external-link-alt"></i></span> 安裝 gulp：</p>
 <ol>
 <li><code>npm install --global gulp-cli</code>：安裝 gulp-cli</li>
 <li>開啟需使用 gulp 的專案資料夾</li>
@@ -285,8 +296,8 @@
 </ul>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/418553/">什麼是gulp,怎麼使用gulp | 程式前沿</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@hugh_Program_learning_diary_Js/%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%9A%8E-gulp-791132bea9f1">前端中階：gulp. 介紹| by Hugh’s Program learning | Medium</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvNDE4NTUzLw==">什麼是gulp,怎麼使用gulp | 程式前沿<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWdoX1Byb2dyYW1fbGVhcm5pbmdfZGlhcnlfSnMvJUU1JTg5JThEJUU3JUFCJUFGJUU0JUI4JUFEJUU5JTlBJThFLWd1bHAtNzkxMTMyYmVhOWYx">前端中階：gulp. 介紹| by Hugh’s Program learning | Medium<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h2 id="uglify-與-minify"><a href="#uglify-與-minify" class="headerlink" title="uglify 與 minify"></a>uglify 與 minify</h2><h3 id="uglify"><a href="#uglify" class="headerlink" title="uglify"></a>uglify</h3><ul>
 <li><code>gulp-uglify</code>：混淆並壓縮 JavaScript 檔案</li>
@@ -306,10 +317,10 @@
 
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://kejyun.github.io/gulp-learning-notes/plguins/JavaScript/Plugins-JavaScript-gulp-uglify.html">【gulp-uglify】最小化 JavaScript | gulp 學習筆記</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191992">前端也需要編譯？Transpile、Compile、Minify、Uglify 基本介紹</a></li>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/674625/">亦敵亦友的uglify</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10225666">[試著把切版專案升級到 gulp4.0 吧] Day21 CSS 的處理：談壓縮 CSS 與 gulp-clean-css</a></li>
+<li><span class="exturl" data-url="aHR0cDovL2tlanl1bi5naXRodWIuaW8vZ3VscC1sZWFybmluZy1ub3Rlcy9wbGd1aW5zL0phdmFTY3JpcHQvUGx1Z2lucy1KYXZhU2NyaXB0LWd1bHAtdWdsaWZ5Lmh0bWw=">【gulp-uglify】最小化 JavaScript | gulp 學習筆記<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MTk5Mg==">前端也需要編譯？Transpile、Compile、Minify、Uglify 基本介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvNjc0NjI1Lw==">亦敵亦友的uglify<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIyNTY2Ng==">[試著把切版專案升級到 gulp4.0 吧] Day21 CSS 的處理：談壓縮 CSS 與 gulp-clean-css<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="Webpack：打包程式碼"><a href="#Webpack：打包程式碼" class="headerlink" title="Webpack：打包程式碼"></a>Webpack：打包程式碼</h2><h3 id="什麼是-Webpack"><a href="#什麼是-Webpack" class="headerlink" title="什麼是 Webpack"></a>什麼是 Webpack</h3><p>Webpack　是一套模組整合工具。可將零散的 JavaScript 模組打包，然後在瀏覽器上運行，解決舊瀏覽器不支援部分新語法的問題，也利於後續管理與維護。</p>
@@ -319,7 +330,7 @@
 <li>瀏覽器支援度：由於部分瀏覽器不支援 ES6 模組，例如 IE，若要使用 import、export 等語法，則需要其他工具來進行轉換。</li>
 <li>不易引用套件：若想要引用他人撰寫的 library 套件，需考慮相容性問題，以及可能造成命名衝突。</li>
 </ol>
-<h3 id="如何安裝-1"><a href="#如何安裝-1" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>跟著官方教學步驟 <a target="_blank" rel="noopener" href="https://webpack.js.org/guides/getting-started/">Getting Started</a> 安裝 webpack：</p>
+<h3 id="如何安裝-1"><a href="#如何安裝-1" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>跟著官方教學步驟 <span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvZ2V0dGluZy1zdGFydGVkLw==">Getting Started<i class="fa fa-external-link-alt"></i></span> 安裝 webpack：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-demo</span><br><span class="line">cd webpack-demo</span><br><span class="line">npm init -y</span><br><span class="line">npm install webpack webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/MP3ufbd.png"></p>
@@ -382,9 +393,9 @@
 
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.huli.tw/2020/01/21/webpack-newbie-tutorial/">webpack 新手教學之淺談模組化與 snowpack</a></li>
-<li><a target="_blank" rel="noopener" href="https://neighborhood999.github.io/webpack-tutorial-gitbook/Part1/">Webpack 初學者教學課程Part1 · Webpack Tutorial 繁體中文</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/i-am-mike/%E4%BB%80%E9%BA%BC%E6%98%AFwebpack-%E4%BD%A0%E9%9C%80%E8%A6%81webpack%E5%97%8E-2d8f9658241d">Webpack教學 (一) ：什麼是Webpack? 能吃嗎？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAyMC8wMS8yMS93ZWJwYWNrLW5ld2JpZS10dXRvcmlhbC8=">webpack 新手教學之淺談模組化與 snowpack<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZWlnaGJvcmhvb2Q5OTkuZ2l0aHViLmlvL3dlYnBhY2stdHV0b3JpYWwtZ2l0Ym9vay9QYXJ0MS8=">Webpack 初學者教學課程Part1 · Webpack Tutorial 繁體中文<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2ktYW0tbWlrZS8lRTQlQkIlODAlRTklQkElQkMlRTYlOTglQUZ3ZWJwYWNrLSVFNCVCRCVBMCVFOSU5QyU4MCVFOCVBNiU4MXdlYnBhY2slRTUlOTclOEUtMmQ4Zjk2NTgyNDFk">Webpack教學 (一) ：什麼是Webpack? 能吃嗎？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h3 id="總結：gulp-vs-webpack"><a href="#總結：gulp-vs-webpack" class="headerlink" title="總結：gulp vs webpack"></a>總結：gulp vs webpack</h3><h4 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h4><ul>
@@ -405,7 +416,7 @@
 <p>簡言之，gulp 是用來管理任務，建構自動化流程的工具；而 Webpack 則是將資源打包，提供模組化開發方式。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1550221216.html">Gulp和webpack的區別，是一種工具嗎？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU1MDIyMTIxNi5odG1s">Gulp和webpack的區別，是一種工具嗎？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -535,10 +546,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -569,7 +580,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

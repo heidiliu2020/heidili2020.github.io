@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="在練習這週的網站部署時，主要參考下列幾篇筆記：  [ 紀錄 ] 部屬 AWS EC2 雲端主機 + LAMP Server + phpMyAdmin AWS EC2 佈署網站：卡關記錄 &amp; 心得 部署 AWS EC2 遠端主機 + Ubuntu LAMP 環境 + phpmyadmin">
@@ -90,6 +92,15 @@
 
   <title>[week 14] 網站部署 - 設定 AWS EC2 遠端主機 +  Ubuntu LAMP 環境 + phpMyAdmin | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -282,9 +293,9 @@
       
         <p>在練習這週的網站部署時，主要參考下列幾篇筆記：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://mtr04-note.coderbridge.io/2020/09/15/-%E7%B4%80%E9%8C%84-%08-%E9%83%A8%E5%B1%AC-aws-ec2-%E9%9B%B2%E7%AB%AF%E4%B8%BB%E6%A9%9F-/">[ 紀錄 ] 部屬 AWS EC2 雲端主機 + LAMP Server + phpMyAdmin</a></li>
-<li><a target="_blank" rel="noopener" href="https://nicolakacha.coderbridge.io/2020/09/16/launch-website/">AWS EC2 佈署網站：卡關記錄 &amp; 心得</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Lidemy/mentor-program-2nd-yuchun33/issues/15">部署 AWS EC2 遠端主機 + Ubuntu LAMP 環境 + phpmyadmin</a><a id="more"></a>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tdHIwNC1ub3RlLmNvZGVyYnJpZGdlLmlvLzIwMjAvMDkvMTUvLSVFNyVCNCU4MCVFOSU4QyU4NC0lMDgtJUU5JTgzJUE4JUU1JUIxJUFDLWF3cy1lYzItJUU5JTlCJUIyJUU3JUFCJUFGJUU0JUI4JUJCJUU2JUE5JTlGLS8=">[ 紀錄 ] 部屬 AWS EC2 雲端主機 + LAMP Server + phpMyAdmin<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFrYWNoYS5jb2RlcmJyaWRnZS5pby8yMDIwLzA5LzE2L2xhdW5jaC13ZWJzaXRlLw==">AWS EC2 佈署網站：卡關記錄 &amp; 心得<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpZGVteS9tZW50b3ItcHJvZ3JhbS0ybmQteXVjaHVuMzMvaXNzdWVzLzE1">部署 AWS EC2 遠端主機 + Ubuntu LAMP 環境 + phpmyadmin<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
 </li>
 </ul>
 <hr>
@@ -528,13 +539,13 @@
 <p>完成以上步驟後，就可以正常操作 phpmyadmin 了！</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10216815">Day 03 : 環境架設 part II – MySQL &amp; phpMyAdmin</a></li>
-<li><a target="_blank" rel="noopener" href="https://magiclen.org/ubuntu-server-18-04/">如何安裝Ubuntu Server 18.04來架設伺服器？</a></li>
-<li><a target="_blank" rel="noopener" href="https://magiclen.org/lamp/">安裝 LAMP Server + phpMyAdmin 在 Linux 系統上輕鬆架設網站</a></li>
-<li><a target="_blank" rel="noopener" href="https://magiclen.org/ubuntu-server-mysql-php/">使用Ubuntu Server架設MySQL伺服器，並於PHP程式中存取MySQL資料庫</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNjgxNQ==">Day 03 : 環境架設 part II – MySQL &amp; phpMyAdmin<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYWdpY2xlbi5vcmcvdWJ1bnR1LXNlcnZlci0xOC0wNC8=">如何安裝Ubuntu Server 18.04來架設伺服器？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYWdpY2xlbi5vcmcvbGFtcC8=">安裝 LAMP Server + phpMyAdmin 在 Linux 系統上輕鬆架設網站<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYWdpY2xlbi5vcmcvdWJ1bnR1LXNlcnZlci1teXNxbC1waHAv">使用Ubuntu Server架設MySQL伺服器，並於PHP程式中存取MySQL資料庫<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
-<h3 id="修改-MySQL-帳號設定"><a href="#修改-MySQL-帳號設定" class="headerlink" title="修改 MySQL 帳號設定"></a>修改 MySQL 帳號設定</h3><p>此外，若想要使用 phpmyadmin 以外的圖形化界面操作資料庫（例如：<a target="_blank" rel="noopener" href="https://www.sequelpro.com/">Sequel Pro</a>），可能會有無法連線的問題，因為預設只能從本機登入 MySQL，因此我們需要修改一些設定，步驟如下：</p>
+<h3 id="修改-MySQL-帳號設定"><a href="#修改-MySQL-帳號設定" class="headerlink" title="修改 MySQL 帳號設定"></a>修改 MySQL 帳號設定</h3><p>此外，若想要使用 phpmyadmin 以外的圖形化界面操作資料庫（例如：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VxdWVscHJvLmNvbS8=">Sequel Pro<i class="fa fa-external-link-alt"></i></span>），可能會有無法連線的問題，因為預設只能從本機登入 MySQL，因此我們需要修改一些設定，步驟如下：</p>
 <ol>
 <li><p>到 phpmyadmin 使用者帳號的介面，點選 root 帳號的「編輯權限」後，會進入編輯權限介面：</p>
 </li>
@@ -549,7 +560,7 @@
 <hr>
 <h2 id="設定域名"><a href="#設定域名" class="headerlink" title="設定域名"></a>設定域名</h2><p><img src="https://i.imgur.com/hBbMxyF.png"></p>
 <ol>
-<li>先在 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi.net</a> 註冊帳號</li>
+<li>先在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2FuZGkubmV0L3poLUhhbnQ=">gandi.net<i class="fa fa-external-link-alt"></i></span> 註冊帳號</li>
 <li>到電子信箱收驗證信</li>
 <li>進入域名頁面，輸入想要的網域名稱後，再按購買</li>
 </ol>
@@ -667,20 +678,20 @@
 <li>安裝 apache-mod-markdown 套件</li>
 </ol>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/32597316/serving-markdown-from-apache-2-4-7-on-ubuntu">Serving markdown from Apache 2.4.7 on Ubuntu</a>：安裝完套件後在第二步卡住，不是很明白要怎麼建立模組？</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzI1OTczMTYvc2VydmluZy1tYXJrZG93bi1mcm9tLWFwYWNoZS0yLTQtNy1vbi11YnVudHU=">Serving markdown from Apache 2.4.7 on Ubuntu<i class="fa fa-external-link-alt"></i></span>：安裝完套件後在第二步卡住，不是很明白要怎麼建立模組？</li>
 </ul>
 <ol start="2">
 <li>把 markdown 檔案轉成 html 檔</li>
 </ol>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1546783937.html">markdown在ubuntu上的使用</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0Njc4MzkzNy5odG1s">markdown在ubuntu上的使用<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <ol start="3">
 <li>安裝 hexo 這個框架，能夠支援 Markdown 語法，感覺這比較符合需求</li>
 </ol>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://lrscy.github.io/2017/11/10/Ubuntu-Github-io-config-Hexo/">Ubuntu 16.04下从零起步搭建配置github.io博客——Hexo</a></li>
-<li><a target="_blank" rel="noopener" href="https://blackmaple.me/hexo-tutorial/">Hexo+GitHub，新手也可以快速建立部落格</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9scnNjeS5naXRodWIuaW8vMjAxNy8xMS8xMC9VYnVudHUtR2l0aHViLWlvLWNvbmZpZy1IZXhvLw==">Ubuntu 16.04下从零起步搭建配置github.io博客——Hexo<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibGFja21hcGxlLm1lL2hleG8tdHV0b3JpYWwv">Hexo+GitHub，新手也可以快速建立部落格<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -810,10 +821,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -844,7 +855,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

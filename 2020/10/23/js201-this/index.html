@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [JS201] 進階 JavaScript：那些你一直搞不懂的地方 這門課程的學習筆記。如有錯誤歡迎指正！  1234學習目標： P1 你知道大部分情況下 this 的值是什麼 P2 你知道物件導向的基本概念（類別、實體、繼承、封裝）">
@@ -57,6 +59,15 @@
 
   <title>[week 16] JavaScript 進階 - What is this？ | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,13 +259,13 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/js201-javascript">[JS201] 進階 JavaScript：那些你一直搞不懂的地方</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道大部分情況下 this 的值是什麼</span><br><span class="line"> P2 你知道物件導向的基本概念（類別、實體、繼承、封裝）</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
 <hr>
-<h2 id="從物件導向到-this"><a href="#從物件導向到-this" class="headerlink" title="從物件導向到 this"></a>從物件導向到 this</h2><p>在上一篇<a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-js201-oop-prototype">JavaScript 進階 - 物件導向 &amp; Prototype</a> 筆記中，其實我們就有提到 this 相關概念。this 的主要用途就在於物件導向，用來指哪個 instance 在呼叫這個 function，透過 this 我們能夠進一步操作。</p>
+<h2 id="從物件導向到-this"><a href="#從物件導向到-this" class="headerlink" title="從物件導向到 this"></a>從物件導向到 this</h2><p>在上一篇<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWpzMjAxLW9vcC1wcm90b3R5cGU=">JavaScript 進階 - 物件導向 &amp; Prototype<i class="fa fa-external-link-alt"></i></span> 筆記中，其實我們就有提到 this 相關概念。this 的主要用途就在於物件導向，用來指哪個 instance 在呼叫這個 function，透過 this 我們能夠進一步操作。</p>
 <p>那如果是在和物件導向無關的情況下，呼叫 this 會代表什麼？</p>
 <h3 id="Global-context-下的-this"><a href="#Global-context-下的-this" class="headerlink" title="Global context 下的 this"></a>Global context 下的 this</h3><p>如果在全域環境下呼叫 this，根據不同執行環境（瀏覽器或 node.js），預設值可能會是 global 或 window：</p>
 <h4 id="在-node-js-運行"><a href="#在-node-js-運行" class="headerlink" title="在 node.js 運行"></a>在 node.js 運行</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>);            <span class="comment">// Object [global] &#123; ...&#125;</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span> === <span class="built_in">global</span>)  <span class="comment">// true</span></span><br><span class="line">&#125;</span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
@@ -358,10 +369,10 @@
 </ul>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2019/02/23/javascript-this/">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂</a></li>
-<li><a target="_blank" rel="noopener" href="https://hugh-program-learning-diary-js.medium.com/%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%9A%8E-js%E4%BB%A4%E4%BA%BA%E6%90%9E%E4%B8%8D%E6%87%82%E7%9A%84%E5%9C%B0%E6%96%B9-this-b9b9c6960c03">前端中階：JS令人搞不懂的地方-this</a></li>
-<li><a target="_blank" rel="noopener" href="https://nicolakacha.coderbridge.io/2020/10/01/oop-prototype-this/">JavaScript: Object-oriented JavaScript, Prototype Chain &amp; This</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1544116971.html">關於this綁定的四種方式</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOS8wMi8yMy9qYXZhc2NyaXB0LXRoaXMv">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9odWdoLXByb2dyYW0tbGVhcm5pbmctZGlhcnktanMubWVkaXVtLmNvbS8lRTUlODklOEQlRTclQUIlQUYlRTQlQjglQUQlRTklOUElOEUtanMlRTQlQkIlQTQlRTQlQkElQkElRTYlOTAlOUUlRTQlQjglOEQlRTYlODclODIlRTclOUElODQlRTUlOUMlQjAlRTYlOTYlQjktdGhpcy1iOWI5YzY5NjBjMDM=">前端中階：JS令人搞不懂的地方-this<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFrYWNoYS5jb2RlcmJyaWRnZS5pby8yMDIwLzEwLzAxL29vcC1wcm90b3R5cGUtdGhpcy8=">JavaScript: Object-oriented JavaScript, Prototype Chain &amp; This<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NDExNjk3MS5odG1s">關於this綁定的四種方式<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -491,10 +502,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -525,7 +536,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

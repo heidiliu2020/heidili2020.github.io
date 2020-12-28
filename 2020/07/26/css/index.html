@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  123456789學習目標: P1 你知道 CSS 是什麼 P1 你知道 inline、block 跟 inline-block 的區別 P1 你知道什麼是 box model P1 你知道 position 的所有屬性及其差別 P2 你知道 :hover, :before, :after P2 你">
@@ -57,6 +59,15 @@
 
   <title>[week 6] CSS - 認識基礎標籤 & 屬性 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,7 +259,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe101-html-css">[FE101] 前端基礎：HTML 與 CSS</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">學習目標:</span><br><span class="line"></span><br><span class="line"> P1 你知道 CSS 是什麼</span><br><span class="line"> P1 你知道 inline、block 跟 inline-block 的區別</span><br><span class="line"> P1 你知道什麼是 box model</span><br><span class="line"> P1 你知道 position 的所有屬性及其差別</span><br><span class="line"> P2 你知道 :hover, :before, :after</span><br><span class="line"> P2 你知道 :nth-child 的各種用法</span><br><span class="line"> P2 你熟悉 CSS selector，可以輕鬆選到想選到的元素</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -312,13 +323,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 找出任何位在 &lt;li&gt; 元素內的 &lt;a&gt; 元素 --&gt;</span><br><span class="line">li a &#123;</span><br><span class="line">  color: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="偽類選取器"><a href="#偽類選取器" class="headerlink" title="偽類選取器"></a>偽類選取器</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes 偽類一覽表</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1BzZXVkby1jbGFzc2Vz">Pseudo-classes 偽類一覽表<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>以 hover（滑鼠滑入的樣式）為例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 當滑鼠移至任何 a 連結上時，背景會變成黃色 --&gt;</span><br><span class="line">a:hover &#123;</span><br><span class="line">  background: yellow</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>參考資料：<a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css_selectors.asp">CSS Selectors Reference - W3Schools</a></p>
-<h3 id="nth-child-n-選擇器"><a href="#nth-child-n-選擇器" class="headerlink" title="nth-child(n) 選擇器"></a>nth-child(n) 選擇器</h3><p>參考資料：<a target="_blank" rel="noopener" href="https://www.itread01.com/content/1541105823.html">CSS選取第幾個標籤元素：nth-child(n)、first-child、last-child</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNvbS9jc3NyZWYvY3NzX3NlbGVjdG9ycy5hc3A=">CSS Selectors Reference - W3Schools<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="nth-child-n-選擇器"><a href="#nth-child-n-選擇器" class="headerlink" title="nth-child(n) 選擇器"></a>nth-child(n) 選擇器</h3><p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0MTEwNTgyMy5odG1s">CSS選取第幾個標籤元素：nth-child(n)、first-child、last-child<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="CSS-Selector-的權重計算方式"><a href="#CSS-Selector-的權重計算方式" class="headerlink" title="CSS Selector 的權重計算方式"></a>CSS Selector 的權重計算方式</h3><p>當選擇器作用在同一元素上時：</p>
 <ul>
 <li>兩個權重不同：權重值高的規則生效</li>
@@ -353,8 +364,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://muki.tw/tech/css-specificity-document/">強烈推薦收藏好物 – CSS Specificity (CSS 權重一覽)</a></li>
-<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5afa98bf51882542c832e5ec">你對 CSS 權重真的足夠了解嗎？</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tdWtpLnR3L3RlY2gvY3NzLXNwZWNpZmljaXR5LWRvY3VtZW50Lw==">強烈推薦收藏好物 – CSS Specificity (CSS 權重一覽)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81YWZhOThiZjUxODgyNTQyYzgzMmU1ZWM=">你對 CSS 權重真的足夠了解嗎？<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="box-model-盒模型"><a href="#box-model-盒模型" class="headerlink" title="box model 盒模型"></a>box model 盒模型</h2><p>盒模型又稱為區塊模型，意思是所有 HTML 元素均可被視為一個盒子。我們能透過 CSS 控制內距、外距、邊框屬性，來調整盒子的外觀及位置。</p>
@@ -385,9 +396,9 @@
 <p>而 margin 在兩種盒模型都是額外加上去的，並不會影響盒子長寬。</p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Getting_started/Boxes">盒模型- Web 开发者指南| MDN</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.wibibi.com/info.php?tid=CSS_box_model_%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B">CSS box model 盒子模型- Wibibi</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/passionred/css%E6%8E%92%E7%89%88%E5%9F%BA%E7%A4%8E%E8%A7%80%E5%BF%B5-%E4%B8%80-box-model-13a9a3dfe84f">CSS排版基礎觀念（一）—— box-model</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvR3VpZGUvQ1NTL0dldHRpbmdfc3RhcnRlZC9Cb3hlcw==">盒模型- Web 开发者指南| MDN<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cud2liaWJpLmNvbS9pbmZvLnBocD90aWQ9Q1NTX2JveF9tb2RlbF8lRTclOUIlOTIlRTUlQUQlOTAlRTYlQTglQTElRTUlOUUlOEI=">CSS box model 盒子模型- Wibibi<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3Bhc3Npb25yZWQvY3NzJUU2JThFJTkyJUU3JTg5JTg4JUU1JTlGJUJBJUU3JUE0JThFJUU4JUE3JTgwJUU1JUJGJUI1LSVFNCVCOCU4MC1ib3gtbW9kZWwtMTNhOWEzZGZlODRm">CSS排版基礎觀念（一）—— box-model<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="display-inline-block-跟-inline-block-的差別"><a href="#display-inline-block-跟-inline-block-的差別" class="headerlink" title="display: inline, block 跟 inline-block 的差別"></a>display: inline, block 跟 inline-block 的差別</h2><p>display 是 CSS 中用於控制排版的屬性。每個 HTML 元素都有一個預設的 display 值，大部分的元素可分為 block（區塊元素）和 inline（行內元素）兩類：</p>
@@ -421,9 +432,9 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@wendy199288/css%E6%95%99%E5%AD%B8-%E9%97%9C%E6%96%BCdisplay-inline-inline-block-block%E7%9A%84%E5%B7%AE%E5%88%A5-1034f38eda82">CSS教學-關於display:inline、block、inline-block的差別</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10204956">金魚都能懂網頁設計入門 : 網頁兩大主角 (鐵人賽第十天)</a></li>
-<li><a target="_blank" rel="noopener" href="https://zh-tw.learnlayout.com/display.html">關於”display” 屬性 - CSS</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B3ZW5keTE5OTI4OC9jc3MlRTYlOTUlOTklRTUlQUQlQjgtJUU5JTk3JTlDJUU2JTk2JUJDZGlzcGxheS1pbmxpbmUtaW5saW5lLWJsb2NrLWJsb2NrJUU3JTlBJTg0JUU1JUI3JUFFJUU1JTg4JUE1LTEwMzRmMzhlZGE4Mg==">CSS教學-關於display:inline、block、inline-block的差別<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwNDk1Ng==">金魚都能懂網頁設計入門 : 網頁兩大主角 (鐵人賽第十天)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC10dy5sZWFybmxheW91dC5jb20vZGlzcGxheS5odG1s">關於”display” 屬性 - CSS<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="Position-屬性"><a href="#Position-屬性" class="headerlink" title="Position 屬性"></a>Position 屬性</h2><ul>
@@ -457,13 +468,13 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://zh-tw.learnlayout.com/position.html">關於position 屬性 - 學習CSS 版面配置</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.wibibi.com/info.php?tid=156">CSS position 位置屬性（定位） - Wibibi</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/ui-ux%E7%B7%B4%E5%8A%9F%E5%9D%8A/position-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5-5931254e5203">position 屬性的基礎概念 - Medium</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC10dy5sZWFybmxheW91dC5jb20vcG9zaXRpb24uaHRtbA==">關於position 屬性 - 學習CSS 版面配置<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cud2liaWJpLmNvbS9pbmZvLnBocD90aWQ9MTU2">CSS position 位置屬性（定位） - Wibibi<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3VpLXV4JUU3JUI3JUI0JUU1JThBJTlGJUU1JTlEJThBL3Bvc2l0aW9uLSVFNSVCMSVBQyVFNiU4MCVBNyVFNyU5QSU4NCVFNSU5RiVCQSVFNyVBNCU4RSVFNiVBNiU4MiVFNSVCRiVCNS01OTMxMjU0ZTUyMDM=">position 屬性的基礎概念 - Medium<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h2 id="水平置中："><a href="#水平置中：" class="headerlink" title="水平置中："></a>水平置中：</h2><h3 id="margin-auto"><a href="#margin-auto" class="headerlink" title="margin: auto;"></a><code>margin: auto;</code></h3><p>設定左右外邊距（margin-left 與 margin-right）為 auto 可達成水平居中。</p>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://zh-tw.learnlayout.com/margin-auto.html">學習 CSS 版面配置</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly96aC10dy5sZWFybmxheW91dC5jb20vbWFyZ2luLWF1dG8uaHRtbA==">學習 CSS 版面配置<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="補充：盒模型為什麼無法貼邊？"><a href="#補充：盒模型為什麼無法貼邊？" class="headerlink" title="補充：盒模型為什麼無法貼邊？"></a>補充：盒模型為什麼無法貼邊？</h2><p>盒模型在瀏覽器中會有默認的外邊距。此時只要利用 CSS Reset 即可解決空隙問題。</p>
 <h3 id="CSS-Reset"><a href="#CSS-Reset" class="headerlink" title="CSS Reset"></a>CSS Reset</h3><ul>
 <li>方法一：利用全域選擇器</li>
@@ -476,14 +487,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 設定基底字體大小 *&#x2F;</span><br><span class="line">html &#123;</span><br><span class="line">  font-size: 12px;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;* 取消預設空隙 *&#x2F;</span><br><span class="line">html, body, h1, h2, h3, h4, p&#123;</span><br><span class="line">  padding: 0;</span><br><span class="line">  margin: 0 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="CSS-Reset-與-CSS-normalize"><a href="#CSS-Reset-與-CSS-normalize" class="headerlink" title="CSS Reset 與 CSS normalize"></a>CSS Reset 與 CSS normalize</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://meyerweb.com/eric/tools/css/reset/">CSS Reset</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZXllcndlYi5jb20vZXJpYy90b29scy9jc3MvcmVzZXQv">CSS Reset<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>優點：統整、重置了各個瀏覽器的樣式設定。<br>缺點：必須全部重新做設定，比較沒有彈性。且在使用開發者工具時，會看到一大坨的繼承鏈（inheritance chain）。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://necolas.github.io/normalize.css/">Normalize.css</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZWNvbGFzLmdpdGh1Yi5pby9ub3JtYWxpemUuY3NzLw==">Normalize.css<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>最大的特色就是保留原本預設 HTML 標籤的樣式，僅針對不同瀏覽器與各版本間不相容的標籤進行些微調整。</p>
-<p>參考資料：<br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10196528">Day21：小事之CSS Reset 與CSS normalize</a></p>
+<p>參考資料：<br><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5NjUyOA==">Day21：小事之CSS Reset 與CSS normalize<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="切版注意事項"><a href="#切版注意事項" class="headerlink" title="切版注意事項"></a>切版注意事項</h2><h3 id="盡量不要把高度寫死"><a href="#盡量不要把高度寫死" class="headerlink" title="盡量不要把高度寫死"></a>盡量不要把高度寫死</h3><p>例如：.header、.content、.footer 不用寫死高度，以內容撐出高度，並用 padding 產生留白，往後若更動內容才不易跑版。</p>
 <h3 id="如何垂直置中？"><a href="#如何垂直置中？" class="headerlink" title="如何垂直置中？"></a>如何垂直置中？</h3><ul>
 <li>加上 padding 留白</li>
@@ -496,15 +507,15 @@
 </ul>
 <hr>
 <h2 id="如何讓-img-自適應容器大小"><a href="#如何讓-img-自適應容器大小" class="headerlink" title="如何讓 img 自適應容器大小"></a>如何讓 img 自適應容器大小</h2><p>不管容器有多大，只要將 img 的寬高設定成 100 %（這裡的100%是相對於父級寬高而言）就能自適應容器大小。</p>
-<p>參考資料：<a target="_blank" rel="noopener" href="https://www.itread01.com/content/1546673250.html">css讓圖片自適應容器（div）大小- IT閱讀 - ITREAD01.COM</a></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NjY3MzI1MC5odG1s">css讓圖片自適應容器（div）大小- IT閱讀 - ITREAD01.COM<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="CSS-屬性用法紀錄"><a href="#CSS-屬性用法紀錄" class="headerlink" title="CSS 屬性用法紀錄"></a>CSS 屬性用法紀錄</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://blog.ja-anything.com/2018/01/17/css-%E8%AE%93%E9%81%8E%E9%95%B7%E7%9A%84%E6%96%87%E5%AD%97%E9%9A%B1%E8%97%8F%E8%AE%8A-css-to-make-text-overflow-elegant-is-with-ellipses-single-or-multiple-lines/">CSS 限制字數/行數，讓過長的文字隱藏變”…”</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmphLWFueXRoaW5nLmNvbS8yMDE4LzAxLzE3L2Nzcy0lRTglQUUlOTMlRTklODElOEUlRTklOTUlQjclRTclOUElODQlRTYlOTYlODclRTUlQUQlOTclRTklOUElQjElRTglOTclOEYlRTglQUUlOEEtY3NzLXRvLW1ha2UtdGV4dC1vdmVyZmxvdy1lbGVnYW50LWlzLXdpdGgtZWxsaXBzZXMtc2luZ2xlLW9yLW11bHRpcGxlLWxpbmVzLw==">CSS 限制字數/行數，讓過長的文字隱藏變”…”<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 修飾過長的文字，ellipsis：用點點點來表示被切斷的字串 */</span></span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line"><span class="comment">/* 不進行換行 */</span></span><br><span class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.w3cplus.com/content/css3-box-shadow">box-shadow 屬性的參數</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cudzNjcGx1cy5jb20vY29udGVudC9jc3MzLWJveC1zaGFkb3c=">box-shadow 屬性的參數<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/* 投影方式 X軸偏移 Y軸偏移 模糊半徑 擴展半徑 顏色&#125;*/</span></span><br><span class="line"><span class="selector-tag">box-shadow</span><span class="selector-pseudo">:inset</span> <span class="selector-tag">x-offset</span> <span class="selector-tag">y-offset</span> <span class="selector-tag">blur-radius</span> <span class="selector-tag">spread-radius</span> <span class="selector-tag">color</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.minwt.com/webdesign-dev/css/21538.html">[教學] CSS3 半透明背景的四種設定方法 (RGBa、HSLa、Opacity、HEX)</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubWlud3QuY29tL3dlYmRlc2lnbi1kZXYvY3NzLzIxNTM4Lmh0bWw=">[教學] CSS3 半透明背景的四種設定方法 (RGBa、HSLa、Opacity、HEX)<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">opacity</span>: <span class="selector-tag">x</span></span><br><span class="line"><span class="comment">/* x　取值 0~1，該區塊元素均會調整透明度 */</span></span><br><span class="line"><span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(<span class="selector-tag">red</span>, <span class="selector-tag">green</span>, <span class="selector-tag">blue</span>, <span class="selector-tag">alpha</span>)</span><br><span class="line"><span class="comment">/* alpha 代表透明度，取值 0~1 */</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>決定換行的屬性</p>
@@ -647,10 +658,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -681,7 +692,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

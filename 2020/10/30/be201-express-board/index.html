@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  在之前的課程中，我們學到如何使用 Express 這套框架，以及在 Express 扮演重要角色的 Middleware：">
@@ -74,6 +76,15 @@
 
   <title>[week 17] 後端中階 - Express 實戰：簡易會員註冊系統 & 留言板 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -265,13 +276,13 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be201-express-sequelize">[BE201] 後端中階：Express 與 Sequelize</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <p>在之前的課程中，我們學到如何使用 Express 這套框架，以及在 Express 扮演重要角色的 Middleware：</p>
 <a id="more"></a>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-be201-express-node">[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@Heidi-Liu/note-be201-express-middleware">[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMjAxLWV4cHJlc3Mtbm9kZQ==">[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMjAxLWV4cHJlc3MtbWlkZGxld2FyZQ==">[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>接下來要整合我們之前所學的東西，透過串聯資料庫系統，來實作一個簡單的會員註冊系統，並且具有留言版功能的網頁。</p>
 <hr>
@@ -362,7 +373,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;簡易會員系統&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 以是否有 username 來判斷登入狀況 --&gt;</span><br><span class="line">&lt;% if(username) &#123; %&gt;</span><br><span class="line">  &lt;!-- 使用 &lt;%&#x3D; %&gt; 會輸出原始碼，相當於做 escpae --&gt;</span><br><span class="line">  &lt;div&gt;Hello, &lt;%&#x3D; username + &#39;!&#39; %&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;logout&quot;&gt;登出&lt;&#x2F;a&gt;</span><br><span class="line">&lt;% &#125; else &#123; %&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;register&quot;&gt;註冊&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;login&quot;&gt;登入&lt;&#x2F;a&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Step6-用-hash-雜湊處理明碼"><a href="#Step6-用-hash-雜湊處理明碼" class="headerlink" title="Step6. 用 hash 雜湊處理明碼"></a>Step6. 用 hash 雜湊處理明碼</h3><ol>
-<li>接下來可安裝 <a target="_blank" rel="noopener" href="https://github.com/kelektiv/node.bcrypt.js/">node.bcrypt.js</a> 套件，即可將明碼進行雜湊處理，避免儲存明碼造成安全性問題：</li>
+<li>接下來可安裝 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tlbGVrdGl2L25vZGUuYmNyeXB0LmpzLw==">node.bcrypt.js<i class="fa fa-external-link-alt"></i></span> 套件，即可將明碼進行雜湊處理，避免儲存明碼造成安全性問題：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install bcrypt</span><br></pre></td></tr></table></figure>
 
@@ -449,7 +460,7 @@
 
 <p>這樣其實就完成簡易的留言版了！但可以注意到，透過 EJS 語法輸出的時間，和我們預期的 <code>&#39;MMM-DD-YYYY&#39;</code> 格式不太相同：</p>
 <p><img src="https://i.imgur.com/7BWBdzc.png"></p>
-<h3 id="補充：透過-moment-js-修改時間格式"><a href="#補充：透過-moment-js-修改時間格式" class="headerlink" title="補充：透過 moment.js 修改時間格式"></a>補充：透過 moment.js 修改時間格式</h3><p>透過 <a target="_blank" rel="noopener" href="https://momentjs.com/">moment.js</a> 這個套件，我們就能夠制定要輸出的時間日期格式，也能設定不同時區的時間。</p>
+<h3 id="補充：透過-moment-js-修改時間格式"><a href="#補充：透過-moment-js-修改時間格式" class="headerlink" title="補充：透過 moment.js 修改時間格式"></a>補充：透過 moment.js 修改時間格式</h3><p>透過 <span class="exturl" data-url="aHR0cHM6Ly9tb21lbnRqcy5jb20v">moment.js<i class="fa fa-external-link-alt"></i></span> 這個套件，我們就能夠制定要輸出的時間日期格式，也能設定不同時區的時間。</p>
 <ol>
 <li>安裝 moment.js 套件：</li>
 </ol>
@@ -467,7 +478,7 @@
 
 <p>這樣就成功把時間修改成 “YYYY-MM-DD h:mm:ss” 格式了！</p>
 <p><img src="https://i.imgur.com/yiiWQeZ.png"></p>
-<p>找了幾種引用 moment 的寫法，最後覺得這篇：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12794860/how-to-use-node-modules-like-momentjs-in-ejs-views">How to use node modules (like MomentJS) in EJS views?</a> 內容蠻符合需要的，也就是要如何透過 node 提供的套件來改變 EJS views，稍微嘗試過後，也成功將時間格式調整成想要的樣子！</p>
+<p>找了幾種引用 moment 的寫法，最後覺得這篇：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTI3OTQ4NjAvaG93LXRvLXVzZS1ub2RlLW1vZHVsZXMtbGlrZS1tb21lbnRqcy1pbi1lanMtdmlld3M=">How to use node modules (like MomentJS) in EJS views?<i class="fa fa-external-link-alt"></i></span> 內容蠻符合需要的，也就是要如何透過 node 提供的套件來改變 EJS views，稍微嘗試過後，也成功將時間格式調整成想要的樣子！</p>
 <hr>
 <h2 id="實戰：優化留言板"><a href="#實戰：優化留言板" class="headerlink" title="實戰：優化留言板"></a>實戰：優化留言板</h2><p>在上述範例中，我們在完成了一個有新增功能簡易留言版，接下來我們要試著把系統變得更完整一點。</p>
 <h3 id="Step1-思考產品全貌"><a href="#Step1-思考產品全貌" class="headerlink" title="Step1. 思考產品全貌"></a>Step1. 思考產品全貌</h3><p>在開始實作產品內容之前，需要先思考幾個重點：</p>
@@ -570,7 +581,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;%- include(&#39;template&#x2F;head&#39;) %&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">  &lt;h1&gt;簡易會員系統&lt;&#x2F;h1&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;h2&gt;&lt;%&#x3D; errorMessage %&gt;&lt;&#x2F;h2&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;% if(username) &#123; %&gt;</span><br><span class="line">  &lt;div&gt;Hello, &lt;%&#x3D; username + &#39;!&#39; %&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;logout&quot;&gt;登出&lt;&#x2F;a&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;form method&#x3D;&quot;POST&quot; action&#x3D;&quot;&#x2F;comments&quot;&gt;</span><br><span class="line">    &lt;textarea name&#x3D;&quot;content&quot; id&#x3D;&quot;&quot; cols&#x3D;&quot;30&quot; rows&#x3D;&quot;10&quot;&gt;&lt;&#x2F;textarea&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;% &#125; else &#123; %&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;register&quot;&gt;註冊&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#x2F;login&quot;&gt;登入&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;% comments.forEach(function(comment) &#123; %&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h2&gt;&lt;%&#x3D; comment.nickname %&gt;&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;p class&#x3D;&quot;card-subtitle text-muted&quot;&gt;&lt;%&#x3D; moment(comment.created_at).format(shortDateFormat) %&gt;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&lt;%&#x3D; comment.content %&gt;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;% if (username &#x3D;&#x3D;&#x3D; comment.username) &#123;%&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;update_comments&#x2F;&lt;%&#x3D; comment.id %&gt;&quot;&gt;編輯&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;delete_comments&#x2F;&lt;%&#x3D; comment.id %&gt;&quot;&gt;刪除&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;% &#125;) %&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li>再來編輯 head.ejs 部分，引入 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.5/getting-started/introduction/">Bootstrap</a> 提供的樣式和 meta tags：</li>
+<li>再來編輯 head.ejs 部分，引入 <span class="exturl" data-url="aHR0cHM6Ly9nZXRib290c3RyYXAuY29tL2RvY3MvNC41L2dldHRpbmctc3RhcnRlZC9pbnRyb2R1Y3Rpb24v">Bootstrap<i class="fa fa-external-link-alt"></i></span> 提供的樣式和 meta tags：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Required meta tags --&gt;</span><br><span class="line">&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, shrink-to-fit&#x3D;no&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Bootstrap CSS --&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@4.5.3&#x2F;dist&#x2F;css&#x2F;bootstrap.min.css&quot;</span><br><span class="line">integrity&#x3D;&quot;sha384-TX8t27EcRE3e&#x2F;ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;</span><br></pre></td></tr></table></figure>
 
@@ -582,7 +593,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- include(&#39;template&#x2F;navbar&#39;) %&gt;</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li>新增模版 navbar.ejs，可在 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.5/components/navbar/">Bootstrap/navbar</a> 找合適的模版來套用，並且把之前在 index.ejs 做的登入驗證同樣放到這裡，加上對應的路徑：</li>
+<li>新增模版 navbar.ejs，可在 <span class="exturl" data-url="aHR0cHM6Ly9nZXRib290c3RyYXAuY29tL2RvY3MvNC41L2NvbXBvbmVudHMvbmF2YmFyLw==">Bootstrap/navbar<i class="fa fa-external-link-alt"></i></span> 找合適的模版來套用，並且把之前在 index.ejs 做的登入驗證同樣放到這裡，加上對應的路徑：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav class&#x3D;&quot;navbar navbar-dark bg-dark&quot;&gt;</span><br><span class="line">  &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;&#x2F;&quot; &gt;這是一個留言版&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;% if(username) &#123; %&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">        &lt;span class&#x3D;&quot;text-light&quot;&gt;Hello, &lt;%&#x3D; username + &#39;!&#39; %&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;btn btn-outline-light my-2 my-sm-0&quot; href&#x3D;&quot;&#x2F;logout&quot;&gt;登出&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;% &#125; else &#123; %&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;btn btn-outline-light my-2 my-sm-0&quot; href&#x3D;&quot;&#x2F;login&quot;&gt;登入&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;btn btn-outline-warning my-2 my-sm-0&quot; href&#x3D;&quot;&#x2F;register&quot;&gt;註冊&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;nav&gt;</span><br></pre></td></tr></table></figure>
 
@@ -591,7 +602,7 @@
 <p>此外，像 head.ejs、navbar 這些通用模版，可放在 views/template 資料夾統一管理：</p>
 <p><img src="https://i.imgur.com/2YdWdMx.png"></p>
 <ol start="5">
-<li>接著來修改註冊和登入頁面，同樣可在 Bootstrap 找合適的 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.5/components/forms/">forms</a> 版型：</li>
+<li>接著來修改註冊和登入頁面，同樣可在 Bootstrap 找合適的 <span class="exturl" data-url="aHR0cHM6Ly9nZXRib290c3RyYXAuY29tL2RvY3MvNC41L2NvbXBvbmVudHMvZm9ybXMv">forms<i class="fa fa-external-link-alt"></i></span> 版型：</li>
 </ol>
 <ul>
 <li>register.ejs 註冊頁面</li>
@@ -761,10 +772,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -795,7 +806,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

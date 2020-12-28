@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  課程筆記：[week 9] 後端基礎 - PHP 語法、資料庫 MySQL">
@@ -57,6 +59,15 @@
 
   <title>[week 9] 利用 PHP 實作留言板 - 初階實作篇 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,9 +259,9 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be101-php-mysql">[BE101] 用 PHP 與 MySQL 學習後端基礎</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
-<p>課程筆記：<a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week9_%E5%BE%8C%E7%AB%AF%E5%9F%BA%E7%A4%8E_PHP%E3%80%81MySQL.md">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL</a></p>
+<p>課程筆記：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></p>
 <a id="more"></a>
 <hr>
 <h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p>在開始實作留言板之前，需先進行前置作業：</p>
@@ -287,7 +298,7 @@
 <p><img src="https://i.imgur.com/w8cOsfs.png"></p>
 <hr>
 <h2 id="實作留言板"><a href="#實作留言板" class="headerlink" title="實作留言板"></a>實作留言板</h2><p>可分為前後端。通常會先切出前端頁面，再加入功能，從資料庫取出並資料串聯到頁面。</p>
-<h3 id="Step3-實作前端頁面"><a href="#Step3-實作前端頁面" class="headerlink" title="Step3. 實作前端頁面"></a>Step3. 實作前端頁面</h3><p>依照設計稿切出所需頁面，可參考<a target="_blank" rel="noopener" href="http://mentor-program.co/mtr04group2/Heidi/week9/index.php">留言板 DEMO</a>。</p>
+<h3 id="Step3-實作前端頁面"><a href="#Step3-實作前端頁面" class="headerlink" title="Step3. 實作前端頁面"></a>Step3. 實作前端頁面</h3><p>依照設計稿切出所需頁面，可參考<span class="exturl" data-url="aHR0cDovL21lbnRvci1wcm9ncmFtLmNvL210cjA0Z3JvdXAyL0hlaWRpL3dlZWs5L2luZGV4LnBocA==">留言板 DEMO<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="Step4-實作目標功能"><a href="#Step4-實作目標功能" class="headerlink" title="Step4. 實作目標功能"></a>Step4. 實作目標功能</h3><p>接著就進入重頭戲，也就是替靜態網頁加上各種功能。</p>
 <h3 id="PHP-常用函式"><a href="#PHP-常用函式" class="headerlink" title="PHP 常用函式"></a>PHP 常用函式</h3><ul>
 <li>用 <code>-&gt;</code> 符號：取用物件中的變數<ul>
@@ -386,8 +397,8 @@
 
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10227602">27. [WEB] Cookie &amp; Session 是什麼？</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@hulitw/session-and-cookie-15e47ed838bc">白話 Session 與 Cookie：從經營雜貨店開始</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIyNzYwMg==">27. [WEB] Cookie &amp; Session 是什麼？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvc2Vzc2lvbi1hbmQtY29va2llLTE1ZTQ3ZWQ4MzhiYw==">白話 Session 與 Cookie：從經營雜貨店開始<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -515,10 +526,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -549,7 +560,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

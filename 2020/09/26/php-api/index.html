@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。   hw1：JavaScript 留言板">
@@ -56,6 +58,15 @@
 
   <title>[week 12] 利用 PHP 實作留言板 - API 篇 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -247,25 +258,25 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/be101-php-mysql">[BE101] 用 PHP 與 MySQL 學習後端基礎</a> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <blockquote>
-<p>hw1：<a target="_blank" rel="noopener" href="http://mentor-program.co/mtr04group2/Heidi/week12/hw1/">JavaScript 留言板</a></p>
+<p>hw1：<span class="exturl" data-url="aHR0cDovL21lbnRvci1wcm9ncmFtLmNvL210cjA0Z3JvdXAyL0hlaWRpL3dlZWsxMi9odzEv">JavaScript 留言板<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <a id="more"></a>
 
 <h4 id="參考筆記"><a href="#參考筆記" class="headerlink" title="參考筆記"></a>參考筆記</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week4_%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96.md">[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week8_%E5%82%B3%E9%80%81%E8%B3%87%E6%96%99%E7%9A%84%E6%96%B9%E5%BC%8F%E3%80%81%E7%80%8F%E8%A6%BD%E5%99%A8%E7%9A%84%E9%99%90%E5%88%B6.md">[week 8] 傳送資料的方式 &amp; 瀏覽器的限制</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrNF8lRTclQjYlQjIlRTglQjclQUYlRTUlOUYlQkElRTclQTQlOEUlRTYlQTYlODIlRTglQUIlOTYubWQ=">[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOF8lRTUlODIlQjMlRTklODAlODElRTglQjMlODclRTYlOTYlOTklRTclOUElODQlRTYlOTYlQjklRTUlQkMlOEYlRTMlODAlODElRTclODAlOEYlRTglQTYlQkQlRTUlOTklQTglRTclOUElODQlRTklOTklOTAlRTUlODglQjYubWQ=">[week 8] 傳送資料的方式 &amp; 瀏覽器的限制<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h2 id="什麼是-API？"><a href="#什麼是-API？" class="headerlink" title="什麼是 API？"></a>什麼是 API？</h2><p>API 就是純資料的交換。資料以 JSON 形式儲存。</p>
 <p>在第八週時，我們學會使用 JavaScript 來串接 API，前端負責顯示資料，後端只負責提供資料。</p>
 <p>之前實作的留言板是透過 PHP 直接輸出內容。這週我們會透過 PHP 實作 API，再使用 JavaScript 串接 API 來動態顯示資料。</p>
-<h3 id="如何測試-API"><a href="#如何測試-API" class="headerlink" title="如何測試 API"></a>如何測試 API</h3><p>有幾種方式能夠測試 API 是否能成功運行。可參考這篇文章介紹：<a target="_blank" rel="noopener" href="https://noob.tw/postman/">API 實作(三)：以 Postman 測試 API</a></p>
+<h3 id="如何測試-API"><a href="#如何測試-API" class="headerlink" title="如何測試 API"></a>如何測試 API</h3><p>有幾種方式能夠測試 API 是否能成功運行。可參考這篇文章介紹：<span class="exturl" data-url="aHR0cHM6Ly9ub29iLnR3L3Bvc3RtYW4v">API 實作(三)：以 Postman 測試 API<i class="fa fa-external-link-alt"></i></span></p>
 <ul>
 <li>瀏覽器：撰寫程式碼不易，步驟繁瑣</li>
 <li>curl 工具：不易進行 debug</li>
-<li><a target="_blank" rel="noopener" href="https://www.postman.com/">Postman</a>：方便使用，能夠針對不同分頁或欄位進行測試</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucG9zdG1hbi5jb20v">Postman<i class="fa fa-external-link-alt"></i></span>：方便使用，能夠針對不同分頁或欄位進行測試</li>
 </ul>
 <h2 id="練習：實作無會員機制的留言版-API"><a href="#練習：實作無會員機制的留言版-API" class="headerlink" title="練習：實作無會員機制的留言版 API"></a>練習：實作無會員機制的留言版 API</h2><h3 id="PHP-相關語法"><a href="#PHP-相關語法" class="headerlink" title="PHP 相關語法"></a>PHP 相關語法</h3><ul>
 <li><code>header(&#39;Content-Type: application/json; charset=utf-8&#39;);</code>：指定瀏覽器以 JSON 格式內容，UTF-8 字元編碼</li>
@@ -310,7 +321,7 @@
 <p>利用 postman 以 <code>GET</code> 方式發出 request 測試，確認是否能讀取留言：</p>
 <p><img src="https://i.imgur.com/2rjKvzl.png"></p>
 <p>這樣就完成後端 API 的新增留言和顯示留言功能。</p>
-<h3 id="前端串接-API-1"><a href="#前端串接-API-1" class="headerlink" title="前端串接 API"></a>前端串接 API</h3><h4 id="Step1-建立-UI-頁面"><a href="#Step1-建立-UI-頁面" class="headerlink" title="Step1. 建立 UI 頁面"></a>Step1. 建立 UI 頁面</h4><p>首先利用 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.5/getting-started/introduction/">Bootstrap</a> 來快速建立前端頁面 <code>index.html</code></p>
+<h3 id="前端串接-API-1"><a href="#前端串接-API-1" class="headerlink" title="前端串接 API"></a>前端串接 API</h3><h4 id="Step1-建立-UI-頁面"><a href="#Step1-建立-UI-頁面" class="headerlink" title="Step1. 建立 UI 頁面"></a>Step1. 建立 UI 頁面</h4><p>首先利用 <span class="exturl" data-url="aHR0cHM6Ly9nZXRib290c3RyYXAuY29tL2RvY3MvNC41L2dldHRpbmctc3RhcnRlZC9pbnRyb2R1Y3Rpb24v">Bootstrap<i class="fa fa-external-link-alt"></i></span> 來快速建立前端頁面 <code>index.html</code></p>
 <h4 id="Step2-將前端頁面串接-API"><a href="#Step2-將前端頁面串接-API" class="headerlink" title="Step2. 將前端頁面串接 API"></a>Step2. 將前端頁面串接 API</h4><ul>
 <li>顯示留言 API</li>
 <li>新增留言 API</li>
@@ -320,7 +331,7 @@
 <h4 id="Step3-實作分頁機制"><a href="#Step3-實作分頁機制" class="headerlink" title="Step3. 實作分頁機制"></a>Step3. 實作分頁機制</h4><ul>
 <li><p>Offset/limit-based Pagination</p>
 <ul>
-<li>基於 Offset/limit 的分頁，也就是我們在 <a target="_blank" rel="noopener" href="https://github.com/heidiliu2020/This-is-Codediary/blob/master/week11_%E5%88%A9%E7%94%A8PHP%E5%AF%A6%E4%BD%9C%E7%95%99%E8%A8%80%E6%9D%BF_%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD%E7%AF%87.md">week11 實作的留言板</a></li>
+<li>基於 Offset/limit 的分頁，也就是我們在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrMTFfJUU1JTg4JUE5JUU3JTk0JUE4UEhQJUU1JUFGJUE2JUU0JUJEJTlDJUU3JTk1JTk5JUU4JUE4JTgwJUU2JTlEJUJGXyVFNiU5NiVCMCVFNSVBMiU5RSVFNSU4QSU5RiVFOCU4MyVCRCVFNyVBRiU4Ny5tZA==">week11 實作的留言板<i class="fa fa-external-link-alt"></i></span></li>
 <li>可計算資料的總數量、目前頁數，或跳到指定的頁數</li>
 <li>缺點：當資料量大時執行緩慢</li>
 </ul>
@@ -341,7 +352,7 @@
 
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://jiepeng.me/2019/12/06/learning-how-to-implement-graphql-pagination">深入淺出 GraphQL Pagination 實作</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qaWVwZW5nLm1lLzIwMTkvMTIvMDYvbGVhcm5pbmctaG93LXRvLWltcGxlbWVudC1ncmFwaHFsLXBhZ2luYXRpb24=">深入淺出 GraphQL Pagination 實作<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h4 id="錯誤一-Reason"><a href="#錯誤一-Reason" class="headerlink" title="錯誤一 Reason"></a>錯誤一 Reason</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reason: CORS header &#39;Access-Control-Allow-Origin&#39; missing</span><br></pre></td></tr></table></figure>
@@ -357,7 +368,7 @@
 <li>原因：要進行跳脫的值為 null</li>
 <li>解決辦法：先判斷該值是否為空再進行 replace 操作</li>
 </ul>
-<p>參考網站：<a target="_blank" rel="noopener" href="https://blog.csdn.net/k_prince/article/details/89350124?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param">Cannot read property ‘replace’ of undefined</a></p>
+<p>參考網站：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2tfcHJpbmNlL2FydGljbGUvZGV0YWlscy84OTM1MDEyND91dG1fbWVkaXVtPWRpc3RyaWJ1dGUucGNfcmVsZXZhbnQubm9uZS10YXNrLWJsb2ctQmxvZ0NvbW1lbmRGcm9tTWFjaGluZUxlYXJuUGFpMi0xLmNoYW5uZWxfcGFyYW0mZGVwdGhfMS11dG1fc291cmNlPWRpc3RyaWJ1dGUucGNfcmVsZXZhbnQubm9uZS10YXNrLWJsb2ctQmxvZ0NvbW1lbmRGcm9tTWFjaGluZUxlYXJuUGFpMi0xLmNoYW5uZWxfcGFyYW0=">Cannot read property ‘replace’ of undefined<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
 
@@ -484,10 +495,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -518,7 +529,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！   參考：從實際案例看 class 與 function component 的差異">
@@ -57,6 +59,15 @@
 
   <title>[week 22] 再探 React：Function component vs Class component | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -248,10 +259,10 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe302-react-hooks">[FE302] React 基礎 - hooks 版本</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <ul>
-<li>參考：<a target="_blank" rel="noopener" href="https://blog.huli.tw/2020/06/15/react-function-class-hook-useeffect/">從實際案例看 class 與 function component 的差異</a><a id="more"></a>
+<li>參考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAyMC8wNi8xNS9yZWFjdC1mdW5jdGlvbi1jbGFzcy1ob29rLXVzZWVmZmVjdC8=">從實際案例看 class 與 function component 的差異<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
 
 </li>
 </ul>
@@ -294,9 +305,9 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoItemC</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="comment">// 設定初始 state</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      counter: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  handleToggleClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; handleToggleIsDone, todo &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    handleToggleIsDone(todo.id);</span><br><span class="line">    <span class="comment">// 設定 state</span></span><br><span class="line">    <span class="built_in">this</span>.setState = &#123;</span><br><span class="line">      counter: <span class="built_in">this</span>.state.counter + <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Class-component-的生命週期"><a href="#Class-component-的生命週期" class="headerlink" title="Class component 的生命週期"></a>Class component 的生命週期</h2><p>關於 class component 的生命週期架構可參考附圖：</p>
-<p><img src="https://i.imgur.com/CV4MKmC.png"><br>（圖片來源：<a target="_blank" rel="noopener" href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">React LifeCycle Methods Diagram</a>）</p>
+<p><img src="https://i.imgur.com/CV4MKmC.png"><br>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9wcm9qZWN0cy53b2p0ZWttYWoucGwvcmVhY3QtbGlmZWN5Y2xlLW1ldGhvZHMtZGlhZ3JhbS8=">React LifeCycle Methods Diagram<i class="fa fa-external-link-alt"></i></span>）</p>
 <p>可和之前提過的 React Hook 流程圖進行對照，改成用 useEffect 執行：</p>
-<p><img src="https://i.imgur.com/iY123nV.png"><br>（圖片來源：<a target="_blank" rel="noopener" href="https://github.com/donavon/hook-flow%EF%BC%89">https://github.com/donavon/hook-flow）</a></p>
+<p><img src="https://i.imgur.com/iY123nV.png"><br>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvbmF2b24vaG9vay1mbG93JUVGJUJDJTg5">https://github.com/donavon/hook-flow）<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="實作一個-Counter-component"><a href="#實作一個-Counter-component" class="headerlink" title="實作一個 Counter component"></a>實作一個 Counter component</h3><p>這裡重新建立一個 Counter.js 作為範例，首先將 index.js 改成引入 Counter：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Counter <span class="keyword">from</span> <span class="string">&quot;./Counter&quot;</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span>, <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>));</span><br></pre></td></tr></table></figure>
 
@@ -344,7 +355,7 @@
 </ul>
 <p>參考文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://pjchender.github.io/2018/08/29/react-%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F%EF%BC%88life-cycle%EF%BC%89/">[React] 生命週期（life cycle）</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZ2l0aHViLmlvLzIwMTgvMDgvMjkvcmVhY3QtJUU3JTk0JTlGJUU1JTkxJUJEJUU5JTgwJUIxJUU2JTlDJTlGJUVGJUJDJTg4bGlmZS1jeWNsZSVFRiVCQyU4OS8=">[React] 生命週期（life cycle）<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -474,10 +485,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -508,7 +519,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

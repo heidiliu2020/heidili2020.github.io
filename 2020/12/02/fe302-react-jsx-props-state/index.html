@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 我知道 React 的目的以及原理 P1 我知道我們為什麼需要 React P1 我知道使用 React 跟之前使用 jQuery 的區別 P1 我理解 state 跟 props 的不同">
@@ -60,6 +62,15 @@
 
   <title>[week 21] 初探 React：Component、JSX 語法、props 與 state 的不同 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -251,14 +262,14 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/fe302-react-hooks">[FE302] React 基礎 - hooks 版本</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 我知道 React 的目的以及原理</span><br><span class="line"> P1 我知道我們為什麼需要 React</span><br><span class="line"> P1 我知道使用 React 跟之前使用 jQuery 的區別</span><br><span class="line"> P1 我理解 state 跟 props 的不同</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="React-版本差異"><a href="#React-版本差異" class="headerlink" title="React 版本差異"></a>React 版本差異</h3><p>關於 React 發展歷史，其實起源於 2013 年由 Facebook 開源出來的一個 Library，直到 2015 年更新到 v15 版本後又為更多人使用。</p>
 <p>而 React 16.8.0 則是第一個支援 Hook 的版本，這部分我們之後會再提到。到 2020 年 10 月出現 React v17，課程將以此版本為主，和 v16 基本上沒有太大的差異。</p>
-<h3 id="React-中一定會用到的-ES6-語法"><a href="#React-中一定會用到的-ES6-語法" class="headerlink" title="React 中一定會用到的 ES6 語法"></a>React 中一定會用到的 ES6 語法</h3><p>在開始之前，可以先複習這篇：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10217085">React 中一定會用到的 JavaScript 語法</a>，主要包括下列幾個重點：</p>
+<h3 id="React-中一定會用到的-ES6-語法"><a href="#React-中一定會用到的-ES6-語法" class="headerlink" title="React 中一定會用到的 ES6 語法"></a>React 中一定會用到的 ES6 語法</h3><p>在開始之前，可以先複習這篇：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNzA4NQ==">React 中一定會用到的 JavaScript 語法<i class="fa fa-external-link-alt"></i></span>，主要包括下列幾個重點：</p>
 <ul>
 <li>樣板字面值（Template literals／Template strings）</li>
 <li>箭頭函式（arrow functions）</li>
@@ -269,7 +280,7 @@
 </ul>
 <p>可事先具備這些知識，或到時候再搭配 MDN 查詢用法，因為這些是之後實作 React 時一定會碰到的語法。</p>
 <hr>
-<h2 id="React：JavaScript-函式庫"><a href="#React：JavaScript-函式庫" class="headerlink" title="React：JavaScript 函式庫"></a>React：JavaScript 函式庫</h2><p>我們經常會聽到前端三大框架：React、Vue、Angular，但根據 <a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/">React</a> 官網定義：</p>
+<h2 id="React：JavaScript-函式庫"><a href="#React：JavaScript-函式庫" class="headerlink" title="React：JavaScript 函式庫"></a>React：JavaScript 函式庫</h2><p>我們經常會聽到前端三大框架：React、Vue、Angular，但根據 <span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnLw==">React<i class="fa fa-external-link-alt"></i></span> 官網定義：</p>
 <blockquote>
 <p>React: A JavaScript library for building user interfaces</p>
 </blockquote>
@@ -302,10 +313,10 @@
 <p>因此，並不是所有專案都適合用 React 進行開發，應該根據網站需求去決定合適的工具。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.fooish.com/reactjs/">React 教學 - React JavaScript UI Library</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZm9vaXNoLmNvbS9yZWFjdGpzLw==">React 教學 - React JavaScript UI Library<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
-<h2 id="初探-React"><a href="#初探-React" class="headerlink" title="初探 React"></a>初探 React</h2><p>在開始前可先透過 <a target="_blank" rel="noopener" href="https://codesandbox.io/">CodeSandbox</a> 進行練習，這是一個支援前端框架開發線上編輯器（IDE），類似複雜版的 Codepen。</p>
+<h2 id="初探-React"><a href="#初探-React" class="headerlink" title="初探 React"></a>初探 React</h2><p>在開始前可先透過 <span class="exturl" data-url="aHR0cHM6Ly9jb2Rlc2FuZGJveC5pby8=">CodeSandbox<i class="fa fa-external-link-alt"></i></span> 進行練習，這是一個支援前端框架開發線上編輯器（IDE），類似複雜版的 Codepen。</p>
 <p>點選 Create Sandbox，並選擇 React 來快速建立開發環境：</p>
 <p><img src="https://i.imgur.com/j6UFABA.png"></p>
 <p>建立完成的初始畫面如下，藉由像這樣快速建立環境，也能用來幫助線上 debug：</p>
@@ -345,9 +356,9 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;todo.isDone &amp;&amp; <span class="string">&#x27;已完成&#x27;</span>&#125;</span><br><span class="line">&#123;!todo.isDone &amp;&amp; <span class="string">&#x27;未完成&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="JSX-特性：自動-escape"><a href="#JSX-特性：自動-escape" class="headerlink" title="JSX 特性：自動 escape"></a>JSX 特性：自動 escape</h3><p>此外，根據<a target="_blank" rel="noopener" href="https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks">官方文件</a>，JSX 語法能夠預防 Injection Attacks，提供 escape 功能。</p>
+<h3 id="JSX-特性：自動-escape"><a href="#JSX-特性：自動-escape" class="headerlink" title="JSX 特性：自動 escape"></a>JSX 特性：自動 escape</h3><p>此外，根據<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2ludHJvZHVjaW5nLWpzeC5odG1sI2pzeC1wcmV2ZW50cy1pbmplY3Rpb24tYXR0YWNrcw==">官方文件<i class="fa fa-external-link-alt"></i></span>，JSX 語法能夠預防 Injection Attacks，提供 escape 功能。</p>
 <p><img src="https://i.imgur.com/eRabFE4.png"></p>
-<p>如果真的想要 render 出 innerHTML，則需透過 <a target="_blank" rel="noopener" href="https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml">dangerouslysetinnerhtml</a> 這個冗長的標籤，一般而言不會使用這個方法。</p>
+<p>如果真的想要 render 出 innerHTML，則需透過 <span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2RvbS1lbGVtZW50cy5odG1sI2Rhbmdlcm91c2x5c2V0aW5uZXJodG1s">dangerouslysetinnerhtml<i class="fa fa-external-link-alt"></i></span> 這個冗長的標籤，一般而言不會使用這個方法。</p>
 <p>但需要注意，如果在 a 連結標間中，有使用者輸入的區塊，例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&#123;todo.content&#125;&gt;click me!&lt;/a&gt;</span><br></pre></td></tr></table></figure>
 
@@ -401,11 +412,11 @@
 <p><img src="https://i.imgur.com/gX8yUJ5.png"></p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.fooish.com/reactjs/state.html">React State - React 教學Tutorial - Fooish 程式技術</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10185095">React Day5 - state 與 setState</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10210221">React的props與state</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10200640">【DAY 04】React！說，Props是誰啊？</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10214495">【Day 6】Child Component &amp;&amp; Props</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZm9vaXNoLmNvbS9yZWFjdGpzL3N0YXRlLmh0bWw=">React State - React 教學Tutorial - Fooish 程式技術<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NTA5NQ==">React Day5 - state 與 setState<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxMDIyMQ==">React的props與state<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDY0MA==">【DAY 04】React！說，Props是誰啊？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNDQ5NQ==">【Day 6】Child Component &amp;&amp; Props<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="環境建置：create-react-app"><a href="#環境建置：create-react-app" class="headerlink" title="環境建置：create-react-app"></a>環境建置：create-react-app</h2><p>React 環境建置可分為兩種：</p>
@@ -419,7 +430,7 @@
 </ul>
 </li>
 </ul>
-<p>這裡會以現成的程式來做示範，詳細說明可參考 <a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app">facebook/create-react-app</a>。</p>
+<p>這裡會以現成的程式來做示範，詳細說明可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL2NyZWF0ZS1yZWFjdC1hcHA=">facebook/create-react-app<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><p>依照下方指令安裝相關套件並啟動：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-react-app my-app</span><br><span class="line">$ cd my-app</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure>
 
@@ -430,7 +441,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.css&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span>;</span><br><span class="line"><span class="comment">// 與資料收集、效能有關</span></span><br><span class="line"><span class="keyword">import</span> reportWebVitals <span class="keyword">from</span> <span class="string">&#x27;./reportWebVitals&#x27;</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">reportWebVitals();</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>React.StrictMode</code>：代表<a target="_blank" rel="noopener" href="https://reactjs.org/docs/strict-mode.html#identifying-unsafe-lifecycles">嚴格模式</a>中，會像 ESLint 進行檢查與警告，但有時為了偵測，可能會呼叫兩次，造成和想像中不同的結果，因此建議不加上</li>
+<li><code>React.StrictMode</code>：代表<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL3N0cmljdC1tb2RlLmh0bWwjaWRlbnRpZnlpbmctdW5zYWZlLWxpZmVjeWNsZXM=">嚴格模式<i class="fa fa-external-link-alt"></i></span>中，會像 ESLint 進行檢查與警告，但有時為了偵測，可能會呼叫兩次，造成和想像中不同的結果，因此建議不加上</li>
 <li><code>&lt;App /&gt;</code>：render 出 App conponent，也就是 render 的畫面</li>
 </ul>
 <p>可在 src\App.js 檔案，修改要 render 的畫面：</p>
@@ -567,10 +578,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -601,7 +612,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

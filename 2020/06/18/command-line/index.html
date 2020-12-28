@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [CMD101] Command Line 超新手入門和 [CS101] 初心者的計概與 coding 火球術 這兩門課程的學習筆記。  12345678學習目標： 說得出程式如何執行 理解寫程式的本質只是一行行的指令 了解前端與後端的區別 能說出從發出一個 request 到接收 response 中間發生的事 了解不同載具的差異在哪（Desktop、Mobile、Web） 了瞭解基本">
@@ -52,6 +54,15 @@
 
   <title>[week 1] Command Line 入門 & 基本指令 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -243,7 +254,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/cmd101-command-line">[CMD101] Command Line 超新手入門</a>和 <a target="_blank" rel="noopener" href="https://lidemy.com/p/cs101-coding">[CS101] 初心者的計概與 coding 火球術</a> 這兩門課程的學習筆記。</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY21kMTAxLWNvbW1hbmQtbGluZQ==">[CMD101] Command Line 超新手入門<i class="fa fa-external-link-alt"></i></span>和 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY3MxMDEtY29kaW5n">[CS101] 初心者的計概與 coding 火球術<i class="fa fa-external-link-alt"></i></span> 這兩門課程的學習筆記。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> 說得出程式如何執行</span><br><span class="line"> 理解寫程式的本質只是一行行的指令</span><br><span class="line"> 了解前端與後端的區別</span><br><span class="line"> 能說出從發出一個 request 到接收 response 中間發生的事</span><br><span class="line"> 了解不同載具的差異在哪（Desktop、Mobile、Web）</span><br><span class="line"> 了瞭解基本的 command line 指令</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -270,11 +281,11 @@
 <li>要執行 Command Line 指令，必須先根據作業系統安裝 Command Line Tool：</li>
 </ul>
 <ol>
-<li>Windows：<a target="_blank" rel="noopener" href="https://gitforwindows.org/">git-bash</a>（推薦）、<a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2015/09/27/Useful-tool-Cmder">Cmder</a></li>
-<li>Mac：<a target="_blank" rel="noopener" href="http://huli.logdown.com/posts/402147-iterm2-zsh-better-environment">iTerm2</a></li>
+<li>Windows：<span class="exturl" data-url="aHR0cHM6Ly9naXRmb3J3aW5kb3dzLm9yZy8=">git-bash<i class="fa fa-external-link-alt"></i></span>（推薦）、<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxNS8wOS8yNy9Vc2VmdWwtdG9vbC1DbWRlcg==">Cmder<i class="fa fa-external-link-alt"></i></span></li>
+<li>Mac：<span class="exturl" data-url="aHR0cDovL2h1bGkubG9nZG93bi5jb20vcG9zdHMvNDAyMTQ3LWl0ZXJtMi16c2gtYmV0dGVyLWVudmlyb25tZW50">iTerm2<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <ul>
-<li>或是使用 <a target="_blank" rel="noopener" href="https://bellard.org/jslinux/">JSLinux</a> （<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Jslinux">以 JavaScript 寫成的 Linux 模擬器</a>）來統一環境，即可在瀏覽器介面進行測試。</li>
+<li>或是使用 <span class="exturl" data-url="aHR0cHM6Ly9iZWxsYXJkLm9yZy9qc2xpbnV4Lw==">JSLinux<i class="fa fa-external-link-alt"></i></span> （<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvSnNsaW51eA==">以 JavaScript 寫成的 Linux 模擬器<i class="fa fa-external-link-alt"></i></span>）來統一環境，即可在瀏覽器介面進行測試。</li>
 </ul>
 <h2 id="基本指令介紹"><a href="#基本指令介紹" class="headerlink" title="基本指令介紹"></a>基本指令介紹</h2><blockquote>
 <p>所謂的「指令」其實也是由程式寫成，我們藉由輸入指令來執行程式。</p>
@@ -331,8 +342,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="http://www.vixual.net/blog/archives/234">vi 與 vim 的指令整理</a>、</li>
-<li><a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_basic/0310vi.php">鳥哥的Linux 私房菜– 第九章、vim 程式編輯器</a></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy52aXh1YWwubmV0L2Jsb2cvYXJjaGl2ZXMvMjM0">vi 與 vim 的指令整理<i class="fa fa-external-link-alt"></i></span>、</li>
+<li><span class="exturl" data-url="aHR0cDovL2xpbnV4LnZiaXJkLm9yZy9saW51eF9iYXNpYy8wMzEwdmkucGhw">鳥哥的Linux 私房菜– 第九章、vim 程式編輯器<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <h2 id="更多常用指令"><a href="#更多常用指令" class="headerlink" title="更多常用指令"></a>更多常用指令</h2><h4 id="date：印出當前日期"><a href="#date：印出當前日期" class="headerlink" title="date：印出當前日期"></a><code>date</code>：印出當前日期</h4><h4 id="top（Table-Of-Processes）：印出所有Process，可持續偵測程序運作的狀態（按-q-鍵離開）"><a href="#top（Table-Of-Processes）：印出所有Process，可持續偵測程序運作的狀態（按-q-鍵離開）" class="headerlink" title="top（Table Of Processes）：印出所有Process，可持續偵測程序運作的狀態（按 q 鍵離開）"></a><code>top</code>（Table Of Processes）：印出所有Process，可持續偵測程序運作的狀態（按 q 鍵離開）</h4><h4 id="cat（CATenate）：查看檔案內容"><a href="#cat（CATenate）：查看檔案內容" class="headerlink" title="cat（CATenate）：查看檔案內容"></a><code>cat</code>（CATenate）：查看檔案內容</h4><h4 id="less：分頁式印出檔案"><a href="#less：分頁式印出檔案" class="headerlink" title="less：分頁式印出檔案"></a><code>less</code>：分頁式印出檔案</h4><h4 id="grep：抓取特定關鍵字"><a href="#grep：抓取特定關鍵字" class="headerlink" title="grep：抓取特定關鍵字"></a><code>grep</code>：抓取特定關鍵字</h4><h4 id="echo：印出字串"><a href="#echo：印出字串" class="headerlink" title="echo：印出字串"></a><code>echo</code>：印出字串</h4><h4 id="（pipe）：把前面的輸入「變成」後面的輸出"><a href="#（pipe）：把前面的輸入「變成」後面的輸出" class="headerlink" title="|（pipe）：把前面的輸入「變成」後面的輸出"></a><code>|</code>（pipe）：把前面的輸入「變成」後面的輸出</h4><ul>
 <li><p>範例：<code>cat file.txt  | grep hi </code>：從印出的 file.txt 內容中，抓取字串 hi 並輸出</p>
@@ -353,10 +364,10 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://yakimhsu.com/project/project_w1_CommandLine.html">[第一週] Command Line - Terminal、基本指令介紹</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/12/23/linux-commnd-line-tutorial/">Linux Command 命令列指令與基本操作入門教學</a> </li>
-<li><a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2015/09/27/Useful-tool-Cmder">介紹好用工具：Cmder ( 具有 Linux 溫度的 Windows 命令提示字元工具 )</a></li>
-<li><a target="_blank" rel="noopener" href="http://huli.logdown.com/posts/402147-iterm2-zsh-better-environment">[心得] iTerm2 + zsh，打造更好的工作環境</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3cxX0NvbW1hbmRMaW5lLmh0bWw=">[第一週] Command Line - Terminal、基本指令介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNy8xMi8yMy9saW51eC1jb21tbmQtbGluZS10dXRvcmlhbC8=">Linux Command 命令列指令與基本操作入門教學<i class="fa fa-external-link-alt"></i></span> </li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxNS8wOS8yNy9Vc2VmdWwtdG9vbC1DbWRlcg==">介紹好用工具：Cmder ( 具有 Linux 溫度的 Windows 命令提示字元工具 )<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2h1bGkubG9nZG93bi5jb20vcG9zdHMvNDAyMTQ3LWl0ZXJtMi16c2gtYmV0dGVyLWVudmlyb25tZW50">[心得] iTerm2 + zsh，打造更好的工作環境<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -484,10 +495,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -518,7 +529,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

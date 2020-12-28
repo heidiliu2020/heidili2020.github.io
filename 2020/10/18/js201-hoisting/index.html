@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [JS201] 進階 JavaScript：那些你一直搞不懂的地方 這門課程的學習筆記。如有錯誤歡迎指正！  1234567學習目標：  你知道 Hoisting（提升）是什麼  你知道 Hoisting 的原理為何  你知道 Hoisting 只會提升宣告而非賦值  你知道 function 宣告、function 的參數以及一般變數宣告同時出現時的提升優先順序  你知道 let 跟">
@@ -56,6 +58,15 @@
 
   <title>[week 16] JavaScript 進階 - 初探 Hoisting & Execution Context | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -247,7 +258,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/js201-javascript">[JS201] 進階 JavaScript：那些你一直搞不懂的地方</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line">  你知道 Hoisting（提升）是什麼</span><br><span class="line">  你知道 Hoisting 的原理為何</span><br><span class="line">  你知道 Hoisting 只會提升宣告而非賦值</span><br><span class="line">  你知道 function 宣告、function 的參數以及一般變數宣告同時出現時的提升優先順序</span><br><span class="line">  你知道 let 跟 const 其實也有 Hoisting，只是表現形式不太相同</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -294,7 +305,7 @@
 <li>引數（Argument）：用於呼叫函式</li>
 </ul>
 <blockquote>
-<p>可參考：<a target="_blank" rel="noopener" href="https://notfalse.net/6/arg-vs-param">引數(Argument) vs. 參數(Parameter) - NotFalse 技術客</a></p>
+<p>可參考：<span class="exturl" data-url="aHR0cHM6Ly9ub3RmYWxzZS5uZXQvNi9hcmctdnMtcGFyYW0=">引數(Argument) vs. 參數(Parameter) - NotFalse 技術客<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>因此，當我們傳入參數到 function 時，其實指的就是引數（argument），而 argument 的宣告會優先於被提升的變數宣告。</p>
 <p>以下方傳入參數的程式碼為例：</p>
@@ -372,12 +383,12 @@
 <p>為了解決上述問題，所以我們需要 Hoisting。</p>
 <p>延伸閱讀：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://dmitrysoshnikov.com/notes/note-4-two-words-about-hoisting/">Note 4. Two words about “hoisting”.</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuhe688/p/5891273.html">JavaScript系列文章：变量提升和函数提升</a></li>
+<li><span class="exturl" data-url="aHR0cDovL2RtaXRyeXNvc2huaWtvdi5jb20vbm90ZXMvbm90ZS00LXR3by13b3Jkcy1hYm91dC1ob2lzdGluZy8=">Note 4. Two words about “hoisting”.<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbGl1aGU2ODgvcC81ODkxMjczLmh0bWw=">JavaScript系列文章：变量提升和函数提升<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h2 id="Hoisting-的運作原理"><a href="#Hoisting-的運作原理" class="headerlink" title="Hoisting 的運作原理"></a>Hoisting 的運作原理</h2><p>在瞭解什麼是 Hoisting，還有我們為什麼需要 Hoisting 之後，接著就來探討：「Hoisting 究竟是如何運作的？」</p>
-<p>這部分可參考 JavaScript 所遵循的標準 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ECMAScript">ECMAScript</a> 規格書，因為後期版本規格眾多，這裡以 <a target="_blank" rel="noopener" href="https://www-archive.mozilla.org/js/language/E262-3.pdf">ES3 規格書</a>當作範例。</p>
+<p>這部分可參考 JavaScript 所遵循的標準 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvRUNNQVNjcmlwdA==">ECMAScript<i class="fa fa-external-link-alt"></i></span> 規格書，因為後期版本規格眾多，這裡以 <span class="exturl" data-url="aHR0cHM6Ly93d3ctYXJjaGl2ZS5tb3ppbGxhLm9yZy9qcy9sYW5ndWFnZS9FMjYyLTMucGRm">ES3 規格書<i class="fa fa-external-link-alt"></i></span>當作範例。</p>
 <p>其實在 ES3 的規則中，並出現沒有 Hoisting 這個詞，與此現象有關的段落出現在第十章：Execution Contexts（執行環境，以下部分內容簡稱 EC）。</p>
 <h3 id="什麼是-Execution-Context？"><a href="#什麼是-Execution-Context？" class="headerlink" title="什麼是 Execution Context？"></a>什麼是 Execution Context？</h3><p>在 JavaScript 中，可執行的 JS 程式碼可分成三種型別：</p>
 <ol>
@@ -402,8 +413,8 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://i.imgur.com/BeuXQfQ.png"><br>（參考來源：<a target="_blank" rel="noopener" href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248%EF%BC%89">https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248）</a></p>
-<h3 id="呼叫-amp-執行堆疊（Call-Stack）"><a href="#呼叫-amp-執行堆疊（Call-Stack）" class="headerlink" title="呼叫 &amp; 執行堆疊（Call Stack）"></a>呼叫 &amp; 執行堆疊（Call Stack）</h3><p>因為 JavaScript 是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">單執行緒</a>的程式語言，用白話文解釋就是「JavaScript 一次只能做一件事情」，因此 JS 中等待執行的任務會被放入 Call Stack。</p>
+<p><img src="https://i.imgur.com/BeuXQfQ.png"><br>（參考來源：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVBRCU5NCVFOSVBQyVCQyVFOCU5NyU4RiVFNSU5QyVBOCVFNyVBOCU4QiVFNSVCQyU4RiVFNyVCNCVCMCVFNyVBRiU4MCVFOCVBMyVBMS8lRTYlQjclQkElRTglQUIlODctamF2YXNjcmlwdC0lRTUlOUYlQjclRTglQTElOEMlRTclOTIlQjAlRTUlQTIlODMtMjk3NmIzZWFmMjQ4JUVGJUJDJTg5">https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248）<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="呼叫-amp-執行堆疊（Call-Stack）"><a href="#呼叫-amp-執行堆疊（Call-Stack）" class="headerlink" title="呼叫 &amp; 執行堆疊（Call Stack）"></a>呼叫 &amp; 執行堆疊（Call Stack）</h3><p>因為 JavaScript 是<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUJBJUJGJUU3JUE4JThC">單執行緒<i class="fa fa-external-link-alt"></i></span>的程式語言，用白話文解釋就是「JavaScript 一次只能做一件事情」，因此 JS 中等待執行的任務會被放入 Call Stack。</p>
 <p>JavaScript 在調用一個執行環境時，其實會經過兩個階段：</p>
 <ol>
 <li>建立階段：呼叫堆疊（Call Stack）</li>
@@ -415,7 +426,7 @@
 </ol>
 <p>接著 JavaScript 會優先處理執行堆疊中最上面的執行環境。一旦執行完該 function 後，該執行環境就會從最上面被移除（pop off），同時儲存在該 function 中的資訊也會被銷毀，然後再回到之前的執行環境，直到回到 Global EC 為止。</p>
 <p>可參考下方的執行環境流程示意圖：</p>
-<p><img src="https://i.imgur.com/gEIWBNG.png"><br>（參考來源：<a target="_blank" rel="noopener" href="https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc%EF%BC%89">https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc）</a></p>
+<p><img src="https://i.imgur.com/gEIWBNG.png"><br>（參考來源：<span class="exturl" data-url="aHR0cHM6Ly9kZXYudG8vYWhtZWR0YWhpci93aGF0LWlzLXRoZS1leGVjdXRpb24tY29udGV4dC1leGVjdXRpb24tc3RhY2stc2NvcGUtY2hhaW4taW4tanMtMjZuYyVFRiVCQyU4OQ==">https://dev.to/ahmedtahir/what-is-the-execution-context-execution-stack-scope-chain-in-js-26nc）<i class="fa fa-external-link-alt"></i></span></p>
 <p>最後整理關於執行環境的幾個重點：</p>
 <ul>
 <li>JavavaScript 是單執行緒的語言</li>
@@ -435,7 +446,7 @@
 <p>若以 Object 型態表示會如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">executionContextObject = &#123;</span><br><span class="line">  scopeChain: &#123; </span><br><span class="line">    <span class="comment">// 變數物件 + 所有父代執行環境物件的變數物件</span></span><br><span class="line">  &#125;,</span><br><span class="line">  variableObject: &#123; </span><br><span class="line">    <span class="comment">// 函式的參數、內部的變數和函式</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">this</span>: &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Variable-Object-變數物件（VO）"><a href="#Variable-Object-變數物件（VO）" class="headerlink" title="Variable Object 變數物件（VO）"></a>Variable Object 變數物件（VO）</h2><p>以下是 ECMA <a target="_blank" rel="noopener" href="https://www.ecma-international.org/archive/ecmascript/1999/TC39WG/990220-es2_func.pdf">10.1.3 Variable Instantiation</a> 對於 Variable Object 的解釋：</p>
+<h2 id="Variable-Object-變數物件（VO）"><a href="#Variable-Object-變數物件（VO）" class="headerlink" title="Variable Object 變數物件（VO）"></a>Variable Object 變數物件（VO）</h2><p>以下是 ECMA <span class="exturl" data-url="aHR0cHM6Ly93d3cuZWNtYS1pbnRlcm5hdGlvbmFsLm9yZy9hcmNoaXZlL2VjbWFzY3JpcHQvMTk5OS9UQzM5V0cvOTkwMjIwLWVzMl9mdW5jLnBkZg==">10.1.3 Variable Instantiation<i class="fa fa-external-link-alt"></i></span> 對於 Variable Object 的解釋：</p>
 <blockquote>
 <p>Every execution context has associated with it a variable object. Variables and functions declared in the source text are added as properties of the variable object. For function, anonymous, and implementation-supplied code, parameters are added as properties of the variable object.</p>
 </blockquote>
@@ -534,12 +545,12 @@
 <p>除了課堂影片提到的內容，自己也上網查了許多有關執行環境、執行堆疊的資料，雖然花費不少時間，卻也藉由瞭解 JavaScript 的編譯與執行過程，從建立到執行階段，加深對整個架構的理解。</p>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/">我知道你懂 hoisting，可是你了解到多深？</a></li>
-<li><a target="_blank" rel="noopener" href="https://nicolakacha.coderbridge.io/2020/09/29/javascript-scope-hoisting/">JavaScript: Scope &amp; Hoisting</a></li>
-<li><a target="_blank" rel="noopener" href="https://andyyou.github.io/2015/04/18/what-is-the-execution-context-in-javascript/">理解 Javascript 執行環境</a></li>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/267342/">javascript執行環境及作用域詳解</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248">秒懂！JavaSript 執行環境與堆疊</a></li>
-<li><a target="_blank" rel="noopener" href="https://shawnlin0201.github.io/JavaScript/JavaScript-Variable-Object-and-Activation-Object/">JavaScript 深入淺出 Variable Object &amp; Activation Object</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOC8xMS8xMC9qYXZhc2NyaXB0LWhvaXN0aW5nLw==">我知道你懂 hoisting，可是你了解到多深？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFrYWNoYS5jb2RlcmJyaWRnZS5pby8yMDIwLzA5LzI5L2phdmFzY3JpcHQtc2NvcGUtaG9pc3Rpbmcv">JavaScript: Scope &amp; Hoisting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hbmR5eW91LmdpdGh1Yi5pby8yMDE1LzA0LzE4L3doYXQtaXMtdGhlLWV4ZWN1dGlvbi1jb250ZXh0LWluLWphdmFzY3JpcHQv">理解 Javascript 執行環境<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTUlODklOEQlRTclQUIlQUYlRTklOTYlOEIlRTclOTklQkMvMjY3MzQyLw==">javascript執行環境及作用域詳解<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVBRCU5NCVFOSVBQyVCQyVFOCU5NyU4RiVFNSU5QyVBOCVFNyVBOCU4QiVFNSVCQyU4RiVFNyVCNCVCMCVFNyVBRiU4MCVFOCVBMyVBMS8lRTYlQjclQkElRTglQUIlODctamF2YXNjcmlwdC0lRTUlOUYlQjclRTglQTElOEMlRTclOTIlQjAlRTUlQTIlODMtMjk3NmIzZWFmMjQ4">秒懂！JavaSript 執行環境與堆疊<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaGF3bmxpbjAyMDEuZ2l0aHViLmlvL0phdmFTY3JpcHQvSmF2YVNjcmlwdC1WYXJpYWJsZS1PYmplY3QtYW5kLUFjdGl2YXRpb24tT2JqZWN0Lw==">JavaScript 深入淺出 Variable Object &amp; Activation Object<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -670,10 +681,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -704,7 +715,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         

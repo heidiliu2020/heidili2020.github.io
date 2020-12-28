@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -19,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本篇為 [JS101] 用 JavaScript 一步步打造程式基礎 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 你能靈活運用變數、迴圈、判斷式等等基本概念來解題 P1 你能一行行的說出現在程式在做什麼 P1 你知道「回傳」跟「輸出」的差異 P1 你可以把用文字寫好的演算法轉成程式碼">
@@ -71,6 +73,15 @@
 
   <title>[week 2] JavaScript 基礎 - 基本語法、值的型別、變數、迴圈、函數 | 前端新米</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
 
 
 
@@ -262,7 +273,7 @@
 
       
         <blockquote>
-<p>本篇為 <a target="_blank" rel="noopener" href="https://lidemy.com/p/js101-javascript">[JS101] 用 JavaScript 一步步打造程式基礎</a> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDEtamF2YXNjcmlwdA==">[JS101] 用 JavaScript 一步步打造程式基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你能靈活運用變數、迴圈、判斷式等等基本概念來解題</span><br><span class="line"> P1 你能一行行的說出現在程式在做什麼</span><br><span class="line"> P1 你知道「回傳」跟「輸出」的差異</span><br><span class="line"> P1 你可以把用文字寫好的演算法轉成程式碼</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -272,13 +283,13 @@
 <p>直到 Node.js 出現後，提供了 JavaScript 在瀏覽器以外的運行環境。目前實務開發中，通常使用瀏覽器的開發者工具來進行 debug（除錯）。</p>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="http://test.domojyun.net/MEMO/JavaScript/">JavaScript 基本認識 - JavaScript 入門學習筆記</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@totoroLiu/%E7%B7%A8%E8%AD%AF%E8%AA%9E%E8%A8%80-vs-%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80-5f34e6bae051">編譯語言 VS 直譯語言- Po-Ching Liu - Medium</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/codememo/%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB-js-%E5%B0%88%E7%82%BA%E7%80%8F%E8%A6%BD%E5%99%A8%E8%80%8C%E7%94%9F%E7%9A%84-script-%E8%85%B3%E6%9C%AC%E8%AA%9E%E8%A8%80-60a628988710">[心得分享] JS = 專為瀏覽器而生的 script (腳本語言)</a></li>
-<li><a target="_blank" rel="noopener" href="https://books.google.com.tw/books?id=8J_3BQAAQBAJ&pg=SA1-PA5&lpg=SA1-PA5&dq=%E8%85%B3%E6%9C%AC%E8%AA%9E%E8%A8%80%E6%98%AF%E4%B8%80%E7%A8%AE%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80%EF%BC%8C&source=bl&ots=oHnBL1CGny&sig=ACfU3U0hgWb-mnejRGX2ZhsClobxafUnqA&hl=zh-TW&sa=X&ved=2ahUKEwiD1Z7Q8I_qAhXMw4sBHU3IDo0Q6AEwBXoECAkQAQ#v=onepage&q=%E8%85%B3%E6%9C%AC%E8%AA%9E%E8%A8%80%E6%98%AF%E4%B8%80%E7%A8%AE%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80%EF%BC%8C&f=false">JavaScript+jQuery Mobile+Node.js跨平台網頁設計範例教本(電子書)</a></li>
+<li><span class="exturl" data-url="aHR0cDovL3Rlc3QuZG9tb2p5dW4ubmV0L01FTU8vSmF2YVNjcmlwdC8=">JavaScript 基本認識 - JavaScript 入門學習筆記<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B0b3Rvcm9MaXUvJUU3JUI3JUE4JUU4JUFEJUFGJUU4JUFBJTlFJUU4JUE4JTgwLXZzLSVFNyU5QiVCNCVFOCVBRCVBRiVFOCVBQSU5RSVFOCVBOCU4MC01ZjM0ZTZiYWUwNTE=">編譯語言 VS 直譯語言- Po-Ching Liu - Medium<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2NvZGVtZW1vLyVFNSVCRiU4MyVFNSVCRSU5NyVFNSU4OCU4NiVFNCVCQSVBQi1qcy0lRTUlQjAlODglRTclODIlQkElRTclODAlOEYlRTglQTYlQkQlRTUlOTklQTglRTglODAlOEMlRTclOTQlOUYlRTclOUElODQtc2NyaXB0LSVFOCU4NSVCMyVFNiU5QyVBQyVFOCVBQSU5RSVFOCVBOCU4MC02MGE2Mjg5ODg3MTA=">[心得分享] JS = 專為瀏覽器而生的 script (腳本語言)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ib29rcy5nb29nbGUuY29tLnR3L2Jvb2tzP2lkPThKXzNCUUFBUUJBSiZwZz1TQTEtUEE1JmxwZz1TQTEtUEE1JmRxPSVFOCU4NSVCMyVFNiU5QyVBQyVFOCVBQSU5RSVFOCVBOCU4MCVFNiU5OCVBRiVFNCVCOCU4MCVFNyVBOCVBRSVFNyU5QiVCNCVFOCVBRCVBRiVFOCVBQSU5RSVFOCVBOCU4MCVFRiVCQyU4QyZzb3VyY2U9Ymwmb3RzPW9IbkJMMUNHbnkmc2lnPUFDZlUzVTBoZ1diLW1uZWpSR1gyWmhzQ2xvYnhhZlVucUEmaGw9emgtVFcmc2E9WCZ2ZWQ9MmFoVUtFd2lEMVo3UThJX3FBaFhNdzRzQkhVM0lEbzBRNkFFd0JYb0VDQWtRQVEjdj1vbmVwYWdlJnE9JUU4JTg1JUIzJUU2JTlDJUFDJUU4JUFBJTlFJUU4JUE4JTgwJUU2JTk4JUFGJUU0JUI4JTgwJUU3JUE4JUFFJUU3JTlCJUI0JUU4JUFEJUFGJUU4JUFBJTlFJUU4JUE4JTgwJUVGJUJDJThDJmY9ZmFsc2U=">JavaScript+jQuery Mobile+Node.js跨平台網頁設計範例教本(電子書)<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <h2 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h2><blockquote>
-<p>進入<a target="_blank" rel="noopener" href="https://nodejs.org/en/">官網</a>會看到下列文字：<br>Node.js® is a JavaScript ==runtime== built on Chrome’s V8 JavaScript engine.<br>（Node.js 一個能執行 JavaScript 的==運行環境==，以 Google Chrome V8 引擎為核心。）</p>
+<p>進入<span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">官網<i class="fa fa-external-link-alt"></i></span>會看到下列文字：<br>Node.js® is a JavaScript ==runtime== built on Chrome’s V8 JavaScript engine.<br>（Node.js 一個能執行 JavaScript 的==運行環境==，以 Google Chrome V8 引擎為核心。）</p>
 </blockquote>
 <p>安裝完成後，就可以在 Command Line 輸入指令：</p>
 <h3 id="node-v：查看目前-Node-js-版本號"><a href="#node-v：查看目前-Node-js-版本號" class="headerlink" title="node -v：查看目前 Node.js 版本號"></a><code>node -v</code>：查看目前 Node.js 版本號</h3><p>出現版本號就代表安裝成功。</p>
@@ -320,7 +331,7 @@
 <p><img src="https://i.imgur.com/dbhRafe.png" alt="and"></p>
 <h4 id="：not"><a href="#：not" class="headerlink" title="!：not"></a><code>!</code>：not</h4><p>做反向。</p>
 <p><img src="https://i.imgur.com/2scURgc.png" alt="!"></p>
-<h3 id="與-amp-amp-的短路性質"><a href="#與-amp-amp-的短路性質" class="headerlink" title="|| 與 &amp;&amp; 的短路性質"></a><code>||</code> 與 <code>&amp;&amp;</code> 的短路性質</h3><p>使用最短的路徑來求值，又稱<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC">短路求值</a>。只有當第一個運算數的值無法確定邏輯運算的結果時，才對第二個運算數進行求值。例如：</p>
+<h3 id="與-amp-amp-的短路性質"><a href="#與-amp-amp-的短路性質" class="headerlink" title="|| 與 &amp;&amp; 的短路性質"></a><code>||</code> 與 <code>&amp;&amp;</code> 的短路性質</h3><p>使用最短的路徑來求值，又稱<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JTlGJUFEJUU4JUI3JUFGJUU2JUIxJTgyJUU1JTgwJUJD">短路求值<i class="fa fa-external-link-alt"></i></span>。只有當第一個運算數的值無法確定邏輯運算的結果時，才對第二個運算數進行求值。例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 當 or 的第一個運算數為 true 時，最後結果必定為 true</span><br><span class="line">2. 當 and 的第一個運算數的值為 false 時，其結果必定為 false</span><br></pre></td></tr></table></figure>
 
 <p>在這種情況下，就不需要知道第二個運算數的具體值。也就是短路性質。</p>
@@ -330,7 +341,7 @@
 <p><code>var obj = obj || &#123; &#125;;　　//　如果 obj 存在就維持原樣，如果不存在就給予空物件</code></p>
 <p><code>var student = name || &quot;小明&quot;;　　//　如果沒有 name 就用預設為小明。用 || 來設定變數預設值</code></p>
 <blockquote>
-<p>更多短路邏輯的運用可參考這篇：<a target="_blank" rel="noopener" href="https://sweeteason.pixnet.net/blog/post/43022921-javascript-%E5%9F%BA%E7%A4%8E%E6%89%93%E5%BA%95%E7%B3%BB%E5%88%97-%28%E4%B8%89%29---%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%EF%BC%8C%E8%88%87">想知道&amp;&amp;與&amp;及||與|之間的區別嗎？ | 程式前沿</a></p>
+<p>更多短路邏輯的運用可參考這篇：<span class="exturl" data-url="aHR0cHM6Ly9zd2VldGVhc29uLnBpeG5ldC5uZXQvYmxvZy9wb3N0LzQzMDIyOTIxLWphdmFzY3JpcHQtJUU1JTlGJUJBJUU3JUE0JThFJUU2JTg5JTkzJUU1JUJBJTk1JUU3JUIzJUJCJUU1JTg4JTk3LSUyOCVFNCVCOCU4OSUyOS0tLSVFOSU4MiU4RiVFOCVCQyVBRiVFOSU4MSU4QiVFNyVBRSU5NyVFNSVBRCU5MCVFRiVCQyU4QyVFOCU4OCU4Nw==">想知道&amp;&amp;與&amp;及||與|之間的區別嗎？ | 程式前沿<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h3 id="位移運算子：-lt-lt-與-gt-gt"><a href="#位移運算子：-lt-lt-與-gt-gt" class="headerlink" title="位移運算子：&lt;&lt; 與 &gt;&gt;"></a>位移運算子：<code>&lt;&lt;</code> 與 <code>&gt;&gt;</code></h3><p>首先來複習二進位制：</p>
 <p>0100 = 2^3<em>0 + 2^2</em>1 + 2^1<em>0 + 2^0</em>0 = 2^2 = 4<br>1000 = 2^3<em>1 + 2^2</em>0 + 2^1<em>0 + 2^0</em>0 = 2^3 = 8</p>
@@ -384,11 +395,11 @@
 <h3 id="typeof-lt-value-gt-：用來判斷參數型態"><a href="#typeof-lt-value-gt-：用來判斷參數型態" class="headerlink" title="typeof &lt;value&gt;：用來判斷參數型態"></a><code>typeof &lt;value&gt;</code>：用來判斷參數型態</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#39;typeof true&#39;, typeof true)</span><br><span class="line">&#x2F;&#x2F;輸出 typeof true boolean</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/rT6DR1N.png"></p>
-<p>在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof">MDN 網站</a> 列出 typeof 的可能回傳值：</p>
+<p>在 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvT3BlcmF0b3JzL3R5cGVvZg==">MDN 網站<i class="fa fa-external-link-alt"></i></span> 列出 typeof 的可能回傳值：</p>
 <p><img src="https://4.bp.blogspot.com/-dBndQxibqJ8/V3xngW8lK5I/AAAAAAAAnDU/L5PVWe-8j-gL3vzcA4xMznzsgqq4AcnkACLcB/s1600/1.png"></p>
 <blockquote>
-<p>null 使用 typeof 運算子，回傳的結果會是字串 “object”，這指出 null 可被認為是象徵「無物件」（no object）的一種特殊物件值。（參考資料：<a target="_blank" rel="noopener" href="https://www.tenlong.com.tw/products/9789862764411">犀牛書</a>）</p>
-<p>這其實是 JavaScript 最初發現的一個錯誤，然後被 ECMAScript 沿用了。現在，null 被認為是物件的佔位符，從而解釋了這一矛盾<br>（參考資料：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10200841">你懂JavaScript 嗎？#4 型別（Types） </a>）</p>
+<p>null 使用 typeof 運算子，回傳的結果會是字串 “object”，這指出 null 可被認為是象徵「無物件」（no object）的一種特殊物件值。（參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGVubG9uZy5jb20udHcvcHJvZHVjdHMvOTc4OTg2Mjc2NDQxMQ==">犀牛書<i class="fa fa-external-link-alt"></i></span>）</p>
+<p>這其實是 JavaScript 最初發現的一個錯誤，然後被 ECMAScript 沿用了。現在，null 被認為是物件的佔位符，從而解釋了這一矛盾<br>（參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDg0MQ==">你懂JavaScript 嗎？#4 型別（Types） <i class="fa fa-external-link-alt"></i></span>）</p>
 </blockquote>
 <hr>
 <h2 id="變數（Variable）"><a href="#變數（Variable）" class="headerlink" title="變數（Variable）"></a>變數（Variable）</h2><ul>
@@ -399,7 +410,7 @@
 
 <h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><ul>
 <li>不可用數字開頭</li>
-<li>不可取名為<a target="_blank" rel="noopener" href="http://www.w3bai.com/zh-TW/js/js_reserved.html">保留字詞</a>，例如 var、function、for </li>
+<li>不可取名為<span class="exturl" data-url="aHR0cDovL3d3dy53M2JhaS5jb20vemgtVFcvanMvanNfcmVzZXJ2ZWQuaHRtbA==">保留字詞<i class="fa fa-external-link-alt"></i></span>，例如 var、function、for </li>
 <li>變數盡量用語譯化的方式命名，例如 peopleCount、total</li>
 <li>變數的取名規則需統一，可分為下列兩種：</li>
 </ul>
@@ -407,7 +418,7 @@
 <li>蛇式命名（snake_case）:名稱中間的標點以底線連接<br><code>var this_is_a_box</code></li>
 <li>駝峰式命名（camelCase）:除了第一個單詞外，後面的單詞首字母均為大寫<br><code>var thisIsABox</code></li>
 </ol>
-<h3 id="變數的儲存模型"><a href="#變數的儲存模型" class="headerlink" title="變數的儲存模型"></a>變數的儲存模型</h3><p>前面提到變數是像箱子的儲存模型，參考 Huli 寫的<a target="_blank" rel="noopener" href="https://medium.com/@hulitw/variable-and-frontdesk-a53a0440af3c">這篇文章</a>，舉以下範例來說明其特性：</p>
+<h3 id="變數的儲存模型"><a href="#變數的儲存模型" class="headerlink" title="變數的儲存模型"></a>變數的儲存模型</h3><p>前面提到變數是像箱子的儲存模型，參考 Huli 寫的<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvdmFyaWFibGUtYW5kLWZyb250ZGVzay1hNTNhMDQ0MGFmM2M=">這篇文章<i class="fa fa-external-link-alt"></i></span>，舉以下範例來說明其特性：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 範例一</span><br><span class="line"></span><br><span class="line">var A &#x3D; [1, 2, 3]</span><br><span class="line">var B &#x3D; [1, 2, 3]</span><br><span class="line">var C &#x3D; A</span><br><span class="line">console.log(A &#x3D;&#x3D; B)　　　&#x2F;&#x2F; 回傳 false</span><br><span class="line">console.log(C &#x3D;&#x3D; B)　　　&#x2F;&#x2F; 回傳 false</span><br><span class="line">console.log(C &#x3D;&#x3D; A)　　　&#x2F;&#x2F; 回傳 true</span><br></pre></td></tr></table></figure>
 
 <ol>
@@ -435,7 +446,7 @@
 <li><code>console.log(parseInt(a, 10) + b)</code>：用 <code>parseInt()</code> 將字串轉換成整數，10 代表預設的十進位 </li>
 </ol>
 <ul>
-<li>注意<a target="_blank" rel="noopener" href="http://blog.dcview.com/article.php?a=VmhQNVY+Czo=">浮動數誤差</a>：電腦在儲存小數值可能會產生誤差</li>
+<li>注意<span class="exturl" data-url="aHR0cDovL2Jsb2cuZGN2aWV3LmNvbS9hcnRpY2xlLnBocD9hPVZtaFFOVlkrQ3pvPQ==">浮動數誤差<i class="fa fa-external-link-alt"></i></span>：電腦在儲存小數值可能會產生誤差</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; 0.1 + 0.2</span><br><span class="line">console.log(a &#x3D;&#x3D; 0.3)　　　&#x2F;&#x2F; 印出 false</span><br><span class="line">console.log(a)            &#x2F;&#x2F; 印出 0.30000000000000004</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -527,8 +538,8 @@
 </ul>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1549602198.html">switch…case 和 if…else效率比較和優化</a></li>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10211561">JavaScript 基礎知識-switch &amp; if else 的判別差異</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0OTYwMjE5OC5odG1s">switch…case 和 if…else效率比較和優化<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxMTU2MQ==">JavaScript 基礎知識-switch &amp; if else 的判別差異<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 <hr>
 <h3 id="三元運算子（ternary）"><a href="#三元運算子（ternary）" class="headerlink" title="三元運算子（ternary）"></a>三元運算子（ternary）</h3><ul>
@@ -600,7 +611,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function logEven(number) &#123;</span><br><span class="line">    if (number%2 &#x3D;&#x3D;&#x3D; 0)　　　　　&#x2F;&#x2F; 若為偶數，就印出數字</span><br><span class="line">    console.log(number)</span><br><span class="line">&#125;</span><br><span class="line">function print1to100() &#123;</span><br><span class="line">    for (var i&#x3D;1; i&lt;&#x3D;100; i++)</span><br><span class="line">    logEven(i)  　　　　　　　　　</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print1to100()　　　　　　　　　&#x2F;&#x2F; 印出 1~100 的偶數</span><br></pre></td></tr></table></figure>
 
 <h3 id="宣告函式的不同種方式"><a href="#宣告函式的不同種方式" class="headerlink" title="宣告函式的不同種方式"></a>宣告函式的不同種方式</h3><ul>
-<li>在語法上大致分為 4 種方式，可參考這篇介紹：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10207740">函數定義 (Function Definition) 的 100 種寫法</a></li>
+<li>在語法上大致分為 4 種方式，可參考這篇介紹：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwNzc0MA==">函數定義 (Function Definition) 的 100 種寫法<i class="fa fa-external-link-alt"></i></span></li>
 <li>其中最常使用的為宣告式，以及匿名表達式。</li>
 </ul>
 <h4 id="第一種：宣告式（Function-Declarations）"><a href="#第一種：宣告式（Function-Declarations）" class="headerlink" title="第一種：宣告式（Function Declarations）"></a>第一種：宣告式（Function Declarations）</h4><ul>
@@ -636,7 +647,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function add(a, b) &#123;</span><br><span class="line"> console.log(arguments.length)    &#x2F;&#x2F; 印出 2</span><br><span class="line"> return a+b</span><br><span class="line">&#125;</span><br><span class="line">add(2, 5)</span><br><span class="line">&#x2F;&#x2F; 一共傳了兩個引數</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>參考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/arguments">MDN - Arguments 物件</a>，由於 arguments 帶其他屬性，可能因此需要用物件的方式來儲存資訊。</p>
+<p>參考<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRnVuY3Rpb25zL2FyZ3VtZW50cw==">MDN - Arguments 物件<i class="fa fa-external-link-alt"></i></span>，由於 arguments 帶其他屬性，可能因此需要用物件的方式來儲存資訊。</p>
 </blockquote>
 <h3 id="function-傳參數的運作機制（待補）"><a href="#function-傳參數的運作機制（待補）" class="headerlink" title="function 傳參數的運作機制（待補）"></a>function 傳參數的運作機制（待補）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function swap(a, b) &#123;</span><br><span class="line">在函式當傳入值時就會這樣跑</span><br><span class="line">  var a &#x3D; number1</span><br><span class="line">  var b &#x3D; number2</span><br><span class="line">  所以只是把 number1 跟 number2 給複製了一份</span><br><span class="line">  number1 number2 a b 是各自獨立的變數</span><br><span class="line"></span><br><span class="line"> var temp &#x3D; a</span><br><span class="line"> a &#x3D; b</span><br><span class="line"> b &#x3D; temp</span><br><span class="line"> console.log(&quot;a: b:&quot;, a, b)</span><br><span class="line">&#125;</span><br><span class="line">var number1 &#x3D; 10</span><br><span class="line">var number2 &#x3D; 20</span><br><span class="line">console.log(number1, number2)</span><br><span class="line">swap(number1, number2)</span><br><span class="line">console.log(number1, number2)</span><br><span class="line">number1 . number2 . a . b 是各自獨立的變數</span><br></pre></td></tr></table></figure>
 
@@ -649,7 +660,7 @@
 <p>這種情況以專有名詞稱作：</p>
 <p>pass by value<br>pass by reference. （JavaScript 中沒有）<br>pass by sharing</p>
 <blockquote>
-<p>可以參考：<a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？</a></p>
+<p>可以參考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOC8wNi8yMy9qYXZhc2NyaXB0LWNhbGwtYnktdmFsdWUtb3ItcmVmZXJlbmNlLw==">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <hr>
 <h2 id="return-的作用與使用時機"><a href="#return-的作用與使用時機" class="headerlink" title="return 的作用與使用時機"></a>return 的作用與使用時機</h2><p>首先可以把 function 分成兩類：</p>
@@ -670,7 +681,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">舉例</span><br><span class="line">function double(x) &#123;</span><br><span class="line">    return 123            &#x2F;&#x2F; 執行 return 就會跳出</span><br><span class="line">    console.log(abc)</span><br><span class="line">    return x * 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result &#x3D; double(3)</span><br><span class="line">console.log(result)　　　　&#x2F;&#x2F; 只會印出回傳值 123</span><br></pre></td></tr></table></figure>
 
 <h2 id="常用內建函式"><a href="#常用內建函式" class="headerlink" title="常用內建函式"></a>常用內建函式</h2><h3 id="Number-類型的內建函式"><a href="#Number-類型的內建函式" class="headerlink" title="Number 類型的內建函式"></a>Number 類型的內建函式</h3><blockquote>
-<p>可參考：<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Number">Number - JavaScript - MDN - Mozilla</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">Math - JavaScript - MDN - Mozilla</a></p>
+<p>可參考：<br><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTnVtYmVy">Number - JavaScript - MDN - Mozilla<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aA==">Math - JavaScript - MDN - Mozilla<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <ul>
 <li><code>Number()</code>：將字串轉數字</li>
@@ -735,14 +746,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(Math.random())</span><br><span class="line">&#x2F;&#x2F; 產生 0~1 隨機數</span><br><span class="line">console.log(Math.floor(Math.random()*10 + 1))</span><br><span class="line">&#x2F;&#x2F; 乘以十可產生 0~10 的隨機數（不包含 10）</span><br><span class="line">&#x2F;&#x2F; 無條件捨去，可產生 1~10 的整數</span><br></pre></td></tr></table></figure>
 
 <h3 id="String-類型的內建函式"><a href="#String-類型的內建函式" class="headerlink" title="String 類型的內建函式"></a>String 類型的內建函式</h3><blockquote>
-<p>可參考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String - JavaScript - MDN - Mozilla</a></p>
+<p>可參考：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5n">String - JavaScript - MDN - Mozilla<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <ul>
 <li><code>toUpperCase</code>, <code>toLowerCase()</code>：將字串轉換大、小寫</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; &#39;abc&#39;.toUpperCase()</span><br><span class="line">console.log(a)　　　　　　　　　&#x2F;&#x2F; 印出 ABC</span><br><span class="line"></span><br><span class="line">var B &#x3D; &#39;ABC!!!&#39;.toLowerCase()</span><br><span class="line">console.log(B)　　　　　　　　　&#x2F;&#x2F; 印出 abc!!!</span><br></pre></td></tr></table></figure>
 
-<p>或是參考 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ASCII">ASCII code</a> 進行轉換：</p>
+<p>或是參考 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvQVNDSUk=">ASCII code<i class="fa fa-external-link-alt"></i></span> 進行轉換：</p>
 <ul>
 <li><code>.charCodeAt()</code>：取得字串特定位置的字元 ASCII 編碼</li>
 </ul>
@@ -762,7 +773,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var str &#x3D; &#39;hey hello world&#39;</span><br><span class="line">var index &#x3D; str.indexOf(&#39;hello&#39;)</span><br><span class="line">console.log(index)                        &#x2F;&#x2F; 印出 4，hello 第一次出現在 index &#x3D; 4</span><br><span class="line"></span><br><span class="line">var index &#x3D; str.indexOf(&#39;hello!!&#39;)</span><br><span class="line">console.log(index)                        &#x2F;&#x2F; 印出 -1，代表字串不存在</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>replace()</code>：取代字串。只能換第一個指定字串。要全換的話可使用<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Regular_Expressions">正規表達式</a>來達成</li>
+<li><code>replace()</code>：取代字串。只能換第一個指定字串。要全換的話可使用<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9HdWlkZS9SZWd1bGFyX0V4cHJlc3Npb25z">正規表達式<i class="fa fa-external-link-alt"></i></span>來達成</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; replace()換第一個：</span><br><span class="line">var str &#x3D; &#39;hey hey hello world&#39;.replace(&#39;hey&#39;, &#39;!!!&#39;)</span><br><span class="line">console.log(str)          </span><br><span class="line">&#x2F;&#x2F; 印出 !!! hey hello world</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 正規表達式可全換：</span><br><span class="line">var str &#x3D; &#39;hey hey hello world&#39;.replace(&#x2F;hey&#x2F;g, &#39;!!!&#39;)</span><br><span class="line">console.log(str)  </span><br><span class="line">&#x2F;&#x2F; 印出 !!! !!! hello world，&#x2F;hey&#x2F;g 的 g 代表 global</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">- &#96;split()&#96;：透過「指定分隔符」來分開字串，回傳值為陣列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>var str = ‘data1,data2,data3’<br>var arr = str.split(‘,’)                // 取出分號<br>console.log(arr)<br>// 印出 [‘data1’, ‘data2’, ‘data3’]</p>
@@ -811,10 +822,10 @@
 <hr>
 <p>參考資料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10215301">JavaScript 初心者筆記: 判斷式 - if…else / switch 篇</a></li>
-<li><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/316385/">Java中for、while、do while三種迴圈語句的區別介紹</a></li>
-<li><a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part3/loop.html">迴圈· 從ES6開始的JavaScript學習生活</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@hugh_Program_learning_diary_Js/javascript-%E5%9F%BA%E7%A4%8E-%E5%87%BD%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9-e647b4e45af1">JavaScript 基礎：函式的基本介紹- Hugh’s Program learning</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNTMwMQ==">JavaScript 初心者筆記: 判斷式 - if…else / switch 篇<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvMzE2Mzg1Lw==">Java中for、while、do while三種迴圈語句的區別介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9leWVzb2ZraWRzLmdpdGJvb2tzLmlvL2phdmFzY3JpcHQtc3RhcnQtZnJvbS1lczYvY29udGVudC9wYXJ0My9sb29wLmh0bWw=">迴圈· 從ES6開始的JavaScript學習生活<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWdoX1Byb2dyYW1fbGVhcm5pbmdfZGlhcnlfSnMvamF2YXNjcmlwdC0lRTUlOUYlQkElRTclQTQlOEUtJUU1JTg3JUJEJUU1JUJDJThGJUU3JTlBJTg0JUU1JTlGJUJBJUU2JTlDJUFDJUU0JUJCJThCJUU3JUI0JUI5LWU2NDdiNGU0NWFmMQ==">JavaScript 基礎：函式的基本介紹- Hugh’s Program learning<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
@@ -942,10 +953,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/heidiliu2020" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://heidi-coding.medium.com/" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-medium fa-fw"></i>Medium</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
       </span>
   </div>
 
@@ -976,7 +987,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
   </div>
 
         
