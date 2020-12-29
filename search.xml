@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>[week 14] 後端基礎：資料庫 &amp; 系統設計</title>
-    <url>/2020/10/01/backend-system-design/</url>
+    <url>/backend-system-design/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為「程式導師實驗計畫：Lesson 8-2 之資料庫」這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -151,7 +151,7 @@
   </entry>
   <entry>
     <title>[week 1] Command Line 入門 &amp; 基本指令</title>
-    <url>/2020/06/18/command-line/</url>
+    <url>/command-line/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY21kMTAxLWNvbW1hbmQtbGluZQ==">[CMD101] Command Line 超新手入門<i class="fa fa-external-link-alt"></i></span>和 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY3MxMDEtY29kaW5n">[CS101] 初心者的計概與 coding 火球術<i class="fa fa-external-link-alt"></i></span> 這兩門課程的學習筆記。</p>
 </blockquote>
@@ -270,15 +270,15 @@
 </ol>
 ]]></content>
       <categories>
-        <category>程式基礎</category>
+        <category>Lidemy</category>
       </categories>
       <tags>
-        <tag>Command Line</tag>
+        <tag>Lidemy</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 3] JavaScript：ES6 語法 + npm + Jest</title>
-    <url>/2020/07/25/es6/</url>
+    <url>/javascript-es6/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDItamF2YXNjcmlwdC1lczYtbnBt">[JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -491,13 +491,12 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>npm</tag>
         <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 13] 前端工具之三 - gulp、webpack</title>
-    <url>/2020/09/27/fe201-gulp-webpack/</url>
+    <url>/gulp-webpack/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUyMDE=">[FE201] 前端中階：那些前端會用到的工具們<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -671,7 +670,7 @@
   </entry>
   <entry>
     <title>[week 13] 前端進階 - 如何優化執行 CSS 效能</title>
-    <url>/2020/09/30/fe201-css-optimize/</url>
+    <url>/css-optimization/</url>
     <content><![CDATA[<h2 id="前端優化"><a href="#前端優化" class="headerlink" title="前端優化"></a>前端優化</h2><p>關於前端優化方式，可從下列幾個方向進行：</p>
 <ul>
 <li>資源本身的大小</li>
@@ -771,12 +770,11 @@
       <tags>
         <tag>Front-End</tag>
         <tag>CSS</tag>
-        <tag>Optimization</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 6] CSS - 認識基礎標籤 &amp; 屬性</title>
-    <url>/2020/07/26/css/</url>
+    <url>/css/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -1056,12 +1054,12 @@
         <category>Front-End</category>
       </categories>
       <tags>
-        <tag>HTML&amp;CSS</tag>
+        <tag>Front-End</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 3] 設定 ESLint：用來檢查語法的工具</title>
-    <url>/2020/06/30/eslint/</url>
+    <url>/eslint/</url>
     <content><![CDATA[<h2 id="什麼是-ESLint？"><a href="#什麼是-ESLint？" class="headerlink" title="什麼是 ESLint？"></a>什麼是 ESLint？</h2><p>ESLint（ECMAScript + lint）是用來檢查 JavaScript 程式碼的工具。可在 commit 前檢查語法錯誤、提示潛在的 bug，藉此有效提高程式碼質量，和統一基本的 coding style。</p>
 <blockquote>
 <p>參考資料：</p>
@@ -1142,7 +1140,7 @@
   </entry>
   <entry>
     <title>[week 21] 補充：Prettier 套件 - 自動整理程式碼格式</title>
-    <url>/2020/12/13/fe302-prettier/</url>
+    <url>/prettier-code-formatter/</url>
     <content><![CDATA[<h2 id="Prettier：Code-formatter"><a href="#Prettier：Code-formatter" class="headerlink" title="Prettier：Code formatter"></a>Prettier：Code formatter</h2><blockquote>
 <p>相關安裝套件與如何操作可參考<span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGUtcmVhY3QtYXBwLmRldi9kb2NzL3NldHRpbmctdXAteW91ci1lZGl0b3Iv">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 </blockquote>
@@ -1181,12 +1179,11 @@
       </categories>
       <tags>
         <tag>Front-End</tag>
-        <tag>Prettier</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 12] 前端工具之一 - jQuery 與 Bootstrap</title>
-    <url>/2020/09/26/fe201-jquery-bootstrap/</url>
+    <url>/fe201-jquery-bootstrap/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUyMDE=">[FE201] 前端中階：那些前端會用到的工具們<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -1257,7 +1254,7 @@
   </entry>
   <entry>
     <title>[week 21] 補充：在 React 使用 PropTypes 進行型別檢查</title>
-    <url>/2020/12/14/fe302-proptypes/</url>
+    <url>/react-proptypes/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -1303,12 +1300,11 @@
       </categories>
       <tags>
         <tag>React</tag>
-        <tag>PropTypes</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 13] 前端工具之二 - CSS 預處理器、Babel</title>
-    <url>/2020/09/27/fe201-sass-babel/</url>
+    <url>/sass-babel/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUyMDE=">[FE201] 前端中階：那些前端會用到的工具們<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -1480,13 +1476,11 @@
       </categories>
       <tags>
         <tag>Front-End</tag>
-        <tag>SASS</tag>
-        <tag>Babel</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 22] 再探 React：Function component vs Class component</title>
-    <url>/2020/12/15/fe302-react-function-class-hook/</url>
+    <url>/react-class-function-hook/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -1593,12 +1587,11 @@
       <tags>
         <tag>React</tag>
         <tag>Hooks</tag>
-        <tag>useEffect</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 21] 初探 React：Component、JSX 語法、props 與 state 的不同</title>
-    <url>/2020/12/02/fe302-react-jsx-props-state/</url>
+    <url>/react-jsx-props/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -1795,14 +1788,13 @@
       </categories>
       <tags>
         <tag>React</tag>
-        <tag>JSX</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇</title>
-    <url>/2020/12/18/fe302-react-optimization/</url>
+    <url>/react-optimization/</url>
     <content><![CDATA[<p>在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。</p>
-<p><a href="https://heidiliu2020.github.io/react-blog-test/#/">部落格 DEMO</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9oZWlkaWxpdTIwMjAuZ2l0aHViLmlvL3JlYWN0LWJsb2ctdGVzdC8jLw==">部落格 DEMO<i class="fa fa-external-link-alt"></i></span></p>
 <a id="more"></a>
 <h2 id="一、處理登入狀態的畫面閃爍"><a href="#一、處理登入狀態的畫面閃爍" class="headerlink" title="一、處理登入狀態的畫面閃爍"></a>一、處理登入狀態的畫面閃爍</h2><p>在 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMzAyLXJlYWN0LWJsb2ctbG9naW4=">[week 22] React：用 SPA 架構實作一個部落格（二）- 身分驗證<i class="fa fa-external-link-alt"></i></span> 這篇筆記中，有提到登入狀態時，重整頁面會出現畫面閃爍的問題，之所以會有這個現象，是因為畫面進行了兩次 render：</p>
 <ul>
@@ -1875,7 +1867,6 @@
         <category>React</category>
       </categories>
       <tags>
-        <tag>Optimization</tag>
         <tag>React</tag>
         <tag>useEffect</tag>
         <tag>useState</tag>
@@ -1884,7 +1875,7 @@
   </entry>
   <entry>
     <title>[week 22] React：用 SPA 架構實作一個部落格（三）- 淺談測試</title>
-    <url>/2020/12/17/fe302-react-test/</url>
+    <url>/react-test/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -1991,7 +1982,7 @@
   </entry>
   <entry>
     <title>[week 21] 前端框架 - 先別急著學 React</title>
-    <url>/2020/11/24/fe302-react/</url>
+    <url>/react/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -2114,7 +2105,7 @@
   </entry>
   <entry>
     <title>[week 22] React：用 SPA 架構實作一個部落格（二）- 身分驗證</title>
-    <url>/2020/12/17/fe302-react-usecontext-usehistory/</url>
+    <url>/react-usecontext/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -2317,7 +2308,7 @@
   </entry>
   <entry>
     <title>[week 21] React 基礎：style &amp; 如何撰寫 CSS</title>
-    <url>/2020/11/30/fe302-styled-component/</url>
+    <url>/react-styled-component/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -2414,12 +2405,11 @@
       <tags>
         <tag>CSS</tag>
         <tag>React</tag>
-        <tag>styled component</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 21] React 性能優化：Virtual DOM &amp; 如何避免 re-render</title>
-    <url>/2020/12/10/fe302-virtual-dom/</url>
+    <url>/react-virtual-dom/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -2525,12 +2515,11 @@
       </categories>
       <tags>
         <tag>React</tag>
-        <tag>Virtual DOM</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 16] 淺談 JavaScript：同步與非同步 &amp; Callback Function &amp; Event Loop</title>
-    <url>/2020/10/24/fs201-callback-event-loop/</url>
+    <url>/callback-event-loop/</url>
     <content><![CDATA[<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOS8xMC8wNC9qYXZhc2NyaXB0LWFzeW5jLXN5bmMtYW5kLWNhbGxiYWNrLw==">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！<i class="fa fa-external-link-alt"></i></span> 這篇文章的學習筆記。</p>
 <a id="more"></a>
 
@@ -2665,13 +2654,11 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Callback</tag>
-        <tag>Event Loop</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 1] 版本控制 - Git 進階指令 &amp; GitHub</title>
-    <url>/2020/06/16/git-github/</url>
+    <url>/git-github/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZ2l0MTAx">[GIT101] Git 超新手入門<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。</p>
 </blockquote>
@@ -2909,7 +2896,7 @@
   </entry>
   <entry>
     <title>[week 13] Fetch &amp; Promise 補充</title>
-    <url>/2020/09/30/fetch-promise/</url>
+    <url>/fetch-promise/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 Limedy「Fetch 與 Promise 補充系列」課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -3075,7 +3062,7 @@
   </entry>
   <entry>
     <title>【學習筆記】如何使用 Hexo + GitHub Pages 架設個人網誌</title>
-    <url>/2020/11/07/hexo-github/</url>
+    <url>/hexo-github/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/dOOM0JO.png"></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇主要介紹如何使用 Hexo 並搭配 GitHub 來快速架設網誌。從介紹什麼是 Hexo 框架，該如何安裝、建立環境，接著介紹一些常用指令，以及如何部署到 GitHub 上。</p>
 <a id="more"></a>
@@ -3257,7 +3244,7 @@
   </entry>
   <entry>
     <title>[week 11] 資訊安全 - 雜湊與加密 &amp; 常見攻擊：SQL Injection、XSS</title>
-    <url>/2020/09/16/hash-security/</url>
+    <url>/hash-security/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -3535,13 +3522,12 @@
       </categories>
       <tags>
         <tag>Back-End</tag>
-        <tag>SQL Injection</tag>
         <tag>hash</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 1] 版本控制 - Git 概念 ＆ 基本指令</title>
-    <url>/2020/06/14/git/</url>
+    <url>/git/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZ2l0MTAx">[GIT101] Git 超新手入門<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。</p>
 </blockquote>
@@ -3663,7 +3649,7 @@
   </entry>
   <entry>
     <title>【學習筆記】hexo-admin：Hexo 後台管理工具</title>
-    <url>/2020/12/02/hexo-admin/</url>
+    <url>/hexo-admin/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/T1CHqyf.png"></p>
 <p>在上篇<a href="https://heidiliu2020.github.io/2020/11/07/202011-hexo-github/">【學習筆記】如何使用 Hexo + GitHub Pages 架設個人網誌</a>中，我們學會如何打造簡單的個人網誌後，再來要介紹如何透過 hexo-admin 這個套件，以更直觀的方式在後台管理網誌文章。</p>
 <a id="more"></a>
@@ -3742,7 +3728,7 @@
   </entry>
   <entry>
     <title>【學習筆記】如何更換 Hexo 主題 &amp; 自訂樣式</title>
-    <url>/2020/12/28/hexo-theme/</url>
+    <url>/hexo-theme/</url>
     <content><![CDATA[<p>以下介紹如何套用 Hexo 主題，以及自訂樣式：</p>
 <p><img src="https://i.imgur.com/6LNDOBF.png"></p>
 <a id="more"></a>
@@ -3795,7 +3781,7 @@
   </entry>
   <entry>
     <title>[week 7] DOM 介面、瀏覽器事件處理</title>
-    <url>/2020/08/04/javascript-event/</url>
+    <url>/javascript-event/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDItamF2YXNjcmlwdA==">[FE102] 前端必備：JavaScript<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -4020,12 +4006,11 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>DOM</tag>
-        <tag>Event Listener</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 7] DOM 事件傳遞機制：捕獲與冒泡、事件代理</title>
-    <url>/2020/08/07/javascript-dom/</url>
+    <url>/javascript-dom/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDItamF2YXNjcmlwdA==">[FE102] 前端必備：JavaScript<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -4118,7 +4103,7 @@
   </entry>
   <entry>
     <title>[week 6] HTML - 認識基礎標籤</title>
-    <url>/2020/07/22/html-css/</url>
+    <url>/html/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -4297,7 +4282,7 @@
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - What is this？</title>
-    <url>/2020/10/23/js201-this/</url>
+    <url>/javascript-this/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -4421,12 +4406,11 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>OOP</tag>
-        <tag>this</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - 關於變數與資料型態</title>
-    <url>/2020/10/16/js201-variable/</url>
+    <url>/javascript-variable/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -4590,12 +4574,11 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>variable</tag>
       </tags>
   </entry>
   <entry>
     <title>【中場心得】半年過去了，我仍在學習程式的路上（上篇）</title>
-    <url>/2020/11/06/lidemy-learing-1/</url>
+    <url>/lidemy-learing-1/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/YLhLtnT.png"><br>（Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQGZveHhtZA==">Matt Duncan<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20v">Unsplash<i class="fa fa-external-link-alt"></i></span>）</p>
 <a id="more"></a>
 
@@ -4685,7 +4668,7 @@
   </entry>
   <entry>
     <title>[week 19] 淺談產品開發與工作流程</title>
-    <url>/2020/11/02/pd101-lidemy/</url>
+    <url>/pd101-lidemy/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvcGQxMDE=">[PD101] 淺談產品開發與工作流程<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -4960,12 +4943,12 @@
         <category>Lidemy</category>
       </categories>
       <tags>
-        <tag>產品開發</tag>
+        <tag>Lidemy</tag>
       </tags>
   </entry>
   <entry>
     <title>常見重點整理 - 命名慣例 &amp; 開發時注意事項</title>
-    <url>/2020/10/02/lidemy-common-examples/</url>
+    <url>/lidemy-common-examples/</url>
     <content><![CDATA[<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpZGVteS9tZW50b3ItcHJvZ3JhbS00dGgvYmxvYi9tYXN0ZXIvZXhhbXBsZXMvY29tbW9uLm1k">https://github.com/Lidemy/mentor-program-4th/blob/master/examples/common.md<i class="fa fa-external-link-alt"></i></span></p>
 <a id="more"></a>
 <h2 id="什麼是好的-code？"><a href="#什麼是好的-code？" class="headerlink" title="什麼是好的 code？"></a>什麼是好的 code？</h2><ol>
@@ -5033,12 +5016,12 @@
         <category>Lidemy</category>
       </categories>
       <tags>
-        <tag>命名慣例</tag>
+        <tag>Lidemy</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 13] MTR04 - 實作留言版 plugin</title>
-    <url>/2020/09/29/mtr04-plugin/</url>
+    <url>/mtr04-plugin/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbXRyMDQ=">[MTR04] 第十三週 - 帶著做留言版 plugin<i class="fa fa-external-link-alt"></i></span> 的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -5121,7 +5104,7 @@
   </entry>
   <entry>
     <title>[week 11] 利用 PHP 實作陽春部落格</title>
-    <url>/2020/09/24/php-blog/</url>
+    <url>/php-blog/</url>
     <content><![CDATA[<p>可以將部落格想成「只有一人」能新增文章的留言版。</p>
 <a id="more"></a>
 <h2 id="Step1-規劃產品路由與功能"><a href="#Step1-規劃產品路由與功能" class="headerlink" title="Step1. 規劃產品路由與功能"></a>Step1. 規劃產品路由與功能</h2><h3 id="頁面"><a href="#頁面" class="headerlink" title="頁面"></a>頁面</h3><ul>
@@ -5238,7 +5221,7 @@
   </entry>
   <entry>
     <title>[week 9] 利用 PHP 實作留言板 - 初階實作篇</title>
-    <url>/2020/09/09/php-board/</url>
+    <url>/php-board/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -5391,7 +5374,7 @@
   </entry>
   <entry>
     <title>[week 9] 後端基礎 - PHP 語法、資料庫 MySQL</title>
-    <url>/2020/08/21/php-mysql/</url>
+    <url>/php-mysql/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -5628,7 +5611,7 @@
   </entry>
   <entry>
     <title>[week 12] 結合前端與後端功能實作 Todo List</title>
-    <url>/2020/09/26/php-todolist/</url>
+    <url>/php-todolist/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -5698,7 +5681,7 @@
   </entry>
   <entry>
     <title>[week 5] 複習週 - 前四週學習與解題心得</title>
-    <url>/2020/07/19/review/</url>
+    <url>/review/</url>
     <content><![CDATA[<ul>
 <li>Command line 的使用</li>
 <li>Git 的基本操作</li>
@@ -5854,7 +5837,7 @@
   </entry>
   <entry>
     <title>[week 14] 網站部署 - 設定 AWS EC2 遠端主機 +  Ubuntu LAMP 環境 + phpMyAdmin</title>
-    <url>/2020/10/03/backend-aws-ubuntu/</url>
+    <url>/backend-aws-ubuntu/</url>
     <content><![CDATA[<p>在練習這週的網站部署時，主要參考下列幾篇筆記：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tdHIwNC1ub3RlLmNvZGVyYnJpZGdlLmlvLzIwMjAvMDkvMTUvLSVFNyVCNCU4MCVFOSU4QyU4NC0lMDgtJUU5JTgzJUE4JUU1JUIxJUFDLWF3cy1lYzItJUU5JTlCJUIyJUU3JUFCJUFGJUU0JUI4JUJCJUU2JUE5JTlGLS8=">[ 紀錄 ] 部屬 AWS EC2 雲端主機 + LAMP Server + phpMyAdmin<i class="fa fa-external-link-alt"></i></span></li>
@@ -6264,12 +6247,11 @@
       <tags>
         <tag>Back-End</tag>
         <tag>phpmyadmin</tag>
-        <tag>網站部署</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁</title>
-    <url>/2020/10/26/be201-express/</url>
+    <url>/express/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -6561,7 +6543,7 @@
   </entry>
   <entry>
     <title>[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware</title>
-    <url>/2020/10/29/be201-express-middleware/</url>
+    <url>/be201-express-middleware/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -6803,7 +6785,7 @@
   </entry>
   <entry>
     <title>[week 17] 後端中階 - 淺談 Sequelize：使用 ORM 框架串接資料庫</title>
-    <url>/2020/10/31/be201-sequelize-orm/</url>
+    <url>/sequelize-orm/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -7055,12 +7037,11 @@
       <tags>
         <tag>Back-End</tag>
         <tag>Sequelize</tag>
-        <tag>ORM</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 22] React：用 SPA 架構實作一個部落格（一）- Router</title>
-    <url>/2020/12/16/fe302-react-router/</url>
+    <url>/react-router/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -7261,12 +7242,11 @@
       <tags>
         <tag>React</tag>
         <tag>Hooks</tag>
-        <tag>React Router</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 21] React Hooks API：useState &amp; 再戰 Todo List</title>
-    <url>/2020/12/04/fe302-usestate-useref/</url>
+    <url>/react-usestate/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -7466,12 +7446,11 @@
       <tags>
         <tag>React</tag>
         <tag>Hooks</tag>
-        <tag>useState</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 21] React Hooks API：useEffect &amp; 實作一個自己的鉤子</title>
-    <url>/2020/12/06/fe302-useeffect/</url>
+    <url>/react-useeffect/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -7647,12 +7626,11 @@
       <tags>
         <tag>React</tag>
         <tag>Hooks</tag>
-        <tag>useEffect</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API</title>
-    <url>/2020/07/12/http-api/</url>
+    <url>/http-api/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbmV0MTAxLWpz">[NET101] 網路基礎概論（搭配 JS 實作練習）<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -8133,17 +8111,16 @@
 <hr>
 ]]></content>
       <categories>
-        <category>網路概論</category>
+        <category>Lidemy</category>
       </categories>
       <tags>
         <tag>HTTP</tag>
-        <tag>網路概論</tag>
         <tag>API</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - 什麼是閉包？探討 Closure &amp; Scope Chain</title>
-    <url>/2020/10/20/js201-closure/</url>
+    <url>/javascript-closure/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -8398,13 +8375,12 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Scope</tag>
         <tag>Closure</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - 作業練習</title>
-    <url>/2020/10/25/js201-hw/</url>
+    <url>/js201-hw/</url>
     <content><![CDATA[<ul>
 <li>hw1：Event Loop</li>
 <li>hw2：Event Loop + Scope</li>
@@ -8645,7 +8621,7 @@
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - 初探 Hoisting &amp; Execution Context</title>
-    <url>/2020/10/18/js201-hoisting/</url>
+    <url>/javascript-hoisting/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -8948,13 +8924,11 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>Hoisting</tag>
-        <tag>Execution Context</tag>
-        <tag>TDZ</tag>
       </tags>
   </entry>
   <entry>
     <title>[week 16] JavaScript 進階 - 物件導向 &amp; Prototype</title>
-    <url>/2020/10/21/js201-oop-prototype/</url>
+    <url>/javascript-oop-prototype/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMyMDEtamF2YXNjcmlwdA==">[JS201] 進階 JavaScript：那些你一直搞不懂的地方<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -9149,12 +9123,11 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>OOP</tag>
-        <tag>Propotype</tag>
       </tags>
   </entry>
   <entry>
     <title>【中場心得】半年過去了，我仍在學習程式的路上（下篇）</title>
-    <url>/2020/11/21/lidemy-learning-2/</url>
+    <url>/lidemy-learning-2/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/oEOkZDK.jpg"><br>（<span>Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQGpsdWVia2U/dXRtX3NvdXJjZT11bnNwbGFzaCZhbXA7dXRtX21lZGl1bT1yZWZlcnJhbCZhbXA7dXRtX2NvbnRlbnQ9Y3JlZGl0Q29weVRleHQ=">Justin Luebke<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vcy9waG90b3Mvcm9hZD91dG1fc291cmNlPXVuc3BsYXNoJmFtcDt1dG1fbWVkaXVtPXJlZmVycmFsJmFtcDt1dG1fY29udGVudD1jcmVkaXRDb3B5VGV4dA==">Unsplash<i class="fa fa-external-link-alt"></i></span></span>）</p>
 <a id="more"></a>
 <blockquote>
@@ -9320,7 +9293,7 @@
   </entry>
   <entry>
     <title>[week 12] 利用 PHP 實作留言板 - API 篇</title>
-    <url>/2020/09/26/php-api/</url>
+    <url>/php-api/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -9443,7 +9416,7 @@
   </entry>
   <entry>
     <title>[week 17] 後端中階 - Express 實戰：簡易會員註冊系統 &amp; 留言板</title>
-    <url>/2020/10/30/be201-express-board/</url>
+    <url>/express-board/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -9825,7 +9798,7 @@
   </entry>
   <entry>
     <title>[week 2] JavaScript 基礎 - 基本語法、值的型別、變數、迴圈、函數</title>
-    <url>/2020/06/24/javascript/</url>
+    <url>/javascript/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDEtamF2YXNjcmlwdA==">[JS101] 用 JavaScript 一步步打造程式基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
@@ -10391,7 +10364,7 @@
   </entry>
   <entry>
     <title>[week 2] 先別急著寫 leetcode - 虛擬碼、Debugger、解題技巧</title>
-    <url>/2020/06/28/leetcode/</url>
+    <url>/leetcode/</url>
     <content><![CDATA[<blockquote>
 <ul>
 <li>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYWxnMTAxLWxlZXRjb2Rl">[ALG101] 先別急著寫 leetcode<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</li>
@@ -10833,7 +10806,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>leetcode</tag>
       </tags>
   </entry>
 </search>
