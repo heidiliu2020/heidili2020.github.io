@@ -6871,7 +6871,7 @@
       </tags>
   </entry>
   <entry>
-    <title>[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API</title>
+    <title>[week 4] 網路基礎概論 - HTTP 協定、TCP/IP</title>
     <url>/http-api/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbmV0MTAxLWpz">[NET101] 網路基礎概論（搭配 JS 實作練習）<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
@@ -7356,7 +7356,7 @@
         <category>Lidemy</category>
       </categories>
       <tags>
-        <tag>HTTP</tag>
+        <tag>Lidemy</tag>
       </tags>
   </entry>
   <entry>
