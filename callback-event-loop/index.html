@@ -274,12 +274,35 @@
 <p>以 Node.js 來說，則必須先在電腦上安裝 Node.js 這個執行環境，然後以 CLI 的方式輸入 <code>node index.js</code> 這個指令來執行。</p>
 <h2 id="阻塞與非阻塞"><a href="#阻塞與非阻塞" class="headerlink" title="阻塞與非阻塞"></a>阻塞與非阻塞</h2><p>前面有提過 Node.js 有提供控制檔案的介面，讓我們能夠寫 JavaScript 程式碼來讀取與寫入檔案。</p>
 <p>以下方程式碼作為範例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>)<br><span class="hljs-keyword">const</span> file = fs.readFileSync(<span class="hljs-string">&#x27;./README.md&#x27;</span>) <span class="hljs-comment">// 在這邊等好幾秒才往下執行</span><br><span class="hljs-built_in">console</span>.log(file)<br>  <br><span class="hljs-keyword">const</span> arr = []<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-number">99999999</span>; i+=<span class="hljs-number">2</span>) &#123;<br>  arr.push(i)<br>&#125;<br>  <br><span class="hljs-built_in">console</span>.log(arr)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> file <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">'./README.md'</span><span class="token punctuation">)</span> <span class="token comment">// 在這邊等好幾秒才往下執行</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
+  
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">99999999</span><span class="token punctuation">;</span> i<span class="token operator">+=</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+  
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>上面這段程式碼，意思是先引入 Node.js 提供的內建模組 fs，再來使用 fs.readFileSync 來讀取檔案，最後把檔案的內容用 console.log 給印出來。</p>
 <p>但因為程式碼在讀取檔案之前會卡住，必須等到執行完畢並且拿到回傳值為止，程式才會繼續往下執行，這種情況就稱為阻塞（blocking）。</p>
 <p>難道不能用非阻塞（non-blocking）的方式讀取檔案嗎？有的！我們能使用 readFile 的 method 來進行。以下為程式碼範例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 讀取內建 fs 模組</span><br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>)<br>  <br><span class="hljs-comment">// 定義讀取檔案完成以後，要執行的 function</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readFileFinished</span>(<span class="hljs-params">err, data</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (err) &#123;<br>    <span class="hljs-built_in">console</span>.log(err)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(data)<br>  &#125;<br>&#125;<br>  <br><span class="hljs-comment">// 讀取檔案，第二個參數是 callback function</span><br>fs.readFile(<span class="hljs-string">&#x27;./README.md&#x27;</span>, readFileFinished);<br><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 讀取內建 fs 模組</span>
+<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+  
+<span class="token comment">// 定義讀取檔案完成以後，要執行的 function</span>
+<span class="token keyword">function</span> <span class="token function">readFileFinished</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+  
+<span class="token comment">// 讀取檔案，第二個參數是 callback function</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'./README.md'</span><span class="token punctuation">,</span> readFileFinished<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可發現 readFile 的用法跟 readFileSync 差不多，但兩種讀取檔案的方式差別在於：</p>
 <h4 id="readFileSync"><a href="#readFileSync" class="headerlink" title="readFileSync"></a>readFileSync</h4><ul>
@@ -296,7 +319,17 @@
 <h2 id="Callback-function"><a href="#Callback-function" class="headerlink" title="Callback function"></a>Callback function</h2><p>callback function 的意思其實就是：「當某事發生的時候，請利用這個 function 通知我」。</p>
 <p>通常 callback function 會簡化成匿名函式（Anonymous function）的寫法，也就是直接在第二個參數的地方宣告一個 function。</p>
 <p>常見的形式會像這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 讀取內建 fs 模組</span><br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>)<br>  <br><span class="hljs-comment">// 讀取檔案</span><br>fs.readFile(<span class="hljs-string">&#x27;./README.md&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, data</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (err) &#123;<br>    <span class="hljs-built_in">console</span>.log(err)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(data)<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 讀取內建 fs 模組</span>
+<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+  
+<span class="token comment">// 讀取檔案</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'./README.md'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在使用 callback function 時，需注意常見的錯誤：</p>
 <ul>
@@ -304,7 +337,27 @@
 <li>舉例來說，fn 是一個 function；fn() 則是執行 function，並且會把執行完的回傳結果當作 callback function</li>
 </ul>
 <p>這裡以 setTimeout() 來作為範例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 正確</span><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-number">2000</span>, tick)<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tick</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-string">&#x27;時間到！&#x27;</span>)<br>&#125;<br><br>===以下是錯誤範例===<br><br><span class="hljs-comment">// 錯誤</span><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-number">2000</span>, tick())<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tick</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-string">&#x27;時間到！&#x27;</span>)<br>&#125;<br><br><span class="hljs-comment">// 上面錯誤會等同於</span><br><span class="hljs-keyword">let</span> fn = tick()<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-number">2000</span>, fn)<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tick</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-string">&#x27;時間到！&#x27;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 正確</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> tick<span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">tick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'時間到！'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token operator">===</span>以下是錯誤範例<span class="token operator">===</span>
+
+<span class="token comment">// 錯誤</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> <span class="token function">tick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">tick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'時間到！'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 上面錯誤會等同於</span>
+<span class="token keyword">let</span> fn <span class="token operator">=</span> <span class="token function">tick</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> fn<span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">tick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'時間到！'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="Node-js-上的同步與非同步"><a href="#Node-js-上的同步與非同步" class="headerlink" title="Node.js 上的同步與非同步"></a>Node.js 上的同步與非同步</h2><p>其實到這邊已經差不多把同步與非同步的觀念講完了。而在 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2RvY3MvZ3VpZGVzL2Jsb2NraW5nLXZzLW5vbi1ibG9ja2luZy8=">Node.js 的官方文件<i class="fa fa-external-link-alt"></i></span>是這麼說的：</p>
 <blockquote>
@@ -321,13 +374,28 @@
 <h2 id="瀏覽器上的同步與非同步"><a href="#瀏覽器上的同步與非同步" class="headerlink" title="瀏覽器上的同步與非同步"></a>瀏覽器上的同步與非同步</h2><p>前面是以 Node.js 當做例子，再來回到我們熟悉的瀏覽器。</p>
 <p>假設我們今天在 JavaScript 有一個函式叫做 假設我們有一個函式叫做getAPIResponse，能後和後端 API 串接拿取資料。</p>
 <p>同步版本：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> response = getAPIResponse()<br><span class="hljs-built_in">console</span>.log(response)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token function">getAPIResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>JavaScript 執行後會一直等到回傳後，才會繼續執行下一行程式碼。假如今天要等到 10 秒後，API Server 才會回傳資料，這段期間等於說讓執行 JavaScript 的執行緒（thread）凍結。</p>
 <p>在瀏覽器裡面，負責執行 JavaScript 的叫做 main thread，負責處理跟畫面渲染相關的也是 main thread。換句話說，如果這個 thread 凍結 10 秒，會造成無法點擊畫面，因為瀏覽器沒有資源去處理其他事情。</p>
 <p>而瀏覽器裡執行 JavaScript 的 main thread 同時也負責畫面的 render，因此非同步顯得更加重要而且必須，否則等待的時候畫面會凍結，就像電腦當機了一樣。</p>
 <p>那麼依照之前所學的，把程式碼改成非同步，也就是利用 callback function 來接收結果。這裡有三種寫法，解果都會相同：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 範例一：額外宣告函式</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleResponst</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(response)<br>&#125;<br>getAPIResponse(handleResponst)<br>  <br><span class="hljs-comment">// 範例二：匿名函式</span><br>getAPIResponse(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, response</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(response)<br>&#125;)<br>  <br><span class="hljs-comment">// 範例三：利用 ES6 箭頭函式簡化過後</span><br>getAPIResponse(<span class="hljs-function">(<span class="hljs-params">err, response</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(response)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 範例一：額外宣告函式</span>
+<span class="token keyword">function</span> <span class="token function">handleResponst</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">getAPIResponse</span><span class="token punctuation">(</span>handleResponst<span class="token punctuation">)</span>
+  
+<span class="token comment">// 範例二：匿名函式</span>
+<span class="token function">getAPIResponse</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  
+<span class="token comment">// 範例三：利用 ES6 箭頭函式簡化過後</span>
+<span class="token function">getAPIResponse</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><blockquote>
@@ -364,11 +432,21 @@
 </ol>
 <p>接著是 Event Loop，藉由這個機制不斷偵測 call stack 是否為空，如果是空的，就把 callback queue 裡面的東西丟到 call stack。</p>
 <p>Event Loop 其實有 loop（迴圈）概念在，可以表示成這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-title">while</span>(<span class="hljs-params"><span class="hljs-literal">true</span></span>)</span> &#123;<br>  <span class="hljs-comment">// 如果 call stack 為空 且 callback quere 有排程</span><br>  <span class="hljs-keyword">if</span> (callStack.length === <span class="hljs-number">0</span> &amp;&amp; callbackQueue.length &gt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-comment">// 拿出 callbackQueue 的第一個元素，並放到 callStack</span><br>    callStack.push(callbackQueue.dequeue())<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 如果 call stack 為空 且 callback quere 有排程</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>callStack<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> callbackQueue<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 拿出 callbackQueue 的第一個元素，並放到 callStack</span>
+    callStack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>callbackQueue<span class="token punctuation">.</span><span class="token function">dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>簡單來說，非同步的 callback function 會先被放到 callback queue，並且等到 call stack 為空時候才被 Event loop 丟進去 call stack，真正負責執行的還是 JavaScript 的 main thread。</p>
 <h3 id="牛刀小試"><a href="#牛刀小試" class="headerlink" title="牛刀小試"></a>牛刀小試</h3><p>再舉一個常見例子，下面程式碼中應該哪行會先被執行？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;零秒出手&#x27;</span>)<br>&#125;, <span class="hljs-number">0</span>)<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;hello&#x27;</span>)<br><span class="hljs-comment">// hello</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'零秒出手'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span>
+<span class="token comment">// hello</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>思考方式：</p>
 <ol>

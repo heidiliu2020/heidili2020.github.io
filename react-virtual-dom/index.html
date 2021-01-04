@@ -282,7 +282,28 @@
 <p>當 DOM 的節點需要更動時，不會直接修改 DOM，而是透過 DOM diff 演算法比較 Virtual DOM 修改前與修改後的樹狀結構，再批次更新真實的 DOM 節點。</p>
 <p><img src="https://i.imgur.com/ADMTzi4.png"><br>（圖片來源：<span class="exturl" data-url="aHR0cHM6Ly90dXRvcmlhbHNsaW5rLmNvbS9BcnRpY2xlcy9XaGF0LWlzLVZpcnR1YWwtRE9NLzE1ODAlRUYlQkMlODk=">https://tutorialslink.com/Articles/What-is-Virtual-DOM/1580）<i class="fa fa-external-link-alt"></i></span></p>
 <p>比如下方這段 DOM 結構：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;div className&#x3D;&quot;APP&quot;&gt;<br>  &lt;TodoItem&gt;<br>    Watch a Movie<br>  &lt;&#x2F;TodoItem&gt;<br>&lt;&#x2F;div&gt;<br>&#96;&#96;&#96; <br><br>若以 JavaScript 物件形式寫成 Virtual DOM：<br><br>&#96;&#96;&#96;javascript&#x3D;<br>&#123;<br>  tag: &#39;div&#39;,<br>    props: &#123;<br>      className: &#39;APP&#39;<br>    &#125;<br>  children: [<br>    &#123;<br>      tag: &#39;TodoItem&#39;,<br>      children: &#39;Watch a Movie&#39;<br>    &#125;<br>  ]<br>&#125;    <br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;div className&#x3D;&quot;APP&quot;&gt;
+  &lt;TodoItem&gt;
+    Watch a Movie
+  &lt;&#x2F;TodoItem&gt;
+&lt;&#x2F;div&gt;
+&#96;&#96;&#96; 
+
+若以 JavaScript 物件形式寫成 Virtual DOM：
+
+&#96;&#96;&#96;javascript&#x3D;
+&#123;
+  tag: &#39;div&#39;,
+    props: &#123;
+      className: &#39;APP&#39;
+    &#125;
+  children: [
+    &#123;
+      tag: &#39;TodoItem&#39;,
+      children: &#39;Watch a Movie&#39;
+    &#125;
+  ]
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="為什麼需要-Virtual-DOM？"><a href="#為什麼需要-Virtual-DOM？" class="headerlink" title="為什麼需要 Virtual DOM？"></a>為什麼需要 Virtual DOM？</h3><p>因為操作 DOM 這件事，其實會耗費很大的成本；而 React 背後運行機制，就是透過比對 Virtual DOM 來避免直接操作 DOM，藉此來提升效能。</p>
 <p>除了提升效能這個優點，因為建立 Virtual DOM 這一虛擬層，我們能夠對程式碼進行更多操作，例如：</p>
@@ -310,7 +331,9 @@
 <p>HOC: a higher-order component is a function that takes a component and returns a new component.<br>（把一個元件丟進 HOC 函數時，會經過一些處理並返回新元件）</p>
 </blockquote>
 <p>用法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> MyComponent = React.memo(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyComponent</span>(<span class="hljs-params">props</span>) </span>&#123;<br>    ...<br>&#125;);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> MyComponent <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">memo</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">MyComponent</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>比如說，當子元件依賴於父元件的狀態（state）或事件（event），在父元件中宣告狀態與事件方法，可透過 props 將傳遞到子元件中。</p>
 <p>但如果是在父元件的狀態被改變，props 結果不變的情況下，子元件即使沒有改變，仍然會被重新渲染，像這樣多餘的渲染就會造成效能浪費。</p>

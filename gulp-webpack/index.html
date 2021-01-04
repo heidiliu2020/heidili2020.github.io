@@ -305,7 +305,14 @@
 <li>混淆：藉此提升代碼閱讀難度，有一定程度的保護代碼作用</li>
 </ul>
 <p>配置範例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>),               <span class="hljs-comment">// 載入 gulp</span><br><span class="hljs-keyword">let</span> gulpUglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-uglify&#x27;</span>);  <span class="hljs-comment">// 載入 gulp-uglify</span><br><br>gulp.task(<span class="hljs-string">&#x27;script&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    gulp.src(<span class="hljs-string">&#x27;javascript/original/*.js&#x27;</span>)        <span class="hljs-comment">// 指定要處理的原始 JavaScript 檔案目錄</span><br>        .pipe(gulpUglify())                     <span class="hljs-comment">// 將 JavaScript 做最小化</span><br>        .pipe(gulp.dest(<span class="hljs-string">&#x27;javascript/minify&#x27;</span>));  <span class="hljs-comment">// 指定最小化後的 JavaScript 檔案目錄</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> gulp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>               <span class="token comment">// 載入 gulp</span>
+<span class="token keyword">let</span> gulpUglify <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-uglify'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 載入 gulp-uglify</span>
+
+gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'javascript/original/*.js'</span><span class="token punctuation">)</span>        <span class="token comment">// 指定要處理的原始 JavaScript 檔案目錄</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">gulpUglify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                     <span class="token comment">// 將 JavaScript 做最小化</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'javascript/minify'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 指定最小化後的 JavaScript 檔案目錄</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="minify"><a href="#minify" class="headerlink" title="minify"></a>minify</h3><ul>
 <li><code>gulp-minify-css</code>：壓縮 CSS 檔案</li>
@@ -313,7 +320,14 @@
 <li>但更新的版本已經不太適用，改為使用 <code> gulp-clean-css</code></li>
 </ul>
 <p>配置範例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>);<br><span class="hljs-keyword">let</span> cleanCSS = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-clean-css&#x27;</span>);<br><br>gulp.task(<span class="hljs-string">&#x27;minify-css&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">&#x27;styles/*.css&#x27;</span>)<br>    .pipe(cleanCSS(&#123;<span class="hljs-attr">compatibility</span>: <span class="hljs-string">&#x27;ie8&#x27;</span>&#125;))<br>    .pipe(gulp.dest(<span class="hljs-string">&#x27;dist&#x27;</span>));<br>&#125;);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> gulp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> cleanCSS <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-clean-css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'minify-css'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'styles/*.css'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">cleanCSS</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>compatibility<span class="token operator">:</span> <span class="token string">'ie8'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>參考資料：</p>
 <ul>
@@ -331,7 +345,10 @@
 <li>不易引用套件：若想要引用他人撰寫的 library 套件，需考慮相容性問題，以及可能造成命名衝突。</li>
 </ol>
 <h3 id="如何安裝-1"><a href="#如何安裝-1" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>跟著官方教學步驟 <span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvZ2V0dGluZy1zdGFydGVkLw==">Getting Started<i class="fa fa-external-link-alt"></i></span> 安裝 webpack：</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">mkdir</span> webpack-<span class="hljs-built_in">demo</span><br>cd webpack-<span class="hljs-built_in">demo</span><br>npm init -y<br>npm install webpack webpack-cli --<span class="hljs-built_in">save</span>-dev<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">mkdir webpack-demo
+cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://i.imgur.com/MP3ufbd.png"></p>
 <h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><blockquote>
@@ -340,33 +357,42 @@
 <ul>
 <li>下載 jquery</li>
 </ul>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">npm <span class="hljs-keyword">install </span><span class="hljs-keyword">jquery </span>webpack-cli --save-dev<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">npm install jquery webpack-cli --save-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>css-Loader：用來解析 CSS 檔</li>
 </ul>
-<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs q">npm install --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> css-loader<br>npm install --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> style-loader<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">npm install --save-dev css-loader
+npm install --save-dev style-loader<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ul>
 <li>babel-loader</li>
 </ul>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install -D babel-loader @babel/core @babel/preset-env<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">npm install -D babel-loader @babel&#x2F;core @babel&#x2F;preset-env<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>sass-loader</li>
 </ul>
-<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">npm install sass-loader sass webpack --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">npm install sass-loader sass webpack --save-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="執行步驟"><a href="#執行步驟" class="headerlink" title="執行步驟"></a>執行步驟</h3><ul>
 <li>需要進行編譯的檔案，通常不會直接放在根目錄，而是會先放在 src（source code），使用工具轉換後再放到其他地方。</li>
 <li>webpack 預設執行檔案路徑如下：</li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">webpack-demo<span class="hljs-regexp">/src/i</span>ndex.js<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">webpack-demo&#x2F;src&#x2F;index.js<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以 index.js 引入 utils.js 為例：</p>
-<h4 id="utils-js"><a href="#utils-js" class="headerlink" title="utils.js"></a>utils.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> Utils = &#123;<br>  first: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">str</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> str[<span class="hljs-number">0</span>]<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">module</span>.exports = Utils<br></code></pre></td></tr></table></figure>
+<h4 id="utils-js"><a href="#utils-js" class="headerlink" title="utils.js"></a>utils.js</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Utils <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">first</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> str<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./utils&#x27;</span>)<br><br><span class="hljs-built_in">console</span>.log(utils.first(<span class="hljs-string">&#x27;abc&#x27;</span>))<br></code></pre></td></tr></table></figure>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> Utils<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> utils <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./utils'</span><span class="token punctuation">)</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>utils<span class="token punctuation">.</span><span class="token function">first</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>在 CLI 執行 <code>npm src/index.js</code> 後印出 <code>a</code>，代表成功引入檔案。</p>
 <p><img src="https://i.imgur.com/QmPof6p.png"></p>
@@ -374,11 +400,21 @@
 <p>若執行檔案 <code>npm dist/main.js</code> 仍會得到相同結果：</p>
 <p><img src="https://i.imgur.com/aE3nKoD.png"></p>
 <p>接著在 index.html 引入：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script src=<span class="hljs-string">&quot;dist/main.js&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"dist/main.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>即可透過 webpack 打包 module，讓我們能夠在瀏覽器上執行使用 require 語法。</p>
 <h3 id="webpack-config-js：預設執行檔"><a href="#webpack-config-js：預設執行檔" class="headerlink" title="webpack.config.js：預設執行檔"></a><code>webpack.config.js</code>：預設執行檔</h3><p>在安裝好 loader 後，需設定執行檔，透過指定 rules 來執行檔案：</p>
-<h4 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span><br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>   mode: <span class="hljs-string">&#x27;&#x27;</span>,<br>  entry: [<span class="hljs-string">&#x27;./src/index&#x27;</span>], <span class="hljs-comment">// 在 index 檔案後的 .js 副檔名是可選的</span><br>  output: &#123;<br>    path: path.join(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),<br>    filename: <span class="hljs-string">&#x27;bundle.js&#x27;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// webpack.config.js</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+   mode<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'./src/index'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 在 index 檔案後的 .js 副檔名是可選的</span>
+  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token operator">:</span> <span class="token string">'bundle.js'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="屬性介紹"><a href="#屬性介紹" class="headerlink" title="屬性介紹"></a>屬性介紹</h4><ul>
 <li>mode：使用的模式。預設為 production，代表正式生產環境版本；開發使用 development 則不會進行壓縮</li>
@@ -389,7 +425,34 @@
 </ul>
 </li>
 </ul>
-<h4 id="接著以打包-style-css-和-index-js-所需進行的設定為例："><a href="#接著以打包-style-css-和-index-js-所需進行的設定為例：" class="headerlink" title="接著以打包 style.css 和 index.js 所需進行的設定為例："></a>接著以打包 style.css 和 index.js 所需進行的設定為例：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  mode: <span class="hljs-string">&#x27;&#x27;</span>,<br>  entry: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,<br>  output: &#123;<br>    filename: <span class="hljs-string">&#x27;main.js&#x27;</span>,    <span class="hljs-comment">// 輸出檔案名稱</span><br>    path: path.resolve(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),　    <span class="hljs-comment">// 輸出位置</span><br>  &#125;,<br>  <span class="hljs-comment">// 載入 loader</span><br>  <span class="hljs-built_in">module</span>: &#123;<br>    rules: [<br>      &#123;<br>        test: <span class="hljs-regexp">/\.css$/i</span>,      <span class="hljs-comment">// .css 結尾的檔案均使用 css-loader 解析</span><br>        use: [<span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-string">&#x27;css-loader&#x27;</span>],<br>      &#125;,&#123;<br>        test: <span class="hljs-regexp">/\.m?js$/</span>,      <span class="hljs-comment">// .mjs 結尾的檔案均使用 babel-loader 解析</span><br>        exclude: <span class="hljs-regexp">/(node_modules|bower_components)/</span>,<br>        use: &#123;<br>          loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>          options: &#123;<br>            presets: [<span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>]<br>          &#125;<br>        &#125;<br>      &#125;<br>    ],<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h4 id="接著以打包-style-css-和-index-js-所需進行的設定為例："><a href="#接著以打包-style-css-和-index-js-所需進行的設定為例：" class="headerlink" title="接著以打包 style.css 和 index.js 所需進行的設定為例："></a>接著以打包 style.css 和 index.js 所需進行的設定為例：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  mode<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  entry<span class="token operator">:</span> <span class="token string">'./src/index.js'</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    filename<span class="token operator">:</span> <span class="token string">'main.js'</span><span class="token punctuation">,</span>    <span class="token comment">// 輸出檔案名稱</span>
+    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>　    <span class="token comment">// 輸出位置</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 載入 loader</span>
+  module<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span>
+        test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.css$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">,</span>      <span class="token comment">// .css 結尾的檔案均使用 css-loader 解析</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+        test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.m?js$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>      <span class="token comment">// .mjs 結尾的檔案均使用 babel-loader 解析</span>
+        exclude<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(node_modules|bower_components)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          loader<span class="token operator">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+          options<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            presets<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'@babel/preset-env'</span><span class="token punctuation">]</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>參考資料：</p>
 <ul>

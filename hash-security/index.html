@@ -264,7 +264,15 @@
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標：<br><br> <span class="hljs-built_in">P1</span> 你知道什麼是雜湊（Hash <span class="hljs-meta">function</span>）<br> <span class="hljs-built_in">P1</span> 你知道什麼是加密（Encryption）<br> <span class="hljs-built_in">P1</span> 你知道雜湊與加密的差別<br> <span class="hljs-built_in">P1</span> 你知道什麼是 SQL Injection 以及如何防範<br> <span class="hljs-built_in">P1</span> 你知道什麼是 XSS 以及如何防範<br> <span class="hljs-built_in">P1</span> 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證<br> <span class="hljs-built_in">P2</span> 你知道什麼是 CSRF 以及如何防範<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">學習目標：
+
+ P1 你知道什麼是雜湊（Hash function）
+ P1 你知道什麼是加密（Encryption）
+ P1 你知道雜湊與加密的差別
+ P1 你知道什麼是 SQL Injection 以及如何防範
+ P1 你知道什麼是 XSS 以及如何防範
+ P1 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證
+ P2 你知道什麼是 CSRF 以及如何防範<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 </li>
 </ul>
@@ -324,10 +332,22 @@
 </li>
 </ul>
 <h3 id="PHP-內建雜湊函式：password-hash"><a href="#PHP-內建雜湊函式：password-hash" class="headerlink" title="PHP 內建雜湊函式：password_hash()"></a>PHP 內建雜湊函式：<code>password_hash()</code></h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucGhwLm5ldC9tYW51YWwvZW4vZnVuY3Rpb24ucGFzc3dvcmQtaGFzaC5waHA=">PHP 提供內建函式 <i class="fa fa-external-link-alt"></i></span><code>password_hash()</code> 能夠實現加密， 指令如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br>$hash = password_hash(<span class="hljs-string">&quot;要加密的字串&quot;</span>, PASSWORD_DEFAULT);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token variable">$hash</span> <span class="token operator">=</span> <span class="token function">password_hash</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"要加密的字串"</span><span class="token punctuation">,</span> <span class="token constant">PASSWORD_DEFAULT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>驗證指令：<code>password_verify(&quot;要驗證的字串&quot;, &quot;加密過的字串&quot;)</code>，會回傳一個 boolean</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 使用範例</span><br><span class="hljs-meta">&lt;?php</span> <br>$password = <span class="hljs-string">&#x27;1234&#x27;</span>;    <span class="hljs-comment">// 原始密碼</span><br>$hash_password = password_hash($password, PASSWORD_DEFAULT);<br><br><span class="hljs-keyword">if</span> (password_verify($password , $hash_password))&#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;密碼正確&quot;</span>;  <span class="hljs-comment">// true</span><br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;密碼錯誤&quot;</span>;  <span class="hljs-comment">// false</span><br>&#125;<br><span class="hljs-meta">?&gt;</span> <br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">// 使用範例
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> 
+<span class="token variable">$password</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'1234'</span><span class="token punctuation">;</span>    <span class="token comment">// 原始密碼</span>
+<span class="token variable">$hash_password</span> <span class="token operator">=</span> <span class="token function">password_hash</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">,</span> <span class="token constant">PASSWORD_DEFAULT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">password_verify</span><span class="token punctuation">(</span><span class="token variable">$password</span> <span class="token punctuation">,</span> <span class="token variable">$hash_password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">echo</span> <span class="token double-quoted-string string">"密碼正確"</span><span class="token punctuation">;</span>  <span class="token comment">// true</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">echo</span> <span class="token double-quoted-string string">"密碼錯誤"</span><span class="token punctuation">;</span>  <span class="token comment">// false</span>
+<span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>參考資料：</p>
 <ol>
@@ -345,14 +365,14 @@
 <li><p>正常的 SQL 語法</p>
 <ul>
 <li>帳號：123</li>
-<li>密碼：456<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * <span class="hljs-keyword">FROM</span> users WHERE username=<span class="hljs-string">&#x27;123&#x27;</span> <span class="hljs-keyword">AND</span> password=<span class="hljs-string">&#x27;456&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<li>密碼：456<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token constant">SELECT</span> <span class="token operator">*</span> <span class="token constant">FROM</span> users <span class="token constant">WHERE</span> username<span class="token operator">=</span><span class="token single-quoted-string string">'123'</span> <span class="token keyword">AND</span> password<span class="token operator">=</span><span class="token single-quoted-string string">'456'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
 </li>
 <li><p>SQL injection</p>
 <ul>
 <li>帳號：<code>&#39; or 1=1#</code></li>
-<li>密碼：可輸入任意值（甚至不需輸入）<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * <span class="hljs-keyword">FROM</span> users WHERE username=<span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span><span class="hljs-comment"># AND password=&#x27;&#x27;;</span><br></code></pre></td></tr></table></figure></li>
+<li>密碼：可輸入任意值（甚至不需輸入）<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token constant">SELECT</span> <span class="token operator">*</span> <span class="token constant">FROM</span> users <span class="token constant">WHERE</span> username<span class="token operator">=</span><span class="token single-quoted-string string">''</span> <span class="token keyword">or</span> <span class="token number">1</span><span class="token operator">=</span><span class="token number">1</span><span class="token shell-comment comment"># AND password='';</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 </li>
 <li><p><code>&#39;</code>：將 username 的 input 關閉</p>
@@ -366,7 +386,8 @@
 </ul>
 <h4 id="以之前實作的初階留言版為例："><a href="#以之前實作的初階留言版為例：" class="headerlink" title="以之前實作的初階留言版為例："></a>以之前實作的初階留言版為例：</h4><ol>
 <li>登入後在新增留言輸入：<code>&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code></li>
-<li>SQL 指令就變成：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">INSERT INTO comments(nickname, content)<br>VALUES(<span class="hljs-string">&#x27;aaa&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>), (<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;Hacking!&#x27;</span>)<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure></li>
+<li>SQL 指令就變成：<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token constant">INSERT</span> <span class="token constant">INTO</span> <span class="token function">comments</span><span class="token punctuation">(</span>nickname<span class="token punctuation">,</span> content<span class="token punctuation">)</span>
+<span class="token function">VALUES</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'aaa'</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token single-quoted-string string">'admin'</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'Hacking!'</span><span class="token punctuation">)</span><span class="token shell-comment comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li>執行後會新增兩筆留言，nickname 分別是 aaa 和 admin</li>
 </ol>
 <p><img src="https://i.imgur.com/zLfxN7g.png"></p>
@@ -384,7 +405,21 @@
 <li>若執行成功，則使用 <code>get_result()</code> 取出執行結果</li>
 </ol>
 <p>程式碼範例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-comment">// SQL 語法</span><br>  $sql = <span class="hljs-string">&quot;INSERT INTO comments(nickname, content) VALUES(?, ?)&quot;</span>;<br>  <span class="hljs-comment">// prepare() 預處理 </span><br>  $stmt = $conn-&gt;prepare($sql);<br>  <span class="hljs-comment">// bind_param() 帶入參數</span><br>  $stmt-&gt;bind_param(<span class="hljs-string">&#x27;ss&#x27;</span>, $nickname, $content);<br>  <span class="hljs-comment">// execute() 執行 SQL 語法</span><br>  $result = $stmt-&gt;execute();<br>  <span class="hljs-comment">// 確認是否執行成功</span><br>  <span class="hljs-keyword">if</span> (!$result) &#123;<br>    <span class="hljs-keyword">die</span>($conn-&gt;error);<br>  <span class="hljs-comment">// 取出執行結果</span><br>  $result = $stmt-&gt;get_result();<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token comment">// SQL 語法</span>
+  <span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token double-quoted-string string">"INSERT INTO comments(nickname, content) VALUES(?, ?)"</span><span class="token punctuation">;</span>
+  <span class="token comment">// prepare() 預處理 </span>
+  <span class="token variable">$stmt</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">prepare</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// bind_param() 帶入參數</span>
+  <span class="token variable">$stmt</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">bind_param</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'ss'</span><span class="token punctuation">,</span> <span class="token variable">$nickname</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// execute() 執行 SQL 語法</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 確認是否執行成功</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 取出執行結果</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">get_result</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>參考資料：</p>
 <ol>
@@ -402,7 +437,7 @@
 </ul>
 <p><img src="https://i.imgur.com/zNQGEPN.png"></p>
 <p>以網頁輸入欄位為例。若在輸入欄位內刻意植入 Javascript 語法，例如下列程式碼，即可竊取使用者的 cookie 資料：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">alert(<span class="hljs-built_in">document</span>.cookie)；</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&lt;script&gt;alert(document.cookie)；&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>Stored XSS（儲存型）</li>
@@ -417,7 +452,12 @@
 <h4 id="Server-端"><a href="#Server-端" class="headerlink" title="Server 端"></a>Server 端</h4><ol>
 <li>過濾特殊字元：過濾所有 Client 端提供的內容，並轉譯成純文字。例如：使用 PHP 內建函式 <code>htmlentities（）</code>或 <code>htmlspecialchars（）</code></li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// utils.php</span><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">escape</span>(<span class="hljs-params">$str</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> htmlspecialchars($str, ENT_QUOTES, <span class="hljs-string">&#x27;UTF-8&#x27;</span>);<br>  &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">// utils.php</span>
+  <span class="token keyword">function</span> <span class="token function">escape</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">,</span> <span class="token constant">ENT_QUOTES</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'UTF-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li>限制輸入內容長度或型態。雖然可藉由引入外部 JavaScript 來繞過，但還是能提高 XSS 攻擊難度</li>
@@ -468,7 +508,12 @@
 </ul>
 <p>在 <code>form</code> 裡面加上一個 <code>hidden</code> 的欄位，叫做 <code>csrftoken</code>，填入的值為 Server 隨機產生的亂碼，並且存在 Server 的 session 中。</p>
 <p>按下 submit 後，Server 會比對表單中的 csrftoken 與存在 Server 端的是否相同。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br>&lt;form action=<span class="hljs-string">&quot;https://myblog.com/delete&quot;</span> method=<span class="hljs-string">&quot;POST&quot;</span>&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span> value=<span class="hljs-string">&quot;3&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;csrftoken&quot;</span> value=<span class="hljs-string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;刪除文章&quot;</span>/&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 範例程式碼</span>
+<span class="token operator">&lt;</span>form action<span class="token operator">=</span><span class="token double-quoted-string string">"https://myblog.com/delete"</span> method<span class="token operator">=</span><span class="token double-quoted-string string">"POST"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"hidden"</span> name<span class="token operator">=</span><span class="token double-quoted-string string">"id"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"3"</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"hidden"</span> name<span class="token operator">=</span><span class="token double-quoted-string string">"csrftoken"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"&lt;亂碼>"</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"submit"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"刪除文章"</span><span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>缺點：若攻擊者先發出 request，還是能取得 csrftoken 來攻擊目標網站</li>
@@ -482,7 +527,14 @@
 </ul>
 <p>與前一種解法相似，好處是不需要存任何東西在 Server 端。</p>
 <p>而是在 cookie 與 form 設置相同的 csrftoken，利用「cookie 只會從相同 domain 帶上來」機制，使攻擊者無法從不同 domain 戴上此 cookie。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br>Set-Cookie: csrftoken=&lt;亂碼&gt;<br><br>&lt;form action=<span class="hljs-string">&quot;https://myblog.com/delete&quot;</span> method=<span class="hljs-string">&quot;POST&quot;</span>&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span> value=<span class="hljs-string">&quot;3&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;csrftoken&quot;</span> value=<span class="hljs-string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;刪除文章&quot;</span>/&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 範例程式碼</span>
+Set<span class="token operator">-</span>Cookie<span class="token punctuation">:</span> csrftoken<span class="token operator">=</span><span class="token operator">&lt;</span>亂碼<span class="token operator">></span>
+
+<span class="token operator">&lt;</span>form action<span class="token operator">=</span><span class="token double-quoted-string string">"https://myblog.com/delete"</span> method<span class="token operator">=</span><span class="token double-quoted-string string">"POST"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"hidden"</span> name<span class="token operator">=</span><span class="token double-quoted-string string">"id"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"3"</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"hidden"</span> name<span class="token operator">=</span><span class="token double-quoted-string string">"csrftoken"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"&lt;亂碼>"</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token double-quoted-string string">"submit"</span> value<span class="token operator">=</span><span class="token double-quoted-string string">"刪除文章"</span><span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>缺點：攻擊者若掌握使用者底下任何一個 subdomain，就能夠幫使用者寫 cookie，藉此進行攻擊</li>
@@ -499,12 +551,17 @@
 <ul>
 <li>例如：library axios 就有提供此功能。只要設定好 header 與 cookie 名稱，設定好之後的每一個 request，即可自動在 header 統一加上 cookie 值</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br><span class="hljs-comment">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span><br>xsrfCookieName: <span class="hljs-string">&#x27;XSRF-TOKEN&#x27;</span>, <span class="hljs-comment">// default</span><br><br><span class="hljs-comment">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span><br>xsrfHeaderName: <span class="hljs-string">&#x27;X-XSRF-TOKEN&#x27;</span>, <span class="hljs-comment">// default</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 範例程式碼</span>
+<span class="token comment">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span>
+xsrfCookieName<span class="token punctuation">:</span> <span class="token single-quoted-string string">'XSRF-TOKEN'</span><span class="token punctuation">,</span> <span class="token comment">// default</span>
+
+<span class="token comment">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span>
+xsrfHeaderName<span class="token punctuation">:</span> <span class="token single-quoted-string string">'X-XSRF-TOKEN'</span><span class="token punctuation">,</span> <span class="token comment">// default</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="瀏覽器端的防禦：SameSite-cookie"><a href="#瀏覽器端的防禦：SameSite-cookie" class="headerlink" title="瀏覽器端的防禦：SameSite cookie"></a>瀏覽器端的防禦：SameSite cookie</h4><p>CSRF 之所以能夠成立，是瀏覽器的機制所導致，但我們也能從瀏覽器著手進行防禦，也就是透過 SameSite cookie。其原理是「幫 Cookie 再加上一層驗證」，防止來自不同 domain 的請求。</p>
 <p>做法是在 Set-cookie 的 session_id 後加上 SameSite 即可啟用此功能。由於這是較新的功能，目前瀏覽器中只有 Chrome 支援，使用前須注意。</p>
 <p>使用範例如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">Set-Cookie: session_id=&lt;亂碼&gt;; SameSite<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">Set<span class="token operator">-</span>Cookie<span class="token punctuation">:</span> session_id<span class="token operator">=</span><span class="token operator">&lt;</span>亂碼<span class="token operator">></span><span class="token punctuation">;</span> SameSite<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>SameSite 有分 Strict（預設）與 Lax 兩種模式：</p>
 <ul>

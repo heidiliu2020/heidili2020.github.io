@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [CMD101] Command Line 超新手入門和 [CS101] 初心者的計概與 coding 火球術 這兩門課程的學習筆記。  12345678學習目標： 說得出程式如何執行 理解寫程式的本質只是一行行的指令 了解前端與後端的區別 能說出從發出一個 request 到接收 response 中間發生的事 了解不同載具的差異在哪（Desktop、Mobile、Web） 了瞭解基本">
+  <meta name="description" content="本篇為 [CMD101] Command Line 超新手入門和 [CS101] 初心者的計概與 coding 火球術 這兩門課程的學習筆記。  學習目標：   說得出程式如何執行  理解寫程式的本質只是一行行的指令  了解前端與後端的區別  能說出從發出一個 request 到接收 response 中間發生的事  了解不同載具的差異在哪（Desktop、Mobile、Web）  了瞭解基本的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 1] Command Line 入門 &amp; 基本指令">
 <meta property="og:url" content="https://heidiliu2020.github.io/command-line/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [CMD101] Command Line 超新手入門和 [CS101] 初心者的計概與 coding 火球術 這兩門課程的學習筆記。  12345678學習目標： 說得出程式如何執行 理解寫程式的本質只是一行行的指令 了解前端與後端的區別 能說出從發出一個 request 到接收 response 中間發生的事 了解不同載具的差異在哪（Desktop、Mobile、Web） 了瞭解基本">
+<meta property="og:description" content="本篇為 [CMD101] Command Line 超新手入門和 [CS101] 初心者的計概與 coding 火球術 這兩門課程的學習筆記。  學習目標：   說得出程式如何執行  理解寫程式的本質只是一行行的指令  了解前端與後端的區別  能說出從發出一個 request 到接收 response 中間發生的事  了解不同載具的差異在哪（Desktop、Mobile、Web）  了瞭解基本的">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/emeMG2h.png">
 <meta property="article:published_time" content="2020-06-18T05:17:00.000Z">
@@ -256,14 +256,30 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY21kMTAxLWNvbW1hbmQtbGluZQ==">[CMD101] Command Line 超新手入門<i class="fa fa-external-link-alt"></i></span>和 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY3MxMDEtY29kaW5n">[CS101] 初心者的計概與 coding 火球術<i class="fa fa-external-link-alt"></i></span> 這兩門課程的學習筆記。</p>
 </blockquote>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">學習目標：<br><br> 說得出程式如何執行<br> 理解寫程式的本質只是一行行的指令<br> 了解前端與後端的區別<br> 能說出從發出一個 request 到接收 response 中間發生的事<br> 了解不同載具的差異在哪（Desktop、Mobile、Web）<br> 了瞭解基本的 <span class="hljs-keyword">command</span> <span class="hljs-title">line</span> 指令<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">學習目標：
+
+ 說得出程式如何執行
+ 理解寫程式的本質只是一行行的指令
+ 了解前端與後端的區別
+ 能說出從發出一個 request 到接收 response 中間發生的事
+ 了解不同載具的差異在哪（Desktop、Mobile、Web）
+ 了瞭解基本的 command line 指令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="關於寫程式這件事"><a href="#關於寫程式這件事" class="headerlink" title="關於寫程式這件事"></a>關於寫程式這件事</h2><p>就是對電腦下指令（程式碼），讓電腦執行我們想要的動作（解決問題）。</p>
 <h2 id="條列式的重要性"><a href="#條列式的重要性" class="headerlink" title="條列式的重要性"></a>條列式的重要性</h2><p>試著用「程式化思考」將解法以標準化的格式呈現。</p>
 <blockquote>
 <p>範例：「給你一串文字，問你裡面有沒有 p」</p>
 </blockquote>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span> 假設 n 是 <span class="hljs-number">1</span>，length 是字串長度，<br>   A 設成 <span class="hljs-number">-1</span> 代表找到的位置，p 是要找到的字   <span class="hljs-comment">//字串不會有負數，若小於零代表找不到</span><br><br><span class="hljs-number">2.</span> 看第 n 個字是不是 p，是的話 A=n　　<span class="hljs-comment">//把 A 設成 n 的值，若 n=3，即在第 3 個數找到 p</span><br><br><span class="hljs-number">3.</span> 把 n+<span class="hljs-number">1</span>，如果 n+<span class="hljs-number">1</span> 大於 length 的話，就跳到第 <span class="hljs-number">5</span> 步　　<span class="hljs-comment">//條件機制</span><br><br><span class="hljs-number">4.</span> 跳回第 <span class="hljs-number">2</span> 步　　<span class="hljs-comment">//迴圈的概念</span><br><br><span class="hljs-number">5.</span> 如果 A &lt; <span class="hljs-number">0</span>，代表沒出現過；否則 A 就是答案<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">1. 假設 n 是 1，length 是字串長度，
+   A 設成 -1 代表找到的位置，p 是要找到的字   &#x2F;&#x2F;字串不會有負數，若小於零代表找不到
+
+2. 看第 n 個字是不是 p，是的話 A&#x3D;n　　&#x2F;&#x2F;把 A 設成 n 的值，若 n&#x3D;3，即在第 3 個數找到 p
+
+3. 把 n+1，如果 n+1 大於 length 的話，就跳到第 5 步　　&#x2F;&#x2F;條件機制
+
+4. 跳回第 2 步　　&#x2F;&#x2F;迴圈的概念
+
+5. 如果 A &lt; 0，代表沒出現過；否則 A 就是答案<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h2 id="Command-Line-是什麼？"><a href="#Command-Line-是什麼？" class="headerlink" title="Command Line 是什麼？"></a>Command Line 是什麼？</h2><ul>

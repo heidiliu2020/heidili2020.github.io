@@ -307,7 +307,8 @@
 </li>
 <li><code>require_once();</code>：取用資料夾中其他 library</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;conn.php&quot;</span>);      <span class="hljs-comment">// 連線到資料庫</span><br><span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;utils.php&quot;</span>);     <span class="hljs-comment">// 導入常用函式</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"conn.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 連線到資料庫</span>
+<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"utils.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 導入常用函式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="echo、print-r-與-var-dump-的區別"><a href="#echo、print-r-與-var-dump-的區別" class="headerlink" title="echo、print_r 與 var_dump 的區別"></a>echo、print_r 與 var_dump 的區別</h4><ul>
 <li><code>echo</code>：印出變數、字串等<ul>
@@ -326,14 +327,33 @@
 <li><code>fetch_assoc()</code>：讀取的資料 Key 值設定為欄位名稱的陣列</li>
 <li><code>fetch_row()</code>：讀取的資料 Key 值設定為依序的數字</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;?php<br>  &#x2F;&#x2F; 把 $result 資料的 Key 值設定為欄位名稱的陣列<br>  while($row &#x3D; $result-&gt;fetch_assoc()) &#123;<br>?&gt;<br>  &lt;div class&#x3D;&quot;card&quot;&gt;<br>    &lt;div class&#x3D;&quot;card__avatar&quot;&gt;&lt;&#x2F;div&gt;<br>    &lt;div class&#x3D;&quot;card__body&quot;&gt;<br>        &lt;div class&#x3D;&quot;card__info&quot;&gt;<br>          &lt;span class&#x3D;&quot;card__author&quot;&gt;&lt;?php echo $row[&#39;nickname&#39;]; ?&gt;&lt;&#x2F;span&gt;<br>          &lt;span class&#x3D;&quot;card__time&quot;&gt;&lt;?php echo $row[&#39;created_at&#39;]; ?&gt;&lt;&#x2F;span&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;p class&#x3D;&quot;card__content&quot;&gt;&lt;?php echo $row[&#39;content&#39;]; ?&gt;&lt;&#x2F;p&gt;<br>    &lt;&#x2F;div&gt;<br>  &lt;&#x2F;div&gt;<br>  &lt;div class&#x3D;&quot;board__hr&quot;&gt;&lt;&#x2F;div&gt;<br>&lt;?php &#125; ?&gt;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;?php
+  &#x2F;&#x2F; 把 $result 資料的 Key 值設定為欄位名稱的陣列
+  while($row &#x3D; $result-&gt;fetch_assoc()) &#123;
+?&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;card__avatar&quot;&gt;&lt;&#x2F;div&gt;
+    &lt;div class&#x3D;&quot;card__body&quot;&gt;
+        &lt;div class&#x3D;&quot;card__info&quot;&gt;
+          &lt;span class&#x3D;&quot;card__author&quot;&gt;&lt;?php echo $row[&#39;nickname&#39;]; ?&gt;&lt;&#x2F;span&gt;
+          &lt;span class&#x3D;&quot;card__time&quot;&gt;&lt;?php echo $row[&#39;created_at&#39;]; ?&gt;&lt;&#x2F;span&gt;
+        &lt;&#x2F;div&gt;
+        &lt;p class&#x3D;&quot;card__content&quot;&gt;&lt;?php echo $row[&#39;content&#39;]; ?&gt;&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+  &lt;div class&#x3D;&quot;board__hr&quot;&gt;&lt;&#x2F;div&gt;
+&lt;?php &#125; ?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>若以 <code>print_r($row);</code> 印出上述程式碼，可知 <code>$row</code> 為陣列：<br><img src="https://i.imgur.com/EnxNFAl.png"></p>
 <h4 id="檢查是否存在"><a href="#檢查是否存在" class="headerlink" title="檢查是否存在"></a>檢查是否存在</h4><ul>
 <li><code>isset()</code>：檢查是否有此變數</li>
 <li><code>empty()</code>：檢查是否有值</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">$username = <span class="hljs-literal">NULL</span>;<br><span class="hljs-comment">// 如果 session 中沒有存 username，就讀取 session</span><br><span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>  $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$username</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token comment">// 如果 session 中沒有存 username，就讀取 session</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>query()</code>：判斷資料庫查詢是否成功<ul>
@@ -343,24 +363,90 @@
 </li>
 <li><code>exit()</code> 和 <code>die()</code>：兩者幾乎相同，均為輸出消息後退出程式</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 以 id 進行 DESC（遞減）排序：&quot;後新增的留言&quot;會排在前面</span><br>$result = $conn-&gt;query(<span class="hljs-string">&quot;SELECT * FROM comments ORDER BY id DESC&quot;</span>);<br><span class="hljs-comment">// 檢查是否查詢成功</span><br><span class="hljs-keyword">if</span> (!$result) &#123;<br>  <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Error:&#x27;</span> . $conn-&gt;error);<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 以 id 進行 DESC（遞減）排序："後新增的留言"會排在前面</span>
+<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"SELECT * FROM comments ORDER BY id DESC"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 檢查是否查詢成功</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'Error:'</span> <span class="token punctuation">.</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>sprintf()</code>：裡面可放入替代字元</li>
 </ul>
 <p>例如使用 <code>sprintf()</code> 做 SELECT：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// handle_login.php</span><br>  $sql = sprintf(<br>    <span class="hljs-string">&quot;SELECT * FROM users WHERE username=&#x27;%s&#x27; AND password=&#x27;%s&#x27;&quot;</span>,<br>    $username,<br>    $password<br>  );<br><br><span class="hljs-comment">// 把執行結果存在 $result 這個變數中</span><br>$result = $conn-&gt;query($sql);<br><span class="hljs-comment">// 確認是否有拿到結果</span><br><span class="hljs-keyword">if</span> (!$result) &#123;<br>  <span class="hljs-keyword">die</span>($conn-&gt;error);<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// handle_login.php</span>
+  <span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>
+    <span class="token double-quoted-string string">"SELECT * FROM users WHERE username='%s' AND password='%s'"</span><span class="token punctuation">,</span>
+    <span class="token variable">$username</span><span class="token punctuation">,</span>
+    <span class="token variable">$password</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 把執行結果存在 $result 這個變數中</span>
+<span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 確認是否有拿到結果</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>用 <code>sprintf()</code> 做 INSERT INTO：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// handle_add_comment.php</span><br>$sql = sprintf(<br>  <span class="hljs-string">&quot;INSERT INTO comments(nickname, content) VALUES(&#x27;%s&#x27;, &#x27;%s&#x27;)&quot;</span>,<br>  $nickname,<br>  $content<br>  );<br><br><span class="hljs-comment">// handle_register.php</span><br>$sql = sprintf(<br>  <span class="hljs-string">&quot;INSERT INTO users(nickname, username, password) VALUES(&#x27;%s&#x27;, &#x27;%s&#x27;, &#x27;%s&#x27;)&quot;</span>,<br>  $nickname,<br>  $username,<br>  $password<br>);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// handle_add_comment.php</span>
+<span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>
+  <span class="token double-quoted-string string">"INSERT INTO comments(nickname, content) VALUES('%s', '%s')"</span><span class="token punctuation">,</span>
+  <span class="token variable">$nickname</span><span class="token punctuation">,</span>
+  <span class="token variable">$content</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// handle_register.php</span>
+<span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>
+  <span class="token double-quoted-string string">"INSERT INTO users(nickname, username, password) VALUES('%s', '%s', '%s')"</span><span class="token punctuation">,</span>
+  <span class="token variable">$nickname</span><span class="token punctuation">,</span>
+  <span class="token variable">$username</span><span class="token punctuation">,</span>
+  <span class="token variable">$password</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="conn-php-連線資料庫"><a href="#conn-php-連線資料庫" class="headerlink" title="conn.php 連線資料庫"></a><code>conn.php</code> 連線資料庫</h3><blockquote>
 <p>【注意】由於 <code>conn.php</code> 放有帳號密碼等重要資料，因此在 commit 前需加入 <code>git.ignore</code>，不進行版本控制。</p>
 </blockquote>
 <p>程式碼如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  $server_name = <span class="hljs-string">&#x27;localhost&#x27;</span>;<br>  $username = <span class="hljs-string">&#x27;heidi&#x27;</span>;<br>  $password = <span class="hljs-string">&#x27;1234&#x27;</span>;<br>  $db_name = <span class="hljs-string">&#x27;heidiDB&#x27;</span>;<br><br>  <span class="hljs-comment">// `mysqli` 的四個參數分別為：伺服器名稱、帳號、密碼、資料庫名稱</span><br>  $conn = <span class="hljs-keyword">new</span> mysqli($server_name, $username, $password, $db_name);<br><br>  <span class="hljs-comment">// 確認是否出現連線錯誤</span><br>  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">empty</span>($conn-&gt;connect_error)) &#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;資料庫連線錯誤:&#x27;</span> . $conn-&gt;connect_error);<br>  &#125;<br><br>  <span class="hljs-comment">// 設定編碼，避免出現亂碼</span><br>  $conn-&gt;query(<span class="hljs-string">&#x27;SET NAMES UTF8&#x27;</span>);<br>  <span class="hljs-comment">// 設定成臺灣時區</span><br>  $conn-&gt;query(<span class="hljs-string">&#x27;SET time_zone = &quot;+8:00&quot;&#x27;</span>);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token variable">$server_name</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'localhost'</span><span class="token punctuation">;</span>
+  <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'heidi'</span><span class="token punctuation">;</span>
+  <span class="token variable">$password</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'1234'</span><span class="token punctuation">;</span>
+  <span class="token variable">$db_name</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'heidiDB'</span><span class="token punctuation">;</span>
 
-<h3 id="index-php-顯示所有留言"><a href="#index-php-顯示所有留言" class="headerlink" title="index.php 顯示所有留言"></a><code>index.php</code> 顯示所有留言</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  session_start();<br>  <span class="hljs-comment">// 連線到資料庫</span><br>  <span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;conn.php&quot;</span>);<br>  <span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;utils.php&quot;</span>);<br><br>  $username = <span class="hljs-literal">NULL</span>;<br>  <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>    $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>  &#125;<br><br>  <span class="hljs-comment">// 以 id 進行 desc（遞減）排序，也就是&quot;後新增的留言&quot;會排在前面</span><br>  $result = $conn-&gt;query(<span class="hljs-string">&quot;SELECT * FROM comments ORDER BY id DESC&quot;</span>);<br>  <span class="hljs-comment">// 檢查是否有資料</span><br>  <span class="hljs-keyword">if</span> (!$result) &#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Error:&#x27;</span> . $conn-&gt;error);<br>  &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+  <span class="token comment">// `mysqli` 的四個參數分別為：伺服器名稱、帳號、密碼、資料庫名稱</span>
+  <span class="token variable">$conn</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mysqli</span><span class="token punctuation">(</span><span class="token variable">$server_name</span><span class="token punctuation">,</span> <span class="token variable">$username</span><span class="token punctuation">,</span> <span class="token variable">$password</span><span class="token punctuation">,</span> <span class="token variable">$db_name</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 確認是否出現連線錯誤</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">connect_error</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'資料庫連線錯誤:'</span> <span class="token punctuation">.</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">connect_error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 設定編碼，避免出現亂碼</span>
+  <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'SET NAMES UTF8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 設定成臺灣時區</span>
+  <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'SET time_zone = "+8:00"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="index-php-顯示所有留言"><a href="#index-php-顯示所有留言" class="headerlink" title="index.php 顯示所有留言"></a><code>index.php</code> 顯示所有留言</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 連線到資料庫</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"conn.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"utils.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 以 id 進行 desc（遞減）排序，也就是"後新增的留言"會排在前面</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token double-quoted-string string">"SELECT * FROM comments ORDER BY id DESC"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 檢查是否有資料</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'Error:'</span> <span class="token punctuation">.</span> <span class="token variable">$conn</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h2 id="儲存狀態的方式：Cookie-amp-Session"><a href="#儲存狀態的方式：Cookie-amp-Session" class="headerlink" title="儲存狀態的方式：Cookie &amp; Session"></a>儲存狀態的方式：Cookie &amp; Session</h2><h3 id="使用-Cookie-記住-HTTP-狀態"><a href="#使用-Cookie-記住-HTTP-狀態" class="headerlink" title="使用 Cookie 記住 HTTP 狀態"></a>使用 Cookie 記住 HTTP 狀態</h3><p>首先要了解 Cookie 是什麼：</p>
@@ -383,7 +469,13 @@
 <li>把 username 寫入檔案</li>
 <li><code>set-cookie</code>: <code>session-id</code></li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 使用 Session 時，均需在開頭加上 session_start()</span><br>session_start();<br><br>$username = htmlspecialchars($_POST[<span class="hljs-string">&#x27;username&#x27;</span>]);<br><br><span class="hljs-comment">// 把資料存在 Session 對應的 key 裡面</span><br>$_SEESION[<span class="hljs-string">&#x27;username&#x27;</span>] = $username;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 使用 Session 時，均需在開頭加上 session_start()</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 把資料存在 Session 對應的 key 裡面</span>
+<span class="token variable">$_SEESION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="讀取-Session"><a href="#讀取-Session" class="headerlink" title="讀取 Session"></a>讀取 Session</h4><p>當 <code>$_SESSION</code> 讀取資料時，會進行下列三件事：</p>
 <ol>
@@ -391,9 +483,17 @@
 <li>從檔案裡面讀取 session id 的內容</li>
 <li>把內容放到 <code>$_SESSION</code></li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php">session_start();<br><br><span class="hljs-comment">// 若 Session 內有存過 username，則 $username 為剛才存的 $_SESSION[&#x27;username&#x27;] </span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>  $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h4 id="清除-Session"><a href="#清除-Session" class="headerlink" title="清除 Session"></a>清除 Session</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">session_start();<br><br><span class="hljs-comment">// 直接清除所有 session</span><br>session_destroy();<br></code></pre></td></tr></table></figure>
+<span class="token comment">// 若 Session 內有存過 username，則 $username 為剛才存的 $_SESSION['username'] </span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="清除-Session"><a href="#清除-Session" class="headerlink" title="清除 Session"></a>清除 Session</h4><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 直接清除所有 session</span>
+<span class="token function">session_destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>參考資料：</p>
 <ol>

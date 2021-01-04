@@ -333,39 +333,158 @@
 <h3 id="巢狀與變數"><a href="#巢狀與變數" class="headerlink" title="巢狀與變數"></a>巢狀與變數</h3><ol>
 <li>巢狀語法：注意 <code>&amp;</code> 前的空格</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sass">.section<br>  width: 100%<br>  height: 50%<br>  border-bottom: 1px solid #000<br>  padding: 2rem<br>  &amp;__title<br>    text-align: center<br>  &amp;__wrapper<br>    display: flex<br>    justify-content: center<br>    align-items: center<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token selector">.section</span>
+<span class="token property-line">  <span class="token property">width</span><span class="token punctuation">:</span> 100<span class="token operator">%</span></span>
+<span class="token property-line">  <span class="token property">height</span><span class="token punctuation">:</span> 50<span class="token operator">%</span></span>
+<span class="token property-line">  <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px solid #000</span>
+<span class="token property-line">  <span class="token property">padding</span><span class="token punctuation">:</span> 2rem</span>
+  <span class="token selector">&amp;__title</span>
+<span class="token property-line">    <span class="token property">text-align</span><span class="token punctuation">:</span> center</span>
+  <span class="token selector">&amp;__wrapper</span>
+<span class="token property-line">    <span class="token property">display</span><span class="token punctuation">:</span> flex</span>
+<span class="token property-line">    <span class="token property">justify-content</span><span class="token punctuation">:</span> center</span>
+<span class="token property-line">    <span class="token property">align-items</span><span class="token punctuation">:</span> center</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.section</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">50%</span>;<br>  <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#000</span>;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">2rem</span>;<br>&#125;<br><span class="hljs-selector-class">.section__title</span> &#123;<br>  <span class="hljs-attribute">text-align</span>: center;<br>&#125;<br><span class="hljs-selector-class">.section__wrapper</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: center;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br><br><span class="hljs-comment">/*# sourceMappingURL=main.css.map */</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.section</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+  <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px solid #000<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 2rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.section__title</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.section__wrapper</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*# sourceMappingURL=main.css.map */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li>變數設定：使用 <code>$</code> 來命名</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sass">$primary: #0047AB<br>$secondary: #4D80E6<br>$warning: #CD5C5C<br>$text:#CCCCFF<br>$background: #eeeeee<br><br>.color<br>  width: 50px<br>  height: 50px<br>  margin: 10px<br>  background: #000<br>  &amp;-primary<br>    background: $primary<br>  &amp;-secondary<br>    background: $secondary<br>  &amp;-warning<br>    background: $warning<br>  &amp;-text<br>    background: $text<br>  &amp;-background<br>    background: $background<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token variable-line"><span class="token variable">$primary</span><span class="token punctuation">:</span> #0047AB</span>
+<span class="token variable-line"><span class="token variable">$secondary</span><span class="token punctuation">:</span> #4D80E6</span>
+<span class="token variable-line"><span class="token variable">$warning</span><span class="token punctuation">:</span> #CD5C5C</span>
+<span class="token variable-line"><span class="token variable">$text</span><span class="token punctuation">:</span>#CCCCFF</span>
+<span class="token variable-line"><span class="token variable">$background</span><span class="token punctuation">:</span> #eeeeee</span>
+
+<span class="token selector">.color</span>
+<span class="token property-line">  <span class="token property">width</span><span class="token punctuation">:</span> 50px</span>
+<span class="token property-line">  <span class="token property">height</span><span class="token punctuation">:</span> 50px</span>
+<span class="token property-line">  <span class="token property">margin</span><span class="token punctuation">:</span> 10px</span>
+<span class="token property-line">  <span class="token property">background</span><span class="token punctuation">:</span> #000</span>
+  <span class="token selector">&amp;-primary</span>
+<span class="token property-line">    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$primary</span></span>
+  <span class="token selector">&amp;-secondary</span>
+<span class="token property-line">    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$secondary</span></span>
+  <span class="token selector">&amp;-warning</span>
+<span class="token property-line">    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$warning</span></span>
+  <span class="token selector">&amp;-text</span>
+<span class="token property-line">    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$text</span></span>
+  <span class="token selector">&amp;-background</span>
+<span class="token property-line">    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token variable">$background</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.color</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;<br>&#125;<br><span class="hljs-selector-class">.color-primary</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#0047AB</span>;<br>&#125;<br><span class="hljs-selector-class">.color-secondary</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#4D80E6</span>;<br>&#125;<br><span class="hljs-selector-class">.color-warning</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#CD5C5C</span>;<br>&#125;<br><span class="hljs-selector-class">.color-text</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#CCCCFF</span>;<br>&#125;<br><span class="hljs-selector-class">.color-background</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#eeeeee</span>;<br>&#125;<br><br><span class="hljs-comment">/*# sourceMappingURL=main.css.map */</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.color</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #000<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.color-primary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #0047AB<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.color-secondary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #4D80E6<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.color-warning</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #CD5C5C<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.color-text</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #CCCCFF<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.color-background</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #eeeeee<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*# sourceMappingURL=main.css.map */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="模組化-CSS"><a href="#模組化-CSS" class="headerlink" title="模組化 CSS"></a>模組化 CSS</h3><h4 id="import：引入檔案，用來分別進行管理"><a href="#import：引入檔案，用來分別進行管理" class="headerlink" title="@import：引入檔案，用來分別進行管理"></a><code>@import</code>：引入檔案，用來分別進行管理</h4><ul>
 <li>例如：將變數放到 <code>_variables.sass</code> 統一管理，然後在 <code>main.sass</code> 加上 <code>@import _variables.sass</code> 即可引入檔案</li>
 </ul>
 <h4 id="export：繼承，處理共同樣式"><a href="#export：繼承，處理共同樣式" class="headerlink" title="export：繼承，處理共同樣式"></a><code>export</code>：繼承，處理共同樣式</h4><ul>
 <li>使用時機：可將所有相同樣式的內容合併，減少重複的行為</li>
-<li>例如：<code>&lt;a&gt;</code> 統一去除底線、制定 template<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sass">%btn<br>  padding: 1rem 2rem<br>  color: $background<br>  font-size: 1rem<br>  margin: 1rem<br>  transition: .1s<br><br>.btn<br>  &amp;-primary<br>    @extend %btn<br>  &amp;-secondary<br>    @extend %btn<br>  &amp;-waring<br>    @extend %btn<br></code></pre></td></tr></table></figure>
+<li>例如：<code>&lt;a&gt;</code> 統一去除底線、制定 template<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token selector">%btn</span>
+<span class="token property-line">  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$background</span></span>
+<span class="token property-line">  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem</span>
+<span class="token property-line">  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem</span>
+<span class="token property-line">  <span class="token property">transition</span><span class="token punctuation">:</span> .1s</span>
+
+<span class="token selector">.btn</span>
+  <span class="token selector">&amp;-primary</span>
+<span class="token atrule-line">    <span class="token atrule">@extend</span> %btn</span>
+  <span class="token selector">&amp;-secondary</span>
+<span class="token atrule-line">    <span class="token atrule">@extend</span> %btn</span>
+  <span class="token selector">&amp;-waring</span>
+<span class="token atrule-line">    <span class="token atrule">@extend</span> %btn</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 </li>
 </ul>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.btn-waring</span>, <span class="hljs-selector-class">.btn-secondary</span>, <span class="hljs-selector-class">.btn-primary</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">2rem</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#eeeeee</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.1s</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.btn-waring, .btn-secondary, .btn-primary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #eeeeee<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> 0.1s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="mixin：打包常用功能，替換局部變數"><a href="#mixin：打包常用功能，替換局部變數" class="headerlink" title="mixin：打包常用功能，替換局部變數"></a><code>mixin</code>：打包常用功能，替換局部變數</h4><ul>
 <li>使用時機：用於需重複使用到的屬性，且可帶入變數，以進行微調</li>
 <li>例如：width、height、flex-center 等</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sass">@mixin btn<br>  padding: 1rem 2rem<br>  color: $background<br>  font-size: 1rem<br>  margin: 1rem<br>  transition: .1s<br><br>.btn<br>  &amp;-primary<br>    +btn<br>  &amp;-secondary<br>    +btn<br>  &amp;-waring<br>    +btn<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token atrule-line"><span class="token atrule">@mixin</span> btn</span>
+<span class="token property-line">  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$background</span></span>
+<span class="token property-line">  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem</span>
+<span class="token property-line">  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem</span>
+<span class="token property-line">  <span class="token property">transition</span><span class="token punctuation">:</span> .1s</span>
+
+<span class="token selector">.btn</span>
+  <span class="token selector">&amp;-primary</span>
+<span class="token atrule-line">    <span class="token atrule">+</span>btn</span>
+  <span class="token selector">&amp;-secondary</span>
+<span class="token atrule-line">    <span class="token atrule">+</span>btn</span>
+  <span class="token selector">&amp;-waring</span>
+<span class="token atrule-line">    <span class="token atrule">+</span>btn</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.btn-primary</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">2rem</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#eeeeee</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.1s</span>;<br>&#125;<br><span class="hljs-selector-class">.btn-secondary</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">2rem</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#eeeeee</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.1s</span>;<br>&#125;<br><span class="hljs-selector-class">.btn-waring</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span> <span class="hljs-number">2rem</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#eeeeee</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">transition</span>: <span class="hljs-number">0.1s</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.btn-primary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #eeeeee<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> 0.1s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.btn-secondary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #eeeeee<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> 0.1s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.btn-waring</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 1rem 2rem<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #eeeeee<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> 0.1s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="function：可回傳數值，搭配變數和-mixin-使用"><a href="#function：可回傳數值，搭配變數和-mixin-使用" class="headerlink" title="function：可回傳數值，搭配變數和 mixin 使用"></a><code>function</code>：可回傳數值，搭配變數和 mixin 使用</h4><ul>
 <li>與 <code>@mixin</code> 的不同之處，在於 <code>@function</code> 只會回傳一個值，而 <code>@mixin</code> 是回傳一段CSS程式碼</li>
@@ -376,9 +495,31 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sass">$direction-typs: center, start, end<br><br>@each $type in $direction-typs<br>  .flex-#&#123;$type&#125;<br>    display: flex<br>    justify-content: $type<br>    align-items: center<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token variable-line"><span class="token variable">$direction-typs</span><span class="token punctuation">:</span> center, start, end</span>
+
+<span class="token atrule-line"><span class="token atrule">@each</span> $type in $direction-typs</span>
+  <span class="token selector">.flex-#&#123;$type&#125;</span>
+<span class="token property-line">    <span class="token property">display</span><span class="token punctuation">:</span> flex</span>
+<span class="token property-line">    <span class="token property">justify-content</span><span class="token punctuation">:</span> <span class="token variable">$type</span></span>
+<span class="token property-line">    <span class="token property">align-items</span><span class="token punctuation">:</span> center</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.flex-center</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: center;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br><br><span class="hljs-selector-class">.flex-start</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: start;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br><br><span class="hljs-selector-class">.flex-end</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: end;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.flex-center</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.flex-start</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> start<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.flex-end</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> end<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>使用 <code>@each</code> 搭配 map<ul>
@@ -386,21 +527,67 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sass">$direction-typs: (center: center, start: flex-start, end: flex-end)<br><br>@each $type, $value in $direction-typs<br>  .flex-#&#123;$type&#125;<br>    display: flex<br>    justify-content: $value<br>    align-items: center<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token variable-line"><span class="token variable">$direction-typs</span><span class="token punctuation">:</span> (center<span class="token punctuation">:</span> center, start<span class="token punctuation">:</span> flex-start, end<span class="token punctuation">:</span> flex-end)</span>
+
+<span class="token atrule-line"><span class="token atrule">@each</span> $type, $value in $direction-typs</span>
+  <span class="token selector">.flex-#&#123;$type&#125;</span>
+<span class="token property-line">    <span class="token property">display</span><span class="token punctuation">:</span> flex</span>
+<span class="token property-line">    <span class="token property">justify-content</span><span class="token punctuation">:</span> <span class="token variable">$value</span></span>
+<span class="token property-line">    <span class="token property">align-items</span><span class="token punctuation">:</span> center</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.flex-center</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: center;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br><br><span class="hljs-selector-class">.flex-start</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: flex-start;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br><br><span class="hljs-selector-class">.flex-end</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: flex-end;<br>  <span class="hljs-attribute">align-items</span>: center;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.flex-center</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.flex-start</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.flex-end</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>for 迴圈<ul>
-<li>使用時機：用於預先設定，或特效網站需產生密集大小值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sass">@for $i from 0 through 5<br>    .h#&#123;5 - $i + 1&#125;<br>        font-size: 1 + 0.2rem * $i<br></code></pre></td></tr></table></figure>
+<li>使用時機：用於預先設定，或特效網站需產生密集大小值<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token atrule-line"><span class="token atrule">@for</span> $i from 0 through 5</span>
+    <span class="token selector">.h#&#123;5 - $i + 1&#125;</span>
+<span class="token property-line">        <span class="token property">font-size</span><span class="token punctuation">:</span> 1 <span class="token operator">+</span> 0.2rem <span class="token operator">*</span> <span class="token variable">$i</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 </li>
 </ul>
 </li>
 </ul>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.h6</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.h5</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.h4</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.4rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.h3</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.6rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.h2</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.8rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.h1</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2rem</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.h6</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.h5</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.2rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.h4</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.4rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.h3</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.6rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.h2</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.8rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.h1</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 2rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h4><p>有關 Flow Control 可參考<span class="exturl" data-url="aHR0cHM6Ly9zYXNzLWxhbmcuY29tL2RvY3VtZW50YXRpb24vYXQtcnVsZXMvY29udHJvbC9mb3I=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>參考資料：</p>

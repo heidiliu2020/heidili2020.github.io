@@ -260,9 +260,21 @@
 </li>
 </ul>
 <h2 id="hw1：Event-Loop"><a href="#hw1：Event-Loop" class="headerlink" title="hw1：Event Loop"></a>hw1：Event Loop</h2><p>在 JavaScript 裡面，一個很重要的概念就是 Event Loop，是 JavaScript 底層在執行程式碼時的運作方式。請你說明以下程式碼會輸出什麼，以及盡可能詳細地解釋原因。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>)<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>)<br>&#125;, <span class="hljs-number">0</span>)<br><span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>)<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>)<br>&#125;, <span class="hljs-number">0</span>)<br><span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">console.log(1)
+setTimeout(() &#x3D;&gt; &#123;
+  console.log(2)
+&#125;, 0)
+console.log(3)
+setTimeout(() &#x3D;&gt; &#123;
+  console.log(4)
+&#125;, 0)
+console.log(5)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="輸出結果"><a href="#輸出結果" class="headerlink" title="輸出結果"></a>輸出結果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-number">1</span><br><span class="hljs-number">3</span><br><span class="hljs-number">5</span><br><span class="hljs-number">2</span><br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h3 id="輸出結果"><a href="#輸出結果" class="headerlink" title="輸出結果"></a>輸出結果</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token number">1</span>
+<span class="token number">3</span>
+<span class="token number">5</span>
+<span class="token number">2</span>
+<span class="token number">4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="執行流程"><a href="#執行流程" class="headerlink" title="執行流程"></a>執行流程</h3><ol>
 <li>將 <code>console.log(1)</code> 放入 Call Stack 並直接執行，印出 1，執行結束後移除</li>
@@ -276,9 +288,23 @@
 </ol>
 <hr>
 <h2 id="hw2：Event-Loop-Scope"><a href="#hw2：Event-Loop-Scope" class="headerlink" title="hw2：Event Loop + Scope"></a>hw2：Event Loop + Scope</h2><p>請說明以下程式碼會輸出什麼，以及盡可能詳細地解釋原因。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">5</span>; i++</span>)</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;i: &#x27;</span> + i)<br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(i)<br>  &#125;, i * <span class="hljs-number">1000</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'i: '</span> <span class="token operator">+</span> i<span class="token punctuation">)</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="輸出結果-1"><a href="#輸出結果-1" class="headerlink" title="輸出結果"></a>輸出結果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">i: <span class="hljs-number">0</span><br>i: <span class="hljs-number">1</span><br>i: <span class="hljs-number">2</span><br>i: <span class="hljs-number">3</span><br>i: <span class="hljs-number">4</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<h3 id="輸出結果-1"><a href="#輸出結果-1" class="headerlink" title="輸出結果"></a>輸出結果</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js">i<span class="token operator">:</span> <span class="token number">0</span>
+i<span class="token operator">:</span> <span class="token number">1</span>
+i<span class="token operator">:</span> <span class="token number">2</span>
+i<span class="token operator">:</span> <span class="token number">3</span>
+i<span class="token operator">:</span> <span class="token number">4</span>
+<span class="token number">5</span>
+<span class="token number">5</span>
+<span class="token number">5</span>
+<span class="token number">5</span>
+<span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="執行流程-1"><a href="#執行流程-1" class="headerlink" title="執行流程"></a>執行流程</h3><ol>
 <li>將 for 迴圈放入 Call Stack 並開始執行，宣告變數 i = 0，判斷 i 是否小於 5，是，進入第一圈迴圈</li>
@@ -311,53 +337,118 @@
 </ol>
 <hr>
 <h2 id="hw3：Hoisting"><a href="#hw3：Hoisting" class="headerlink" title="hw3：Hoisting"></a>hw3：Hoisting</h2><p>請說明以下程式碼會輸出什麼，以及盡可能詳細地解釋原因。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(a)    <span class="hljs-comment">// undefined</span><br>  <span class="hljs-keyword">var</span> a = <span class="hljs-number">5</span><br>  <span class="hljs-built_in">console</span>.log(a)    <span class="hljs-comment">// 5</span><br>  a++　<br>  <span class="hljs-keyword">var</span> a<br>  fn2()<br>  <span class="hljs-built_in">console</span>.log(a)     <span class="hljs-comment">// 6</span><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn2</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(a)     <span class="hljs-comment">// 20 </span><br>    a = <span class="hljs-number">20</span><br>    b = <span class="hljs-number">100</span><br>  &#125;<br>&#125;<br>fn()<br><span class="hljs-built_in">console</span>.log(a)     <span class="hljs-comment">// 1</span><br>a = <span class="hljs-number">10</span><br><span class="hljs-built_in">console</span>.log(a)     <span class="hljs-comment">// 10</span><br><span class="hljs-built_in">console</span>.log(b)     <span class="hljs-comment">// 100</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>    <span class="token comment">// undefined</span>
+  <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">5</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>    <span class="token comment">// 5</span>
+  a<span class="token operator">++</span>　
+  <span class="token keyword">var</span> a
+  <span class="token function">fn2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>     <span class="token comment">// 6</span>
+  <span class="token keyword">function</span> <span class="token function">fn2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>     <span class="token comment">// 20 </span>
+    a <span class="token operator">=</span> <span class="token number">20</span>
+    b <span class="token operator">=</span> <span class="token number">100</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>     <span class="token comment">// 1</span>
+a <span class="token operator">=</span> <span class="token number">10</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>     <span class="token comment">// 10</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>     <span class="token comment">// 100</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="輸出結果-2"><a href="#輸出結果-2" class="headerlink" title="輸出結果"></a>輸出結果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-literal">undefined</span><br><span class="hljs-number">5</span><br><span class="hljs-number">6</span><br><span class="hljs-number">20</span><br><span class="hljs-number">1</span><br><span class="hljs-number">10</span><br><span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+<h3 id="輸出結果-2"><a href="#輸出結果-2" class="headerlink" title="輸出結果"></a>輸出結果</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">undefined</span>
+<span class="token number">5</span>
+<span class="token number">6</span>
+<span class="token number">20</span>
+<span class="token number">1</span>
+<span class="token number">10</span>
+<span class="token number">100</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="執行流程-2"><a href="#執行流程-2" class="headerlink" title="執行流程"></a>執行流程</h3><ol>
 <li>開始執行程式，建立 global EC 並初始化 VO</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">global</span> EC<br>  VO &#123;<br>    fn: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: <span class="hljs-title">undefined</span></span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">global <span class="token constant">EC</span>
+  <span class="token constant">VO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token keyword">undefined</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li>執行第一行程式碼，宣告變數 a 並賦值為 1</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">global</span> EC &#123;<br>  VO &#123;<br>    fn: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 1</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">global <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">VO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">1</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="3">
 <li>呼叫 fn()，建立 fn EC 並初始化 AO，變數宣告會提升 <code>var = a</code></li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">fn EC &#123;<br>  AO &#123;<br>    fn2: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: <span class="hljs-title">undefined</span></span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">fn <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">AO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn2</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token keyword">undefined</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="4">
 <li>進入 function fn 並執行 console.log(a)，找到 fn AO 中 a = undefined，印出 undefined</li>
 <li>執行 var a = 5，查看 fn EC 是否有 a，找到 a，將 a 賦值為 5</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">fn EC &#123;<br>  AO &#123;<br>    fn2: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 5</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">fn <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">AO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn2</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">5</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="6">
 <li>執行 console.log(a)，找到 fn AO 中 a = 5，印出 5</li>
 <li>執行 a++，查看 fn EC 是否有 a，將 a 賦值為 6</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">fn EC &#123;<br>  AO &#123;<br>    fn2: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 6</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">fn <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">AO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn2</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">6</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="8">
 <li>已經宣告過變數 a，忽略 <code>var a</code> </li>
 <li>呼叫 fn2()，建立 fn EC 並初始化 AO</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">fn2 EC &#123;<br>  AO &#123;<br>    <span class="hljs-comment">// 沒有進行任何宣告</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">fn2 <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">AO</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 沒有進行任何宣告</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="10">
 <li>進入 function fn2 並執行 console.log(a)，查看 fn2  AO 沒有找到 a；往上一層 fn AO 找，找到 a = 6，印出 6</li>
 <li>執行 a = 20，在 fn2 AO 沒有找到 a；往上一層 fn AO 找，找到 a，並賦值 a 為 20</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">fn EC &#123;<br>  AO &#123;<br>    fn2: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 20</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">fn <span class="token constant">EC</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">AO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn2</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">20</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="12">
 <li>執行 b = 100，在 fn2 AO 沒有找到 b；往上一層 fn AO 找，沒有找到 b；再往上一層 global VO 找，沒有找到 b。因為是在非嚴格模式執行程式碼，會在 global VO 宣告變數 b 並賦值為 100</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">global</span> EC<br>  VO &#123;<br>    fn: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 1</span><br><span class="hljs-function">    <span class="hljs-title">b</span>: 100</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">global <span class="token constant">EC</span>
+  <span class="token constant">VO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">1</span>
+    b<span class="token operator">:</span> <span class="token number">100</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="13">
 <li>function fn2 執行結束，移除 fn2 EC，回到 fn EC 執行其餘程式碼</li>
@@ -366,7 +457,13 @@
 <li>執行 console.log(a)，找到 global VO 中 a = 1，印出 1</li>
 <li>執行 a = 10，查看 global EC 是否有 a，找到 a，將 a 賦值為 10</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">global</span> EC<br>  VO &#123;<br>    fn: <span class="hljs-function"><span class="hljs-keyword">function</span>,</span><br><span class="hljs-function">    <span class="hljs-title">a</span>: 10</span><br><span class="hljs-function">    <span class="hljs-title">b</span>: 100</span><br><span class="hljs-function">  &#125;</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">global <span class="token constant">EC</span>
+  <span class="token constant">VO</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">fn</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">,</span>
+    a<span class="token operator">:</span> <span class="token number">10</span>
+    b<span class="token operator">:</span> <span class="token number">100</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="18">
 <li>執行 console.log(a)，找到 global VO 中 a = 10，印出 10</li>
@@ -374,9 +471,28 @@
 </ol>
 <hr>
 <h2 id="hw4：What-is-this"><a href="#hw4：What-is-this" class="headerlink" title="hw4：What is this?"></a>hw4：What is this?</h2><p>請說明以下程式碼會輸出什麼，以及盡可能詳細地解釋原因。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;<br>  value: <span class="hljs-number">1</span>,<br>  hello: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.value)<br>  &#125;,<br>  inner: &#123;<br>    value: <span class="hljs-number">2</span>,<br>    hello: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.value)<br>    &#125;<br>  &#125;<br>&#125;<br>  <br><span class="hljs-keyword">const</span> obj2 = obj.inner<br><span class="hljs-keyword">const</span> hello = obj.inner.hello<br>obj.inner.hello()    <span class="hljs-comment">// 2</span><br>obj2.hello()    <span class="hljs-comment">// 2</span><br>hello()     <span class="hljs-comment">// undefined</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  value<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">hello</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  inner<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    value<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">hello</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+  
+<span class="token keyword">const</span> obj2 <span class="token operator">=</span> obj<span class="token punctuation">.</span>inner
+<span class="token keyword">const</span> hello <span class="token operator">=</span> obj<span class="token punctuation">.</span>inner<span class="token punctuation">.</span>hello
+obj<span class="token punctuation">.</span>inner<span class="token punctuation">.</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">// 2</span>
+obj2<span class="token punctuation">.</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">// 2</span>
+<span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment">// undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="輸出結果-3"><a href="#輸出結果-3" class="headerlink" title="輸出結果"></a>輸出結果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-number">2</span><br><span class="hljs-number">2</span><br><span class="hljs-literal">undefined</span><br></code></pre></td></tr></table></figure>
+<h3 id="輸出結果-3"><a href="#輸出結果-3" class="headerlink" title="輸出結果"></a>輸出結果</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token number">2</span>
+<span class="token number">2</span>
+<span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="執行流程-3"><a href="#執行流程-3" class="headerlink" title="執行流程"></a>執行流程</h3><ol>
 <li><code>obj.inner.hello()</code></li>
@@ -452,25 +568,61 @@
 <li>默認綁定</li>
 </ul>
 <p>在和物件導向無關的情況下，this 會被指定為全域物件。又依照執行環境不同，其值會是 global 或 window，而在嚴格模式下會是 undefined：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);     <span class="hljs-comment">// Window </span><br>&#125;<br>test();<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// Window </span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>隱式綁定</li>
 </ul>
 <p>若在 function 中， this 有被某物件指定為屬性並呼叫，this 就是呼叫 function 的物件。以下方範例來說 this 就是 obj：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a);<br>&#125;<br><br><span class="hljs-keyword">var</span> obj = &#123;<br>  a: <span class="hljs-number">4</span>,<br>  test: func<br>&#125;;<br><br>obj.test();  <span class="hljs-comment">// 4</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  a<span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+  test<span class="token operator">:</span> func
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>顯示綁定</li>
 </ul>
 <p>若是透過 <code>.call()</code>、<code>.apply()</code> 或 <code>.bind()</code> 方式指定 this，this 就會是傳入的參數：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123;<br>  a: <span class="hljs-number">10</span>,<br>  test: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);<br>  &#125;<br>&#125;<br><br>obj.test.call(obj)<br>obj.test.apply(obj)<br><br><span class="hljs-comment">// 第一種寫法：直接呼叫 function</span><br>obj.test.bind(obj)();<br><span class="hljs-comment">// 第二種寫法：先宣告，再呼叫</span><br><span class="hljs-keyword">const</span> bindTest = obj.test.bind(obj);<br>bindTest();  <br><br><span class="hljs-comment">// 均印出: &#123; a: 10, test: [Function: test] &#125;</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  a<span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+obj<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+
+<span class="token comment">// 第一種寫法：直接呼叫 function</span>
+obj<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 第二種寫法：先宣告，再呼叫</span>
+<span class="token keyword">const</span> bindTest <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">bindTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+<span class="token comment">// 均印出: &#123; a: 10, test: [Function: test] &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>new 綁定</li>
 </ul>
 <p>透過建構函式 new 出一個 instance，this 就會是 instance 物件本身：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">name</span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.name = name;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);       <span class="hljs-comment">// Dog &#123;name: &quot;dog A&quot;&#125;</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.name);  <span class="hljs-comment">// dog A</span><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> Dog(<span class="hljs-string">&#x27;dog A&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Dog</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// Dog &#123;name: "dog A"&#125;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// dog A</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token string">'dog A'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>例外：箭頭函式中的 this 是看程式碼定義在哪，和怎麼呼叫沒關係。</li>

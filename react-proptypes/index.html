@@ -273,18 +273,36 @@
 </blockquote>
 <p>在使用前，需要先修改 eslint 規則，也就是在 react 專案新增 .eslintrc.json 檔案。</p>
 <p>內容如下，或是參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lhbm5pY2tjci9lc2xpbnQtcGx1Z2luLXJlYWN0">yannickcr/eslint-plugin-react<i class="fa fa-external-link-alt"></i></span>，意思是專案中的每個 component 都要加上 props，否則會出現警告訊息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;extends&quot;</span>: [<span class="hljs-string">&quot;react-app&quot;</span>],<br>  <span class="hljs-attr">&quot;rules&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;react/prop-types&quot;</span>: <span class="hljs-string">&quot;warn&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"react-app"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"rules"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"react/prop-types"</span><span class="token operator">:</span> <span class="token string">"warn"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>之後輸入 npm start 指令運行 React，就會在終端機介面看到警告訊息。</p>
 <p>接下來會以 TodoItem component 作為範例。</p>
 <h3 id="引入使用-ProtoTypes"><a href="#引入使用-ProtoTypes" class="headerlink" title="引入使用 ProtoTypes"></a>引入使用 ProtoTypes</h3><p>首先要在 TodoItem.js 引入使用 ProtoTypes：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;prop-types&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> PropTypes <span class="token keyword">from</span> <span class="token string">'prop-types'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>接著幫 TodoItem component 的 props 加上 PropTypes，注意 function 在這裡是縮寫 func：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">TodoItem.propTypes = &#123;<br>  todo: PropTypes.object,<br>  handleDeleteTodo: PropTypes.func,<br>  handleToggleIsDone: PropTypes.func,<br>&#125;;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">TodoItem<span class="token punctuation">.</span>propTypes <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  todo<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>object<span class="token punctuation">,</span>
+  handleDeleteTodo<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>func<span class="token punctuation">,</span>
+  handleToggleIsDone<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>func<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>也可以將 object 寫得更詳細，描述物件中的 key-value 以及型別：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">TodoItem.propTypes = &#123;<br>  todo: PropTypes.shape(&#123;<br>    id: PropTypes.number,<br>    content: PropTypes.string,<br>    isDone: PropTypes.bool,<br>  &#125;),<br>  handleDeleteTodo: PropTypes.func,<br>  handleToggleIsDone: PropTypes.func,<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">TodoItem<span class="token punctuation">.</span>propTypes <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  todo<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span><span class="token function">shape</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    id<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>number<span class="token punctuation">,</span>
+    content<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>string<span class="token punctuation">,</span>
+    isDone<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>bool<span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  handleDeleteTodo<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>func<span class="token punctuation">,</span>
+  handleToggleIsDone<span class="token operator">:</span> PropTypes<span class="token punctuation">.</span>func<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>加上 PropTypes 進行修改的好處在於：</p>
 <ul>

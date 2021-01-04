@@ -271,7 +271,17 @@
 <li><code>prettier</code>: is the JavaScript formatter we will run before commits.</li>
 </ul>
 <p>並在 package.json 檔案中加上套件相關資訊：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json">+  &quot;husky&quot;: &#123;<br>+    &quot;hooks&quot;: &#123;<br>+      &quot;pre-commit&quot;: &quot;lint-staged&quot;<br>+    &#125;<br>+  &#125;,<br><br>+ &quot;lint-staged&quot;: &#123;<br>+   &quot;src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;&quot;: [<br>+     &quot;prettier --write&quot;<br>+   ]<br>+ &#125;,<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">+  <span class="token property">"husky"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
++    <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
++      <span class="token property">"pre-commit"</span><span class="token operator">:</span> <span class="token string">"lint-staged"</span>
++    <span class="token punctuation">&#125;</span>
++  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+
++ <span class="token property">"lint-staged"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
++   <span class="token property">"src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
++     <span class="token string">"prettier --write"</span>
++   <span class="token punctuation">]</span>
++ <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>簡單來說，就是在 pre-commit 之前，透過 husky -&gt; lint-staged -&gt; prettier 這個傳遞過程，對 commit 的檔案做 prettier。</p>
 <p>安裝完成後，在 commit 之前，prettier 就會自動檢查程式碼並進行格式化：</p>
