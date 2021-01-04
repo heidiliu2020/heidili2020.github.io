@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  12345學習目標： P1 你知道 HTML 是在做什麼的 P1 你知道如何使用有語意的（semantic）標籤 P1 你知道基本 SEO 的概念">
+  <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   P1 你知道 HTML 是在做什麼的  P1 你知道如何使用有語意的（semantic）標籤  P1 你知道基本 SEO 的概念">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 6] HTML - 認識基礎標籤">
 <meta property="og:url" content="https://heidiliu2020.github.io/html/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  12345學習目標： P1 你知道 HTML 是在做什麼的 P1 你知道如何使用有語意的（semantic）標籤 P1 你知道基本 SEO 的概念">
+<meta property="og:description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   P1 你知道 HTML 是在做什麼的  P1 你知道如何使用有語意的（semantic）標籤  P1 你知道基本 SEO 的概念">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/SzbbSNA.png">
 <meta property="og:image" content="https://i.imgur.com/EFy5QbP.png">
@@ -261,7 +261,11 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道 HTML 是在做什麼的</span><br><span class="line"> P1 你知道如何使用有語意的（semantic）標籤</span><br><span class="line"> P1 你知道基本 SEO 的概念</span><br></pre></td></tr></table></figure>
+<pre><code>學習目標：
+
+ P1 你知道 HTML 是在做什麼的
+ P1 你知道如何使用有語意的（semantic）標籤
+ P1 你知道基本 SEO 的概念</code></pre>
 <a id="more"></a>
 <h2 id="網頁是如何製作的？"><a href="#網頁是如何製作的？" class="headerlink" title="網頁是如何製作的？"></a>網頁是如何製作的？</h2><ul>
 <li>所有網站都使用 HTML 和 CSS 編寫，且根據不同需求，可能還會加入其他技術。</li>
@@ -280,11 +284,43 @@
 <h2 id="基本架構-必要的標籤"><a href="#基本架構-必要的標籤" class="headerlink" title="基本架構 - 必要的標籤"></a>基本架構 - 必要的標籤</h2><blockquote>
 <p>小技巧：在編輯器上輸入 <code>!</code> 再按 tab 鍵，可快速生成基本架構。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 開頭需定義撰寫格式，告訴瀏覽器使用最新版本 HTML5 --&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 網頁的最根部元素 --&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 包含網頁的基本資訊 --&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line"></span><br><span class="line">  &lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 網頁顯示的內容 --&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line"></span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;!-- 開頭需定義撰寫格式，告訴瀏覽器使用最新版本 HTML5 --&gt;
+&lt;!DOCTYPE html&gt;
 
+&lt;!-- 網頁的最根部元素 --&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+  &lt;!-- 包含網頁的基本資訊 --&gt;
+  &lt;head&gt;
+
+  &lt;/head&gt;
+
+  &lt;!-- 網頁顯示的內容 --&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
 <h2 id="lt-head-gt-內常見的標籤"><a href="#lt-head-gt-內常見的標籤" class="headerlink" title="&lt;head&gt; 內常見的標籤"></a><code>&lt;head&gt;</code> 內常見的標籤</h2><p>head 中的文檔並不會呈現在瀏覽器上，通常會包含一些資訊，例如：標題（<code>&lt;title&gt;</code>）、meatadata（提供網頁資訊給瀏覽器或搜尋引擎）、引入 CSS 或 JavaScript 文件並應用於 HTML 檔。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;!-- 聲明該頁面的編碼方式 --&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt; </span><br><span class="line">        </span><br><span class="line">  　&lt;!-- 在 RWD 網頁，用來設定在不同裝置下的顯示方式：</span><br><span class="line">        width&#x3D;device-width：符合裝置寬度最佳解析度</span><br><span class="line">        initial-scale&#x3D;1.0：設定手機螢幕畫面的初始縮放比例為 100% </span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 在瀏覽器 tab 標籤上的標題 --&gt;</span><br><span class="line">    &lt;title&gt;網頁標題&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;!-- 在瀏覽器 tab 標籤上的小圖示 --&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;icon&quot; href&#x3D;&quot;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;!-- 引入 main.css --&gt;</span><br><span class="line">    &lt;link href&#x3D;&quot;main.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line">    &lt;!-- 引入 common.js --&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;common.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;head&gt;
+    &lt;!-- 聲明該頁面的編碼方式 --&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt; 
 
+  　&lt;!-- 在 RWD 網頁，用來設定在不同裝置下的顯示方式：
+        width=device-width：符合裝置寬度最佳解析度
+        initial-scale=1.0：設定手機螢幕畫面的初始縮放比例為 100% 
+    --&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+
+    &lt;!-- 在瀏覽器 tab 標籤上的標題 --&gt;
+    &lt;title&gt;網頁標題&lt;/title&gt;
+    &lt;!-- 在瀏覽器 tab 標籤上的小圖示 --&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;favicon.ico&quot;&gt;
+    &lt;!-- 引入 main.css --&gt;
+    &lt;link href=&quot;main.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;!-- 引入 common.js --&gt;
+    &lt;script src=&quot;common.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
 <p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2liaWJpLmNvbS9pbmZvLnBocD90aWQ9NDE1">HTML meta 標籤- Wibibi<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="lt-body-gt-內常見的標籤"><a href="#lt-body-gt-內常見的標籤" class="headerlink" title="&lt;body&gt; 內常見的標籤"></a><code>&lt;body&gt;</code> 內常見的標籤</h2><ul>
@@ -300,8 +336,11 @@
 <li><code>&lt;span&gt;</code>：為行內元素</li>
 <li><code>&lt;sup&gt;</code> 和 <code>&lt;sub&gt;</code>：用來將內容上標、下標。為行內元素。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;上標（superscript）：常用來表示日期字尾、次方數&lt;&#x2F;h3&gt;</span><br><span class="line">&lt;p&gt;Today is July 23&lt;sup&gt;rd&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;h3&gt;下標（subscript）：常用在註解或化學式上&lt;&#x2F;h3&gt;</span><br><span class="line">&lt;p&gt;H&lt;sub&gt;2&lt;&#x2F;sub&gt;O&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;h3&gt;上標（superscript）：常用來表示日期字尾、次方數&lt;/h3&gt;
+&lt;p&gt;Today is July 23&lt;sup&gt;rd&lt;/sup&gt;.&lt;/p&gt;
 
+&lt;h3&gt;下標（subscript）：常用在註解或化學式上&lt;/h3&gt;
+&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;</code></pre>
 <p><img src="https://i.imgur.com/SzbbSNA.png" alt="sup sub"></p>
 <h3 id="空白壓縮"><a href="#空白壓縮" class="headerlink" title="空白壓縮"></a>空白壓縮</h3><p>當瀏覽器遇到兩個以上的空白字元時，只會顯示一個空白字元；同樣的，遇到斷行也會視為單一空白字元處理。</p>
 <p>因此我們可以利用下列標籤幫助排版：</p>
@@ -311,8 +350,11 @@
 <li><code>&lt;hr /&gt;</code> 或 <code>&lt;hr /&gt;</code>：水平線，大小寫均可，斜線可加可不加</li>
 </ul>
 <p>舉個例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我是標題</span><br><span class="line">&lt;hr&gt;</span><br><span class="line">我是段落一</span><br><span class="line">&lt;HR&gt;</span><br><span class="line">我是段落二</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">我是標題
+&lt;hr&gt;
+我是段落一
+&lt;HR&gt;
+我是段落二</code></pre>
 <p><img src="https://i.imgur.com/EFy5QbP.png"></p>
 <h3 id="清單列表"><a href="#清單列表" class="headerlink" title="清單列表"></a>清單列表</h3><ul>
 <li><code>&lt;ul&gt;</code>：項目清單（unordered list）</li>
@@ -320,8 +362,11 @@
 <li><code>&lt;li&gt;</code>：清單中的每個項目（list item）</li>
 <li>去除清單預設樣式 CSS：<code>list-style: none</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">  &lt;li&gt;項目一&lt;&#x2F;li&gt;</span><br><span class="line">  &lt;li&gt;項目二&lt;&#x2F;li&gt;</span><br><span class="line">  &lt;li&gt;項目三&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ol&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;ol&gt;
+  &lt;li&gt;項目一&lt;/li&gt;
+  &lt;li&gt;項目二&lt;/li&gt;
+  &lt;li&gt;項目三&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
 <h3 id="lt-a-gt-：加入連結"><a href="#lt-a-gt-：加入連結" class="headerlink" title="&lt;a&gt;：加入連結"></a><code>&lt;a&gt;</code>：加入連結</h3><ul>
 <li><code>href</code> 屬性：指定要連結的目標網頁，可分為：<ul>
 <li>絕對 URL：完整網址</li>
@@ -330,8 +375,17 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 id&#x3D;&quot;top&quot;&gt;網頁前端&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;#html&quot;&gt;前往 HTML&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;#css&quot;&gt;前往 CSS&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">&lt;h2 id&#x3D;&quot;html&quot;&gt;HTML 介紹&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;p&gt;Lorem數字 + tab 鍵：可產生假字&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;h2 id&#x3D;&quot;css&quot;&gt;CSS 介紹&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;p&gt;Lorem1000 + tab 鍵：產生 1000 個假字&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href&#x3D;&quot;#top&quot;&gt;回到 TOP&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;h1 id=&quot;top&quot;&gt;網頁前端&lt;/h1&gt;
+&lt;a href=&quot;#html&quot;&gt;前往 HTML&lt;/a&gt;
+&lt;a href=&quot;#css&quot;&gt;前往 CSS&lt;/a&gt;
 
+&lt;h2 id=&quot;html&quot;&gt;HTML 介紹&lt;/h2&gt;
+&lt;p&gt;Lorem數字 + tab 鍵：可產生假字&lt;/p&gt;
+
+&lt;h2 id=&quot;css&quot;&gt;CSS 介紹&lt;/h2&gt;
+&lt;p&gt;Lorem1000 + tab 鍵：產生 1000 個假字&lt;/p&gt;
+
+&lt;a href=&quot;#top&quot;&gt;回到 TOP&lt;/a&gt;</code></pre>
 <ul>
 <li><code>target</code> 屬性：<ul>
 <li><code>_self</code>：為預設值，會在原頁面開啟連結</li>
@@ -339,22 +393,25 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.google.com.tw&#x2F;&quot;&gt;連到 Google 首頁&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.google.com.tw&#x2F;&quot; target&#x3D;&quot;_blank&quot;&gt;另開新視窗&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;a href=&quot;https://www.google.com.tw/&quot;&gt;連到 Google 首頁&lt;/a&gt;
+&lt;a href=&quot;https://www.google.com.tw/&quot; target=&quot;_blank&quot;&gt;另開新視窗&lt;/a&gt;</code></pre>
 <h3 id="lt-img-gt-：嵌入圖片"><a href="#lt-img-gt-：嵌入圖片" class="headerlink" title="&lt;img&gt;：嵌入圖片"></a><code>&lt;img&gt;</code>：嵌入圖片</h3><ul>
 <li><code>src</code> 屬性：指定圖片來源</li>
 <li><code>alt</code> 屬性：當圖片無法顯示時的替代文字，可用來描述影像內容</li>
 <li><code>title</code> 屬性：滑鼠停留在圖片上的提示文字</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;www.google.com.tw&#x2F;images&#x2F;branding&#x2F;googlelogo&#x2F;1x&#x2F;googlelogo_color_272x92dp.png&quot; alt&#x3D;&quot;This is logo&quot; title&#x3D;&quot;google logo&quot; &gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;img src=&quot;https://www.google.com.tw/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png&quot; alt=&quot;This is logo&quot; title=&quot;google logo&quot; &gt;</code></pre>
 <ul>
 <li><p><code>&lt;Iframe&gt;</code>：內嵌網頁</p>
 </li>
 <li></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;figure&gt;</span><br><span class="line">  &lt;img src&#x3D;&quot;https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1528138326811-ec5dd3b594be?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;750&amp;q&#x3D;80&quot; alt&#x3D;&quot;photo&quot; title&#x3D;&quot;tasty break&quot;&gt;</span><br><span class="line">  &lt;figcaption&gt;</span><br><span class="line">    Photo by Vita Marija Murenaite on &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;unsplash.com&#x2F;photos&#x2F;HyO7jwH4C6g&quot;&gt;Unsplash&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;figcaption&gt;</span><br><span class="line">&lt;&#x2F;figure&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;figure&gt;
+  &lt;img src=&quot;https://images.unsplash.com/photo-1528138326811-ec5dd3b594be?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=750&amp;q=80&quot; alt=&quot;photo&quot; title=&quot;tasty break&quot;&gt;
+  &lt;figcaption&gt;
+    Photo by Vita Marija Murenaite on &lt;a href=&quot;https://unsplash.com/photos/HyO7jwH4C6g&quot;&gt;Unsplash&lt;/a&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
 <p><img src="https://i.imgur.com/zRRRzrC.png" alt="figure"></p>
 <h3 id="lt-table-gt-：表格"><a href="#lt-table-gt-：表格" class="headerlink" title="&lt;table&gt;：表格"></a><code>&lt;table&gt;</code>：表格</h3><p>表格是以一列一列的方式撰寫，每一列由 <code>&lt;tr&gt;</code> 元素來製作。</p>
 <ul>
@@ -369,8 +426,27 @@
 <li>舉個例子：</li>
 </ul>
 <p><img src="https://i.imgur.com/2mddzqX.png" alt="table"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 上述表格程式碼如下 --&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;A&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;B&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;C&lt;&#x2F;th&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;內容&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;td&gt;漢堡&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;薯條&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;炸雞&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;價格&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;td&gt;99&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;25&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;70&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;!-- 上述表格程式碼如下 --&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th&gt;A&lt;/th&gt;
+    &lt;th&gt;B&lt;/th&gt;
+    &lt;th&gt;C&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;內容&lt;/th&gt;
+    &lt;td&gt;漢堡&lt;/td&gt;
+    &lt;td&gt;薯條&lt;/td&gt;
+    &lt;td&gt;炸雞&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;價格&lt;/th&gt;
+    &lt;td&gt;99&lt;/td&gt;
+    &lt;td&gt;25&lt;/td&gt;
+    &lt;td&gt;70&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
 <h3 id="lt-form-gt-：表單"><a href="#lt-form-gt-：表單" class="headerlink" title="&lt;form&gt;：表單"></a><code>&lt;form&gt;</code>：表單</h3><p>其實 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS50dy8=">Google 首頁<i class="fa fa-external-link-alt"></i></span>中央的搜尋框，就是最為人熟知的表單。除此之外，表單還提供其他線上功能，例如：註冊網站會員、網路購物、問卷調查等。</p>
 <p>表單控制項：<br>from、input、textarea</p>
 <p><code>text</code>：純文字<br><code>password</code>：顯示會以符號代替文字<br>可以使用 maxlength and minlength 來控制輸入字數<br><code>email</code>：會自動做簡單驗證<br><code>search</code>：搜尋框<br><code>tel</code>：電話<br><code>url</code>：網址</p>
@@ -418,8 +494,9 @@
 <li>外部引入 JavaScript 文件</li>
 </ol>
 <p>建立 .js 檔案後，在 HTML 檔案中的 <code>&lt;body&gt;</code> 或 <code>&lt;head&gt;</code> 透過 <code>&lt;script src= &quot;&quot;&gt;</code> 標籤引用。這是最常使用的方法，可橫跨多個 HTML 檔案使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- .js 檔案路徑為:scripts&#x2F;common.js --&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src&#x3D;&quot;scripts&#x2F;common.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;!-- .js 檔案路徑為:scripts/common.js --&gt;
 
+&lt;script src=&quot;scripts/common.js&quot;&gt;&lt;/script&gt;</code></pre>
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9oaXNraW8uY29tL2NvdXJzZXMvNTEvbGVjdHVyZXMvODU2">JavaScript 寫在哪裡？ - HiSKIO<i class="fa fa-external-link-alt"></i></span></li>
@@ -534,7 +611,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -545,7 +622,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

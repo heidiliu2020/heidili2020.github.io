@@ -271,8 +271,17 @@
 <li><code>prettier</code>: is the JavaScript formatter we will run before commits.</li>
 </ul>
 <p>並在 package.json 檔案中加上套件相關資訊：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+  &quot;husky&quot;: &#123;</span><br><span class="line">+    &quot;hooks&quot;: &#123;</span><br><span class="line">+      &quot;pre-commit&quot;: &quot;lint-staged&quot;</span><br><span class="line">+    &#125;</span><br><span class="line">+  &#125;,</span><br><span class="line"></span><br><span class="line">+ &quot;lint-staged&quot;: &#123;</span><br><span class="line">+   &quot;src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;&quot;: [</span><br><span class="line">+     &quot;prettier --write&quot;</span><br><span class="line">+   ]</span><br><span class="line">+ &#125;,</span><br></pre></td></tr></table></figure>
+<pre><code class="json=">+  &quot;husky&quot;: &#123;
++    &quot;hooks&quot;: &#123;
++      &quot;pre-commit&quot;: &quot;lint-staged&quot;
++    &#125;
++  &#125;,
 
++ &quot;lint-staged&quot;: &#123;
++   &quot;src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;&quot;: [
++     &quot;prettier --write&quot;
++   ]
++ &#125;,</code></pre>
 <p>簡單來說，就是在 pre-commit 之前，透過 husky -&gt; lint-staged -&gt; prettier 這個傳遞過程，對 commit 的檔案做 prettier。</p>
 <p>安裝完成後，在 commit 之前，prettier 就會自動檢查程式碼並進行格式化：</p>
 <p><img src="https://i.imgur.com/JlV2aOS.png"></p>
@@ -398,7 +407,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -409,7 +418,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

@@ -333,40 +333,148 @@
 <h3 id="巢狀與變數"><a href="#巢狀與變數" class="headerlink" title="巢狀與變數"></a>巢狀與變數</h3><ol>
 <li>巢狀語法：注意 <code>&amp;</code> 前的空格</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.section</span><br><span class="line">  width: 100%</span><br><span class="line">  height: 50%</span><br><span class="line">  border-bottom: 1px solid #000</span><br><span class="line">  padding: 2rem</span><br><span class="line">  &amp;__title</span><br><span class="line">    text-align: center</span><br><span class="line">  &amp;__wrapper</span><br><span class="line">    display: flex</span><br><span class="line">    justify-content: center</span><br><span class="line">    align-items: center</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sass=">.section
+  width: 100%
+  height: 50%
+  border-bottom: 1px solid #000
+  padding: 2rem
+  &amp;__title
+    text-align: center
+  &amp;__wrapper
+    display: flex
+    justify-content: center
+    align-items: center</code></pre>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.section</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">2rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.section__title</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.section__wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*# sourceMappingURL=main.css.map */</span></span><br></pre></td></tr></table></figure>
+<pre><code class="css=">.section &#123;
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px solid #000;
+  padding: 2rem;
+&#125;
+.section__title &#123;
+  text-align: center;
+&#125;
+.section__wrapper &#123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+&#125;
 
+/*# sourceMappingURL=main.css.map */</code></pre>
 <ol start="2">
 <li>變數設定：使用 <code>$</code> 來命名</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$primary: #0047AB</span><br><span class="line">$secondary: #4D80E6</span><br><span class="line">$warning: #CD5C5C</span><br><span class="line">$text:#CCCCFF</span><br><span class="line">$background: #eeeeee</span><br><span class="line"></span><br><span class="line">.color</span><br><span class="line">  width: 50px</span><br><span class="line">  height: 50px</span><br><span class="line">  margin: 10px</span><br><span class="line">  background: #000</span><br><span class="line">  &amp;-primary</span><br><span class="line">    background: $primary</span><br><span class="line">  &amp;-secondary</span><br><span class="line">    background: $secondary</span><br><span class="line">  &amp;-warning</span><br><span class="line">    background: $warning</span><br><span class="line">  &amp;-text</span><br><span class="line">    background: $text</span><br><span class="line">  &amp;-background</span><br><span class="line">    background: $background</span><br></pre></td></tr></table></figure>
+<pre><code class="sass=">$primary: #0047AB
+$secondary: #4D80E6
+$warning: #CD5C5C
+$text:#CCCCFF
+$background: #eeeeee
 
+.color
+  width: 50px
+  height: 50px
+  margin: 10px
+  background: #000
+  &amp;-primary
+    background: $primary
+  &amp;-secondary
+    background: $secondary
+  &amp;-warning
+    background: $warning
+  &amp;-text
+    background: $text
+  &amp;-background
+    background: $background</code></pre>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.color</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.color-primary</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0047AB</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.color-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#4D80E6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.color-warning</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#CD5C5C</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.color-text</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#CCCCFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.color-background</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#eeeeee</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*# sourceMappingURL=main.css.map */</span></span><br></pre></td></tr></table></figure>
+<pre><code class="css=">.color &#123;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  background: #000;
+&#125;
+.color-primary &#123;
+  background: #0047AB;
+&#125;
+.color-secondary &#123;
+  background: #4D80E6;
+&#125;
+.color-warning &#123;
+  background: #CD5C5C;
+&#125;
+.color-text &#123;
+  background: #CCCCFF;
+&#125;
+.color-background &#123;
+  background: #eeeeee;
+&#125;
 
+/*# sourceMappingURL=main.css.map */</code></pre>
 <h3 id="模組化-CSS"><a href="#模組化-CSS" class="headerlink" title="模組化 CSS"></a>模組化 CSS</h3><h4 id="import：引入檔案，用來分別進行管理"><a href="#import：引入檔案，用來分別進行管理" class="headerlink" title="@import：引入檔案，用來分別進行管理"></a><code>@import</code>：引入檔案，用來分別進行管理</h4><ul>
 <li>例如：將變數放到 <code>_variables.sass</code> 統一管理，然後在 <code>main.sass</code> 加上 <code>@import _variables.sass</code> 即可引入檔案</li>
 </ul>
 <h4 id="export：繼承，處理共同樣式"><a href="#export：繼承，處理共同樣式" class="headerlink" title="export：繼承，處理共同樣式"></a><code>export</code>：繼承，處理共同樣式</h4><ul>
 <li>使用時機：可將所有相同樣式的內容合併，減少重複的行為</li>
-<li>例如：<code>&lt;a&gt;</code> 統一去除底線、制定 template<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">%btn</span><br><span class="line">  padding: 1rem 2rem</span><br><span class="line">  color: $background</span><br><span class="line">  font-size: 1rem</span><br><span class="line">  margin: 1rem</span><br><span class="line">  transition: .1s</span><br><span class="line"></span><br><span class="line">.btn</span><br><span class="line">  &amp;-primary</span><br><span class="line">    @extend %btn</span><br><span class="line">  &amp;-secondary</span><br><span class="line">    @extend %btn</span><br><span class="line">  &amp;-waring</span><br><span class="line">    @extend %btn</span><br></pre></td></tr></table></figure>
-
+<li>例如：<code>&lt;a&gt;</code> 統一去除底線、制定 template<pre><code class="sass=">%btn
+padding: 1rem 2rem
+color: $background
+font-size: 1rem
+margin: 1rem
+transition: .1s
+</code></pre>
 </li>
 </ul>
-<p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-waring</span>, <span class="selector-class">.btn-secondary</span>, <span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span> <span class="number">2rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#eeeeee</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">0.1s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>.btn<br>  &amp;-primary<br>    @extend %btn<br>  &amp;-secondary<br>    @extend %btn<br>  &amp;-waring<br>    @extend %btn</p>
+<pre><code>
+編譯結果：
 
+```css=
+.btn-waring, .btn-secondary, .btn-primary &#123;
+  padding: 1rem 2rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  margin: 1rem;
+  transition: 0.1s;
+&#125;</code></pre>
 <h4 id="mixin：打包常用功能，替換局部變數"><a href="#mixin：打包常用功能，替換局部變數" class="headerlink" title="mixin：打包常用功能，替換局部變數"></a><code>mixin</code>：打包常用功能，替換局部變數</h4><ul>
 <li>使用時機：用於需重複使用到的屬性，且可帶入變數，以進行微調</li>
 <li>例如：width、height、flex-center 等</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@mixin btn</span><br><span class="line">  padding: 1rem 2rem</span><br><span class="line">  color: $background</span><br><span class="line">  font-size: 1rem</span><br><span class="line">  margin: 1rem</span><br><span class="line">  transition: .1s</span><br><span class="line"></span><br><span class="line">.btn</span><br><span class="line">  &amp;-primary</span><br><span class="line">    +btn</span><br><span class="line">  &amp;-secondary</span><br><span class="line">    +btn</span><br><span class="line">  &amp;-waring</span><br><span class="line">    +btn</span><br></pre></td></tr></table></figure>
+<pre><code class="sass=">@mixin btn
+  padding: 1rem 2rem
+  color: $background
+  font-size: 1rem
+  margin: 1rem
+  transition: .1s
 
+.btn
+  &amp;-primary
+    +btn
+  &amp;-secondary
+    +btn
+  &amp;-waring
+    +btn</code></pre>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span> <span class="number">2rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#eeeeee</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">0.1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span> <span class="number">2rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#eeeeee</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">0.1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-waring</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span> <span class="number">2rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#eeeeee</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">0.1s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="css=">.btn-primary &#123;
+  padding: 1rem 2rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  margin: 1rem;
+  transition: 0.1s;
+&#125;
+.btn-secondary &#123;
+  padding: 1rem 2rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  margin: 1rem;
+  transition: 0.1s;
+&#125;
+.btn-waring &#123;
+  padding: 1rem 2rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  margin: 1rem;
+  transition: 0.1s;
+&#125;</code></pre>
 <h4 id="function：可回傳數值，搭配變數和-mixin-使用"><a href="#function：可回傳數值，搭配變數和-mixin-使用" class="headerlink" title="function：可回傳數值，搭配變數和 mixin 使用"></a><code>function</code>：可回傳數值，搭配變數和 mixin 使用</h4><ul>
 <li>與 <code>@mixin</code> 的不同之處，在於 <code>@function</code> 只會回傳一個值，而 <code>@mixin</code> 是回傳一段CSS程式碼</li>
 </ul>
@@ -376,32 +484,95 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$direction-typs: center, start, end</span><br><span class="line"></span><br><span class="line">@each $type in $direction-typs</span><br><span class="line">  .flex-#&#123;$type&#125;</span><br><span class="line">    display: flex</span><br><span class="line">    justify-content: $type</span><br><span class="line">    align-items: center</span><br></pre></td></tr></table></figure>
-<p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flex-center</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-start</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: start;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-end</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: end;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="sass=">$direction-typs: center, start, end
 
+@each $type in $direction-typs
+  .flex-#&#123;$type&#125;
+    display: flex
+    justify-content: $type
+    align-items: center</code></pre>
+<p>編譯結果：</p>
+<pre><code class="css=">.flex-center &#123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+&#125;
+
+.flex-start &#123;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+&#125;
+
+.flex-end &#123;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+&#125;</code></pre>
 <ul>
 <li>使用 <code>@each</code> 搭配 map<ul>
 <li>在括號以 <code>參數:值</code> 表示 <code>(center: center, start: flex-start, end: flex-end)</code></li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$direction-typs: (center: center, start: flex-start, end: flex-end)</span><br><span class="line"></span><br><span class="line">@each $type, $value in $direction-typs</span><br><span class="line">  .flex-#&#123;$type&#125;</span><br><span class="line">    display: flex</span><br><span class="line">    justify-content: $value</span><br><span class="line">    align-items: center</span><br></pre></td></tr></table></figure>
+<pre><code class="sass=">$direction-typs: (center: center, start: flex-start, end: flex-end)
 
+@each $type, $value in $direction-typs
+  .flex-#&#123;$type&#125;
+    display: flex
+    justify-content: $value
+    align-items: center</code></pre>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flex-center</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-start</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-end</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="css=">.flex-center &#123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+&#125;
 
+.flex-start &#123;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+&#125;
+
+.flex-end &#123;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+&#125;</code></pre>
 <ul>
 <li>for 迴圈<ul>
-<li>使用時機：用於預先設定，或特效網站需產生密集大小值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@for $i from 0 through 5</span><br><span class="line">    .h#&#123;5 - $i + 1&#125;</span><br><span class="line">        font-size: 1 + 0.2rem * $i</span><br></pre></td></tr></table></figure>
-
+<li>使用時機：用於預先設定，或特效網站需產生密集大小值<pre><code class="sass=">@for $i from 0 through 5
+.h#&#123;5 - $i + 1&#125;
+    font-size: 1 + 0.2rem * $i</code></pre>
 </li>
 </ul>
 </li>
 </ul>
 <p>編譯結果：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.h6</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.h5</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.2rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.h4</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.4rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.h3</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.6rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.h2</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.8rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="css=">.h6 &#123;
+  font-size: 1rem;
+&#125;
 
+.h5 &#123;
+  font-size: 1.2rem;
+&#125;
+
+.h4 &#123;
+  font-size: 1.4rem;
+&#125;
+
+.h3 &#123;
+  font-size: 1.6rem;
+&#125;
+
+.h2 &#123;
+  font-size: 1.8rem;
+&#125;
+
+.h1 &#123;
+  font-size: 2rem;
+&#125;</code></pre>
 <h4 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h4><p>有關 Flow Control 可參考<span class="exturl" data-url="aHR0cHM6Ly9zYXNzLWxhbmcuY29tL2RvY3VtZW50YXRpb24vYXQtcnVsZXMvY29udHJvbC9mb3I=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>參考資料：</p>
 <ul>
@@ -526,7 +697,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -537,7 +708,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

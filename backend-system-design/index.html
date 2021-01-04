@@ -331,14 +331,20 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzMxMzQ2Mzky">如何理解數據庫事務中的一致性的概念？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h3 id="如何在-MySQL-執行-Transaction"><a href="#如何在-MySQL-執行-Transaction" class="headerlink" title="如何在 MySQL 執行 Transaction"></a>如何在 MySQL 執行 Transaction</h3><p>一個 Transaction 可同時執行多個 SQL，以下列程式碼為例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$conn-&gt;autocommit(<span class="literal">FALSE</span>);    <span class="comment">// 避免每次自動變成 transaction</span></span><br><span class="line">$conn-&gt;begin_transaction();  <span class="comment">// 開始 transaction</span></span><br><span class="line">$conn-&gt;query(<span class="string">&quot;update from money set amount = 20&quot;</span>);</span><br><span class="line">$conn-&gt;query(<span class="string">&quot;update from money set sum = 10&quot;</span>);</span><br><span class="line">$conn-&gt;commit();        <span class="comment">// 當發出 commit 後才會執行</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">$conn-&gt;autocommit(FALSE);    // 避免每次自動變成 transaction
+$conn-&gt;begin_transaction();  // 開始 transaction
+$conn-&gt;query(&quot;update from money set amount = 20&quot;);
+$conn-&gt;query(&quot;update from money set sum = 10&quot;);
+$conn-&gt;commit();        // 當發出 commit 後才會執行</code></pre>
 <hr>
 <h2 id="Lock-資料鎖定"><a href="#Lock-資料鎖定" class="headerlink" title="Lock 資料鎖定"></a>Lock 資料鎖定</h2><p>資料庫的交易資料鎖定。</p>
 <p>當多筆交易在讀取或寫入資料時，彼此會相互影響。因此為了交易的並行性與獨立性，需透過做「記號」來標記該資料狀態正在被讀取或寫入，其他交易則根據該記號決定能否執行其他操作，而這個記號就是所謂的 lock（交易鎖定）。但由於鎖定後會需要等待執行，也須考慮到效能上的損耗。</p>
 <p>程式碼範例如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$conn-&gt;autocommit(<span class="literal">FALSE</span>);</span><br><span class="line">$conn-&gt;begin_transaction();</span><br><span class="line">$conn-&gt;query(<span class="string">&quot;SELECT amount from products where id = 1 for update&quot;</span>);</span><br><span class="line"><span class="comment">// 加上 for update: 更新後就會把這行鎖起來，沒有指定欄位的話會鎖住 Schema</span></span><br><span class="line">$conn-&gt;commit();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">$conn-&gt;autocommit(FALSE);
+$conn-&gt;begin_transaction();
+$conn-&gt;query(&quot;SELECT amount from products where id = 1 for update&quot;);
+// 加上 for update: 更新後就會把這行鎖起來，沒有指定欄位的話會鎖住 Schema
+$conn-&gt;commit();</code></pre>
 <h3 id="什麼情況需要-Lock-鎖"><a href="#什麼情況需要-Lock-鎖" class="headerlink" title="什麼情況需要 Lock 鎖"></a>什麼情況需要 Lock 鎖</h3><p>舉例來說，當某個商品限定數量，造成搶購時可能會發生「超賣」情形，此現象又稱作 race condition（競爭危害）。若能在交易時加上 lock，即可避免同時讀取和寫入同一筆資料時產生的資料衝突，避免系統發生錯誤。</p>
 <p>參考資料：</p>
 <ul>
@@ -415,8 +421,8 @@
       <i class="fa fa-chevron-left"></i> [week 13] Fetch & Promise 補充
     </a></div>
       <div class="post-nav-item">
-    <a href="/lidemy-common-examples/" rel="next" title="常見重點整理 - 命名慣例 & 開發時注意事項">
-      常見重點整理 - 命名慣例 & 開發時注意事項 <i class="fa fa-chevron-right"></i>
+    <a href="/backend-aws-ubuntu/" rel="next" title="[week 14] 網站部署 - 設定 AWS EC2 遠端主機 +  Ubuntu LAMP 環境 + phpMyAdmin">
+      [week 14] 網站部署 - 設定 AWS EC2 遠端主機 +  Ubuntu LAMP 環境 + phpMyAdmin <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -501,7 +507,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -512,7 +518,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

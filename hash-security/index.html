@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL [week 9] 利用 PHP 實作留言板 - 初階實作篇">
+  <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL  [week 9] 利用 PHP 實作留言板 - 初階實作篇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 11] 資訊安全 - 雜湊與加密 &amp; 常見攻擊：SQL Injection、XSS">
 <meta property="og:url" content="https://heidiliu2020.github.io/hash-security/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL [week 9] 利用 PHP 實作留言板 - 初階實作篇">
+<meta property="og:description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL  [week 9] 利用 PHP 實作留言板 - 初階實作篇">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/ymLoNYw.png">
 <meta property="og:image" content="https://i.imgur.com/zLfxN7g.png">
@@ -262,10 +262,19 @@
 </blockquote>
 <p>相關筆記：</p>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 你知道什麼是雜湊（Hash function）</span><br><span class="line"> P1 你知道什麼是加密（Encryption）</span><br><span class="line"> P1 你知道雜湊與加密的差別</span><br><span class="line"> P1 你知道什麼是 SQL Injection 以及如何防範</span><br><span class="line"> P1 你知道什麼是 XSS 以及如何防範</span><br><span class="line"> P1 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證</span><br><span class="line"> P2 你知道什麼是 CSRF 以及如何防範</span><br></pre></td></tr></table></figure>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span></p>
+<a id="more"></a>
+<pre><code>學習目標：
 
+P1 你知道什麼是雜湊（Hash function）
+P1 你知道什麼是加密（Encryption）
+P1 你知道雜湊與加密的差別
+P1 你知道什麼是 SQL Injection 以及如何防範
+P1 你知道什麼是 XSS 以及如何防範
+P1 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證
+P2 你知道什麼是 CSRF 以及如何防範</code></pre>
 </li>
 </ul>
 <hr>
@@ -324,11 +333,21 @@
 </li>
 </ul>
 <h3 id="PHP-內建雜湊函式：password-hash"><a href="#PHP-內建雜湊函式：password-hash" class="headerlink" title="PHP 內建雜湊函式：password_hash()"></a>PHP 內建雜湊函式：<code>password_hash()</code></h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucGhwLm5ldC9tYW51YWwvZW4vZnVuY3Rpb24ucGFzc3dvcmQtaGFzaC5waHA=">PHP 提供內建函式 <i class="fa fa-external-link-alt"></i></span><code>password_hash()</code> 能夠實現加密， 指令如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">$hash = password_hash(<span class="string">&quot;要加密的字串&quot;</span>, PASSWORD_DEFAULT);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="php"> &lt;?php
+$hash = password_hash(&quot;要加密的字串&quot;, PASSWORD_DEFAULT);
+?&gt;</code></pre>
 <p>驗證指令：<code>password_verify(&quot;要驗證的字串&quot;, &quot;加密過的字串&quot;)</code>，會回傳一個 boolean</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用範例</span></span><br><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$password = <span class="string">&#x27;1234&#x27;</span>;    <span class="comment">// 原始密碼</span></span><br><span class="line">$hash_password = password_hash($password, PASSWORD_DEFAULT);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (password_verify($password , $hash_password))&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;密碼正確&quot;</span>;  <span class="comment">// true</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;密碼錯誤&quot;</span>;  <span class="comment">// false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<pre><code class="php=">// 使用範例
+&lt;?php 
+$password = &#39;1234&#39;;    // 原始密碼
+$hash_password = password_hash($password, PASSWORD_DEFAULT);
 
+if (password_verify($password , $hash_password))&#123;
+  echo &quot;密碼正確&quot;;  // true
+&#125; else &#123;
+  echo &quot;密碼錯誤&quot;;  // false
+&#125;
+?&gt; </code></pre>
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly90aW55dXJsLmNvbS95NjVwZ280dw==">[資訊安全] 密碼存明碼，怎麼不直接去裸奔算了？淺談 Hash , 用雜湊保護密碼<i class="fa fa-external-link-alt"></i></span></li>
@@ -345,14 +364,15 @@
 <li><p>正常的 SQL 語法</p>
 <ul>
 <li>帳號：123</li>
-<li>密碼：456<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * <span class="keyword">FROM</span> users WHERE username=<span class="string">&#x27;123&#x27;</span> <span class="keyword">AND</span> password=<span class="string">&#x27;456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<li>密碼：456<pre><code class="php=">SELECT * FROM users WHERE username=&#39;123&#39; AND password=&#39;456&#39;;</code></pre>
 </li>
 </ul>
 </li>
 <li><p>SQL injection</p>
 <ul>
 <li>帳號：<code>&#39; or 1=1#</code></li>
-<li>密碼：可輸入任意值（甚至不需輸入）<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * <span class="keyword">FROM</span> users WHERE username=<span class="string">&#x27;&#x27;</span> <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment"># AND password=&#x27;&#x27;;</span></span><br></pre></td></tr></table></figure></li>
+<li>密碼：可輸入任意值（甚至不需輸入）<pre><code class="php=">SELECT * FROM users WHERE username=&#39;&#39; or 1=1# AND password=&#39;&#39;;</code></pre>
+</li>
 </ul>
 </li>
 <li><p><code>&#39;</code>：將 username 的 input 關閉</p>
@@ -366,7 +386,9 @@
 </ul>
 <h4 id="以之前實作的初階留言版為例："><a href="#以之前實作的初階留言版為例：" class="headerlink" title="以之前實作的初階留言版為例："></a>以之前實作的初階留言版為例：</h4><ol>
 <li>登入後在新增留言輸入：<code>&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code></li>
-<li>SQL 指令就變成：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO comments(nickname, content)</span><br><span class="line">VALUES(<span class="string">&#x27;aaa&#x27;</span>, <span class="string">&#x27;&#x27;</span>), (<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;Hacking!&#x27;</span>)<span class="comment">#</span></span><br></pre></td></tr></table></figure></li>
+<li>SQL 指令就變成：<pre><code class="php=">INSERT INTO comments(nickname, content)
+VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code></pre>
+</li>
 <li>執行後會新增兩筆留言，nickname 分別是 aaa 和 admin</li>
 </ol>
 <p><img src="https://i.imgur.com/zLfxN7g.png"></p>
@@ -384,8 +406,21 @@
 <li>若執行成功，則使用 <code>get_result()</code> 取出執行結果</li>
 </ol>
 <p>程式碼範例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">// SQL 語法</span></span><br><span class="line">  $sql = <span class="string">&quot;INSERT INTO comments(nickname, content) VALUES(?, ?)&quot;</span>;</span><br><span class="line">  <span class="comment">// prepare() 預處理 </span></span><br><span class="line">  $stmt = $conn-&gt;prepare($sql);</span><br><span class="line">  <span class="comment">// bind_param() 帶入參數</span></span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">&#x27;ss&#x27;</span>, $nickname, $content);</span><br><span class="line">  <span class="comment">// execute() 執行 SQL 語法</span></span><br><span class="line">  $result = $stmt-&gt;execute();</span><br><span class="line">  <span class="comment">// 確認是否執行成功</span></span><br><span class="line">  <span class="keyword">if</span> (!$result) &#123;</span><br><span class="line">    <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line">  <span class="comment">// 取出執行結果</span></span><br><span class="line">  $result = $stmt-&gt;get_result();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">&lt;?php
+  // SQL 語法
+  $sql = &quot;INSERT INTO comments(nickname, content) VALUES(?, ?)&quot;;
+  // prepare() 預處理 
+  $stmt = $conn-&gt;prepare($sql);
+  // bind_param() 帶入參數
+  $stmt-&gt;bind_param(&#39;ss&#39;, $nickname, $content);
+  // execute() 執行 SQL 語法
+  $result = $stmt-&gt;execute();
+  // 確認是否執行成功
+  if (!$result) &#123;
+    die($conn-&gt;error);
+  // 取出執行結果
+  $result = $stmt-&gt;get_result();
+&#125;</code></pre>
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4OTIwMQ==">[Postx1] 攻擊行為－SQL 資料隱碼攻擊 SQL injection<i class="fa fa-external-link-alt"></i></span></li>
@@ -402,8 +437,7 @@
 </ul>
 <p><img src="https://i.imgur.com/zNQGEPN.png"></p>
 <p>以網頁輸入欄位為例。若在輸入欄位內刻意植入 Javascript 語法，例如下列程式碼，即可竊取使用者的 cookie 資料：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(document.cookie)；&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="=">&lt;script&gt;alert(document.cookie)；&lt;/script&gt;</code></pre>
 <ul>
 <li>Stored XSS（儲存型）</li>
 </ul>
@@ -417,8 +451,12 @@
 <h4 id="Server-端"><a href="#Server-端" class="headerlink" title="Server 端"></a>Server 端</h4><ol>
 <li>過濾特殊字元：過濾所有 Client 端提供的內容，並轉譯成純文字。例如：使用 PHP 內建函式 <code>htmlentities（）</code>或 <code>htmlspecialchars（）</code></li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// utils.php</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">escape</span>(<span class="params">$str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> htmlspecialchars($str, ENT_QUOTES, <span class="string">&#x27;UTF-8&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">&lt;?php
+// utils.php
+  function escape($str) &#123;
+    return htmlspecialchars($str, ENT_QUOTES, &#39;UTF-8&#39;);
+  &#125;
+?&gt;</code></pre>
 <ol start="2">
 <li>限制輸入內容長度或型態。雖然可藉由引入外部 JavaScript 來繞過，但還是能提高 XSS 攻擊難度</li>
 </ol>
@@ -468,8 +506,12 @@
 </ul>
 <p>在 <code>form</code> 裡面加上一個 <code>hidden</code> 的欄位，叫做 <code>csrftoken</code>，填入的值為 Server 隨機產生的亂碼，並且存在 Server 的 session 中。</p>
 <p>按下 submit 後，Server 會比對表單中的 csrftoken 與存在 Server 端的是否相同。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 範例程式碼</span></span><br><span class="line">&lt;form action=<span class="string">&quot;https://myblog.com/delete&quot;</span> method=<span class="string">&quot;POST&quot;</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;id&quot;</span> value=<span class="string">&quot;3&quot;</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;csrftoken&quot;</span> value=<span class="string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;刪除文章&quot;</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">// 範例程式碼
+&lt;form action=&quot;https://myblog.com/delete&quot; method=&quot;POST&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;3&quot;/&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;csrftoken&quot; value=&quot;&lt;亂碼&gt;&quot;/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;刪除文章&quot;/&gt;
+&lt;/form&gt;</code></pre>
 <ul>
 <li>缺點：若攻擊者先發出 request，還是能取得 csrftoken 來攻擊目標網站</li>
 </ul>
@@ -482,8 +524,14 @@
 </ul>
 <p>與前一種解法相似，好處是不需要存任何東西在 Server 端。</p>
 <p>而是在 cookie 與 form 設置相同的 csrftoken，利用「cookie 只會從相同 domain 帶上來」機制，使攻擊者無法從不同 domain 戴上此 cookie。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 範例程式碼</span></span><br><span class="line">Set-Cookie: csrftoken=&lt;亂碼&gt;</span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">&quot;https://myblog.com/delete&quot;</span> method=<span class="string">&quot;POST&quot;</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;id&quot;</span> value=<span class="string">&quot;3&quot;</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;csrftoken&quot;</span> value=<span class="string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;刪除文章&quot;</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="php=">// 範例程式碼
+Set-Cookie: csrftoken=&lt;亂碼&gt;
 
+&lt;form action=&quot;https://myblog.com/delete&quot; method=&quot;POST&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;3&quot;/&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;csrftoken&quot; value=&quot;&lt;亂碼&gt;&quot;/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;刪除文章&quot;/&gt;
+&lt;/form&gt;</code></pre>
 <ul>
 <li>缺點：攻擊者若掌握使用者底下任何一個 subdomain，就能夠幫使用者寫 cookie，藉此進行攻擊</li>
 </ul>
@@ -499,13 +547,16 @@
 <ul>
 <li>例如：library axios 就有提供此功能。只要設定好 header 與 cookie 名稱，設定好之後的每一個 request，即可自動在 header 統一加上 cookie 值</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 範例程式碼</span></span><br><span class="line"><span class="comment">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span></span><br><span class="line">xsrfCookieName: <span class="string">&#x27;XSRF-TOKEN&#x27;</span>, <span class="comment">// default</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span></span><br><span class="line">xsrfHeaderName: <span class="string">&#x27;X-XSRF-TOKEN&#x27;</span>, <span class="comment">// default</span></span><br></pre></td></tr></table></figure>
+<pre><code class="php=">// 範例程式碼
+// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token
+xsrfCookieName: &#39;XSRF-TOKEN&#39;, // default
 
+// `xsrfHeaderName` is the name of the http header that carries the xsrf token value
+xsrfHeaderName: &#39;X-XSRF-TOKEN&#39;, // default</code></pre>
 <h4 id="瀏覽器端的防禦：SameSite-cookie"><a href="#瀏覽器端的防禦：SameSite-cookie" class="headerlink" title="瀏覽器端的防禦：SameSite cookie"></a>瀏覽器端的防禦：SameSite cookie</h4><p>CSRF 之所以能夠成立，是瀏覽器的機制所導致，但我們也能從瀏覽器著手進行防禦，也就是透過 SameSite cookie。其原理是「幫 Cookie 再加上一層驗證」，防止來自不同 domain 的請求。</p>
 <p>做法是在 Set-cookie 的 session_id 後加上 SameSite 即可啟用此功能。由於這是較新的功能，目前瀏覽器中只有 Chrome 支援，使用前須注意。</p>
 <p>使用範例如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: session_id=&lt;亂碼&gt;; SameSite</span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">Set-Cookie: session_id=&lt;亂碼&gt;; SameSite</code></pre>
 <p>SameSite 有分 Strict（預設）與 Lax 兩種模式：</p>
 <ul>
 <li>Strict 模式（嚴格）<ul>
@@ -637,7 +688,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -648,7 +699,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

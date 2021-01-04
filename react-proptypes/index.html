@@ -273,19 +273,33 @@
 </blockquote>
 <p>在使用前，需要先修改 eslint 規則，也就是在 react 專案新增 .eslintrc.json 檔案。</p>
 <p>內容如下，或是參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lhbm5pY2tjci9lc2xpbnQtcGx1Z2luLXJlYWN0">yannickcr/eslint-plugin-react<i class="fa fa-external-link-alt"></i></span>，意思是專案中的每個 component 都要加上 props，否則會出現警告訊息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;extends&quot;</span>: [<span class="string">&quot;react-app&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;rules&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;react/prop-types&quot;</span>: <span class="string">&quot;warn&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="json=">&#123;
+  &quot;extends&quot;: [&quot;react-app&quot;],
+  &quot;rules&quot;: &#123;
+    &quot;react/prop-types&quot;: &quot;warn&quot;
+  &#125;
+&#125;</code></pre>
 <p>之後輸入 npm start 指令運行 React，就會在終端機介面看到警告訊息。</p>
 <p>接下來會以 TodoItem component 作為範例。</p>
 <h3 id="引入使用-ProtoTypes"><a href="#引入使用-ProtoTypes" class="headerlink" title="引入使用 ProtoTypes"></a>引入使用 ProtoTypes</h3><p>首先要在 TodoItem.js 引入使用 ProtoTypes：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&#x27;prop-types&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">import PropTypes from &#39;prop-types&#39;;</code></pre>
 <p>接著幫 TodoItem component 的 props 加上 PropTypes，注意 function 在這裡是縮寫 func：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  todo: PropTypes.object,</span><br><span class="line">  handleDeleteTodo: PropTypes.func,</span><br><span class="line">  handleToggleIsDone: PropTypes.func,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">TodoItem.propTypes = &#123;
+  todo: PropTypes.object,
+  handleDeleteTodo: PropTypes.func,
+  handleToggleIsDone: PropTypes.func,
+&#125;;</code></pre>
 <p>也可以將 object 寫得更詳細，描述物件中的 key-value 以及型別：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  todo: PropTypes.shape(&#123;</span><br><span class="line">    id: PropTypes.number,</span><br><span class="line">    content: PropTypes.string,</span><br><span class="line">    isDone: PropTypes.bool,</span><br><span class="line">  &#125;),</span><br><span class="line">  handleDeleteTodo: PropTypes.func,</span><br><span class="line">  handleToggleIsDone: PropTypes.func,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">TodoItem.propTypes = &#123;
+  todo: PropTypes.shape(&#123;
+    id: PropTypes.number,
+    content: PropTypes.string,
+    isDone: PropTypes.bool,
+  &#125;),
+  handleDeleteTodo: PropTypes.func,
+  handleToggleIsDone: PropTypes.func,
+&#125;;
+</code></pre>
 <p>加上 PropTypes 進行修改的好處在於：</p>
 <ul>
 <li>Console 不會再出現 warning</li>
@@ -400,7 +414,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -411,7 +425,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

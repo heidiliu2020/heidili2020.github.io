@@ -318,8 +318,7 @@
 </blockquote>
 <h3 id="Step1-安裝-Hexo"><a href="#Step1-安裝-Hexo" class="headerlink" title="Step1. 安裝 Hexo"></a>Step1. 安裝 Hexo</h3><p><img src="https://i.imgur.com/3162t1b.png"></p>
 <p>開啟 CLI 介面（例如 cmd、git-bash 等終端機），並輸入下列指令安裝 Hexo：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ npm install hexo-cli -g</code></pre>
 <p><img src="https://i.imgur.com/20qI9yU.png"></p>
 <p>安裝完後，可輸入 <code>hexo version</code> 或 <code>hexo -v</code> 查看 Hexo 版本，確認是否有安裝成功：</p>
 <p><img src="https://i.imgur.com/PRFQNVz.png"></p>
@@ -327,23 +326,27 @@
 <ol>
 <li>直接輸入下面指令，會自動於所在目錄建立一個新資料夾以操作 Hexo。記得將括號內修改成自己的資料夾名稱，若不指定資料夾名稱，則會直接初始化當前目錄：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;資料夾名稱&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>$ hexo init &lt;資料夾名稱&gt;</code></pre>
 <p><img src="https://i.imgur.com/tPOIIKP.png"></p>
 <ol start="2">
 <li>也可以先建立好資料夾，並在該資料夾輸入上述指令，同樣能進行初始化。可使用 cd 指令來切換路徑：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;資料夾名稱 or 資料夾路徑&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ cd &lt;資料夾名稱 or 資料夾路徑&gt;</code></pre>
 <p><img src="https://i.imgur.com/t1vVcEC.png"></p>
 <h3 id="Step3-在資料夾安裝所需檔案"><a href="#Step3-在資料夾安裝所需檔案" class="headerlink" title="Step3. 在資料夾安裝所需檔案"></a>Step3. 在資料夾安裝所需檔案</h3><p>確認 CLI 上的路徑是在資料夾中，接著執行下列指令，安裝所需的 npm 套件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ npm install</code></pre>
 <blockquote>
 <p>也可以直接在資料夾目錄輸入 cmd，按下 enter 後就會在這個路徑開啟終端機。</p>
 </blockquote>
 <p>安裝完成後，進入資料夾會看到下方這些檔案和資料夾：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-
+<pre><code>.
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes</code></pre>
 <h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><ul>
 <li>有關網站配置的檔案，可修改各種配置設定。例如：網站標題、網站的網址、使用主題名稱等等</li>
 <li>詳細內容可以參考<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLXR3L2RvY3MvY29uZmlndXJhdGlvbg==">官方文件<i class="fa fa-external-link-alt"></i></span></li>
@@ -368,12 +371,10 @@
 <li>執行 <code>$ hexo deploy</code> 之後，則會將 public 文件夾中的內容部署到 GitHub，並生成 .deploy_git 資料夾，因此內容與 public 幾乎相同</li>
 <li>這三者的關係可想成：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source -&gt; public -&gt; .deploy_git</span><br></pre></td></tr></table></figure>
-
+<pre><code>source -&gt; public -&gt; .deploy_git</code></pre>
 <hr>
 <h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>接著介紹一些 Hexo 常會用到的相關指令語法，更多詳細指令可參考<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLXR3L2RvY3MvY29tbWFuZHM=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
-<h3 id="new-新增文章"><a href="#new-新增文章" class="headerlink" title="new 新增文章"></a>new 新增文章</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
-
+<h3 id="new-新增文章"><a href="#new-新增文章" class="headerlink" title="new 新增文章"></a>new 新增文章</h3><pre><code>$ hexo new [layout] &lt;title&gt;</code></pre>
 <ul>
 <li>如果沒有設定 layout，則會使用 _config.yml 中的 default_layout 來設定</li>
 <li>如果標題有包含空格，需使用引號括住：<code>&quot;title&quot;</code></li>
@@ -382,11 +383,9 @@
 <blockquote>
 <p>若是對 Markdown 相關語法不熟悉，可參考這篇筆記：<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLW1hcmtkb3du">Markdown 格式介紹<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<h3 id="clean-清除靜態檔案與快取"><a href="#clean-清除靜態檔案與快取" class="headerlink" title="clean 清除靜態檔案與快取"></a>clean 清除靜態檔案與快取</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
-
+<h3 id="clean-清除靜態檔案與快取"><a href="#clean-清除靜態檔案與快取" class="headerlink" title="clean 清除靜態檔案與快取"></a>clean 清除靜態檔案與快取</h3><pre><code>$ hexo clean</code></pre>
 <p>在每次儲存修正後的檔案之前，會建議先輸入此指令，清除快取檔案 （db.json）和已產生的靜態檔案（public）。</p>
-<h3 id="generate-產生靜態檔案"><a href="#generate-產生靜態檔案" class="headerlink" title="generate 產生靜態檔案"></a>generate 產生靜態檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
+<h3 id="generate-產生靜態檔案"><a href="#generate-產生靜態檔案" class="headerlink" title="generate 產生靜態檔案"></a>generate 產生靜態檔案</h3><pre><code>$ hexo generate</code></pre>
 <p>可簡寫成 <code>hexo g</code>，生成靜態檔案。</p>
 <h3 id="server-啟動伺服器"><a href="#server-啟動伺服器" class="headerlink" title="server 啟動伺服器"></a>server 啟動伺服器</h3><ul>
 <li>在本地端啟動 Hexo 伺服器，預設路徑為：<code>http://localhost:4000/</code></li>
@@ -395,8 +394,7 @@
 </blockquote>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ hexo server</code></pre>
 <p><img src="https://i.imgur.com/JUHZ8Lw.png"></p>
 <h2 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a>部署到 GitHub</h2><h3 id="建立-GitHub-專案"><a href="#建立-GitHub-專案" class="headerlink" title="建立 GitHub 專案"></a>建立 GitHub 專案</h3><p>在架設網誌之前，還必須準備一個存放網站的空間，例如架設主機，或是選擇現有的平台，例如 GitHub Pages 或 Heroku 等，本篇以 GitHub 作為範例。</p>
 <p>接著可依照下列步驟在 GitHub 新增專案：</p>
@@ -404,14 +402,15 @@
 <h4 id="Step3-將專案名稱命名為-username-github-io，username-記得改成自己的帳號名稱"><a href="#Step3-將專案名稱命名為-username-github-io，username-記得改成自己的帳號名稱" class="headerlink" title="Step3. 將專案名稱命名為 username.github.io，username 記得改成自己的帳號名稱"></a>Step3. 將專案名稱命名為 <code>username.github.io</code>，username 記得改成自己的帳號名稱</h4><p><img src="https://i.imgur.com/0i5Fg2R.png"></p>
 <p>這樣就成功建立了一個網域：<code>username.github.io</code></p>
 <h3 id="將檔案發布到-GitHub"><a href="#將檔案發布到-GitHub" class="headerlink" title="將檔案發布到 GitHub"></a>將檔案發布到 GitHub</h3><h4 id="Step1-安裝-Git-相關套件"><a href="#Step1-安裝-Git-相關套件" class="headerlink" title="Step1. 安裝 Git 相關套件"></a>Step1. 安裝 Git 相關套件</h4><p>回到 hexo 資料夾，在終端機輸入下列指令安裝部署所需套件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ npm install hexo-deployer-git --save</code></pre>
 <h4 id="Step2-修改-config-yml-檔案的-Deployment-設定"><a href="#Step2-修改-config-yml-檔案的-Deployment-設定" class="headerlink" title="Step2. 修改 _config.yml 檔案的 Deployment 設定"></a>Step2. 修改 _config.yml 檔案的 Deployment 設定</h4><p>接著是修改 _config.yml 設定檔中，有關 deploy 的設定。</p>
 <blockquote>
 <p>需注意這裡指的 _config.yml 檔案是根目錄的，而不是 themes 主題中的。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
+<pre><code>deploy:
+  type: git
+  repo: https://github.com/username/username.github.io.git
+  branch: master</code></pre>
 <ul>
 <li>type：選擇部屬模式，這裡填 git</li>
 <li>repo：GitHub repository 的連結，記得將 username 修改成自己的帳號名稱</li>
@@ -419,11 +418,11 @@
 </ul>
 <p><img src="https://i.imgur.com/bVw4OIH.png"></p>
 <h4 id="Step3-輸入部署指令"><a href="#Step3-輸入部署指令" class="headerlink" title="Step3. 輸入部署指令"></a>Step3. 輸入部署指令</h4><p>使用下列指令即可部署檔案到網站上，第一次輸入可能會要求登入 GitHub 帳號：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ hexo deploy</code></pre>
 <p>通常在完成每次修改後，會依序輸入 clean -&gt; generate -&gt; deploy 三行指令，避免更新不完全：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo cl    &#x2F;&#x2F; 清除之前建立的靜態檔案</span><br><span class="line">$ hexo g     &#x2F;&#x2F; 建立靜態頁面</span><br><span class="line">$ hexo d     &#x2F;&#x2F; 部署至 GitHub</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ hexo cl    // 清除之前建立的靜態檔案
+$ hexo g     // 建立靜態頁面
+$ hexo d     // 部署至 GitHub</code></pre>
 <p>或是合併第二、三行指令：<code>hexo g -d</code> 即可在產生靜態頁面後立刻部署。</p>
 <p>這樣就完成部署網誌到 GitHub 了！可在個人頁面 <code>https://username.github.io</code> 確認是否有發布成功，預設畫面如下：</p>
 <p><img src="https://i.imgur.com/X0cAUy6.png"></p>
@@ -545,7 +544,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -556,7 +555,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

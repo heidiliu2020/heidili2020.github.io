@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/javascript/</loc>
+    <lastmod>2021-01-04</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/git-workflow/</loc>
-    <lastmod>2020-12-31</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/http-api/</loc>
-    <lastmod>2020-12-31</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/lidemy-common-examples/</loc>
     <lastmod>2020-12-31</lastmod>
   </url>
   <url>
@@ -19,14 +15,6 @@
   <url>
     <loc>https://heidiliu2020.github.io/react-class-function-hook/</loc>
     <lastmod>2020-12-30</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/command-line/</loc>
-    <lastmod>2020-12-29</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/leetcode/</loc>
-    <lastmod>2020-12-29</lastmod>
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/html/</loc>
@@ -105,10 +93,6 @@
     <lastmod>2020-12-29</lastmod>
   </url>
   <url>
-    <loc>https://heidiliu2020.github.io/pd101-lidemy/</loc>
-    <lastmod>2020-12-29</lastmod>
-  </url>
-  <url>
     <loc>https://heidiliu2020.github.io/react/</loc>
     <lastmod>2020-12-29</lastmod>
   </url>
@@ -162,10 +146,6 @@
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/php-todolist/</loc>
-    <lastmod>2020-12-27</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/javascript/</loc>
     <lastmod>2020-12-27</lastmod>
   </url>
   <url>

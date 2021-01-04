@@ -255,8 +255,10 @@
         <h2 id="實作新功能一定要在分支進行"><a href="#實作新功能一定要在分支進行" class="headerlink" title="實作新功能一定要在分支進行"></a>實作新功能一定要在分支進行</h2><p>不管是在個人專案，還是在多人協作時，都必須記得在實作新功能時，一定要在分支上進行：</p>
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git branch &lt;new_branch&gt;  &#x2F;&#x2F; 開新分支</span><br><span class="line">$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到新分支</span><br><span class="line">$ git commit -am &#39;new_commit&#39; </span><br><span class="line">$ git push origin &lt;new_branch&gt;  &#x2F;&#x2F; push 分支</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ git branch &lt;new_branch&gt;  // 開新分支
+$ git checkout &lt;new_branch&gt;  // 切換到新分支
+$ git commit -am &#39;new_commit&#39; 
+$ git push origin &lt;new_branch&gt;  // push 分支</code></pre>
 <h2 id="多人協作之狀況劇"><a href="#多人協作之狀況劇" class="headerlink" title="多人協作之狀況劇"></a>多人協作之狀況劇</h2><p>在課程最一開始寫的 Git 筆記：<a href="https://heidiliu2020.github.io/git-github/">[week 1] 版本控制 - Git 進階指令 &amp; GitHub</a>，也有提到一些常見狀況劇。</p>
 <p>最近在進行 Final Project 時，體驗到多人協作和個人專案的不同，有許多需要注意的地方，這裡舉幾個自己實際遇到的狀況以及解決方式：</p>
 <ul>
@@ -267,37 +269,41 @@
 </ul>
 <h3 id="狀況一：在-push-分支之前，該如何讓分支同步-master？"><a href="#狀況一：在-push-分支之前，該如何讓分支同步-master？" class="headerlink" title="狀況一：在 push 分支之前，該如何讓分支同步 master？"></a>狀況一：在 push 分支之前，該如何讓分支同步 master？</h3><p>當我們要 push 分支時，如果沒有先同步 master 進度，就會出現衝突問題，有兩種方式解決：</p>
 <h4 id="第一種：切回-master-同步，直接再開一個新分支"><a href="#第一種：切回-master-同步，直接再開一個新分支" class="headerlink" title="第一種：切回 master 同步，直接再開一個新分支"></a>第一種：切回 master 同步，直接再開一個新分支</h4><p>這個方法可以確保新分支一定是同步遠端的狀態，缺點就是要記得先備份好要 commit 的內容，才能切回 master 同步：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master  &#x2F;&#x2F; 切回 master</span><br><span class="line">$ git pull origin master  &#x2F;&#x2F; 同步遠端 master</span><br><span class="line">$ git branch &lt;new_branch&gt; &#x2F;&#x2F; 新開分支</span><br><span class="line">$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到分支</span><br><span class="line">$ git commit -am &#39;new_commit&#39; </span><br><span class="line">$ git push origin &lt;new_branch&gt; &#x2F;&#x2F; push 分支</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ git checkout master  // 切回 master
+$ git pull origin master  // 同步遠端 master
+$ git branch &lt;new_branch&gt; // 新開分支
+$ git checkout &lt;new_branch&gt;  // 切換到分支
+$ git commit -am &#39;new_commit&#39; 
+$ git push origin &lt;new_branch&gt; // push 分支</code></pre>
 <h4 id="第二種：繼續在舊的分支開發，需要先同步分支"><a href="#第二種：繼續在舊的分支開發，需要先同步分支" class="headerlink" title="第二種：繼續在舊的分支開發，需要先同步分支"></a>第二種：繼續在舊的分支開發，需要先同步分支</h4><p>較推薦這個方法，直接在舊分支同步遠端，就不須再另外新開分支：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin master  &#x2F;&#x2F; 同步遠端 master</span><br><span class="line">$ git commit -am &#39;new_commit&#39;</span><br><span class="line">$ git push origin &lt;old_branch&gt; &#x2F;&#x2F; push 分支</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ git pull origin master  // 同步遠端 master
+$ git commit -am &#39;new_commit&#39;
+$ git push origin &lt;old_branch&gt; // push 分支</code></pre>
 <p>依照上述其中一種方式，之後就可以在 GitHub 頁面發 PR 進行 merge，解決衝突問題。<br><br></p>
 <h3 id="狀況二：不小心把要被忽略的檔案-push-上去了！"><a href="#狀況二：不小心把要被忽略的檔案-push-上去了！" class="headerlink" title="狀況二：不小心把要被忽略的檔案 push 上去了！"></a>狀況二：不小心把要被忽略的檔案 push 上去了！</h3><p>如果是在建立 <code>.gitignore</code> 之前，不小心把要被版本控制忽略的檔案給 push 上 GitHub 的話該怎麼辦呢？</p>
 <p>以 React 中會自動生成的 <code>.eslintcache</code> 為例，如果在忽略之前就先把檔案 push 上去，之後多人協作要進行 merge 時，都必須解決衝突問題，這時只要按照以下步驟：</p>
-<h4 id="1-切換到-master，同步專案"><a href="#1-切換到-master，同步專案" class="headerlink" title="1. 切換到 master，同步專案"></a>1. 切換到 master，同步專案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin master</span><br></pre></td></tr></table></figure>
+<h4 id="1-切換到-master，同步專案"><a href="#1-切換到-master，同步專案" class="headerlink" title="1. 切換到 master，同步專案"></a>1. 切換到 master，同步專案</h4><pre><code>$ git pull origin master</code></pre>
+<h4 id="2-刪掉本地端的-eslintcache-檔案"><a href="#2-刪掉本地端的-eslintcache-檔案" class="headerlink" title="2. 刪掉本地端的 .eslintcache 檔案"></a>2. 刪掉本地端的 <code>.eslintcache</code> 檔案</h4><h4 id="3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制"><a href="#3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制" class="headerlink" title="3. 將 .eslintcache 加入專案根目錄的 .gitignore 忽略版本控制"></a>3. 將 <code>.eslintcache</code> 加入專案根目錄的 <code>.gitignore</code> 忽略版本控制</h4><pre><code class="=">// .gitignore 檔案
 
-<h4 id="2-刪掉本地端的-eslintcache-檔案"><a href="#2-刪掉本地端的-eslintcache-檔案" class="headerlink" title="2. 刪掉本地端的 .eslintcache 檔案"></a>2. 刪掉本地端的 <code>.eslintcache</code> 檔案</h4><h4 id="3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制"><a href="#3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制" class="headerlink" title="3. 將 .eslintcache 加入專案根目錄的 .gitignore 忽略版本控制"></a>3. 將 <code>.eslintcache</code> 加入專案根目錄的 <code>.gitignore</code> 忽略版本控制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; .gitignore 檔案</span><br><span class="line"></span><br><span class="line">*.eslintcache</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-commit-本次操作，commit-名稱可自行修改"><a href="#4-commit-本次操作，commit-名稱可自行修改" class="headerlink" title="4. commit 本次操作，commit 名稱可自行修改"></a>4. commit 本次操作，commit 名稱可自行修改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -am &quot;fix: remove .eslintcache&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了"><a href="#5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了" class="headerlink" title="5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了"></a>5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
-
+*.eslintcache</code></pre>
+<h4 id="4-commit-本次操作，commit-名稱可自行修改"><a href="#4-commit-本次操作，commit-名稱可自行修改" class="headerlink" title="4. commit 本次操作，commit 名稱可自行修改"></a>4. commit 本次操作，commit 名稱可自行修改</h4><pre><code>$ git commit -am &quot;fix: remove .eslintcache&quot;</code></pre>
+<h4 id="5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了"><a href="#5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了" class="headerlink" title="5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了"></a>5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了</h4><pre><code>$ git push origin master</code></pre>
 <h4 id="6-讓其他協作者-pull-同步專案，修改完成！"><a href="#6-讓其他協作者-pull-同步專案，修改完成！" class="headerlink" title="6. 讓其他協作者 pull 同步專案，修改完成！"></a>6. 讓其他協作者 pull 同步專案，修改完成！</h4><br>
 
 <h3 id="狀況三：我-commit-了可是我又不想-commit-了"><a href="#狀況三：我-commit-了可是我又不想-commit-了" class="headerlink" title="狀況三：我 commit 了可是我又不想 commit 了"></a>狀況三：我 commit 了可是我又不想 commit 了</h3><h4 id="回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本："><a href="#回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本：" class="headerlink" title="回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本："></a>回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本：</h4><ul>
 <li>HEAD 代表最新的，^ 代表前一個，因此 HEAD^ 就是上一個 commit 的狀態</li>
 <li>預設是 –mixed，可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NzMwMw==">Git reset 的三種模式（soft mixed hard）<i class="fa fa-external-link-alt"></i></span>比較</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD^  &#x2F;&#x2F; 退回到上一個 commit，等同於 git reset HEAD~1</span><br><span class="line">$ git log   &#x2F;&#x2F; 可查看版本號</span><br><span class="line">$ git reset &lt;38e7e30 &gt;  &#x2F;&#x2F; 退回到 &lt;38e7e30&gt; 這個 commit</span><br></pre></td></tr></table></figure>
+<pre><code>$ git reset HEAD^  // 退回到上一個 commit，等同於 git reset HEAD~1
+$ git log   // 可查看版本號
+$ git reset &lt;38e7e30 &gt;  // 退回到 &lt;38e7e30&gt; 這個 commit</code></pre>
 <br>
 
 <h3 id="狀況四：如何撤回已經-push-的-branch"><a href="#狀況四：如何撤回已經-push-的-branch" class="headerlink" title="狀況四：如何撤回已經 push 的 branch"></a>狀況四：如何撤回已經 push 的 branch</h3><h4 id="1-退回本地端的-commit-狀態"><a href="#1-退回本地端的-commit-狀態" class="headerlink" title="1. 退回本地端的 commit 狀態"></a>1. 退回本地端的 commit 狀態</h4><p>需注意這裡用 <code>git reset --hard</code> 指令，除了回到指定 commit 版本，程式碼也會回到指定版本的狀態：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git log   &#x2F;&#x2F; 可查看版本號</span><br><span class="line">$ git reset --hard &lt;6gye93e&gt;  &#x2F;&#x2F; 退回到 &lt;6gye93e&gt; 這個 commit</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ git log   // 可查看版本號
+$ git reset --hard &lt;6gye93e&gt;  // 退回到 &lt;6gye93e&gt; 這個 commit</code></pre>
 <h4 id="2-強制-push-本地端-branch-到遠端"><a href="#2-強制-push-本地端-branch-到遠端" class="headerlink" title="2. 強制 push 本地端 branch 到遠端"></a>2. 強制 push 本地端 branch 到遠端</h4><p>由於本地端分支版本低於遠端分支版本，這裡必須使用 <code>--force</code> 來強制 push 想要拆掉重做的 branch：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;branch&gt; --force</span><br></pre></td></tr></table></figure>
-
+<pre><code>$ git push origin &lt;branch&gt; --force</code></pre>
 <p>這樣就成功撤銷已經 push 的 branch，回到指定的 commit 狀態了！<br><br></p>
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>其實 Git 版本控制是在 Lidemy 課程最一開始學的，之後繳交作業都是透過 Git 進行，中間也曾遇到種種狀況，像是不小心把同步課程大綱也 push 上去等等。</p>
 <p>最近和同學實際進行團體協作，才發現需要注意的事情又更多了！常常一個不注意下錯指令，把應該 push 的分支 push 成 master，還沒同步分支必須解決的衝突問題等等，趁這個機會把一些自己實際遇到的狀況給寫下來。熟悉多人協作以後，感覺自己又對版本控制有更深一層的認識。</p>
@@ -407,7 +413,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -418,7 +424,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

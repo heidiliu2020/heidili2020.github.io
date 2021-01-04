@@ -304,7 +304,13 @@
 <li><p><code>var_dump()</code>：印出變數的相關訊息</p>
 </li>
 <li><p><code>strpos()</code>: 查找該字串首次出現的位置</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">// 獲得回傳的網址列</span></span><br><span class="line">  $url = $_SERVER[<span class="string">&#x27;REQUEST_URI&#x27;</span>];</span><br><span class="line">  <span class="comment">// strpos(): 查找該字串首次出現的位置</span></span><br><span class="line">  $isAdminPage = (strpos($url, <span class="string">&#x27;admin.php&#x27;</span>) !== <span class="literal">false</span>);</span><br><span class="line">  $isLoginPage = (strpos($url, <span class="string">&#x27;login.php&#x27;</span>) !== <span class="literal">false</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="php=">&lt;?php
+// 獲得回傳的網址列
+$url = $_SERVER[&#39;REQUEST_URI&#39;];
+// strpos(): 查找該字串首次出現的位置
+$isAdminPage = (strpos($url, &#39;admin.php&#39;) !== false);
+$isLoginPage = (strpos($url, &#39;login.php&#39;) !== false);
+?&gt;</code></pre>
 </li>
 <li><p><code>substr()</code>：取得部分字串，可設定字串長度，共有三個參數：</p>
 <ul>
@@ -315,14 +321,19 @@
 </li>
 <li><p><code>mb_substr()</code>：和 <code>substr()</code> 用法相同，但多了第四個參數：</p>
 <ul>
-<li><code>$encoding</code>：判斷的編碼，通常使用 <code>&quot;UTF-8&quot;</code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">substr($string, $start, $length);</span><br><span class="line">mb_substr($string, $start, $length, $encoding);</span><br></pre></td></tr></table></figure></li>
+<li><code>$encoding</code>：判斷的編碼，通常使用 <code>&quot;UTF-8&quot;</code><pre><code class="php=">substr($string, $start, $length);
+mb_substr($string, $start, $length, $encoding);</code></pre>
+</li>
 </ul>
 </li>
 <li><p><code>intval()</code>: 將字串轉換為數字</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$id = intval($_GET[<span class="string">&#x27;id&#x27;</span>]);</span><br></pre></td></tr></table></figure></li>
+<pre><code class="php=">$id = intval($_GET[&#39;id&#39;]);</code></pre>
+</li>
 <li><p><code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>：獲取前一頁面的 URL 地址</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 透過 POST 來獲得前一頁面的 URL --&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;handle_update_post.php&quot;</span> method=<span class="string">&quot;POST&quot;</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;page&quot;</span> value=<span class="string">&quot;&lt;?php echo <span class="subst">$_SERVER</span>[&#x27;HTTP_REFERER&#x27;] ?&gt;&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="php=">&lt;!-- 透過 POST 來獲得前一頁面的 URL --&gt;
+&lt;form action=&quot;handle_update_post.php&quot; method=&quot;POST&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;page&quot; value=&quot;&lt;?php echo $_SERVER[&#39;HTTP_REFERER&#39;] ?&gt;&quot;&gt;
+&lt;/form&gt;</code></pre>
 </li>
 </ul>
 <h3 id="include、require、include-once、require-once-的差別"><a href="#include、require、include-once、require-once-的差別" class="headerlink" title="include、require、include_once、require_once 的差別"></a><code>include</code>、<code>require</code>、<code>include_once</code>、<code>require_once</code> 的差別</h3><p><code>include</code> 和 <code>require</code> 達成的效果幾乎相同，均為「引入」外部檔案，差別在於「執行原理」以及「報錯程度」。</p>
@@ -345,8 +356,8 @@
 <li>避免重複引入</li>
 <li>以引入 navbar 為例：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 把 header 獨立出來，就不需每個檔案都重複撰寫 --&gt;</span><br><span class="line">&lt;?php include_once(&#39;navbar.php&#39;)?&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="htmlmixed=">&lt;!-- 把 header 獨立出來，就不需每個檔案都重複撰寫 --&gt;
+&lt;?php include_once(&#39;navbar.php&#39;)?&gt;</code></pre>
 <h4 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a><code>require_once</code></h4><ul>
 <li>和 <code>require</code> 用法基本相同</li>
 <li>若發生錯誤，<code>require_once</code> 會立刻中止程式</li>
@@ -465,7 +476,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -476,7 +487,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

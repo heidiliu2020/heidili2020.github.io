@@ -266,8 +266,12 @@
 <a id="more"></a>
 <h3 id="如何安裝"><a href="#如何安裝" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>要在 Node.js 上運行 ESLint，必須安裝 npm，接著運行下列程式碼：</p>
 <h4 id="npm-install-g-eslint-：安裝-eslint-套件"><a href="#npm-install-g-eslint-：安裝-eslint-套件" class="headerlink" title="npm install -g eslint ：安裝 eslint 套件"></a><code>npm install -g eslint </code>：安裝 eslint 套件</h4><p>在 package.json &gt; scripts &gt; lint，可查看 eslint 的檢查範圍：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代表 homeworks 底下所有的 js 檔案都要經過 eslint 的規則檢查</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">		<span class="string">&quot;lint&quot;</span>: <span class="string">&quot;eslint ./homeworks/**/*.js&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="js">// 代表 homeworks 底下所有的 js 檔案都要經過 eslint 的規則檢查
+&#123;
+    &quot;scripts&quot;: &#123;
+        &quot;lint&quot;: &quot;eslint ./homeworks/**/*.js&quot;
+    &#125;
+&#125;</code></pre>
 <ul>
 <li>若程式碼均符合規則，即可順利 commit：</li>
 </ul>
@@ -279,16 +283,18 @@
 <hr>
 <h2 id="如何忽略檢查語法"><a href="#如何忽略檢查語法" class="headerlink" title="如何忽略檢查語法"></a>如何忽略檢查語法</h2><p>若想忽略規則，可在檔案中加入 <code>eslint-disable</code> 指令。</p>
 <h3 id="忽略所有規則"><a href="#忽略所有規則" class="headerlink" title="忽略所有規則"></a>忽略所有規則</h3><p>放在檔案開頭：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* eslint-disable *&#x2F;                    &#x2F;&#x2F; 在該檔案關閉 ESLint</span><br></pre></td></tr></table></figure>
-
-<h3 id="忽略特定規則"><a href="#忽略特定規則" class="headerlink" title="忽略特定規則"></a>忽略特定規則</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* eslint no-unused-vars: 0 *&#x2F;            &#x2F;&#x2F; off 或 0 代表關閉規則</span><br></pre></td></tr></table></figure>
-
+<pre><code>/* eslint-disable */                    // 在該檔案關閉 ESLint</code></pre>
+<h3 id="忽略特定規則"><a href="#忽略特定規則" class="headerlink" title="忽略特定規則"></a>忽略特定規則</h3><pre><code>/* eslint no-unused-vars: 0 */            // off 或 0 代表關閉規則</code></pre>
 <h3 id="忽略單行"><a href="#忽略單行" class="headerlink" title="忽略單行"></a>忽略單行</h3><p>忽略所有規則。可分為「忽略同一行」或「忽略下一行」兩種寫法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; 10;   &#x2F;&#x2F; eslint-disable-line</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; eslint-disable-next-line</span><br><span class="line">var result &#x3D; &#39;&#39;;</span><br></pre></td></tr></table></figure>
+<pre><code>var a = 10;   // eslint-disable-line
 
+// eslint-disable-next-line
+var result = &#39;&#39;;</code></pre>
 <p>忽略特定規則。直接在指令後面加「想要忽略的規則名稱」。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(&#39;Hello&#39;);       &#x2F;&#x2F; eslint-disable-line no-alert</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; eslint-disable-next-line no-alert</span><br><span class="line">alert(&#39;Hello&#39;);</span><br></pre></td></tr></table></figure>
+<pre><code>alert(&#39;Hello&#39;);       // eslint-disable-line no-alert
 
+// eslint-disable-next-line no-alert
+alert(&#39;Hello&#39;);</code></pre>
 <hr>
 <h2 id="eslint-報錯例子"><a href="#eslint-報錯例子" class="headerlink" title="eslint 報錯例子"></a>eslint 報錯例子</h2><h3 id="1-換行符問題"><a href="#1-換行符問題" class="headerlink" title="1. 換行符問題"></a>1. 換行符問題</h3><p><code>Expected linebreaks to be &#39;LF&#39; but found &#39;CRLF&#39; </code></p>
 <p>原因：不同系統不同工具下換行符的問題。</p>
@@ -308,8 +314,11 @@
 <li>let：和 var 作用差不多，但 let 所宣告的變數，只在代碼塊區域內有效。也就是說，被所屬 <code>&#123; &#125;</code> 包起來的 let 變數，不會被外面（全域）影響。</li>
 </ul>
 <p>舉個例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let price &#x3D; 20;          &#x2F;&#x2F; 全域變數</span><br><span class="line">if (true) &#123;              </span><br><span class="line">  let price &#x3D; 30;        &#x2F;&#x2F; 區域變數</span><br><span class="line">&#125;</span><br><span class="line">console.log(price)      &#x2F;&#x2F; 印出 20，因為區域變數不會覆蓋全域變數</span><br></pre></td></tr></table></figure>
-
+<pre><code>let price = 20;          // 全域變數
+if (true) &#123;              
+  let price = 30;        // 區域變數
+&#125;
+console.log(price)      // 印出 20，因為區域變數不會覆蓋全域變數</code></pre>
 <blockquote>
 <p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxMzE4OA==">Day02【ES6 小筆記】變數宣告 - let、const 哪裡好？跟 var 說掰掰<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -343,12 +352,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/leetcode/" rel="prev" title="[week 2] 先別急著寫 leetcode - 虛擬碼、Debugger、解題技巧">
-      <i class="fa fa-chevron-left"></i> [week 2] 先別急著寫 leetcode - 虛擬碼、Debugger、解題技巧
+    <a href="/javascript/" rel="prev" title="[week 2] JavaScript 基礎 - 基本語法、值的型別、變數、迴圈、函數">
+      <i class="fa fa-chevron-left"></i> [week 2] JavaScript 基礎 - 基本語法、值的型別、變數、迴圈、函數
     </a></div>
       <div class="post-nav-item">
-    <a href="/http-api/" rel="next" title="[week 4] 網路基礎概論 - HTTP 協定、TCP/IP">
-      [week 4] 網路基礎概論 - HTTP 協定、TCP/IP <i class="fa fa-chevron-right"></i>
+    <a href="/review/" rel="next" title="[week 5] 複習週 - 前四週學習與解題心得">
+      [week 5] 複習週 - 前四週學習與解題心得 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -433,7 +442,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -444,7 +453,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

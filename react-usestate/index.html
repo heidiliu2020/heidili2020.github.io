@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 我知道 React 的目的以及原理 P1 我知道我們為什麼需要 React P1 我知道使用 React 跟之前使用 jQuery 的區別 P1 我理解 state 跟 props 的不同">
+  <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 我知道 React 的目的以及原理  P1 我知道我們為什麼需要 React  P1 我知道使用 React 跟之前使用 jQuery 的區別  P1 我理解 state 跟 props 的不同">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 21] React Hooks API：useState &amp; 再戰 Todo List">
 <meta property="og:url" content="https://heidiliu2020.github.io/react-usestate/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 我知道 React 的目的以及原理 P1 我知道我們為什麼需要 React P1 我知道使用 React 跟之前使用 jQuery 的區別 P1 我理解 state 跟 props 的不同">
+<meta property="og:description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 我知道 React 的目的以及原理  P1 我知道我們為什麼需要 React  P1 我知道使用 React 跟之前使用 jQuery 的區別  P1 我理解 state 跟 props 的不同">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/f6EsvhC.png">
 <meta property="og:image" content="https://i.imgur.com/EAY1tzO.png">
@@ -259,7 +259,12 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">學習目標：</span><br><span class="line"></span><br><span class="line"> P1 我知道 React 的目的以及原理</span><br><span class="line"> P1 我知道我們為什麼需要 React</span><br><span class="line"> P1 我知道使用 React 跟之前使用 jQuery 的區別</span><br><span class="line"> P1 我理解 state 跟 props 的不同</span><br></pre></td></tr></table></figure>
+<pre><code>學習目標：
+
+ P1 我知道 React 的目的以及原理
+ P1 我知道我們為什麼需要 React
+ P1 我知道使用 React 跟之前使用 jQuery 的區別
+ P1 我理解 state 跟 props 的不同</code></pre>
 <a id="more"></a>
 <hr>
 <h2 id="React-Hooks-API"><a href="#React-Hooks-API" class="headerlink" title="React Hooks API"></a>React Hooks API</h2><p>根據<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtaW50cm8uaHRtbD9uby1jYWNoZT0x">官網介紹<i class="fa fa-external-link-alt"></i></span>：</p>
@@ -277,31 +282,55 @@
 </blockquote>
 <p>也就是說，React 因為加入了 hooks，再結合 props、state、context、refs 以及 lifecycle 等概念，提供了更直接的 API 使用，讓我們能在 functional component 管理狀態和使用生命周期等功能，藉此簡化程式碼與提高重用性。</p>
 <p>引入 hook 的語法如下，原本要寫成 React.useState，透過 ES6 解構語法即可直接使用 useState：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState, useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>; </span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">import &#123; useState, useEffect, useRef &#125; from &#39;react&#39;; </code></pre>
 <h3 id="hooks-只能寫在-component-第一層"><a href="#hooks-只能寫在-component-第一層" class="headerlink" title="hooks 只能寫在 component 第一層"></a>hooks 只能寫在 component 第一層</h3><p>因為 React 背後的機制，hooks 只能寫在 component 第一層。</p>
 <p>也就是說，不能把 hooks 寫在 if - else 等條件判斷句裡面，像是符合 XX 條件才使用，否則會出現錯誤訊息：</p>
 <blockquote>
 <p>React Hook “useRef” is called conditionally. React Hooks must be called in the exact same order in every component render    react-hooks/rules-of-hooks</p>
 </blockquote>
 <p>只能自行在 hooks 裡面進行判斷是否使用，例如下方寫法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 若不符合就直接 return</span></span><br><span class="line">  <span class="keyword">if</span> (!todos) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// 若符合要做的事情</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">useEffect(() =&gt; &#123;
+  // 若不符合就直接 return
+  if (!todos) return;
+  // 若符合要做的事情
+&#125;)</code></pre>
 <h3 id="useState：用來設定-react-中的-state"><a href="#useState：用來設定-react-中的-state" class="headerlink" title="useState：用來設定 react 中的 state"></a>useState：用來設定 react 中的 state</h3><p>語法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [currentValue, setCurrentValue] = useState(initialValue);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">const [currentValue, setCurrentValue] = useState(initialValue);</code></pre>
 <ul>
 <li>currentValue：存放 state 的值</li>
 <li>setCurrentValue：用來設定 state 值</li>
 <li>initialValue：state 的初始值</li>
 </ul>
 <p>還記得我們前面舉的 Counter component 範例嗎？簡單來說，就是在 <code>useState([初始值])</code> 傳入初始值，然後回傳一個陣列：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">const</span> [todos, setTodos] = useState([<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">function App()&#123;
+const [todos, setTodos] = useState([1])
+&#125;</code></pre>
 <p>其中 todos 具有 immutable 特性，也就是無法再賦值，必須用 setTodos 來產生新的 state，才能在每次 render 畫面時改變 todos 的值。</p>
 <p>透過這個概念，我們也能實作出簡單的 Todo List：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解構語法</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [todos, setTodos] = useState([</span><br><span class="line">    <span class="number">1</span></span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleButtonClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 傳入參數: 新的 todo + 解構 todos</span></span><br><span class="line">    setTodos([<span class="string">&quot;new todo&quot;</span>, ...todos]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      <span class="comment">/* 在 JSX 中，單標籤必須 /&gt; 結尾 */</span></span><br><span class="line">      &lt;input type=<span class="string">&quot;text&quot;</span> placeholder=<span class="string">&quot;Add todo...&quot;</span> /&gt;</span><br><span class="line">      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        todos.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span> <span class="attr">content</span>=<span class="string">&#123;todo&#125;</span> /&gt;</span></span> ) </span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">// 解構語法
+import &#123; useState &#125; from &#39;react&#39;;
 
+function App() &#123;
+  const [todos, setTodos] = useState([
+    1
+  ]);
+
+  const handleButtonClick = () =&gt; &#123;
+    // 傳入參數: 新的 todo + 解構 todos
+    setTodos([&quot;new todo&quot;, ...todos]);
+  &#125;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      /* 在 JSX 中，單標籤必須 /&gt; 結尾 */
+      &lt;input type=&quot;text&quot; placeholder=&quot;Add todo...&quot; /&gt;
+      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;
+      &#123;
+        todos.map((todo, index) =&gt; &lt;TodoItem key=&#123;index&#125; content=&#123;todo&#125; /&gt; ) 
+      &#125;
+    &lt;/div&gt;
+  );
+&#125;</code></pre>
 <p><img src="https://i.imgur.com/f6EsvhC.png"></p>
 <h3 id="controlled-vs-uncontrolled"><a href="#controlled-vs-uncontrolled" class="headerlink" title="controlled vs uncontrolled"></a>controlled vs uncontrolled</h3><blockquote>
 <p>詳細可參考<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvZm9ybXMuaHRtbCNjb250cm9sbGVkLWNvbXBvbmVudHM=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
@@ -324,12 +353,42 @@
 </ul>
 <hr>
 <h2 id="再戰-Todo-List"><a href="#再戰-Todo-List" class="headerlink" title="再戰 Todo List"></a>再戰 Todo List</h2><h3 id="新增-Todo"><a href="#新增-Todo" class="headerlink" title="新增 Todo"></a>新增 Todo</h3><p>透過下方程式碼，可存取 input 的值，並藉由 setValue 來更新 todos 狀態：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> TodoItem <span class="keyword">from</span> <span class="string">&#x27;./TodoItem&#x27;</span></span><br><span class="line"><span class="comment">// 解構語法</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [todos, setTodos] = useState([</span><br><span class="line">    <span class="number">1</span></span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleButtonClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 傳入參數: 新的 todo + 解構 todos</span></span><br><span class="line">    setTodos([value, ...todos]);</span><br><span class="line">    <span class="comment">// 新增完 todo 後清空 value</span></span><br><span class="line">    setValue(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleInputChange = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 拿到 input 的 value</span></span><br><span class="line">    setValue(e.target.value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;input type=<span class="string">&quot;text&quot;</span> placeholder=<span class="string">&quot;Add todo...&quot;</span> value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;</span><br><span class="line">      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        todos.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span> <span class="attr">content</span>=<span class="string">&#123;todo&#125;</span> /&gt;</span></span> ) </span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import TodoItem from &#39;./TodoItem&#39;
+// 解構語法
+import &#123; useState, useRef &#125; from &#39;react&#39;;
 
+function App() &#123;
+  const [todos, setTodos] = useState([
+    1
+  ]);
+
+  const [value, setValue] = useState(&#39;&#39;);
+
+  const handleButtonClick = () =&gt; &#123;
+    // 傳入參數: 新的 todo + 解構 todos
+    setTodos([value, ...todos]);
+    // 新增完 todo 後清空 value
+    setValue(&#39;&#39;);
+  &#125;
+
+  const handleInputChange = (e) =&gt; &#123;
+    // 拿到 input 的 value
+    setValue(e.target.value);
+  &#125;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;Add todo...&quot; value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;
+      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;
+      &#123;
+        todos.map((todo, index) =&gt; &lt;TodoItem key=&#123;index&#125; content=&#123;todo&#125; /&gt; ) 
+      &#125;
+    &lt;/div&gt;
+  );
+&#125;</code></pre>
 <p><img src="https://i.imgur.com/EAY1tzO.png"></p>
 <h3 id="useRef：用來抓取-DOM-節點的-hook"><a href="#useRef：用來抓取-DOM-節點的-hook" class="headerlink" title="useRef：用來抓取 DOM 節點的 hook"></a>useRef：用來抓取 DOM 節點的 hook</h3><p>基本用法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refContainer = useRef(initialValue);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">const refContainer = useRef(initialValue);</code></pre>
 <p>根據<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtcmVmZXJlbmNlLmh0bWwjdXNlcmVm">官方文件<i class="fa fa-external-link-alt"></i></span>介紹：</p>
 <blockquote>
 <p>useRef 回傳一個可變的 ref object，其 .current 屬性被初始為傳入的參數（initialValue）。回傳的 object 在 component 的生命週期將保持不變。</p>
@@ -340,42 +399,177 @@
 <li>在每次 render 時都會給同一個的 ref object</li>
 </ul>
 <p>我們可透過宣告 <code>id = useRef(2)</code>，就能夠在每次 render 時，更改每個 todo 中 id.current 的值：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [todos, setTodos] = useState([</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">content</span>: <span class="string">&#x27;todo1&#x27;</span>&#125;</span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// useRef: 能我們抓取到 DOM 節點的 hooks</span></span><br><span class="line">  <span class="comment">// 會回傳一個物件，要以 id.current 讀取</span></span><br><span class="line">  <span class="keyword">const</span> id = useRef(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleButtonClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setTodos([</span><br><span class="line">      &#123;</span><br><span class="line">        id: id.current,</span><br><span class="line">        content: value</span><br><span class="line">      &#125;, ...todos]</span><br><span class="line">    );</span><br><span class="line">    setValue(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    id.current++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleInputChange = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setValue(e.target.value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;input type=<span class="string">&quot;text&quot;</span> placeholder=<span class="string">&quot;Add todo...&quot;</span> value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;</span><br><span class="line">      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;todo.id&#125;</span> <span class="attr">todo</span>=<span class="string">&#123;todo&#125;</span> /&gt;</span></span> ) </span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">function App() &#123;
+  const [todos, setTodos] = useState([
+    &#123;id: 1, content: &#39;todo1&#39;&#125;
+  ]);
 
+  const [value, setValue] = useState(&#39;&#39;);
+  // useRef: 能我們抓取到 DOM 節點的 hooks
+  // 會回傳一個物件，要以 id.current 讀取
+  const id = useRef(2);
+
+  const handleButtonClick = () =&gt; &#123;
+    setTodos([
+      &#123;
+        id: id.current,
+        content: value
+      &#125;, ...todos]
+    );
+    setValue(&#39;&#39;);
+    id.current++;
+  &#125;
+
+  const handleInputChange = (e) =&gt; &#123;
+    setValue(e.target.value);
+  &#125;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;Add todo...&quot; value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;
+      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;
+      &#123;
+        todos.map(todo =&gt; &lt;TodoItem key=&#123;todo.id&#125; todo=&#123;todo&#125; /&gt; ) 
+      &#125;
+    &lt;/div&gt;
+  );</code></pre>
 <p>傳入 todo 這個參數，並放到 TodoItem：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; content, todo &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;</span><br><span class="line">      &lt;TodoContent&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</span><br><span class="line">      &lt;TodoButtonWrapper&gt;</span><br><span class="line">        &lt;Button&gt;未完成&lt;/Button&gt;</span><br><span class="line">        &lt;RedButton&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">      &lt;/TodoButtonWrapper&gt;</span><br><span class="line">    &lt;/TodoItemWrapper&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">===上方寫法等同於===</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export default function TodoItem(&#123; content, todo &#125;) &#123;
+  return (
+    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;
+      &lt;TodoContent&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;
+      &lt;TodoButtonWrapper&gt;
+        &lt;Button&gt;未完成&lt;/Button&gt;
+        &lt;RedButton&gt;刪除&lt;/RedButton&gt;
+      &lt;/TodoButtonWrapper&gt;
+    &lt;/TodoItemWrapper&gt;
+  );
+&#125;
 
+===上方寫法等同於===
+
+function TodoItem() &#123;
+  // ...
+&#125;
+export default TodoItem;</code></pre>
 <h3 id="刪除-todo"><a href="#刪除-todo" class="headerlink" title="刪除 todo"></a>刪除 todo</h3><h4 id="1-把要做的-function-寫在-Parent，並傳入參數給-Children"><a href="#1-把要做的-function-寫在-Parent，並傳入參數給-Children" class="headerlink" title="1. 把要做的 function 寫在 Parent，並傳入參數給 Children"></a>1. 把要做的 function 寫在 Parent，並傳入參數給 Children</h4><p>把 handleDeleteTodo 這個 function 當作 props 傳給 TodoItem：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleDeleteTodo = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> placeholder=<span class="string">&quot;Add todo...&quot;</span> value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;</span><br><span class="line">    &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;</span><br><span class="line">    &#123;</span><br><span class="line">      todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;todo.id&#125;</span> <span class="attr">todo</span>=<span class="string">&#123;todo&#125;</span> <span class="attr">handleDeleteTodo</span>=<span class="string">&#123;handleDeleteTodo&#125;</span> /&gt;</span></span> ) </span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">  const handleDeleteTodo = id =&gt; &#123;
 
+  &#125;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;Add todo...&quot; value=&#123;value&#125; onChange=&#123;handleInputChange&#125; /&gt;
+      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;
+      &#123;
+        todos.map(todo =&gt; &lt;TodoItem key=&#123;todo.id&#125; todo=&#123;todo&#125; handleDeleteTodo=&#123;handleDeleteTodo&#125; /&gt; ) 
+      &#125;
+    &lt;/div&gt;
+  );</code></pre>
 <h4 id="2-再由-Children-呼叫-function"><a href="#2-再由-Children-呼叫-function" class="headerlink" title="2. 再由 Children 呼叫 function"></a>2. 再由 Children 呼叫 function</h4><p>TodoItem 就可以接收這個 funtcion，並透過刪除按鈕的監聽事件，來呼叫 handleDeleteTodo 以及回傳該 <code>todo.id</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; content, todo, handleDeleteTodo &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;</span><br><span class="line">      &lt;TodoContent&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</span><br><span class="line">      &lt;TodoButtonWrapper&gt;</span><br><span class="line">        &lt;Button&gt;未完成&lt;/Button&gt;</span><br><span class="line">        &lt;RedButton onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          handleDeleteTodo(todo.id)</span><br><span class="line">        &#125;&#125;&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">      &lt;/TodoButtonWrapper&gt;</span><br><span class="line">    &lt;/TodoItemWrapper&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-接著在-Parent-處理-function"><a href="#3-接著在-Parent-處理-function" class="headerlink" title="3. 接著在 Parent 處理 function"></a>3. 接著在 Parent 處理 function</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleDeleteTodo = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 若用 splice() 會改到原本的 todo，因此要用 filter()，留下該 id 以外的 todo</span></span><br><span class="line">  setTodos(todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.id !== id))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">export default function TodoItem(&#123; content, todo, handleDeleteTodo &#125;) &#123;
+  return (
+    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;
+      &lt;TodoContent&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;
+      &lt;TodoButtonWrapper&gt;
+        &lt;Button&gt;未完成&lt;/Button&gt;
+        &lt;RedButton onClick=&#123;() =&gt; &#123;
+          handleDeleteTodo(todo.id)
+        &#125;&#125;&gt;刪除&lt;/RedButton&gt;
+      &lt;/TodoButtonWrapper&gt;
+    &lt;/TodoItemWrapper&gt;
+  );
+&#125;</code></pre>
+<h4 id="3-接著在-Parent-處理-function"><a href="#3-接著在-Parent-處理-function" class="headerlink" title="3. 接著在 Parent 處理 function"></a>3. 接著在 Parent 處理 function</h4><pre><code class="javascript=">  const handleDeleteTodo = id =&gt; &#123;
+    // 若用 splice() 會改到原本的 todo，因此要用 filter()，留下該 id 以外的 todo
+    setTodos(todos.filter(todo =&gt; todo.id !== id))
+  &#125;</code></pre>
 <h3 id="編輯-todo"><a href="#編輯-todo" class="headerlink" title="編輯 todo"></a>編輯 todo</h3><p>在實作編輯 todo 之前，要先來檢視資料結構，也就是把 todo 的狀態加上 isDone，用來判斷是否已完成：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [todos, setTodos] = useState([</span><br><span class="line">    &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">content</span>: <span class="string">&#x27;done&#x27;</span>, <span class="attr">isDone</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">content</span>: <span class="string">&#x27;not done&#x27;</span>, <span class="attr">isDone</span>: <span class="literal">false</span> &#125;</span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> id = useRef(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">function App() &#123;
+  const [todos, setTodos] = useState([
+    &#123; id: 1, content: &#39;done&#39;, isDone: true &#125;,
+    &#123; id: 2, content: &#39;not done&#39;, isDone: false &#125;
+  ]);
 
+  const [value, setValue] = useState(&#39;&#39;);
+  const id = useRef(3);</code></pre>
 <p>接著在 TodoItem 的按鈕加上三元運算子，用來判斷 todo 狀態，再藉由 $isDone 這個參數，判斷式是否執行後面的 JSX 語法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TodoContent = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  font-size: 26px;</span></span><br><span class="line"><span class="string">  color: <span class="subst">$&#123;props =&gt; props.theme.colors.primary_300&#125;</span>;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  // 若 isDone 這個參數為 true(已完成) 則接續後面的 JSX 語法</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;props =&gt; props.$isDone &amp;&amp; <span class="string">`</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    text-decoration: line-through;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">  `</span>&#125;</span></span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; content, todo, handleDeleteTodo &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;</span><br><span class="line">      <span class="comment">// 傳入 isDone 這個參數</span></span><br><span class="line">      &lt;TodoContent $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</span><br><span class="line">      &lt;TodoButtonWrapper&gt;</span><br><span class="line">        &lt;Button&gt;</span><br><span class="line">          <span class="comment">// 透過三元運算子判斷 todo 狀態</span></span><br><span class="line">          &#123;todo.isDone ? <span class="string">&#x27;已完成&#x27;</span> : <span class="string">&#x27;未完成&#x27;</span>&#125;</span><br><span class="line">        &lt;/Button&gt;</span><br><span class="line">        &lt;RedButton onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          handleDeleteTodo(todo.id)</span><br><span class="line">        &#125;&#125;&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">      &lt;/TodoButtonWrapper&gt;</span><br><span class="line">    &lt;/TodoItemWrapper&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">const TodoContent = styled.div`
+  font-size: 26px;
+  color: $&#123;props =&gt; props.theme.colors.primary_300&#125;;
 
+  // 若 isDone 這個參數為 true(已完成) 則接續後面的 JSX 語法
+  $&#123;props =&gt; props.$isDone &amp;&amp; `
+    text-decoration: line-through;
+  `&#125;
+`
+
+export default function TodoItem(&#123; content, todo, handleDeleteTodo &#125;) &#123;
+  return (
+    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;
+      // 傳入 isDone 這個參數
+      &lt;TodoContent $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;
+      &lt;TodoButtonWrapper&gt;
+        &lt;Button&gt;
+          // 透過三元運算子判斷 todo 狀態
+          &#123;todo.isDone ? &#39;已完成&#39; : &#39;未完成&#39;&#125;
+        &lt;/Button&gt;
+        &lt;RedButton onClick=&#123;() =&gt; &#123;
+          handleDeleteTodo(todo.id)
+        &#125;&#125;&gt;刪除&lt;/RedButton&gt;
+      &lt;/TodoButtonWrapper&gt;
+    &lt;/TodoItemWrapper&gt;
+  );
+&#125;</code></pre>
 <p>除了三元運算子，也可改寫成邏輯運算子 &amp;&amp; 的寫法，適用於多種可能的情況：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button onClick=&#123;handleToggleClick&#125;&gt;</span><br><span class="line">  &#123;todo.isDone &amp;&amp; <span class="string">&#x27;已完成&#x27;</span>&#125;</span><br><span class="line">  &#123;!todo.isDone &amp;&amp; <span class="string">&#x27;未完成&#x27;</span>&#125;</span><br><span class="line">&lt;/Button&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">  &lt;Button onClick=&#123;handleToggleClick&#125;&gt;
+    &#123;todo.isDone &amp;&amp; &#39;已完成&#39;&#125;
+    &#123;!todo.isDone &amp;&amp; &#39;未完成&#39;&#125;
+  &lt;/Button&gt;</code></pre>
 <p>接著實作 handleToggleIsDone 修改 todo 功能：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleToggleIsDone = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  setTodos(todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 如果不是要修改的 todo id 就直接回傳</span></span><br><span class="line">    <span class="keyword">if</span> (todo.id !== id) <span class="keyword">return</span> todo;</span><br><span class="line">    <span class="comment">// 要修改的 todo id</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// todo 原本的東西</span></span><br><span class="line">      ...todo,</span><br><span class="line">      <span class="comment">// 要修改的屬性</span></span><br><span class="line">      isDone: !todo.isDone</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">  const handleToggleIsDone = id =&gt; &#123;
+    setTodos(todos.map(todo =&gt; &#123;
+      // 如果不是要修改的 todo id 就直接回傳
+      if (todo.id !== id) return todo;
+      // 要修改的 todo id
+      return &#123;
+        // todo 原本的東西
+        ...todo,
+        // 要修改的屬性
+        isDone: !todo.isDone
+      &#125;
+    &#125;));
+  &#125;</code></pre>
 <p>傳入參數到 TodoItem：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;todo.id&#125;</span> <span class="attr">todo</span>=<span class="string">&#123;todo&#125;</span> <span class="attr">handleDeleteTodo</span>=<span class="string">&#123;handleDeleteTodo&#125;</span> <span class="attr">handleToggleIsDone</span>=<span class="string">&#123;handleToggleIsDone&#125;/</span>&gt;</span></span> ) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">  &#123;
+    todos.map(todo =&gt; &lt;TodoItem key=&#123;todo.id&#125; todo=&#123;todo&#125; handleDeleteTodo=&#123;handleDeleteTodo&#125; handleToggleIsDone=&#123;handleToggleIsDone&#125;/&gt; ) 
+  &#125;</code></pre>
 <p>由 TodoItem 接收參數，可以把 click 事件抽出來寫，相較於原本的 inline function，能夠提高程式碼的可讀性：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; todo, handleDeleteTodo, handleToggleIsDone &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> handleToggleClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    handleToggleIsDone(todo.id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleDeleteClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    handleDeleteTodo(todo.id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;</span><br><span class="line">      &lt;TodoContent $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</span><br><span class="line">      &lt;TodoButtonWrapper&gt;</span><br><span class="line">        &lt;Button onClick=&#123;handleToggleClick&#125;&gt;</span><br><span class="line">          &#123;todo.isDone ? <span class="string">&#x27;已完成&#x27;</span> : <span class="string">&#x27;未完成&#x27;</span>&#125;</span><br><span class="line">        &lt;/Button&gt;</span><br><span class="line">        &lt;RedButton onClick=&#123;handleDeleteClick&#125;&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">      &lt;/TodoButtonWrapper&gt;</span><br><span class="line">    &lt;/TodoItemWrapper&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export default function TodoItem(&#123; todo, handleDeleteTodo, handleToggleIsDone &#125;) &#123;
+  const handleToggleClick = () =&gt; &#123;
+    handleToggleIsDone(todo.id);
+  &#125;
 
+  const handleDeleteClick = () =&gt; &#123;
+    handleDeleteTodo(todo.id);
+  &#125;
+
+  return (
+    &lt;TodoItemWrapper data-todo-id=&#123;todo.id&#125;&gt;
+      &lt;TodoContent $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;
+      &lt;TodoButtonWrapper&gt;
+        &lt;Button onClick=&#123;handleToggleClick&#125;&gt;
+          &#123;todo.isDone ? &#39;已完成&#39; : &#39;未完成&#39;&#125;
+        &lt;/Button&gt;
+        &lt;RedButton onClick=&#123;handleDeleteClick&#125;&gt;刪除&lt;/RedButton&gt;
+      &lt;/TodoButtonWrapper&gt;
+    &lt;/TodoItemWrapper&gt;
+  );
+&#125;</code></pre>
 <h3 id="Transient-props：-lt-props-gt"><a href="#Transient-props：-lt-props-gt" class="headerlink" title="Transient props：$&lt;props&gt;"></a>Transient props：<code>$&lt;props&gt;</code></h3><p>在上方程式碼中，加在 TodoContent 的 $isDone 這個 props，會被視為 style component props，不會被繼續傳到下一個 DOM 元素，也就不會顯示在 TodoContent 標籤上。</p>
 <p>如果沒有加上 $ 符號，這個 props 就會被直接加在 TodoContent 這個 DOM 結構上。</p>
 <p>再以下方程式碼為例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;TodoContent id=<span class="string">&quot;abc&quot;</span> $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&lt;TodoContent id=&quot;abc&quot; $isDone=&#123;todo.isDone&#125;&gt;&#123;todo.content&#125;&lt;/TodoContent&gt;</code></pre>
 <p>可以發現經過 render 之後，在 DOM 元素只會出現 <code>id=&quot;abc&quot;</code> 這個屬性，而不會有 <code>$isDone</code>，這是因為 Transient props 不會被往下傳：</p>
 <p><img src="https://i.imgur.com/K4ROwak.png"></p>
 <h2 id="Todo-List-總結"><a href="#Todo-List-總結" class="headerlink" title="Todo List 總結"></a>Todo List 總結</h2><p>透過實作簡單的 Todo List，其實我們就差不多學會了有關 React 的基礎：</p>
@@ -395,11 +589,29 @@
 <li>Event handler 事件機制</li>
 </ol>
 <p>和過去在網頁添加事件監聽不同，必須先以 <code>querySelector()</code> 選取 DOM 元素：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;Hello!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&#x27;.sayHello&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>, sayHello);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">function sayHello() &#123;
+  alert(&#39;Hello!&#39;);
+&#125;
+document.querySelector(&#39;.sayHello&#39;).addEventListener(&#39;click&#39;, sayHello);</code></pre>
 <p>而 React 把 DOM 和 JavaScript 程式碼寫在一起，因此可直接在 DOM 元素加上 onClick、onSubmit、onKeyDown 等事件監聽：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; todo, handleDeleteTodo &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> handleDeleteClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    handleDeleteTodo(todo.id);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;RedButton onClick=&#123;handleDeleteClick&#125;&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/* 也可簡化成箭頭函式 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123; todo, handleDeleteTodo &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;RedButton onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      handleDeleteTodo(todo.id)</span><br><span class="line">    &#125;&#125;&gt;刪除&lt;/RedButton&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">function TodoItem(&#123; todo, handleDeleteTodo &#125;) &#123;
+  const handleDeleteClick = () =&gt; &#123;
+    handleDeleteTodo(todo.id);
+  &#125;
+  return (
+    &lt;RedButton onClick=&#123;handleDeleteClick&#125;&gt;刪除&lt;/RedButton&gt;
+  );
+&#125;
 
+      /* 也可簡化成箭頭函式 */
+
+function TodoItem(&#123; todo, handleDeleteTodo &#125;) &#123;
+  return (
+    &lt;RedButton onClick=&#123;() =&gt; &#123;
+      handleDeleteTodo(todo.id)
+    &#125;&#125;&gt;刪除&lt;/RedButton&gt;
+  );
+&#125;</code></pre>
 <ol start="5">
 <li>JSX 語法</li>
 </ol>
@@ -414,32 +626,54 @@
 </li>
 </ul>
 <p>此外，當我們要 render 一系列 list 的時候，會使用 <code>map()</code> 把資料變成一個陣列，然後 render 需要提供 key：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;todo.id&#125;</span> <span class="attr">todo</span>=<span class="string">&#123;todo&#125;</span> /&gt;</span></span> ) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&#123;
+   todos.map(todo =&gt; &lt;TodoItem key=&#123;todo.id&#125; todo=&#123;todo&#125; /&gt; ) 
+&#125;</code></pre>
 <ol start="6">
 <li>State 狀態</li>
 </ol>
 <p>是 React 中最重要的觀念，可透過 useState 設定 state 初始值，再以 setState 去改變 state。state 會對應到一個 UI，一旦 state 有變動，就會自動呼叫 render()。</p>
 <p>state 最基本的語法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [currentValue, setCurrentValue] = useState(initialValue);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">const [currentValue, setCurrentValue] = useState(initialValue);</code></pre>
 <p>在 React 當中，若要進行新增、編輯、刪除功能，雖然有許多方法能夠達成，但基本上有固定的作法：</p>
 <ul>
 <li>新增功能：解構語法</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleButtonClick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  setTodos([</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// 要新增的 todo</span></span><br><span class="line">      id: id.current,</span><br><span class="line">      content: value</span><br><span class="line">      <span class="comment">// 解構語法</span></span><br><span class="line">    &#125;, ...todos]</span><br><span class="line">  );</span><br><span class="line">  setValue(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  id.current++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">  const handleButtonClick = () =&gt; &#123;
+    setTodos([
+      &#123;
+        // 要新增的 todo
+        id: id.current,
+        content: value
+        // 解構語法
+      &#125;, ...todos]
+    );
+    setValue(&#39;&#39;);
+    id.current++;
+  &#125;</code></pre>
 <ul>
 <li>編輯功能：map()</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleToggleIsDone = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  setTodos(todos.map(<span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 如果不是要修改的 todo id 就直接回傳</span></span><br><span class="line">    <span class="keyword">if</span> (todo.id !== id) <span class="keyword">return</span> todo;</span><br><span class="line">    <span class="comment">// 要修改的 todo id</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// todo 原本的東西</span></span><br><span class="line">      ...todo,</span><br><span class="line">      <span class="comment">// 要修改的屬性</span></span><br><span class="line">      isDone: !todo.isDone</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">  const handleToggleIsDone = id =&gt; &#123;
+    setTodos(todos.map(todo =&gt; &#123;
+      // 如果不是要修改的 todo id 就直接回傳
+      if (todo.id !== id) return todo;
+      // 要修改的 todo id
+      return &#123;
+        // todo 原本的東西
+        ...todo,
+        // 要修改的屬性
+        isDone: !todo.isDone
+      &#125;
+    &#125;));
+  &#125;</code></pre>
 <ul>
 <li>刪除功能：filter()</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleDeleteTodo = <span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 留下該 id 以外的 todo</span></span><br><span class="line">  setTodos(todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.id !== id))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="javascript=">  const handleDeleteTodo = id =&gt; &#123;
+    // 留下該 id 以外的 todo
+    setTodos(todos.filter(todo =&gt; todo.id !== id))
+  &#125;</code></pre>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3><hr>
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>這和以往的思考模式其實很不一樣，像是在切好的 UI 畫面上新增各種功能；而 React 則是先思考 state 狀態，再去想會如何改變畫面。</p>
 <p>記住一個重點，就是 Component 之間可透過 props 把 state 傳遞下去。並且，只要 state 所有變動，就會觸發 render() 來更新 UI 畫面。</p>
@@ -557,7 +791,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -568,7 +802,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

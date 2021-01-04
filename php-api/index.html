@@ -281,28 +281,228 @@
 <h2 id="練習：實作無會員機制的留言版-API"><a href="#練習：實作無會員機制的留言版-API" class="headerlink" title="練習：實作無會員機制的留言版 API"></a>練習：實作無會員機制的留言版 API</h2><h3 id="PHP-相關語法"><a href="#PHP-相關語法" class="headerlink" title="PHP 相關語法"></a>PHP 相關語法</h3><ul>
 <li><code>header(&#39;Content-Type: application/json; charset=utf-8&#39;);</code>：指定瀏覽器以 JSON 格式內容，UTF-8 字元編碼</li>
 <li><code>array_push()</code>：在一個陣列中，再插入一個值進去<ul>
-<li>語法：<code>array_push(欲增加的陣列, 值)</code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  $array = <span class="keyword">array</span>(); </span><br><span class="line">  array_push($array, <span class="string">&quot;Test&quot;</span>); </span><br><span class="line">  print_r($array); </span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">// 輸出結果: Array ( [0] =&gt; Test )</span></span><br></pre></td></tr></table></figure>
-
+<li>語法：<code>array_push(欲增加的陣列, 值)</code><pre><code class="php=">&lt;?php 
+$array = array(); 
+array_push($array, &quot;Test&quot;); 
+print_r($array); 
+?&gt;
+// 輸出結果: Array ( [0] =&gt; Test )</code></pre>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="用-PHP-實作-API"><a href="#用-PHP-實作-API" class="headerlink" title="用 PHP 實作 API"></a>用 PHP 實作 API</h3><p>首先要瞭解如何使用 PHP 做出 API，以 <code>api_comments.php</code> 下列程式碼為例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="comment">// 宣告變數 comments 為空陣列</span></span><br><span class="line">  $comments = <span class="keyword">array</span>();</span><br><span class="line">  <span class="comment">// 把資料放到陣列 $comments，裡面再建立陣列 array</span></span><br><span class="line">  array_push($comments, <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;id&quot;</span> =&gt; <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;username&quot;</span> =&gt; <span class="string">&quot;aaa&quot;</span>,</span><br><span class="line">    <span class="string">&quot;content&quot;</span> =&gt; <span class="string">&quot;123&quot;</span></span><br><span class="line">  ));</span><br><span class="line">  array_push($comments, <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;id&quot;</span> =&gt; <span class="number">2</span>,</span><br><span class="line">    <span class="string">&quot;username&quot;</span> =&gt; <span class="string">&quot;bbb&quot;</span>,</span><br><span class="line">    <span class="string">&quot;content&quot;</span> =&gt; <span class="string">&quot;456&quot;</span></span><br><span class="line">  ));</span><br><span class="line">  </span><br><span class="line">  $json = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;comments&quot;</span> =&gt; $comments</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  $response = json_encode($json);</span><br><span class="line">  <span class="comment">// 讓瀏覽器知道我們要印出 JSON 格式</span></span><br><span class="line">  header(<span class="string">&#x27;Content-Type: application/json; charset=utf-8&#x27;</span>);</span><br><span class="line">  <span class="keyword">echo</span> $response;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="php=">&lt;?php
+  // 宣告變數 comments 為空陣列
+  $comments = array();
+  // 把資料放到陣列 $comments，裡面再建立陣列 array
+  array_push($comments, array(
+    &quot;id&quot; =&gt; 1,
+    &quot;username&quot; =&gt; &quot;aaa&quot;,
+    &quot;content&quot; =&gt; &quot;123&quot;
+  ));
+  array_push($comments, array(
+    &quot;id&quot; =&gt; 2,
+    &quot;username&quot; =&gt; &quot;bbb&quot;,
+    &quot;content&quot; =&gt; &quot;456&quot;
+  ));
 
+  $json = array(
+    &quot;comments&quot; =&gt; $comments
+  );
+
+  $response = json_encode($json);
+  // 讓瀏覽器知道我們要印出 JSON 格式
+  header(&#39;Content-Type: application/json; charset=utf-8&#39;);
+  echo $response;
+?&gt;</code></pre>
 <p>在瀏覽器接收到的 response 就是 JSON 格式的物件，可使用開發者工具查看內容：</p>
 <p><img src="https://i.imgur.com/RJIaktu.png"></p>
 <h3 id="實作-API：列出所有文章"><a href="#實作-API：列出所有文章" class="headerlink" title="實作 API：列出所有文章"></a>實作 API：列出所有文章</h3><p>把之前實作留言板 <code>index.php</code> 時，使用的語法結合到 <code>api_comments.php</code>，即可得到只輸出資料的 API：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">require_once</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 和 index.php 抓取資料的語法相同</span></span><br><span class="line">  $page = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">empty</span>($_GET[<span class="string">&#x27;page&#x27;</span>])) &#123;</span><br><span class="line">    $page = intval($_GET[<span class="string">&#x27;page&#x27;</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  $items_per_page = <span class="number">5</span>;</span><br><span class="line">  $offset = ($page - <span class="number">1</span>) * $items_per_page; </span><br><span class="line"></span><br><span class="line">  $sql =  <span class="string">&quot;SELECT &quot;</span>.</span><br><span class="line">            <span class="string">&quot;C.id as id, C.content AS content, &quot;</span>. </span><br><span class="line">            <span class="string">&quot;C.created_at AS created_at, U.nickname AS nickname, U.username AS username &quot;</span>.</span><br><span class="line">          <span class="string">&quot;FROM heidi_comments AS C &quot;</span>. </span><br><span class="line">          <span class="string">&quot;LEFT JOIN heidi_users AS U ON C.username = U.username &quot;</span>.</span><br><span class="line">          <span class="string">&quot;WHERE C.is_deleted IS NULL &quot;</span>.</span><br><span class="line">          <span class="string">&quot;ORDER BY C.id DESC &quot;</span>.</span><br><span class="line">          <span class="string">&quot;LIMIT ? OFFSET ? &quot;</span>;</span><br><span class="line">  $stmt = $conn-&gt;prepare($sql);</span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">&quot;ii&quot;</span>, $items_per_page, $offset);</span><br><span class="line">  $result = $stmt-&gt;execute();</span><br><span class="line">  <span class="keyword">if</span> (!$result) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&#x27;Error:&#x27;</span> . $conn-&gt;error);</span><br><span class="line">  &#125;</span><br><span class="line">  $result = $stmt-&gt;get_result();</span><br><span class="line">  $comments = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 把讀取的資料放到陣列 $comments，裡面再建立陣列 array，概念比較像 JS 物件</span></span><br><span class="line">  <span class="keyword">while</span>($row = $result-&gt;fetch_assoc()) &#123;</span><br><span class="line">    array_push($comments, <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;id&quot;</span> =&gt; $row[<span class="string">&#x27;id&#x27;</span>],</span><br><span class="line">    <span class="string">&quot;username&quot;</span> =&gt; $row[<span class="string">&#x27;username&#x27;</span>],</span><br><span class="line">    <span class="string">&quot;nickname&quot;</span> =&gt; $row[<span class="string">&#x27;nickname&#x27;</span>],</span><br><span class="line">    <span class="string">&quot;content&quot;</span> =&gt; $row[<span class="string">&#x27;content&#x27;</span>],</span><br><span class="line">    <span class="string">&quot;created_at&quot;</span> =&gt; $row[<span class="string">&#x27;created_at&#x27;</span>]</span><br><span class="line">    ));</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  $json = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;comments&quot;</span> =&gt; $comments</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  $response = json_encode($json);</span><br><span class="line">  <span class="comment">// 讓瀏覽器知道我們要印出 JSON 格式</span></span><br><span class="line">  header(<span class="string">&#x27;Content-Type: application/json; charset=utf-8&#x27;</span>);</span><br><span class="line">  <span class="keyword">echo</span> $response;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="php=">&lt;?php
+  require_once(&quot;conn.php&quot;);
 
+  // 和 index.php 抓取資料的語法相同
+  $page = 1;
+  if (!empty($_GET[&#39;page&#39;])) &#123;
+    $page = intval($_GET[&#39;page&#39;]);
+  &#125;
+  $items_per_page = 5;
+  $offset = ($page - 1) * $items_per_page; 
+
+  $sql =  &quot;SELECT &quot;.
+            &quot;C.id as id, C.content AS content, &quot;. 
+            &quot;C.created_at AS created_at, U.nickname AS nickname, U.username AS username &quot;.
+          &quot;FROM heidi_comments AS C &quot;. 
+          &quot;LEFT JOIN heidi_users AS U ON C.username = U.username &quot;.
+          &quot;WHERE C.is_deleted IS NULL &quot;.
+          &quot;ORDER BY C.id DESC &quot;.
+          &quot;LIMIT ? OFFSET ? &quot;;
+  $stmt = $conn-&gt;prepare($sql);
+  $stmt-&gt;bind_param(&quot;ii&quot;, $items_per_page, $offset);
+  $result = $stmt-&gt;execute();
+  if (!$result) &#123;
+    die(&#39;Error:&#39; . $conn-&gt;error);
+  &#125;
+  $result = $stmt-&gt;get_result();
+  $comments = array();
+
+  // 把讀取的資料放到陣列 $comments，裡面再建立陣列 array，概念比較像 JS 物件
+  while($row = $result-&gt;fetch_assoc()) &#123;
+    array_push($comments, array(
+    &quot;id&quot; =&gt; $row[&#39;id&#39;],
+    &quot;username&quot; =&gt; $row[&#39;username&#39;],
+    &quot;nickname&quot; =&gt; $row[&#39;nickname&#39;],
+    &quot;content&quot; =&gt; $row[&#39;content&#39;],
+    &quot;created_at&quot; =&gt; $row[&#39;created_at&#39;]
+    ));
+  &#125;
+
+  $json = array(
+    &quot;comments&quot; =&gt; $comments
+  );
+
+  $response = json_encode($json);
+  // 讓瀏覽器知道我們要印出 JSON 格式
+  header(&#39;Content-Type: application/json; charset=utf-8&#39;);
+  echo $response;
+?&gt;</code></pre>
 <p>上述程式碼，和 <code>index.php</code> 同樣是讀取資料，差別在於 API 是把資料放到陣列 <code>$comments</code>，裡面再建立陣列 array，概念比較像 JS 物件。</p>
 <h3 id="實作-API：新增文章"><a href="#實作-API：新增文章" class="headerlink" title="實作 API：新增文章"></a>實作 API：新增文章</h3><p>以 <code>api_add_comment.php</code> 為例，寫法會和 <code>handle_add_comment.php</code>（新增留言功能）的邏輯類似：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">require_once</span>(<span class="string">&#x27;conn.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  header(<span class="string">&#x27;Content-Type: application/json; charset=utf-8&#x27;</span>);</span><br><span class="line">  <span class="comment">// 若讀取失敗</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    <span class="keyword">empty</span>($_POST[<span class="string">&#x27;content&#x27;</span>])</span><br><span class="line">  ) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; <span class="string">&quot;Please input content&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>(); </span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  $username = $_POST[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">  $content = $_POST[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  $sql = <span class="string">&quot;INSERT INTO heidi_comments(username, content)</span></span><br><span class="line"><span class="string">    VALUES(?, ?)&quot;</span>;</span><br><span class="line">  $stmt = $conn-&gt;prepare($sql);</span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">&#x27;ss&#x27;</span>, $username, $content);</span><br><span class="line">  $result = $stmt-&gt;execute();</span><br><span class="line">  <span class="comment">// 若執行失敗</span></span><br><span class="line">  <span class="keyword">if</span> (!$result) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; $conn-&gt;error</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>(); </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 若成功讀取資料</span></span><br><span class="line">  $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; <span class="string">&quot;Success&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="php=">&lt;?php
+  require_once(&#39;conn.php&#39;);
 
+  header(&#39;Content-Type: application/json; charset=utf-8&#39;);
+  // 若讀取失敗
+  if (
+    empty($_POST[&#39;content&#39;])
+  ) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; &quot;Please input content&quot;
+    );
+
+    $response = json_encode($json);
+    echo $response;
+    die(); 
+  &#125;
+
+  $username = $_POST[&#39;username&#39;];
+  $content = $_POST[&#39;content&#39;];
+
+  $sql = &quot;INSERT INTO heidi_comments(username, content)
+    VALUES(?, ?)&quot;;
+  $stmt = $conn-&gt;prepare($sql);
+  $stmt-&gt;bind_param(&#39;ss&#39;, $username, $content);
+  $result = $stmt-&gt;execute();
+  // 若執行失敗
+  if (!$result) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; $conn-&gt;error
+    );
+
+    $response = json_encode($json);
+    echo $response;
+    die(); 
+  &#125;
+  // 若成功讀取資料
+  $json = array(
+      &quot;ok&quot; =&gt; true,
+      &quot;message&quot; =&gt; &quot;Success&quot;
+    );
+
+    $response = json_encode($json);
+    echo $response;
+?&gt;</code></pre>
 <p><img src="https://i.imgur.com/n9O600m.png"></p>
 <h3 id="前端串接-API"><a href="#前端串接-API" class="headerlink" title="前端串接 API"></a>前端串接 API</h3><p>最後就是在前端頁面 <code>index.html</code> 串接寫好的 API：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span><br><span class="line">    &lt;main <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board&quot;</span>&gt;　</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span> </span>=<span class="string">&quot;board__header&quot;</span>&gt;</span><br><span class="line">        &lt;h1 <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board__tittle&quot;</span>&gt;Comments&lt;/h1&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board__btn-block&quot;</span>&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">      &lt;form <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board__new-comment-form&quot;</span>&gt;</span><br><span class="line">        &lt;textarea name=<span class="string">&quot;content&quot;</span> rows=<span class="string">&quot;5&quot;</span> placeholder=<span class="string">&quot;請輸入留言...&quot;</span>&gt;&lt;/textarea&gt;</span><br><span class="line">        &lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board__submit-btn&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;board__hr&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;section&gt;</span><br><span class="line">       <span class="comment">// 動態新增留言的區塊...</span></span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">    &lt;/main&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script&gt;</span><br><span class="line">      <span class="comment">// 發出 Request</span></span><br><span class="line">      <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">      request.open(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;api_comments.php&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">      request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.status &gt;= <span class="number">200</span> &amp;&amp; <span class="built_in">this</span>.status &lt; <span class="number">400</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> resp = <span class="built_in">this</span>.response;</span><br><span class="line">          <span class="keyword">var</span> json = <span class="built_in">JSON</span>.parse(resp)</span><br><span class="line">          <span class="keyword">var</span> comments = json.comments</span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; comments.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> comment = comments[i]</span><br><span class="line">            <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">            div.classList.add(<span class="string">&#x27;card&#x27;</span>)</span><br><span class="line">            div.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">              &lt;div class=&quot;card__avatar&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">              &lt;div class=&quot;card__body&quot;&gt;</span></span><br><span class="line"><span class="string">                  &lt;div class=&quot;card__info&quot;&gt;</span></span><br><span class="line"><span class="string">                    &lt;span class=&quot;card__author&quot;&gt;</span></span><br><span class="line"><span class="string">                      <span class="subst">$&#123;encodeHTML(comment.nickname)&#125;</span>(@<span class="subst">$&#123;encodeHTML(comment.username)&#125;</span>)</span></span><br><span class="line"><span class="string">                    &lt;/span&gt;</span></span><br><span class="line"><span class="string">                    &lt;span class=&quot;card__time&quot;&gt;</span></span><br><span class="line"><span class="string">                      <span class="subst">$&#123;encodeHTML(comment.created_at)&#125;</span></span></span><br><span class="line"><span class="string">                    &lt;/span&gt;</span></span><br><span class="line"><span class="string">                  &lt;/div&gt;</span></span><br><span class="line"><span class="string">                  &lt;p class=&quot;card__content&quot;&gt;<span class="subst">$&#123;encodeHTML(comment.content)&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">              &lt;/div&gt;</span></span><br><span class="line"><span class="string">            `</span></span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">&#x27;section&#x27;</span>).appendChild(div)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; </span><br><span class="line">      &#125;;</span><br><span class="line">      request.send();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> form = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.board__new-comment-form&#x27;</span>)</span><br><span class="line">      form.addEventListener(<span class="string">&#x27;submit&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 阻止預設事件: 送出表單</span></span><br><span class="line">        e.preventDefault()</span><br><span class="line">        <span class="comment">// 讀取輸入內容</span></span><br><span class="line">        <span class="keyword">var</span> content = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;textarea[name=content]&#x27;</span>).value</span><br><span class="line">        <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        <span class="comment">// 發出 POST Request</span></span><br><span class="line">        request.open(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;api_add_comment.php&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">        request.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded; charset=UTF-8&#x27;</span>);</span><br><span class="line">        request.send(<span class="string">&quot;username=aaa&amp;content=&quot;</span> + <span class="built_in">encodeURIComponent</span>(content));</span><br><span class="line">        request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">this</span>.status &gt;= <span class="number">200</span> &amp;&amp; <span class="built_in">this</span>.status &lt; <span class="number">400</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> resp = <span class="built_in">this</span>.response;</span><br><span class="line">            <span class="keyword">var</span> json = <span class="built_in">JSON</span>.parse(resp)</span><br><span class="line">            <span class="keyword">if</span> (json.ok) &#123;</span><br><span class="line">              <span class="comment">// 頁面重整: 可重新抓取留言</span></span><br><span class="line">              location.reload()</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              alert(json.message)</span><br><span class="line">            &#125;       </span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="comment">// 字串均需進行 escape 跳脫</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">encodeHTML</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s.replace(<span class="regexp">/&amp;/g</span>, <span class="string">&#x27;&amp;amp;&#x27;</span>).replace(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt;&#x27;</span>).replace(<span class="regexp">/&quot;/g</span>, <span class="string">&#x27;&amp;quot;&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">&lt;body&gt;
+  &lt;div class=&quot;wrapper&quot;&gt;
+    &lt;main class=&quot;board&quot;&gt;　
+      &lt;div class =&quot;board__header&quot;&gt;
+        &lt;h1 class=&quot;board__tittle&quot;&gt;Comments&lt;/h1&gt;
+        &lt;div class=&quot;board__btn-block&quot;&gt; 
+        &lt;/div&gt;
+      &lt;/div&gt;
 
+      &lt;form class=&quot;board__new-comment-form&quot;&gt;
+        &lt;textarea name=&quot;content&quot; rows=&quot;5&quot; placeholder=&quot;請輸入留言...&quot;&gt;&lt;/textarea&gt;
+        &lt;input class=&quot;board__submit-btn&quot; type=&quot;submit&quot;&gt;
+      &lt;/form&gt;
+    &lt;div class=&quot;board__hr&quot;&gt;&lt;/div&gt;
+
+    &lt;section&gt;
+       // 動態新增留言的區塊...
+    &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+      // 發出 Request
+      var request = new XMLHttpRequest();
+      request.open(&#39;GET&#39;, &#39;api_comments.php&#39;, true);
+
+      request.onload = function() &#123;
+        if (this.status &gt;= 200 &amp;&amp; this.status &lt; 400) &#123;
+          var resp = this.response;
+          var json = JSON.parse(resp)
+          var comments = json.comments
+
+          for (var i = 0; i &lt; comments.length; i++) &#123;
+            var comment = comments[i]
+            var div = document.createElement(&#39;div&#39;)
+            div.classList.add(&#39;card&#39;)
+            div.innerHTML = `
+              &lt;div class=&quot;card__avatar&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;card__body&quot;&gt;
+                  &lt;div class=&quot;card__info&quot;&gt;
+                    &lt;span class=&quot;card__author&quot;&gt;
+                      $&#123;encodeHTML(comment.nickname)&#125;(@$&#123;encodeHTML(comment.username)&#125;)
+                    &lt;/span&gt;
+                    &lt;span class=&quot;card__time&quot;&gt;
+                      $&#123;encodeHTML(comment.created_at)&#125;
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;p class=&quot;card__content&quot;&gt;$&#123;encodeHTML(comment.content)&#125;&lt;/p&gt;
+              &lt;/div&gt;
+            `
+            document.querySelector(&#39;section&#39;).appendChild(div)
+          &#125;
+        &#125; 
+      &#125;;
+      request.send();
+
+      var form = document.querySelector(&#39;.board__new-comment-form&#39;)
+      form.addEventListener(&#39;submit&#39;, function(e) &#123;
+        // 阻止預設事件: 送出表單
+        e.preventDefault()
+        // 讀取輸入內容
+        var content = document.querySelector(&#39;textarea[name=content]&#39;).value
+        var request = new XMLHttpRequest();
+        // 發出 POST Request
+        request.open(&#39;POST&#39;, &#39;api_add_comment.php&#39;, true);
+        request.setRequestHeader(&#39;Content-Type&#39;, &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;);
+        request.send(&quot;username=aaa&amp;content=&quot; + encodeURIComponent(content));
+        request.onload = function() &#123;
+          if (this.status &gt;= 200 &amp;&amp; this.status &lt; 400) &#123;
+            var resp = this.response;
+            var json = JSON.parse(resp)
+            if (json.ok) &#123;
+              // 頁面重整: 可重新抓取留言
+              location.reload()
+            &#125; else &#123;
+              alert(json.message)
+            &#125;       
+          &#125;
+        &#125;
+      &#125;)
+      // 字串均需進行 escape 跳脫
+      function encodeHTML(s) &#123;
+        return s.replace(/&amp;/g, &#39;&amp;amp;&#39;).replace(/&lt;/g, &#39;&amp;lt;&#39;).replace(/&quot;/g, &#39;&amp;quot;&#39;);
+      &#125;
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre>
 <hr>
 <h2 id="實戰：增強版-JavaScript-留言板"><a href="#實戰：增強版-JavaScript-留言板" class="headerlink" title="實戰：增強版 JavaScript 留言板"></a>實戰：增強版 JavaScript 留言板</h2><p>接著要來打造後端 API，再利用前端 JavaScript 來串接 API 實作留言板功能。</p>
 <h3 id="建立後端-API"><a href="#建立後端-API" class="headerlink" title="建立後端 API"></a>建立後端 API</h3><h4 id="Step1-建立資料庫-discussions"><a href="#Step1-建立資料庫-discussions" class="headerlink" title="Step1. 建立資料庫 discussions"></a>Step1. 建立資料庫 discussions</h4><ul>
@@ -312,12 +512,108 @@
 <li>content</li>
 <li>created_at</li>
 </ul>
-<h4 id="Step2-新增留言功能-api-add-comments-php"><a href="#Step2-新增留言功能-api-add-comments-php" class="headerlink" title="Step2. 新增留言功能 api_add_comments.php"></a>Step2. 新增留言功能 <code>api_add_comments.php</code></h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">require_once</span>(<span class="string">&#x27;conn.php&#x27;</span>);</span><br><span class="line">  <span class="comment">// 讓瀏覽器知道回覆的資料是 JSON 格式</span></span><br><span class="line">  header(<span class="string">&#x27;Content-Type: application/json; charset=utf-8&#x27;</span>);</span><br><span class="line">  <span class="comment">// 錯誤處理: 確認資料是否為空值</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    <span class="keyword">empty</span>($_POST[<span class="string">&#x27;nickname&#x27;</span>]) ||</span><br><span class="line">    <span class="keyword">empty</span>($_POST[<span class="string">&#x27;site_key&#x27;</span>]) ||</span><br><span class="line">    <span class="keyword">empty</span>($_POST[<span class="string">&#x27;content&#x27;</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; <span class="string">&quot;Please input content&quot;</span></span><br><span class="line">    );</span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  $nickname = $_POST[<span class="string">&#x27;nickname&#x27;</span>];</span><br><span class="line">  $site_key = $_POST[<span class="string">&#x27;site_key&#x27;</span>];</span><br><span class="line">  $content = $_POST[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  $sql = <span class="string">&quot;INSERT INTO heidi_discussions(site_key, nickname, content) VALUES (?, ?, ?)&quot;</span>;</span><br><span class="line">  $stmt = $conn-&gt;prepare($sql);</span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">&#x27;sss&#x27;</span>, $site_key, $nickname, $content);</span><br><span class="line">  $result = $stmt-&gt;execute();</span><br><span class="line">  <span class="comment">// 錯誤處理: 確認是否執行成功</span></span><br><span class="line">  <span class="keyword">if</span> (!$result) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; $conn-&gt;error     <span class="comment">// 通常不會直接顯示錯誤訊息，因為可能包含敏感資訊</span></span><br><span class="line">    );</span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 成功拿到資料</span></span><br><span class="line">  $json = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;message&quot;</span> =&gt; <span class="string">&quot;success&quot;</span></span><br><span class="line">  );</span><br><span class="line">  <span class="comment">// 把建立好的 $json 物件，轉成 JSON 字串輸出</span></span><br><span class="line">  $response = json_encode($json);</span><br><span class="line">  <span class="keyword">echo</span> $response;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Step2-新增留言功能-api-add-comments-php"><a href="#Step2-新增留言功能-api-add-comments-php" class="headerlink" title="Step2. 新增留言功能 api_add_comments.php"></a>Step2. 新增留言功能 <code>api_add_comments.php</code></h4><pre><code class="php=">&lt;?php
+  require_once(&#39;conn.php&#39;);
+  // 讓瀏覽器知道回覆的資料是 JSON 格式
+  header(&#39;Content-Type: application/json; charset=utf-8&#39;);
+  // 錯誤處理: 確認資料是否為空值
+  if (
+    empty($_POST[&#39;nickname&#39;]) ||
+    empty($_POST[&#39;site_key&#39;]) ||
+    empty($_POST[&#39;content&#39;])
+    ) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; &quot;Please input content&quot;
+    );
+    $response = json_encode($json);
+    echo $response;
+    die();
+  &#125;
 
+  $nickname = $_POST[&#39;nickname&#39;];
+  $site_key = $_POST[&#39;site_key&#39;];
+  $content = $_POST[&#39;content&#39;];
+
+  $sql = &quot;INSERT INTO heidi_discussions(site_key, nickname, content) VALUES (?, ?, ?)&quot;;
+  $stmt = $conn-&gt;prepare($sql);
+  $stmt-&gt;bind_param(&#39;sss&#39;, $site_key, $nickname, $content);
+  $result = $stmt-&gt;execute();
+  // 錯誤處理: 確認是否執行成功
+  if (!$result) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; $conn-&gt;error     // 通常不會直接顯示錯誤訊息，因為可能包含敏感資訊
+    );
+    $response = json_encode($json);
+    echo $response;
+    die();
+  &#125;
+  // 成功拿到資料
+  $json = array(
+    &quot;ok&quot; =&gt; true,
+    &quot;message&quot; =&gt; &quot;success&quot;
+  );
+  // 把建立好的 $json 物件，轉成 JSON 字串輸出
+  $response = json_encode($json);
+  echo $response;
+?&gt;</code></pre>
 <p>利用 postman 以 <code>POST</code> 方式發出 request 測試，確認是否能新增留言到資料庫：</p>
 <p><img src="https://i.imgur.com/f4m5fNp.png" alt="postmanTest"></p>
-<h4 id="Step3-顯示留言功能-api-comments-php"><a href="#Step3-顯示留言功能-api-comments-php" class="headerlink" title="Step3. 顯示留言功能 api_comments.php"></a>Step3. 顯示留言功能 <code>api_comments.php</code></h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">require_once</span>(<span class="string">&#x27;conn.php&#x27;</span>);</span><br><span class="line">  <span class="comment">// 讓瀏覽器知道回覆的資料是 JSON 格式</span></span><br><span class="line">  header(<span class="string">&#x27;Content-Type: application/json; charset=utf-8&#x27;</span>);</span><br><span class="line">  <span class="comment">// 用 site_key 來區分不同的留言版</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    <span class="keyword">empty</span>($_GET[<span class="string">&#x27;site_key&#x27;</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; <span class="string">&quot;Please add site_key in url&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  $site_key = $_GET[<span class="string">&#x27;site_key&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  $sql = <span class="string">&quot;SELECT nickname, content, created_at FROM heidi_discussions WHERE site_key = ? ORDER BY id DESC&quot;</span>;</span><br><span class="line">  $stmt = $conn-&gt;prepare($sql);</span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">&#x27;s&#x27;</span>, $site_key);</span><br><span class="line">  $result = $stmt-&gt;execute();</span><br><span class="line">  <span class="comment">// 錯誤處理: 確認是否執行成功</span></span><br><span class="line">  <span class="keyword">if</span> (!$result) &#123;</span><br><span class="line">    $json = <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">      <span class="string">&quot;message&quot;</span> =&gt; $conn-&gt;error</span><br><span class="line">    );</span><br><span class="line">    $response = json_encode($json);</span><br><span class="line">    <span class="keyword">echo</span> $response;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 若執行成功就拿取資料</span></span><br><span class="line">  $result = $stmt-&gt;get_result();</span><br><span class="line">  $discussions = <span class="keyword">array</span>();</span><br><span class="line">  <span class="keyword">while</span>($row = $result-&gt;fetch_assoc()) &#123;</span><br><span class="line">    array_push($discussions, <span class="keyword">array</span>(</span><br><span class="line">      <span class="string">&quot;nickname&quot;</span> =&gt; $row[<span class="string">&quot;nickname&quot;</span>],</span><br><span class="line">      <span class="string">&quot;content&quot;</span> =&gt; $row[<span class="string">&quot;content&quot;</span>],</span><br><span class="line">      <span class="string">&quot;created_at&quot;</span> =&gt; $row[<span class="string">&quot;created_at&quot;</span>]</span><br><span class="line">    ));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  $json = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;ok&quot;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;discussions&quot;</span> =&gt; $discussions</span><br><span class="line">  );</span><br><span class="line">  <span class="comment">// 把建立好的 $json 物件，轉成 JSON 字串輸出</span></span><br><span class="line">  $response = json_encode($json);</span><br><span class="line">  <span class="keyword">echo</span> $response;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="Step3-顯示留言功能-api-comments-php"><a href="#Step3-顯示留言功能-api-comments-php" class="headerlink" title="Step3. 顯示留言功能 api_comments.php"></a>Step3. 顯示留言功能 <code>api_comments.php</code></h4><pre><code class="php=">&lt;?php
+  require_once(&#39;conn.php&#39;);
+  // 讓瀏覽器知道回覆的資料是 JSON 格式
+  header(&#39;Content-Type: application/json; charset=utf-8&#39;);
+  // 用 site_key 來區分不同的留言版
+  if (
+    empty($_GET[&#39;site_key&#39;])
+    ) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; &quot;Please add site_key in url&quot;
+    );
 
+    $response = json_encode($json);
+    echo $response;
+    die();
+  &#125;
+
+  $site_key = $_GET[&#39;site_key&#39;];
+
+  $sql = &quot;SELECT nickname, content, created_at FROM heidi_discussions WHERE site_key = ? ORDER BY id DESC&quot;;
+  $stmt = $conn-&gt;prepare($sql);
+  $stmt-&gt;bind_param(&#39;s&#39;, $site_key);
+  $result = $stmt-&gt;execute();
+  // 錯誤處理: 確認是否執行成功
+  if (!$result) &#123;
+    $json = array(
+      &quot;ok&quot; =&gt; false,
+      &quot;message&quot; =&gt; $conn-&gt;error
+    );
+    $response = json_encode($json);
+    echo $response;
+    die();
+  &#125;
+  // 若執行成功就拿取資料
+  $result = $stmt-&gt;get_result();
+  $discussions = array();
+  while($row = $result-&gt;fetch_assoc()) &#123;
+    array_push($discussions, array(
+      &quot;nickname&quot; =&gt; $row[&quot;nickname&quot;],
+      &quot;content&quot; =&gt; $row[&quot;content&quot;],
+      &quot;created_at&quot; =&gt; $row[&quot;created_at&quot;]
+    ));
+  &#125;
+
+  $json = array(
+    &quot;ok&quot; =&gt; true,
+    &quot;discussions&quot; =&gt; $discussions
+  );
+  // 把建立好的 $json 物件，轉成 JSON 字串輸出
+  $response = json_encode($json);
+  echo $response;
+?&gt;
+</code></pre>
 <p>利用 postman 以 <code>GET</code> 方式發出 request 測試，確認是否能讀取留言：</p>
 <p><img src="https://i.imgur.com/2rjKvzl.png"></p>
 <p>這樣就完成後端 API 的新增留言和顯示留言功能。</p>
@@ -326,8 +622,126 @@
 <li>顯示留言 API</li>
 <li>新增留言 API</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;Week12 留言板&lt;&#x2F;title&gt;</span><br><span class="line">  &lt;!-- 引入 jQuery --&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery-3.5.1.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;!-- 引入 Bootstrap --&gt;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;stackpath.bootstrapcdn.com&#x2F;bootstrap&#x2F;4.5.2&#x2F;css&#x2F;bootstrap.min.css&quot; integrity&#x3D;&quot;sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    .add-comment-form &#123;</span><br><span class="line">      margin-bottom: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">    .card &#123;</span><br><span class="line">      margin-bottom: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">    .card-body h5, .card-body span &#123;</span><br><span class="line">      display: inline-block;</span><br><span class="line">      margin-right: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;&#x2F;style&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; 跳脫函式</span><br><span class="line">    function escape(toOutput) &#123;</span><br><span class="line">      return toOutput</span><br><span class="line">        .replace(&#x2F;&amp;&#x2F;g, &#39;&amp;&#39;)</span><br><span class="line">        .replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;)</span><br><span class="line">        .replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">        .replace(&#x2F;&quot;&#x2F;g, &#39;&quot;&#39;)</span><br><span class="line">        .replace(&#x2F;&#39;&#x2F;g, &#39;&amp;#039;&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 渲染 comment: 處理讀取的資料 &amp; 決定加在最前面或最後面</span><br><span class="line">    function appendCommentToDOM(container, comment, isPrepend) &#123;</span><br><span class="line">      const html &#x3D; &#96;</span><br><span class="line">        &lt;div class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">            &lt;h5 class&#x3D;&quot;card-title&quot;&gt;$&#123;escape(comment.nickname)&#125;&lt;&#x2F;h5&gt;</span><br><span class="line">            &lt;span&gt;$&#123;escape(comment.created_at)&#125;&lt;&#x2F;span&gt;</span><br><span class="line">            &lt;p class&#x3D;&quot;card-text&quot;&gt;$&#123;escape(comment.content)&#125;</span><br><span class="line">            &lt;&#x2F;p&gt;</span><br><span class="line">          &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &#96;;</span><br><span class="line">      if (isPrepend) &#123;</span><br><span class="line">        container.prepend(html);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        container.append(html);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const showUrl &#x3D; &#39;http:&#x2F;&#x2F;localhost&#x2F;heidi&#x2F;week12_local&#x2F;hw1&#x2F;api_comments.php?site_key&#x3D;heidi&#39;;</span><br><span class="line">    const addUrl &#x3D; &#39;http:&#x2F;&#x2F;localhost&#x2F;heidi&#x2F;week12_local&#x2F;hw1&#x2F;api_add_comments.php&#39;;</span><br><span class="line"></span><br><span class="line">    $(document).ready(() &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; 顯示留言</span><br><span class="line">      const commentDOM &#x3D; $(&#39;.comments&#39;)</span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url: showUrl,</span><br><span class="line">      &#125;).done(function (data) &#123;</span><br><span class="line">        if (!data.ok) &#123;</span><br><span class="line">          alert(data.message);</span><br><span class="line">          return;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 若 request 成功讀取資料</span><br><span class="line">        const comments &#x3D; data.discussions;</span><br><span class="line">        for (let comment of comments) &#123;</span><br><span class="line">          appendCommentToDOM(commentDOM, comment);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      </span><br><span class="line">      &#x2F;&#x2F; 新增留言: 將資料存到後端</span><br><span class="line">      $(&#39;.add-comment-form&#39;).submit(e &#x3D;&gt; &#123;</span><br><span class="line">        e.preventDefault();             &#x2F;&#x2F; 取消原生行為 -&gt; 不會送出表單</span><br><span class="line">        const newCommentData &#x3D; &#123;</span><br><span class="line">          &#39;site_key&#39;: &#39;heidi&#39;,</span><br><span class="line">          &#39;nickname&#39;: $(&#39;input[name&#x3D;nickname]&#39;).val(),</span><br><span class="line">          &#39;content&#39;: $(&#39;textarea[name&#x3D;content]&#39;).val()</span><br><span class="line">        &#125;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">          type: &#39;POST&#39;,</span><br><span class="line">          url: addUrl,</span><br><span class="line">          data: newCommentData</span><br><span class="line">        &#125;).done(function(data) &#123;        &#x2F;&#x2F; done(): 以函數處理回傳的 data 資料</span><br><span class="line">          &#x2F;&#x2F; 執行失敗</span><br><span class="line">          if (!data.ok) &#123;</span><br><span class="line">            alert(data.message);</span><br><span class="line">            return;</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; 執行成功: 按下送出後把欄位清空</span><br><span class="line">          $(&#39;input[name&#x3D;nickname]&#39;).val(&#39;&#39;);</span><br><span class="line">          $(&#39;textarea[name&#x3D;content]&#39;).val(&#39;&#39;);</span><br><span class="line">          &#x2F;&#x2F; 新增留言後以 JS 動態方式加到最上方</span><br><span class="line">          appendCommentToDOM(commentDOM, newCommentData, true);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;form class&#x3D;&quot;add-comment-form&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;form-nickname&quot;&gt;暱稱&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input name&#x3D;&quot;nickname&quot; type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;form-nickname&quot; &gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;content-textarea&quot;&gt;留言內容&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;textarea name&#x3D;&quot;content&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;exampleFormControlTextarea1&quot; rows&#x3D;&quot;3&quot;&gt;&lt;&#x2F;textarea&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-dark&quot;&gt;送出&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;comments&quot;&gt;</span><br><span class="line">      &lt;!-- 以 JavaScript 動態顯示資料的區塊 --&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="htmlmixed=">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Week12 留言板&lt;/title&gt;
+  &lt;!-- 引入 jQuery --&gt;
+  &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- 引入 Bootstrap --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css&quot; integrity=&quot;sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z&quot; crossorigin=&quot;anonymous&quot;&gt;
+  &lt;style&gt;
+    .add-comment-form &#123;
+      margin-bottom: 10px;
+    &#125;
+    .card &#123;
+      margin-bottom: 10px;
+    &#125;
+    .card-body h5, .card-body span &#123;
+      display: inline-block;
+      margin-right: 20px;
+    &#125;
+  &lt;/style&gt;
+  &lt;script&gt;
+    // 跳脫函式
+    function escape(toOutput) &#123;
+      return toOutput
+        .replace(/&amp;/g, &#39;&amp;amp;&#39;)
+        .replace(/&lt;/g, &#39;&amp;lt;&#39;)
+        .replace(/&gt;/g, &#39;&amp;gt;&#39;)
+        .replace(/&quot;/g, &#39;&amp;quot;&#39;)
+        .replace(/&#39;/g, &#39;&amp;#039;&#39;);
+    &#125;
+    // 渲染 comment: 處理讀取的資料 &amp; 決定加在最前面或最後面
+    function appendCommentToDOM(container, comment, isPrepend) &#123;
+      const html = `
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;card-body&quot;&gt;
+            &lt;h5 class=&quot;card-title&quot;&gt;$&#123;escape(comment.nickname)&#125;&lt;/h5&gt;
+            &lt;span&gt;$&#123;escape(comment.created_at)&#125;&lt;/span&gt;
+            &lt;p class=&quot;card-text&quot;&gt;$&#123;escape(comment.content)&#125;
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `;
+      if (isPrepend) &#123;
+        container.prepend(html);
+      &#125; else &#123;
+        container.append(html);
+      &#125;
+    &#125;
 
+    const showUrl = &#39;http://localhost/heidi/week12_local/hw1/api_comments.php?site_key=heidi&#39;;
+    const addUrl = &#39;http://localhost/heidi/week12_local/hw1/api_add_comments.php&#39;;
+
+    $(document).ready(() =&gt; &#123;
+      // 顯示留言
+      const commentDOM = $(&#39;.comments&#39;)
+      $.ajax(&#123;
+        url: showUrl,
+      &#125;).done(function (data) &#123;
+        if (!data.ok) &#123;
+          alert(data.message);
+          return;
+        &#125;
+        // 若 request 成功讀取資料
+        const comments = data.discussions;
+        for (let comment of comments) &#123;
+          appendCommentToDOM(commentDOM, comment);
+        &#125;
+      &#125;);
+
+      // 新增留言: 將資料存到後端
+      $(&#39;.add-comment-form&#39;).submit(e =&gt; &#123;
+        e.preventDefault();             // 取消原生行為 -&gt; 不會送出表單
+        const newCommentData = &#123;
+          &#39;site_key&#39;: &#39;heidi&#39;,
+          &#39;nickname&#39;: $(&#39;input[name=nickname]&#39;).val(),
+          &#39;content&#39;: $(&#39;textarea[name=content]&#39;).val()
+        &#125;
+        $.ajax(&#123;
+          type: &#39;POST&#39;,
+          url: addUrl,
+          data: newCommentData
+        &#125;).done(function(data) &#123;        // done(): 以函數處理回傳的 data 資料
+          // 執行失敗
+          if (!data.ok) &#123;
+            alert(data.message);
+            return;
+          &#125;
+          // 執行成功: 按下送出後把欄位清空
+          $(&#39;input[name=nickname]&#39;).val(&#39;&#39;);
+          $(&#39;textarea[name=content]&#39;).val(&#39;&#39;);
+          // 新增留言後以 JS 動態方式加到最上方
+          appendCommentToDOM(commentDOM, newCommentData, true);
+        &#125;);
+      &#125;);
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;form class=&quot;add-comment-form&quot;&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;form-nickname&quot;&gt;暱稱&lt;/label&gt;
+        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;form-nickname&quot; &gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;content-textarea&quot;&gt;留言內容&lt;/label&gt;
+        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; id=&quot;exampleFormControlTextarea1&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;div class=&quot;comments&quot;&gt;
+      &lt;!-- 以 JavaScript 動態顯示資料的區塊 --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 <h4 id="Step3-實作分頁機制"><a href="#Step3-實作分頁機制" class="headerlink" title="Step3. 實作分頁機制"></a>Step3. 實作分頁機制</h4><ul>
 <li><p>Offset/limit-based Pagination</p>
 <ul>
@@ -337,8 +751,8 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 跳過 5 筆資料，回傳接下來的 5 筆資料</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> comments <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span> <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> <span class="number">5</span> <span class="keyword">OFFSET</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="sql">-- 跳過 5 筆資料，回傳接下來的 5 筆資料
+SELECT * FROM comments ORDER BY id DESC LIMIT 5 OFFSET 5</code></pre>
 <ul>
 <li><p>Cursor-based pagination</p>
 <ul>
@@ -348,21 +762,49 @@
 </ul>
 </li>
 </ul>
-<h4 id="相關函式"><a href="#相關函式" class="headerlink" title="相關函式"></a>相關函式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 再包一層 function 避免重複輸入同樣的程式碼</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComments</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> commentDOM = $(<span class="string">&#x27;.comments&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;.load-more&#x27;</span>).hide();         <span class="comment">// 點擊後就隱藏按鈕</span></span><br><span class="line">  <span class="keyword">if</span> (isEnd) &#123;</span><br><span class="line">    <span class="keyword">return</span>;          <span class="comment">// 若拿完資料就直接返回</span></span><br><span class="line">  &#125;</span><br><span class="line">  getCommentsAPI(siteKey, lastId, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">      alert(data.message);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 若 request 成功讀取資料</span></span><br><span class="line">    <span class="keyword">const</span> comments = data.discussions;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> comment <span class="keyword">of</span> comments) &#123;</span><br><span class="line">      appendCommentToDOM(commentDOM, comment);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> length = comments.length;</span><br><span class="line">    <span class="comment">// 沒有 lastId: 初始頁面的留言若 &lt; 5 直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (!lastId &amp;&amp; length &lt; <span class="number">5</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> (comments.length &lt; <span class="number">5</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 有 lastId: 若拿完資料就隱藏按鈕</span></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">      isEnd = <span class="literal">true</span>;</span><br><span class="line">      $(<span class="string">&#x27;.load-more&#x27;</span>).hide();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      lastId = comments[length - <span class="number">1</span>].id;</span><br><span class="line">      $(<span class="string">&#x27;.comments&#x27;</span>).append(loadMoreButtonHTML);   <span class="comment">// 新增 &quot;載入更多&quot; 按鈕</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="相關函式"><a href="#相關函式" class="headerlink" title="相關函式"></a>相關函式</h4><pre><code class="javascript=">// 再包一層 function 避免重複輸入同樣的程式碼
+function getComments() &#123;
+  const commentDOM = $(&#39;.comments&#39;);
+  $(&#39;.load-more&#39;).hide();         // 點擊後就隱藏按鈕
+  if (isEnd) &#123;
+    return;          // 若拿完資料就直接返回
+  &#125;
+  getCommentsAPI(siteKey, lastId, data =&gt; &#123;
+    if (!data.ok) &#123;
+      alert(data.message);
+      return;
+    &#125;
+    // 若 request 成功讀取資料
+    const comments = data.discussions;
+    for (let comment of comments) &#123;
+      appendCommentToDOM(commentDOM, comment);
+    &#125;
+    let length = comments.length;
+    // 沒有 lastId: 初始頁面的留言若 &lt; 5 直接返回
+    if (!lastId &amp;&amp; length &lt; 5) &#123;
+      return (comments.length &lt; 5);
+    &#125; 
+    // 有 lastId: 若拿完資料就隱藏按鈕
+    if (length === 0) &#123;
+      isEnd = true;
+      $(&#39;.load-more&#39;).hide();
+    &#125; else &#123;
+      lastId = comments[length - 1].id;
+      $(&#39;.comments&#39;).append(loadMoreButtonHTML);   // 新增 &quot;載入更多&quot; 按鈕
+    &#125;
+  &#125;);
+&#125;</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qaWVwZW5nLm1lLzIwMTkvMTIvMDYvbGVhcm5pbmctaG93LXRvLWltcGxlbWVudC1ncmFwaHFsLXBhZ2luYXRpb24=">深入淺出 GraphQL Pagination 實作<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
-<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h4 id="錯誤一-Reason"><a href="#錯誤一-Reason" class="headerlink" title="錯誤一 Reason"></a>錯誤一 Reason</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reason: CORS header &#39;Access-Control-Allow-Origin&#39; missing</span><br></pre></td></tr></table></figure>
-
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h4 id="錯誤一-Reason"><a href="#錯誤一-Reason" class="headerlink" title="錯誤一 Reason"></a>錯誤一 Reason</h4><pre><code>Reason: CORS header &#39;Access-Control-Allow-Origin&#39; missing</code></pre>
 <ul>
 <li>原因：缺少表頭 <code>header(&#39;Access-Control-Allow-Origin: *&#39;);</code></li>
 <li>實際情況：可能是 php 檔語法上有錯誤，才會出現這個錯誤訊息</li>
 </ul>
-<h4 id="錯誤二-TypeError"><a href="#錯誤二-TypeError" class="headerlink" title="錯誤二 TypeError"></a>錯誤二 TypeError</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot read property &#39;replace&#39; of undefined</span><br></pre></td></tr></table></figure>
-
+<h4 id="錯誤二-TypeError"><a href="#錯誤二-TypeError" class="headerlink" title="錯誤二 TypeError"></a>錯誤二 TypeError</h4><pre><code>TypeError: Cannot read property &#39;replace&#39; of undefined</code></pre>
 <p><img src="https://i.imgur.com/t5Me7wL.png"></p>
 <ul>
 <li>原因：要進行跳脫的值為 null</li>
@@ -477,7 +919,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -488,7 +930,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

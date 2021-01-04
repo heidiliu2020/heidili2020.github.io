@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [MTR04] 第十三週 - 帶著做留言版 plugin 的學習筆記。如有錯誤歡迎指正。  前置作業需安裝好 webpack 以及其他套件，可跟著官方教學步驟 Getting Started 進行安裝： 1234mkdir webpack-democd webpack-demonpm init -ynpm install webpack webpack-cli --save-dev">
+  <meta name="description" content="本篇為 [MTR04] 第十三週 - 帶著做留言版 plugin 的學習筆記。如有錯誤歡迎指正。  前置作業需安裝好 webpack 以及其他套件，可跟著官方教學步驟 Getting Started 進行安裝： mkdir webpack-demo cd webpack-demo npm init -y npm install webpack webpack-cli --save-dev">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 13] MTR04 - 實作留言版 plugin">
 <meta property="og:url" content="https://heidiliu2020.github.io/mtr04-plugin/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [MTR04] 第十三週 - 帶著做留言版 plugin 的學習筆記。如有錯誤歡迎指正。  前置作業需安裝好 webpack 以及其他套件，可跟著官方教學步驟 Getting Started 進行安裝： 1234mkdir webpack-democd webpack-demonpm init -ynpm install webpack webpack-cli --save-dev">
+<meta property="og:description" content="本篇為 [MTR04] 第十三週 - 帶著做留言版 plugin 的學習筆記。如有錯誤歡迎指正。  前置作業需安裝好 webpack 以及其他套件，可跟著官方教學步驟 Getting Started 進行安裝： mkdir webpack-demo cd webpack-demo npm init -y npm install webpack webpack-cli --save-dev">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/3Vf60Fy.png">
 <meta property="article:published_time" content="2020-09-29T06:20:00.000Z">
@@ -259,56 +259,300 @@
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbXRyMDQ=">[MTR04] 第十三週 - 帶著做留言版 plugin<i class="fa fa-external-link-alt"></i></span> 的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
 <h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p>需安裝好 webpack 以及其他套件，可跟著官方教學步驟 <span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvZ2V0dGluZy1zdGFydGVkLw==">Getting Started<i class="fa fa-external-link-alt"></i></span> 進行安裝：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-demo</span><br><span class="line">cd webpack-demo</span><br><span class="line">npm init -y</span><br><span class="line">npm install webpack webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
+<pre><code>mkdir webpack-demo
+cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev</code></pre>
 <a id="more"></a>
-<h4 id="安裝使用-jquery"><a href="#安裝使用-jquery" class="headerlink" title="安裝使用 jquery"></a>安裝使用 jquery</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install jquery webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
-
-<h4 id="安裝-babel-loader"><a href="#安裝-babel-loader" class="headerlink" title="安裝 babel-loader"></a>安裝 babel-loader</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D babel-loader @babel&#x2F;core @babel&#x2F;preset-env</span><br></pre></td></tr></table></figure>
-
+<h4 id="安裝使用-jquery"><a href="#安裝使用-jquery" class="headerlink" title="安裝使用 jquery"></a>安裝使用 jquery</h4><pre><code>npm install jquery webpack-cli --save-dev</code></pre>
+<h4 id="安裝-babel-loader"><a href="#安裝-babel-loader" class="headerlink" title="安裝 babel-loader"></a>安裝 babel-loader</h4><pre><code>npm install -D babel-loader @babel/core @babel/preset-env</code></pre>
 <h2 id="目標：建立留言版-plugin"><a href="#目標：建立留言版-plugin" class="headerlink" title="目標：建立留言版 plugin"></a>目標：建立留言版 plugin</h2><p>也就是修改 week12 實作的留言版，將 index.html 中的內容全部以 JavaScript 形式匯入。</p>
-<h3 id="步驟一：init-初始化"><a href="#步驟一：init-初始化" class="headerlink" title="步驟一：init() 初始化"></a>步驟一：init() 初始化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">commentPlugin.init(&#123;</span><br><span class="line">  apiURL: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  siteKey: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  containerSelector: <span class="string">&#x27;#comments&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+<h3 id="步驟一：init-初始化"><a href="#步驟一：init-初始化" class="headerlink" title="步驟一：init() 初始化"></a>步驟一：init() 初始化</h3><pre><code class="javascript=">commentPlugin.init(&#123;
+  apiURL: &#39;&#39;,
+  siteKey: &#39;&#39;,
+  containerSelector: &#39;#comments&#39;
+&#125;)</code></pre>
 <h3 id="步驟二：動態新增頁面"><a href="#步驟二：動態新增頁面" class="headerlink" title="步驟二：動態新增頁面"></a>步驟二：動態新增頁面</h3><p>將 UI 介面以及 CSS 樣式，同樣使用 JavaScript 來動態新增：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> siteKey = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> apiUrl = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> containerElement = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> commentDOM = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> lastId = <span class="literal">null</span>;    <span class="comment">// before</span></span><br><span class="line"><span class="keyword">let</span> isEnd = <span class="literal">false</span>;    <span class="comment">// 確認是否拿完資料</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> css = <span class="string">&#x27;.add-comment-form &#123; margin-bottom: 10px; &#125; .card &#123; margin-bottom: 10px; &#125; .card-title &#123;  word-wrap:break-word; &#125; .load-more &#123; margin-bottom: 10px; &#125;&#x27;</span></span><br><span class="line"><span class="keyword">const</span> loadMoreButtonHTML = <span class="string">&#x27;&lt;button class=&quot;load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UI 介面的模板</span></span><br><span class="line"><span class="keyword">const</span> formTemplate = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;form class=&quot;add-comment-form&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label for=&quot;form-nickname&quot;&gt;暱稱&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;form-nickname&quot; &gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label for=&quot;content-textarea&quot;&gt;留言內容&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; id=&quot;exampleFormControlTextarea1&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;comments&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化: 動態匯入表單</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  siteKey = options.siteKey;</span><br><span class="line">  apiUrl = options.apiUrl;</span><br><span class="line">  containerElement = $(options.containerSelector);</span><br><span class="line">  containerElement.append(formTemplate);</span><br><span class="line">  <span class="comment">// 動態新增 css 樣式</span></span><br><span class="line">  <span class="keyword">const</span> styleElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line">  styleElement.type = <span class="string">&#x27;text/css&#x27;</span>;</span><br><span class="line">  styleElement.appendChild(<span class="built_in">document</span>.createTextNode(css));</span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(styleElement)</span><br><span class="line"></span><br><span class="line">  commentDOM = $(<span class="string">&#x27;.comments&#x27;</span>);</span><br><span class="line">  getComments();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 載入更多: 以事件代理的方式處理 click 事件 </span></span><br><span class="line">  $(<span class="string">&#x27;.comments&#x27;</span>).on(<span class="string">&#x27;click&#x27;</span>, <span class="string">&#x27;.load-more&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    getComments();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 新增留言 -&gt;  將資料存到後端</span></span><br><span class="line">  $(<span class="string">&#x27;.add-comment-form&#x27;</span>).submit(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    e.preventDefault();             <span class="comment">// 取消原生行為 -&gt; 不會送出表單</span></span><br><span class="line">    <span class="keyword">const</span> newCommentData = &#123;</span><br><span class="line">      <span class="string">&#x27;site_key&#x27;</span>: siteKey,         <span class="comment">// 全域變數的 siteKey</span></span><br><span class="line">      <span class="string">&#x27;nickname&#x27;</span>: $(<span class="string">&#x27;input[name=nickname]&#x27;</span>).val(),</span><br><span class="line">      <span class="string">&#x27;content&#x27;</span>: $(<span class="string">&#x27;textarea[name=content]&#x27;</span>).val()</span><br><span class="line">    &#125;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">      type: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">      url: <span class="string">`<span class="subst">$&#123;apiUrl&#125;</span>/api_add_comments.php`</span>,</span><br><span class="line">      data: newCommentData</span><br><span class="line">    &#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;        <span class="comment">// done(): 以函數處理回傳的 data 資料</span></span><br><span class="line">      <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">        alert(data.message);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      $(<span class="string">&#x27;input[name=nickname]&#x27;</span>).val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      $(<span class="string">&#x27;textarea[name=content]&#x27;</span>).val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      <span class="comment">// 新增留言後以 JS 動態方式加到最上方</span></span><br><span class="line">      appendCommentToDOM(commentDOM, newCommentData, <span class="literal">true</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 DOM 結構準備好後，再進行初始化</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  init(&#123;</span><br><span class="line">    siteKey: <span class="string">&#x27;heidi&#x27;</span>,</span><br><span class="line">    apiUrl: <span class="string">&#x27;http://localhost/heidi/week13_local/hw2&#x27;</span>,</span><br><span class="line">    containerSelector: <span class="string">&#x27;.comment-area&#x27;</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">let siteKey = &#39;&#39;;
+let apiUrl = &#39;&#39;;
+let containerElement = null;
+let commentDOM = null;
+let lastId = null;    // before
+let isEnd = false;    // 確認是否拿完資料
 
+const css = &#39;.add-comment-form &#123; margin-bottom: 10px; &#125; .card &#123; margin-bottom: 10px; &#125; .card-title &#123;  word-wrap:break-word; &#125; .load-more &#123; margin-bottom: 10px; &#125;&#39;
+const loadMoreButtonHTML = &#39;&lt;button class=&quot;load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;&#39;;
+
+// UI 介面的模板
+const formTemplate = `
+  &lt;div&gt;
+    &lt;form class=&quot;add-comment-form&quot;&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;form-nickname&quot;&gt;暱稱&lt;/label&gt;
+        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;form-nickname&quot; &gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;content-textarea&quot;&gt;留言內容&lt;/label&gt;
+        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; id=&quot;exampleFormControlTextarea1&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;div class=&quot;comments&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+`
+
+// 初始化: 動態匯入表單
+function init(options) &#123;
+  siteKey = options.siteKey;
+  apiUrl = options.apiUrl;
+  containerElement = $(options.containerSelector);
+  containerElement.append(formTemplate);
+  // 動態新增 css 樣式
+  const styleElement = document.createElement(&#39;style&#39;);
+  styleElement.type = &#39;text/css&#39;;
+  styleElement.appendChild(document.createTextNode(css));
+  document.head.appendChild(styleElement)
+
+  commentDOM = $(&#39;.comments&#39;);
+  getComments();
+
+  // 載入更多: 以事件代理的方式處理 click 事件 
+  $(&#39;.comments&#39;).on(&#39;click&#39;, &#39;.load-more&#39;, () =&gt; &#123;
+    getComments();
+  &#125;);
+
+  // 新增留言 -&gt;  將資料存到後端
+  $(&#39;.add-comment-form&#39;).submit(e =&gt; &#123;
+    e.preventDefault();             // 取消原生行為 -&gt; 不會送出表單
+    const newCommentData = &#123;
+      &#39;site_key&#39;: siteKey,         // 全域變數的 siteKey
+      &#39;nickname&#39;: $(&#39;input[name=nickname]&#39;).val(),
+      &#39;content&#39;: $(&#39;textarea[name=content]&#39;).val()
+    &#125;
+    $.ajax(&#123;
+      type: &#39;POST&#39;,
+      url: `$&#123;apiUrl&#125;/api_add_comments.php`,
+      data: newCommentData
+    &#125;).done(function (data) &#123;        // done(): 以函數處理回傳的 data 資料
+      if (!data.ok) &#123;
+        alert(data.message);
+        return;
+      &#125;
+      $(&#39;input[name=nickname]&#39;).val(&#39;&#39;);
+      $(&#39;textarea[name=content]&#39;).val(&#39;&#39;);
+      // 新增留言後以 JS 動態方式加到最上方
+      appendCommentToDOM(commentDOM, newCommentData, true);
+    &#125;);
+  &#125;);
+&#125;
+
+// 在 DOM 結構準備好後，再進行初始化
+$(document).ready(() =&gt; &#123;
+  init(&#123;
+    siteKey: &#39;heidi&#39;,
+    apiUrl: &#39;http://localhost/heidi/week13_local/hw2&#39;,
+    containerSelector: &#39;.comment-area&#39;
+  &#125;);
+&#125;);</code></pre>
 <p>如此即可將 <code>&lt;script&gt;</code> 區塊的程式碼全部放到 src\index.js，再利用 webpack 進行下列步驟。</p>
 <h3 id="步驟三：進行模組化"><a href="#步驟三：進行模組化" class="headerlink" title="步驟三：進行模組化"></a>步驟三：進行模組化</h3><p>將不同功能模組化來重構程式碼，以便後續管理。</p>
 <ol>
 <li>在 src 資料夾建立 api.js</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getComments</span>(<span class="params">apiUrl, siteKey, before, cb</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> showURL = <span class="string">`<span class="subst">$&#123;apiUrl&#125;</span>/api_comments.php?site_key=<span class="subst">$&#123;siteKey&#125;</span>`</span>;</span><br><span class="line">  <span class="keyword">if</span> (before) &#123;</span><br><span class="line">    showURL += <span class="string">&#x27;&amp;before=&#x27;</span> + before;</span><br><span class="line">  &#125;</span><br><span class="line">  $.ajax(&#123;</span><br><span class="line">    url: showURL</span><br><span class="line">  &#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    cb(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addComments</span>(<span class="params">apiUrl, siteKey, before, cb</span>) </span>&#123;</span><br><span class="line">  $.ajax(&#123;</span><br><span class="line">    type: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    url: <span class="string">`<span class="subst">$&#123;apiUrl&#125;</span>/api_add_comments.php`</span>,</span><br><span class="line">    data</span><br><span class="line">  &#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    cb(data)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import $ from &#39;jquery&#39;;
 
+export function getComments(apiUrl, siteKey, before, cb) &#123;
+  let showURL = `$&#123;apiUrl&#125;/api_comments.php?site_key=$&#123;siteKey&#125;`;
+  if (before) &#123;
+    showURL += &#39;&amp;before=&#39; + before;
+  &#125;
+  $.ajax(&#123;
+    url: showURL
+  &#125;).done(function (data) &#123;
+    cb(data);
+  &#125;);
+&#125;
+
+export function addComments(apiUrl, siteKey, before, cb) &#123;
+  $.ajax(&#123;
+    type: &#39;POST&#39;,
+    url: `$&#123;apiUrl&#125;/api_add_comments.php`,
+    data
+  &#125;).done(function (data) &#123;
+    cb(data)
+  &#125;);
+&#125;</code></pre>
 <ol start="2">
 <li>建立 template.js</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> cssTemplate = <span class="string">&#x27;.add-comment-form &#123;margin - bottom: 10px; &#125; .card &#123;margin - bottom: 10px; &#125; .card-title &#123;word - wrap:break-word; &#125; .load-more &#123;margin - bottom: 10px; &#125;&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> loadMoreButtonHTML = <span class="string">&#x27;&lt;button class=&quot;load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UI 介面的模板</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> formTemplate = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;form class=&quot;add-comment-form&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label for=&quot;form-nickname&quot;&gt;暱稱&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;form-nickname&quot; &gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label for=&quot;content-textarea&quot;&gt;留言內容&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; id=&quot;exampleFormControlTextarea1&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;comments&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export const cssTemplate = &#39;.add-comment-form &#123;margin - bottom: 10px; &#125; .card &#123;margin - bottom: 10px; &#125; .card-title &#123;word - wrap:break-word; &#125; .load-more &#123;margin - bottom: 10px; &#125;&#39;
+export const loadMoreButtonHTML = &#39;&lt;button class=&quot;load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;&#39;;
 
+// UI 介面的模板
+export const formTemplate = `
+  &lt;div&gt;
+    &lt;form class=&quot;add-comment-form&quot;&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;form-nickname&quot;&gt;暱稱&lt;/label&gt;
+        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;form-nickname&quot; &gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;content-textarea&quot;&gt;留言內容&lt;/label&gt;
+        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; id=&quot;exampleFormControlTextarea1&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;div class=&quot;comments&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+`</code></pre>
 <ol start="3">
 <li>建立 utils.js</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">escape</span>(<span class="params">toOutput</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toOutput</span><br><span class="line">    .replace(<span class="regexp">/&amp;/g</span>, <span class="string">&#x27;&amp;amp;&#x27;</span>)</span><br><span class="line">    .replace(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt;&#x27;</span>)</span><br><span class="line">    .replace(<span class="regexp">/&gt;/g</span>, <span class="string">&#x27;&amp;gt;&#x27;</span>)</span><br><span class="line">    .replace(<span class="regexp">/&quot;/g</span>, <span class="string">&#x27;&amp;quot;&#x27;</span>)</span><br><span class="line">    .replace(<span class="regexp">/&#x27;/g</span>, <span class="string">&#x27;&amp;#039;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染 comment: 處理讀取的資料 &amp; 決定加在最前面或最後面</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">appendCommentToDOM</span>(<span class="params">container, comment, isPrepend</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> html = <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;card&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;card-body&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;h5 class=&quot;card-title&quot;&gt;<span class="subst">$&#123;<span class="built_in">escape</span>(comment.nickname)&#125;</span>&lt;/h5&gt;</span></span><br><span class="line"><span class="string">      &lt;p class=&quot;card-text&quot;&gt;<span class="subst">$&#123;<span class="built_in">escape</span>(comment.content)&#125;</span></span></span><br><span class="line"><span class="string">      &lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">if</span> (isPrepend) &#123;</span><br><span class="line">    container.prepend(html);  <span class="comment">// 新增到最上方</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    container.append(html);   <span class="comment">// 新增到最底部</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export function escape(toOutput) &#123;
+  return toOutput
+    .replace(/&amp;/g, &#39;&amp;amp;&#39;)
+    .replace(/&lt;/g, &#39;&amp;lt;&#39;)
+    .replace(/&gt;/g, &#39;&amp;gt;&#39;)
+    .replace(/&quot;/g, &#39;&amp;quot;&#39;)
+    .replace(/&#39;/g, &#39;&amp;#039;&#39;);
+&#125;
 
+// 渲染 comment: 處理讀取的資料 &amp; 決定加在最前面或最後面
+export function appendCommentToDOM(container, comment, isPrepend) &#123;
+  const html = `
+    &lt;div class=&quot;card&quot;&gt;
+    &lt;div class=&quot;card-body&quot;&gt;
+      &lt;h5 class=&quot;card-title&quot;&gt;$&#123;escape(comment.nickname)&#125;&lt;/h5&gt;
+      &lt;p class=&quot;card-text&quot;&gt;$&#123;escape(comment.content)&#125;
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+  `;
+  if (isPrepend) &#123;
+    container.prepend(html);  // 新增到最上方
+  &#125; else &#123;
+    container.append(html);   // 新增到最底部
+  &#125;
+&#125;</code></pre>
 <ol start="4">
 <li>並在 index.js 引入上述檔案：</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getComments, addComments &#125; <span class="keyword">from</span> <span class="string">&#x27;./api&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; appendCommentToDOM &#125; <span class="keyword">from</span> <span class="string">&#x27;./utils&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; cssTemplate, loadMoreButtonHTML, formTemplate &#125; <span class="keyword">from</span> <span class="string">&#x27;./template&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> siteKey = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> apiUrl = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> containerElement = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> commentDOM = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> lastId = <span class="literal">null</span>;    <span class="comment">// before</span></span><br><span class="line"><span class="keyword">let</span> isEnd = <span class="literal">false</span>;    <span class="comment">// 確認是否拿完資料</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 DOM 結構準備好後，再進行初始化</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  init(&#123;</span><br><span class="line">    siteKey: <span class="string">&#x27;heidi&#x27;</span>,</span><br><span class="line">    apiUrl: <span class="string">&#x27;http://localhost/heidi/week13_local/hw2&#x27;</span>,</span><br><span class="line">    containerSelector: <span class="string">&#x27;.comment-area&#x27;</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化: 動態匯入表單</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  siteKey = options.siteKey;</span><br><span class="line">  apiUrl = options.apiUrl;</span><br><span class="line">  containerElement = $(options.containerSelector);</span><br><span class="line">  containerElement.append(formTemplate);</span><br><span class="line">  <span class="comment">// 動態新增 css 樣式</span></span><br><span class="line">  <span class="keyword">const</span> styleElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line">  styleElement.type = <span class="string">&#x27;text/css&#x27;</span>;</span><br><span class="line">  styleElement.appendChild(<span class="built_in">document</span>.createTextNode(cssTemplate));</span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(styleElement)</span><br><span class="line"></span><br><span class="line">  commentDOM = $(<span class="string">&#x27;.comments&#x27;</span>);</span><br><span class="line">  getNewComments();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 載入更多: 以事件代理的方式處理 click 事件</span></span><br><span class="line">  $(<span class="string">&#x27;.comments&#x27;</span>).on(<span class="string">&#x27;click&#x27;</span>, <span class="string">&#x27;.load-more&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  getNewComments();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 新增留言 -&gt;  將資料存到後端</span></span><br><span class="line">  $(<span class="string">&#x27;.add-comment-form&#x27;</span>).submit(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  e.preventDefault();             <span class="comment">// 取消原生行為 -&gt; 不會送出表單</span></span><br><span class="line">    <span class="keyword">const</span> newCommentData = &#123;</span><br><span class="line">     <span class="string">&#x27;site_key&#x27;</span>: siteKey,         <span class="comment">// 全域變數的 siteKey</span></span><br><span class="line">      <span class="string">&#x27;nickname&#x27;</span>: $(<span class="string">&#x27;input[name=nickname]&#x27;</span>).val(),</span><br><span class="line">      <span class="string">&#x27;content&#x27;</span>: $(<span class="string">&#x27;textarea[name=content]&#x27;</span>).val()</span><br><span class="line">    &#125;</span><br><span class="line">    addComments(apiUrl, siteKey, newCommentData, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">        alert(data.message);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      $(<span class="string">&#x27;input[name=nickname]&#x27;</span>).val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      $(<span class="string">&#x27;textarea[name=content]&#x27;</span>).val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      appendCommentToDOM(commentDOM, newCommentData, <span class="literal">true</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNewComments</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">const</span> commentDOM = $(<span class="string">&#x27;.comments&#x27;</span>);</span><br><span class="line">$(<span class="string">&#x27;.load-more&#x27;</span>).hide();       </span><br><span class="line">  <span class="keyword">if</span> (isEnd) &#123;</span><br><span class="line">    <span class="keyword">return</span>; </span><br><span class="line">  &#125;</span><br><span class="line">  getComments(apiUrl, siteKey, lastId, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">      alert(data.message);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 若 request 成功讀取資料</span></span><br><span class="line">    <span class="keyword">const</span> comments = data.discussions;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> comment <span class="keyword">of</span> comments) &#123;</span><br><span class="line">      appendCommentToDOM(commentDOM, comment);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> length = comments.length;</span><br><span class="line">    <span class="comment">// 沒有 lastId: 若初始頁面留言 &lt; 5 直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (length &lt; <span class="number">5</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 有 lastId: 若拿完資料就隱藏按鈕</span></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">      isEnd = <span class="literal">true</span>;</span><br><span class="line">      $(<span class="string">&#x27;.load-more&#x27;</span>).hide();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      lastId = comments[length - <span class="number">1</span>].id;</span><br><span class="line">      $(<span class="string">&#x27;.comments&#x27;</span>).append(loadMoreButtonHTML);   <span class="comment">// 新增 &quot;載入更多&quot; 按鈕</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import &#123; getComments, addComments &#125; from &#39;./api&#39;;
+import &#123; appendCommentToDOM &#125; from &#39;./utils&#39;;
+import &#123; cssTemplate, loadMoreButtonHTML, formTemplate &#125; from &#39;./template&#39;;
+import $ from &#39;jquery&#39;;
 
+let siteKey = &#39;&#39;;
+let apiUrl = &#39;&#39;;
+let containerElement = null;
+let commentDOM = null;
+let lastId = null;    // before
+let isEnd = false;    // 確認是否拿完資料
+
+// 在 DOM 結構準備好後，再進行初始化
+$(document).ready(() =&gt; &#123;
+  init(&#123;
+    siteKey: &#39;heidi&#39;,
+    apiUrl: &#39;http://localhost/heidi/week13_local/hw2&#39;,
+    containerSelector: &#39;.comment-area&#39;
+  &#125;);
+&#125;);
+
+// 初始化: 動態匯入表單
+function init(options) &#123;
+  siteKey = options.siteKey;
+  apiUrl = options.apiUrl;
+  containerElement = $(options.containerSelector);
+  containerElement.append(formTemplate);
+  // 動態新增 css 樣式
+  const styleElement = document.createElement(&#39;style&#39;);
+  styleElement.type = &#39;text/css&#39;;
+  styleElement.appendChild(document.createTextNode(cssTemplate));
+  document.head.appendChild(styleElement)
+
+  commentDOM = $(&#39;.comments&#39;);
+  getNewComments();
+
+  // 載入更多: 以事件代理的方式處理 click 事件
+  $(&#39;.comments&#39;).on(&#39;click&#39;, &#39;.load-more&#39;, () =&gt; &#123;
+  getNewComments();
+  &#125;);
+
+  // 新增留言 -&gt;  將資料存到後端
+  $(&#39;.add-comment-form&#39;).submit(e =&gt; &#123;
+  e.preventDefault();             // 取消原生行為 -&gt; 不會送出表單
+    const newCommentData = &#123;
+     &#39;site_key&#39;: siteKey,         // 全域變數的 siteKey
+      &#39;nickname&#39;: $(&#39;input[name=nickname]&#39;).val(),
+      &#39;content&#39;: $(&#39;textarea[name=content]&#39;).val()
+    &#125;
+    addComments(apiUrl, siteKey, newCommentData, data =&gt; &#123;
+      if (!data.ok) &#123;
+        alert(data.message);
+        return;
+      &#125;
+      $(&#39;input[name=nickname]&#39;).val(&#39;&#39;);
+      $(&#39;textarea[name=content]&#39;).val(&#39;&#39;);
+      appendCommentToDOM(commentDOM, newCommentData, true);
+    &#125;);
+  &#125;);
+&#125;
+
+function getNewComments() &#123;
+const commentDOM = $(&#39;.comments&#39;);
+$(&#39;.load-more&#39;).hide();       
+  if (isEnd) &#123;
+    return; 
+  &#125;
+  getComments(apiUrl, siteKey, lastId, data =&gt; &#123;
+    if (!data.ok) &#123;
+      alert(data.message);
+      return;
+    &#125;
+    // 若 request 成功讀取資料
+    const comments = data.discussions;
+    for (let comment of comments) &#123;
+      appendCommentToDOM(commentDOM, comment);
+    &#125;
+
+    let length = comments.length;
+    // 沒有 lastId: 若初始頁面留言 &lt; 5 直接返回
+    if (length &lt; 5) &#123;
+      return;
+    &#125;
+    // 有 lastId: 若拿完資料就隱藏按鈕
+    if (length === 0) &#123;
+      isEnd = true;
+      $(&#39;.load-more&#39;).hide();
+    &#125; else &#123;
+      lastId = comments[length - 1].id;
+      $(&#39;.comments&#39;).append(loadMoreButtonHTML);   // 新增 &quot;載入更多&quot; 按鈕
+    &#125;
+  &#125;);
+&#125;</code></pre>
 <h3 id="步驟四：使用-webpack-打包"><a href="#步驟四：使用-webpack-打包" class="headerlink" title="步驟四：使用 webpack 打包"></a>步驟四：使用 webpack 打包</h3><p>將上述檔案進行打包，會在 dist 資料夾建立 main.js，接著回到 index.html 引入該檔案：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;./dist/main.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&lt;script src=&quot;./dist/main.js&quot;&gt;&lt;/script&gt;</code></pre>
 <h3 id="步驟五：引入-library"><a href="#步驟五：引入-library" class="headerlink" title="步驟五：引入 library"></a>步驟五：引入 library</h3><blockquote>
 <p>可參考官方文件：<span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvYXV0aG9yLWxpYnJhcmllcy8=">https://webpack.js.org/guides/author-libraries/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <ol>
 <li>將 index.js 的 <code>init()</code> 改為 export：</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">export function init(options) &#123;
+  ...
+&#125;</code></pre>
 <ol start="2">
 <li>改在 index.html 引入 library：</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  $(<span class="built_in">document</span>).ready(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    commentPlugin.init(&#123;</span><br><span class="line">      siteKey: <span class="string">&#x27;heidi&#x27;</span>,</span><br><span class="line">      apiUrl: <span class="string">&#x27;http://localhost/heidi/week13_local/hw2&#x27;</span>,</span><br><span class="line">      containerSelector: <span class="string">&#x27;.comment-area&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&lt;script&gt;
+  $(document).ready(() =&gt; &#123;
+    commentPlugin.init(&#123;
+      siteKey: &#39;heidi&#39;,
+      apiUrl: &#39;http://localhost/heidi/week13_local/hw2&#39;,
+      containerSelector: &#39;.comment-area&#39;
+    &#125;);
+  &#125;);
+&lt;/script&gt;</code></pre>
 <ol start="2">
 <li>並在設定檔 webpack.config.js 的 output 加上<code>library: &#39;commentPlugin&#39;,</code></li>
 </ol>
@@ -319,12 +563,129 @@
 <ul>
 <li>修改 template.js 中的 classname </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加上不同的 classname，避免不同使用者共用 plugin 發生衝突</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getLoadMoreButton</span>(<span class="params">classname</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`&lt;button class=&quot;<span class="subst">$&#123;classname&#125;</span> load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UI 介面的模板</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getForm</span>(<span class="params">formClassName, commentsClassName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;form class=<span class="subst">$&#123;formClassName&#125;</span>&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label&gt;暱稱&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;label&gt;留言內容&lt;/label&gt;</span></span><br><span class="line"><span class="string">        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;<span class="subst">$&#123;commentsClassName&#125;</span>&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">// 加上不同的 classname，避免不同使用者共用 plugin 發生衝突
+export function getLoadMoreButton(classname) &#123;
+  return `&lt;button class=&quot;$&#123;classname&#125; load-more btn btn-dark&quot;&gt;載入更多&lt;/button&gt;`;
+&#125;
 
+// UI 介面的模板
+export function getForm(formClassName, commentsClassName) &#123;
+  return `
+  &lt;div&gt;
+    &lt;form class=$&#123;formClassName&#125;&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label&gt;暱稱&lt;/label&gt;
+        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label&gt;留言內容&lt;/label&gt;
+        &lt;textarea name=&quot;content&quot; class=&quot;form-control&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;button type=&quot;submit&quot; class=&quot;btn btn-dark&quot;&gt;送出&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;div class=&quot;$&#123;commentsClassName&#125;&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  `
+&#125;</code></pre>
 <ul>
 <li>index.js 中，同樣使用變數來取代字串</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getComments, addComments &#125; <span class="keyword">from</span> <span class="string">&#x27;./api&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; appendCommentToDOM, appendStyle &#125; <span class="keyword">from</span> <span class="string">&#x27;./utils&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; cssTemplate, getLoadMoreButton, getForm &#125; <span class="keyword">from</span> <span class="string">&#x27;./template&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化: 動態匯入表單</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> siteKey = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> apiUrl = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> containerElement = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">let</span> commentDOM = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">let</span> lastId = <span class="literal">null</span>;    <span class="comment">// before</span></span><br><span class="line">  <span class="keyword">let</span> isEnd = <span class="literal">false</span>;    <span class="comment">// 確認是否拿完資料</span></span><br><span class="line">  <span class="keyword">let</span> loadMoreClassName;</span><br><span class="line">  <span class="keyword">let</span> loadMoreSelector;</span><br><span class="line">  <span class="keyword">let</span> commentsClassName;</span><br><span class="line">  <span class="keyword">let</span> commentsSelector;</span><br><span class="line">  <span class="keyword">let</span> formClassName;</span><br><span class="line">  <span class="keyword">let</span> formSelector;</span><br><span class="line"></span><br><span class="line">  siteKey = options.siteKey;</span><br><span class="line">  apiUrl = options.apiUrl;</span><br><span class="line">  loadMoreClassName = <span class="string">`<span class="subst">$&#123;siteKey&#125;</span>-load-more`</span>;</span><br><span class="line">  commentsClassName = <span class="string">`<span class="subst">$&#123;siteKey&#125;</span>-comments`</span>;</span><br><span class="line">  formClassName = <span class="string">`<span class="subst">$&#123;siteKey&#125;</span>-add-comment-form`</span>;</span><br><span class="line">  loadMoreSelector = <span class="string">&#x27;.&#x27;</span> + loadMoreClassName;</span><br><span class="line">  commentsSelector = <span class="string">&#x27;.&#x27;</span> + commentsClassName;</span><br><span class="line">  formSelector = <span class="string">&#x27;.&#x27;</span> + formClassName;</span><br><span class="line"></span><br><span class="line">  containerElement = $(options.containerSelector);</span><br><span class="line">  containerElement.append(getForm(formClassName, commentsClassName));</span><br><span class="line">  appendStyle(cssTemplate)</span><br><span class="line"></span><br><span class="line">  commentDOM = $(commentsSelector);</span><br><span class="line">  getNewComments();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 載入更多: 以事件代理的方式處理 click 事件</span></span><br><span class="line">  $(commentsSelector).on(<span class="string">&#x27;click&#x27;</span>, loadMoreSelector, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    getNewComments();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 新增留言 -&gt;  將資料存到後端</span></span><br><span class="line">  $(formSelector).submit(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    e.preventDefault();             <span class="comment">// 取消原生行為 -&gt; 不會送出表單</span></span><br><span class="line">    <span class="keyword">const</span> nicknameDOM = $(<span class="string">`<span class="subst">$&#123;formSelector&#125;</span> input[name=nickname]`</span>);</span><br><span class="line">    <span class="keyword">const</span> contentDOM = $(<span class="string">`<span class="subst">$&#123;formSelector&#125;</span> textarea[name=content]`</span>);</span><br><span class="line">    <span class="keyword">const</span> newCommentData = &#123;</span><br><span class="line">      site_key: siteKey,         <span class="comment">// 全域變數的 siteKey</span></span><br><span class="line">      nickname: nicknameDOM.val(),</span><br><span class="line">      content: contentDOM.val()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(formSelector)</span><br><span class="line">    <span class="built_in">console</span>.log(nicknameDOM, nicknameDOM.val())</span><br><span class="line">    <span class="built_in">console</span>.log(contentDOM, contentDOM.val())    </span><br><span class="line">    addComments(apiUrl, siteKey, newCommentData, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">        alert(data.message);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      nicknameDOM.val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      contentDOM.val(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      appendCommentToDOM(commentDOM, newCommentData, <span class="literal">true</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getNewComments</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> commentDOM = $(commentsSelector);</span><br><span class="line">    $(loadMoreSelector).hide();</span><br><span class="line">    <span class="keyword">if</span> (isEnd) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    getComments(apiUrl, siteKey, lastId, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!data.ok) &#123;</span><br><span class="line">        alert(data.message);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">const</span> comments = data.discussions;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> comment <span class="keyword">of</span> comments) &#123;</span><br><span class="line">        appendCommentToDOM(commentDOM, comment);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> length = comments.length;</span><br><span class="line">      <span class="keyword">if</span> (length &lt; <span class="number">5</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">        isEnd = <span class="literal">true</span>;</span><br><span class="line">        $(loadMoreSelector).hide();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        lastId = comments[length - <span class="number">1</span>].id;</span><br><span class="line">        <span class="keyword">const</span> loadMoreButtonHTML = getLoadMoreButton(loadMoreClassName);</span><br><span class="line">        $(commentsSelector).append(loadMoreButtonHTML);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import &#123; getComments, addComments &#125; from &#39;./api&#39;;
+import &#123; appendCommentToDOM, appendStyle &#125; from &#39;./utils&#39;;
+import &#123; cssTemplate, getLoadMoreButton, getForm &#125; from &#39;./template&#39;;
+import $ from &#39;jquery&#39;;
+
+// 初始化: 動態匯入表單
+export function init(options) &#123;
+  let siteKey = &#39;&#39;;
+  let apiUrl = &#39;&#39;;
+  let containerElement = null;
+  let commentDOM = null;
+  let lastId = null;    // before
+  let isEnd = false;    // 確認是否拿完資料
+  let loadMoreClassName;
+  let loadMoreSelector;
+  let commentsClassName;
+  let commentsSelector;
+  let formClassName;
+  let formSelector;
+
+  siteKey = options.siteKey;
+  apiUrl = options.apiUrl;
+  loadMoreClassName = `$&#123;siteKey&#125;-load-more`;
+  commentsClassName = `$&#123;siteKey&#125;-comments`;
+  formClassName = `$&#123;siteKey&#125;-add-comment-form`;
+  loadMoreSelector = &#39;.&#39; + loadMoreClassName;
+  commentsSelector = &#39;.&#39; + commentsClassName;
+  formSelector = &#39;.&#39; + formClassName;
+
+  containerElement = $(options.containerSelector);
+  containerElement.append(getForm(formClassName, commentsClassName));
+  appendStyle(cssTemplate)
+
+  commentDOM = $(commentsSelector);
+  getNewComments();
+
+  // 載入更多: 以事件代理的方式處理 click 事件
+  $(commentsSelector).on(&#39;click&#39;, loadMoreSelector, () =&gt; &#123;
+    getNewComments();
+  &#125;);
+
+  // 新增留言 -&gt;  將資料存到後端
+  $(formSelector).submit(e =&gt; &#123;
+    e.preventDefault();             // 取消原生行為 -&gt; 不會送出表單
+    const nicknameDOM = $(`$&#123;formSelector&#125; input[name=nickname]`);
+    const contentDOM = $(`$&#123;formSelector&#125; textarea[name=content]`);
+    const newCommentData = &#123;
+      site_key: siteKey,         // 全域變數的 siteKey
+      nickname: nicknameDOM.val(),
+      content: contentDOM.val()
+    &#125;
+    console.log(formSelector)
+    console.log(nicknameDOM, nicknameDOM.val())
+    console.log(contentDOM, contentDOM.val())    
+    addComments(apiUrl, siteKey, newCommentData, data =&gt; &#123;
+      if (!data.ok) &#123;
+        alert(data.message);
+        return;
+      &#125;
+      nicknameDOM.val(&#39;&#39;);
+      contentDOM.val(&#39;&#39;);
+      appendCommentToDOM(commentDOM, newCommentData, true);
+    &#125;);
+  &#125;);
+
+  function getNewComments() &#123;
+    const commentDOM = $(commentsSelector);
+    $(loadMoreSelector).hide();
+    if (isEnd) &#123;
+      return;
+    &#125;
+    getComments(apiUrl, siteKey, lastId, data =&gt; &#123;
+      if (!data.ok) &#123;
+        alert(data.message);
+        return;
+      &#125;
+      const comments = data.discussions;
+      for (let comment of comments) &#123;
+        appendCommentToDOM(commentDOM, comment);
+      &#125;
+
+      let length = comments.length;
+      if (length &lt; 5) &#123;
+        return;
+      &#125;
+      if (length === 0) &#123;
+        isEnd = true;
+        $(loadMoreSelector).hide();
+      &#125; else &#123;
+        lastId = comments[length - 1].id;
+        const loadMoreButtonHTML = getLoadMoreButton(loadMoreClassName);
+        $(commentsSelector).append(loadMoreButtonHTML);
+      &#125;
+    &#125;);
+  &#125;
+&#125;</code></pre>
 
     </div>
 
@@ -435,7 +796,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -446,7 +807,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

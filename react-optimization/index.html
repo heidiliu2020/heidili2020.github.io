@@ -269,60 +269,255 @@
 <li>App.js</li>
 </ul>
 <p>在 App.js 執行開始，就先設定一個 isLoadingGetMe，預設值為 true，也就是不顯示登入登出：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [isLoadingGetMe, setLoadingGetMe] = useState(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">const [isLoadingGetMe, setLoadingGetMe] = useState(true);</code></pre>
 <p>一旦接收到 getMe() 回傳的 response 時，或是發現沒有 token 時，就會改成 false，顯示登入登出：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getMe &#125; <span class="keyword">from</span> <span class="string">&quot;../../WebAPI&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getAuthToken &#125; <span class="keyword">from</span> <span class="string">&quot;../../utils&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 以 getAuthToken 從 localStorage 讀取 token</span></span><br><span class="line">  <span class="keyword">if</span> (getAuthToken()) &#123;</span><br><span class="line">    <span class="comment">// 有 token 才 call API</span></span><br><span class="line">    getMe().then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (response.ok) &#123;</span><br><span class="line">        setUser(response.data);</span><br><span class="line">        setLoadingGetMe(<span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    setLoadingGetMe(<span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import &#123; getMe &#125; from &quot;../../WebAPI&quot;;
+import &#123; getAuthToken &#125; from &quot;../../utils&quot;;
 
+useEffect(() =&gt; &#123;
+  // 以 getAuthToken 從 localStorage 讀取 token
+  if (getAuthToken()) &#123;
+    // 有 token 才 call API
+    getMe().then((response) =&gt; &#123;
+      if (response.ok) &#123;
+        setUser(response.data);
+        setLoadingGetMe(false);
+      &#125;
+    &#125;);
+  &#125; else &#123;
+    setLoadingGetMe(false);
+  &#125;
+&#125;, []);</code></pre>
 <p>並透過 Provider 將參數設為全域變數：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; AuthContext, LoadingContext &#125; <span class="keyword">from</span> <span class="string">&quot;../../contexts&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">&lt;AuthContext.Provider value=&#123;&#123; user, setUser &#125;&#125;&gt;</span><br><span class="line">  &lt;Root&gt;</span><br><span class="line">     &lt;LoadingContext.Provider</span><br><span class="line">        value=&#123;&#123; isLoading, setIsLoading, isLoadingGetMe &#125;&#125;</span><br><span class="line">      &gt;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//  ...   </span></span><br><span class="line"></span><br><span class="line">    &lt;/LoadingContext.Provider&gt;</span><br><span class="line">  &lt;/Root&gt;</span><br><span class="line">&lt;/AuthContext.Provider&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="jsx=">import &#123; AuthContext, LoadingContext &#125; from &quot;../../contexts&quot;;
 
+// ...
+
+&lt;AuthContext.Provider value=&#123;&#123; user, setUser &#125;&#125;&gt;
+  &lt;Root&gt;
+     &lt;LoadingContext.Provider
+        value=&#123;&#123; isLoading, setIsLoading, isLoadingGetMe &#125;&#125;
+      &gt;
+
+    //  ...   
+
+    &lt;/LoadingContext.Provider&gt;
+  &lt;/Root&gt;
+&lt;/AuthContext.Provider&gt;</code></pre>
 <h3 id="context-js：建立-context"><a href="#context-js：建立-context" class="headerlink" title="context.js：建立 context"></a>context.js：建立 context</h3><p>在 src/context.js 建立 context，初始值設為 null：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始值為 null</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AuthContext = createContext(<span class="literal">null</span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> LoadingContext = createContext(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import &#123; createContext &#125; from &quot;react&quot;;
 
+// 初始值為 null
+export const AuthContext = createContext(null);
+export const LoadingContext = createContext(null);</code></pre>
 <h3 id="Header-js：根據-isLoadingGetMe-顯示登入狀態"><a href="#Header-js：根據-isLoadingGetMe-顯示登入狀態" class="headerlink" title="Header.js：根據 isLoadingGetMe 顯示登入狀態"></a>Header.js：根據 isLoadingGetMe 顯示登入狀態</h3><p>首先從 context.js 引入參數，以及引入需要的 hooks：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Link, NavLink, useHistory, useLocation &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; AuthContext, LoadingContext &#125; <span class="keyword">from</span> <span class="string">&quot;../../contexts&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; setAuthToken &#125; <span class="keyword">from</span> <span class="string">&quot;../../utils&quot;</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import React, &#123; useContext &#125; from &quot;react&quot;;
+import &#123; Link, NavLink, useHistory, useLocation &#125; from &quot;react-router-dom&quot;;
 
+import &#123; AuthContext, LoadingContext &#125; from &quot;../../contexts&quot;;
+import &#123; setAuthToken &#125; from &quot;../../utils&quot;;</code></pre>
 <p>接著就可以根據 isLoadingGetMe 以及 user 的布林值，決定如何顯示登入狀態：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Header</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; isLoadingGetMe &#125; = useContext(LoadingContext);</span><br><span class="line">  <span class="keyword">const</span> &#123; user, setUser &#125; = useContext(AuthContext);</span><br><span class="line">  <span class="keyword">const</span> location = useLocation();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 登出功能</span></span><br><span class="line">  <span class="keyword">const</span> history = useHistory();</span><br><span class="line">  <span class="keyword">const</span> handleLogout = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setAuthToken(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    setUser(<span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">if</span> (location.pathname !== <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">      history.push(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;HeaderContainer&gt;</span><br><span class="line">      &lt;Brand&gt;</span><br><span class="line">        &lt;Link to=<span class="string">&quot;/&quot;</span> replace&gt;</span><br><span class="line">          React 部落格</span><br><span class="line">        &lt;/Link&gt;</span><br><span class="line">      &lt;/Brand&gt;</span><br><span class="line">      &lt;NavbarList&gt;</span><br><span class="line">        &lt;StyledLink exact to=<span class="string">&quot;/about&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">          關於我</span><br><span class="line">        &lt;/StyledLink&gt;</span><br><span class="line">        &lt;StyledLink to=<span class="string">&quot;/post-list/&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">          文章列表</span><br><span class="line">        &lt;/StyledLink&gt;</span><br><span class="line">        &#123;isLoadingGetMe ? (</span><br><span class="line">          &lt;LoadingGetMe&gt;資料讀取中...&lt;/LoadingGetMe&gt;</span><br><span class="line">        ) : (</span><br><span class="line">          &lt;&gt;</span><br><span class="line">            &#123;!user &amp;&amp; (</span><br><span class="line">              &lt;StyledLink to=<span class="string">&quot;/register&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">                註冊</span><br><span class="line">              &lt;/StyledLink&gt;</span><br><span class="line">            )&#125;</span><br><span class="line">            &#123;!user &amp;&amp; (</span><br><span class="line">              &lt;StyledLink to=<span class="string">&quot;/login&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">                登入</span><br><span class="line">              &lt;/StyledLink&gt;</span><br><span class="line">            )&#125;</span><br><span class="line">            &#123;user &amp;&amp; (</span><br><span class="line">              &lt;StyledLink to=<span class="string">&quot;/new-post&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">                發布文章</span><br><span class="line">              &lt;/StyledLink&gt;</span><br><span class="line">            )&#125;</span><br><span class="line">            &#123;user &amp;&amp; (</span><br><span class="line">              &lt;StyledLink to=<span class="string">&quot;&quot;</span> replace onClick=&#123;handleLogout&#125;&gt;</span><br><span class="line">                登出</span><br><span class="line">              &lt;/StyledLink&gt;</span><br><span class="line">            )&#125;</span><br><span class="line">          &lt;/&gt;</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;/NavbarList&gt;</span><br><span class="line">    &lt;/HeaderContainer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export default function Header() &#123;
+  const &#123; isLoadingGetMe &#125; = useContext(LoadingContext);
+  const &#123; user, setUser &#125; = useContext(AuthContext);
+  const location = useLocation();
 
+  // 登出功能
+  const history = useHistory();
+  const handleLogout = () =&gt; &#123;
+    setAuthToken(&quot;&quot;);
+    setUser(null);
+    if (location.pathname !== &quot;/&quot;) &#123;
+      history.push(&quot;/&quot;);
+    &#125;
+  &#125;;
+
+  return (
+    &lt;HeaderContainer&gt;
+      &lt;Brand&gt;
+        &lt;Link to=&quot;/&quot; replace&gt;
+          React 部落格
+        &lt;/Link&gt;
+      &lt;/Brand&gt;
+      &lt;NavbarList&gt;
+        &lt;StyledLink exact to=&quot;/about&quot; replace activeClassName=&quot;active&quot;&gt;
+          關於我
+        &lt;/StyledLink&gt;
+        &lt;StyledLink to=&quot;/post-list/&quot; replace activeClassName=&quot;active&quot;&gt;
+          文章列表
+        &lt;/StyledLink&gt;
+        &#123;isLoadingGetMe ? (
+          &lt;LoadingGetMe&gt;資料讀取中...&lt;/LoadingGetMe&gt;
+        ) : (
+          &lt;&gt;
+            &#123;!user &amp;&amp; (
+              &lt;StyledLink to=&quot;/register&quot; replace activeClassName=&quot;active&quot;&gt;
+                註冊
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;!user &amp;&amp; (
+              &lt;StyledLink to=&quot;/login&quot; replace activeClassName=&quot;active&quot;&gt;
+                登入
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;user &amp;&amp; (
+              &lt;StyledLink to=&quot;/new-post&quot; replace activeClassName=&quot;active&quot;&gt;
+                發布文章
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;user &amp;&amp; (
+              &lt;StyledLink to=&quot;&quot; replace onClick=&#123;handleLogout&#125;&gt;
+                登出
+              &lt;/StyledLink&gt;
+            )&#125;
+          &lt;/&gt;
+        )&#125;
+      &lt;/NavbarList&gt;
+    &lt;/HeaderContainer&gt;
+  );
+&#125;</code></pre>
 <p>重點在於 isLoadingGetMe  的判斷邏輯：</p>
 <ul>
 <li>如果 isLoadingGetMe 為 true，就不會顯示裡面和登入狀態有關的東西</li>
 <li>當 isLoadingGetMe 為 faluse，才會再根據 user 是否為 true，決定要顯示「註冊、登入」還是「發布文章、登出」</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;isLoadingGetMe ? (</span><br><span class="line">  &lt;LoadingGetMe&gt;資料讀取中...&lt;/LoadingGetMe&gt;</span><br><span class="line">) : (</span><br><span class="line">  &lt;&gt;</span><br><span class="line">    &#123;!user &amp;&amp; (</span><br><span class="line">      &lt;StyledLink to=<span class="string">&quot;/register&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">        註冊</span><br><span class="line">      &lt;/StyledLink&gt;</span><br><span class="line">    )&#125;</span><br><span class="line">    &#123;!user &amp;&amp; (</span><br><span class="line">      &lt;StyledLink to=<span class="string">&quot;/login&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">        登入</span><br><span class="line">      &lt;/StyledLink&gt;</span><br><span class="line">    )&#125;</span><br><span class="line">    &#123;user &amp;&amp; (</span><br><span class="line">      &lt;StyledLink to=<span class="string">&quot;/new-post&quot;</span> replace activeClassName=<span class="string">&quot;active&quot;</span>&gt;</span><br><span class="line">        發布文章</span><br><span class="line">      &lt;/StyledLink&gt;</span><br><span class="line">    )&#125;</span><br><span class="line">    &#123;user &amp;&amp; (</span><br><span class="line">      &lt;StyledLink to=<span class="string">&quot;&quot;</span> replace onClick=&#123;handleLogout&#125;&gt;</span><br><span class="line">        登出</span><br><span class="line">      &lt;/StyledLink&gt;</span><br><span class="line">    )&#125;</span><br><span class="line">  &lt;/&gt;</span><br><span class="line">)&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">        &#123;isLoadingGetMe ? (
+          &lt;LoadingGetMe&gt;資料讀取中...&lt;/LoadingGetMe&gt;
+        ) : (
+          &lt;&gt;
+            &#123;!user &amp;&amp; (
+              &lt;StyledLink to=&quot;/register&quot; replace activeClassName=&quot;active&quot;&gt;
+                註冊
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;!user &amp;&amp; (
+              &lt;StyledLink to=&quot;/login&quot; replace activeClassName=&quot;active&quot;&gt;
+                登入
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;user &amp;&amp; (
+              &lt;StyledLink to=&quot;/new-post&quot; replace activeClassName=&quot;active&quot;&gt;
+                發布文章
+              &lt;/StyledLink&gt;
+            )&#125;
+            &#123;user &amp;&amp; (
+              &lt;StyledLink to=&quot;&quot; replace onClick=&#123;handleLogout&#125;&gt;
+                登出
+              &lt;/StyledLink&gt;
+            )&#125;
+          &lt;/&gt;
+        )&#125;</code></pre>
 <hr>
 <h2 id="二、處理呼叫-API-造成的畫面閃爍"><a href="#二、處理呼叫-API-造成的畫面閃爍" class="headerlink" title="二、處理呼叫 API 造成的畫面閃爍"></a>二、處理呼叫 API 造成的畫面閃爍</h2><p>當我們需要 call API 時，必須考慮到非同步的問題。舉例來說，當我們進入文章列表時，第一次 render 會先看到空的列表，第二次 render 才會出現文章。</p>
 <p>為了解決這個問題，我們可以將第一次 render 改為 Loading 畫面，等到第二次 render 再顯示文章頁面。</p>
 <p>那麼就開始吧！</p>
 <h3 id="App-js：設定-isLoading-狀態"><a href="#App-js：設定-isLoading-狀態" class="headerlink" title="App.js：設定 isLoading 狀態"></a>App.js：設定 isLoading 狀態</h3><p>首先，同樣在 APP 執行時就先設第一個 isLoading 狀態，預設值為 false，當我們有進行 call API 的動作時才會設為 true：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [isLoading, setIsLoading] = useState(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">const [isLoading, setIsLoading] = useState(false);</code></pre>
 <p>同樣透過 Provider 將參數設為全域變數：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> &lt;LoadingContext.Provider</span><br><span class="line">    value=&#123;&#123; isLoading, setIsLoading, isLoadingGetMe &#125;&#125;&gt;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&lt;/LoadingContext.Provider&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="jsx="> &lt;LoadingContext.Provider
+    value=&#123;&#123; isLoading, setIsLoading, isLoadingGetMe &#125;&#125;&gt;
+    // ...
+&lt;/LoadingContext.Provider&gt;</code></pre>
 <h3 id="PoseListPage-js：根據-isLoading-狀態顯示畫面"><a href="#PoseListPage-js：根據-isLoading-狀態顯示畫面" class="headerlink" title="PoseListPage.js：根據 isLoading 狀態顯示畫面"></a>PoseListPage.js：根據 isLoading 狀態顯示畫面</h3><p>接著引入 context，還有 isLoading 時要顯示的 Loading component：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect, useRef, useContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; LoadingContext, AuthContext &#125; <span class="keyword">from</span> <span class="string">&quot;../../contexts&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Loading <span class="keyword">from</span> <span class="string">&quot;../../components/Loading&quot;</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">import React, &#123; useState, useEffect, useRef, useContext &#125; from &quot;react&quot;;
+import &#123; LoadingContext, AuthContext &#125; from &quot;../../contexts&quot;;
+import Loading from &quot;../../components/Loading&quot;;</code></pre>
 <p>接著是根據 isLoading 狀態顯示畫面，在 call API 時會設為 true，直到接收 response 後會設為 false：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">HomePage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; isLoading, setIsLoading &#125; = useContext(LoadingContext);</span><br><span class="line">  <span class="keyword">const</span> [posts, setPosts] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setIsLoading(<span class="literal">true</span>);</span><br><span class="line">    getPosts()</span><br><span class="line">      .then(<span class="function">(<span class="params">posts</span>) =&gt;</span> setPosts(posts))</span><br><span class="line">      .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setIsLoading(<span class="literal">false</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;, [setIsLoading]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Root&gt;</span><br><span class="line">      &#123;isLoading ? (</span><br><span class="line">        &lt;Loading /&gt;</span><br><span class="line">      ) : (</span><br><span class="line">        &lt;PostsListContainer&gt;</span><br><span class="line">          &lt;PostsListTitle&gt;最新文章&lt;/PostsListTitle&gt;</span><br><span class="line">          &#123;posts &amp;&amp; posts.map(<span class="function">(<span class="params">post</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">PostList</span> <span class="attr">post</span>=<span class="string">&#123;post&#125;</span> <span class="attr">key</span>=<span class="string">&#123;post.id&#125;</span> /&gt;</span></span>)&#125;</span><br><span class="line">          &lt;ReadMore&gt;</span><br><span class="line">            &lt;Link to=<span class="string">&quot;/post-list&quot;</span>&gt;查看更多&lt;/Link&gt;</span><br><span class="line">          &lt;/ReadMore&gt;</span><br><span class="line">        &lt;/PostsListContainer&gt;</span><br><span class="line">      )&#125;</span><br><span class="line">    &lt;/Root&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">export default function HomePage() &#123;
+  const &#123; isLoading, setIsLoading &#125; = useContext(LoadingContext);
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() =&gt; &#123;
+    setIsLoading(true);
+    getPosts()
+      .then((posts) =&gt; setPosts(posts))
+      .then(() =&gt; &#123;
+        setIsLoading(false);
+      &#125;);
+  &#125;, [setIsLoading]);
+
+  return (
+    &lt;Root&gt;
+      &#123;isLoading ? (
+        &lt;Loading /&gt;
+      ) : (
+        &lt;PostsListContainer&gt;
+          &lt;PostsListTitle&gt;最新文章&lt;/PostsListTitle&gt;
+          &#123;posts &amp;&amp; posts.map((post) =&gt; &lt;PostList post=&#123;post&#125; key=&#123;post.id&#125; /&gt;)&#125;
+          &lt;ReadMore&gt;
+            &lt;Link to=&quot;/post-list&quot;&gt;查看更多&lt;/Link&gt;
+          &lt;/ReadMore&gt;
+        &lt;/PostsListContainer&gt;
+      )&#125;
+    &lt;/Root&gt;
+  );
+&#125;</code></pre>
 <h2 id="三、透過-react-spinner-設定-loading-畫面"><a href="#三、透過-react-spinner-設定-loading-畫面" class="headerlink" title="三、透過 react-spinner 設定 loading 畫面"></a>三、透過 react-spinner 設定 loading 畫面</h2><blockquote>
 <p>使用方法可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkaHUyMDAwL3JlYWN0LXNwaW5uZXJz">davidhu2000 / react-spinners<i class="fa fa-external-link-alt"></i></span> 介紹，以及樣式 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGF2aWRodS5pby9yZWFjdC1zcGlubmVycy8=">DEMO<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-spinners --save</span><br></pre></td></tr></table></figure>
-
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><pre><code>npm install react-spinners --save</code></pre>
 <h3 id="官方使用範例"><a href="#官方使用範例" class="headerlink" title="官方使用範例"></a>官方使用範例</h3><p>官方範例是用 class component 去寫的，但其實概念和 function component 沒有差太多，狀態就從 App.js 設定的 isLoading 去判斷即可：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; css &#125; <span class="keyword">from</span> <span class="string">&quot;@emotion/core&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ClipLoader <span class="keyword">from</span> <span class="string">&quot;react-spinners/ClipLoader&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Can be a string as well. Need to ensure each key-value pair ends with ;</span></span><br><span class="line"><span class="keyword">const</span> override = css`</span><br><span class="line"><span class="css">  <span class="selector-tag">display</span>: <span class="selector-tag">block</span>;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">margin</span>: 0 <span class="selector-tag">auto</span>;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">border-color</span>: <span class="selector-tag">red</span>;</span></span><br><span class="line"><span class="css">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AwesomeComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      loading: <span class="literal">true</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">&quot;sweet-loading&quot;</span>&gt;</span><br><span class="line">        &lt;ClipLoader</span><br><span class="line">          css=&#123;override&#125;</span><br><span class="line">          size=&#123;<span class="number">150</span>&#125;</span><br><span class="line">          color=&#123;<span class="string">&quot;#123abc&quot;</span>&#125;</span><br><span class="line">          loading=&#123;<span class="built_in">this</span>.state.loading&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import React from &quot;react&quot;;
+import &#123; css &#125; from &quot;@emotion/core&quot;;
+import ClipLoader from &quot;react-spinners/ClipLoader&quot;;
 
+// Can be a string as well. Need to ensure each key-value pair ends with ;
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
+class AwesomeComponent extends React.Component &#123;
+  constructor(props) &#123;
+    super(props);
+    this.state = &#123;
+      loading: true
+    &#125;;
+  &#125;
+
+  render() &#123;
+    return (
+      &lt;div className=&quot;sweet-loading&quot;&gt;
+        &lt;ClipLoader
+          css=&#123;override&#125;
+          size=&#123;150&#125;
+          color=&#123;&quot;#123abc&quot;&#125;
+          loading=&#123;this.state.loading&#125;
+        /&gt;
+      &lt;/div&gt;
+    );
+  &#125;
+&#125;</code></pre>
 <ul>
 <li>Loading.js</li>
 </ul>
 <p>改寫 Loading component 如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line"><span class="comment">// 要引用的樣式</span></span><br><span class="line"><span class="keyword">import</span> &#123; PuffLoader &#125; <span class="keyword">from</span> <span class="string">&quot;react-spinners&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全版的半透明背景</span></span><br><span class="line"><span class="keyword">const</span> LoadingWapper = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  position: fixed;</span></span><br><span class="line"><span class="string">  top: 0;</span></span><br><span class="line"><span class="string">  left: 0;</span></span><br><span class="line"><span class="string">  right: 0;</span></span><br><span class="line"><span class="string">  bottom: 0;</span></span><br><span class="line"><span class="string">  background: rgba(0, 0, 0, 0.6);</span></span><br><span class="line"><span class="string">  display: flex;</span></span><br><span class="line"><span class="string">  align-items: center;</span></span><br><span class="line"><span class="string">  justify-content: center;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Loading</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;LoadingWapper&gt;</span><br><span class="line">      &lt;PuffLoader size=&#123;<span class="number">60</span>&#125; color=&#123;<span class="string">&quot;#4A90E2&quot;</span>&#125; /&gt;</span><br><span class="line">    &lt;/LoadingWapper&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">import React from &quot;react&quot;;
+import styled from &quot;styled-components&quot;;
+// 要引用的樣式
+import &#123; PuffLoader &#125; from &quot;react-spinners&quot;;
 
+// 全版的半透明背景
+const LoadingWapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export default function Loading() &#123;
+  return (
+    &lt;LoadingWapper&gt;
+      &lt;PuffLoader size=&#123;60&#125; color=&#123;&quot;#4A90E2&quot;&#125; /&gt;
+    &lt;/LoadingWapper&gt;
+  );
+&#125;</code></pre>
 <p>效果如下：</p>
 <p><img src="https://i.imgur.com/MNaWqI0.gif"></p>
 
@@ -436,7 +631,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -447,7 +642,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

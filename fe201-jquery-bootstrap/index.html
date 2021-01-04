@@ -269,38 +269,122 @@
 <h2 id="jQuery：JS-函式庫"><a href="#jQuery：JS-函式庫" class="headerlink" title="jQuery：JS 函式庫"></a>jQuery：JS 函式庫</h2><p><img src="https://i.imgur.com/KKhdOms.png"></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9qcXVlcnkuY29tLw==">jQuery<i class="fa fa-external-link-alt"></i></span> 是一個 JavaScript 函式庫（Javascipt Framework），是幫助加速網頁程式開發的工具。可解決跨瀏覽器的問題，能夠快速又方面操作 DOM，縮短開發時間與簡化程式碼。</p>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>和引入 JavaScript 方法類似：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;</code></pre>
 <h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><p>使用 jQuery 的基本語法如下，意即指派元素到指定的事件：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 選取 `$(selector)` 元素，並指派它進行 `.action()` 事件</span></span><br><span class="line">$(selector).action()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 範例</span></span><br><span class="line">$( <span class="string">&quot;button.continue&quot;</span> ).html( <span class="string">&quot;Next Step...&quot;</span> )</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">// 選取 `$(selector)` 元素，並指派它進行 `.action()` 事件
+$(selector).action()
 
+// 範例
+$( &quot;button.continue&quot; ).html( &quot;Next Step...&quot; )</code></pre>
 <p>其中的 <code>$()</code> 符號就是 jQuery 常用的選擇器，善用選擇器可以快速找到網頁當中的物件。</p>
 <p>以按鈕 Button 的點擊事件為例：</p>
-<h4 id="JavaScript-原生語法"><a href="#JavaScript-原生語法" class="headerlink" title="JavaScript 原生語法"></a>JavaScript 原生語法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 DOMContentLoaded 或 load 事件，可確保 DOM 結構被完整的讀取跟解析</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.btn&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">&#x27;click!&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+<h4 id="JavaScript-原生語法"><a href="#JavaScript-原生語法" class="headerlink" title="JavaScript 原生語法"></a>JavaScript 原生語法</h4><pre><code class="javascript">// 使用 DOMContentLoaded 或 load 事件，可確保 DOM 結構被完整的讀取跟解析
+document.addEventListener(&#39;DOMContentLoaded&#39;, function () &#123;
+  document.querySelector(&#39;.btn&#39;).addEventListener(&#39;click&#39;, function() &#123;
+    alert(&#39;click!&#39;)
+  &#125;)
+&#125;)</code></pre>
 <p>兩者結構其實非常類似，多數情況下 JavaScript 和 jQuery 的語法兩者也能夠混用。</p>
-<h4 id="使用-jQuery"><a href="#使用-jQuery" class="headerlink" title="使用 jQuery"></a>使用 jQuery</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery === $</span></span><br><span class="line">$(<span class="built_in">document</span>).ready (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">&#x27;.btn&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">&#x27;click jq!&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+<h4 id="使用-jQuery"><a href="#使用-jQuery" class="headerlink" title="使用 jQuery"></a>使用 jQuery</h4><pre><code class="javascript=">// jQuery === $
+$(document).ready (function() &#123;
+  $(&#39;.btn&#39;).click(function(e) &#123;
+    alert(&#39;click jq!&#39;)
+  &#125;)
+&#125;)</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vY2FpemhlbmJvL3AvNjY3OTQ3OC5odG1s">DOMContentLoaded與load的區別<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9hcGkuanF1ZXJ5LmNvbS9sb2FkLWV2ZW50LyNsb2FkMQ==">jQuery Core API Documentation<i class="fa fa-external-link-alt"></i></span>：用來查閱官方說明文件</li>
 <li><span class="exturl" data-url="aHR0cDovL3lvdW1pZ2h0bm90bmVlZGpxdWVyeS5jb20v">You might not need jQuery<i class="fa fa-external-link-alt"></i></span>：可對照 jQuery 和 JavaScript 的寫法</li>
 </ul>
-<h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><h4 id="淡入淡出效果"><a href="#淡入淡出效果" class="headerlink" title="淡入淡出效果"></a>淡入淡出效果</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .box &#123;</span><br><span class="line">    height: <span class="number">200</span>px;</span><br><span class="line">    width: <span class="number">200</span>px;</span><br><span class="line">    background: brown;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script src=<span class="string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> isHide = <span class="literal">false</span></span><br><span class="line">  $(<span class="built_in">document</span>).ready (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">&#x27;.btn&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (isHide) &#123;</span><br><span class="line">        $(<span class="string">&#x27;.box&#x27;</span>).fadeIn(<span class="number">500</span>)    <span class="comment">// show()</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $(<span class="string">&#x27;.box&#x27;</span>).fadeOut(<span class="number">500</span>)   <span class="comment">// hide()</span></span><br><span class="line">      &#125;</span><br><span class="line">      isHide = !isHide</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span>&gt;I am a button&lt;/button&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;box&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><h4 id="淡入淡出效果"><a href="#淡入淡出效果" class="headerlink" title="淡入淡出效果"></a>淡入淡出效果</h4><pre><code class="javascript=">&lt;style&gt;
+  .box &#123;
+    height: 200px;
+    width: 200px;
+    background: brown;
+  &#125;
+&lt;/style&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
 
+&lt;script&gt;
+  var isHide = false
+  $(document).ready (function() &#123;
+    $(&#39;.btn&#39;).click(function(e) &#123;
+      if (isHide) &#123;
+        $(&#39;.box&#39;).fadeIn(500)    // show()
+      &#125; else &#123;
+        $(&#39;.box&#39;).fadeOut(500)   // hide()
+      &#125;
+      isHide = !isHide
+    &#125;)
+  &#125;)
+  &lt;/script&gt;
+&lt;body&gt;
+  &lt;button class=&quot;btn&quot;&gt;I am a button&lt;/button&gt;
+  &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
 <h4 id="簡易-todo-list"><a href="#簡易-todo-list" class="headerlink" title="簡易 todo list"></a>簡易 todo list</h4><p>首先建立點擊事件，來拿取 input 欄位輸入的值：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(<span class="built_in">document</span>).ready (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">&#x27;.btn&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="string">&#x27;.todo-input&#x27;</span>).val()) <span class="comment">// 測試是否讀取成功</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;todo-input&quot;</span> /&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span>&gt;Add todo&lt;/button&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;todos&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript=">&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready (function() &#123;
+  $(&#39;.btn&#39;).click(function(e) &#123;
+    console.log($(&#39;.todo-input&#39;).val()) // 測試是否讀取成功
+  &#125;)
+&#125;)
+&lt;/script&gt;
+&lt;body&gt;
+  &lt;input class=&quot;todo-input&quot; /&gt;
+  &lt;button class=&quot;btn&quot;&gt;Add todo&lt;/button&gt;
+  &lt;div class=&quot;todos&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
 <p>再來加入新增 todo 到 todos 的功能：</p>
 <ul>
 <li><code>prepend()</code>：新增元素到最上面</li>
 <li><code>append()</code>：新增元素到最下面</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .todo &#123;</span><br><span class="line">    padding: <span class="number">10</span>px;</span><br><span class="line">    border: <span class="number">1</span>px solid #eee;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script src=<span class="string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  $(<span class="built_in">document</span>).ready (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">&#x27;.btn&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;             <span class="comment">// 建立點擊事件</span></span><br><span class="line">      <span class="keyword">const</span> value = $(<span class="string">&#x27;.todo-input&#x27;</span>).val()    <span class="comment">// 拿取 value 值</span></span><br><span class="line">      $(<span class="string">&#x27;.todo-input&#x27;</span>).val(<span class="string">&#x27;&#x27;</span>)                <span class="comment">// 讀取完後清空 input 欄位</span></span><br><span class="line">      $(<span class="string">&#x27;.todos&#x27;</span>).prepend(<span class="string">`&lt;div class=&quot;todo&quot;&gt;<span class="subst">$&#123;value&#125;</span>&lt;/div&gt;`</span>)    <span class="comment">// 把該元素新增到 todos</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;todo-input&quot;</span> /&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn&quot;</span>&gt;Add todo&lt;/button&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;todos&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript=">&lt;style&gt;
+  .todo &#123;
+    padding: 10px;
+    border: 1px solid #eee;
+  &#125;
+&lt;/style&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  $(document).ready (function() &#123;
+    $(&#39;.btn&#39;).click(function(e) &#123;             // 建立點擊事件
+      const value = $(&#39;.todo-input&#39;).val()    // 拿取 value 值
+      $(&#39;.todo-input&#39;).val(&#39;&#39;)                // 讀取完後清空 input 欄位
+      $(&#39;.todos&#39;).prepend(`&lt;div class=&quot;todo&quot;&gt;$&#123;value&#125;&lt;/div&gt;`)    // 把該元素新增到 todos
+    &#125;)
+  &#125;)
+&lt;/script&gt;
+&lt;body&gt;
+  &lt;input class=&quot;todo-input&quot; /&gt;
+  &lt;button class=&quot;btn&quot;&gt;Add todo&lt;/button&gt;
+  &lt;div class=&quot;todos&quot;&gt;&lt;/div&gt;</code></pre>
+<h4 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h4><pre><code class="javascript=">$.ajax(&#123;
+  type: &quot;GET&quot;, // 指定 method
+  url: &#39;ajax/test.html&#39;,
+  success: function(data) &#123;
+  $(&#39;.result&#39;).html(data);
+  alert(&#39;Load was performed.&#39;);
+  &#125;
+&#125;);
 
-<h4 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  type: <span class="string">&quot;GET&quot;</span>, <span class="comment">// 指定 method</span></span><br><span class="line">  url: <span class="string">&#x27;ajax/test.html&#x27;</span>,</span><br><span class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  $(<span class="string">&#x27;.result&#x27;</span>).html(data);</span><br><span class="line">  alert(<span class="string">&#x27;Load was performed.&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得 HTML: load()</span></span><br><span class="line">$(<span class="string">&quot;#htmDoc&quot;</span>).load(<span class="string">&quot;test.html&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得 JSON 格式的資料: getJSON()</span></span><br><span class="line">$.getJSON(<span class="string">&quot;test.json&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> idx <span class="keyword">in</span> data)  </span><br><span class="line">    $(<span class="string">&quot;#menu&quot;</span>).append(<span class="string">&quot;&lt;li&gt;&quot;</span> + data[idx] + <span class="string">&quot;&lt;/li&gt;&quot;</span>); </span><br><span class="line">&#125;);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// document ready 事件</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">  alert(<span class="string">&#x27;Hello&#x27;</span>);    <span class="comment">// 網頁下載完成後立即執行 alert()</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+// 取得 HTML: load()
+$(&quot;#htmDoc&quot;).load(&quot;test.html&quot;);
 
+// 取得 JSON 格式的資料: getJSON()
+$.getJSON(&quot;test.json&quot;, function(data)&#123;  
+  for (var idx in data)  
+    $(&quot;#menu&quot;).append(&quot;&lt;li&gt;&quot; + data[idx] + &quot;&lt;/li&gt;&quot;); 
+&#125;);  
+
+// document ready 事件
+$(document).ready(function() &#123;  
+  alert(&#39;Hello&#39;);    // 網頁下載完成後立即執行 alert()
+&#125;);
+</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qdzMxMC5naXRodWIuaW8vMjAyMC8wMS8xNi9qUXVlcnktYmFzZS8jJUU0JUJEJUJGJUU3JTk0JUE4LWpRdWVyeQ==">jQuery 簡單介紹<i class="fa fa-external-link-alt"></i></span></li>
@@ -423,7 +507,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -434,7 +518,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
