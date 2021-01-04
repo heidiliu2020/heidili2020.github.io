@@ -9507,4 +9507,1419 @@
         <tag>JavaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[week 1] Command Line 入門 &amp; 基本指令</title>
+    <url>/command-line/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY21kMTAxLWNvbW1hbmQtbGluZQ==">[CMD101] Command Line 超新手入門<i class="fa fa-external-link-alt"></i></span>和 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvY3MxMDEtY29kaW5n">[CS101] 初心者的計概與 coding 火球術<i class="fa fa-external-link-alt"></i></span> 這兩門課程的學習筆記。</p>
+</blockquote>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><code class="hljs livecodeserver">學習目標：<br><br> 說得出程式如何執行<br> 理解寫程式的本質只是一行行的指令<br> 了解前端與後端的區別<br> 能說出從發出一個 request 到接收 response 中間發生的事<br> 了解不同載具的差異在哪（Desktop、Mobile、Web）<br> 了瞭解基本的 <span class="hljs-keyword">command</span> <span class="hljs-title">line</span> 指令<br></code></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="關於寫程式這件事"><a href="#關於寫程式這件事" class="headerlink" title="關於寫程式這件事"></a>關於寫程式這件事</h2><p>就是對電腦下指令（程式碼），讓電腦執行我們想要的動作（解決問題）。</p>
+<h2 id="條列式的重要性"><a href="#條列式的重要性" class="headerlink" title="條列式的重要性"></a>條列式的重要性</h2><p>試著用「程式化思考」將解法以標準化的格式呈現。</p>
+<blockquote>
+<p>範例：「給你一串文字，問你裡面有沒有 p」</p>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span> 假設 n 是 <span class="hljs-number">1</span>，length 是字串長度，<br>   A 設成 <span class="hljs-number">-1</span> 代表找到的位置，p 是要找到的字   <span class="hljs-comment">//字串不會有負數，若小於零代表找不到</span><br><br><span class="hljs-number">2.</span> 看第 n 個字是不是 p，是的話 A=n　　<span class="hljs-comment">//把 A 設成 n 的值，若 n=3，即在第 3 個數找到 p</span><br><br><span class="hljs-number">3.</span> 把 n+<span class="hljs-number">1</span>，如果 n+<span class="hljs-number">1</span> 大於 length 的話，就跳到第 <span class="hljs-number">5</span> 步　　<span class="hljs-comment">//條件機制</span><br><br><span class="hljs-number">4.</span> 跳回第 <span class="hljs-number">2</span> 步　　<span class="hljs-comment">//迴圈的概念</span><br><br><span class="hljs-number">5.</span> 如果 A &lt; <span class="hljs-number">0</span>，代表沒出現過；否則 A 就是答案<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Command-Line-是什麼？"><a href="#Command-Line-是什麼？" class="headerlink" title="Command Line 是什麼？"></a>Command Line 是什麼？</h2><ul>
+<li>操控電腦的方法大致上分兩種類型：</li>
+</ul>
+<ol>
+<li><strong>GUI（Graphical User Interface，圖形化介面）</strong>：一般習慣使用的電腦操作介面，透過設計出的「圖形」來下指令。</li>
+<li><strong>CLI（Command Line Interface，命令列介面）</strong>：透過「純文字」來達成指定動作。</li>
+</ol>
+<ul>
+<li>兩種都可以用來和電腦溝通；但有些伺服器可能沒有 GUI （例如 database），這種情況就只能使用 CLI 來進行操作。</li>
+</ul>
+<h2 id="環境設置"><a href="#環境設置" class="headerlink" title="環境設置"></a>環境設置</h2><ul>
+<li>要執行 Command Line 指令，必須先根據作業系統安裝 Command Line Tool：</li>
+</ul>
+<ol>
+<li>Windows：<span class="exturl" data-url="aHR0cHM6Ly9naXRmb3J3aW5kb3dzLm9yZy8=">git-bash<i class="fa fa-external-link-alt"></i></span>（推薦）、<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxNS8wOS8yNy9Vc2VmdWwtdG9vbC1DbWRlcg==">Cmder<i class="fa fa-external-link-alt"></i></span></li>
+<li>Mac：<span class="exturl" data-url="aHR0cDovL2h1bGkubG9nZG93bi5jb20vcG9zdHMvNDAyMTQ3LWl0ZXJtMi16c2gtYmV0dGVyLWVudmlyb25tZW50">iTerm2<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<ul>
+<li>或是使用 <span class="exturl" data-url="aHR0cHM6Ly9iZWxsYXJkLm9yZy9qc2xpbnV4Lw==">JSLinux<i class="fa fa-external-link-alt"></i></span> （<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvSnNsaW51eA==">以 JavaScript 寫成的 Linux 模擬器<i class="fa fa-external-link-alt"></i></span>）來統一環境，即可在瀏覽器介面進行測試。</li>
+</ul>
+<h2 id="基本指令介紹"><a href="#基本指令介紹" class="headerlink" title="基本指令介紹"></a>基本指令介紹</h2><blockquote>
+<p>所謂的「指令」其實也是由程式寫成，我們藉由輸入指令來執行程式。</p>
+</blockquote>
+<h4 id="pwd（Print-Working-Directory）：印出目前所在位置"><a href="#pwd（Print-Working-Directory）：印出目前所在位置" class="headerlink" title="pwd（Print Working Directory）：印出目前所在位置"></a><code>pwd</code>（Print Working Directory）：印出目前所在位置</h4><h4 id="ls（List）：印出當前位置檔案清單"><a href="#ls（List）：印出當前位置檔案清單" class="headerlink" title="ls（List）：印出當前位置檔案清單"></a><code>ls</code>（List）：印出當前位置檔案清單</h4><ul>
+<li><code>ls-l</code>：長格式（long），顯示有關檔案的詳細資訊</li>
+<li><code>ls-a</code>：列出所有檔案（包括隱藏檔）</li>
+</ul>
+<h4 id="cd（Change-Directory）-切換目前資料夾"><a href="#cd（Change-Directory）-切換目前資料夾" class="headerlink" title="cd（Change Directory） 切換目前資料夾"></a><code>cd</code>（Change Directory） 切換目前資料夾</h4><ul>
+<li><code>cd ..</code>：回到上一層資料夾</li>
+<li><code>cd ~</code>：回到 home 目錄（我的文件）</li>
+<li><code>cd /</code>：回到根目錄<ul>
+<li>絕對路徑：「一定由根目錄 / 寫起」<br><code>cd /Users/share/data</code></li>
+<li>相對路徑：「不是由 / 寫起」<br><code>cd test</code></li>
+</ul>
+</li>
+<li>範例：「若要從 /downloads/test/data 到 /downloads/test/media 底下時」<br>可以寫 <code>cd ../media</code>：先回到上一層，再進入 media 資料夾<br>也可寫 <code>cd ~/downloads/test/media</code>：直接用絕對路徑進入</li>
+</ul>
+<p><img src="https://i.imgur.com/emeMG2h.png" alt="cd 語法練習"></p>
+<blockquote>
+<p>小技巧：直接把圖形介面的資料夾拖到 CLI 裡，就會自動輸入那個資料夾的絕對路徑。可節省打字時間。</p>
+</blockquote>
+<h4 id="clear：清空螢幕"><a href="#clear：清空螢幕" class="headerlink" title="clear：清空螢幕"></a><code>clear</code>：清空螢幕</h4><h4 id="touch：碰一下"><a href="#touch：碰一下" class="headerlink" title="touch：碰一下"></a><code>touch</code>：碰一下</h4><ul>
+<li>作用 1：touch 現有的檔案，會修改檔案時間成當前時間</li>
+<li>作用 2：若檔案不存在，則會新增檔案</li>
+</ul>
+<h4 id="mkdir：MaKe-DIRectory-新增資料夾"><a href="#mkdir：MaKe-DIRectory-新增資料夾" class="headerlink" title="mkdir：MaKe DIRectory 新增資料夾"></a><code>mkdir</code>：MaKe DIRectory 新增資料夾</h4><h4 id="rm：ReMove-刪除檔案（註：有關刪除指令需慎用）"><a href="#rm：ReMove-刪除檔案（註：有關刪除指令需慎用）" class="headerlink" title="rm：ReMove 刪除檔案（註：有關刪除指令需慎用）"></a><code>rm</code>：ReMove 刪除檔案（註：有關刪除指令需慎用）</h4><h4 id="rmdir：刪除資料夾"><a href="#rmdir：刪除資料夾" class="headerlink" title="rmdir：刪除資料夾"></a><code>rmdir</code>：刪除資料夾</h4><ul>
+<li>也可用 <code>rm -r</code> 指令來刪除檔案或資料夾</li>
+</ul>
+<h4 id="cp：CoPy-複製"><a href="#cp：CoPy-複製" class="headerlink" title="cp：CoPy 複製"></a><code>cp</code>：CoPy 複製</h4><ul>
+<li>範例 1. <code>cp data data_2</code>：複製出一個 data_2 檔案</li>
+<li>範例 2. <code>cp -r deep deep2</code>：複製出一個 deep2 資料夾</li>
+</ul>
+<h4 id="mv：MoVe-移動檔案-or-更改檔名"><a href="#mv：MoVe-移動檔案-or-更改檔名" class="headerlink" title="mv：MoVe 移動檔案 or 更改檔名"></a><code>mv</code>：MoVe 移動檔案 or 更改檔名</h4><ul>
+<li>作用 1：當找到該資料夾時，檔案會<strong>移到資料夾裡</strong><ul>
+<li>範例：<code>mv data folder</code>：將 data 檔案移到 folder 資料夾裡</li>
+</ul>
+</li>
+<li>作用 2：當找不到該資料夾，則會<strong>更改檔案名稱</strong><ul>
+<li>範例：<code>mv data test</code>：將 data 檔案名稱更改為 test</li>
+</ul>
+</li>
+</ul>
+<h4 id="vim：進入文字編輯器"><a href="#vim：進入文字編輯器" class="headerlink" title="vim：進入文字編輯器"></a><code>vim</code>：進入文字編輯器</h4><blockquote>
+<p>本來想說沒問題，結果還真的卡很久無法回到上層介面 Orz<br>需按下 [ESC] 按鍵回到一般指令模式，才能下 <code>:wq</code> 指令存檔（write）並離開 （quit)。</p>
+</blockquote>
+<h4 id="參考-vim-介紹："><a href="#參考-vim-介紹：" class="headerlink" title="參考 vim 介紹："></a>參考 vim 介紹：</h4><p>可分為普通模式跟編輯模式：</p>
+<ul>
+<li>按鍵 i：進入編輯模式</li>
+<li>按鍵 Esc：進入普通模式</li>
+<li><code>:q</code> 退出</li>
+<li><code>:wq</code> 存檔（write）後退出（quit)</li>
+<li><code>:q!</code> 不存檔直接退出</li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy52aXh1YWwubmV0L2Jsb2cvYXJjaGl2ZXMvMjM0">vi 與 vim 的指令整理<i class="fa fa-external-link-alt"></i></span>、</li>
+<li><span class="exturl" data-url="aHR0cDovL2xpbnV4LnZiaXJkLm9yZy9saW51eF9iYXNpYy8wMzEwdmkucGhw">鳥哥的 Linux 私房菜– 第九章、vim 程式編輯器<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h2 id="更多常用指令"><a href="#更多常用指令" class="headerlink" title="更多常用指令"></a>更多常用指令</h2><h4 id="date：印出當前日期"><a href="#date：印出當前日期" class="headerlink" title="date：印出當前日期"></a><code>date</code>：印出當前日期</h4><h4 id="top（Table-Of-Processes）：印出所有-Process，可持續偵測程序運作的狀態（按-q-鍵離開）"><a href="#top（Table-Of-Processes）：印出所有-Process，可持續偵測程序運作的狀態（按-q-鍵離開）" class="headerlink" title="top（Table Of Processes）：印出所有 Process，可持續偵測程序運作的狀態（按 q 鍵離開）"></a><code>top</code>（Table Of Processes）：印出所有 Process，可持續偵測程序運作的狀態（按 q 鍵離開）</h4><h4 id="cat（CATenate）：查看檔案內容"><a href="#cat（CATenate）：查看檔案內容" class="headerlink" title="cat（CATenate）：查看檔案內容"></a><code>cat</code>（CATenate）：查看檔案內容</h4><h4 id="less：分頁式印出檔案"><a href="#less：分頁式印出檔案" class="headerlink" title="less：分頁式印出檔案"></a><code>less</code>：分頁式印出檔案</h4><h4 id="grep：抓取特定關鍵字"><a href="#grep：抓取特定關鍵字" class="headerlink" title="grep：抓取特定關鍵字"></a><code>grep</code>：抓取特定關鍵字</h4><h4 id="echo：印出字串"><a href="#echo：印出字串" class="headerlink" title="echo：印出字串"></a><code>echo</code>：印出字串</h4><h4 id="（pipe）：把前面的輸入「變成」後面的輸出"><a href="#（pipe）：把前面的輸入「變成」後面的輸出" class="headerlink" title="|（pipe）：把前面的輸入「變成」後面的輸出"></a><code>|</code>（pipe）：把前面的輸入「變成」後面的輸出</h4><ul>
+<li>範例：<code>cat file.txt | grep hi </code>：從印出的 file.txt 內容中，抓取字串 hi 並輸出</li>
+</ul>
+<h4 id="gt-（redirect）：將輸入或輸出重新導向"><a href="#gt-（redirect）：將輸入或輸出重新導向" class="headerlink" title="&gt;（redirect）：將輸入或輸出重新導向"></a><code>&gt;</code>（redirect）：將輸入或輸出重新導向</h4><ul>
+<li>範例 1：<code>date &gt; time.txt</code>：將 <code>date</code> 輸出到 <code>time.txt</code><br>　　再輸入 <code>cat time.txt</code>，會顯示出 <code>Sun May 31 20:29:57 UTC 2020</code></li>
+<li>範例 2：<code>echo &quot;123&quot; &gt; 123.txt</code>：印出 123 到 123.txt<br>　 1. 若輸入 <code>echo &quot;456&quot; &gt; 123.txt</code>：顯示 456，檔案會被全部覆蓋<br>　 2. 若輸入 <code>echo &quot;456&quot; &gt;&gt; 123.txt</code>：顯示 123456，兩個 <code>&gt;</code> 會新增內容在最後</li>
+</ul>
+<h4 id="wget：下載檔案"><a href="#wget：下載檔案" class="headerlink" title="wget：下載檔案"></a><code>wget</code>：下載檔案</h4><ul>
+<li>範例：輸入 <code>wget https://www.google.com.tw/</code>，即可下載 Google 首頁的網頁原始碼（index.html）</li>
+</ul>
+<h4 id="curl：送出-request，可用來測試-API"><a href="#curl：送出-request，可用來測試-API" class="headerlink" title="curl：送出 request，可用來測試 API"></a><code>curl</code>：送出 request，可用來測試 API</h4><hr>
+<h3 id="補充：檔案格式"><a href="#補充：檔案格式" class="headerlink" title="補充：檔案格式"></a>補充：檔案格式</h3><ul>
+<li>內容是一回事，如何解讀是另一回事</li>
+<li>在電腦裡的任何檔案，其實都是以純文字組成，可用不同格式進行解析</li>
+<li>可以透過設定副檔名（如：文件.pdf、圖片.jpg）幫助電腦辨別格式</li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3cxX0NvbW1hbmRMaW5lLmh0bWw=">[第一週] Command Line - Terminal、基本指令介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNy8xMi8yMy9saW51eC1jb21tbmQtbGluZS10dXRvcmlhbC8=">Linux Command 命令列指令與基本操作入門教學<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxNS8wOS8yNy9Vc2VmdWwtdG9vbC1DbWRlcg==">介紹好用工具：Cmder ( 具有 Linux 溫度的 Windows 命令提示字元工具 )<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2h1bGkubG9nZG93bi5jb20vcG9zdHMvNDAyMTQ3LWl0ZXJtMi16c2gtYmV0dGVyLWVudmlyb25tZW50">[心得] iTerm2 + zsh，打造更好的工作環境<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Lidemy</category>
+      </categories>
+      <tags>
+        <tag>Lidemy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常見重點整理 - 命名慣例 &amp; 開發時注意事項</title>
+    <url>/lidemy-common-examples/</url>
+    <content><![CDATA[<ul>
+<li>參考資料：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpZGVteS9tZW50b3ItcHJvZ3JhbS00dGgvYmxvYi9tYXN0ZXIvZXhhbXBsZXMvY29tbW9uLm1k">https://github.com/Lidemy/mentor-program-4th/blob/master/examples/common.md<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
+
+</li>
+</ul>
+<h2 id="什麼是好的-code？"><a href="#什麼是好的-code？" class="headerlink" title="什麼是好的 code？"></a>什麼是好的 code？</h2><ol>
+<li>符合命名慣例以及命名一致性</li>
+<li>合理的變數名稱</li>
+</ol>
+<h2 id="三種常見的命名慣例"><a href="#三種常見的命名慣例" class="headerlink" title="三種常見的命名慣例"></a>三種常見的命名慣例</h2><h3 id="駝峰式命名（Camel-case）"><a href="#駝峰式命名（Camel-case）" class="headerlink" title="駝峰式命名（Camel case）"></a>駝峰式命名（Camel case）</h3><ul>
+<li>就像駝峰會一高一低</li>
+<li>單字之間不空格，而是直接連起來，但是連起來的第一個字要大寫</li>
+<li>例如：有一個 handle add post 的 function，就會叫做 handleAddPost</li>
+</ul>
+<p>駝峰又有分兩種：</p>
+<ol>
+<li>小駝峰（lower camel case）：開頭是小寫，就像上面的範例 handleAddPost</li>
+<li>大駝峰（upper camel case）：又被稱為 Pascal Case。開頭變成大寫，也就會變成 HandleAddPost</li>
+</ol>
+<h3 id="蛇型命名（Snake-case）"><a href="#蛇型命名（Snake-case）" class="headerlink" title="蛇型命名（Snake case）"></a>蛇型命名（Snake case）</h3><ul>
+<li>蛇就是底線的意思，利用底線來連接單字，然後全部都是小寫</li>
+<li>同上述範例，會變成：handle_add_post</li>
+</ul>
+<h3 id="烤肉串命名（Kebab-case）"><a href="#烤肉串命名（Kebab-case）" class="headerlink" title="烤肉串命名（Kebab case）"></a>烤肉串命名（Kebab case）</h3><ul>
+<li>Kebab 是烤肉串的意思，<code>-</code> 符號看起來就像那跟棍子</li>
+<li>同上述範例，會變成：handle-add-post</li>
+</ul>
+<p>認識這三種常見的命名慣例以及名詞之後，接著要來熟悉不同地方的命名慣例。也就是說，不同程式語言或是不同環境，使用的命名慣例也可能會不一樣。</p>
+<p>需注意的是，命名慣例雖然沒有強制性，但開發時基本上都會依照這套慣例，避免寫出他人認為不好的 code。</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>在 JavaScript 中，不管是 function 或變數，習慣使用 lower camel case，也就是 <code>handleAddPost</code>。</p>
+<p>在特殊情況下，可以使用大寫駝峰式，例如：</p>
+<ol>
+<li>XMLHttpRequest</li>
+<li>Number</li>
+<li>Set</li>
+</ol>
+<p>這些變數可以算是物件導向中的 class，因此習慣以大寫開頭。而 React 中的 也同樣會使用大寫開頭方式命名。</p>
+<h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><ul>
+<li>常數具有不變的特性，通常以 snake case + 全大寫來命名</li>
+<li>例如：圓周率 PI，就會是 <code>Math.PI</code>；或是 client id 會寫成 CLIENT_ID</li>
+</ul>
+<h2 id="資料庫-table-與欄位"><a href="#資料庫-table-與欄位" class="headerlink" title="資料庫 table 與欄位"></a>資料庫 table 與欄位</h2><ul>
+<li>資料庫以 snake case 命名為主</li>
+<li>table 名稱的慣例是複數，所以使用者資料會叫做 users</li>
+<li>欄位名稱同樣是 snake case，以建立時間為例：created_at</li>
+</ul>
+<h2 id="Url"><a href="#Url" class="headerlink" title="Url"></a>Url</h2><p>snake case 或 kebab case 這兩種慣例都蠻常見的，可能會長這樣：</p>
+<ol>
+<li>handle_add_post</li>
+<li>handle-add-post</li>
+</ol>
+<h2 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h2><ul>
+<li>大原則：不確定縮寫或簡稱時，就乖乖寫好寫滿<ul>
+<li>例如：event handler 傳進來的參數 event，常見的簡寫就是 evt 或是 e</li>
+</ul>
+</li>
+<li>function 通常搭配動詞開頭，get 和 set 就是常見動詞。例如 getGames 或是 getStreams，setName 或是 setTitle</li>
+</ul>
+<h2 id="程式碼排版"><a href="#程式碼排版" class="headerlink" title="程式碼排版"></a>程式碼排版</h2><p>例如統一空兩格，可透過調整編輯器設定，上傳到 GitHub 後要確認過沒有跑版問題。</p>
+<hr>
+<h2 id="資訊安全"><a href="#資訊安全" class="headerlink" title="資訊安全"></a>資訊安全</h2><ol>
+<li>程式碼都是公開的：後台管理界面一定要做驗證，才能進行權限管理</li>
+<li>不要存著僥倖心態：永遠都預設把你要輸出的東西做編碼（例如：跳脫）以後才輸出，而不是直接輸出，就可以避免掉很多的 XSS 攻擊。</li>
+</ol>
+<h2 id="前端檢查-vs-後端檢查"><a href="#前端檢查-vs-後端檢查" class="headerlink" title="前端檢查 vs 後端檢查"></a>前端檢查 vs 後端檢查</h2><p>前端做資料檢查，只是為了增進使用者體驗，後端做資料檢查才是真的檢查。</p>
+]]></content>
+      <categories>
+        <category>Lidemy</category>
+      </categories>
+      <tags>
+        <tag>Lidemy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 19] 淺談產品開發與工作流程</title>
+    <url>/pd101-lidemy/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvcGQxMDE=">[PD101] 淺談產品開發與工作流程<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+</blockquote>
+<p>透過這堂課程，我們能夠在進入職場之前，先試著瞭解開發流程，雖然每間公司實際工作情形不一定相同，但也能先有個初步概念：</p>
+<a id="more"></a>
+
+<p><img src="https://i.imgur.com/PPlaGG2.png"></p>
+<p>課程內容也會以之前 Huli 和助教共同實作的 Lidemy 學習系統作為範例。</p>
+<hr>
+<h2 id="在實際開發之前"><a href="#在實際開發之前" class="headerlink" title="在實際開發之前"></a>在實際開發之前</h2><p>工程師會根據 PM 提出的產品需求來進行開發，而一個產品需求產生的流程如下：</p>
+<p><img src="https://i.imgur.com/EHWat4x.png"></p>
+<ul>
+<li>stakeholder 利益相關者，也就是客戶</li>
+<li>Product Requirement Document 產品需求文件</li>
+<li>Product Specifications 產品規格書</li>
+<li>wireframe 設計線稿</li>
+<li>mockup 模型</li>
+</ul>
+<p>接著工程師會透過 spec 瞭解產品需求，根據 mockup 寫出相對應的產品介面與功能。</p>
+<h3 id="Product-spec-裡面有哪些東西？"><a href="#Product-spec-裡面有哪些東西？" class="headerlink" title="Product spec 裡面有哪些東西？"></a>Product spec 裡面有哪些東西？</h3><p>實際開發中，寫得越詳細的產品規格書，能夠幫助開發內容與規格達成一致；假如 PM 沒有將需求寫在規格書中，開發產品也需同步進行，避免程式行為與規格不一致，導致後續維護問題。</p>
+<p>一般而言，產品規格書屬於公司機密不能對外公開，這裡舉一些網路上公開的範例。</p>
+<h4 id="範例一：PRD-到底该怎么写？更全面的文档范例来了"><a href="#範例一：PRD-到底该怎么写？更全面的文档范例来了" class="headerlink" title="範例一：PRD 到底该怎么写？更全面的文档范例来了"></a>範例一：<span class="exturl" data-url="aHR0cDovL3d3dy53b3NoaXBtLmNvbS9wbWQvMzMyNzc3MC5odG1s">PRD 到底该怎么写？更全面的文档范例来了<i class="fa fa-external-link-alt"></i></span></h4><ul>
+<li>修訂紀錄</li>
+<li>全局說明</li>
+<li>項目背景<ul>
+<li>透過現狀、方案、目標來描述</li>
+</ul>
+</li>
+<li>項目範圍<ul>
+<li>項目對應搭框架</li>
+<li>產品結構圖</li>
+</ul>
+</li>
+<li>開發流程</li>
+<li>功能需求<ul>
+<li>對功能逐一描述</li>
+<li>透過使用者 + 功能方式來描述</li>
+<li>配置條件、介面元素、產品邏輯、異常與分支流程</li>
+<li>數據字典</li>
+</ul>
+</li>
+<li>非功能需求<ul>
+<li>數據、監控、性能需求</li>
+</ul>
+</li>
+</ul>
+<h4 id="範例二：【SOP-不藏私】系列＃EP1「連猴子也會的-PRD-指南」"><a href="#範例二：【SOP-不藏私】系列＃EP1「連猴子也會的-PRD-指南」" class="headerlink" title="範例二：【SOP 不藏私】系列＃EP1「連猴子也會的 PRD 指南」"></a>範例二：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2FzLWEtcHJvZHVjdC1kZXNpZ25lci9zb3AtZXAwMS1wcmQtM2M2ZDMzODgwYzM0">【SOP 不藏私】系列＃EP1「連猴子也會的 PRD 指南」<i class="fa fa-external-link-alt"></i></span></h4><p>這個例子會比較偏向於介紹產品如何開發以及開發時程，說明產品規格書的文件架構：</p>
+<ul>
+<li>文件概況<ul>
+<li>文件修訂紀錄</li>
+</ul>
+</li>
+<li>產品簡介與功能對照<ul>
+<li>產品簡介</li>
+<li>產品目標說明</li>
+<li>「工作排程、使用者故事、對應功能、進版時間」對照表</li>
+</ul>
+</li>
+<li>產品架構與流程<ul>
+<li>產品功能架構圖（Function Map）</li>
+<li>產品信息架構圖（Information Architecture）</li>
+<li>功能邏輯圖（Flow Chart）</li>
+</ul>
+</li>
+<li>產品設計原型<ul>
+<li>產品全局簡介</li>
+<li>局部功能 Prototype，有互動的部分</li>
+</ul>
+</li>
+<li>產品指標</li>
+<li>字串表<ul>
+<li>用來顯示多國語言</li>
+</ul>
+</li>
+</ul>
+<p>延伸閱讀：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3ktcG9pbnRlci9wcm9kdWN0LXByZC1jYTBlYTliNzViODU=">【產品經理 PM ｜需求文檔 PRD】優惠券發放的產品設計，需求文檔怎麼寫？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h3 id="User-Story-使用者故事"><a href="#User-Story-使用者故事" class="headerlink" title="User Story 使用者故事"></a>User Story 使用者故事</h3><p>User Story（使用者故事）是一段簡單的功能敘述，藉由客戶或使用者的觀點寫下有價值的功能（functionality）。除了能更明確化產品需求，工程師也能夠知道客戶會做哪些驗收測試、期望跟假設。</p>
+<p>在 User Story 中，對於一個需求的寫法大致如下：</p>
+<ul>
+<li>As a user… 身為一個使用者..</li>
+<li>I want to… 我希望…</li>
+<li>so that I can… 我就可以…</li>
+</ul>
+<p>以開發 Lidemy 作業系統為例子，這是初步的產品需求：</p>
+<p><img src="https://i.imgur.com/5Ho0Vcl.png"></p>
+<p>若以 User Story 方式撰寫，就能夠使產品需求更加明確化，也能瞭解不同使用者身份的需求以及開發順序：</p>
+<p><img src="https://i.imgur.com/Fewp6BB.png"></p>
+<h3 id="繪製-Flowchart-amp-Wireframe"><a href="#繪製-Flowchart-amp-Wireframe" class="headerlink" title="繪製 Flowchart &amp; Wireframe"></a>繪製 Flowchart &amp; Wireframe</h3><p>此外還有像是 User Flow 使用流程和 Wireframe 設計線稿，也能幫助理解產品邏輯：</p>
+<ul>
+<li>User Flow</li>
+</ul>
+<p><img src="https://i.imgur.com/YH4yf2T.png"></p>
+<ul>
+<li>Wireframe</li>
+</ul>
+<p><img src="https://i.imgur.com/xuiuBsv.png"></p>
+<p>繪製 Flowchart 時，也找了一些參考資料，瞭解該如何繪製：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2FzLWEtcHJvZHVjdC1kZXNpZ25lci8lRTUlODUlODglRTUlODglQTUlRTYlODAlQTUlRTglOTElOTclRTclOTUlQUJ1aS0lRTQlQkQlQTAlRTglODElQkQlRTklODElOEVmbG93LWNoYXJ0JUU1JTk3JThFLWM2NzE1ZjA1NWNmYw==">先別急著畫 UI，你聽過 Flow Chart 嗎<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGVseS5jb20vZGlhZ3JhbS1jb21tdW5pdHkvcG9wdWxhci90L2Zsb3djaGFydA==">Flowchart Templates | Editable Online or Download for Free<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p>像是流程圖其實能透過規範的符號來統一：<br><img src="https://miro.medium.com/max/1000/1*EYsGjOTefEx3BfT4TpSKcg.png"></p>
+<p>試做有關會員的 User Flow：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93aGltc2ljYWwuY29tL3VzZXItZmxvdy0zdEVpM2hHM0dLUnNFaGtTMk5XeVVy">DEMO 連結<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://i.imgur.com/aZ4xEt5.png"></p>
+<hr>
+<h2 id="Card-Ticket-Task-Issue"><a href="#Card-Ticket-Task-Issue" class="headerlink" title="Card = Ticket = Task = Issue"></a>Card = Ticket = Task = Issue</h2><p>在實際開發過程，通常會把每個功能切割成一個任務，以下這些名詞均可代表工作的最小單位：</p>
+<ul>
+<li>Task：任務</li>
+<li>Issue：GitHub 上的一個問題或 Bug</li>
+<li>Card：卡片</li>
+<li>Ticket：票</li>
+</ul>
+<p>通常會利用現成的平台，像是 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXRsYXNzaWFuLmNvbS9zb2Z0d2FyZS9qaXJhPyZhY2VpZD0mYWRwb3NpdGlvbj0mYWRncm91cD05NTAwMzY0NTQ0OSZjYW1wYWlnbj05MTI0ODc4NzAyJmNyZWF0aXZlPTQxNTU0Mjc1MjM2NSZkZXZpY2U9YyZrZXl3b3JkPWppcmEmbWF0Y2h0eXBlPWUmbmV0d29yaz1nJnBsYWNlbWVudD0mZHNfa2lkcz1wNTEyNDIxODkzMTgmZHNfZT1HT09HTEUmZHNfZWlkPTcwMDAwMDAwMTU1ODUwMSZkc19lMT1HT09HTEUmZ2NsaWQ9Q2owS0NRaUFxZFA5QlJEVkFSSXNBR1NaOEFtemJmWHZheGx3c2wtOTBDSUlVQWtPc2dMQWNCSVFxdnVCSUJYNlIxcHVzejFKdFBGLVlOMGFBbUF6RUFMd193Y0ImZ2Nsc3JjPWF3LmRz">Jira<i class="fa fa-external-link-alt"></i></span> 或 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlYWRzZXJ2aWNlcy5jb20vcGFnZWFkL2FjbGs/c2E9TCZhaT1EQ2hjU0V3amNzOWV4MTR2dEFoVUoySllLSFVjQ0RwQVlBQkFBR2dKMGJBJm9ob3N0PXd3dy5nb29nbGUuY29tJmNpZD1DQUVTUWVEMldGdExWeDdtNHN4eUFFVHEwUWhGcHY0YW9HVlhYQzRCVmlyN3VaZzN3LTEzT1lZU09BZTFKcUVqQUpsVnAzRDhzSmItQ0MyX2NWaHNXeTRZdU9WWCZzaWc9QU9ENjRfMHU1MzM1TTdSTjlSLTgxeDh2RlVtXzBBZHIzQSZxJmFkdXJsJnZlZD0yYWhVS0V3amdqdEd4MTR2dEFoVUh3b3NCSGZBakNGMFEwUXg2QkFnTUVBRQ==">Trello<i class="fa fa-external-link-alt"></i></span> 來管理任務，通常一個 User Story 就會切割成一張票：</p>
+<p><img src="https://i.imgur.com/l4GdKJq.png"></p>
+<p>透過這些平台，能夠用來切割工作區塊，也能讓整個團隊快速瀏覽整體工作進度。</p>
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9paG93ZXIudHcvYmxvZy9hcmNoaXZlcy8yMDkw">什麼是 User Story？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1hcE92RjlOVmd1QQ==">Agile 使用者故事 <i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1FRFQwSE10RHdZSQ==">拆解使用者故事 <i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<hr>
+<h2 id="軟體開發方法論-Methodology"><a href="#軟體開發方法論-Methodology" class="headerlink" title="軟體開發方法論 Methodology"></a>軟體開發方法論 Methodology</h2><p>在實際軟體開發過程，並不是拿了一張卡就開始工作那麼簡單，而是必須考慮透過哪種模式或框架來進行開發，大致可分成幾種方法：</p>
+<ul>
+<li>Waterfall 瀑布流</li>
+<li>Agile 敏捷</li>
+</ul>
+<h3 id="Waterfall-瀑布流"><a href="#Waterfall-瀑布流" class="headerlink" title="Waterfall 瀑布流"></a>Waterfall 瀑布流</h3><p><img src="https://i.imgur.com/XRtzTAx.png"></p>
+<ul>
+<li>從上往下，不能往回，一次性</li>
+<li>呈現完整性較高</li>
+<li>事前規劃需做完善，若過程中需要增加新功能獲改善，就需要再等下一輪流程</li>
+<li>較不適合大型專案</li>
+</ul>
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc21hcnRzaGVldC5jb20vYWdpbGUtdnMtc2NydW0tdnMtd2F0ZXJmYWxsLXZzLWthbmJhbg==">What’s the Difference? Agile vs Scrum vs Waterfall vs Kanban<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLzNwbS1sYWIvcG0tcG9kY2FzdC1lcDAzLXdhdGVyZmFsbC12cy1hZ2lsZS04MmIyMTQ4NTMxMTI=">【Podcast EP03】敏捷或瀑布開發哪個好？流程用哪種重要嗎？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h3 id="Agile-敏捷"><a href="#Agile-敏捷" class="headerlink" title="Agile 敏捷"></a>Agile 敏捷</h3><p><img src="https://i.imgur.com/Rp9dRyX.png"></p>
+<ul>
+<li>及早並持續地交付，精簡化</li>
+<li>彈性較高，能夠改變需求</li>
+<li>類似於把 Waterfall 的任務切小細分</li>
+<li>按照 12 項原則就能夠稱為敏捷，又可細分為不同框架來進行</li>
+</ul>
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFNiU5NiU4NyVFNiU4MCU5RCVFNCVCOCU4RCVFOCU5NyU4RiVFNyVBNyU4MS8lRTYlOTYlODclRTYlODAlOUQlRTQlQjglOEQlRTglOTclOEYlRTclQTclODEtJUU2JTk1JThGJUU2JThEJUI3JUU1JUFFJUEzJUU4JUE4JTgwLTEyLSVFNSU4RSU5RiVFNSU4OSU4Ny02NGFkN2Q1OTIwODc=">【文思不藏私】@敏捷宣言 12 原則<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1aOVFiWVpoMVlYWQ==">什麼是敏捷?<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1IRG1PN0V2N01sYw==">【敏捷系列 - 1】什麼是敏捷？敏捷實例分享<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h3 id="實作-Agile-概念：Kanban-看板"><a href="#實作-Agile-概念：Kanban-看板" class="headerlink" title="實作 Agile 概念：Kanban 看板"></a>實作 Agile 概念：Kanban 看板</h3><p>這裡以 Trello 和 Jira 平台為例：</p>
+<p><img src="https://i.imgur.com/dvYXPf0.png"></p>
+<ul>
+<li>Trello</li>
+</ul>
+<p><img src="https://i.imgur.com/5dSZWIc.png"></p>
+<ul>
+<li>Jira 平台的 Kanban Board</li>
+</ul>
+<p><img src="https://i.imgur.com/6oPUTVR.png"></p>
+<p><img src="https://i.imgur.com/a9XYtOX.png"></p>
+<h3 id="實作-Agile-概念：Scrum"><a href="#實作-Agile-概念：Scrum" class="headerlink" title="實作 Agile 概念：Scrum"></a>實作 Agile 概念：Scrum</h3><p><img src="https://i.imgur.com/Xs7PQ5q.png"></p>
+<p>透過 Scrum 的開發流程：</p>
+<ul>
+<li>Product Backlog：列出產品所有功能</li>
+<li>Sprint Planning：預估所需時間，分配任務</li>
+<li>Sprint Backlog：這個週期要開發的功能</li>
+<li>Sprint 開發週期：2-4 weeks 循環</li>
+<li>Daily Scrum：例行溝通進度</li>
+<li>Review、Retrospective：檢視進度與檢討</li>
+</ul>
+<p><img src="https://i.imgur.com/qMvYoim.png"></p>
+<p>在實際開發扮演的角色：</p>
+<ul>
+<li>Product Owner：決定產品走向</li>
+<li>Scrum Master：幫助團隊跑 Scrum 流程</li>
+<li>Team：實際開發的工程師</li>
+</ul>
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj05VHljTFIwVHFGQQ==">Introduction to Scrum - 7 Minutes<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1DUXAwbkdZNG5vbw==">【敏捷系列 - 3】Scrum 中的短衝 (Sprint)<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<hr>
+<h2 id="工程師的兩週生活-amp-Scrum"><a href="#工程師的兩週生活-amp-Scrum" class="headerlink" title="工程師的兩週生活 &amp; Scrum"></a>工程師的兩週生活 &amp; Scrum</h2><p>這裡以工程師的生活作為範例，通常以兩個禮拜為一個開發週期，流程大致如下：</p>
+<ul>
+<li>Sprint Planning<ul>
+<li>預估任務時間 Story Point</li>
+<li>分配任務</li>
+</ul>
+</li>
+<li>開發與 Daily Standup<ul>
+<li>Daily Standup：報告昨天進度、今天預計進度、提出遇到的困難，藉此同步團隊資訊</li>
+</ul>
+</li>
+<li>Deploy 部署<ul>
+<li>例如隔週會部署程式到測試環境</li>
+</ul>
+</li>
+<li>Sprint Demo<ul>
+<li>PM 藉由 Demo 讓客戶瞭解目前進度</li>
+</ul>
+</li>
+<li>Sprint retrospective 檢討會議<ul>
+<li>Went well 做得不錯的點</li>
+<li>To improve 要加強的點</li>
+<li>Action items 如何改善</li>
+</ul>
+</li>
+</ul>
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZWV0cm8uaW8v">協助做 retro 的工具<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h2 id="關於部署"><a href="#關於部署" class="headerlink" title="關於部署"></a>關於部署</h2><p>實際部署程式可分成幾種環境，藉由不同環境，能夠在過程中進行測試，確認功能都沒問題後再進行公開：</p>
+<ul>
+<li>Local 環境<ul>
+<li>本機端開發，通常會接 Dev 的資料</li>
+</ul>
+</li>
+<li>Development 環境（Dev）<ul>
+<li>和 Local 的差別：一個在自己電腦測試，另一個則是部署到 Server 環境</li>
+<li>例如：<span class="exturl" data-url="aHR0cHM6Ly93d3cubmV0bGlmeS5jb20v">Netlify<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Staging 環境 / QA 環境<ul>
+<li>和 Production 類似，只是用來測試，不對外公開的環境</li>
+</ul>
+</li>
+<li>Production 環境<ul>
+<li>所有使用者都看得到的環境</li>
+</ul>
+</li>
+</ul>
+<h2 id="關於測試"><a href="#關於測試" class="headerlink" title="關於測試"></a>關於測試</h2><p>這邊提到的測試，和我們之前學到的 Unit Test 不同，是工程師針對程式碼進行的測試；但 QA 要測的只是呈現功能是否正常，簡單介紹下列兩種測試方式：</p>
+<ul>
+<li>SIT（System Integration Testing）：系統整合測試，確認功能是否正常，可能透過手動或寫自動化程式來測試</li>
+<li>UAT（User Acceptance Testing）：使用者可用性測試，通常是 PM 會進行測試，確認功能是否符合預期</li>
+</ul>
+<hr>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>最後整理產品開發流程的幾個重點：</p>
+<ol>
+<li>由 PM 提出產品需求給工程師<ul>
+<li>spec 產品規格書：需要哪些功能</li>
+<li>wireframe 設計草圖：用來確認網頁架構</li>
+<li>mockup：由設計師根據產品規格做出模型</li>
+<li>透過 User Flow、User Story，更明確寫出針對不同使用者、需要哪些功能、以及優先順序（例如：身為一個使用者/管理員，我希望可以 XXX）</li>
+</ul>
+</li>
+<li>實作 Agile 開發<ul>
+<li>在實際開發之前，可先在 Kanban（看板）列出產品所有功能，並以功能切割任務、預估所需時間</li>
+<li>例如：Trello、Jira 等平台</li>
+</ul>
+</li>
+<li>實際開發流程<ul>
+<li>以 Sprint 開發週期為例，通常以 2-4 weeks 為週期，根據分配的任務進行開發，最後檢視進度並檢討如何在下個週期改善</li>
+<li>可將各個產品功能加上編號，在 commit 時也加上相對編號，之後就能快速找到當初討論的 requirement</li>
+</ul>
+</li>
+</ol>
+<p>延伸閱讀：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLzNwbS1sYWIvbWFydHktY2FnYW4tcHJvZHVjdHRhbmstdGFpcGVpLXNwZWVjaC05MzNlN2RmYzEzYWY=">做產品真是哭夭難！ — Marty Cagan 演講 70 分鐘中文逐字翻譯（附贈 YouTube 錄影）<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Lidemy</category>
+      </categories>
+      <tags>
+        <tag>Lidemy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 4] 網路基礎概論 - HTTP 協定、TCP/IP</title>
+    <url>/http-api/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvbmV0MTAxLWpz">[NET101] 網路基礎概論（搭配 JS 實作練習）<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">學習目標：<br><br> 知道網路背後大概的運作模式<br> 知道什麼是 Request 跟 Response<br> 知道什麼是<span class="hljs-built_in"> DNS </span>以及運作原理<br> 知道 HTTP 與 HTTPS 的差異<br> 知道 localhost 跟 127.0.0.1 是什麼<br> 知道 <span class="hljs-builtin-name">GET</span> 與 POST 的差別<br> 知道常用的 HTTP Header<br> 知道什麼是 API<br> 會使用 node.js 寫出串接 API 的程式<br> 知道 HTTP method 有哪些<br> 知道基本的 HTTP statud code，像是 200、301、400、404、500<br></code></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="HTTP-是什麼？"><a href="#HTTP-是什麼？" class="headerlink" title="HTTP 是什麼？"></a>HTTP 是什麼？</h2><p>全名是 HyperText Transfer Protocol，中文翻作「 超文本傳輸協定」。</p>
+<p>HTTP 是一套網路傳輸協定，為<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCNiU4NSVFNiU5NiU4NyVFNiU5QyVBQyVFNCVCQyVBMCVFOCVCRSU5MyVFNSU4RCU4RiVFOCVBRSVBRQ==">全球資訊網的資料通訊的基礎<i class="fa fa-external-link-alt"></i></span>。也就是說，網頁前端和後端在溝通時，就是透過 HTTP 協定進行。</p>
+<h3 id="為什麼我們需要-Protocol（協定）？"><a href="#為什麼我們需要-Protocol（協定）？" class="headerlink" title="為什麼我們需要 Protocol（協定）？"></a>為什麼我們需要 Protocol（協定）？</h3><p>簡言之，協定就是一個「標準」。協定是為了讓彼此溝通而建立的規範，制定標準以統一格式，如此能夠進行規模化。</p>
+<h2 id="Client-amp-Server"><a href="#Client-amp-Server" class="headerlink" title="Client &amp; Server"></a>Client &amp; Server</h2><p>而透過協議溝通的兩端，通常可分為客戶端（Client）和伺服器端（Server）。</p>
+<p><img src="https://i.imgur.com/EYmEfr8.png"></p>
+<h3 id="我們如何看到網頁的畫面？"><a href="#我們如何看到網頁的畫面？" class="headerlink" title="我們如何看到網頁的畫面？"></a>我們如何看到網頁的畫面？</h3><p>網頁上的資訊，其實就是由許多 request 跟 response 構成。且兩者內容均分成 header 與 body，分別帶著不同資訊：</p>
+<ul>
+<li>header：額外資訊</li>
+<li>body：主要內容</li>
+</ul>
+<p>我們可透過瀏覽器的開發者工具、或是 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NzM3NzA4Ny5odG1s">HTTP 抓包工具 Charles<i class="fa fa-external-link-alt"></i></span> 來查看詳細資訊，過程大致如下：</p>
+<ol>
+<li>瀏覽器（Client）產生 HTTP「request」傳給 Server</li>
+<li>Server 經過處理後，回傳一個「response」</li>
+<li>再由瀏覽器進行解析（html、css、js 等），將程式碼渲染成我們所熟悉的網頁介面</li>
+</ol>
+<p><img src="https://i.imgur.com/4pi9zu5.png" alt="瀏覽器"></p>
+<h2 id="DNS-域名系統"><a href="#DNS-域名系統" class="headerlink" title="DNS 域名系統"></a>DNS 域名系統</h2><p>全名是 Domain Name System，負責將域名轉換成 IP 位置。</p>
+<ul>
+<li>域名（Domain）：即常用的網址。google.com 就是一個域名，類似景點名稱。</li>
+<li>IP 位置：每個主機都有個 IP 位置，是網路溝通的地址。由四個數字組成，範圍是 0 ~ 255。</li>
+</ul>
+<blockquote>
+<p>補充：localhost 跟 127.0.0.1 是什麼？</p>
+<ul>
+<li><code>localhost</code>：是一個域名，對應的的 IP 位址是 127.0.0.1</li>
+<li><code>127.0.0.1</code> 是回送地址，指本地機，一般用來測試使用</li>
+</ul>
+</blockquote>
+<h3 id="以查詢地址為例"><a href="#以查詢地址為例" class="headerlink" title="以查詢地址為例"></a>以查詢地址為例</h3><ol>
+<li>如果今天想要抵達 台北 101（域名）</li>
+<li>查詢 Google 地址在哪（DNS）</li>
+<li>回覆正確地址：台北市信義區信義路五段 7 號（IP）</li>
+</ol>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvR29vZ2xlX1B1YmxpY19ETlM=">Google 提供免費的 DNS 伺服器<i class="fa fa-external-link-alt"></i></span> 8.8.8.8 和 8.8.4.4，如此可透過搜尋引擎來蒐集大數據。</p>
+</blockquote>
+<h3 id="以-GitHub-網站為例"><a href="#以-GitHub-網站為例" class="headerlink" title="以 GitHub 網站為例"></a>以 GitHub 網站為例</h3><p>就是透過 DNS 把 Request URL（github.com） 轉換成實際 IP 位置（13.250.177.223）。</p>
+<p><img src="https://i.imgur.com/LsnJjwB.png" alt="DNS"></p>
+<h3 id="nslookup-指令"><a href="#nslookup-指令" class="headerlink" title="nslookup 指令"></a><code>nslookup</code> 指令</h3><p>在終端機輸入 <code>nslookup &#39;網址&#39;</code>：可查詢 DNS 伺服器。有可能出現多個結果，代表對應到多個 server。</p>
+<p><img src="https://i.imgur.com/wTIOWZF.png" alt="nslookup"></p>
+<h2 id="瀏覽器只是一個程式"><a href="#瀏覽器只是一個程式" class="headerlink" title="瀏覽器只是一個程式"></a>瀏覽器只是一個程式</h2><p>即使我們沒有瀏覽器，也能夠過其他方式發送 request 跟取得 response。</p>
+<h3 id="實做一個-Client-端發送-request"><a href="#實做一個-Client-端發送-request" class="headerlink" title="實做一個 Client 端發送 request"></a>實做一個 Client 端發送 request</h3><p>利用 Node.js 的一套 library：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">request - Simplified HTTP client<i class="fa fa-external-link-alt"></i></span>，來模擬瀏覽器發送 request 的過程，步驟如下：</p>
+<ol>
+<li>安裝套件：<code>npm install request</code></li>
+<li>使用方法：複製官網提供的範本，貼到 index.js 裡</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;request&#x27;</span>);<br>request(<span class="hljs-string">&#x27;http://www.google.com&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&#x27;error:&#x27;</span>, error); <span class="hljs-comment">// Print the error if one occurred</span><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;statusCode:&#x27;</span>, response &amp;&amp; response.statusCode); <span class="hljs-comment">// Print the response status code if a response was received</span><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;body:&#x27;</span>, body); <span class="hljs-comment">// Print the HTML for the Google homepage.</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>修改成要發送 request 的域名</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;request&#x27;</span>);<br>request(<span class="hljs-string">&#x27;https://github.com/Lidemy/mentor-program-4th-heidiliu2020&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&#x27;error:&#x27;</span>, error);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;statusCode:&#x27;</span>, response &amp;&amp; response.statusCode);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;body:&#x27;</span>, body);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>執行 <code>node index.js</code> 可拿到 response</li>
+</ol>
+<p><img src="https://i.imgur.com/795sNFV.png" alt="執行 request"></p>
+<ol start="5">
+<li>或是利用 <code>node index.js &gt; github.html</code> 導入程式碼，一樣能打開網頁</li>
+</ol>
+<hr>
+<h2 id="HTTP-Request-Method-請求方法"><a href="#HTTP-Request-Method-請求方法" class="headerlink" title="HTTP Request Method 請求方法"></a>HTTP Request Method 請求方法</h2><p>什麼是 <code>HTTP Method</code>？在 HTTP 1.1 協定中，定義了八種方法，來以不同方式操作指定的資源。詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSFRUUC9NZXRob2Rz">HTTP 請求方法- HTTP | MDN<i class="fa fa-external-link-alt"></i></span>：</p>
+<ul>
+<li>GET：只應用於取得資料</li>
+<li>HEAD：只獲取回應的 header，但沒有 body。較少使用，通常應用在只想知道 response 資訊時</li>
+<li>POST：用於提交指定資源的實體。通常會改變伺服器的狀態</li>
+<li>PUT：取代原本的整個 request。和 PATCH 類似</li>
+<li>PATCH：修改部分 request</li>
+<li>DELETE：刪除資源</li>
+<li>OPTIONS：會回傳 server 支援哪些方法</li>
+<li>TRACE</li>
+<li>CONNECT</li>
+</ul>
+<p>這是為了讓 Server 能夠清楚辨別 request 的目的。</p>
+<h3 id="CRUD-原則"><a href="#CRUD-原則" class="headerlink" title="CRUD 原則"></a>CRUD 原則</h3><p>常用的幾個動作分別為：GET / POST / PUT / DELETE，正好對應到資料庫基本操作 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JUEyJTlFJUU1JTg4JUFBJUU2JTlGJUE1JUU2JTk0JUI5">CRUD 增刪查改<i class="fa fa-external-link-alt"></i></span>：</p>
+<ul>
+<li>Create：新增（POST）</li>
+<li>Delete：刪除（DELETE）</li>
+<li>Read：讀取（GET）</li>
+<li>Update：更新（PUT）</li>
+</ul>
+<h3 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h3><ul>
+<li>REST：全名是 Representational State Transfer，中文為「表現層狀態轉換」，是一種設計風格，以語意化且更為嚴謹的方式描述 API</li>
+<li>RESTful：形容以此規範設計的 API</li>
+</ul>
+<p>一般的 API 可能會長這樣：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><code class="hljs jboss-cli">新增使用者：POST + <span class="hljs-string">/new_user</span><br>刪除使用者：POST + <span class="hljs-string">/delete_user</span><br>查詢使用者：GET + <span class="hljs-string">/user_data/</span><span class="hljs-function">:id</span><br>更改使用者：POST + <span class="hljs-string">/update_user</span><br></code></pre></td></tr></table></figure>
+
+<p>若以 RESTful API 風格開發：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">新增使用者：POST + /users<br>刪除使用者：DELETE + /users/:id<br>查詢使用者：<span class="hljs-builtin-name">GET</span> + /users/:id<br>更改使用者：PATCH + /users/:id<br></code></pre></td></tr></table></figure>
+
+<p>由此可見 RESTful 的寫法較一致，且語意化更好理解。透過把「動作」藏在 HTTP method 裡面，而有唯一的 URL（<code>/users</code>）表示資源位置，藉此統一 API 接口。</p>
+<blockquote>
+<p>如果用 HTML 來比喻，寫網頁時我們可以全部使用 div 標籤，但為了幫助理解，通常會使用 li、section、article 等具有語意的標籤，即可從結構看出內容的作用。</p>
+</blockquote>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2l0c2Vtcy1mcm9udGVuZC9hcGktJUU2JTk4JUFGJUU0JUJCJTgwJUU5JUJBJUJDLXJlc3RmdWwtYXBpLSVFNSU4RiU4OCVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQy1hMDAxYTg1YWI2Mzg=">API 是什麼? RESTful API 又是什麼? - Medium<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="GET-amp-POST-請求的區別"><a href="#GET-amp-POST-請求的區別" class="headerlink" title="GET &amp; POST 請求的區別"></a>GET &amp; POST 請求的區別</h3><p>當中又以 <code>GET</code> 和 <code>POST</code> 兩種，為最常使用的 HTTP 請求方法。兩者最直觀的區別是「資料傳遞方式」與「安全性」。</p>
+<h4 id="GET：向指定的資源要求資料，類似於查詢操作。"><a href="#GET：向指定的資源要求資料，類似於查詢操作。" class="headerlink" title="GET：向指定的資源要求資料，類似於查詢操作。"></a><code>GET</code>：向指定的資源要求資料，類似於查詢操作。</h4><ul>
+<li>資料傳遞方式：將引數由 URL 帶至 Server 端</li>
+<li>安全性：較 POST 不安全，因為傳遞的引數會在 URL 上顯示</li>
+<li>例如：讀取連結或圖片</li>
+</ul>
+<p><img src="https://i.imgur.com/C2MUvS4.png" alt="GET"></p>
+<h4 id="POST：將要處理的資料提交給指定的資源，類似於更新操作。"><a href="#POST：將要處理的資料提交給指定的資源，類似於更新操作。" class="headerlink" title="POST：將要處理的資料提交給指定的資源，類似於更新操作。"></a><code>POST</code>：將要處理的資料提交給指定的資源，類似於更新操作。</h4><ul>
+<li>資料傳遞方式：將引數放在 request body 中傳遞</li>
+<li>安全性：較 GET 安全，適合用於隱密性較高的資料</li>
+<li>例如：會員登入系統（如下圖所示）</li>
+</ul>
+<p><img src="https://i.imgur.com/K7UVu6f.png" alt="POST"></p>
+<p>在最下方夾帶 request 資訊：</p>
+<p><img src="https://i.imgur.com/7dixXCe.png" alt="request body"></p>
+<h3 id="HTTP-Status-Code-狀態碼"><a href="#HTTP-Status-Code-狀態碼" class="headerlink" title="HTTP Status Code 狀態碼"></a>HTTP Status Code 狀態碼</h3><p>是 HTTP 用「3 位數字代碼」來表示回應狀態，通常以開頭的數字來進行區分。詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvSFRUUCVFNyU4QSVCNiVFNiU4MCU4MSVFNyVBMCU4MQ==">HTTP 狀態碼- 維基百科<i class="fa fa-external-link-alt"></i></span>：</p>
+<h4 id="1xx：訊息（較少見）"><a href="#1xx：訊息（較少見）" class="headerlink" title="1xx：訊息（較少見）"></a>1xx：訊息（較少見）</h4><h4 id="2xx：Success-成功"><a href="#2xx：Success-成功" class="headerlink" title="2xx：Success 成功"></a>2xx：Success 成功</h4><ul>
+<li><code>200 OK</code>：代表成功</li>
+<li><code>204 No Content</code>：伺服器成功處理了請求，沒有返回任何內容（例如發出 DELETE XXX 訊息，回傳 204 代表刪除成功）</li>
+</ul>
+<h4 id="3xx：Redirect-重新導向"><a href="#3xx：Redirect-重新導向" class="headerlink" title="3xx：Redirect 重新導向"></a>3xx：Redirect 重新導向</h4><ul>
+<li><code>301 Moved Permanently</code>：資源「永久」移到新位置</li>
+<li><code>302 Found</code>：資源「暫時」移到其他位置</li>
+</ul>
+<h4 id="4xx：User-error-客戶端錯誤"><a href="#4xx：User-error-客戶端錯誤" class="headerlink" title="4xx：User error 客戶端錯誤"></a>4xx：User error 客戶端錯誤</h4><ul>
+<li><code>400 Bad Request</code>：請求語法錯誤、資源太大、請求訊息無效等</li>
+<li><code>404 Not Found</code>：找不到資源</li>
+</ul>
+<h4 id="5xx：Server-error-伺服器端錯誤"><a href="#5xx：Server-error-伺服器端錯誤" class="headerlink" title="5xx：Server error 伺服器端錯誤"></a>5xx：Server error 伺服器端錯誤</h4><ul>
+<li><code>500 Internal Server Error</code>：伺服器出錯。例如搶票時伺服器當機</li>
+<li><code>503 Service Unavailable</code>：由於臨時的伺服器維護或者過載，伺服器當前無法處理請求</li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly95YWtpbWhzdS5jb20vcHJvamVjdC9wcm9qZWN0X3c0X05ldHdvcmtfaHR0cC5odG1s">[第四週] 網路基礎 - HTTP、Request、Response - Yakim<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MjA5NQ==">[Day 09] 表單中的 GET 與 POST<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0MzU3MTA0Ni5odG1s">GET 和 POST 請求的區別（面試和原理都得知道）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B0b3Rvcm9MaXUvaHR0cC1wb3N0LSVFNSU5MiU4Qy1nZXQtJUU1JUI3JUFFJUU3JTk1JUIwLTkyODgyOWQyOTkxNA==">http Post 和 Get 差異<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h3 id="實作一個簡易-HTTP-Server-端"><a href="#實作一個簡易-HTTP-Server-端" class="headerlink" title="實作一個簡易 HTTP Server 端"></a>實作一個簡易 HTTP Server 端</h3><p>前面我們已經實作一個 Client 端，也就是利用 request 這個 library 來顯示出來。接下來我們要利用 Node.js 內建 <code>library：http</code> 來實作 Server 端：</p>
+<ol>
+<li>建立一個檔案 <code>server.js</code>，並輸入下列程式碼：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;http&quot;</span>); <span class="hljs-comment">// 引用 library: http</span><br><br><span class="hljs-keyword">let</span> server = http.createServer(handleRequest);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleRequest</span>(<span class="hljs-params">req, res</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(req.url);<br>  res.write(<span class="hljs-string">&quot;hello&quot;</span>);<br>  res.end();<br>&#125;<br><br>server.listen(<span class="hljs-number">5000</span>); <span class="hljs-comment">// 監聽 5000 這個 port</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>執行 <code>node server.js</code>：不會跑出任何東西。因為沒有 <code>console.log</code> 任何東西，所以是正常的。此時程式會一直執行到按 <code>Crtl + C</code> 才會退出，符合 server 端必須不斷運行來接收資訊。</p>
+</li>
+<li><p>在瀏覽器輸入網址 <code>localhost:5000</code> 會跑出下列畫面：</p>
+</li>
+</ol>
+<p><img src="https://i.imgur.com/PUPfab0.png" alt="localhost:5000"></p>
+<ol start="4">
+<li>若修改程式碼如下，即可根據「不同網址」給出「不同回應」：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;http&quot;</span>); <span class="hljs-comment">// 引用 library: http</span><br><br><span class="hljs-keyword">let</span> server = http.createServer(handleRequest);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleRequest</span>(<span class="hljs-params">req, res</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(req.url);<br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/&quot;</span>) &#123;<br>    <span class="hljs-comment">// 若網址為根目錄</span><br>    res.write(<span class="hljs-string">&quot;welcome!&quot;</span>);<br>    res.end();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/hello&quot;</span>) &#123;<br>    <span class="hljs-comment">// 若網址為 /hello</span><br>    res.write(<span class="hljs-string">&quot;hello&quot;</span>);<br>    res.end();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;redirect&quot;</span>) &#123;<br>  &#125;<br>&#125;<br><br>server.listen(<span class="hljs-number">5000</span>); <span class="hljs-comment">// 監聽 5000 這個 port</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>輸入網址 <code>localhost:5000</code>：回應 welcome</li>
+</ul>
+<p><img src="https://i.imgur.com/p1PKLHk.png" alt="welcome"></p>
+<ul>
+<li>輸入網址 <code>localhost:5000/hello</code>：回應 hello</li>
+</ul>
+<p><img src="https://i.imgur.com/Ay4ut32.png" alt="hello"></p>
+<ol start="5">
+<li>再增加 <code>redirect</code> 部分和 <code>res.writeHead(404)</code>，就完成一個較完整的 Server 端：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;http&quot;</span>); <span class="hljs-comment">// 引用 library: http</span><br><br><span class="hljs-keyword">let</span> server = http.createServer(handleRequest);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleRequest</span>(<span class="hljs-params">req, res</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(req.url);<br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/&quot;</span>) &#123;<br>    res.write(<span class="hljs-string">&quot;welcome!&quot;</span>);<br>    res.end();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/hello&quot;</span>) &#123;<br>    res.write(<span class="hljs-string">&quot;hello&quot;</span>);<br>    res.end();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/redirect&quot;</span>) &#123;<br>    res.writeHead(<span class="hljs-number">200</span>, &#123;<br>      lidemy: <span class="hljs-string">&quot;good&quot;</span>,<br>    &#125;);<br>    res.end();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  res.writeHead(<span class="hljs-number">404</span>);<br>  res.end();<br>&#125;<br><br>server.listen(<span class="hljs-number">5000</span>); <span class="hljs-comment">// 監聽 5000 這個 port</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>若輸入不存在的網址，就會出現狀態 <code>404 Not Found</code>：</li>
+</ul>
+<p><img src="https://i.imgur.com/Dy8kyCR.png" alt="404"></p>
+<ul>
+<li>若輸入 <code>localhost:5000/redirect</code>，會在 Response Headers 會出現 <code>&#39;lidemy&#39;: &#39;good&#39;</code>：</li>
+</ul>
+<p><img src="https://i.imgur.com/KufqrXq.png" alt="&#39;lidemy&#39;: &#39;good&#39;"></p>
+<ol start="6">
+<li>在之前的狀態碼有提到，若要轉址必須改成 <code>302 Found</code>：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">if</span> (req.url === <span class="hljs-string">&quot;/redirect&quot;</span>) &#123;<br>  res.writeHead(<span class="hljs-number">302</span>, &#123;<br>    Location: <span class="hljs-string">&quot;/hello&quot;</span>, <span class="hljs-comment">// 指定要轉到哪裡</span><br>  &#125;);<br>  res.end();<br>  <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>輸入網址 <code>&#39;localhost:5000/redirect</code>，瀏覽器就會轉址到新位置：</li>
+</ol>
+<p><img src="https://i.imgur.com/WX6bq3s.png" alt="302"></p>
+<ul>
+<li>若將程式碼改成 <code>&#39;Location&#39;: &#39;https://google.com&#39;</code>：輸入網址 <code>localhost:5000/redirect</code> 就會直接連到 <code>google.com</code></li>
+</ul>
+<hr>
+<h2 id="淺談-TCP-IP"><a href="#淺談-TCP-IP" class="headerlink" title="淺談 TCP/IP"></a>淺談 TCP/IP</h2><h3 id="網路的層級"><a href="#網路的層級" class="headerlink" title="網路的層級"></a>網路的層級</h3><p>先前提到「從電腦發出 request 到 server」，在溝通訊息這段過程，其實需要經過非常多道手續。因此就有組織將網路標準化，將網路連接過程分成數個階層（layer），每個階層都有特別的獨立的功能。</p>
+<p>分層的好處，是只要處理該層級的事情就好，因為每個階層的程式碼可以獨立撰寫，功能也不會相互干擾。</p>
+<p>而著名的分層模型主要有兩種：</p>
+<h3 id="OSI-七層協定"><a href="#OSI-七層協定" class="headerlink" title="OSI 七層協定"></a>OSI 七層協定</h3><p>由於協定非常嚴謹，較偏向理論。</p>
+<p><img src="https://i.imgur.com/wLsG4hH.png" alt="OSI"></p>
+<h3 id="TCP-IP-四層模型"><a href="#TCP-IP-四層模型" class="headerlink" title="TCP/IP 四層模型"></a>TCP/IP 四層模型</h3><p>TCP/IP 是由 OSI 七層協定簡化而來，為目前網路通訊的基礎架構。以下為兩者之間的比較圖與常見的通訊協定：</p>
+<p><img src="https://i.imgur.com/GFDpM8z.png" alt="OSI TCP/IP"></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cDovL2xpbnV4LnZiaXJkLm9yZy9saW51eF9zZXJ2ZXIvMDExMG5ldHdvcmtfYmFzaWMucGhwI3doYXRpc25ldHdvcmtfdGNwaXA=">2.4 TCP/IP 的傳輸層相關封包與資料 - 鳥哥的 Linux 私房菜<i class="fa fa-external-link-alt"></i></span></p>
+<hr>
+<h2 id="網路層-IP-地址"><a href="#網路層-IP-地址" class="headerlink" title="網路層 - IP 地址"></a>網路層 - IP 地址</h2><p>IP 的全名是 Internet Protocol，中文是「網際網路協定」。</p>
+<p>可分為 IPv4、IPv6 這兩種協議，兩者最主要差異在於「IP 地址的不同」：</p>
+<ul>
+<li>IPv4：由四個數字組成，範圍是 0~255</li>
+<li>IPv6：用來取代 IPv4，主要是為了解決 IP 地址不夠用的問題，可容納更多 IP 地址</li>
+</ul>
+<h3 id="各種-IP"><a href="#各種-IP" class="headerlink" title="各種 IP"></a>各種 IP</h3><p>我們常聽到的 IP 地址，代表在網路上的地址。在網際網路上，每台電腦之間，是透過 IP 位址來通訊。當中又分為下列幾種類型：</p>
+<ul>
+<li>固定 IP：不會改變的 IP</li>
+</ul>
+<p>理想情況下，是每一台電腦都有一個 IP 位址。固定的 IP 位址，適合架設網站，也因為不會變動，確保使用者能夠連上伺服器。例如：伺服主機、網路設備多使用固定 IP。</p>
+<ul>
+<li>浮動 IP：每次連上網路時的 IP 位置都會不一樣</li>
+</ul>
+<p>一般用戶大多是浮動 IP。浮動 IP 解決了「IP 不夠用」這個問題，因為每次連線的 IP 位址皆不同，也不會輕易被駭客攻擊。</p>
+<ul>
+<li>虛擬 IP：僅能使用於內部網路，外網連不上該位置</li>
+</ul>
+<p>只有在內網才能互相連接，外網找不到該地址，所以內網 IP 位址是可以重複的。但對外網而言，一定會有一個「固定 or 浮動」的 IP 位址。例如：公司使用內網溝通，藉由鎖 IP 位址，可提高安全性。</p>
+<blockquote>
+<p>通常以 <code>192.168</code> 或 <code>10.0</code> 開頭的，都是虛擬 IP。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/TFcsKyY.png" alt="虛擬 IP"></p>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9xdWVzdGlvbnMvMTAwMDA3OTY=">浮動 IP 與 固定 IP 有何不同?? 各有何優缺點??<i class="fa fa-external-link-alt"></i></span></p>
+<hr>
+<h2 id="Port-連接埠（端口）"><a href="#Port-連接埠（端口）" class="headerlink" title="Port 連接埠（端口）"></a>Port 連接埠（端口）</h2><p>在應用層當中，每台電腦主機 IP 位置（localhost），可能對應到不同應用程式。例如：HTTP、FTP、信件收發等服務。</p>
+<p>而 Port 扮演網路通訊的端點，用來區分不同功能。如此即可辨認出，該連線要對應到哪個應用程式。</p>
+<ul>
+<li>例如實作 server 端提過的 <code>server.listen(5000)</code>：代表監聽 <code>5000</code> 這個 Port，輸入網址 <code>localhost:5000</code> 即可連到這個服務</li>
+</ul>
+<p>如果沒有輸入 Port，會有一些預設或常用值：</p>
+<ul>
+<li>HTTP 80：說明用於網頁瀏覽</li>
+<li>HTTPS 443</li>
+<li>FTP 21</li>
+<li>「測試」常用：3000、4000、8080、8000 等冷門 Port</li>
+</ul>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9kb3RibG9ncy5jb20udHcvYm94NTA2OC8yMDExLzAxLzE5LzIwOTAx">[網路管理]常用 port 說明<i class="fa fa-external-link-alt"></i></span></p>
+<hr>
+<h2 id="傳輸層-TCP-amp-UDP"><a href="#傳輸層-TCP-amp-UDP" class="headerlink" title="傳輸層 - TCP &amp; UDP"></a>傳輸層 - TCP &amp; UDP</h2><p>傳輸層（Transport Layer）協定提供不同主機之間的資料傳輸及控制。根據不同需求，又分為「可靠的 TCP」和「速度較快的 UDP」兩種協定：</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><ul>
+<li>全名：Transmission Control Protocol 傳輸控制協定</li>
+<li>是一種可靠的資料傳輸，因此大部分的網路協定都是建立在 TCP 上面</li>
+<li>透過「三次握手」確認建立一個連接：</li>
+</ul>
+<p><img src="https://i.imgur.com/PHSLrDe.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">若以「傳紙條概念」比喻三次握手：<br>小明：安安，在嗎？<br>小美：在阿，你好。<br>小明：收到，太好了！<br></code></pre></td></tr></table></figure>
+
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><ul>
+<li>全名：User Datagram Protocol 用戶資料包協定</li>
+<li>流量是不受規範的，需要快速、重複傳送資料的情況會使用 UDP，相對而言也較不穩定</li>
+<li>例如：視訊功能</li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJDJUEwJUU4JUJFJTkzJUU2JThFJUE3JUU1JTg4JUI2JUU1JThEJThGJUU4JUFFJUFF">TCP 協議 - Wikipedia<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDAwMDAyMQ==">什麼是 OSI 的 7 層架構？和常聽到的 Layer 7 有關？<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h2 id="小結-從傳紙條概念看-TCP-IP"><a href="#小結-從傳紙條概念看-TCP-IP" class="headerlink" title="小結 - 從傳紙條概念看 TCP/IP"></a>小結 - 從傳紙條概念看 TCP/IP</h2><p>參考 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvbGVhcm5pbmctdGNwLWlwLWh0dHAtdmlhLXNlbmRpbmctbGV0dGVyLTVkMzI5OTIwMzY2MA==">Huli - 從傳紙條輕鬆學習基本網路概念<i class="fa fa-external-link-alt"></i></span>，我們能夠透過傳紙條的例子，來試著理解網路通訊概念：</p>
+<ul>
+<li>應用層（HTTP / FTP）：傳輸的資料內容</li>
+<li>傳輸層（TCP / UDP）：傳輸方式</li>
+<li>網路層（IP）：傳輸地址</li>
+<li>實體層（網路電纜）：實體傳輸</li>
+</ul>
+<p><img src="https://i.imgur.com/oJPxLiH.png" alt="傳紙條概念"></p>
+<hr>
+<h2 id="淺談-API"><a href="#淺談-API" class="headerlink" title="淺談 API"></a>淺談 API</h2><blockquote>
+<p>可參考 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvcmFtZW4tYW5kLWFwaS02MjM4NDM3ZGM1NDQ=">Huli - 從拉麵店的販賣機理解什麼是 API<i class="fa fa-external-link-alt"></i></span>，或是這部影片：<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj16dkthZGQ5Q2ZsYyZmZWF0dXJlPWVtYl9sb2dv">什麼是 API？<i class="fa fa-external-link-alt"></i></span>來瞭解。</p>
+</blockquote>
+<p>全名是 Application Programming ==Interface==，中文是「應用程式==介面==」。簡言之，就是方便溝通、交換資料的管道。</p>
+<p>API 是應用程式、裝置之間資料的交換，但不一定要透過網路才能有 API，例如：</p>
+<ul>
+<li>軟硬體廠商的 API：USB 與 電腦交換資料</li>
+<li>作業系統裡的 API：讀取、傳輸及寫入等等電腦上的操作</li>
+</ul>
+<h3 id="而對於網頁來說就是-Web-API"><a href="#而對於網頁來說就是-Web-API" class="headerlink" title="而對於網頁來說就是 Web API"></a>而對於網頁來說就是 Web API</h3><ul>
+<li>Web API：是基於 http 協定下運作的 API，代表透過網路進行資料交換</li>
+</ul>
+<p>以下為實際的運用例子：</p>
+<ul>
+<li>會員登入系統：社群連結註冊登入（例如：設置 FB 或 Google 登入按鈕）</li>
+<li>社群嵌入：分享、留言版、按讚按鈕、影音（例如：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmZhY2Vib29rLmNvbS9kb2NzL2dyYXBoLWFwaT9sb2NhbGU9emhfVFc=">Facebook Graphic<i class="fa fa-external-link-alt"></i></span>）</li>
+<li>資料嵌入：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIueWFob28uY29tL3dlYXRoZXIvP2d1Y2NvdW50ZXI9MSZndWNlX3JlZmVycmVyPWFIUjBjSE02THk5NVlXdHBiV2h6ZFM1amIyMHZjSEp2YW1WamRDOXdjbTlxWldOMFgzYzBYMDVsZEhkdmNtdGZRVkJKTG1oMGJXdyZndWNlX3JlZmVycmVyX3NpZz1BUUFBQUJiS3FvVGZJZWNOdHVnTXBvS0tmNUw1M1h3SUpBX2wxelByckpVbVBEMlloMU4tcmNYYmFKaGJuUFFBS1ctVWJuVF9OSmhRWF80aXNZMzc0T1R2YnRSMXE5MURkR2xZT0s0cVNReVFxcjJia3I1WE1QUXVvOGJRVDg3NFJJQ1Y2SUYyc0hzcjJ5cDg0VVhNVjQ1NDlSMWFYRmpITnQ5bGlmSUkzWWRUdmJBWQ==">Yahoo 氣象<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vbWFwcy9kb2N1bWVudGF0aW9uL3RpbWV6b25lL3N0YXJ0P2hsPXpoLXR3">Google 地圖<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIudHdpdHRlci5jb20vZW4vZG9jcy90d2VldHMvdGltZWxpbmVzL292ZXJ2aWV3">Tweet timelines<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wb2tlYXBpLmNvLw==">PokéAPI<i class="fa fa-external-link-alt"></i></span>：拿到寶可夢的資訊</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9waWNzdW0ucGhvdG9zLw==">假圖 API<i class="fa fa-external-link-alt"></i></span>：隨機產生出圖片</li>
+</ul>
+<p>透過 API 能夠達到省時、便利、營利等優點，因此我們也可以說，API 是一個「能讓生產者與消費者雙方溝通的介面」。</p>
+<h2 id="實際串接-API"><a href="#實際串接-API" class="headerlink" title="實際串接 API"></a>實際串接 API</h2><h3 id="串接的前置作業"><a href="#串接的前置作業" class="headerlink" title="串接的前置作業"></a>串接的前置作業</h3><ol>
+<li>準備 Client 端（發出端）：使用 node.js <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">library request<i class="fa fa-external-link-alt"></i></span> 實作一個 Client 端</li>
+<li>提供 API 的網站（接收端）：<span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4v">Regres<i class="fa fa-external-link-alt"></i></span> 是一個提供 API 測試的網站</li>
+<li>能夠發出 request 的工具：終端機</li>
+</ol>
+<h3 id="實戰演練"><a href="#實戰演練" class="headerlink" title="實戰演練"></a>實戰演練</h3><h3 id="Step1-實作一個-Client-端"><a href="#Step1-實作一個-Client-端" class="headerlink" title="Step1. 實作一個 Client 端"></a>Step1. 實作一個 Client 端</h3><p>與先前「實做一個 Client 端發送 request」操作方式相同，是利用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdA==">library request<i class="fa fa-external-link-alt"></i></span> 來模擬瀏覽器發送 request 的過程。</p>
+<ul>
+<li>新增 index.js 並貼上官網提供的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNzdXBlci1zaW1wbGUtdG8tdXNl">範本<i class="fa fa-external-link-alt"></i></span>：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br>request(<span class="hljs-string">&quot;http://www.google.com&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&quot;error:&quot;</span>, error);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;statusCode:&quot;</span>, response &amp;&amp; response.statusCode);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;head:&quot;</span>, response.headers);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;body:&quot;</span>, body);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="Step2-串接-Regres-API"><a href="#Step2-串接-Regres-API" class="headerlink" title="Step2. 串接 Regres API"></a>Step2. 串接 <span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4vYXBpL3VzZXJz">Regres<i class="fa fa-external-link-alt"></i></span> API</h3><p>將範本中的 google 網址改成 <code>https://reqres.in/api/users</code></p>
+<h3 id="Step3-用-node-js-運行"><a href="#Step3-用-node-js-運行" class="headerlink" title="Step3. 用 node.js 運行"></a>Step3. 用 node.js 運行</h3><p>在終端機輸入 <code>node index.js</code>，即可獲得 Regres API 所提供的資訊：</p>
+<p><img src="https://i.imgur.com/DWirKxl.png" alt="運行"></p>
+<p>這樣其實就完成了簡單的 API 串接！透過丟一個 request 到網站，我們能夠獲取想要的資訊。</p>
+<h2 id="學會查看官方文件"><a href="#學會查看官方文件" class="headerlink" title="學會查看官方文件"></a>學會查看官方文件</h2><p>而透過 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNmb3Jtcw==">request 文件<i class="fa fa-external-link-alt"></i></span>，我們能找到不同的 <code>request.METHOD()</code>，瞭解如何使用各種方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">request.get(): Defaults to method: <span class="hljs-string">&quot;GET&quot;</span>.<br>request.post(): Defaults to method: <span class="hljs-string">&quot;POST&quot;</span>.<br>request.put(): Defaults to method: <span class="hljs-string">&quot;PUT&quot;</span>.<br>request.patch(): Defaults to method: <span class="hljs-string">&quot;PATCH&quot;</span>.<br>request.del() / request.delete(): Defaults to method: <span class="hljs-string">&quot;DELETE&quot;</span>.<br></code></pre></td></tr></table></figure>
+
+<h3 id="情境一：查詢不同使用者資料"><a href="#情境一：查詢不同使用者資料" class="headerlink" title="情境一：查詢不同使用者資料"></a>情境一：查詢不同使用者資料</h3><ul>
+<li>Method：GET（預設方法）</li>
+<li>url ：<code>https://reqres.in/api/users/&lt;userID&gt;</code></li>
+<li>透過 <span class="exturl" data-url="aHR0cHM6Ly9yZXFyZXMuaW4v">Reqres 官網<i class="fa fa-external-link-alt"></i></span>可知，更改 「Request 網址結尾」可獲得不同使用者資訊，以 <code>/api/users/2</code> 為例：</li>
+</ul>
+<p>方法一：直接將網址改成 <code>https://reqres.in/api/users/2</code></p>
+<p><img src="https://i.imgur.com/JiCCL5b.png" alt="id 2"></p>
+<p>方法二：使用 node.js 內建 library <code>process</code></p>
+<p>這個方法是利用 <code>process.argv</code> 達成帶入參數，我們可以先用 <code>console.log</code> 來查看 <code>process.argv</code> 是什麼：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> process = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;process&quot;</span>);<br><span class="hljs-built_in">console</span>.log(process.argv);<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/HrpOUWq.png" alt="array"></p>
+<p>會發現 <code>process.argv</code> 其實是一個陣列，利用 <code>process.argv[2]</code> 就可以拿到我們需要的參數：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br><span class="hljs-keyword">const</span> process = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;process&quot;</span>);<br><br>request(<br>  <span class="hljs-string">&quot;https://reqres.in/api/users/&quot;</span> + process.argv[<span class="hljs-number">2</span>],<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;body:&quot;</span>, body);<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<p>輸入 <code>node index.js 2</code>，就可獲得 <code>id: 2</code> 的使用者資料：</p>
+<p><img src="https://i.imgur.com/dRHS9rO.png" alt="node index.js 2"></p>
+<h3 id="情境二：新增使用者資料"><a href="#情境二：新增使用者資料" class="headerlink" title="情境二：新增使用者資料"></a>情境二：新增使用者資料</h3><ul>
+<li>method：POST</li>
+<li>url ：<code>https://reqres.in/api/users/</code></li>
+<li>到 request library 的 Github 頁面，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcXVlc3QvcmVxdWVzdCNmb3Jtcw==">點選 forms<i class="fa fa-external-link-alt"></i></span>，填入相關程式碼來新增資料至 reqres</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br><br>request.post(<br>  &#123;<br>    url: <span class="hljs-string">&quot;https://reqres.in/api/users&quot;</span>,<br>    form: &#123;<br>      name: <span class="hljs-string">&quot;Heidi&quot;</span>,<br>      job: <span class="hljs-string">&quot;web engineer&quot;</span>,<br>    &#125;,<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> json = <span class="hljs-built_in">JSON</span>.parse(body); <span class="hljs-comment">// 轉成 JS 物件</span><br>    <span class="hljs-built_in">console</span>.log(json);<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<p>成功新增使用者資料：</p>
+<blockquote>
+<p>註：這裡的操作只是測試用，並不會真的新增資料到網站。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/SOHZu0h.png" alt="新增使用者資料"></p>
+<h3 id="情境三：刪除使用者資料"><a href="#情境三：刪除使用者資料" class="headerlink" title="情境三：刪除使用者資料"></a>情境三：刪除使用者資料</h3><ul>
+<li>method：DELETE</li>
+<li>url ：<code>https://reqres.in/api/users/&lt;userID&gt;</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br>request.delete(<br>  &#123;<br>    url: <span class="hljs-string">`https://reqres.in/api/users/2`</span>, <span class="hljs-comment">// 將使用者 id 帶入</span><br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>    <span class="hljs-comment">// console.log(JSON.parse(body));</span><br>    <span class="hljs-comment">// 因為是刪除，所以不會回傳東西，因此轉印狀態碼</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;status code:&quot;</span>, response.statusCode);<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<p>回傳 <code>204</code>，代表成功刪除使用者資料：</p>
+<p><img src="https://i.imgur.com/JHOyAUo.png" alt="delete"></p>
+<h3 id="情境四：修改使用者資料"><a href="#情境四：修改使用者資料" class="headerlink" title="情境四：修改使用者資料"></a>情境四：修改使用者資料</h3><ul>
+<li>method ：PATCH</li>
+<li>url ：<code>https://reqres.in/api/users/&lt;userID&gt;</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br>request.patch(<br>  &#123;<br>    url: <span class="hljs-string">`https://reqres.in/api/users/2`</span>,<br>    form: &#123;<br>      <span class="hljs-comment">// 傳入要修改的資料</span><br>      name: <span class="hljs-string">&quot;hello&quot;</span>,<br>    &#125;,<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.parse(body));<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<p>成功修改使用者資料：</p>
+<p><img src="https://i.imgur.com/HXbVmTk.png" alt="patch"></p>
+<h3 id="綜合應用"><a href="#綜合應用" class="headerlink" title="綜合應用"></a>綜合應用</h3><p>Base URL: <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktYm9vay1zdG9yZS5oZXJva3VhcHAuY29tLw==">https://lidemy-book-store.herokuapp.com<i class="fa fa-external-link-alt"></i></span></p>
+<table>
+<thead>
+<tr>
+<th>說明</th>
+<th>Method</th>
+<th>path</th>
+<th>參數</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>獲取所有書籍</td>
+<td>GET</td>
+<td>/restaurants</td>
+<td>_limit:限制回傳資料數量</td>
+<td>/restaurant?_limit=6</td>
+</tr>
+<tr>
+<td>獲取單一書籍</td>
+<td>GET</td>
+<td>/restaurants/:id</td>
+<td>無</td>
+<td>/restaurant/12</td>
+</tr>
+<tr>
+<td>刪除書籍</td>
+<td>DELETE</td>
+<td>/restaurants/:id</td>
+<td>無</td>
+<td>無</td>
+</tr>
+<tr>
+<td>新增書籍</td>
+<td>POST</td>
+<td>/restaurants</td>
+<td>name: 書籍名稱</td>
+<td>無</td>
+</tr>
+<tr>
+<td>更改書籍</td>
+<td>PATCH</td>
+<td>/restaurants/:id</td>
+<td>name: 書籍名稱</td>
+<td>無</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br><br><span class="hljs-keyword">const</span> API_ENDPOINT = <span class="hljs-string">&quot;https://lidemy-book-store.herokuapp.com&quot;</span>;<br><br>request(<span class="hljs-string">`<span class="hljs-subst">$&#123;API_ENDPOINT&#125;</span>/books?_limit=10`</span>, <span class="hljs-function">(<span class="hljs-params">error, response, body</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 判斷 status code 是否為 2 開頭：偵測回傳是否成功</span><br>  <span class="hljs-keyword">if</span> (response.statusCode &gt;= <span class="hljs-number">200</span> &amp;&amp; response.statusCode &lt; <span class="hljs-number">300</span>) &#123;<br>    <span class="hljs-keyword">let</span> books = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-comment">// try catch：偵測處理資料這個動作是否出現錯誤</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      books = <span class="hljs-built_in">JSON</span>.parse(body);<br>      <span class="hljs-comment">// 列出前十筆資料</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; books.length; i += <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">$&#123;books[i].id&#125;</span> <span class="hljs-subst">$&#123;books[i].name&#125;</span>`</span>);<br>      &#125;<br>    &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>      <span class="hljs-comment">// 若 response 不是一個合法的 JSON 字串，會回傳錯誤</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>    &#125;<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="補充：如何在請求帶入資料"><a href="#補充：如何在請求帶入資料" class="headerlink" title="補充：如何在請求帶入資料"></a>補充：如何在請求帶入資料</h3><p>在發出 request 時，我們其實能透過兩種方式來帶入資料：</p>
+<ol>
+<li>Request header：把資料放入 header<ul>
+<li>通常會放層級較高、具有機密性的資料，例如身分驗證</li>
+</ul>
+</li>
+<li>Query-string parameter：把資訊放在網址列結尾<ul>
+<li>由結尾的問號開始，是 KEY / Value 的組合</li>
+</ul>
+</li>
+</ol>
+<p>實際例子可參考<span class="exturl" data-url="aHR0cHM6Ly9kZXYudHdpdGNoLnR2L2RvY3MvdjU=">Twitch API v5<i class="fa fa-external-link-alt"></i></span> 文件，同樣支援這兩種方法：</p>
+<ol>
+<li>Request header (<code>Client-ID: XXXXX</code>)</li>
+<li>Query-string parameter<br>(<code>https://api.twitch.tv/kraken/users/44322889?client_id=XXXXX</code>)</li>
+</ol>
+<p>因此在串接之前，必須先確認該 API 支援哪種方式來發出請求。</p>
+<hr>
+<h2 id="資料格式-XML-amp-JSON"><a href="#資料格式-XML-amp-JSON" class="headerlink" title="資料格式 XML &amp; JSON"></a>資料格式 XML &amp; JSON</h2><p>在 API 實戰中的 response 資料其實就是「JSON 格式字串」。在談到如何整理資訊之前，先來介紹常用的資料格式：</p>
+<h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><ul>
+<li>全名為 Extensible Markup Language，中文為「可延伸標記式語言」</li>
+<li>和 HTML 非常類似，均屬於 Markup Language（標記語言），內容用<code>前後標籤</code>包起來。<ul>
+<li>例如：<code>&lt;firstName&gt;John&lt;/firstName&gt;</code></li>
+</ul>
+</li>
+<li>缺點是檔案較大、不易閱讀，因此現代開發較少使用</li>
+</ul>
+<h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><ul>
+<li>全名為 JavaScript Object Notation，中文為「JavaScript 物件表示法」</li>
+<li>為現代最普遍、常用的資料格式</li>
+<li>格式容易理解，且相容性高，許多程式均支援讀取或修改</li>
+<li>資料格式看似 JavaScript 物件，但需注意以下幾點：<ol>
+<li>回傳值的型態是「字串」</li>
+<li><code>key</code> 值要用雙引號 <code>&quot;key&quot;</code> 包起來</li>
+<li>支援許多資料格式：<code>[array]</code>、<code>&#123;object&#125;</code> 等；但 <code>value 值</code> 不能放 function</li>
+<li>整個 JSON 格式字串不能使用註解</li>
+</ol>
+</li>
+<li>相關函式<ol>
+<li><code>JSON.prase(&lt;JSON&gt;)</code>：將 JSON 格式字串轉成物件</li>
+<li><code>JSON.stringify(&lt;object&gt;)</code>：將物件轉成 JSON 格式字串</li>
+</ol>
+</li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnd1LWJveS5jb20vMjAxMS8wNC8lRTQlQkQlQTAlRTQlQjglOEQlRTUlOEYlQUYlRTQlQjglOEQlRTclOUYlQTUlRTclOUElODQtanNvbi0lRTUlOUYlQkElRTYlOUMlQUMlRTQlQkIlOEIlRTclQjQlQjkv">你不可不知的 JSON 基本介紹<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qc29uZWRpdG9yb25saW5lLm9yZy8=">JSON Editor online<i class="fa fa-external-link-alt"></i></span>：可將得到的資料轉成 JSON 格式</li>
+</ol>
+<h3 id="實際來處理-JSON-格式字串"><a href="#實際來處理-JSON-格式字串" class="headerlink" title="實際來處理 JSON 格式字串"></a>實際來處理 JSON 格式字串</h3><p>同樣以串接 Reqres API 為例。得到 response 就是「JSON 格式的字串」，但這種資料並不易閱讀，也無法直接使用。</p>
+<p>因此使用內建函式 <code>JSON.parse()</code> 做處理，就會轉成「JS 物件」：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br><br>request(<span class="hljs-string">`https://reqres.in/api/users/2`</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;原始格式，JSON 格式的字串----------&quot;</span>);<br>  <span class="hljs-built_in">console</span>.log(body);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;轉成 JS 物件--------------------&quot;</span>);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.parse(body));<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/rxiOXN2.png" alt="json"></p>
+<p>如此就可以「物件」方式來取出想要的資料：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;request&quot;</span>);<br><br>request(<span class="hljs-string">`https://reqres.in/api/users/2`</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> json = <span class="hljs-built_in">JSON</span>.parse(body); <span class="hljs-comment">// JSON 物件</span><br>  <span class="hljs-built_in">console</span>.log(json.data.first_name); <span class="hljs-comment">// 印出 Janet</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>反之，若想把「JS 物件」轉成「JSON 格式字串」，可以用： <code>JSON.stringify(&lt;object&gt;)</code></p>
+<hr>
+<h2 id="必學指令-curl"><a href="#必學指令-curl" class="headerlink" title="必學指令 curl"></a>必學指令 <code>curl</code></h2><blockquote>
+<p>在 <span class="exturl" data-url="aHR0cHM6Ly9jdXJsLmhheHguc2Uv">curl 官網<i class="fa fa-external-link-alt"></i></span>下載，安裝方法可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NTkyMw==">Day14 - cURL 工具<i class="fa fa-external-link-alt"></i></span>，即可在終端機使用。</p>
+</blockquote>
+<p>curl 做法非常簡單，只要在終端機輸入指令就可支援發 HTTP request 、下載及上傳檔案的功能，基本格式為：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">curl [options] [URL...]<br></code></pre></td></tr></table></figure>
+
+<h3 id="預設是-GET-方法"><a href="#預設是-GET-方法" class="headerlink" title="預設是 GET 方法"></a>預設是 <code>GET</code> 方法</h3><p>以使用 curl 能夠發 request 　到 google 首頁為例：</p>
+<ul>
+<li>輸入 <code>crul &#39;http://www.google.com&#39;</code>：即可下載該網頁程式碼</li>
+<li>或輸入 <code>crul &#39;網址&#39; &gt; google.html</code>：可將回傳值導向其他檔案</li>
+</ul>
+<p><img src="https://i.imgur.com/RbyGVvV.png"></p>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9kb2lpZG8vMTU2NDYzMQ==">linux 指令 curl 指令详解<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOS8wMi8wMS9saW51eC1jdXJsLWNvbW1hbmQtdHV0b3JpYWwv">Linux Curl Command 指令與基本操作入門教學<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<hr>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 2] 先別急著寫 leetcode - 虛擬碼、Debugger、解題技巧</title>
+    <url>/leetcode/</url>
+    <content><![CDATA[<blockquote>
+<ul>
+<li>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYWxnMTAxLWxlZXRjb2Rl">[ALG101] 先別急著寫 leetcode<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</li>
+<li>參考文章：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOS8xMS8wMS9iZWZvcmUtc3RhcnQtbGVldGNvZGUv">程式解題新手入門注意事項 - Huli<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="寫程式-≠-寫程式碼"><a href="#寫程式-≠-寫程式碼" class="headerlink" title="寫程式 ≠ 寫程式碼"></a>寫程式 ≠ 寫程式碼</h2><p>重點是在寫程式之前，先想好要怎麼做，整理自己的想法，並轉換成程式碼表達。</p>
+<ul>
+<li>初學者寫程式 1.邊寫程式碼邊想怎麼解 2.試著套用自己以為學過的語法</li>
+<li>會寫程式的人寫程式 1.先想解法，在腦中構思（太快看不出來） 2.把解法轉換成程式碼</li>
+</ul>
+<h3 id="初期如何學習寫程式？"><a href="#初期如何學習寫程式？" class="headerlink" title="初期如何學習寫程式？"></a>初期如何學習寫程式？</h3><ul>
+<li>步驟</li>
+</ul>
+<ol>
+<li>大概想一下解法，不寫程式碼</li>
+<li>把解法寫成 pseudo code（虛擬碼）</li>
+<li>把 pseudo code 翻譯成程式碼</li>
+</ol>
+<ul>
+<li>利用條列式寫法</li>
+</ul>
+<ol>
+<li>將大問題分割成小問題</li>
+<li>一行只做一件事</li>
+<li>善用敘述、條件判斷</li>
+<li>善用跳轉（jump）來實現重複執行</li>
+</ol>
+<h3 id="範例：印出-1-100-之間的偶數"><a href="#範例：印出-1-100-之間的偶數" class="headerlink" title="範例：印出 1~100 之間的偶數"></a>範例：印出 1~100 之間的偶數</h3><ul>
+<li>步驟一：如何印出 1~100？</li>
+</ul>
+<ol>
+<li>令 i 為 1 　//　設置初始條件</li>
+<li>如果 i&gt;100，結束　//　判斷是否該結束程式（終止條件）</li>
+<li>印出 i</li>
+<li>i = i+1</li>
+<li>跳回第 2 行　//　重複動作</li>
+</ol>
+<ul>
+<li>步驟二：如何判斷某個數是偶數？</li>
+</ul>
+<ol>
+<li>令 i = 1</li>
+<li>如果 i&gt;100，結束</li>
+<li>如果 i % 2 ===0，印出 i 　//　利用是否能整除 2 來判斷奇偶</li>
+<li>i = i+1</li>
+<li>跳回第 2 行</li>
+</ol>
+<h2 id="如何撰寫-Pseudo-Code（虛擬碼）？"><a href="#如何撰寫-Pseudo-Code（虛擬碼）？" class="headerlink" title="如何撰寫 Pseudo Code（虛擬碼）？"></a>如何撰寫 Pseudo Code（虛擬碼）？</h2><p>虛擬碼是程式碼與想法之間的橋樑，把解法用抽象的方式表示。</p>
+<p>將剛才步驟二得到的可執行步驟翻成英文，會發現和程式碼非常相似：</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><code class="hljs basic"><span class="hljs-number">1.</span> <span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span><br><span class="hljs-number">2.</span> <span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">100</span> <span class="hljs-keyword">then</span> exit<br><span class="hljs-number">3.</span> <span class="hljs-keyword">if</span> i % <span class="hljs-number">2</span> no <span class="hljs-comment">remainder, print  i</span><br><span class="hljs-number">4.</span> i = i+<span class="hljs-number">1</span><br><span class="hljs-number">5.</span> jump <span class="hljs-keyword">to</span> <span class="hljs-keyword">line</span> <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+<p>更像程式碼的虛擬碼：</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><code class="hljs basic"><span class="hljs-number">1.</span> <span class="hljs-keyword">for</span> (i from <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">100</span>) do　//　<span class="hljs-keyword">for</span>迴圈，有數字i會從 <span class="hljs-number">1</span>到 <span class="hljs-number">100</span>，do代表迴圈內動作<br><span class="hljs-number">2.</span> 	<span class="hljs-keyword">if</span> i / <span class="hljs-number">2</span> no <span class="hljs-comment">remainder, print i</span><br><span class="hljs-number">3.</span> <span class="hljs-keyword">end</span> <span class="hljs-keyword">for</span>　//　此迴圈結束<br></code></pre></td></tr></table></figure>
+
+<p>若以 JavaScript 撰寫成程式碼：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><code class="hljs matlab"><span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>; <span class="hljs-built_in">i</span>&lt; <span class="hljs-number">100</span>; <span class="hljs-built_in">i</span>++) &#123;<br>　<span class="hljs-keyword">if</span>(<span class="hljs-built_in">i</span> <span class="hljs-comment">% 2 === 0)&#123;</span><br>　console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">i</span>)<br>　&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰練習：印出-1-100-的奇數"><a href="#實戰練習：印出-1-100-的奇數" class="headerlink" title="實戰練習：印出 1-100 的奇數"></a>實戰練習：印出 1-100 的奇數</h3><p>利用「縮排」來標明條件判斷的區塊，較容易閱讀分析。</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1.</span> <span class="hljs-keyword">for</span> (i <span class="hljs-keyword">from</span> <span class="hljs-number">1</span> to <span class="hljs-number">100</span>) <span class="hljs-keyword">do</span><br><span class="hljs-number">2.</span>　<span class="hljs-keyword">if</span> (i mod <span class="hljs-number">2</span> === <span class="hljs-number">1</span>) then　<span class="hljs-comment">//　mod（modulo）：取餘數，餘數為 1 代表為奇數</span><br><span class="hljs-number">3.</span>　　print i<br><span class="hljs-number">4.</span>　end <span class="hljs-keyword">if</span><br><span class="hljs-number">5.</span> end <span class="hljs-keyword">for</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰練習：fiszz-buzz"><a href="#實戰練習：fiszz-buzz" class="headerlink" title="實戰練習：fiszz buzz"></a>實戰練習：fiszz buzz</h3><p>題目：<br>給一個數字 n<br>印出 1~n<br>但如果碰到 3 的倍數，改印 Fizz<br>碰到 5 的倍數，，改印 Buzz<br>若同時是 3 跟 5 的倍數，印 FizzBuzz</p>
+<p>範例：n=7</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br>Fizz<br><span class="hljs-number">4</span><br>Buzz<br>Fizz<br><span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
+
+<p>基本解法：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">for</span> (i <span class="hljs-keyword">from</span> <span class="hljs-number">1</span> to n) <span class="hljs-keyword">do</span>　　<span class="hljs-comment">//　先寫出 1~n的迴圈</span><br><span class="hljs-keyword">if</span>　(i % <span class="hljs-number">15</span> === <span class="hljs-number">0</span>) print “FizzBuzz”<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> === <span class="hljs-number">0</span>) print “Fizz”<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> === <span class="hljs-number">0</span>) print “Buzz”<br>end <span class="hljs-keyword">for</span><br></code></pre></td></tr></table></figure>
+
+<p>但此解<a href="">並非最佳解法</a>，若條件多 7 的倍數或更多，需要考慮的條件判斷也更複雜。</p>
+<h3 id="實戰練習：找最小值"><a href="#實戰練習：找最小值" class="headerlink" title="實戰練習：找最小值"></a>實戰練習：找最小值</h3><p>題目：<br>假設今天有一副撲克牌<br>一次只能看一張牌<br>要怎麼找到最小的牌？</p>
+<p>解法（虛擬碼）：</p>
+<figure class="highlight fsharp"><table><tr><td class="code"><pre><code class="hljs fsharp"><span class="hljs-keyword">let</span> 最小的牌 = 第一張牌<br><span class="hljs-keyword">for</span> (i from <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> n) <span class="hljs-keyword">do</span>　　　<span class="hljs-comment">//　n為撲克牌總數</span><br>翻開第 i 張牌<br><span class="hljs-keyword">if</span> (第 i 張排比最小牌的還小) <span class="hljs-keyword">do</span><br>最小的牌 = 第 i 張牌<br><span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span><br><span class="hljs-keyword">end</span> <span class="hljs-keyword">for</span><br></code></pre></td></tr></table></figure>
+
+<p>將上述解法翻譯成陣列：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><code class="hljs livecodeserver">let <span class="hljs-built_in">min</span> = arr[<span class="hljs-number">0</span>]<span class="hljs-comment">　//　min是陣列中最小值，0代表array第一個元素</span><br><span class="hljs-keyword">for</span> (i <span class="hljs-built_in">from</span> <span class="hljs-number">0</span> <span class="hljs-built_in">to</span> n<span class="hljs-number">-1</span>) <span class="hljs-built_in">do</span>　<span class="hljs-comment">　//　n-1：因為array的 index（索引）所以從 0 開始</span><br><span class="hljs-keyword">if</span> (arr[i] &lt; <span class="hljs-built_in">min</span>) <span class="hljs-built_in">do</span>　<span class="hljs-comment">　//　如果第 i 個元素比最小值還小　</span><br><span class="hljs-built_in">min</span> = arr[i]　<span class="hljs-comment">　//　i 就變成最小值</span><br><span class="hljs-keyword">end if</span><br><span class="hljs-function"><span class="hljs-keyword">end</span> <span class="hljs-title">for</span></span><br></code></pre></td></tr></table></figure>
+
+<p>延伸閱讀：<br><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BCZWFyXy8lRTclQjAlQTElRTUlOTYlQUUlRTclOUElODQtZml6emJ1enotJUU4JTk3JThGJUU2JTlDJTg5LSVFNiVCNyVCMSVFNSVCQSVBNi1nb29nbGUtJUU5JTlEJUEyJUU4JUE5JUE2JUU5JUExJThDLWY1ZTY2ZTNhOTdiZQ==">簡單的 FizzBuzz 藏有 深度(google 面試題)<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFOCVBQSVCMiVFNyVBOCU4QiVFNSVBRCVCOCVFNyVCRiU5MiVFNyVBRCU4NiVFOCVBOCU5OC0lRTUlODUlODglRTUlODglQTUlRTYlODAlQTUlRTglOTElOTclRTUlQUYlQUItbGVldGNvZGUtJUU0JUI4JTgwJUU2JUFEJUE1JUU2JUFEJUE1JUU2JTg5JTkzJUU5JTgwJUEwJUU3JUE4JThCJUU1JUJDJThGJUU4JTg1JUE2LTdlZDEyYWFhNGEzZA==">[課程學習筆記 ]先別急著寫 leetcode — 一步步打造程式腦<i class="fa fa-external-link-alt"></i></span></p>
+<hr>
+<h2 id="學會像電腦一樣思考"><a href="#學會像電腦一樣思考" class="headerlink" title="學會像電腦一樣思考"></a>學會像電腦一樣思考</h2><p>寫程式之前，先學會「看程式」，所謂的看程式碼 = 理解程式碼如何運作。</p>
+<h3 id="以陣列加總的虛擬碼為例"><a href="#以陣列加總的虛擬碼為例" class="headerlink" title="以陣列加總的虛擬碼為例"></a>以陣列加總的虛擬碼為例</h3><figure class="highlight livecodeserver"><table><tr><td class="code"><pre><code class="hljs livecodeserver">let <span class="hljs-built_in">sum</span> = <span class="hljs-number">0</span>　　<br><span class="hljs-keyword">for</span> (i <span class="hljs-built_in">from</span> <span class="hljs-number">0</span> <span class="hljs-built_in">to</span> n<span class="hljs-number">-1</span>) <span class="hljs-built_in">do</span><br>    <span class="hljs-built_in">sum</span> += arr[i]　　<br><span class="hljs-function"><span class="hljs-keyword">end</span> <span class="hljs-title">for</span></span><br>print <span class="hljs-built_in">sum</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>看懂程式碼：</li>
+</ul>
+<ol>
+<li>假設 array 為 [1, 2, 3]，代表陣列長度 n = 3</li>
+<li>設 sum = 0</li>
+<li>讓 i 從 0 跑到 n-1（也就是 2）</li>
+<li>i 現在是 0</li>
+<li>sum += arr[0]，sum 變成 1</li>
+<li>下一個迴圈</li>
+<li>i 現在是 1</li>
+<li>sum += arr[1]，sum 變成 1+2 = 3</li>
+<li>下一個迴圈</li>
+<li>i 現在是 2</li>
+<li>sum += arr[2]，sum 變成 3+3 = 6</li>
+<li>下一個迴圈</li>
+<li>i 現在是 3，超出 n-1，結束</li>
+<li>輸出 sum</li>
+</ol>
+<h3 id="人體編譯器"><a href="#人體編譯器" class="headerlink" title="人體編譯器"></a>人體編譯器</h3><p>編譯（Compile）：將高階語言所編寫的原始程式，透過編譯器（Compiler）轉成機械碼。</p>
+<h3 id="以找最大值為例"><a href="#以找最大值為例" class="headerlink" title="以找最大值為例"></a>以找最大值為例</h3><ul>
+<li>翻譯虛擬碼：</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><code class="hljs livecodeserver">let <span class="hljs-built_in">max</span> = arr[<span class="hljs-number">0</span>]<br><span class="hljs-keyword">for</span> (i <span class="hljs-built_in">from</span> <span class="hljs-number">0</span> <span class="hljs-built_in">to</span> n<span class="hljs-number">-1</span>) <span class="hljs-built_in">do</span><br>    <span class="hljs-keyword">if</span> (arr[i] &gt; <span class="hljs-built_in">max</span>) <span class="hljs-built_in">do</span><br>        <span class="hljs-built_in">max</span> = arr[i]<br>    <span class="hljs-keyword">end if</span><br><span class="hljs-function"><span class="hljs-keyword">end</span> <span class="hljs-title">for</span></span><br>print <span class="hljs-built_in">max</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>假設 arr 為 [2, 7, 5]</li>
+<li>設 max 為 arr[0]，也就是 2</li>
+<li>讓 i 從 0 跑到 2</li>
+<li>i 現在是 0</li>
+<li>判斷 arr[0] 是否 &gt;2</li>
+<li>不是</li>
+<li>下一個迴圈</li>
+<li>i 現在是 1</li>
+<li>判斷 arr[1] 是否 &gt; 2</li>
+<li>是，設 max = arr[2]，也就是 7</li>
+<li>下一個迴圈</li>
+<li>i 現在是 2</li>
+<li>判斷 arr[2] 是否 &gt; 7</li>
+<li>不是</li>
+<li>下一個迴圈</li>
+<li>i 現在是 3，超出條件，結束</li>
+<li>輸出 max</li>
+</ol>
+<p>接著翻譯真的程式碼（JavaScript）：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> max = arr[<span class="hljs-number">0</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>  <span class="hljs-comment">//　i=0 為初始條件；終止條件；每圈執行完 i+=1</span><br>  <span class="hljs-keyword">if</span> (arr[i] &gt; max) &#123;<br>    max = arr[i];<br>  &#125;<br>&#125;<br><span class="hljs-built_in">console</span>.log(max);<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>假設 arr 為 [2, 7, 5]</li>
+<li>設 max 為 arr[0]，也就是 2</li>
+<li>讓 i 從 0 跑到 2</li>
+<li>i 現在是 0</li>
+<li>判斷 arr[0] 是否 &gt;2</li>
+<li>不是</li>
+<li>下一個迴圈</li>
+<li>i 現在是 1</li>
+<li>判斷 arr[1] 是否 &gt; 2</li>
+<li>是，設 max = arr[2]，也就是 7</li>
+<li>下一個迴圈</li>
+<li>i 現在是 2</li>
+<li>判斷 arr[2] 是否 &gt; 7</li>
+<li>不是</li>
+<li>下一個迴圈</li>
+<li>i 現在是 3，超出條件，結束</li>
+<li>輸出 max</li>
+</ol>
+<blockquote>
+<p>重點：當不知道程式碼錯在哪時，可以一行一行檢視程式碼，驗證程式碼是否符合實際想表達的。</p>
+</blockquote>
+<hr>
+<h2 id="Debug-神器：Debugger（偵錯）"><a href="#Debug-神器：Debugger（偵錯）" class="headerlink" title="Debug 神器：Debugger（偵錯）"></a>Debug 神器：Debugger（偵錯）</h2><p>利用 Chrome Devtool（開發者工具）Debugger，直接設置中斷點（break point），一行一行執行程式碼以找出除錯範圍。</p>
+<h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><ol>
+<li>將程式碼貼到一個 html 檔案</li>
+<li>在 <code>&lt;script&gt;</code> 標籤（以執行 JavaScript）底下加上 <code>debugger</code></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">&lt;script&gt;<br><span class="hljs-keyword">debugger</span><br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">let</span> max = arr[<span class="hljs-number">0</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>; i&lt;arr.length; i++) &#123;　<br>    <span class="hljs-keyword">if</span> (arr[i] &gt; max) &#123;<br>      max = arr[i];<br>    &#125;<br>&#125;<br><span class="hljs-built_in">console</span>.log(max);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>用 Chrome 開啟檔案，以開發者工具進行檢視，在 Sources 欄位點選 Step（F9），即可一步一步執行程式碼，進行除錯</li>
+</ol>
+<p><img src="https://i.imgur.com/lLFpAEk.png"></p>
+<h2 id="Log-大法"><a href="#Log-大法" class="headerlink" title="Log 大法"></a>Log 大法</h2><p>另一個 debug 的方法，也就是「log 加好加滿」，透過 log 可以得知每個階段的值。</p>
+<p>舉例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">&lt;script&gt;<br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">let</span> max = arr[<span class="hljs-number">0</span>];<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;max:&#x27;</span>, max)<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>; i&lt;arr.length; i++) &#123;　<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;i=&#x27;</span>, i, <span class="hljs-string">&#x27;arr[i]=&#x27;</span>, arr[i])<br>    <span class="hljs-keyword">if</span> (arr[i] &gt; max) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;found new max!&#x27;</span>)<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;arr[i]:&#x27;</span>, arr[i], <span class="hljs-string">&#x27;old max:&#x27;</span>, max)<br>      max = arr[i];<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;new max:&#x27;</span>, max)<br>    &#125;<br>&#125;<br><span class="hljs-built_in">console</span>.log(max);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>檢視 console 欄位結果如下，可以檢視程式碼運作是否和所想的相同，是否有進入迴圈等等。</p>
+<p><img src="https://i.imgur.com/5jJvOFQ.png"></p>
+<h3 id="補充：為什麼用-console-log-印出來的值和想像中不一樣？"><a href="#補充：為什麼用-console-log-印出來的值和想像中不一樣？" class="headerlink" title="補充：為什麼用 console.log 印出來的值和想像中不一樣？"></a>補充：為什麼用 console.log 印出來的值和想像中不一樣？</h3><p>舉例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">&lt;script&gt;<br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>];　　<span class="hljs-comment">//　[2, 7 , 5]</span><br><span class="hljs-keyword">let</span> max = arr[<span class="hljs-number">0</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>; i&lt;arr.length; i++) &#123;　<br>    <span class="hljs-keyword">if</span> (arr[i] &gt; max) &#123;<br>      max = arr[i];<br>    &#125;<br>&#125;<br>arr.push(<span class="hljs-number">3</span>);　　<span class="hljs-comment">//　[2, 7 , 5, 3] 註解是 Chrome 認為的 log</span><br><span class="hljs-built_in">console</span>.log(max);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>前後 <code>arr</code> 均為同一個變數，而 Chrome 會顯示該數最新儲存的值（抓取當下時間點的 log），而不是該 log 時間點的值。這個問題會出現在陣列和物件上。</p>
+<h4 id="解決方法："><a href="#解決方法：" class="headerlink" title="解決方法："></a>解決方法：</h4><p>利用 <code>JSON.stringify()</code> 將陣列或物件轉成「字串」印出，也就是深拷貝（Deep Copy）。</p>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS50dy92b2ljZS8xMDY2MzU=">從 Debugger 學除錯<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudWRlbXkuY29tL2NvdXJzZS9jaHJvbWUtZGV2dG9vbHMv">六角學院 — Chrome 網頁除錯功能大解密<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAyMC8wMy8yMy9jb25zb2xlLWxvZy1idWcv">你需要注意的 console.log 問題<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sYXJyeTg1MDgwNi5naXRodWIuaW8vMjAxNi8wOS8yMC9zaGFsbG93LXZzLWRlZXAtY29weS8=">[Javascript] 關於 JS 中的淺拷貝和深拷貝<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<hr>
+<h2 id="解題前需注意「輸入範圍」"><a href="#解題前需注意「輸入範圍」" class="headerlink" title="解題前需注意「輸入範圍」"></a>解題前需注意「輸入範圍」</h2><p>在開始寫程式碼之前，必須注意輸入範圍，因為「不同範圍可能有不同限制」，而範圍會決定解題方法。比如說排列一百萬個數字跟排序十個數字，用的方法會不相同。</p>
+<p>在不同限制中，需注意可能會遇到下列幾種狀況：</p>
+<h3 id="1-空間限制"><a href="#1-空間限制" class="headerlink" title="1. 空間限制"></a>1. 空間限制</h3><p>首先，對空間有個概念：</p>
+<p>int: 4 bytes<br>double: bytes<br>JS 中的 Number: 8 bytes</p>
+<p>由此可推算出，一百萬個數字所需記憶體：</p>
+<p>(8 * 1e6 / 1024) = 7812 KB = 7.6 MB</p>
+<p>那麼，十億個數字所需記憶體：</p>
+<p>(8 * 1e8 / 1024) = 781200 KB = 7600 MB = 7.4 GB</p>
+<p>由估算過程可知，我們不可能在程式語言中，宣告一個十億個元素儲存在陣列。<br>勢必得用其他方法，比如把排列好的數字先放在其他檔案等等。</p>
+<h3 id="2-時間限制"><a href="#2-時間限制" class="headerlink" title="2. 時間限制"></a>2. 時間限制</h3><p>對初學題目來說不太重要（先求有再求好），之後會再來談 big O，用來估算時間。</p>
+<h3 id="3-型態限制"><a href="#3-型態限制" class="headerlink" title="3. 型態限制"></a>3. 型態限制</h3><ul>
+<li>int：-214783648 ~ 2147483648</li>
+<li>JS 數字： Number.MAX_SAFE_INTEGER：JavaScript 能儲存的最大值為 16 位數字，在超過這個範圍的運算可能會有誤差，例如：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">Number.MAX_SAFE_INTEGER</span> <span class="hljs-string">+</span> <span class="hljs-number">2</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">Number.MAX_SAFE_INTEGER</span> <span class="hljs-string">+</span> <span class="hljs-number">1</span><br><span class="hljs-string">//</span> <span class="hljs-literal">false</span><br><span class="hljs-string">Number.MAX_SAFE_INTEGER</span> <span class="hljs-string">+</span> <span class="hljs-number">2</span> <span class="hljs-string">===</span> <span class="hljs-string">Number.MAX_SAFE_INTEGER</span> <span class="hljs-string">+</span> <span class="hljs-number">1</span><br><span class="hljs-string">//</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>浮點數精準度問題：這和電腦底層儲存數字的方式有關，許多程式語言都會有這個現象</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><code class="hljs yaml"><span class="hljs-number">0.1</span> <span class="hljs-string">+</span> <span class="hljs-number">0.2</span> <span class="hljs-string">===</span> <span class="hljs-number">0.3</span><br><span class="hljs-string">//</span> <span class="hljs-literal">false</span><br><span class="hljs-string">//</span> <span class="hljs-number">0.1</span> <span class="hljs-string">+</span> <span class="hljs-number">0.2</span> <span class="hljs-string">會印出的值為</span> <span class="hljs-number">0.30000000000000004</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>把範圍講清楚的題目，才是好題目。<br>沒有的話就問清楚！因為範圍決定解決的方法。</p>
+</blockquote>
+<hr>
+<h2 id="解題技巧：函式填空法"><a href="#解題技巧：函式填空法" class="headerlink" title="解題技巧：函式填空法"></a>解題技巧：函式填空法</h2><blockquote>
+<p>目的：簡化雙層迴圈，也就是切割問題。</p>
+</blockquote>
+<h3 id="判斷質數"><a href="#判斷質數" class="headerlink" title="判斷質數"></a>判斷質數</h3><p>以「<span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyMA==">如何判斷質數<i class="fa fa-external-link-alt"></i></span>」為例：</p>
+<blockquote>
+<p>印出陣列中的質數 = 印出陣列 + 質數</p>
+</blockquote>
+<p>Step 1. 簡化問題：不知道怎麼寫的部分，先寫成函式 isPrime</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 第一部分：主要邏輯</span><br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>  <span class="hljs-keyword">if</span> (isPrime(arr[i])) &#123;<br>    <span class="hljs-comment">// 變成函式：如果 arr[i] 是質數</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Prime&quot;</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Composite&quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-comment">// TO DO</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Step 2. 實作判斷質數邏輯</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 第二部分：輔助函式</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// 1 不是函式，先去除</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>    <span class="hljs-keyword">if</span> (n % i === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 注意放在迴圈外，前面都不符合，才符合質數</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Step 3. 合併結果</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>    <span class="hljs-keyword">if</span> (n % i === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>  <span class="hljs-keyword">if</span> (isPrime(arr[i])) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Prime&quot;</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Composite&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>試著把 function 加回去，程式碼會複雜很多：</p>
+<p>Step 1. 把函式拿掉，維持主要邏輯不便</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>  <span class="hljs-keyword">let</span> isPrime = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">if</span> (isPrime) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Prime&quot;</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Composite&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Step 2. 加上判斷質數程式碼</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 雙層迴圈</span><br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;n; i++) &#123;<br>  <span class="hljs-keyword">let</span> isPrime = <span class="hljs-literal">true</span><br>  <span class="hljs-keyword">if</span> (arr[i] === <span class="hljs-number">1</span>) &#123;<br>    isPrime = <span class="hljs-literal">false</span><br>  &#125;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">var</span> j=<span class="hljs-number">2</span>; j&lt;arr[i]; j++) &#123;         <span class="hljs-comment">// 用 j 表示，是因為前面已出現變數 i</span><br>    <span class="hljs-keyword">if</span> (arr[i] % j === <span class="hljs-number">0</span>) &#123;<br>      is Prime = <span class="hljs-literal">false</span><br>      <span class="hljs-keyword">break</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (isPrime) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Prime&quot;</span>)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Composite&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="解題技巧：簡化法"><a href="#解題技巧：簡化法" class="headerlink" title="解題技巧：簡化法"></a>解題技巧：簡化法</h2><h3 id="印出星星"><a href="#印出星星" class="headerlink" title="印出星星"></a>印出星星</h3><p>以「<span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyMQ==">如何印出好多星星<i class="fa fa-external-link-alt"></i></span>」為例：</p>
+<blockquote>
+<p>目的：把大問題變成小問題。如果難的寫不出來，就先寫簡單的。</p>
+</blockquote>
+<p>Step 1. 不會輸出 n 個星星，就先輸出一個就好</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= N; i += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;*&quot;</span>);<br>&#125;<br><span class="hljs-comment">// 印出每行都有 *</span><br></code></pre></td></tr></table></figure>
+
+<p>Step 2. 搭配函式填空法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= N; i += <span class="hljs-number">1</span>) &#123;<br>  printStar(i);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printStar</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 印出 n 個星星</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Step 3. 利用迴圈重複加上星星</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= N; i += <span class="hljs-number">1</span>) &#123;<br>  printStar(i);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printStar</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> s = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    s += <span class="hljs-string">&quot;*&quot;</span>;<br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(s);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可直接利用 <code>repeat</code> 函式來解題：</p>
+<h3 id="實戰：印出金字塔"><a href="#實戰：印出金字塔" class="headerlink" title="實戰：印出金字塔"></a>實戰：印出金字塔</h3><p>預期輸出：</p>
+<p>n = 1</p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><code class="hljs gams"><span class="hljs-comment">*</span><br></code></pre></td></tr></table></figure>
+
+<p>n = 2</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><code class="hljs stata"><span class="hljs-comment"> *</span><br><span class="hljs-comment">***</span><br></code></pre></td></tr></table></figure>
+
+<p>n = 3</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><code class="hljs markdown">  <span class="hljs-emphasis">*</span><br><span class="hljs-emphasis"> <span class="hljs-strong">**<span class="hljs-emphasis">*</span></span></span><br><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">****</span>*</span></span></span><br></code></pre></td></tr></table></figure>
+
+<p>根據觀察可知規律為：</p>
+<ol>
+<li>一共有 n 層</li>
+<li>第 i 層會有 2i -1 個星星</li>
+<li>星星會置中</li>
+<li>需要 n - i 個空白</li>
+</ol>
+<p>接著利用函式填空法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>  printLayer(i, n);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printLayer</span>(<span class="hljs-params">i, n</span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>加上一個輔助的函式：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">repeat</span>(<span class="hljs-params">str, n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> s = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    s += str;<br>  &#125;<br>  <span class="hljs-keyword">return</span> s;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>再按照規律把答案填上去：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>  printLayer(i, n);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printLayer</span>(<span class="hljs-params">i, n</span>) </span>&#123;<br>  <span class="hljs-comment">// 空白 + 星星</span><br>  <span class="hljs-keyword">let</span> str = repeat(<span class="hljs-string">&quot; &quot;</span>, n - i) + repeat(<span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-number">2</span> * i - <span class="hljs-number">1</span>);<br>  <span class="hljs-built_in">console</span>.log(str);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">repeat</span>(<span class="hljs-params">str, n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> s = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    s += str;<br>  &#125;<br>  <span class="hljs-keyword">return</span> s;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰：九九乘法表"><a href="#實戰：九九乘法表" class="headerlink" title="實戰：九九乘法表"></a>實戰：九九乘法表</h3><p>預期輸出：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><code class="hljs angelscript"><span class="hljs-number">1</span>*<span class="hljs-number">1</span>=<span class="hljs-number">1</span><br><span class="hljs-number">1</span>*<span class="hljs-number">2</span>=<span class="hljs-number">2</span><br>...<br><span class="hljs-number">1</span>*<span class="hljs-number">9</span>=<span class="hljs-number">9</span><br><span class="hljs-number">2</span>*<span class="hljs-number">1</span>=<span class="hljs-number">2</span><br>...<br><span class="hljs-number">9</span>*<span class="hljs-number">9</span>=<span class="hljs-number">81</span><br></code></pre></td></tr></table></figure>
+
+<p>首先用簡化法，產生 <code>1*1 ~ 1*9</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;1*&#x27;</span> + i <span class="hljs-string">&#x27;=&#x27;</span> + <span class="hljs-number">1</span>*i )<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>包成函式，把 1 換成 k：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printTable</span>(<span class="hljs-params">k</span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(k + <span class="hljs-string">&#x27;*&#x27;</span> + i + <span class="hljs-string">&#x27;=&#x27;</span> + k*i )<br>  &#125;<br>&#125;<br><br>printTable(<span class="hljs-number">1</span>)<br>printTable(<span class="hljs-number">2</span>)<br>...<br>printTable(<span class="hljs-number">9</span>)<br><span class="hljs-comment">// 即可產生九九乘法表</span><br></code></pre></td></tr></table></figure>
+
+<p>其實就是再一個迴圈：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printTable</span>(<span class="hljs-params">k</span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(k + <span class="hljs-string">&quot;*&quot;</span> + i + <span class="hljs-string">&quot;=&quot;</span> + k * i);<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 這個會產生 1~9</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k = <span class="hljs-number">1</span>; k &lt;= <span class="hljs-number">9</span>; k += <span class="hljs-number">1</span>) &#123;<br>  printTable(k);<br>&#125;<br><span class="hljs-comment">// 結果：產生 1*1~9*9</span><br></code></pre></td></tr></table></figure>
+
+<p>但總有一天要學會雙層迴圈，試著把上面的寫法合併：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 這個產生 1~9</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k = <span class="hljs-number">1</span>; k &lt;= <span class="hljs-number">9</span>; k += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-comment">// 這個也產生 1~9</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(k + <span class="hljs-string">&quot;*&quot;</span> + i + <span class="hljs-string">&quot;=&quot;</span> + k * i);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我們可以利用 Debugger 來觀察雙層迴圈如何執行。也就是先執行外層迴圈第一圈，然後進入內層迴圈第一到九圈，執行完再回到外層迴圈第二圈，依序執行下去，用文字表示如下：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">k</span>=1 <span class="hljs-attribute">i</span>=1, 2, 3<span class="hljs-built_in">..</span>.9<br><span class="hljs-attribute">k</span>=2 <span class="hljs-attribute">i</span>=1, 2, 3<span class="hljs-built_in">..</span>.9<br><span class="hljs-attribute">k</span>=3 <span class="hljs-attribute">i</span>=1, 2, 3<span class="hljs-built_in">..</span>.9<br><span class="hljs-built_in">..</span>.<br><span class="hljs-attribute">k</span>=9 <span class="hljs-attribute">i</span>=1, 2, 3<span class="hljs-built_in">..</span>.9<br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰：印出-1-100-平方數"><a href="#實戰：印出-1-100-平方數" class="headerlink" title="實戰：印出 1~100 平方數"></a>實戰：印出 1~100 平方數</h3><p>簡化法：先印出 1~100</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-built_in">console</span>.log(i);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>搭配函式填空法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-keyword">if</span> (isSquare) &#123;<br>    <span class="hljs-built_in">console</span>.log(i);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isSquare</span>(<span class="hljs-params">n</span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>那麼，該如何判斷平方數呢？</p>
+<p>開根號：<code>Math.sqrt(n)</code><br>無條件捨去：<code>Math.floor(n)</code></p>
+<p>將 n 開根號後得到的數字，無條件捨去後再相乘，若還是等於 n 則為平方數。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i += <span class="hljs-number">1</span>) &#123;<br>  <span class="hljs-keyword">if</span> (isSquare) &#123;<br>    <span class="hljs-built_in">console</span>.log(i);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isSquare</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> root = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.sqrt(n));<br>  <span class="hljs-keyword">return</span> root * root === n; <span class="hljs-comment">// 成立得到 true；反之得到 false</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另一種想法：印出平方數，直到超過 100 為止。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (i * i &lt;= <span class="hljs-number">100</span>) &#123;<br>  <span class="hljs-built_in">console</span>.log(i * i);<br>  i += <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="作業檢討：印出聖誕樹"><a href="#作業檢討：印出聖誕樹" class="headerlink" title="作業檢討：印出聖誕樹"></a>作業檢討：印出聖誕樹</h3><p><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyMz9fZ2E9Mi4xMDUwMjg2MTEuMTI5MTEyODE0Mi4xNTkzMjcxMzU3LTE5NzcyNzc5MzEuMTU5MDMzODU5Ng==">LIOJ 1023：印出聖誕樹<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;readline&quot;</span>);<br><br><span class="hljs-keyword">const</span> rl = readline.createInterface(&#123;<br>  input: process.stdin,<br>&#125;);<br><br><span class="hljs-keyword">const</span> lines = [];<br><br><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&quot;line&quot;</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> &#123;<br>  lines.push(line);<br>&#125;);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; n; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (n % i === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    printTree(i, n);<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n - <span class="hljs-number">1</span>; i += <span class="hljs-number">1</span>) &#123;<br>    printBottom(n);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printTree</span>(<span class="hljs-params">i, n</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(repeat(<span class="hljs-string">&quot; &quot;</span>, n - i) + repeat(<span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-number">2</span> * i - <span class="hljs-number">1</span>));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printBottom</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(repeat(<span class="hljs-string">&quot; &quot;</span>, n - <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;|&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">repeat</span>(<span class="hljs-params">str, n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    result += str;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 輸入結束，開始針對 lines 做處理</span><br>rl.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  solve(lines);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="作業檢討：NN-乘法表"><a href="#作業檢討：NN-乘法表" class="headerlink" title="作業檢討：NN 乘法表"></a>作業檢討：NN 乘法表</h3><p><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyND9fZ2E9Mi4xMDk2Mjk0NDUuMTI5MTEyODE0Mi4xNTkzMjcxMzU3LTE5NzcyNzc5MzEuMTU5MDMzODU5Ng==">LIOJ 1024：NN 乘法表<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;readline&quot;</span>);<br><br><span class="hljs-keyword">const</span> rl = readline.createInterface(&#123;<br>  input: process.stdin,<br>&#125;);<br><br><span class="hljs-keyword">const</span> lines = [];<br><br><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&quot;line&quot;</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> &#123;<br>  lines.push(line);<br>&#125;);<br><br><span class="hljs-comment">// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> N = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> M = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">1</span>]);<br>  <span class="hljs-comment">// 產生 1~N</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k = <span class="hljs-number">1</span>; k &lt;= N; k += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 產生 1~M</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= M; i += <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-built_in">console</span>.log(k + <span class="hljs-string">&quot;*&quot;</span> + i + <span class="hljs-string">&quot;=&quot;</span> + k * i);<br>      <span class="hljs-comment">// 也可寫成 console.log(`$&#123;k&#125;*$&#123;i&#125;=$&#123;k*i&#125;`)</span><br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 輸入結束，開始針對 lines 做處理</span><br>rl.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  solve(lines);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="作業檢討：水仙花數"><a href="#作業檢討：水仙花數" class="headerlink" title="作業檢討：水仙花數"></a>作業檢討：水仙花數</h3><p><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyNT9fZ2E9Mi4xMDk2Mjk0NDUuMTI5MTEyODE0Mi4xNTkzMjcxMzU3LTE5NzcyNzc5MzEuMTU5MDMzODU5Ng==">LIOJ 1025：水仙花數<i class="fa fa-external-link-alt"></i></span></p>
+<p>水仙花數（Narcissistic number）定義為：「一個 n 位數的數字，每一個數字的 n 次方加總等於自身」。</p>
+<p>例如說 153 是三位數，而 1^3 + 5^3 + 3^3 = 153。<br>而數字 0~9 也都是水仙花數，因為一位數 n 的 1 次方一定會等於自己。</p>
+<p>解題難點：</p>
+<ol>
+<li>如何判斷幾位數</li>
+<li>如何取出各個數字</li>
+</ol>
+<p>可直接判斷該數字是幾位數，但這個方法侷限於「需已知輸入範圍」，也就是必須知道有幾位數：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 回傳數字幾位數</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">digitsCount</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">10</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">1e2</span>) &#123;         <span class="hljs-comment">// 1e2 代表 100 科學記號寫法</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">1e3</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span><br>  &#125; ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如何判斷幾位數：一直 <code>/ 10</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 回傳數字幾位數</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">digitsCount</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>    n = <span class="hljs-built_in">Math</span>.floor(n / <span class="hljs-number">10</span>); <span class="hljs-comment">// 無條件捨去</span><br>    result += <span class="hljs-number">1</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>取出各個數字：<code>% 10</code> 搭配 <code>/ 10</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isNarcissistic</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-comment">// 幾位數，宣告一個 m = n</span><br>  <span class="hljs-keyword">let</span> m = n<br>  <span class="hljs-keyword">let</span> digits = digitsCount(m)<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span><br><br>  <span class="hljs-keyword">while</span> (m != <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">let</span> num = m % <span class="hljs-number">10</span><br>    <span class="hljs-comment">// 可改成 Math.pow(num, digits) =&gt; num 的 digits 次方</span><br>    sum += num**digits<br>    m = <span class="hljs-built_in">Math</span>.floor(m / <span class="hljs-number">10</span>)<br>  &#125;<br><br>  <span class="hljs-comment">// 可簡化成：return sum === n</span><br>  <span class="hljs-keyword">if</span> (sum === n) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 應用上方兩個函式即可完成輸出</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-comment">// 輸入 5 200 =&gt; [&#x27;5&#x27;, &#x27;200&#x27;]</span><br>  <span class="hljs-keyword">const</span> temp = input[<span class="hljs-number">0</span>].split(<span class="hljs-string">&#x27; &#x27;</span>);<br>  <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> m = <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">1</span>]);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = n; i &lt;= m; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (isNarcissistic(i)) &#123;<br>      <span class="hljs-built_in">console</span>.log(i);<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可以把「數字轉成字串」，直接用字串來判斷幾位數：</p>
+<p>例如：</p>
+<figure class="highlight lsl"><table><tr><td class="code"><pre><code class="hljs lsl">&#x27;<span class="hljs-number">1234</span>&#x27;.length =&gt; <span class="hljs-number">4</span><br>&#x27;<span class="hljs-number">1234</span>&#x27;.[<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 實際操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isNstr</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-comment">// 數字 + 空字串 =&gt; 字串</span><br>  <span class="hljs-comment">// 或是 n.toString()、String(n)</span><br>  <span class="hljs-keyword">let</span> str = n + <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">let</span> digits = str.length<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; str.length;; i+= <span class="hljs-number">1</span>) &#123;<br>    sum += <span class="hljs-built_in">Number</span>(str[i])**digits<br>  &#125;<br>  <span class="hljs-keyword">return</span> sum === n<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰：判斷等差數列"><a href="#實戰：判斷等差數列" class="headerlink" title="實戰：判斷等差數列"></a>實戰：判斷等差數列</h3><p>判斷 [1, 3, 5, 7, 9] 是否為等差數列</p>
+<p>解題技巧：</p>
+<ol>
+<li>先求公差：<code>arr[1] - arr[0]</code></li>
+<li>再判斷 <code>arr[i] - arr[i-1]</code> 是否等於公差</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 判斷是否為等差數列</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isValid</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> d = arr[<span class="hljs-number">1</span>] - arr[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (arr[i] - arr[i - <span class="hljs-number">1</span>] !== d) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(isValid([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>])); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(isValid([<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>])); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(isValid([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>])); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+
+<p>解題時需考慮到 Edge case（邊緣條件）：</p>
+<ol>
+<li>空陣列</li>
+<li>只有一個元素的陣列</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isValid</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-comment">// 涵蓋邊界條件，可避免不合法的存取</span><br>  <span class="hljs-keyword">if</span> (arr.length &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>  <span class="hljs-keyword">let</span> d = arr[<span class="hljs-number">1</span>] - arr[<span class="hljs-number">0</span>]<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (arr[i] - arr[i-<span class="hljs-number">1</span>] !== d) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="實戰：數字位數加總"><a href="#實戰：數字位數加總" class="headerlink" title="實戰：數字位數加總"></a>實戰：數字位數加總</h3><p>與「判斷水仙花數」題型類似。</p>
+<p>解法一：數學解</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addDigits</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-comment">// 若 n 為負數，乘上 -1 變成正數</span><br>  <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) &#123;<br>    n = n * -<span class="hljs-number">1</span>;<br>  &#125;<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>    sum += n % <span class="hljs-number">10</span>;<br>    n = <span class="hljs-built_in">Math</span>.floor(n / <span class="hljs-number">10</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span> sum;<br>&#125;<br><span class="hljs-built_in">console</span>.log(addDigits(<span class="hljs-number">123</span>));<br></code></pre></td></tr></table></figure>
+
+<p>解法二：字串偷吃步</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addDigits</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> str = n + <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; str.length; i += <span class="hljs-number">1</span>) &#123;<br>    sum += <span class="hljs-built_in">Number</span>(str[i]);<br>  &#125;<br>  <span class="hljs-keyword">return</span> sum;<br>&#125;<br><span class="hljs-built_in">console</span>.log(addDigits(<span class="hljs-number">123</span>));<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="經典題型"><a href="#經典題型" class="headerlink" title="經典題型"></a>經典題型</h2><h3 id="LIOJ-1026：判斷等比數列"><a href="#LIOJ-1026：判斷等比數列" class="headerlink" title="LIOJ 1026：判斷等比數列"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyNg==">LIOJ 1026：判斷等比數列<i class="fa fa-external-link-alt"></i></span></h3><p>基本上和判斷等差數列作法類似：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;readline&quot;</span>);<br><br><span class="hljs-keyword">const</span> rl = readline.createInterface(&#123;<br>  input: process.stdin,<br>&#125;);<br><br><span class="hljs-keyword">const</span> lines = [];<br><br><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&quot;line&quot;</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> &#123;<br>  lines.push(line);<br>&#125;);<br><br><span class="hljs-comment">// 判斷等比數列</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inValid</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> r = arr[<span class="hljs-number">1</span>] / arr[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (arr[i] / arr[i - <span class="hljs-number">1</span>] !== r) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> arr = input[<span class="hljs-number">1</span>].split(<span class="hljs-string">&quot; &quot;</span>); <span class="hljs-comment">// [&#x27;3&#x27;, &#x27;9&#x27;, &#x27;27&#x27;] =&gt; 得到字串的陣列</span><br>  <span class="hljs-keyword">if</span> (inValid(arr)) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Yes&quot;</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;No&quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 輸入結束，開始針對 lines 做處理</span><br>rl.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  solve(lines);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1027：信用卡號驗證"><a href="#LIOJ-1027：信用卡號驗證" class="headerlink" title="LIOJ 1027：信用卡號驗證"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyNw==">LIOJ 1027：信用卡號驗證<i class="fa fa-external-link-alt"></i></span></h3><h3 id="LIOJ-1028：生命靈數"><a href="#LIOJ-1028：生命靈數" class="headerlink" title="LIOJ 1028：生命靈數"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyOA==">LIOJ 1028：生命靈數<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 與位數加總做法相同</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addDigits</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>    sum += n % <span class="hljs-number">10</span>;<br>    n = <span class="hljs-built_in">Math</span>.floor(n / <span class="hljs-number">10</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span> sum;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-comment">// [&#x27;1991 11 7&#x27;] = &gt; [&#x27;1991&#x27;, &#x27;11&#x27;, &#x27;7&#x27;]</span><br>  <span class="hljs-keyword">let</span> temp = input[<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot; &quot;</span>);<br>  <span class="hljs-comment">// 1991117</span><br>  <span class="hljs-keyword">let</span> num = <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">0</span>] + temp[<span class="hljs-number">1</span>] + temp[<span class="hljs-number">2</span>]);<br>  <span class="hljs-keyword">let</span> p = addDigits(num);<br>  <span class="hljs-comment">// 判斷是否不只一位</span><br>  <span class="hljs-keyword">while</span> (p &gt;= <span class="hljs-number">10</span>) &#123;<br>    p = addDigits(p);<br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(p);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1029：加減乘除"><a href="#LIOJ-1029：加減乘除" class="headerlink" title="LIOJ 1029：加減乘除"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAyOQ==">LIOJ 1029：加減乘除<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> temp = input[<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot; &quot;</span>); <span class="hljs-comment">// =&gt; [&#x27;3&#x27;, &#x27;*&#x27;, &#x27;4&#x27;]</span><br>  <span class="hljs-keyword">let</span> a = <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> b = <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">2</span>]);<br><br>  <span class="hljs-keyword">if</span> (temp[<span class="hljs-number">1</span>] === <span class="hljs-string">&quot;+&quot;</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(a + b);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (temp[<span class="hljs-number">1</span>] === <span class="hljs-string">&quot;-&quot;</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(a - b);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (temp[<span class="hljs-number">1</span>] === <span class="hljs-string">&quot;*&quot;</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(a * b);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 不是加減乘，就是除</span><br>    <span class="hljs-built_in">console</span>.log(a / b);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1030：判斷迴文"><a href="#LIOJ-1030：判斷迴文" class="headerlink" title="LIOJ 1030：判斷迴文"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzMA==">LIOJ 1030：判斷迴文<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 反過來輸出</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">str</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = str.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i -= <span class="hljs-number">1</span>) &#123;<br>    result += str[i];<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> str = input[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">if</span> (reverse(str) === str) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;True&quot;</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;False&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1031：完全平方和"><a href="#LIOJ-1031：完全平方和" class="headerlink" title="LIOJ 1031：完全平方和"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzMQ==">LIOJ 1031：完全平方和<i class="fa fa-external-link-alt"></i></span></h3><p>解一：找出比 N 小的完全平方數</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i * i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    result += i * i;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(square(<span class="hljs-number">30</span>));<br><span class="hljs-comment">// 印出 55，也就是 1+4+9+16+25 = 55</span><br></code></pre></td></tr></table></figure>
+
+<p>解二：判斷是否為完全平方數</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isSquare</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> r = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.sqrt(n));<br>  <span class="hljs-keyword">return</span> r * r === n;<br>&#125;<br><br><span class="hljs-comment">// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (isSquare(i)) &#123;<br>      sum += i;<br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(sum);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1032：平面距離計算"><a href="#LIOJ-1032：平面距離計算" class="headerlink" title="LIOJ 1032：平面距離計算"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzMg==">LIOJ 1032：平面距離計算<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">distance</span>(<span class="hljs-params">x1, y1, x2, y2</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> dis = <span class="hljs-built_in">Math</span>.sqrt(<br>    abs(x1 - x2) * abs(x1 - x2) + abs(y1 - y2) * abs(y1 - y2)<br>  );<br>  <span class="hljs-keyword">return</span> dis.toFixed(<span class="hljs-number">2</span>); <span class="hljs-comment">// 取到小數點第二位</span><br>&#125;<br><br><span class="hljs-comment">// 回傳絕對值</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">abs</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">return</span> -n;<br>  &#125;<br>  <span class="hljs-keyword">return</span> n;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> t = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= t; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">let</span> start = (i - <span class="hljs-number">1</span>) * <span class="hljs-number">4</span> + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">let</span> x1 = <span class="hljs-built_in">Number</span>(input[start]);<br>    <span class="hljs-keyword">let</span> y1 = <span class="hljs-built_in">Number</span>(input[start + <span class="hljs-number">1</span>]);<br>    <span class="hljs-keyword">let</span> x2 = <span class="hljs-built_in">Number</span>(input[start + <span class="hljs-number">2</span>]);<br>    <span class="hljs-keyword">let</span> y2 = <span class="hljs-built_in">Number</span>(input[start + <span class="hljs-number">3</span>]);<br>    <span class="hljs-built_in">console</span>.log(distance(x1, y1, x2, y2));<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1033：最近點對"><a href="#LIOJ-1033：最近點對" class="headerlink" title="LIOJ 1033：最近點對"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzMw==">LIOJ 1033：最近點對<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 利用平面距離計算得到的函式</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">distance</span>(<span class="hljs-params">x1, y1, x2, y2</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> dis = <span class="hljs-built_in">Math</span>.sqrt(<br>    abs(x1 - x2) * abs(x1 - x2) + abs(y1 - y2) * abs(y1 - y2)<br>  );<br>  <span class="hljs-keyword">return</span> dis; <span class="hljs-comment">// 取到小數點第二位</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">abs</span>(<span class="hljs-params">n</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">return</span> -n;<br>  &#125;<br>  <span class="hljs-keyword">return</span> n;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> dots = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">let</span> temp = input[i].split(<span class="hljs-string">&quot; &quot;</span>);<br>    dots.push(&#123;<br>      x: <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">0</span>]),<br>      y: <span class="hljs-built_in">Number</span>(temp[<span class="hljs-number">1</span>]),<br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-keyword">let</span> min = <span class="hljs-literal">Infinity</span>; <span class="hljs-comment">// 最短距離先設一個最大值</span><br>  <span class="hljs-keyword">let</span> ans = <span class="hljs-literal">null</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; dots.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = i + <span class="hljs-number">1</span>; j &lt; dots.length; j += <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-keyword">let</span> dis = distance(dots[i].x, dots[i].y, dots[j].x, dots[j].y);<br>      <span class="hljs-keyword">if</span> (dis &lt; min) &#123;<br>        min = dis;<br>        ans = &#123;<br>          x1: dots[i].x,<br>          y1: dots[i].y,<br>          x2: dots[j].x,<br>          y2: dots[j].y,<br>        &#125;;<br>      &#125;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (ans.x1 &gt; ans.x2) &#123;<br>    <span class="hljs-built_in">console</span>.log(ans.x2 + <span class="hljs-string">&quot; &quot;</span> + ans.y2);<br>    <span class="hljs-built_in">console</span>.log(ans.x1 + <span class="hljs-string">&quot; &quot;</span> + ans.y1);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ans.x1 &lt; ans.x2) &#123;<br>    <span class="hljs-built_in">console</span>.log(ans.x1 + <span class="hljs-string">&quot; &quot;</span> + ans.y1);<br>    <span class="hljs-built_in">console</span>.log(ans.x2 + <span class="hljs-string">&quot; &quot;</span> + ans.y2);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (ans.y1 &gt; ans.y2) &#123;<br>      <span class="hljs-built_in">console</span>.log(ans.x2 + <span class="hljs-string">&quot; &quot;</span> + ans.y2);<br>      <span class="hljs-built_in">console</span>.log(ans.x1 + <span class="hljs-string">&quot; &quot;</span> + ans.y1);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(ans.x1 + <span class="hljs-string">&quot; &quot;</span> + ans.y1);<br>      <span class="hljs-built_in">console</span>.log(ans.x2 + <span class="hljs-string">&quot; &quot;</span> + ans.y2);<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1034：凱薩加密"><a href="#LIOJ-1034：凱薩加密" class="headerlink" title="LIOJ 1034：凱薩加密"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzNA==">LIOJ 1034：凱薩加密<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 把字母右移 n 位</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ceaserCipher</span>(<span class="hljs-params">n, s</span>) </span>&#123;<br>  <span class="hljs-comment">// &#x27;a&#x27;.charCodeAt(0) = 97</span><br>  <span class="hljs-comment">// 減去 97，可得到數字 0 ~ 25</span><br>  <span class="hljs-keyword">let</span> code = s.charCodeAt() - <span class="hljs-number">97</span>;<br>  <span class="hljs-comment">// 英文字母有 26 個，當數字超過時，對編碼除 26 取餘數</span><br>  <span class="hljs-keyword">let</span> newCode = (code + n) % <span class="hljs-number">26</span>;<br>  <span class="hljs-comment">// 取得真正的編碼</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(newCode + <span class="hljs-number">97</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> str = input[<span class="hljs-number">1</span>];<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; str.length; i += <span class="hljs-number">1</span>) &#123;<br>    result += ceaserCipher(n, str[i]);<br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(result);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1046：圈圈叉叉"><a href="#LIOJ-1046：圈圈叉叉" class="headerlink" title="LIOJ 1046：圈圈叉叉"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzNQ==">LIOJ 1046：圈圈叉叉<i class="fa fa-external-link-alt"></i></span></h3><p>輸入範例：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">XXO</span><br><span class="hljs-attribute">OXX</span><br><span class="hljs-attribute">XOO</span><br></code></pre></td></tr></table></figure>
+
+<p>利用二維陣列的概念，可知：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">input[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;XXO&quot;</span>; <span class="hljs-comment">// 即 (0, i)</span><br>input[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;X&quot;</span>; <span class="hljs-comment">// 即 (0, 0)</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">whoWin</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-comment">// 判斷橫的三排</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (input[i][<span class="hljs-number">0</span>] === input[i][<span class="hljs-number">1</span>] &amp;&amp; input[i][<span class="hljs-number">1</span>] === input[i][<span class="hljs-number">2</span>]) &#123;<br>      <span class="hljs-keyword">return</span> input[i][<span class="hljs-number">0</span>];<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// 判斷直的三排</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (input[<span class="hljs-number">0</span>][i] === input[<span class="hljs-number">1</span>][i] &amp;&amp; input[<span class="hljs-number">1</span>][i] === input[<span class="hljs-number">2</span>][i]) &#123;<br>      <span class="hljs-keyword">return</span> input[<span class="hljs-number">0</span>][i];<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// 判斷斜對角</span><br>  <span class="hljs-keyword">if</span> (input[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] === input[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] &amp;&amp; input[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] === input[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]) &#123;<br>    <span class="hljs-keyword">return</span> input[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>  &#125;<br>  <span class="hljs-keyword">if</span> (input[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>] === input[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] &amp;&amp; input[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] === input[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>]) &#123;<br>    <span class="hljs-keyword">return</span> input[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>];<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;DRAW&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="作業-LIOJ-1004：聯誼順序比大小"><a href="#作業-LIOJ-1004：聯誼順序比大小" class="headerlink" title="作業 - LIOJ 1004：聯誼順序比大小"></a>作業 - <span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAwNA==">LIOJ 1004：聯誼順序比大小<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 判斷比大小</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compare</span>(<span class="hljs-params">a, b, k</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (a === b) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;DRAW&quot;</span>;<br>  &#125;<br><br>  <span class="hljs-comment">// 若比小，就將 a b 互換，注意 k 是字串不能用 ===</span><br>  <span class="hljs-keyword">if</span> (k == -<span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">const</span> temp = a;<br>    a = b;<br>    b = temp;<br>  &#125;<br><br>  <span class="hljs-comment">// 判斷字串長度是否相同</span><br>  <span class="hljs-comment">// 不同：比較字串長度</span><br>  <span class="hljs-keyword">if</span> (a.length &gt; b.length) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;A&quot;</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (a.length &lt; b.length) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;B&quot;</span>;<br>  &#125;<br><br>  <span class="hljs-comment">// 相同：從字串最左邊開始比大小</span><br>  <span class="hljs-keyword">if</span> (a.length === b.length) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; a.length; j += <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-comment">// 若相等，就繼續迴圈比下一位</span><br>      <span class="hljs-keyword">if</span> (a[j] === b[j]) &#123;<br>        <span class="hljs-keyword">continue</span>;<br>      &#125;<br>      <span class="hljs-keyword">if</span> (a[j] &gt; b[j]) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;A&quot;</span>;<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;B&quot;</span>;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> n = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br><br>  <span class="hljs-comment">// 長度為 512 個位數以內，不可轉成數字比大小</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= n; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 輸出會是陣列 =&gt; [1, 2, 1]</span><br>    <span class="hljs-keyword">let</span> [a, b, k] = input[i].split(<span class="hljs-string">&quot; &quot;</span>);<br>    <span class="hljs-built_in">console</span>.log(compare(a, b, k));<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="練習實作內建函式"><a href="#練習實作內建函式" class="headerlink" title="練習實作內建函式"></a>練習實作內建函式</h2><h3 id="LIOJ-1036：Array-reverse"><a href="#LIOJ-1036：Array-reverse" class="headerlink" title="LIOJ 1036：Array reverse"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzNg==">LIOJ 1036：Array reverse<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 反轉陣列</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = arr.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i -= <span class="hljs-number">1</span>) &#123;<br>    result.push(arr[i]); <span class="hljs-comment">// 反轉 =&gt; [3, 2, 1]</span><br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> numbers = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    numbers.push(input[i]); <span class="hljs-comment">// [1, 2, 3]</span><br>  &#125;<br>  <span class="hljs-comment">// 傳進 reverse 函式，並印出結果</span><br>  <span class="hljs-keyword">let</span> arr = reverse(numbers);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(arr[i]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可以直接在處理輸入後，直接輸出翻轉後的結果：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> numbers = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    numbers.push(input[i]); <span class="hljs-comment">// [1, 2, 3]</span><br>  &#125;<br><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = numbers.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i -= <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(numbers[i]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1037：Array-filter"><a href="#LIOJ-1037：Array-filter" class="headerlink" title="LIOJ 1037：Array filter"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzNw==">LIOJ 1037：Array filter<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 跳過不符合的數字</span><br>    <span class="hljs-keyword">if</span> (arr[i] == arr[<span class="hljs-number">0</span>]) &#123;<br>      <span class="hljs-keyword">continue</span>;<br>    &#125;<br>    result.push(arr[i]);<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> numbers = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    numbers.push(input[i]); <span class="hljs-comment">// [3, 5, 1, 3 , 3, 2, 8]</span><br>  &#125;<br>  <span class="hljs-comment">// 傳進 filter 函式，並印出結果</span><br>  <span class="hljs-keyword">let</span> arr = filter(numbers);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(arr[i]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>或利用回傳函式 callback 來過濾 target：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params">arr, callback</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 跳過不符合的數字</span><br>    <span class="hljs-keyword">if</span> (callback(arr[i]) === <span class="hljs-literal">true</span>) &#123;<br>      result.push(arr[i]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-comment">// 排除目標</span><br>  <span class="hljs-keyword">let</span> target = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> arr = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    arr.push(<span class="hljs-built_in">Number</span>(input[i])); <span class="hljs-comment">// [1, 3 , 3, 2, 8]</span><br>  &#125;<br>  <span class="hljs-comment">// 傳進 filter 函式，留下不等於 target 的值</span><br>  <span class="hljs-comment">// 也可寫成 filter(arr, element =&gt; element !== target)</span><br>  <span class="hljs-keyword">let</span> newArr = filter(arr, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">element</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> element !== target;<br>  &#125;);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; newArr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(newArr[i]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1038：Array-indexOf"><a href="#LIOJ-1038：Array-indexOf" class="headerlink" title="LIOJ 1038：Array indexOf"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzOD9fZ2E9Mi43MDgyNjM4NC4xMjkxMTI4MTQyLjE1OTMyNzEzNTctMTk3NzI3NzkzMS4xNTkwMzM4NTk2">LIOJ 1038：Array indexOf<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&quot;line&quot;</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> &#123;<br>  lines.push(line);<br>&#125;);<br><br><span class="hljs-comment">// LIOJ 1038：Array indexOf</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">indexOf</span>(<span class="hljs-params">arr, searchElement</span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (arr[i] === searchElement) &#123;<br>      <span class="hljs-keyword">return</span> i;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-comment">// 目標數字</span><br>  <span class="hljs-keyword">let</span> target = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-comment">// 要檢查的數字</span><br>  <span class="hljs-keyword">let</span> arr = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    arr.push(<span class="hljs-built_in">Number</span>(input[i])); <span class="hljs-comment">// =&gt; [1, 2, 3, 3, 3]</span><br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(indexOf(arr, target));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1039：Array-fill"><a href="#LIOJ-1039：Array-fill" class="headerlink" title="LIOJ 1039：Array fill"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAzOQ==">LIOJ 1039：Array fill<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// LIOJ 1039：Array fill</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fill</span>(<span class="hljs-params">arr, value</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 陣列每個元素會被取代成 value，也可寫成 result[i] = value</span><br>    result.push(value);<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> target = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">0</span>]);<br>  <span class="hljs-keyword">let</span> arr = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    arr.push(<span class="hljs-built_in">Number</span>(input[i])); <span class="hljs-comment">// =&gt; [1, 2, 3]</span><br>  &#125;<br>  <span class="hljs-keyword">let</span> newArr = fill(arr, target);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; newArr.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(newArr[i]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1040：Array-join"><a href="#LIOJ-1040：Array-join" class="headerlink" title="LIOJ 1040：Array join"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTA0MA==">LIOJ 1040：Array join<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// LIOJ 1040：Array join</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">join</span>(<span class="hljs-params">arr, separator</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    result += arr[i];<br>    <span class="hljs-keyword">if</span> (i &lt; arr.length - <span class="hljs-number">1</span>) &#123;<br>      result += separator;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> str = input[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">let</span> arr = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; input.length; i += <span class="hljs-number">1</span>) &#123;<br>    arr.push(input[i]); <span class="hljs-comment">// [1, 2, 3]</span><br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(join(arr, str));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>或是把字串 <code>1!2 3</code> 看成 <code>1 !2!3</code>，迴圈內就不用再進行判斷：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">join</span>(<span class="hljs-params">arr, separator</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = arr[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i += <span class="hljs-number">1</span>) &#123;<br>    result += separator + arr[i];<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1041：String-trim"><a href="#LIOJ-1041：String-trim" class="headerlink" title="LIOJ 1041：String trim"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTA0MQ==">LIOJ 1041：String trim<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1042：String-toLowerCase"><a href="#LIOJ-1042：String-toLowerCase" class="headerlink" title="LIOJ 1042：String toLowerCase"></a><span class="exturl" data-url="dG9Mb3dlckNhc2VodHRwczovL29qLmxpZGVteS5jb20vcHJvYmxlbS8xMDQy">LIOJ 1042：String toLowerCase<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// LIOJ 1042：String toLowerCase</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toLowerCase</span>(<span class="hljs-params">str</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; str.length; i += <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">if</span> (str[i] &gt;= <span class="hljs-string">&quot;A&quot;</span> &amp;&amp; str[i] &lt;= <span class="hljs-string">&quot;Z&quot;</span>) &#123;<br>      <span class="hljs-keyword">let</span> code = str.charCodeAt(i);<br>      result += <span class="hljs-built_in">String</span>.fromCharCode(code + <span class="hljs-number">32</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      result += str[i]; <span class="hljs-comment">// 若不是大寫就直接加到字串</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(toLowerCase(input[<span class="hljs-number">0</span>]));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1043：String-endsWith"><a href="#LIOJ-1043：String-endsWith" class="headerlink" title="LIOJ 1043：String endsWith"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTA0Mw==">LIOJ 1043：String endsWith<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1044：String-padEnd"><a href="#LIOJ-1044：String-padEnd" class="headerlink" title="LIOJ 1044：String padEnd"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTA0NA==">LIOJ 1044：String padEnd<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// LIOJ 1044：String padEnd</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padEnd</span>(<span class="hljs-params">str, targetLength, padString</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (str.lenght &gt;= targetLength) &#123;<br>    <span class="hljs-keyword">return</span> str;<br>  &#125;<br>  <span class="hljs-comment">// 從 &#x27;S 字串長度 + 1&#x27; 開始填充，直到預期字串長度</span><br>  <span class="hljs-keyword">while</span> (str.length &lt; targetLength) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; padString.length; i += <span class="hljs-number">1</span>) &#123;<br>      str += padString[i];<br>      <span class="hljs-comment">// 若 S 達到預期字串長度，則結束迴圈</span><br>      <span class="hljs-keyword">if</span> (str.length === targetLength) &#123;<br>        <span class="hljs-keyword">return</span> str;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> S = input[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">let</span> target = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">1</span>]); <span class="hljs-comment">// 預期字串的最後長度</span><br>  <span class="hljs-keyword">let</span> padString = input[<span class="hljs-number">2</span>]; <span class="hljs-comment">// 要填充的字串</span><br>  <span class="hljs-built_in">console</span>.log(padEnd(S, target, padString));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="LIOJ-1045：String-slice"><a href="#LIOJ-1045：String-slice" class="headerlink" title="LIOJ 1045：String slice"></a><span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTA0NQ==">LIOJ 1045：String slice<i class="fa fa-external-link-alt"></i></span></h3><figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// LIOJ 1045：String slice</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">slice</span>(<span class="hljs-params">str, beginIndex, endIndex</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> result = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = beginIndex; i &lt; endIndex; i += <span class="hljs-number">1</span>) &#123;<br>    result += str[i];<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// 處理輸入</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">input</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> str = input[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">let</span> start = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">1</span>]);<br>  <span class="hljs-keyword">let</span> end = <span class="hljs-built_in">Number</span>(input[<span class="hljs-number">2</span>]);<br>  <span class="hljs-built_in">console</span>.log(slice(str, start, end));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="補充：Lidemy-OJ-解題方式"><a href="#補充：Lidemy-OJ-解題方式" class="headerlink" title="補充：Lidemy OJ 解題方式"></a>補充：<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj12N3p2MWl4YU8zTQ==">Lidemy OJ<i class="fa fa-external-link-alt"></i></span> 解題方式</h2><p>有三種方式可以驗證輸出：</p>
+<ol>
+<li>直接在 Command Line 介面直接執行 <code>node index.js</code>，即可直接輸入數字，按 ctrl+D 輸出結果（Windows 無法執行）</li>
+<li>直接在 <code>index.js</code> 呼叫 function</li>
+<li>新增檔案來放輸入，利用指令來產生輸出：<code>cat input.txt | node index.js</code><br>補充：Windows 需改成 <code>cat input.txt | env node code.js</code> 或是 <code>cat input.txt | command node code.js</code></li>
+</ol>
+<p>固定輸入程式碼如下，答題時只需更改 function solve(lines)：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;readline&quot;</span>);<br><span class="hljs-keyword">var</span> rl = readline.createInterface(&#123;<br>  input: process.stdin,<br>&#125;);<br><br><span class="hljs-keyword">var</span> lines = [];<br><br><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&quot;line&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">line</span>) </span>&#123;<br>  lines.push(line);<br>&#125;);<br><br><span class="hljs-comment">// 輸入結束，開始針對 lines 做處理</span><br>rl.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  solve(lines);<br>&#125;);<br><br><span class="hljs-comment">// 拿到所有資料</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">lines</span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>以<span class="exturl" data-url="aHR0cHM6Ly9vai5saWRlbXkuY29tL3Byb2JsZW0vMTAxMA==">靈魂伴侶<i class="fa fa-external-link-alt"></i></span>為例：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;readline&#x27;</span>);<br><span class="hljs-keyword">var</span> rl = readline.createInterface(&#123;<br>    input: process.stdin<br>&#125;);<br><br><span class="hljs-keyword">var</span> lines = []<br><br><span class="hljs-comment">// 讀取到一行，先把這一行加進去 lines 陣列，最後再一起處理</span><br>rl.on(<span class="hljs-string">&#x27;line&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">line</span>) </span>&#123;<br>    lines.push(line)<br>&#125;);<br><br><span class="hljs-comment">// 輸入結束，開始針對 lines 做處理</span><br>rl.on(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    solve(lines)<br>&#125;)<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span>(<span class="hljs-params">lines</span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> arr = lines[<span class="hljs-number">0</span>].split(<span class="hljs-string">&#x27; &#x27;</span>)        <span class="hljs-comment">// 注意需要取陣列！</span><br>    <span class="hljs-keyword">var</span> a = <span class="hljs-built_in">Number</span>(arr[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">var</span> b = <span class="hljs-built_in">Number</span>(arr[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">if</span> (a === b) &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Yes&#x27;</span>)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;No&#x27;</span>)<br>    &#125;<br>&#125;<br><br>solve([                           <span class="hljs-comment">// 輸入是陣列，可用函式驗證是否正確</span><br>    <span class="hljs-string">&#x27;15 15&#x27;</span><br>])<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="補充：使用-eslint-檢查語法"><a href="#補充：使用-eslint-檢查語法" class="headerlink" title="補充：使用 eslint 檢查語法"></a>補充：使用 eslint 檢查語法</h2><blockquote>
+<p>相關筆記：<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vbTk1Zmo5U3NSTGUxWERaRWRzeUJ3dw==">[week3] 設定 eslint：用來檢查語法的工具<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>需注意宣告方式、縮排問題、結尾加分號等問題，修改後模板如下：</p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><code class="hljs lua">const readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;readline&#x27;</span>);<br><br>const rl = readline.createInterface(&#123;<br>  <span class="hljs-built_in">input</span>: process.<span class="hljs-built_in">stdin</span>,<br>&#125;);<br><br>const <span class="hljs-built_in">lines</span> = [];<br><br>// 讀取到一行，先把這一行加進去 <span class="hljs-built_in">lines</span> 陣列，最後再一起處理<br>rl.on(<span class="hljs-string">&#x27;line&#x27;</span>, (line) =&gt; &#123;<br>  <span class="hljs-built_in">lines</span>.push(line);<br>&#125;);<br><br>// 前面已宣告過 <span class="hljs-built_in">lines</span>，這裡改用 <span class="hljs-built_in">input</span> 作為參數，拿取內容 <span class="hljs-built_in">lines</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">solve</span><span class="hljs-params">(input)</span></span> &#123;<br>  <span class="hljs-string">&quot;在這裡輸入函式內容&quot;</span><br>&#125;<br><br>// 輸入結束，開始針對 <span class="hljs-built_in">lines</span> 做處理<br>rl.on(<span class="hljs-string">&#x27;close&#x27;</span>, () =&gt; &#123;<br>  solve(<span class="hljs-built_in">lines</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
 </search>
