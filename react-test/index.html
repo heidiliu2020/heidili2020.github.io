@@ -293,19 +293,11 @@
 <p>在我們建立專案時，就有個 App.test.js 檔案可用來寫測試內容：</p>
 <p><img src="https://i.imgur.com/4dcIFV1.png"></p>
 <p>每個測試會用一個 function 包住：</p>
-<pre><code class="javascript=">import &#123; render, screen &#125; from &#39;@testing-library/react&#39;;
-import App from &#39;./App&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; render, screen &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@testing-library/react&#x27;</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span>;<br><br>test(<span class="hljs-string">&#x27;renders learn react link&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// render component</span><br>  render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>);<br>  <span class="hljs-comment">// 確認是否有出現指定文字</span><br>  <span class="hljs-keyword">const</span> linkElement = screen.getByText(<span class="hljs-regexp">/learn react/i</span>);<br>  <span class="hljs-comment">// 確認是否有在 document 裡面</span><br>  expect(linkElement).toBeInTheDocument();<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-test(&#39;renders learn react link&#39;, () =&gt; &#123;
-  // render component
-  render(&lt;App /&gt;);
-  // 確認是否有出現指定文字
-  const linkElement = screen.getByText(/learn react/i);
-  // 確認是否有在 document 裡面
-  expect(linkElement).toBeInTheDocument();
-&#125;);</code></pre>
 <p>在終端機輸入指令即可執行測試：</p>
-<pre><code>$ npm run test</code></pre>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">$ npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span></span><br></code></pre></td></tr></table></figure>
+
 <p>測試預設會找 App.test.js 在上次 commit 時有更動的部分，例如輸入 a 可跑所有測試結果：</p>
 <p><img src="https://i.imgur.com/Hao9KG7.png"></p>
 <p>由於 App.test.js 是 watch 模式，只要檔案有變動就會自動跑測試，結果會長這樣：</p>
@@ -321,8 +313,10 @@ test(&#39;renders learn react link&#39;, () =&gt; &#123;
 <p>這種測試方法其實就類似於 Unit testing 或 Integration testing，再來要介紹的是用於 End-to-end testing 的程式。</p>
 <h2 id="Cypress：JS-E2E-testing"><a href="#Cypress：JS-E2E-testing" class="headerlink" title="Cypress：JS E2E testing"></a>Cypress：JS E2E testing</h2><p>End-to-end testing 的特點在於會真的跑一個 Browser 起來，並將手動測試轉變成程式碼執行，因此會更接近使用者實際在使用網站的感受。</p>
 <p>我們要介紹的是 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3lwcmVzcy5pby8=">cypress<i class="fa fa-external-link-alt"></i></span> 這套 E2E testing 程式，在測試時也有提供錄影功能，能夠記錄錯誤截圖等等。</p>
-<h3 id="安裝程式"><a href="#安裝程式" class="headerlink" title="安裝程式"></a>安裝程式</h3><pre><code>$ npm install cypress</code></pre>
-<h3 id="如何執行"><a href="#如何執行" class="headerlink" title="如何執行"></a>如何執行</h3><pre><code>$ npx cypress open</code></pre>
+<h3 id="安裝程式"><a href="#安裝程式" class="headerlink" title="安裝程式"></a>安裝程式</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">$ npm <span class="hljs-keyword">install</span> cypress<br></code></pre></td></tr></table></figure>
+
+<h3 id="如何執行"><a href="#如何執行" class="headerlink" title="如何執行"></a>如何執行</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">$ npx cypress <span class="hljs-built_in">open</span><br></code></pre></td></tr></table></figure>
+
 <p>或是在 package.json 的 scripts 新增 cypress open 指令，即可使用 <code>npm run cypress:open</code> 指令執行：</p>
 <p><img src="https://i.imgur.com/GNMrji1.png"></p>
 <p>第一次執行 cypress open 時，會自動在 my-app 資料夾建立 cypress 相關程式，像是 integration 裡的內建測試等等。</p>
@@ -330,48 +324,22 @@ test(&#39;renders learn react link&#39;, () =&gt; &#123;
 <p>執行後會自動開啟 GUI 介面：</p>
 <p><img src="https://i.imgur.com/deKsjBl.png"></p>
 <p>預設的測試檔名為 <code>spec.js</code>，例如我們可在 integration 建立一個 home.spec.js，並在 my-app 底下的 cypress.json 新增 baseUrl：</p>
-<pre><code class="json=">&#123;
-  &quot;baseUrl&quot;: &quot;http://localhost:3000/react-board-test&quot;
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;http://localhost:3000/react-board-test&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>然後在 home.spec.js 寫入<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmN5cHJlc3MuaW8vZ3VpZGVzL2dldHRpbmctc3RhcnRlZC90ZXN0aW5nLXlvdXItYXBwLmh0bWwjU3RlcC0yLVZpc2l0LXlvdXItc2VydmVy">官網範例<i class="fa fa-external-link-alt"></i></span>：</p>
-<pre><code class="javascript=">describe(&quot;The Home Page&quot;, () =&gt; &#123;
-  it(&quot;successfully loads&quot;, () =&gt; &#123;
-  // 改成連線到首頁
-    cy.visit(&quot;/&quot;);
-  &#125;);
-&#125;);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">describe(<span class="hljs-string">&quot;The Home Page&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  it(<span class="hljs-string">&quot;successfully loads&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 改成連線到首頁</span><br>    cy.visit(<span class="hljs-string">&quot;/&quot;</span>);<br>  &#125;);<br>&#125;);<br><br></code></pre></td></tr></table></figure>
+
 <p>點選 cypress 介面中的 home.spec.js 執行：</p>
 <p><img src="https://i.imgur.com/20LvIQ2.png"></p>
 <p>此時會自動開啟 Chrome 瀏覽器跑測試，結果如下：</p>
 <p><img src="https://i.imgur.com/L5NO3Ag.png"></p>
 <h3 id="透過-route-來-mock-API"><a href="#透過-route-來-mock-API" class="headerlink" title="透過 route 來 mock API"></a>透過 route 來 mock API</h3><p>但是和先前的例子一樣，我們通常不會真的去 call API，而是會 mock API，在 cypress 可透過 route 來模擬 API，可參考<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmN5cHJlc3MuaW8vYXBpL2NvbW1hbmRzL3JvdXRlLmh0bWwjU3ludGF4">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>首先要修改 cypress.json 設定檔，加上 <code>experimentalFetchPolyfill</code> 參數：</p>
-<pre><code class="json=">&#123;
-  &quot;baseUrl&quot;: &quot;http://localhost:3000/react-board-test&quot;,
-  &quot;experimentalFetchPolyfill&quot;: true
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;http://localhost:3000/react-board-test&quot;</span>,<br>  <span class="hljs-attr">&quot;experimentalFetchPolyfill&quot;</span>: <span class="hljs-literal">true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>改寫 home.spec.js 範例如下，這樣就是一個簡單的測試：</p>
-<pre><code class="javascript=">describe(&quot;The Home Page&quot;, () =&gt; &#123;
-  it(&quot;successfully loads&quot;, () =&gt; &#123;
-    cy.server();
-    // mock API
-    cy.route(
-      &quot;https://student-json-api.lidemy.me/posts?_sort=createdAt&amp;_order=desc&quot;,
-      [
-        &#123;
-          id: 1,
-          title: &quot;Hello World!&quot;,
-          createdAt: 20202020,
-        &#125;,
-      ]
-    );
-    // 導向首頁
-    cy.visit(&quot;/&quot;);
-    // 測試: 確認頁面是否包含該字串
-    cy.contains(&quot;Hello World!&quot;);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">describe(<span class="hljs-string">&quot;The Home Page&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  it(<span class="hljs-string">&quot;successfully loads&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    cy.server();<br>    <span class="hljs-comment">// mock API</span><br>    cy.route(<br>      <span class="hljs-string">&quot;https://student-json-api.lidemy.me/posts?_sort=createdAt&amp;_order=desc&quot;</span>,<br>      [<br>        &#123;<br>          id: <span class="hljs-number">1</span>,<br>          title: <span class="hljs-string">&quot;Hello World!&quot;</span>,<br>          createdAt: <span class="hljs-number">20202020</span>,<br>        &#125;,<br>      ]<br>    );<br>    <span class="hljs-comment">// 導向首頁</span><br>    cy.visit(<span class="hljs-string">&quot;/&quot;</span>);<br>    <span class="hljs-comment">// 測試: 確認頁面是否包含該字串</span><br>    cy.contains(<span class="hljs-string">&quot;Hello World!&quot;</span>);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>測試結果如下：</p>
 <p><img src="https://i.imgur.com/TdVmUf5.png"></p>
 <p>查看 Request URL 會發現網址有被 cypress 換成 mock API，藉此來 mock 回傳結果：</p>

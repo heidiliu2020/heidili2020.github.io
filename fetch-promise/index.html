@@ -278,23 +278,8 @@
 <li>Fetch</li>
 </ol>
 <h2 id="回顧-XMLHttpRequest"><a href="#回顧-XMLHttpRequest" class="headerlink" title="回顧 XMLHttpRequest"></a>回顧 XMLHttpRequest</h2><p><a href="(https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)">XMLHttpRequest</a>，簡稱 XHR。在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOF8lRTUlODIlQjMlRTklODAlODElRTglQjMlODclRTYlOTYlOTklRTclOUElODQlRTYlOTYlQjklRTUlQkMlOEYlRTMlODAlODElRTclODAlOEYlRTglQTYlQkQlRTUlOTklQTglRTclOUElODQlRTklOTklOTAlRTUlODglQjYubWQ=">課程第八週<i class="fa fa-external-link-alt"></i></span>時曾提到，我們可利用 XMLHttpRequest 物件來實現非同步請求，以下列程式碼為例：</p>
-<pre><code class="javascript=">function reqListener () &#123;
- if (request.status &gt;= 200 &amp;&amp; request.status &lt; 400) &#123;
-  console.log(request.responseText)
- &#125; else &#123;
-  console.log(&quot;err&quot;)
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reqListener</span> (<span class="hljs-params"></span>) </span>&#123;<br> <span class="hljs-keyword">if</span> (request.status &gt;= <span class="hljs-number">200</span> &amp;&amp; request.status &lt; <span class="hljs-number">400</span>) &#123;<br>  <span class="hljs-built_in">console</span>.log(request.responseText)<br> &#125; <span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>)<br>&#125;<br><br><span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> XMLHttpRequest();<br>request.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, reqListener);<br><br><span class="hljs-comment">// 加載失敗會回傳 error</span><br>request.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error&#x27;</span>);<br>&#125;;<br><br>request.open(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;http://www.example.org/example.txt&quot;</span>, <span class="hljs-literal">true</span>);<br>request.send();<br></code></pre></td></tr></table></figure>
 
-const request = new XMLHttpRequest();
-request.addEventListener(&quot;load&quot;, reqListener);
-
-// 加載失敗會回傳 error
-request.onerror = function () &#123;
-  console.log(&#39;error&#39;);
-&#125;;
-
-request.open(&quot;GET&quot;, &quot;http://www.example.org/example.txt&quot;, true);
-request.send();</code></pre>
 <ol>
 <li>建立一個 XMLHttpRequest 物件：request</li>
 <li>開啟一個 URL <code>.open()</code><ul>
@@ -305,160 +290,79 @@ request.send();</code></pre>
 <li>發起一個請求 <code>.send()</code></li>
 </ol>
 <p>如果利用 Fetch 來達到相同結果，程式碼如下：</p>
-<pre><code class="javascript=">fetch(&quot;http://www.example.org/example.txt&quot;)
- .then(res=&gt;res.text())
- .then(console.log)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fetch(<span class="hljs-string">&quot;http://www.example.org/example.txt&quot;</span>)<br> .then(<span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>res.text())<br> .then(<span class="hljs-built_in">console</span>.log)<br></code></pre></td></tr></table></figure>
+
 <p>若不指定方法，Fetch 預設方法是使用 GET，與前者相比可發現程式碼簡潔許多。</p>
 <h2 id="初探-Fetch"><a href="#初探-Fetch" class="headerlink" title="初探 Fetch"></a>初探 Fetch</h2><p>要進行 API 串接，發出 GET Request，可利用這個網站：<span class="exturl" data-url="aHR0cHM6Ly9kZXNpZ25lci5tb2NreS5pby8=">Mocky: The world easiest &amp; fastest tool to mock your APIs<i class="fa fa-external-link-alt"></i></span>，能夠自行創造 Response 並指定內容。</p>
 <h3 id="如何發出-Request"><a href="#如何發出-Request" class="headerlink" title="如何發出 Request"></a>如何發出 Request</h3><p>在 index.html 加上 <code>fetch(&#39;請求的 URL&#39;)</code> 即可發出最簡單的 Resquest：</p>
-<pre><code class="javascript=">&lt;script&gt;
-  fetch(&#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;)
-&lt;/script&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>  fetch(<span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span>)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
 <p>使用開發者工具查看 Network，確實有收到 Response：</p>
 <p><img src="https://i.imgur.com/eOZlngN.png"></p>
 <p>或是直接將結果印出來，可知 fetch 其實會回傳一個 Promise：</p>
-<pre><code class="javascript=">&lt;script&gt;
-  const result = fetch(&#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;);
-  console.log(result)
-&lt;/script&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>  <span class="hljs-keyword">const</span> result = fetch(<span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span>);<br>  <span class="hljs-built_in">console</span>.log(result)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/QtvlDpl.png"></p>
 <hr>
 <h2 id="什麼是-Promise"><a href="#什麼是-Promise" class="headerlink" title="什麼是 Promise"></a>什麼是 Promise</h2><p>Promist 是一個獨特的物件，簡單來說就是一個容器，裡面儲存著某個未來才會結束的事件（也就是非同步操作）的結果。</p>
 <h3 id="then-：拿取-Promise-Response"><a href="#then-：拿取-Promise-Response" class="headerlink" title="then()：拿取 Promise Response"></a><code>then()</code>：拿取 Promise Response</h3><p>那麼該如何拿到 Promise 結果呢？我們可利用 <code>.then()</code> 來拿到 Response，如下列程式碼：</p>
-<pre><code class="javascript=">&lt;script&gt;
-  function pringResult(response) &#123;
-    console.log(response)
-  &#125;
-  const result = fetch(&#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;);
-  result.then(pringResult)
-&lt;/script&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pringResult</span>(<span class="hljs-params">response</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(response)<br>  &#125;<br>  <span class="hljs-keyword">const</span> result = fetch(<span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span>);<br>  result.then(pringResult)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/d88g2Ox.png"></p>
 <p>可把上述程式碼簡化如下：</p>
-<pre><code class="javascript=">fetch(&#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;)
-  .then( response =&gt; &#123;
-    console.log(response)
-  &#125;)</code></pre>
-<h3 id="text-amp-json-：處理-Response-Body"><a href="#text-amp-json-：處理-Response-Body" class="headerlink" title=".text() &amp; .json()：處理 Response Body"></a><code>.text()</code> &amp; <code>.json()</code>：處理 Response Body</h3><h4 id="text"><a href="#text" class="headerlink" title=".text()"></a><code>.text()</code></h4><p>利用 <code>.text()</code> 我們會同樣會得到一個 Promise，再以 <code>.then()</code> 處理，可讀取 Response 的 body：</p>
-<pre><code class="javascript=">const api200 = &#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fetch(<span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span>)<br>  .then( <span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(response)<br>  &#125;)<br></code></pre></td></tr></table></figure>
 
-fetch(api200)
-  .then(response =&gt; &#123;
-    response.text().then(text =&gt; &#123;
-      console.log(text)
-    &#125;)
-  &#125;)</code></pre>
+<h3 id="text-amp-json-：處理-Response-Body"><a href="#text-amp-json-：處理-Response-Body" class="headerlink" title=".text() &amp; .json()：處理 Response Body"></a><code>.text()</code> &amp; <code>.json()</code>：處理 Response Body</h3><h4 id="text"><a href="#text" class="headerlink" title=".text()"></a><code>.text()</code></h4><p>利用 <code>.text()</code> 我們會同樣會得到一個 Promise，再以 <code>.then()</code> 處理，可讀取 Response 的 body：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> api200 = <span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span><br><br>fetch(api200)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    response.text().then(<span class="hljs-function"><span class="hljs-params">text</span> =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(text)<br>    &#125;)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <p>確認可在瀏覽器上印出 text 內容：</p>
 <p><img src="https://i.imgur.com/rqFF0In.png"></p>
 <h4 id="jaon"><a href="#jaon" class="headerlink" title=".jaon()"></a><code>.jaon()</code></h4><p>若確定 Response 是 JSON 格式，可使用 <code>.json()</code> 以相同寫法來處理，回傳的結果會如同 <code>JSON.parse()</code> 幫我們轉成 json 格式：</p>
-<pre><code class="javascript=">const api200 = &#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> api200 = <span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span><br><br>fetch(api200)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    response.json().then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(json)<br>    &#125;)<br>  &#125;)<br></code></pre></td></tr></table></figure>
 
-fetch(api200)
-  .then(response =&gt; &#123;
-    response.json().then(json =&gt; &#123;
-      console.log(json)
-    &#125;)
-  &#125;)</code></pre>
 <p>確認得到 JSON 格式的結果：</p>
 <p><img src="https://i.imgur.com/3ZOk7YA.png"></p>
 <h3 id="簡化再簡化"><a href="#簡化再簡化" class="headerlink" title="簡化再簡化"></a>簡化再簡化</h3><p>由於 <code>response.json()</code> 這個 Promise 的回傳值是 text，我們可將程式碼簡化如下：</p>
-<pre><code class="javascript=">fetch(api200)
-  .then(response =&gt; &#123;
-    return response.json()  // 回傳值
-  &#125;).then(json =&gt; &#123;         // then() 會將回傳值帶到 Response
-    console.log(json)       // 取到回傳值
-  &#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fetch(api200)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> response.json()  <span class="hljs-comment">// 回傳值</span><br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> &#123;         <span class="hljs-comment">// then() 會將回傳值帶到 Response</span><br>    <span class="hljs-built_in">console</span>.log(json)       <span class="hljs-comment">// 取到回傳值</span><br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <p>若使用 return 的寫法，可減少縮排層數，簡化程式碼的複雜程度。</p>
 <h3 id="Chaining-特性"><a href="#Chaining-特性" class="headerlink" title="Chaining 特性"></a>Chaining 特性</h3><p>上述的寫法，其實是利用 Promise 具有的 Chaining 特性。</p>
 <p>由於 <code>.then()</code> 裡面回傳的還是一個 promise 物件，我們可以一直使用 <code>.then()</code> 來對回傳的 promise 做處理。</p>
-<pre><code class="javascript=">fetch() ⇒ Promise
-response.text() ⇒ Promise
-response.json() ⇒ Promise
-respose.json.then() ⇒ Promise</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fetch() ⇒ <span class="hljs-built_in">Promise</span><br>response.text() ⇒ <span class="hljs-built_in">Promise</span><br>response.json() ⇒ <span class="hljs-built_in">Promise</span><br>respose.json.then() ⇒ <span class="hljs-built_in">Promise</span><br></code></pre></td></tr></table></figure>
+
 <p>透過這個特性，我們能夠有效減少層數，以第八週串接 twitch API 為例：</p>
 <ul>
 <li>Callback function</li>
 </ul>
-<pre><code class="javascript=">getGames(()=&gt;&#123;
-  getStreams(()=&gt;&#123;
-    getChannel(()=&gt;&#123;
-      getTitle(()=&gt;&#123;
-          ...
-      &#125;)
-    &#125;)
-  &#125;)
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">getGames(<span class="hljs-function">()=&gt;</span>&#123;<br>  getStreams(<span class="hljs-function">()=&gt;</span>&#123;<br>    getChannel(<span class="hljs-function">()=&gt;</span>&#123;<br>      getTitle(<span class="hljs-function">()=&gt;</span>&#123;<br>          ...<br>      &#125;)<br>    &#125;)<br>  &#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>Promise</li>
 </ul>
-<pre><code class="javascript=">getGames(() =&gt; &#123;
-  return getStreams();
-&#125;).then((streams) =&gt; &#123;
-  return getChannel();
-&#125;).then((channel) =&gt; &#123;
-  return getTitle();
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">getGames(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> getStreams();<br>&#125;).then(<span class="hljs-function">(<span class="hljs-params">streams</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> getChannel();<br>&#125;).then(<span class="hljs-function">(<span class="hljs-params">channel</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> getTitle();<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="如何處理-Error"><a href="#如何處理-Error" class="headerlink" title="如何處理 Error"></a>如何處理 Error</h2><p>這裡指的錯誤，並非 http status 400、500 那種錯誤，而是根本無法拿到 Response，Fetch 才會回傳錯誤訊息。</p>
 <p>在過去課程中，以同步方式傳送請求，可使用 <code>try / catch</code> 來處理錯誤訊息：</p>
-<pre><code class="javascript=">try &#123;
-  // 正常執行..
-&#125; catch(e) &#123;
-  // 出錯執行..
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">// 正常執行..</span><br>&#125; <span class="hljs-function"><span class="hljs-title">catch</span>(<span class="hljs-params">e</span>)</span> &#123;<br>  <span class="hljs-comment">// 出錯執行..</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>但這個錯誤處理無法應用在 callback function，因為 Fetch 使用非同步方式發出請求。</p>
 <h3 id="catch-：處理錯誤訊息"><a href="#catch-：處理錯誤訊息" class="headerlink" title=".catch()：處理錯誤訊息"></a><code>.catch()</code>：處理錯誤訊息</h3><p>程式碼範例如下：</p>
-<pre><code class="javascript=">fetch(api200)
-  .then(response =&gt; &#123;
-    return response.json()
-  &#125;).then(json =&gt; &#123;
-    console.log(json)
-  &#125;).catch(err =&gt; &#123;
-    console.log(&#39;error&#39;, err)
-  &#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fetch(api200)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> response.json()<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(json)<br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error&#x27;</span>, err)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <p>再把原先的請求 URL 稍作修改，確認可接收錯誤訊息：</p>
 <p><img src="https://i.imgur.com/qN3HBCE.png"></p>
 <p>簡言之，我們可使用 <code>then()</code> 來接收回傳的結果，<code>catch()</code> 來接收回傳的錯誤。</p>
 <h2 id="利用-Fetch-發-POST"><a href="#利用-Fetch-發-POST" class="headerlink" title="利用 Fetch 發 POST"></a>利用 Fetch 發 POST</h2><p>前面提到過，Fetch 預設方法是使用 GET，若要發出 POST Request，需帶入其他參數，以下列程式碼為例：</p>
-<pre><code class="javascript=">const data = &#123;
-  name: &#39;heidi&#39;
-&#125;
-fetch(api200, &#123;
-  method: &#39;POST&#39;,
-  body: JSON.stringify(data),
-  headers: new Headers(&#123;
-    &#39;Content-Type&#39;: &#39;application/json&#39;
-  &#125;)
-&#125;)
-  .then(response =&gt; &#123;
-    return response.json()
-  &#125;).then(json =&gt; &#123;
-    console.log(json)
-  &#125;).catch(err =&gt; &#123;
-    console.log(&#39;error&#39;, err)
-  &#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = &#123;<br>  name: <span class="hljs-string">&#x27;heidi&#x27;</span><br>&#125;<br>fetch(api200, &#123;<br>  method: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>  body: <span class="hljs-built_in">JSON</span>.stringify(data),<br>  headers: <span class="hljs-keyword">new</span> Headers(&#123;<br>    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;)<br>&#125;)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> response.json()<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(json)<br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error&#x27;</span>, err)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <h3 id="Fetch-使用時的注意事項"><a href="#Fetch-使用時的注意事項" class="headerlink" title="Fetch 使用時的注意事項"></a>Fetch 使用時的注意事項</h3><h4 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h4><ul>
 <li>決定 server 如何處理 Request</li>
 <li>根據不同的 Content-Type，需修改 body 如何解析接收到的資料格式</li>
 </ul>
 <h4 id="credential"><a href="#credential" class="headerlink" title="credential"></a>credential</h4><p>發 request 給不同來源 domain 的 API 時，並不會自動把 cookie 帶上去，需加上 <code>credentials: &#39;includes&#39;</code>，如下列程式碼：</p>
-<pre><code class="javascript=">const data = &#123;
-  name: &#39;heidi&#39;
-&#125;
-fetch(api200, &#123;
-  method: &#39;POST&#39;,
-  body: JSON.stringify(data),
-  credentials: &#39;includes&#39;,
-  headers: new Headers(&#123;
-    &#39;Content-Type&#39;: &#39;application/json&#39;
-  &#125;)
-&#125;)
-  .then(response =&gt; &#123;
-    return response.json()
-  &#125;).then(json =&gt; &#123;
-    console.log(json)
-  &#125;).catch(err =&gt; &#123;
-    console.log(&#39;error&#39;, err)
-  &#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = &#123;<br>  name: <span class="hljs-string">&#x27;heidi&#x27;</span><br>&#125;<br>fetch(api200, &#123;<br>  method: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>  body: <span class="hljs-built_in">JSON</span>.stringify(data),<br>  credentials: <span class="hljs-string">&#x27;includes&#x27;</span>,<br>  headers: <span class="hljs-keyword">new</span> Headers(&#123;<br>    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;)<br>&#125;)<br>  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> response.json()<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(json)<br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;error&#x27;</span>, err)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <h4 id="對-mode-的誤解"><a href="#對-mode-的誤解" class="headerlink" title="對 mode 的誤解"></a>對 mode 的誤解</h4><ul>
 <li><code>mode: &#39;no-cors&#39;</code> 並不能突破 CORS 限制，而是會回傳一個空的 response</li>
 <li>這條指令只是跟瀏覽器說：「我沒有要拿 response，不用傳錯誤訊息給我」</li>
@@ -467,123 +371,43 @@ fetch(api200, &#123;
 <hr>
 <h2 id="建立-Promise-物件"><a href="#建立-Promise-物件" class="headerlink" title="建立 Promise 物件"></a>建立 Promise 物件</h2><p>根據上述結論，要處理非同步，我們可利用 callback function 或 Promise。</p>
 <p>以下程式碼示範如何建立 Promise 物件，也就是把一個 Promise 物件 new 出來：</p>
-<pre><code class="javascript=">function init(resolve, reject) &#123;
-  resolve(3)
-&#125;
-const myPromise = new Promise(init)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  resolve(<span class="hljs-number">3</span>)<br>&#125;<br><span class="hljs-keyword">const</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(init)<br><br>myPromise.then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;data&#x27;</span>, data)       <span class="hljs-comment">// 正確</span><br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;err&#x27;</span>, err)         <span class="hljs-comment">// 錯誤</span><br>  &#125;)<br>  <br><span class="hljs-comment">// 印出 data 3</span><br></code></pre></td></tr></table></figure>
 
-myPromise.then((data) =&gt; &#123;
-    console.log(&#39;data&#39;, data)       // 正確
-  &#125;).catch(err =&gt; &#123;
-    console.log(&#39;err&#39;, err)         // 錯誤
-  &#125;)
-
-// 印出 data 3</code></pre>
 <p>簡化 function 如下：</p>
-<pre><code class="javascript=">const myPromise = new Promise((resolve, reject) =&gt; &#123;
-  resolve(3)
-&#125;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>  resolve(<span class="hljs-number">3</span>)<br>&#125;)<br><br>myPromise.then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;data&#x27;</span>, data)       <span class="hljs-comment">// 正確</span><br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;err&#x27;</span>, err)         <span class="hljs-comment">// 錯誤</span><br>  &#125;)<br></code></pre></td></tr></table></figure>
 
-myPromise.then((data) =&gt; &#123;
-    console.log(&#39;data&#39;, data)       // 正確
-  &#125;).catch(err =&gt; &#123;
-    console.log(&#39;err&#39;, err)         // 錯誤
-  &#125;)</code></pre>
 <h3 id="應用範例"><a href="#應用範例" class="headerlink" title="應用範例"></a>應用範例</h3><p>透過 <code>setTimeout()</code> 結合 promise 應用：</p>
-<pre><code class="javascript=">const myPromise = new Promise((resolve) =&gt; &#123;
-  setTimeout(resolve, 3000)         // 3 秒後呼叫 resolve()
-&#125;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">3000</span>)         <span class="hljs-comment">// 3 秒後呼叫 resolve()</span><br>&#125;)<br><br>myPromise.then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;myPromise data&#x27;</span>, data)<br>&#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;err&#x27;</span>, err)<br>&#125;)<br><br><span class="hljs-comment">// 經過 3 秒後會印出 myPromise Data undefined</span><br></code></pre></td></tr></table></figure>
 
-myPromise.then((data) =&gt; &#123;
-  console.log(&#39;myPromise data&#39;, data)
-&#125;).catch(err =&gt; &#123;
-  console.log(&#39;err&#39;, err)
-&#125;)
-
-// 經過 3 秒後會印出 myPromise Data undefined</code></pre>
 <p>再來利用 <code>function sleep()</code> 宣告一個叫做 myPromise 的 Promise 再回傳回去。如下列程式碼：</p>
-<pre><code class="javascript=">function sleep(ms) &#123;
-  const myPromise = new Promise(resolve =&gt; &#123;
-    setTimeout(resolve, ms)      // 把秒數設為參數
-  &#125;)
-  return myPromise;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">ms</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, ms)      <span class="hljs-comment">// 把秒數設為參數</span><br>  &#125;)<br>  <span class="hljs-keyword">return</span> myPromise;<br>&#125;<br><br>sleep(<span class="hljs-number">1500</span>).then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;      <span class="hljs-comment">// 執行完 sleep() 會得到 Promise</span><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;myPromise Data&#x27;</span>, data);<br>&#125;)<br>  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;err&#x27;</span>, err);<br>  &#125;)<br></code></pre></td></tr></table></figure>
 
-sleep(1500).then((data) =&gt; &#123;      // 執行完 sleep() 會得到 Promise
-  console.log(&#39;myPromise Data&#39;, data);
-&#125;)
-  .catch(err =&gt; &#123;
-    console.log(&#39;err&#39;, err);
-  &#125;)</code></pre>
 <p>上述的 <code>sleep()</code> 函式可簡化成：</p>
-<pre><code class="javascript=">function sleep(ms) &#123;
-  return new Promise(resolve =&gt; &#123;
-    setTimeout(resolve, ms)
-  &#125;)
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">ms</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, ms)<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>若以箭頭函式表達則是：</p>
-<pre><code class="javascript=">const sleep = ms =&gt; &#123;
-  return new Promise(resolve =&gt; &#123;
-    setTimeout(resolve, ms)
-  &#125;)
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, ms)<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>還可以簡化成這樣，省略 return 的大括號：</p>
-<pre><code class="javascript=">const sleep = ms =&gt; new Promise(resolve =&gt; &#123;
-    setTimeout(resolve, ms)
-  &#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, ms)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
 <p>最終可簡化成一行：</p>
-<pre><code class="javascript=">const sleep = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms))</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, ms))<br></code></pre></td></tr></table></figure>
+
 <h2 id="async-await"><a href="#async-await" class="headerlink" title="async / await"></a>async / await</h2><p>利用 <code>async / await</code> 可以用看起來像同步的語法，做到非同步的事情。</p>
 <p>方法是用 async 宣告一個非同步的 function，裡面放 await 接一個 Promise 物件，會等到執行完 await 裡面的 promise 才往下執行。</p>
 <p>以下列程式碼為例：</p>
-<pre><code class="javascript=">const sleep = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms))
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, ms))<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;enter main&#x27;</span>);<br>  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">1000</span>);        <span class="hljs-comment">// 接一個 Promise</span><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;exit main&#x27;</span>);<br>&#125;<br><br>main();<br><span class="hljs-comment">// 執行 main() 會發現兩個 console.log 會相隔一秒印出</span><br></code></pre></td></tr></table></figure>
 
-async function main() &#123;
-  console.log(&#39;enter main&#39;);
-  await sleep(1000);        // 接一個 Promise
-  console.log(&#39;exit main&#39;);
-&#125;
-
-main();
-// 執行 main() 會發現兩個 console.log 會相隔一秒印出</code></pre>
 <p>對照使用 Promise 的寫法：</p>
-<pre><code class="javascript=">const sleep = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms))
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, ms))<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mainPromise</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;enter main&#x27;</span>);<br>  sleep(<span class="hljs-number">1000</span>).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;exit main&#x27;</span>);<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function mainPromise() &#123;
-  console.log(&#39;enter main&#39;);
-  sleep(1000).then(() =&gt; &#123;
-    console.log(&#39;exit main&#39;);
-  &#125;)
-&#125;</code></pre>
-<h4 id="應用練習"><a href="#應用練習" class="headerlink" title="應用練習"></a>應用練習</h4><pre><code class="javascript=">const sleep = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms))
+<h4 id="應用練習"><a href="#應用練習" class="headerlink" title="應用練習"></a>應用練習</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">ms</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, ms))<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> api200 = <span class="hljs-string">&#x27;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#x27;</span><br>  <span class="hljs-keyword">return</span> fetch(api200)      <span class="hljs-comment">// 回傳執行完的結果 =&gt; Promise</span><br>    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> response.json()<br>    &#125;)<br>&#125;<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;enter main&#x27;</span>);<br>  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">1000</span>);              <span class="hljs-comment">// 等 1 秒</span><br>  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> getData();    <span class="hljs-comment">// 接收到結果才會繼續執行</span><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;result&#x27;</span>, result);<br>&#125;<br><br>main();<br></code></pre></td></tr></table></figure>
 
-function getData() &#123;
-  const api200 = &#39;https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605&#39;
-  return fetch(api200)      // 回傳執行完的結果 =&gt; Promise
-    .then(response =&gt; &#123;
-      return response.json()
-    &#125;)
-&#125;
-
-async function main() &#123;
-  console.log(&#39;enter main&#39;);
-  await sleep(1000);              // 等 1 秒
-  const result = await getData();    // 接收到結果才會繼續執行
-  console.log(&#39;result&#39;, result);
-&#125;
-
-main();</code></pre>
 <p>甚至可使用同步方式的 <code>try / catch</code> 來處理錯誤訊息：</p>
-<pre><code class="javascript=">async function main() &#123;
-  console.log(&#39;enter main&#39;);
-  await sleep(1000);              // 等 1 秒
-  try &#123;
-    const result = await getData();
-    console.log(&#39;result&#39;, result);
-  &#125; catch(err) &#123;
-    console.log(&#39;err&#39;, err);
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;enter main&#x27;</span>);<br>  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">1000</span>);              <span class="hljs-comment">// 等 1 秒</span><br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> getData();<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;result&#x27;</span>, result);<br>  &#125; <span class="hljs-function"><span class="hljs-title">catch</span>(<span class="hljs-params">err</span>)</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;err&#x27;</span>, err);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU3MDYwNjMyMy5odG1s">ES6入門之Promise物件<i class="fa fa-external-link-alt"></i></span></li>

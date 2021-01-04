@@ -269,122 +269,38 @@
 <h2 id="jQuery：JS-函式庫"><a href="#jQuery：JS-函式庫" class="headerlink" title="jQuery：JS 函式庫"></a>jQuery：JS 函式庫</h2><p><img src="https://i.imgur.com/KKhdOms.png"></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9qcXVlcnkuY29tLw==">jQuery<i class="fa fa-external-link-alt"></i></span> 是一個 JavaScript 函式庫（Javascipt Framework），是幫助加速網頁程式開發的工具。可解決跨瀏覽器的問題，能夠快速又方面操作 DOM，縮短開發時間與簡化程式碼。</p>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>和引入 JavaScript 方法類似：</p>
-<pre><code class="javascript=">&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;</code></pre>
-<h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><p>使用 jQuery 的基本語法如下，意即指派元素到指定的事件：</p>
-<pre><code class="javascript=">// 選取 `$(selector)` 元素，並指派它進行 `.action()` 事件
-$(selector).action()
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script src=<span class="hljs-string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
-// 範例
-$( &quot;button.continue&quot; ).html( &quot;Next Step...&quot; )</code></pre>
+<h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><p>使用 jQuery 的基本語法如下，意即指派元素到指定的事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 選取 `$(selector)` 元素，並指派它進行 `.action()` 事件</span><br>$(selector).action()<br><br><span class="hljs-comment">// 範例</span><br>$( <span class="hljs-string">&quot;button.continue&quot;</span> ).html( <span class="hljs-string">&quot;Next Step...&quot;</span> )<br></code></pre></td></tr></table></figure>
+
 <p>其中的 <code>$()</code> 符號就是 jQuery 常用的選擇器，善用選擇器可以快速找到網頁當中的物件。</p>
 <p>以按鈕 Button 的點擊事件為例：</p>
-<h4 id="JavaScript-原生語法"><a href="#JavaScript-原生語法" class="headerlink" title="JavaScript 原生語法"></a>JavaScript 原生語法</h4><pre><code class="javascript">// 使用 DOMContentLoaded 或 load 事件，可確保 DOM 結構被完整的讀取跟解析
-document.addEventListener(&#39;DOMContentLoaded&#39;, function () &#123;
-  document.querySelector(&#39;.btn&#39;).addEventListener(&#39;click&#39;, function() &#123;
-    alert(&#39;click!&#39;)
-  &#125;)
-&#125;)</code></pre>
+<h4 id="JavaScript-原生語法"><a href="#JavaScript-原生語法" class="headerlink" title="JavaScript 原生語法"></a>JavaScript 原生語法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 使用 DOMContentLoaded 或 load 事件，可確保 DOM 結構被完整的讀取跟解析</span><br><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.btn&#x27;</span>).addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    alert(<span class="hljs-string">&#x27;click!&#x27;</span>)<br>  &#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <p>兩者結構其實非常類似，多數情況下 JavaScript 和 jQuery 的語法兩者也能夠混用。</p>
-<h4 id="使用-jQuery"><a href="#使用-jQuery" class="headerlink" title="使用 jQuery"></a>使用 jQuery</h4><pre><code class="javascript=">// jQuery === $
-$(document).ready (function() &#123;
-  $(&#39;.btn&#39;).click(function(e) &#123;
-    alert(&#39;click jq!&#39;)
-  &#125;)
-&#125;)</code></pre>
+<h4 id="使用-jQuery"><a href="#使用-jQuery" class="headerlink" title="使用 jQuery"></a>使用 jQuery</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// jQuery === $</span><br>$(<span class="hljs-built_in">document</span>).ready (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  $(<span class="hljs-string">&#x27;.btn&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;<br>    alert(<span class="hljs-string">&#x27;click jq!&#x27;</span>)<br>  &#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vY2FpemhlbmJvL3AvNjY3OTQ3OC5odG1s">DOMContentLoaded與load的區別<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9hcGkuanF1ZXJ5LmNvbS9sb2FkLWV2ZW50LyNsb2FkMQ==">jQuery Core API Documentation<i class="fa fa-external-link-alt"></i></span>：用來查閱官方說明文件</li>
 <li><span class="exturl" data-url="aHR0cDovL3lvdW1pZ2h0bm90bmVlZGpxdWVyeS5jb20v">You might not need jQuery<i class="fa fa-external-link-alt"></i></span>：可對照 jQuery 和 JavaScript 的寫法</li>
 </ul>
-<h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><h4 id="淡入淡出效果"><a href="#淡入淡出效果" class="headerlink" title="淡入淡出效果"></a>淡入淡出效果</h4><pre><code class="javascript=">&lt;style&gt;
-  .box &#123;
-    height: 200px;
-    width: 200px;
-    background: brown;
-  &#125;
-&lt;/style&gt;
-&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
+<h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><h4 id="淡入淡出效果"><a href="#淡入淡出效果" class="headerlink" title="淡入淡出效果"></a>淡入淡出效果</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;style&gt;<br>  .box &#123;<br>    height: <span class="hljs-number">200</span>px;<br>    width: <span class="hljs-number">200</span>px;<br>    background: brown;<br>  &#125;<br>&lt;/style&gt;<br>&lt;script src=<span class="hljs-string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;<br><br>&lt;script&gt;<br>  <span class="hljs-keyword">var</span> isHide = <span class="hljs-literal">false</span><br>  $(<span class="hljs-built_in">document</span>).ready (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    $(<span class="hljs-string">&#x27;.btn&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;<br>      <span class="hljs-keyword">if</span> (isHide) &#123;<br>        $(<span class="hljs-string">&#x27;.box&#x27;</span>).fadeIn(<span class="hljs-number">500</span>)    <span class="hljs-comment">// show()</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        $(<span class="hljs-string">&#x27;.box&#x27;</span>).fadeOut(<span class="hljs-number">500</span>)   <span class="hljs-comment">// hide()</span><br>      &#125;<br>      isHide = !isHide<br>    &#125;)<br>  &#125;)<br>  &lt;/script&gt;<br>&lt;body&gt;<br>  &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;btn&quot;</span>&gt;I am a button&lt;/button&gt;<br>  &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;box&quot;</span>&gt;&lt;/div&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script&gt;
-  var isHide = false
-  $(document).ready (function() &#123;
-    $(&#39;.btn&#39;).click(function(e) &#123;
-      if (isHide) &#123;
-        $(&#39;.box&#39;).fadeIn(500)    // show()
-      &#125; else &#123;
-        $(&#39;.box&#39;).fadeOut(500)   // hide()
-      &#125;
-      isHide = !isHide
-    &#125;)
-  &#125;)
-  &lt;/script&gt;
-&lt;body&gt;
-  &lt;button class=&quot;btn&quot;&gt;I am a button&lt;/button&gt;
-  &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;</code></pre>
 <h4 id="簡易-todo-list"><a href="#簡易-todo-list" class="headerlink" title="簡易 todo list"></a>簡易 todo list</h4><p>首先建立點擊事件，來拿取 input 欄位輸入的值：</p>
-<pre><code class="javascript=">&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-$(document).ready (function() &#123;
-  $(&#39;.btn&#39;).click(function(e) &#123;
-    console.log($(&#39;.todo-input&#39;).val()) // 測試是否讀取成功
-  &#125;)
-&#125;)
-&lt;/script&gt;
-&lt;body&gt;
-  &lt;input class=&quot;todo-input&quot; /&gt;
-  &lt;button class=&quot;btn&quot;&gt;Add todo&lt;/button&gt;
-  &lt;div class=&quot;todos&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script src=<span class="hljs-string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;script&gt;<br>$(<span class="hljs-built_in">document</span>).ready (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  $(<span class="hljs-string">&#x27;.btn&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log($(<span class="hljs-string">&#x27;.todo-input&#x27;</span>).val()) <span class="hljs-comment">// 測試是否讀取成功</span><br>  &#125;)<br>&#125;)<br>&lt;/script&gt;<br>&lt;body&gt;<br>  &lt;input <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;todo-input&quot;</span> /&gt;<br>  &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;btn&quot;</span>&gt;Add todo&lt;/button&gt;<br>  &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;todos&quot;</span>&gt;&lt;/div&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
 <p>再來加入新增 todo 到 todos 的功能：</p>
 <ul>
 <li><code>prepend()</code>：新增元素到最上面</li>
 <li><code>append()</code>：新增元素到最下面</li>
 </ul>
-<pre><code class="javascript=">&lt;style&gt;
-  .todo &#123;
-    padding: 10px;
-    border: 1px solid #eee;
-  &#125;
-&lt;/style&gt;
-&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  $(document).ready (function() &#123;
-    $(&#39;.btn&#39;).click(function(e) &#123;             // 建立點擊事件
-      const value = $(&#39;.todo-input&#39;).val()    // 拿取 value 值
-      $(&#39;.todo-input&#39;).val(&#39;&#39;)                // 讀取完後清空 input 欄位
-      $(&#39;.todos&#39;).prepend(`&lt;div class=&quot;todo&quot;&gt;$&#123;value&#125;&lt;/div&gt;`)    // 把該元素新增到 todos
-    &#125;)
-  &#125;)
-&lt;/script&gt;
-&lt;body&gt;
-  &lt;input class=&quot;todo-input&quot; /&gt;
-  &lt;button class=&quot;btn&quot;&gt;Add todo&lt;/button&gt;
-  &lt;div class=&quot;todos&quot;&gt;&lt;/div&gt;</code></pre>
-<h4 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h4><pre><code class="javascript=">$.ajax(&#123;
-  type: &quot;GET&quot;, // 指定 method
-  url: &#39;ajax/test.html&#39;,
-  success: function(data) &#123;
-  $(&#39;.result&#39;).html(data);
-  alert(&#39;Load was performed.&#39;);
-  &#125;
-&#125;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;style&gt;<br>  .todo &#123;<br>    padding: <span class="hljs-number">10</span>px;<br>    border: <span class="hljs-number">1</span>px solid #eee;<br>  &#125;<br>&lt;/style&gt;<br>&lt;script src=<span class="hljs-string">&quot;https://code.jquery.com/jquery-3.5.1.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;script&gt;<br>  $(<span class="hljs-built_in">document</span>).ready (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    $(<span class="hljs-string">&#x27;.btn&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;             <span class="hljs-comment">// 建立點擊事件</span><br>      <span class="hljs-keyword">const</span> value = $(<span class="hljs-string">&#x27;.todo-input&#x27;</span>).val()    <span class="hljs-comment">// 拿取 value 值</span><br>      $(<span class="hljs-string">&#x27;.todo-input&#x27;</span>).val(<span class="hljs-string">&#x27;&#x27;</span>)                <span class="hljs-comment">// 讀取完後清空 input 欄位</span><br>      $(<span class="hljs-string">&#x27;.todos&#x27;</span>).prepend(<span class="hljs-string">`&lt;div class=&quot;todo&quot;&gt;<span class="hljs-subst">$&#123;value&#125;</span>&lt;/div&gt;`</span>)    <span class="hljs-comment">// 把該元素新增到 todos</span><br>    &#125;)<br>  &#125;)<br>&lt;/script&gt;<br>&lt;body&gt;<br>  &lt;input <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;todo-input&quot;</span> /&gt;<br>  &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;btn&quot;</span>&gt;Add todo&lt;/button&gt;<br>  &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;todos&quot;</span>&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
 
-// 取得 HTML: load()
-$(&quot;#htmDoc&quot;).load(&quot;test.html&quot;);
+<h4 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript">$.ajax(&#123;<br>  type: <span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-comment">// 指定 method</span><br>  url: <span class="hljs-string">&#x27;ajax/test.html&#x27;</span>,<br>  success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>&#123;<br>  $(<span class="hljs-string">&#x27;.result&#x27;</span>).html(data);<br>  alert(<span class="hljs-string">&#x27;Load was performed.&#x27;</span>);<br>  &#125;<br>&#125;);<br><br><span class="hljs-comment">// 取得 HTML: load()</span><br>$(<span class="hljs-string">&quot;#htmDoc&quot;</span>).load(<span class="hljs-string">&quot;test.html&quot;</span>);<br><br><span class="hljs-comment">// 取得 JSON 格式的資料: getJSON()</span><br>$.getJSON(<span class="hljs-string">&quot;test.json&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>&#123;  <br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> idx <span class="hljs-keyword">in</span> data)  <br>    $(<span class="hljs-string">&quot;#menu&quot;</span>).append(<span class="hljs-string">&quot;&lt;li&gt;&quot;</span> + data[idx] + <span class="hljs-string">&quot;&lt;/li&gt;&quot;</span>); <br>&#125;);  <br><br><span class="hljs-comment">// document ready 事件</span><br>$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;  <br>  alert(<span class="hljs-string">&#x27;Hello&#x27;</span>);    <span class="hljs-comment">// 網頁下載完成後立即執行 alert()</span><br>&#125;);<br><br></code></pre></td></tr></table></figure>
 
-// 取得 JSON 格式的資料: getJSON()
-$.getJSON(&quot;test.json&quot;, function(data)&#123;  
-  for (var idx in data)  
-    $(&quot;#menu&quot;).append(&quot;&lt;li&gt;&quot; + data[idx] + &quot;&lt;/li&gt;&quot;); 
-&#125;);  
-
-// document ready 事件
-$(document).ready(function() &#123;  
-  alert(&#39;Hello&#39;);    // 網頁下載完成後立即執行 alert()
-&#125;);
-</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qdzMxMC5naXRodWIuaW8vMjAyMC8wMS8xNi9qUXVlcnktYmFzZS8jJUU0JUJEJUJGJUU3JTk0JUE4LWpRdWVyeQ==">jQuery 簡單介紹<i class="fa fa-external-link-alt"></i></span></li>

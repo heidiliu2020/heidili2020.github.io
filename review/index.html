@@ -303,19 +303,10 @@
 <li>了解如何透過 node.js 傳入 request，利用 POST 來新增書籍。</li>
 <li>這題稍微卡關了一下，因為一開始有點搞不懂 header、body、form 的階層關係，修改過後原來這兩種寫法都能得到 response：<code>&#123; message: &#39;新增成功&#39;, id: &#39;1989&#39; &#125;</code>。</li>
 </ul>
-<pre><code class="js">// 在 body 以 query string 帶入 name 和 ISBN
-  headers: &#123;
-    &#39;content-type&#39;: &#39;application/x-www-form-urlencoded&#39;,
-  &#125;,
-  body: &#39;name=《大腦喜歡這樣學》&amp;ISBN=9789863594475&#39;</code></pre>
-<pre><code class="js">// 在 form 帶入 name 和 ISBN
-headers: &#123;
-  &#39;content-type&#39;: &#39;application/x-www-form-urlencoded&#39;,
-&#125;,
-form: &#123;
-　name: &#39;《大腦喜歡這樣學》&#39;,
-　ISBN: &#39;9789863594475&#39;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 在 body 以 query string 帶入 name 和 ISBN</span><br>  headers: &#123;<br>    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>,<br>  &#125;,<br>  body: <span class="hljs-string">&#x27;name=《大腦喜歡這樣學》&amp;ISBN=9789863594475&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 在 form 帶入 name 和 ISBN</span><br>headers: &#123;<br>  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>,<br>&#125;,<br>form: &#123;<br>　name: <span class="hljs-string">&#x27;《大腦喜歡這樣學》&#x27;</span>,<br>　ISBN: <span class="hljs-string">&#x27;9789863594475&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>得到回應為：<code>&#123; message: &#39;新增成功&#39;, id: &#39;1989&#39; &#125; </code></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjM/dG9rZW49JTdCNTU2Nk5PMSU3RCZhbXA7aWQ9MTk4OQ==">https://lidemy-http-challenge.herokuapp.com/lv3?token={5566NO1}&amp;id=1989<i class="fa fa-external-link-alt"></i></span></li>
@@ -337,9 +328,8 @@ form: &#123;
 <li>了解如何透過 DELETE 來獲得刪除書籍。</li>
 <li>得到的 response 好像讓人有點不安（？）下一題才知道是因為沒有登入就能夠新增刪除，缺少了身分驗證。</li>
 </ul>
-<pre><code>&#123;
-  message: &#39;\n咦...是刪掉了沒錯，但總覺得哪裡怪怪的，算了，先這樣吧！下一關的 token 為 &#123;CHICKENCUTLET&#125;\n&#39;
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">&#123;<br>  <span class="hljs-attribute">message</span>: <span class="hljs-string">&#x27;\n咦...是刪掉了沒錯，但總覺得哪裡怪怪的，算了，先這樣吧！下一關的 token 為 &#123;CHICKENCUTLET&#125;\n&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjY/dG9rZW49JTdCQ0hJQ0tFTkNVVExFVCU3RA==">https://lidemy-http-challenge.herokuapp.com/lv6?token={CHICKENCUTLET}<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
@@ -347,11 +337,8 @@ form: &#123;
 <li>了解如何將 http basic authorization 帶入 Header 進行身分驗證。</li>
 <li>這關有稍微卡住，一開始是驗證碼少加 Basic，然後又卡一陣子找不到錯在哪裡，才發現原來是 圖書館資訊系統 API v2 接點最後有多加 <code>/v2</code>，真是魔鬼藏在細節裡，諸此類小地方都需要更加注意！</li>
 </ul>
-<pre><code class="js">  method: &#39;GET&#39;,
-  url: `https://lidemy-http-challenge.herokuapp.com/api/v2/me`,
-  headers: &#123;
-    &#39;Authorization&#39;: &#39;Basic YWRtaW46YWRtaW4xMjM=&#39;,
-  &#125;,</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>url: <span class="hljs-string">`https://lidemy-http-challenge.herokuapp.com/api/v2/me`</span>,<br>headers: &#123;<br>  <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Basic YWRtaW46YWRtaW4xMjM=&#x27;</span>,<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><p>得到回應為：<code>&#123; username: &#39;admin&#39;, email: &#39;lib@lidemy.com&#39; &#125;</code></p>
 </li>
@@ -363,11 +350,8 @@ form: &#123;
 <h3 id="Lv7"><a href="#Lv7" class="headerlink" title="Lv7"></a>Lv7</h3><ul>
 <li>和 Lv5 類似。了解如何透過 DELETE 刪除書籍，但要在 Header 多加上身分驗證。</li>
 </ul>
-<pre><code class="js">  method: &#39;DELETE&#39;,
-  url: `https://lidemy-http-challenge.herokuapp.com/api/v2/books/89`,
-  headers: &#123;
-    &#39;Authorization&#39;: &#39;Basic YWRtaW46YWRtaW4xMjM=&#39;,
-  &#125;,</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">method: <span class="hljs-string">&#x27;DELETE&#x27;</span>,<br>url: <span class="hljs-string">`https://lidemy-http-challenge.herokuapp.com/api/v2/books/89`</span>,<br>headers: &#123;<br>  <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Basic YWRtaW46YWRtaW4xMjM=&#x27;</span>,<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>得到回應為：<code>&#123; message: &#39;\n希望下一次進這本書的時候不會再被偷走了。下一關的 token 為 &#123;HsifnAerok&#125;\n&#39; &#125;</code></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjg/dG9rZW49JTdCSHNpZm5BZXJvayU3RA==">https://lidemy-http-challenge.herokuapp.com/lv8?token={HsifnAerok}<i class="fa fa-external-link-alt"></i></span></li>
@@ -375,27 +359,16 @@ form: &#123;
 <h3 id="Lv8"><a href="#Lv8" class="headerlink" title="Lv8"></a>Lv8</h3><ul>
 <li>了解如何透過 GET 查詢書籍，再以 PATCH 更改書籍資訊。</li>
 </ul>
-<pre><code class="js">  method: &#39;GET&#39;,
-  url: `https://lidemy-http-challenge.herokuapp.com/api/v2/books`,
-  headers: &#123;
-    &#39;Authorization&#39;: &#39;Basic YWRtaW46YWRtaW4xMjM=&#39;,
-  &#125;,</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>url: <span class="hljs-string">`https://lidemy-http-challenge.herokuapp.com/api/v2/books`</span>,<br>headers: &#123;<br>  <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Basic YWRtaW46YWRtaW4xMjM=&#x27;</span>,<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><p>找到與目標相符的資料：<code>&#123;id: 72, name: &#39;日日好日：茶道教我的幸福15味【電影書腰版】&#39;, author: &#39;森下典子&#39;, ISBN: &#39;9981835427&#39;&#125;,</code>，一開始還沒看清楚作者名字是四個字，幸好最後檢查有發現到！</p>
 </li>
 <li><p>把 ISBN 最後一碼改成 3，和 Lv3 使用的 POST 一樣要在 Header 加上 content type：</p>
 </li>
 </ul>
-<pre><code class="js">  method: &#39;PATCH&#39;,
-  url: `https://lidemy-http-challenge.herokuapp.com/api/v2/books/72`,
-  headers: &#123;
-    &#39;Authorization&#39;: &#39;Basic YWRtaW46YWRtaW4xMjM=&#39;,
-    &#39;content-type&#39;: &#39;application/x-www-form-urlencoded&#39;,
-  &#125;,
-  form: &#123;
-    name: &#39;日日好日：茶道教我的幸福15味【電影書腰版】&#39;,
-    ISBN: &#39;9981835423&#39;
-  &#125;,</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">method: <span class="hljs-string">&#x27;PATCH&#x27;</span>,<br>url: <span class="hljs-string">`https://lidemy-http-challenge.herokuapp.com/api/v2/books/72`</span>,<br>headers: &#123;<br>  <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Basic YWRtaW46YWRtaW4xMjM=&#x27;</span>,<br>  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>,<br>&#125;,<br>form: &#123;<br>  name: <span class="hljs-string">&#x27;日日好日：茶道教我的幸福15味【電影書腰版】&#x27;</span>,<br>  ISBN: <span class="hljs-string">&#x27;9981835423&#x27;</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>得到回應為：<code>&#123; message: &#39;\n希望之後他們能引進語音輸入系統，我就只要講講話就好。下一關的 token 為 &#123;NeuN&#125;\n&#39; &#125;</code></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjk/dG9rZW49JTdCTmV1TiU3RA==">https://lidemy-http-challenge.herokuapp.com/lv9?token={NeuN}<i class="fa fa-external-link-alt"></i></span></li>
@@ -403,22 +376,12 @@ form: &#123;
 <h2 id="Lv9"><a href="#Lv9" class="headerlink" title="Lv9"></a>Lv9</h2><ul>
 <li>了解如何在 Header 帶上參數 <code>X-Library-Number</code> 和 <code>User-Agent</code>。想到在 Request 補充影片剛好就有提到 <code>User-Agent</code> 的用途，查到了這篇文章：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODA4NjI1Mg==">談談UserAgent 字符串的規律和偽造方法<i class="fa fa-external-link-alt"></i></span>。</li>
 </ul>
-<pre><code class="js">  method: &#39;GET&#39;,
-  url: `https://lidemy-http-challenge.herokuapp.com/api/v2/sys_info`,
-  headers: &#123;
-    &#39;Authorization&#39;: &#39;Basic YWRtaW46YWRtaW4xMjM=&#39;,
-    &#39;User-Agent&#39;:&#39;MSIE 6.0&#39;,
-    &#39;X-Library-Number&#39;: &#39;20&#39;
-  &#125;,</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>url: <span class="hljs-string">`https://lidemy-http-challenge.herokuapp.com/api/v2/sys_info`</span>,<br>headers: &#123;<br>  <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;Basic YWRtaW46YWRtaW4xMjM=&#x27;</span>,<br>  <span class="hljs-string">&#x27;User-Agent&#x27;</span>:<span class="hljs-string">&#x27;MSIE 6.0&#x27;</span>,<br>  <span class="hljs-string">&#x27;X-Library-Number&#x27;</span>: <span class="hljs-string">&#x27;20&#x27;</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>得到回傳值：</li>
 </ul>
-<pre><code class="js">&#123;
-  message: &#39;success&#39;,
-  version: &#39;1A4938Jl7&#39;,
-  owner: &#39;lib&#39;,
-  createdAt: &#39;121290329301&#39;
-&#125;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  message: <span class="hljs-string">&#x27;success&#x27;</span>,<br>  version: <span class="hljs-string">&#x27;1A4938Jl7&#x27;</span>,<br>  owner: <span class="hljs-string">&#x27;lib&#x27;</span>,<br>  createdAt: <span class="hljs-string">&#x27;121290329301&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><p>把 version 的值放到 query string：<span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjk/dG9rZW49JTdCTmV1TiU3RCZhbXA7dmVyc2lvbj0xQTQ5MzhKbDc=">https://lidemy-http-challenge.herokuapp.com/lv9?token={NeuN}&amp;version=1A4938Jl7<i class="fa fa-external-link-alt"></i></span></p>
 </li>

@@ -283,266 +283,120 @@
 <p>瞭解如何使用 Express 這套 Web 應用框架之後，再來要介紹新的工具：Sequelize，這是一款基於 Node.js 的非同步 ORM 框架，讓我們能透過 ORM（物件關聯對映）來開發網頁，以物件導向的概念來操作資料庫。</p>
 <a id="more"></a>
 
-<pre><code>學習目標：
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標：<br><br> <span class="hljs-built_in">P1</span> 了解什麼是 ORM<br> <span class="hljs-built_in">P1</span> 了解 ORM 的優缺點<br> <span class="hljs-built_in">P1</span> 了解什麼是 N+<span class="hljs-number">1</span> problem<br> <span class="hljs-built_in">P1</span> 我知道如何部署 Node.js 應用程式到 heroku<br></code></pre></td></tr></table></figure>
 
- P1 了解什麼是 ORM
- P1 了解 ORM 的優缺點
- P1 了解什麼是 N+1 problem
- P1 我知道如何部署 Node.js 應用程式到 heroku</code></pre>
 <hr>
 <h2 id="什麼是-ORM？"><a href="#什麼是-ORM？" class="headerlink" title="什麼是 ORM？"></a>什麼是 ORM？</h2><p>前面我們提到 Sequelize 是一款 ORM 框架，那什麼是 ORM？</p>
 <p>ORM（Object Relational Mapping），中文為物件關聯對映。是一種將關聯式資料庫（MySQL）映射（mapping）至物件導向（OOP）的資料抽象化技術。</p>
 <p>簡單來說，在網站開發 MVC 結構中，ORM 扮演資料庫系統和 Model 資料容器的中間橋梁，讓我們能透過程式語言（JavaScript）去操作資料庫語言（SQL），是實作物件導向概念的一種工具模式。</p>
-<pre><code>JavaScript（物件） -&gt; ORM -&gt; SQL（資料）</code></pre>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">JavaScript（物件） -&gt; ORM -&gt; SQL（資料）<br></code></pre></td></tr></table></figure>
+
 <h2 id="初探-Sequelize"><a href="#初探-Sequelize" class="headerlink" title="初探 Sequelize"></a>初探 Sequelize</h2><p>初步瞭解什麼是 ORM 框架以後，接著我們要來實際操作 Sequelize 這套 Library，詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9zZXF1ZWxpemUub3JnL21hc3Rlci9tYW51YWwvZ2V0dGluZy1zdGFydGVkLmh0bWw=">Sequelize 官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>透過 npm 來安裝套件，如果專案設在新開的目錄底下，則需先初始化 npm：</p>
-<pre><code>$ npm init
-$ npm install --save sequelize</code></pre>
-<p>並根據使用的 database 來安裝相關套件，本篇使用 MySQL 作為範例：</p>
-<pre><code># One of the following:
-$ npm install --save pg pg-hstore # Postgres
-$ npm install --save mysql2
-$ npm install --save mariadb
-$ npm install --save sqlite3
-$ npm install --save tedious # Microsoft SQL Server</code></pre>
-<h3 id="連線資料庫"><a href="#連線資料庫" class="headerlink" title="連線資料庫"></a>連線資料庫</h3><p>建立 index.js 來引入 sequelize 套件，並透過物件導向概念來連線資料庫：</p>
-<pre><code class="javascript=">// 引入 sequelize 套件
-const &#123; Sequelize &#125; = require(&#39;sequelize&#39;);
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">$ <span class="hljs-built_in">npm</span> init<br>$ <span class="hljs-built_in">npm</span> install --save sequelize<br></code></pre></td></tr></table></figure>
 
-// 透過 new 建立 Sequelize 這個 class，而 sequelize 就是物件 instance
-const sequelize = new Sequelize(&#39;database&#39;, &#39;username&#39;, &#39;password&#39;, &#123;
-  host: &#39;localhost&#39;,
-  dialect: &#39;mysql&#39;
-&#125;);</code></pre>
+<p>並根據使用的 database 來安裝相關套件，本篇使用 MySQL 作為範例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># One of the following:</span><br>$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save pg pg-hstore # Postgres</span><br>$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save mysql2</span><br>$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save mariadb</span><br>$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save sqlite3</span><br>$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save tedious # Microsoft SQL Server</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="連線資料庫"><a href="#連線資料庫" class="headerlink" title="連線資料庫"></a>連線資料庫</h3><p>建立 index.js 來引入 sequelize 套件，並透過物件導向概念來連線資料庫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 sequelize 套件</span><br><span class="hljs-keyword">const</span> &#123; Sequelize &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;sequelize&#x27;</span>);<br><br><span class="hljs-comment">// 透過 new 建立 Sequelize 這個 class，而 sequelize 就是物件 instance</span><br><span class="hljs-keyword">const</span> sequelize = <span class="hljs-keyword">new</span> Sequelize(<span class="hljs-string">&#x27;database&#x27;</span>, <span class="hljs-string">&#x27;username&#x27;</span>, <span class="hljs-string">&#x27;password&#x27;</span>, &#123;<br>  host: <span class="hljs-string">&#x27;localhost&#x27;</span>,<br>  dialect: <span class="hljs-string">&#x27;mysql&#x27;</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <h3 id="定義物件：Model-模型"><a href="#定義物件：Model-模型" class="headerlink" title="定義物件：Model 模型"></a>定義物件：Model 模型</h3><p>由於 ORM 是透過物件與資料庫做連線，物件中的屬性會對映到資料庫欄位，例如資料型態、是否可為空值等等。</p>
 <p>透過 <code>sequelize.define</code> 指令可定義 Model 模型：</p>
-<pre><code class="javascript=">// 定義一個叫做 User 的資料結構
-const User = sequelize.define(&#39;User&#39;, &#123;
-  // 定義 Model 屬性
-  firstName: &#123;     　　　 // 欄位名稱
-    type: Sequelize.STRING,  //  資料型態
-    allowNull: false　　　// 能不能為空，預設是 true
-  &#125;,
-  lastName: &#123;
-    type: Sequelize.STRING
-    // allowNull defaults to true
-  &#125;
-&#125;, &#123;
-  // Other model options go here
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 定義一個叫做 User 的資料結構</span><br><span class="hljs-keyword">const</span> User = sequelize.define(<span class="hljs-string">&#x27;User&#x27;</span>, &#123;<br>  <span class="hljs-comment">// 定義 Model 屬性</span><br>  firstName: &#123;     　　　 <span class="hljs-comment">// 欄位名稱</span><br>    type: Sequelize.STRING,  <span class="hljs-comment">//  資料型態</span><br>    allowNull: <span class="hljs-literal">false</span>　　　<span class="hljs-comment">// 能不能為空，預設是 true</span><br>  &#125;,<br>  lastName: &#123;<br>    type: Sequelize.STRING<br>    <span class="hljs-comment">// allowNull defaults to true</span><br>  &#125;<br>&#125;, &#123;<br>  <span class="hljs-comment">// Other model options go here</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>再來必須呼叫 <code>sequelize.sync()</code> 來執行程式，Sequelize 就會在資料庫建立欄位。而這個指令會回傳一個 promise 物件，需要用 <code>.then()</code> 來接續後面的動作。</p>
 <blockquote>
 <p>這部分可參考之前的學習筆記：<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZldGNoLWFuZC1wcm9taXNl">[week 13] Fetch &amp; Promise 補充<i class="fa fa-external-link-alt"></i></span>。</p>
 </blockquote>
 <h3 id="create-：新增一筆資料"><a href="#create-：新增一筆資料" class="headerlink" title=".create()：新增一筆資料"></a><code>.create()</code>：新增一筆資料</h3><p>如果要新增資料，就在 <code>.then()</code> 裡面使用 <code>&lt;Table Name&gt;.create()</code>，傳入欄位名稱和資料內容：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  // 寫入對映欄位名稱的資料內容
-  User.create(&#123;
-    // 記得 value 字串要加上引號
-    firstName: &#39;Heidi&#39;,
-    lastName:&#39;Liu&#39;
-  &#125;).then(() =&gt; &#123;
-    // 執行成功後會印出文字
-    console.log(&#39;successfully created!!&#39;) 
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 寫入對映欄位名稱的資料內容</span><br>  User.create(&#123;<br>    <span class="hljs-comment">// 記得 value 字串要加上引號</span><br>    firstName: <span class="hljs-string">&#x27;Heidi&#x27;</span>,<br>    lastName:<span class="hljs-string">&#x27;Liu&#x27;</span><br>  &#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 執行成功後會印出文字</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;successfully created!!&#x27;</span>) <br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>在 CLI 介面執行後會發現 SQL log：</p>
 <p><img src="https://i.imgur.com/sV6Dauj.png"></p>
 <p>Sequelize 就會根據 Model 定義，自動在資料庫建立 users table 和一筆資料，並且會自動生成 createdAt 和 updateAt 兩個欄位：</p>
 <p><img src="https://i.imgur.com/apIryUS.png"></p>
 <h3 id="findAll-：選取所有資料"><a href="#findAll-：選取所有資料" class="headerlink" title=".findAll()：選取所有資料"></a><code>.findAll()</code>：選取所有資料</h3><p>如果要選取所有資料，就在 <code>.then()</code> 裡面用 <code>&lt;Table Name&gt;.findAll()</code>，而 <code>findAll()</code> 會回傳一個 promise，因此也要用 <code>.then()</code> 來接收：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findAll().then(users =&gt; &#123;
-    // 用 JSON.stringify() 來格式化輸出
-    console.log(&quot;All users:&quot;, JSON.stringify(users, null, 4));
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findAll().then(<span class="hljs-function"><span class="hljs-params">users</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 用 JSON.stringify() 來格式化輸出</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;All users:&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(users, <span class="hljs-literal">null</span>, <span class="hljs-number">4</span>));<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>就能拿到 All users 的資料：</p>
 <p><img src="https://i.imgur.com/mY7pNA4.png"></p>
 <p>若試著印出 <code>user[0]</code> 的資料：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findAll().then(users =&gt; &#123;
-    // 用 JSON.stringify() 來格式化輸出
-    console.log(users[0]);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findAll().then(<span class="hljs-function"><span class="hljs-params">users</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 用 JSON.stringify() 來格式化輸出</span><br>    <span class="hljs-built_in">console</span>.log(users[<span class="hljs-number">0</span>]);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>會得到一個 User 物件，除了資料訊息，也會有一些底線開頭的屬性，像是 Sequelize 設定的資訊：</p>
 <p><img src="https://i.imgur.com/mE0MsOM.png"></p>
 <p>如果要存取 user 的資料訊息，可直接用 <code>user[0].id</code> 來拿到 id：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findAll().then(users =&gt; &#123;
-    console.log(users[0].id, users[0].firstName);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findAll().then(<span class="hljs-function"><span class="hljs-params">users</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(users[<span class="hljs-number">0</span>].id, users[<span class="hljs-number">0</span>].firstName);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/fWaQzG1.png"></p>
 <h3 id="findAll-where-：設定資料條件"><a href="#findAll-where-：設定資料條件" class="headerlink" title=".findAll(where{ })：設定資料條件"></a>.findAll(where{ })：設定資料條件</h3><p>如果要指定讀取哪些資料，可在 <code>.findAll()</code> 裡面填入 <code>where&#123;&#125;</code> 這個物件來指定條件。假如在資料庫中找不到相對應的資料，就會回傳錯誤訊息：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findAll(&#123;
-    where: &#123;
-      firstName: &#39;Apple&#39;
-    &#125;
-  &#125;).then(users =&gt; &#123;
-    console.log(users[0].id, users[0].firstName);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findAll(&#123;<br>    where: &#123;<br>      firstName: <span class="hljs-string">&#x27;Apple&#x27;</span><br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">users</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(users[<span class="hljs-number">0</span>].id, users[<span class="hljs-number">0</span>].firstName);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>印出符合條件的資料：</p>
 <p><img src="https://i.imgur.com/8raviKR.png"></p>
 <p>這種寫法就相當於 SQL 語法的 <code>SELECT * FROM users WHERE firstName = Apple</code>，更多有關條設定的語法可參考：<span class="exturl" data-url="aHR0cHM6Ly9zZXF1ZWxpemUub3JnL3Y1L21hbnVhbC9xdWVyeWluZy5odG1s">官方文件 -  querying<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="findOne-：選取單一資料"><a href="#findOne-：選取單一資料" class="headerlink" title=".findOne()：選取單一資料"></a>.findOne()：選取單一資料</h3><p>如果只想選取單一資料，或是想要透過 id 來讀取資料，可以使用 <code>.findOne()</code>：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findOne(&#123;
-    where: &#123;
-      id: &#39;1&#39;
-    &#125;
-  &#125;).then(user =&gt; &#123;
-    console.log(user.firstName);
-  &#125;);
-&#125;);
-// Heidi</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findOne(&#123;<br>    where: &#123;<br>      id: <span class="hljs-string">&#x27;1&#x27;</span><br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(user.firstName);<br>  &#125;);<br>&#125;);<br><span class="hljs-comment">// Heidi</span><br></code></pre></td></tr></table></figure>
+
 <p>成功撈取指定資料之後，就可以對該筆資料進行 CRUD。</p>
 <h3 id="update-：更新資料"><a href="#update-：更新資料" class="headerlink" title=".update()：更新資料"></a>.update()：更新資料</h3><p>如果要更新資料，可使用 <code>.then()</code> 接住資料，並在裡面傳入 function，用來執行 <code>user.update()</code>，把要更新的內容用 <code>&#123;&#125;</code> 大括號包住，再填入 <code>update()</code> 中：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findOne(&#123;
-    where: &#123;
-      id: &#39;3&#39;
-    &#125;
-  &#125;).then(user =&gt; &#123;
-    // 在 () 裡面用 &#123;&#125; 大括號包住要更新的內容
-    user.update(&#123;
-      lastName: &#39;Banana&#39;
-    &#125;);
-  &#125;).then(() =&gt; &#123;
-    console.log(&#39;update done!&#39;);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findOne(&#123;<br>    where: &#123;<br>      id: <span class="hljs-string">&#x27;3&#x27;</span><br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 在 () 裡面用 &#123;&#125; 大括號包住要更新的內容</span><br>    user.update(&#123;<br>      lastName: <span class="hljs-string">&#x27;Banana&#x27;</span><br>    &#125;);<br>  &#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;update done!&#x27;</span>);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>這樣就成功更新 id 為 3 這筆資料的 lastName：</p>
 <p><img src="https://i.imgur.com/wZ95sPf.png"></p>
 <h3 id="destroy-：刪除資料"><a href="#destroy-：刪除資料" class="headerlink" title=".destroy()：刪除資料"></a>.destroy()：刪除資料</h3><p>如果要刪除資料，可使用 <code>.then()</code> 接住資料，並在裡面傳入 function，用來執行 <code>user.destroy()</code>：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findOne(&#123;
-    where: &#123;
-      id: &#39;2&#39;
-    &#125;
-  &#125;).then(user =&gt; &#123;
-    user.destroy().then(() =&gt; &#123;
-      console.log(&#39;destroy done!&#39;);
-    &#125;);
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findOne(&#123;<br>    where: &#123;<br>      id: <span class="hljs-string">&#x27;2&#x27;</span><br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    user.destroy().then(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;destroy done!&#x27;</span>);<br>    &#125;);<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="Associations-資料庫關聯"><a href="#Associations-資料庫關聯" class="headerlink" title="Associations 資料庫關聯"></a>Associations 資料庫關聯</h2><p>再來我們要學習如何做資料庫關聯，也就是將兩個不同的 table 關聯，例如將 <code>users.id</code> 對應到 <code>comments.userId</code>。我們在之前課程使用的 SQL 指令，就是透過 <code>user.id</code> 或是 JOIN 等方式來進行資料庫關聯。</p>
 <p>而在 ORM 當中，要將兩個 tabel 進行關聯，則需要透過 <code>.hasMany()</code>、<code>.hasOne</code> 等指令，告訴 Sequelize 執行資料庫關聯，詳細內容可參考<span class="exturl" data-url="aHR0cHM6Ly9zZXF1ZWxpemUub3JnL3Y1L2NsYXNzL2xpYi9hc3NvY2lhdGlvbnMvYmFzZS5qc35Bc3NvY2lhdGlvbi5odG1s">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="如何關聯兩個-table"><a href="#如何關聯兩個-table" class="headerlink" title="如何關聯兩個 table"></a>如何關聯兩個 table</h3><p>以 <code>User.hasMany(Comment)</code> 指令來說，意思就是告訴 Sequelize 一個 user 可以有很多 comment，接著就會在 comment table 中加上 userId 來建立關聯：</p>
-<pre><code class="javascript=">const User = sequelize.define(&#39;user&#39;, &#123;
-  firstName: &#123;
-    type: Sequelize.STRING,
-    allowNull: false
-  &#125;,
-  lastName: &#123;
-    type: Sequelize.STRING
-  &#125;
-&#125;, &#123;
-&#125;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> User = sequelize.define(<span class="hljs-string">&#x27;user&#x27;</span>, &#123;<br>  firstName: &#123;<br>    type: Sequelize.STRING,<br>    allowNull: <span class="hljs-literal">false</span><br>  &#125;,<br>  lastName: &#123;<br>    type: Sequelize.STRING<br>  &#125;<br>&#125;, &#123;<br>&#125;);<br><br><span class="hljs-keyword">const</span> Comment = sequelize.define(<span class="hljs-string">&#x27;comment&#x27;</span>, &#123;<br>  content: &#123;<br>    type: Sequelize.STRING,<br>  &#125;<br>&#125;);<br><br>User.hasMany(Comment);  <span class="hljs-comment">// 將兩個 table 進行關聯</span><br></code></pre></td></tr></table></figure>
 
-const Comment = sequelize.define(&#39;comment&#39;, &#123;
-  content: &#123;
-    type: Sequelize.STRING,
-  &#125;
-&#125;);
-
-User.hasMany(Comment);  // 將兩個 table 進行關聯</code></pre>
 <p>執行後就會發現建立了 comments table，還多了 userId 這個欄位：</p>
 <p><img src="https://i.imgur.com/KiaKCDW.png"></p>
 <h3 id="範例：新增留言"><a href="#範例：新增留言" class="headerlink" title="範例：新增留言"></a>範例：新增留言</h3><p>接著我們就能對資料庫進行操作，以新建一個 comment 為例，在 Comment 要填入 content 和 userId：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  Comment.create(&#123;
-    userId: &#39;3&#39;,
-    content: &#39;Hello!&#39;
-  &#125;).then(() =&gt;&#123;
-    console.log(&#39;done!&#39;)
-  &#125;);
-  User.findOne(&#123;
-    where: &#123;
-      firstName: &#39;Apple&#39;
-    &#125;
-  &#125;).then(user =&gt; &#123;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  Comment.create(&#123;<br>    userId: <span class="hljs-string">&#x27;3&#x27;</span>,<br>    content: <span class="hljs-string">&#x27;Hello!&#x27;</span><br>  &#125;).then(<span class="hljs-function">() =&gt;</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;done!&#x27;</span>)<br>  &#125;);<br>  User.findOne(&#123;<br>    where: &#123;<br>      firstName: <span class="hljs-string">&#x27;Apple&#x27;</span><br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br><br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-  &#125;);
-&#125;);</code></pre>
 <p>執行成功會印出設定的 <code>done!</code>：</p>
 <p><img src="https://i.imgur.com/7HvR4V7.png"></p>
 <p>這樣就成功在 comments table 建立了一則留言：</p>
 <p><img src="https://i.imgur.com/Qi9bRny.png"></p>
 <h3 id="範例：撈取資料"><a href="#範例：撈取資料" class="headerlink" title="範例：撈取資料"></a>範例：撈取資料</h3><p>接著我們就可以利用關聯的 user id 來撈取資料，透過 <code>include:&lt;Table&gt;</code> 這個參數來指定 Model，如果要 include 多個 Model 可透過 Array 傳入：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findOne(&#123;
-    where: &#123;
-      firstName: &#39;Apple&#39;
-    &#125;,
-    // 新增 include 這個參數來指定 Model
-    include: Comment
-  &#125;).then(user =&gt; &#123;
-    console.log(user)
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findOne(&#123;<br>    where: &#123;<br>      firstName: <span class="hljs-string">&#x27;Apple&#x27;</span><br>    &#125;,<br>    <span class="hljs-comment">// 新增 include 這個參數來指定 Model</span><br>    include: Comment<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(user)<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>若把 user 資料印出來，會發現包含很多資訊：</p>
 <p><img src="https://i.imgur.com/c6SBlsD.png"></p>
 <p>利用 <code>JSON.stringify()</code> 來格式化輸出，即可忽略不需要的資訊：</p>
-<pre><code class="javascript=">sequelize.sync().then(() =&gt; &#123;
-  User.findOne(&#123;
-    where: &#123;
-      firstName: &#39;Apple&#39;
-    &#125;,
-    include: Comment
-  &#125;).then(user =&gt; &#123;
-    console.log(JSON.stringify(user.comments, null, 4));
-  &#125;);
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  User.findOne(&#123;<br>    where: &#123;<br>      firstName: <span class="hljs-string">&#x27;Apple&#x27;</span><br>    &#125;,<br>    include: Comment<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(user.comments, <span class="hljs-literal">null</span>, <span class="hljs-number">4</span>));<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>就會拿到 userId 為 3 的使用者的所有留言：</p>
 <p><img src="https://i.imgur.com/RYpcxxT.png"></p>
 <p>而 <code>User.hasMany(Comment);</code> 其實是單向關係，也就是將 User 對 Comment 進行關聯，但沒有說明 Comment 和 User 的關係是什麼。這時如果要從 comment 來查詢 user 的資料，就會出現錯誤訊息。</p>
 <p>需要加上 <code>Comment.belongsTo(User)</code>，透過這段指令將 Comment 對 User 做關聯，建立起雙向關係：</p>
-<pre><code class="javascript=">User.hasMany(Comment);
-Comment.belongsTo(User);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript">User.hasMany(Comment);<br>Comment.belongsTo(User);<br><br>sequelize.sync().then(<span class="hljs-function">() =&gt;</span> &#123;<br>  Comment.findOne(&#123;<br>    where: &#123;<br>      content: <span class="hljs-string">&#x27;Hello!&#x27;</span><br>    &#125;,<br>    include: User<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">comment</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(comment, <span class="hljs-literal">null</span>, <span class="hljs-number">4</span>));<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-sequelize.sync().then(() =&gt; &#123;
-  Comment.findOne(&#123;
-    where: &#123;
-      content: &#39;Hello!&#39;
-    &#125;,
-    include: User
-  &#125;).then(comment =&gt; &#123;
-    console.log(JSON.stringify(comment, null, 4));
-  &#125;);
-&#125;);</code></pre>
 <p>就會拿到有關 comment 的 user 資訊：</p>
 <p><img src="https://i.imgur.com/5U9BsA1.png"></p>
 <h2 id="Sequelize-CLI"><a href="#Sequelize-CLI" class="headerlink" title="Sequelize CLI"></a>Sequelize CLI</h2><p>在實際開發時，為了讓程式碼更有結構性以及方便管理，可安裝 Sequelize CLI 這套工具，詳細內容可參考<span class="exturl" data-url="aHR0cHM6Ly9zZXF1ZWxpemUub3JnL3Y1L21hbnVhbC9taWdyYXRpb25zLmh0bWw=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
-<h3 id="安裝並初始化"><a href="#安裝並初始化" class="headerlink" title="安裝並初始化"></a>安裝並初始化</h3><pre><code>$ npm install --save sequelize-cli
-$ npx sequelize-cli init</code></pre>
+<h3 id="安裝並初始化"><a href="#安裝並初始化" class="headerlink" title="安裝並初始化"></a>安裝並初始化</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata">$ npm install --<span class="hljs-keyword">save</span> sequelize-<span class="hljs-keyword">cli</span><br>$ npx sequelize-<span class="hljs-keyword">cli</span> init<br></code></pre></td></tr></table></figure>
+
 <p>完成初始化會建立 config.json 檔案，裡面會有連線資料庫的設定，包含 database 帳密等資訊，因此通常不會加到 commit：</p>
 <p><img src="https://i.imgur.com/UOauFVL.png"></p>
 <h3 id="設定連線資料庫"><a href="#設定連線資料庫" class="headerlink" title="設定連線資料庫"></a>設定連線資料庫</h3><p>接著可以在 config.json 更改成我們連線資料庫的設定，三種設定分別是在開發環境、測試環境、正式環境。因為我們現在是在 localhost 開發所以要修改 development 的部分：</p>
 <p><img src="https://i.imgur.com/opeKSyL.png"></p>
 <h3 id="建立-Model"><a href="#建立-Model" class="headerlink" title="建立 Model"></a>建立 Model</h3><p>接著我們可以直接透過 CLI 指令來建立 User 和 Comment 這兩個 Model：</p>
-<pre><code>$ npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
-$ npx sequelize-cli model:generate --name Comment --attributes content:string</code></pre>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs verilog">$ npx sequelize-cli model:<span class="hljs-keyword">generate</span> --name User --attributes firstName:<span class="hljs-keyword">string</span>,lastName:<span class="hljs-keyword">string</span>,email:<span class="hljs-keyword">string</span><br>$ npx sequelize-cli model:<span class="hljs-keyword">generate</span> --name Comment --attributes content:<span class="hljs-keyword">string</span><br></code></pre></td></tr></table></figure>
+
 <p>建立好 Model 之後，Sequelize 會自動在 models 和 migrations 資料夾底下建立檔案：</p>
 <p><img src="https://i.imgur.com/xTNnc3A.png"></p>
 <p>我們可以透過 user.js 和 comment.js 這些檔案設定，來對 model 進行微調：</p>
-<pre><code class="javascript=">&#39;use strict&#39;;
-module.exports = (sequelize, DataTypes) =&gt; &#123;
-  const Comment = sequelize.define(&#39;Comment&#39;, &#123;
-    content: DataTypes.STRING
-  &#125;, &#123;&#125;);
-  Comment.associate = function(models) &#123;
-    //  在這裡設定資料庫關聯
-    Comment.belongsTo(Models.User);
-  &#125;;
-  return Comment;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br><span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">sequelize, DataTypes</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> Comment = sequelize.define(<span class="hljs-string">&#x27;Comment&#x27;</span>, &#123;<br>    content: DataTypes.STRING<br>  &#125;, &#123;&#125;);<br>  Comment.associate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">models</span>) </span>&#123;<br>    <span class="hljs-comment">//  在這裡設定資料庫關聯</span><br>    Comment.belongsTo(Models.User);<br>  &#125;;<br>  <span class="hljs-keyword">return</span> Comment;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="執行-Migrations"><a href="#執行-Migrations" class="headerlink" title="執行 Migrations"></a>執行 Migrations</h3><p>但設定完這些檔案之後，資料庫裡面還不會有任何東西。這是因為必須透過執行 Migrations，才會依照我們在 Model 做的設定去操作資料庫：</p>
-<pre><code>$ npx sequelize-cli db:migrate</code></pre>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">$ npx sequelize-<span class="hljs-keyword">cli</span> <span class="hljs-keyword">db</span>:migrate<br></code></pre></td></tr></table></figure>
+
 <p>接著就會在資料庫建立 SequelizeMeta table 來記錄執行過的 migrations；並且依照 migrations 中的檔案去操作資料庫，也就是建立 users 和 comments table：</p>
 <p><img src="https://i.imgur.com/RPTzLXv.png"></p>
 <p>有了 migrations，就不需再透過 <code>sync()</code> 指令來操作資料庫，並且能夠以更結構性的方式進行管理。</p>
@@ -550,123 +404,64 @@ module.exports = (sequelize, DataTypes) =&gt; &#123;
 <ul>
 <li>user.js</li>
 </ul>
-<pre><code class="javascript=">&#39;use strict&#39;;
-const &#123;
-  Model
-&#125; = require(&#39;sequelize&#39;);
-module.exports = (sequelize, DataTypes) =&gt; &#123;
-  class User extends Model &#123;
-    static associate(models) &#123;
-      // 加上關聯資料庫的設定
-      User.hasMany(models.Comment)
-    &#125;
-  &#125;;
-  User.init(&#123;
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING
-  &#125;, &#123;
-    sequelize,
-    modelName: &#39;User&#39;,
-  &#125;);
-  return User;
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br><span class="hljs-keyword">const</span> &#123;<br>  Model<br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;sequelize&#x27;</span>);<br><span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">sequelize, DataTypes</span>) =&gt;</span> &#123;<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">associate</span>(<span class="hljs-params">models</span>)</span> &#123;<br>      <span class="hljs-comment">// 加上關聯資料庫的設定</span><br>      User.hasMany(models.Comment)<br>    &#125;<br>  &#125;;<br>  User.init(&#123;<br>    firstName: DataTypes.STRING,<br>    lastName: DataTypes.STRING,<br>    email: DataTypes.STRING<br>  &#125;, &#123;<br>    sequelize,<br>    modelName: <span class="hljs-string">&#x27;User&#x27;</span>,<br>  &#125;);<br>  <span class="hljs-keyword">return</span> User;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>comment.js</li>
 </ul>
-<pre><code class="javascript=">&#39;use strict&#39;;
-const &#123;
-  Model
-&#125; = require(&#39;sequelize&#39;);
-module.exports = (sequelize, DataTypes) =&gt; &#123;
-  class Comment extends Model &#123;
-    static associate(models) &#123;
-      // 加上關聯資料庫的設定，存取其他 Model
-      Comment.belongsTo(models.User);
-    &#125;
-  &#125;;
-  Comment.init(&#123;
-    content: DataTypes.STRING
-  &#125;, &#123;
-    sequelize,
-    modelName: &#39;Comment&#39;,
-  &#125;);
-  return Comment;
-&#125;;</code></pre>
-<h3 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h3><p>再來回到根目錄的 index.js，即可從 models 引入 db 來使用：</p>
-<pre><code class="javascript=">const db = require(&#39;./models&#39;);</code></pre>
-<p>以下列程式碼為例，如此就可以透過 index.js 來操作資料庫：</p>
-<pre><code class="javascript=">const User = db.User;
-const Comment =　db.Comment;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br><span class="hljs-keyword">const</span> &#123;<br>  Model<br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;sequelize&#x27;</span>);<br><span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">sequelize, DataTypes</span>) =&gt;</span> &#123;<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Comment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">associate</span>(<span class="hljs-params">models</span>)</span> &#123;<br>      <span class="hljs-comment">// 加上關聯資料庫的設定，存取其他 Model</span><br>      Comment.belongsTo(models.User);<br>    &#125;<br>  &#125;;<br>  Comment.init(&#123;<br>    content: DataTypes.STRING<br>  &#125;, &#123;<br>    sequelize,<br>    modelName: <span class="hljs-string">&#x27;Comment&#x27;</span>,<br>  &#125;);<br>  <span class="hljs-keyword">return</span> Comment;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-User.create(&#123;
-  firstName: &#39;Hello&#39;,
-  lastName: &#39;World&#39;
-&#125;).then(() =&gt; &#123;
-  console.log(&#39;done!&#39;)
-&#125;);</code></pre>
+<h3 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h3><p>再來回到根目錄的 index.js，即可從 models 引入 db 來使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./models&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>以下列程式碼為例，如此就可以透過 index.js 來操作資料庫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> User = db.User;<br><span class="hljs-keyword">const</span> Comment =　db.Comment;<br><br>User.create(&#123;<br>  firstName: <span class="hljs-string">&#x27;Hello&#x27;</span>,<br>  lastName: <span class="hljs-string">&#x27;World&#x27;</span><br>&#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;done!&#x27;</span>)<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>執行後成功在 User 新增一筆資料：</p>
 <p><img src="https://i.imgur.com/OPsscPV.png"></p>
 <hr>
 <h2 id="改造留言板系統"><a href="#改造留言板系統" class="headerlink" title="改造留言板系統"></a>改造留言板系統</h2><p>在瞭解到什麼是 Sequelize 和 ORM 之後，接著我們要來改造之前時做的<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMjAxLWV4cHJlc3MtcHJhY3RpY2U=">留言版系統<i class="fa fa-external-link-alt"></i></span>，也就是把 Model 部分改用 Sequelize 實作。</p>
 <h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>在 express 專案中引入 Sequelize 套件，並進行初始化：</p>
-<pre><code>$ npm install sequelize mysql2
-$ npm install sequelize-cli
-$ npx sequelize-cli init</code></pre>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>npm install sequelize mysql2<br><span class="hljs-variable">$ </span>npm install sequelize-cli<br><span class="hljs-variable">$ </span>npx sequelize-cli init<br></code></pre></td></tr></table></figure>
+
 <p>接著在建立 Model 之前，可以先清除不必要的檔案和程式碼，例如 db.js、todocontroller、以及原本 models 的部分。</p>
 <h3 id="設定連線資料庫-1"><a href="#設定連線資料庫-1" class="headerlink" title="設定連線資料庫"></a>設定連線資料庫</h3><p>接著修改 config.json 資料庫連線的設定：</p>
-<pre><code class="javascript=">  &quot;development&quot;: &#123;
-    &quot;username&quot;: &quot;root&quot;,
-    &quot;password&quot;: null,
-    &quot;database&quot;: &quot;mydb&quot;,
-    &quot;host&quot;: &quot;localhost&quot;,
-    &quot;dialect&quot;: &quot;mysql&quot;
-  &#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-string">&quot;development&quot;</span>: &#123;<br>  <span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;root&quot;</span>,<br>  <span class="hljs-string">&quot;password&quot;</span>: <span class="hljs-literal">null</span>,<br>  <span class="hljs-string">&quot;database&quot;</span>: <span class="hljs-string">&quot;mydb&quot;</span>,<br>  <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,<br>  <span class="hljs-string">&quot;dialect&quot;</span>: <span class="hljs-string">&quot;mysql&quot;</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <h3 id="建立-Model-1"><a href="#建立-Model-1" class="headerlink" title="建立 Model"></a>建立 Model</h3><p>再來要建立 User 和 Comment 兩個 Model：</p>
 <ul>
 <li>因為已經要把兩個 table 進行關聯，Comment  table 就不須再加上 username 欄位</li>
 <li>string 型態預設會建立 VARCHAR，最大長度為 255，因此可以把 content 改用 text</li>
 <li>在新增之前記得先把舊的同名 table 移除，避免互相干擾</li>
 </ul>
-<pre><code>$ npx sequelize-cli model:generate --name User --attributes username:string,password:string,nickname:string
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs verilog">$ npx sequelize-cli model:<span class="hljs-keyword">generate</span> --name User --attributes username:<span class="hljs-keyword">string</span>,password:<span class="hljs-keyword">string</span>,nickname:<span class="hljs-keyword">string</span><br><br>$ npx sequelize-cli model:<span class="hljs-keyword">generate</span> --name Comment --attributes content:text<br></code></pre></td></tr></table></figure>
 
-$ npx sequelize-cli model:generate --name Comment --attributes content:text</code></pre>
 <p>執行後會在 models 建立檔案：</p>
 <p><img src="https://i.imgur.com/XXR8r9j.png"></p>
 <h3 id="執行-Migrations-1"><a href="#執行-Migrations-1" class="headerlink" title="執行 Migrations"></a>執行 Migrations</h3><p>再來執行 Migrations，才會真正把資料寫入資料庫來建立 table：</p>
-<pre><code>$ npx sequelize-cli db:migrate</code></pre>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">$ npx sequelize-<span class="hljs-keyword">cli</span> <span class="hljs-keyword">db</span>:migrate<br></code></pre></td></tr></table></figure>
+
 <p>執行後會在資料庫建立 table：</p>
 <p><img src="https://i.imgur.com/cJidV5z.png"></p>
 <p>但我們還需要在 comment table 加上 UserId 欄位，這部分要自己手動修改 migrations 中的 create-comment 檔案：</p>
-<pre><code class="javascript=">// 新增 UserId 這個欄位，型態是數字
-  UserId: &#123;
-    type: Sequelize.INTEGER
-  &#125;</code></pre>
-<p>接著要重跑一次 Migrations，可透過下方<br>指令來撤銷上一個動作：</p>
-<pre><code>// 單次撤銷（最近的一次）
-$ npx sequelize-cli db:migrate:undo
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 新增 UserId 這個欄位，型態是數字</span><br>  UserId: &#123;<br>    type: Sequelize.INTEGER<br>  &#125;<br></code></pre></td></tr></table></figure>
 
-// 撤銷所有
-$ npx sequelize-cli db:migrate:all</code></pre>
+<p>接著要重跑一次 Migrations，可透過下方<br>指令來撤銷上一個動作：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-comment">// 單次撤銷（最近的一次）</span><br>$ npx sequelize-cli <span class="hljs-attr">db:</span><span class="hljs-attr">migrate:</span>undo<br><br><span class="hljs-comment">// 撤銷所有</span><br>$ npx sequelize-cli <span class="hljs-attr">db:</span><span class="hljs-attr">migrate:</span>all<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/iGSJ2HF.png"></p>
 <p>到資料庫會發現 comments 不見了，但 users 不會受到影響：</p>
 <p><img src="https://i.imgur.com/XKqaVdq.png"></p>
 <p>再跑一次 Migrations 建立 Comment table，會多一個 UserId 欄位：</p>
 <p><img src="https://i.imgur.com/N6Hfsy7.png"></p>
 <h4 id="補充：設定-username-為-UNIQUE"><a href="#補充：設定-username-為-UNIQUE" class="headerlink" title="補充：設定 username 為 UNIQUE"></a>補充：設定 username 為 UNIQUE</h4><p>此外，也可透過修改 create-user 檔案，把 username 欄位設定為 UNIQUE，然後再重新 Migrations。如此可避免註冊時會有重複的 username：</p>
-<pre><code class="javascript=">  username: &#123;
-    type: Sequelize.STRING,
-    unique: true
-  &#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">username: &#123;<br>  type: Sequelize.STRING,<br>  unique: <span class="hljs-literal">true</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <h3 id="關聯資料庫"><a href="#關聯資料庫" class="headerlink" title="關聯資料庫"></a>關聯資料庫</h3><p>再來要進行資料庫關聯，分別在 models 資料夾中的 user.js 和 comment.js 加上關聯指令：</p>
-<pre><code class="javascript=">// user.js
-  static associate(models) &#123;
-    User.hasMany(models.Comment);
-  &#125;</code></pre>
-<pre><code class="javascript=">// comment.js
-  static associate(models) &#123;
-    Comment.belongsTo(models.User);
-    &#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// user.js</span><br>  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">associate</span>(<span class="hljs-params">models</span>)</span> &#123;<br>    User.hasMany(models.Comment);<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// comment.js</span><br>  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">associate</span>(<span class="hljs-params">models</span>)</span> &#123;<br>    Comment.belongsTo(models.User);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="修改-Controllers"><a href="#修改-Controllers" class="headerlink" title="修改 Controllers"></a>修改 Controllers</h3><p>接著要來修改 user 和 comment 的 Controllers，也就是原本處理 userModel 的部分：</p>
 <ul>
 <li>controllers\user.js</li>
@@ -674,194 +469,49 @@ $ npx sequelize-cli db:migrate:all</code></pre>
 <ol>
 <li>拿掉原本引入的 userModel，改成引入 db 中的 models：</li>
 </ol>
-<pre><code class="javascript=">const db = require(&#39;../models&#39;);
-const User = db.User;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models&#x27;</span>);<br><span class="hljs-keyword">const</span> User = db.User;<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>修改 handleLogin：</li>
 </ol>
-<pre><code class="javascript=">  handleLogin: (req, res, next) =&gt; &#123;
-    const &#123; username, password &#125; = req.body;
-    if (!username || !password) &#123;
-      req.flash(&#39;errorMessage&#39;, &#39;請輸入您的帳密&#39;);
-      return next();
-    &#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript">handleLogin: <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; username, password &#125; = req.body;<br>  <span class="hljs-keyword">if</span> (!username || !password) &#123;<br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;請輸入您的帳密&#x27;</span>);<br>    <span class="hljs-keyword">return</span> next();<br>  &#125;<br><br>  <span class="hljs-comment">// 從 User table 撈取對應 username 的資料</span><br>  User.findOne(&#123;<br>    where: &#123;<br>      username<br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!user) &#123;<br>      req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;使用者不存在&#x27;</span>);<br>      <span class="hljs-keyword">return</span> next();<br>    &#125;<br><br>    bcrypt.compare(password, user.password, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, isSccess</span>) </span>&#123;<br>      <span class="hljs-keyword">if</span> (err || !isSccess) &#123;<br>        req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;輸入帳密有誤&#x27;</span>);<br>        <span class="hljs-keyword">return</span> next();<br>      &#125;<br>      req.session.username = user.username;<br>      <span class="hljs-comment">// 在 session 中加入 user.id</span><br>      req.session.userId = user.id;<br>      res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>)<br>    &#125;);<br>  <span class="hljs-comment">// 有錯誤的話就印出錯誤訊息</span><br>  &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, err.toString());<br>    <span class="hljs-keyword">return</span> next();<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
 
-    // 從 User table 撈取對應 username 的資料
-    User.findOne(&#123;
-      where: &#123;
-        username
-      &#125;
-    &#125;).then(user =&gt; &#123;
-      if (!user) &#123;
-        req.flash(&#39;errorMessage&#39;, &#39;使用者不存在&#39;);
-        return next();
-      &#125;
-
-      bcrypt.compare(password, user.password, function (err, isSccess) &#123;
-        if (err || !isSccess) &#123;
-          req.flash(&#39;errorMessage&#39;, &#39;輸入帳密有誤&#39;);
-          return next();
-        &#125;
-        req.session.username = user.username;
-        // 在 session 中加入 user.id
-        req.session.userId = user.id;
-        res.redirect(&#39;/&#39;)
-      &#125;);
-    // 有錯誤的話就印出錯誤訊息
-    &#125;).catch(err =&gt; &#123;
-      req.flash(&#39;errorMessage&#39;, err.toString());
-      return next();
-    &#125;);
-  &#125;,</code></pre>
 <ol start="3">
 <li>修改 handleRegister：</li>
 </ol>
-<pre><code class="javascript=">  handleRegister: (req, res, next) =&gt; &#123;
-    const &#123;username, password, nickname&#125; = req.body;
-    if (!username || !password || !nickname) &#123;
-      req.flash(&#39;errorMessage&#39;, &#39;缺少必要欄位&#39;);
-      return next();
-    &#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs javascript">handleRegister: <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123;username, password, nickname&#125; = req.body;<br>  <span class="hljs-keyword">if</span> (!username || !password || !nickname) &#123;<br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;缺少必要欄位&#x27;</span>);<br>    <span class="hljs-keyword">return</span> next();<br>  &#125;<br><br>  bcrypt.hash(password, saltRounds, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, hash</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (err) &#123;<br>      req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, err.toString());<br>      <span class="hljs-keyword">return</span> next();<br>    &#125;<br>    <span class="hljs-comment">// 在 User table 建立資料</span><br>    User.create(&#123;<br>      username,<br>      nickname,<br>      password: hash<br>    &#125;).then(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> &#123;     <span class="hljs-comment">// create 完會回傳一個 instance</span><br>      req.session.username = username;<br>      <span class="hljs-comment">// 在 session 中加入 user.id</span><br>      req.session.userId = user.id;<br>      res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br><br>    <span class="hljs-comment">// 有錯誤的話就印出錯誤訊息</span><br>    &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>      req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;已存在相同用戶名&#x27;</span>);<br>      <span class="hljs-keyword">return</span> next();<br>    &#125;);<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
 
-    bcrypt.hash(password, saltRounds, function (err, hash) &#123;
-      if (err) &#123;
-        req.flash(&#39;errorMessage&#39;, err.toString());
-        return next();
-      &#125;
-      // 在 User table 建立資料
-      User.create(&#123;
-        username,
-        nickname,
-        password: hash
-      &#125;).then(user =&gt; &#123;     // create 完會回傳一個 instance
-        req.session.username = username;
-        // 在 session 中加入 user.id
-        req.session.userId = user.id;
-        res.redirect(&#39;/&#39;);
-
-      // 有錯誤的話就印出錯誤訊息
-      &#125;).catch(err =&gt; &#123;
-        req.flash(&#39;errorMessage&#39;, &#39;已存在相同用戶名&#39;);
-        return next();
-      &#125;);
-    &#125;);
-  &#125;,</code></pre>
 <ul>
 <li>controllers\comment.js</li>
 </ul>
 <ol>
 <li>拿掉原本引入的 commentModel，改成引入 db 中的 models：</li>
 </ol>
-<pre><code class="javascript=">// 從 models 引入 db
-const db = require(&#39;../models&#39;);
-const Comment = db.Comment;
-const User = db.User;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 從 models 引入 db</span><br><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models&#x27;</span>);<br><span class="hljs-keyword">const</span> Comment = db.Comment;<br><span class="hljs-keyword">const</span> User = db.User;<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>修改 add：</li>
 </ol>
-<pre><code class="javascript=">  add: (req, res, next) =&gt; &#123;
-    const &#123;userId&#125; = req.session
-    const &#123;content&#125; = req.body
-    if (!userId) &#123;
-      req.flash(&#39;errorMessage&#39;, &#39;請先登入&#39;);
-      return next();
-    &#125;
-    if (!content) &#123;
-      req.flash(&#39;errorMessage&#39;, &#39;請填入留言內容&#39;);
-      return next();
-    &#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript">add: <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123;userId&#125; = req.session<br>  <span class="hljs-keyword">const</span> &#123;content&#125; = req.body<br>  <span class="hljs-keyword">if</span> (!userId) &#123;<br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;請先登入&#x27;</span>);<br>    <span class="hljs-keyword">return</span> next();<br>  &#125;<br>  <span class="hljs-keyword">if</span> (!content) &#123;<br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;請填入留言內容&#x27;</span>);<br>    <span class="hljs-keyword">return</span> next();<br>  &#125;<br><br>  Comment.create(&#123;<br>    content,<br>    UserId: userId<br>  &#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  &#125;)<br>&#125;,<br></code></pre></td></tr></table></figure>
 
-    Comment.create(&#123;
-      content,
-      UserId: userId
-    &#125;).then(() =&gt; &#123;
-      res.redirect(&#39;/&#39;);
-    &#125;)
-  &#125;,</code></pre>
 <ol start="3">
 <li>修改 index：</li>
 </ol>
-<pre><code class="javascript=">  index: (req, res) =&gt; &#123;
-    Comment.findAll(&#123;
-      // 撈取資料需要關聯 Comment 和 User table
-      include: User
-    &#125;).then(comments =&gt; &#123;
-      res.render(&#39;index&#39;, &#123;
-        comments
-      &#125;);
-    &#125;);
-  &#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">index: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  Comment.findAll(&#123;<br>    <span class="hljs-comment">// 撈取資料需要關聯 Comment 和 User table</span><br>    include: User<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">comments</span> =&gt;</span> &#123;<br>    res.render(<span class="hljs-string">&#x27;index&#x27;</span>, &#123;<br>      comments<br>    &#125;);<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <p>因為資料形式改變，必須修改 View 的部分，例如拿取 nickname 的部分，要改成 comment.User.nickname 來透過關聯拿取：</p>
-<pre><code class="htmlmixed=">&lt;!-- index.ejs --&gt;
-  &lt;div class=&quot;card-container d-flex justify-content-around flex-wrap&quot; style=&quot;width: 100%;&quot;&gt;
-    &lt;% comments.forEach(function(comment) &#123; %&gt;
-      &lt;div class=&quot;card mb-2&quot; style=&quot;width: 22rem; height: 18rem;&quot;&gt;
-        &lt;div class=&quot;card-header&quot;&gt;
-          &lt;div class=&quot;card-top d-flex justify-content-between&quot;&gt;
-            &lt;h5 class=&quot;card-title&quot;&gt;&lt;%= comment.User.nickname %&gt;&lt;/h5&gt;
-            &lt;div class=&quot;card-btn&quot;&gt;
-              &lt;% if (username === comment.User.username) &#123;%&gt;
-              &lt;a href=&quot;/update_comments/&lt;%= comment.id %&gt;&quot; class=&quot;card-link&quot;&gt;編輯&lt;/a&gt;
-              &lt;a href=&quot;/delete_comments/&lt;%= comment.id %&gt;&quot; class=&quot;card-link&quot;&gt;刪除&lt;/a&gt;
-              &lt;% &#125; %&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;p class=&quot;card-subtitle text-muted&quot;&gt;&lt;%= moment(comment.createdAt).format(shortDateFormat) %&gt;&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;card-body&quot; style=&quot;overflow:scroll; overflow-x:hidden; &quot;&gt;
-          &lt;p class=&quot;card-text&quot; &gt;&lt;%= comment.content %&gt;&lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;% &#125;) %&gt;
-  &lt;/div&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- index.ejs --&gt;<br>  &lt;div class&#x3D;&quot;card-container d-flex justify-content-around flex-wrap&quot; style&#x3D;&quot;width: 100%;&quot;&gt;<br>    &lt;% comments.forEach(function(comment) &#123; %&gt;<br>      &lt;div class&#x3D;&quot;card mb-2&quot; style&#x3D;&quot;width: 22rem; height: 18rem;&quot;&gt;<br>        &lt;div class&#x3D;&quot;card-header&quot;&gt;<br>          &lt;div class&#x3D;&quot;card-top d-flex justify-content-between&quot;&gt;<br>            &lt;h5 class&#x3D;&quot;card-title&quot;&gt;&lt;%&#x3D; comment.User.nickname %&gt;&lt;&#x2F;h5&gt;<br>            &lt;div class&#x3D;&quot;card-btn&quot;&gt;<br>              &lt;% if (username &#x3D;&#x3D;&#x3D; comment.User.username) &#123;%&gt;<br>              &lt;a href&#x3D;&quot;&#x2F;update_comments&#x2F;&lt;%&#x3D; comment.id %&gt;&quot; class&#x3D;&quot;card-link&quot;&gt;編輯&lt;&#x2F;a&gt;<br>              &lt;a href&#x3D;&quot;&#x2F;delete_comments&#x2F;&lt;%&#x3D; comment.id %&gt;&quot; class&#x3D;&quot;card-link&quot;&gt;刪除&lt;&#x2F;a&gt;<br>              &lt;% &#125; %&gt;<br>            &lt;&#x2F;div&gt;<br>          &lt;&#x2F;div&gt;<br>          &lt;p class&#x3D;&quot;card-subtitle text-muted&quot;&gt;&lt;%&#x3D; moment(comment.createdAt).format(shortDateFormat) %&gt;&lt;&#x2F;p&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;div class&#x3D;&quot;card-body&quot; style&#x3D;&quot;overflow:scroll; overflow-x:hidden; &quot;&gt;<br>          &lt;p class&#x3D;&quot;card-text&quot; &gt;&lt;%&#x3D; comment.content %&gt;&lt;&#x2F;p&gt;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    &lt;% &#125;) %&gt;<br>  &lt;&#x2F;div&gt;<br></code></pre></td></tr></table></figure>
+
 <ol start="4">
 <li>修改 delete：</li>
 </ol>
-<pre><code class="javascript=">  delete: (req, res) =&gt; &#123;
-    Comment.findOne(&#123;
-      where: &#123;
-        id: req.params.id,
-        UserId: req.session.userId
-      &#125;
-    &#125;).then(comment =&gt; &#123;
-      return comment.destroy();
-    &#125;).then(() =&gt; &#123;
-      res.redirect(&#39;/&#39;);
-    &#125;).catch(() =&gt; &#123;
-      res.redirect(&#39;/&#39;);
-    &#125;);
-  &#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">delete</span>: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  Comment.findOne(&#123;<br>    where: &#123;<br>      id: req.params.id,<br>      UserId: req.session.userId<br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">comment</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> comment.destroy();<br>  &#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  &#125;).catch(<span class="hljs-function">() =&gt;</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ol start="5">
 <li>修改 update 和 handleupdate：</li>
 </ol>
-<pre><code class="javascript=">  update: (req, res) =&gt; &#123;
-    Comment.findOne(&#123;
-      where: &#123;
-        id: req.params.id
-      &#125;
-    &#125;).then(comment =&gt; &#123;
-      res.render(&#39;update&#39;, &#123;
-        comment
-      &#125;);
-    &#125;);
-  &#125;,
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript">update: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  Comment.findOne(&#123;<br>    where: &#123;<br>      id: req.params.id<br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">comment</span> =&gt;</span> &#123;<br>    res.render(<span class="hljs-string">&#x27;update&#x27;</span>, &#123;<br>      comment<br>    &#125;);<br>  &#125;);<br>&#125;,<br><br>handleUpdate: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  Comment.findOne(&#123;<br>    where: &#123;<br>      id: req.params.id,<br>      UserId: req.session.userId<br>    &#125;<br>  &#125;).then(<span class="hljs-function"><span class="hljs-params">comment</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> comment.update(&#123;<br>      content: req.body.content<br>    &#125;);<br>  &#125;).then(<span class="hljs-function">() =&gt;</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  &#125;).catch(<span class="hljs-function">() =&gt;</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-  handleUpdate: (req, res) =&gt; &#123;
-    Comment.findOne(&#123;
-      where: &#123;
-        id: req.params.id,
-        UserId: req.session.userId
-      &#125;
-    &#125;).then(comment =&gt; &#123;
-      return comment.update(&#123;
-        content: req.body.content
-      &#125;);
-    &#125;).then(() =&gt; &#123;
-      res.redirect(&#39;/&#39;);
-    &#125;).catch(() =&gt; &#123;
-      res.redirect(&#39;/&#39;);
-    &#125;);
-  &#125;</code></pre>
 <p>修改結果：</p>
 <p><img src="https://i.imgur.com/aSeD9vH.png"></p>
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>這樣就成功透過 Express 搭配 Sequelize 修改之前的留言板結構，即使不使用 SQL 指令，也能以 ORM 提供的物件導向形式來操作資料庫。</p>

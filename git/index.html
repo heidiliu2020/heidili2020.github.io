@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [GIT101] Git 超新手入門 這門課程的學習筆記。  學習目標：   了解 Git 在做什麼，以及為何我們需要 Git  知道 add、commit、push、pull 等基本 Git 指令">
+  <meta name="description" content="本篇為 [GIT101] Git 超新手入門 這門課程的學習筆記。  1234學習目標： 了解 Git 在做什麼，以及為何我們需要 Git 知道 add、commit、push、pull 等基本 Git 指令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 1] 版本控制 - Git 概念 ＆ 基本指令">
 <meta property="og:url" content="https://heidiliu2020.github.io/git/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [GIT101] Git 超新手入門 這門課程的學習筆記。  學習目標：   了解 Git 在做什麼，以及為何我們需要 Git  知道 add、commit、push、pull 等基本 Git 指令">
+<meta property="og:description" content="本篇為 [GIT101] Git 超新手入門 這門課程的學習筆記。  1234學習目標： 了解 Git 在做什麼，以及為何我們需要 Git 知道 add、commit、push、pull 等基本 Git 指令">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/2nnCsCD.png">
 <meta property="og:image" content="https://i.imgur.com/BVuxZag.png">
@@ -266,10 +266,7 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZ2l0MTAx">[GIT101] Git 超新手入門<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。</p>
 </blockquote>
-<pre><code>學習目標：
-
- 了解 Git 在做什麼，以及為何我們需要 Git
- 知道 add、commit、push、pull 等基本 Git 指令</code></pre>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">學習目標：<br><br> 了解 Git 在做什麼，以及為何我們需要 Git<br> 知道 <span class="hljs-keyword">add</span>、commit、<span class="hljs-keyword">push</span>、pull 等基本 Git 指令<br></code></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <h2 id="什麼是版本控制？"><a href="#什麼是版本控制？" class="headerlink" title="什麼是版本控制？"></a>什麼是版本控制？</h2><h4 id="簡言之，就是將一個檔案所有歷史紀錄的版本都保存起來，以便日後參考。"><a href="#簡言之，就是將一個檔案所有歷史紀錄的版本都保存起來，以便日後參考。" class="headerlink" title="簡言之，就是將一個檔案所有歷史紀錄的版本都保存起來，以便日後參考。"></a>簡言之，就是將一個檔案所有歷史紀錄的版本都保存起來，以便日後參考。</h4><p>我們其實曾接觸過版本控制，例如備份檔案，或是以不同檔名保存編輯過的檔案：</p>
@@ -366,8 +363,9 @@
 <li>modified（已修改的）：代表檔案已經被編輯過，或檔案內容與 <code>HEAD</code> 內容不一致的狀態</li>
 </ol>
 <h3 id="補充-2：設定帳號和姓名"><a href="#補充-2：設定帳號和姓名" class="headerlink" title="補充 2：設定帳號和姓名"></a>補充 2：設定帳號和姓名</h3><p>第一次輸入 <code>git commit</code> 指令時出現錯誤，跳出需要設定帳號和姓名的畫面，這時需輸入以下指令：</p>
-<pre><code>git config --global user.name &quot;your name&quot;　　//  &quot;換成自己的帳號和信箱&quot;
-git config --global user.email &quot;your email&quot;</code></pre>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs verilog">git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.name</span> <span class="hljs-string">&quot;your name&quot;</span>　　<span class="hljs-comment">//  &quot;換成自己的帳號和信箱&quot;</span><br>git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.email</span> <span class="hljs-string">&quot;your email&quot;</span><br></code></pre></td></tr></table></figure>
+
+
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9kamFuZ29naXJsc3RhaXBlaS5oZXJva3VhcHAuY29tL3R1dG9yaWFscy92ZXJzaW9uLWNvbnRyb2wtd2l0aC1naXQvP29zPXdpbmRvd3M=">用 Git 進行版本控制<i class="fa fa-external-link-alt"></i></span></li>

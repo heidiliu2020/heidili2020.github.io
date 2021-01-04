@@ -271,17 +271,8 @@
 <li><code>prettier</code>: is the JavaScript formatter we will run before commits.</li>
 </ul>
 <p>並在 package.json 檔案中加上套件相關資訊：</p>
-<pre><code class="json=">+  &quot;husky&quot;: &#123;
-+    &quot;hooks&quot;: &#123;
-+      &quot;pre-commit&quot;: &quot;lint-staged&quot;
-+    &#125;
-+  &#125;,
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json">+  &quot;husky&quot;: &#123;<br>+    &quot;hooks&quot;: &#123;<br>+      &quot;pre-commit&quot;: &quot;lint-staged&quot;<br>+    &#125;<br>+  &#125;,<br><br>+ &quot;lint-staged&quot;: &#123;<br>+   &quot;src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;&quot;: [<br>+     &quot;prettier --write&quot;<br>+   ]<br>+ &#125;,<br></code></pre></td></tr></table></figure>
 
-+ &quot;lint-staged&quot;: &#123;
-+   &quot;src/**/*.&#123;js,jsx,ts,tsx,json,css,scss,md&#125;&quot;: [
-+     &quot;prettier --write&quot;
-+   ]
-+ &#125;,</code></pre>
 <p>簡單來說，就是在 pre-commit 之前，透過 husky -&gt; lint-staged -&gt; prettier 這個傳遞過程，對 commit 的檔案做 prettier。</p>
 <p>安裝完成後，在 commit 之前，prettier 就會自動檢查程式碼並進行格式化：</p>
 <p><img src="https://i.imgur.com/JlV2aOS.png"></p>

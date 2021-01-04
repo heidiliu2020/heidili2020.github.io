@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡  P1 你知道 DOM 是什麼  P1 你知道如何用 JavaScript 操控 DOM 物件  P1 你知道如何幫一個按鈕加上 event listener">
+  <meta name="description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  123456學習目標： P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡 P1 你知道 DOM 是什麼 P1 你知道如何用 JavaScript 操控 DOM 物件 P1 你知道如何幫一個按鈕加上 event listener">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 7] DOM 介面、瀏覽器事件處理">
 <meta property="og:url" content="https://heidiliu2020.github.io/javascript-event/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡  P1 你知道 DOM 是什麼  P1 你知道如何用 JavaScript 操控 DOM 物件  P1 你知道如何幫一個按鈕加上 event listener">
+<meta property="og:description" content="本篇為 [FE102] 前端必備：JavaScript 這門課程的學習筆記。如有錯誤歡迎指正。  123456學習目標： P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡 P1 你知道 DOM 是什麼 P1 你知道如何用 JavaScript 操控 DOM 物件 P1 你知道如何幫一個按鈕加上 event listener">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/yR0I3JG.png">
 <meta property="og:image" content="https://i.imgur.com/8i7ohCd.png">
@@ -267,12 +267,7 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDItamF2YXNjcmlwdA==">[FE102] 前端必備：JavaScript<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
-<pre><code>學習目標：
-
- P1 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡
- P1 你知道 DOM 是什麼
- P1 你知道如何用 JavaScript 操控 DOM 物件
- P1 你知道如何幫一個按鈕加上 event listener</code></pre>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標：<br><br> <span class="hljs-built_in">P1</span> 你知道 JavaScript 跑在網頁上跟跑在 Node.js 上差在哪裡<br> <span class="hljs-built_in">P1</span> 你知道 DOM 是什麼<br> <span class="hljs-built_in">P1</span> 你知道如何用 JavaScript 操控 DOM 物件<br> <span class="hljs-built_in">P1</span> 你知道如何幫一個按鈕加上 event listener<br></code></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <p>當我們運用 JavaScript 在網頁進行操作時，主要可分為下列三大面向：</p>
@@ -290,10 +285,8 @@
 <li>放在 <code>&lt;/body&gt;</code> 之前</li>
 </ol>
 <p>由於瀏覽器是由上而下渲染，相較之下以第二種方法較佳。但更好的做法，是另外新增 js 檔，以外連檔的形式執行 JS，更有助於管理與維護。</p>
-<pre><code class="htmlmixed=">&lt;head&gt;
-  &lt;title&gt;This is title.&lt;/title&gt;
-  &lt;script src=&quot;./main.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;head&gt;<br>  &lt;title&gt;This is title.&lt;&#x2F;title&gt;<br>  &lt;script src&#x3D;&quot;.&#x2F;main.js&quot;&gt;&lt;&#x2F;script&gt;<br>&lt;&#x2F;head&gt;<br></code></pre></td></tr></table></figure>
+
 <h3 id="執行環境"><a href="#執行環境" class="headerlink" title="執行環境"></a>執行環境</h3><p>我們可以在 Node.js 或瀏覽器執行 JS。由於兩者是不同的執行環境，在語法支援度也有些微差異。</p>
 <blockquote>
 <p>例如：</p>
@@ -314,18 +307,8 @@
 <li>選取 CSS 選擇器：<code>document.querySelector()</code></li>
 </ul>
 <p>以 <code>document.getElementsByTagName(&#39;div&#39;)</code>，選取所有 tag 名稱是 div 元素為範例：</p>
-<pre><code class="htmlmixed=">&lt;body&gt;
-  &lt;div&gt;
-    This is tagName.
-    &lt;div class=&quot;box&quot;&gt;This is className.&lt;/div&gt;
-    &lt;div id=&quot;name&quot;&gt;This is idName.&lt;/div&gt;
-  &lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;body&gt;<br>  &lt;div&gt;<br>    This is tagName.<br>    &lt;div class&#x3D;&quot;box&quot;&gt;This is className.&lt;&#x2F;div&gt;<br>    &lt;div id&#x3D;&quot;name&quot;&gt;This is idName.&lt;&#x2F;div&gt;<br>  &lt;&#x2F;div&gt;<br><br>  &lt;script&gt;<br>    const elements &#x3D; document.getElementsByTagName(&#39;div&#39;)<br>    console.log(elements)<br>  &lt;&#x2F;script&gt;<br>&lt;&#x2F;body&gt;<br></code></pre></td></tr></table></figure>
 
-  &lt;script&gt;
-    const elements = document.getElementsByTagName(&#39;div&#39;)
-    console.log(elements)
-  &lt;/script&gt;
-&lt;/body&gt;</code></pre>
 <p>在瀏覽器運行結果，會得到類陣列如下：</p>
 <p><img src="https://i.imgur.com/8i7ohCd.png" alt="Tag"></p>
 <p>若改選取 <code>elements[1]</code>，即可選取類陣列中的元素：</p>
@@ -346,33 +329,20 @@
 <li>選取 id：<code>const element = document.querySelector(&#39;#name&#39;)</code></li>
 </ul>
 <p>但 <code>querySelector()</code> 只會選取第一個匹配的元素，舉例如下：</p>
-<pre><code class="htmlmixed=">&lt;body&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;body&gt;<br><br>  &lt;a href&#x3D;&quot;#&quot;&gt;1st&lt;&#x2F;a&gt;<br><br>  &lt;div&gt;<br>    &lt;a href&#x3D;&quot;#&quot;&gt;2rd&lt;&#x2F;a&gt;<br>  &lt;&#x2F;div&gt;<br><br>  &lt;script&gt;<br>    const element &#x3D; document.querySelector(&#39;a&#39;)<br>    console.log(element)<br>  &lt;&#x2F;script&gt;<br>&lt;&#x2F;body&gt;<br></code></pre></td></tr></table></figure>
 
-  &lt;a href=&quot;#&quot;&gt;1st&lt;/a&gt;
-
-  &lt;div&gt;
-    &lt;a href=&quot;#&quot;&gt;2rd&lt;/a&gt;
-  &lt;/div&gt;
-
-  &lt;script&gt;
-    const element = document.querySelector(&#39;a&#39;)
-    console.log(element)
-  &lt;/script&gt;
-&lt;/body&gt;</code></pre>
 <p>結果只會選取第一個 <code>&lt;a&gt;</code>：</p>
 <p><img src="https://i.imgur.com/ZE1Ue7g.png" alt="querySelector"></p>
 <p>若想選取到所有匹配到的元素，可使用 <code>querySelectorAll()</code>：</p>
-<pre><code class="htmlmixed="> const element = document.querySelectorAll(&#39;a&#39;)</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">const element &#x3D; document.querySelectorAll(&#39;a&#39;)<br></code></pre></td></tr></table></figure>
+
 <p>同樣能夠得到類陣列：</p>
 <p><img src="https://i.imgur.com/ih6mj9T.png" alt="querySelectorAll"></p>
 <h3 id="改變元素的-CSS：-style"><a href="#改變元素的-CSS：-style" class="headerlink" title="改變元素的 CSS：.style"></a>改變元素的 CSS：<code>.style</code></h3><ul>
 <li>直接寫上行內樣式</li>
 </ul>
-<pre><code class="htmlmixed=">const element = document.querySelector(&#39;.box&#39;)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">const element &#x3D; document.querySelector(&#39;.box&#39;)<br><br>element.style.background &#x3D; &#39;red&#39;;<br>element.style.paddingTop &#x3D; &#39;10px&#39;;         &#x2F;&#x2F; 駝峰式<br>element.style[&quot;padding-top&quot;] &#x3D; &#39;10px&#39;;     &#x2F;&#x2F; 字串<br></code></pre></td></tr></table></figure>
 
-element.style.background = &#39;red&#39;;
-element.style.paddingTop = &#39;10px&#39;;         // 駝峰式
-element.style[&quot;padding-top&quot;] = &#39;10px&#39;;     // 字串</code></pre>
 <ul>
 <li>但這種寫法其實不易修改，因此並不推薦。通常會寫好另外的 class，藉由「改變元素的 class」來套用該狀態，也就是下面要介紹的方法。</li>
 </ul>
@@ -382,65 +352,28 @@ element.style[&quot;padding-top&quot;] = &#39;10px&#39;;     // 字串</code></p
 <li><code>.classList.toggle()</code>：開關（有就刪、沒有就加）</li>
 <li><code>.classList.contains()</code>：判斷是否包含該 class</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;style&gt;
-.active &#123; 
-  background: red;
-&#125;
-&lt;/style&gt;
-element.classList.add(&#39;active&#39;)
-&lt;!-- 將元素套用 active 這個 class 的樣式 --&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;style&gt;<br>.active &#123; <br>  background: red;<br>&#125;<br>&lt;&#x2F;style&gt;<br>element.classList.add(&#39;active&#39;)<br>&lt;!-- 將元素套用 active 這個 class 的樣式 --&gt;<br></code></pre></td></tr></table></figure>
+
 <h3 id="改變元素的內容"><a href="#改變元素的內容" class="headerlink" title="改變元素的內容"></a>改變元素的內容</h3><ul>
 <li><code>.innerText</code>：只抓取標籤內的文字。最常用來改變文字內容。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;div&gt;
-  &lt;div class=&quot;box&quot;&gt;This is &lt;span&gt;class&lt;/span&gt;.&lt;/div&gt;
-  &lt;div id=&quot;name&quot;&gt;This is id.&lt;/div&gt;
-&lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;div&gt;<br>  &lt;div class&#x3D;&quot;box&quot;&gt;This is &lt;span&gt;class&lt;&#x2F;span&gt;.&lt;&#x2F;div&gt;<br>  &lt;div id&#x3D;&quot;name&quot;&gt;This is id.&lt;&#x2F;div&gt;<br>&lt;&#x2F;div&gt;<br><br>&lt;script&gt;<br>  const element &#x3D; document.querySelector(&#39;.box&#39;)<br>  console.log(element.innerText)<br>&lt;&#x2F;script&gt;<br>&lt;!-- 印出：This is class. --&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script&gt;
-  const element = document.querySelector(&#39;.box&#39;)
-  console.log(element.innerText)
-&lt;/script&gt;
-&lt;!-- 印出：This is class. --&gt;</code></pre>
 <ul>
 <li><code>.innerHTML</code>：抓取標籤內的所有內容，包含 HTML 標籤。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;div&gt;
-  &lt;div class=&quot;box&quot;&gt;This is &lt;span&gt;class&lt;/span&gt;.&lt;/div&gt;
-  &lt;div id=&quot;name&quot;&gt;This is id.&lt;/div&gt;
-&lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;div&gt;<br>  &lt;div class&#x3D;&quot;box&quot;&gt;This is &lt;span&gt;class&lt;&#x2F;span&gt;.&lt;&#x2F;div&gt;<br>  &lt;div id&#x3D;&quot;name&quot;&gt;This is id.&lt;&#x2F;div&gt;<br>&lt;&#x2F;div&gt;<br><br>&lt;script&gt;<br>  const element &#x3D; document.querySelector(&#39;.box&#39;)<br>  console.log(element.innerHTML)<br>&lt;&#x2F;script&gt;<br>&lt;!-- 印出：This is &lt;span&gt;class&lt;&#x2F;span&gt;. --&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script&gt;
-  const element = document.querySelector(&#39;.box&#39;)
-  console.log(element.innerHTML)
-&lt;/script&gt;
-&lt;!-- 印出：This is &lt;span&gt;class&lt;/span&gt;. --&gt;</code></pre>
 <ul>
 <li><code>.outerHTML</code>：抓取整個元素，可用來重新設置元素本身。較少使用。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;div class=&quot;block&quot;&gt;
-  &lt;div class=&quot;box&quot;&gt;This is &lt;span&gt;class&lt;/span&gt;.&lt;/div&gt;
-  &lt;div id=&quot;name&quot;&gt;This is id.&lt;/div&gt;
-&lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;div class&#x3D;&quot;block&quot;&gt;<br>  &lt;div class&#x3D;&quot;box&quot;&gt;This is &lt;span&gt;class&lt;&#x2F;span&gt;.&lt;&#x2F;div&gt;<br>  &lt;div id&#x3D;&quot;name&quot;&gt;This is id.&lt;&#x2F;div&gt;<br>&lt;&#x2F;div&gt;<br><br>&lt;script&gt;<br>  const element &#x3D; document.querySelector(&#39;.box&#39;)<br>  console.log(element.outerHTML)<br>&lt;&#x2F;script&gt;<br>&lt;!-- 印出：&lt;div class&#x3D;&quot;box&quot;&gt;This is &lt;span&gt;class&lt;&#x2F;span&gt;.&lt;&#x2F;div&gt; --&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script&gt;
-  const element = document.querySelector(&#39;.box&#39;)
-  console.log(element.outerHTML)
-&lt;/script&gt;
-&lt;!-- 印出：&lt;div class=&quot;box&quot;&gt;This is &lt;span&gt;class&lt;/span&gt;.&lt;/div&gt; --&gt;</code></pre>
 <h3 id="刪除與插入元素：removechild-與-appendChild"><a href="#刪除與插入元素：removechild-與-appendChild" class="headerlink" title="刪除與插入元素：removechild 與 appendChild"></a>刪除與插入元素：removechild 與 appendChild</h3><ul>
 <li><code>.removechild()</code>：移除子元素</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;div class=&quot;block&quot;&gt;
-  &lt;div class=&quot;box&quot;&gt;This is &lt;span&gt;class&lt;/span&gt;.&lt;/div&gt;
-  &lt;a&gt;This is a.&lt;/a&gt;
-&lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;div class&#x3D;&quot;block&quot;&gt;<br>  &lt;div class&#x3D;&quot;box&quot;&gt;This is &lt;span&gt;class&lt;&#x2F;span&gt;.&lt;&#x2F;div&gt;<br>  &lt;a&gt;This is a.&lt;&#x2F;a&gt;<br>&lt;&#x2F;div&gt;<br><br>&lt;script&gt;<br>  const element &#x3D; document.querySelector(&#39;.block&#39;)<br>  element.removeChild(document.querySelector(&#39;a&#39;))<br>&lt;&#x2F;script&gt;<br>&lt;!-- 成功刪除在 block 元素底下，標籤為 a 的元素 --&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script&gt;
-  const element = document.querySelector(&#39;.block&#39;)
-  element.removeChild(document.querySelector(&#39;a&#39;))
-&lt;/script&gt;
-&lt;!-- 成功刪除在 block 元素底下，標籤為 a 的元素 --&gt;</code></pre>
 <ul>
 <li><code>.appendChild()</code>：插入元素在最後方</li>
 </ul>
@@ -470,7 +403,8 @@ element.classList.add(&#39;active&#39;)
 </blockquote>
 <h3 id="監聽事件-addEventListener"><a href="#監聽事件-addEventListener" class="headerlink" title="監聽事件 addEventListener()"></a>監聽事件 <code>addEventListener()</code></h3><p>在處理事件時，通常會需要指派監聽者（Event listeners）來監聽事件觸發。</p>
 <p>也就是監測 DOM 中的某一元素，當使用者觸發某事件時，就會執行後續動作，語法如下：</p>
-<pre><code class="javascript=">element.addEventListener(&#39;event&#39;, function, useCapture)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">element.addEventListener(<span class="hljs-string">&#x27;event&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>, <span class="hljs-title">useCapture</span>)</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="參數值說明"><a href="#參數值說明" class="headerlink" title="參數值說明"></a>參數值說明</h3><h4 id="1-event-事件"><a href="#1-event-事件" class="headerlink" title="1. event 事件"></a>1. event 事件</h4><ul>
 <li>必須</li>
 <li>指定事件類型</li>
@@ -489,22 +423,12 @@ element.classList.add(&#39;active&#39;)
 <ul>
 <li>直接將函式作為參數帶入：回呼函式（callback function）</li>
 </ul>
-<pre><code class="javascript=">const element = document.querySelector(&#39;.box&#39;)
-// 先註冊一個事件
-element.addEventListener(&#39;click&#39;, onClick())
-
-// 等事件被觸發才執行 callback function
-function onClick()&#123;     
-   alert(&#39;click!&#39;)
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.box&#x27;</span>)<br><span class="hljs-comment">// 先註冊一個事件</span><br>element.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, onClick())<br><br><span class="hljs-comment">// 等事件被觸發才執行 callback function</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onClick</span>(<span class="hljs-params"></span>)</span>&#123;     <br>   alert(<span class="hljs-string">&#x27;click!&#x27;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>匿名函式（anonymous）</li>
 </ul>
-<pre><code class="javascript=">const element = document.querySelector(&#39;.box&#39;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.box&#x27;</span>)<br><br>element.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>   alert(<span class="hljs-string">&#x27;click!&#x27;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-element.addEventListener(&#39;click&#39;, function()&#123;
-   alert(&#39;click!&#39;)
-&#125;)</code></pre>
 <h4 id="3-useCapture"><a href="#3-useCapture" class="headerlink" title="3. useCapture"></a>3. useCapture</h4><ul>
 <li>可選</li>
 <li>布林值，指定事件在捕獲或冒泡階段執行<ol>
@@ -520,11 +444,8 @@ element.addEventListener(&#39;click&#39;, function()&#123;
 </ol>
 <h3 id="事件資訊-event-e"><a href="#事件資訊-event-e" class="headerlink" title="事件資訊 event(e)"></a>事件資訊 <code>event(e)</code></h3><p>一個事件的發生會包含各種資訊。event 資訊會放在 callback function 的第一個參數。通常取名 <code>event</code> 或簡寫 <code>e</code>，可以當作是一個「物件」，裡面放著關於此事件的參數值。</p>
 <p>以 click 事件為例：</p>
-<pre><code class="javascript=">const element = document.querySelector(&#39;.box&#39;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.box&#x27;</span>)<br><br>element.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(e)<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-element.addEventListener(&#39;click&#39;, function(e) &#123;
-  console.log(e)
-&#125;)</code></pre>
 <p>點擊元素後會出現下列資訊：</p>
 <p><img src="https://i.imgur.com/JJEo1ZR.png" alt="event"></p>
 <p>我們可以用「物件」的方式來取得需要的元素，以常用的事件資訊為例。</p>
@@ -537,27 +458,13 @@ element.addEventListener(&#39;click&#39;, function(e) &#123;
 <li>e.key：按鍵號碼</li>
 </ul>
 <h4 id="submit-事件：提交表單前觸發，通常用來驗證表單內容"><a href="#submit-事件：提交表單前觸發，通常用來驗證表單內容" class="headerlink" title="submit 事件：提交表單前觸發，通常用來驗證表單內容"></a>submit 事件：提交表單前觸發，通常用來驗證表單內容</h4><p>首先建立一個簡易表單：</p>
-<pre><code class="htmlmixed=">  &lt;form class=&quot;login-form&quot;&gt;
-    &lt;div class=&quot;account&quot;&gt;
-      Account: &lt;input name=&quot;account&quot; type=&quot;text&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;password&quot;&gt;
-      Password: &lt;input name=&quot;password&quot; type=&quot;password&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;password2&quot;&gt;
-      Password again: &lt;input name=&quot;password2&quot; type=&quot;password&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;submit&quot;&gt;
-      &lt;input name=&quot;submit&quot; type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;form class&#x3D;&quot;login-form&quot;&gt;<br>  &lt;div class&#x3D;&quot;account&quot;&gt;<br>    Account: &lt;input name&#x3D;&quot;account&quot; type&#x3D;&quot;text&quot;&gt;<br>  &lt;&#x2F;div&gt;<br>  &lt;div class&#x3D;&quot;password&quot;&gt;<br>    Password: &lt;input name&#x3D;&quot;password&quot; type&#x3D;&quot;password&quot;&gt;<br>  &lt;&#x2F;div&gt;<br>  &lt;div class&#x3D;&quot;password2&quot;&gt;<br>    Password again: &lt;input name&#x3D;&quot;password2&quot; type&#x3D;&quot;password&quot;&gt;<br>  &lt;&#x2F;div&gt;<br>  &lt;div class&#x3D;&quot;submit&quot;&gt;<br>    &lt;input name&#x3D;&quot;submit&quot; type&#x3D;&quot;submit&quot; value&#x3D;&quot;Submit&quot;&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;form&gt;<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/wWjVaIv.png" alt="form"></p>
 <p>點選表單中的 submit 按鈕後，會以預設方法 <code>GET</code> 送出資料，也就是把參數帶入原網址送出。而 submit 事件是在表單送出前觸發，通常用來驗證表單內容。</p>
 <p>以點選 submit 後彈出視窗為例：</p>
-<pre><code class="javascript=">  const element = document.querySelector(&#39;.login-form&#39;)
-  element.addEventListener(&#39;submit&#39;, function () &#123;
-    alert(&quot;成功&quot;)
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">  <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.login-form&#x27;</span>)<br>  element.addEventListener(<span class="hljs-string">&#x27;submit&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    alert(<span class="hljs-string">&quot;成功&quot;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/grkuUrS.png"></p>
 <h3 id="阻止預設行為-e-preventDefault"><a href="#阻止預設行為-e-preventDefault" class="headerlink" title="阻止預設行為 e.preventDefault()"></a>阻止預設行為 <code>e.preventDefault()</code></h3><p>用來阻止瀏覽器上特定元素的預設行為。以下為常見使用方式：</p>
 <ul>
@@ -566,19 +473,8 @@ element.addEventListener(&#39;click&#39;, function(e) &#123;
 <li><code>&lt;input&gt;</code> 的 keypress 事件：阻止輸入按鍵</li>
 </ul>
 <p>以上述例子來說，當 Password 跟 Password again 輸入的值不同時，就可使用 <code>e.preventDefault()</code> 來阻止表單送出：</p>
-<pre><code class="javascript=">&lt;script&gt;
-  const element = document.querySelector(&#39;.login-form&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>  <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.login-form&#x27;</span>);<br><br>  element.addEventListener(<span class="hljs-string">&#x27;submit&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> pw1 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;input[name=&quot;password1&quot;]&#x27;</span>);<br>    <span class="hljs-keyword">const</span> pw2 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;input[name=&quot;password2&quot;]&#x27;</span>);<br>    <span class="hljs-comment">// 若密碼不同，就不送出表單</span><br>    <span class="hljs-keyword">if</span> (pw1.value !== pw2.value) &#123;<br>      alert(<span class="hljs-string">&#x27;密碼不同！&#x27;</span>)<br>      e.preventDefault();<br>    &#125; <br>  &#125;);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
-  element.addEventListener(&#39;submit&#39;, function(e) &#123;
-    const pw1 = document.querySelector(&#39;input[name=&quot;password1&quot;]&#39;);
-    const pw2 = document.querySelector(&#39;input[name=&quot;password2&quot;]&#39;);
-    // 若密碼不同，就不送出表單
-    if (pw1.value !== pw2.value) &#123;
-      alert(&#39;密碼不同！&#39;)
-      e.preventDefault();
-    &#125; 
-  &#125;);
-&lt;/script&gt;</code></pre>
 <p><img src="https://i.imgur.com/vjBsv0i.png"></p>
 <p>參考資料：</p>
 <ol>

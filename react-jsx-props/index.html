@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 我知道 React 的目的以及原理  P1 我知道我們為什麼需要 React  P1 我知道使用 React 跟之前使用 jQuery 的區別  P1 我理解 state 跟 props 的不同">
+  <meta name="description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 我知道 React 的目的以及原理 P1 我知道我們為什麼需要 React P1 我知道使用 React 跟之前使用 jQuery 的區別 P1 我理解 state 跟 props 的不同">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 21] 初探 React：Component、JSX 語法、props 與 state 的不同">
 <meta property="og:url" content="https://heidiliu2020.github.io/react-jsx-props/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 我知道 React 的目的以及原理  P1 我知道我們為什麼需要 React  P1 我知道使用 React 跟之前使用 jQuery 的區別  P1 我理解 state 跟 props 的不同">
+<meta property="og:description" content="本篇為 [FE302] React 基礎 - hooks 版本 這門課程的學習筆記。如有錯誤歡迎指正！  123456學習目標： P1 我知道 React 的目的以及原理 P1 我知道我們為什麼需要 React P1 我知道使用 React 跟之前使用 jQuery 的區別 P1 我理解 state 跟 props 的不同">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/j6UFABA.png">
 <meta property="og:image" content="https://i.imgur.com/d5LQgbX.png">
@@ -263,12 +263,7 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUzMDItcmVhY3QtaG9va3M=">[FE302] React 基礎 - hooks 版本<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
-<pre><code>學習目標：
-
- P1 我知道 React 的目的以及原理
- P1 我知道我們為什麼需要 React
- P1 我知道使用 React 跟之前使用 jQuery 的區別
- P1 我理解 state 跟 props 的不同</code></pre>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pf">學習目標：<br><br> P1 我知道 React 的目的以及原理<br> P1 我知道我們為什麼需要 React<br> P1 我知道使用 React 跟之前使用 jQuery 的區別<br> P1 我理解 <span class="hljs-keyword">state</span> 跟 props 的不同<br></code></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="React-版本差異"><a href="#React-版本差異" class="headerlink" title="React 版本差異"></a>React 版本差異</h3><p>關於 React 發展歷史，其實起源於 2013 年由 Facebook 開源出來的一個 Library，直到 2015 年更新到 v15 版本後又為更多人使用。</p>
@@ -329,34 +324,21 @@
 <p>簡單來說，JSX（JavaScript extension syntax）就是 HTML/XML + JavaScript。</p>
 </blockquote>
 <p>React 提供的 JSX 語法，是透過底層的 Babel 機制，將 HTML 語法轉成 JavaScript Function 的形式，讓我們能用來建立 React elements：</p>
-<pre><code class="javascript=">const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;h2&gt;app&lt;/h2&gt;, rootElement
-);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>);<br>ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>app<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span>, rootElement<br>);<br></code></pre></td></tr></table></figure>
+
 <p>以 mount Hello 這個 component 為例：</p>
 <blockquote>
 <p>mount：意思是把 component 放到畫面上</p>
 </blockquote>
-<pre><code class="javascript=">function Hello() &#123;
-  // 在 Hello() 中 return 什麼，就會在畫面 render 出什麼
-  return &lt;h1&gt;hello world!&lt;/h1&gt;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Hello</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 在 Hello() 中 return 什麼，就會在畫面 render 出什麼</span><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>);<br>ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> /&gt;</span></span>, rootElement<br>);<br></code></pre></td></tr></table></figure>
 
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;Hello /&gt;, rootElement
-);</code></pre>
 <p><img src="https://i.imgur.com/CapcKxx.png"></p>
 <p>Hello() 這個 component 可以接收參數 props，寫在大括號中會被解讀 React 為 JavaScript 程式碼執行，例如 <code>&#123;JS code&#125;</code>：</p>
-<pre><code class="javascript=">function Hello(props) &#123;
-  return &lt;h1&gt;Hello, &#123;props.name&#125;!&lt;/h1&gt;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Hello</span>(<span class="hljs-params">props</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, &#123;props.name&#125;!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>);<br>ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Heidi&quot;</span>/&gt;</span></span>, rootElement<br>);<br></code></pre></td></tr></table></figure>
 
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;Hello name=&quot;Heidi&quot;/&gt;, rootElement
-);</code></pre>
 <h4 id="ES6-的解構寫法"><a href="#ES6-的解構寫法" class="headerlink" title="ES6 的解構寫法"></a>ES6 的解構寫法</h4><p>更常見的寫法，是把 props 參數改成 ES6 的解構寫法，也就是在大括號內傳入參數：</p>
-<pre><code class="javascript=">function Hello(&#123;name&#125;) &#123;
-  return &lt;h1&gt;Hello, &#123;name&#125;!&lt;/h1&gt;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Hello</span>(<span class="hljs-params">&#123;name&#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, &#123;name&#125;!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="使用-JSX-語法需注意的地方"><a href="#使用-JSX-語法需注意的地方" class="headerlink" title="使用 JSX 語法需注意的地方"></a>使用 JSX 語法需注意的地方</h3><p>JSX 語法和 template engine 不同，在使用上沒有那麼自由，必須遵守幾點規則，以避免寫出不合法的 JSX ：</p>
 <ul>
 <li>沒有迴圈的概念</li>
@@ -366,17 +348,19 @@ ReactDOM.render(&lt;Hello name=&quot;Heidi&quot;/&gt;, rootElement
 <ul>
 <li>透過三元運算子來進行判斷：適用於只有 ture/false 的情況</li>
 </ul>
-<pre><code class="javascript=">&#123;todo.isDone ? &#39;已完成&#39; : &#39;未完成&#39;&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;todo.isDone ? <span class="hljs-string">&#x27;已完成&#x27;</span> : <span class="hljs-string">&#x27;未完成&#x27;</span>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>透過邏輯運算子 &amp;&amp; 的短路行為：適用於多種可能的情況</li>
 </ul>
-<pre><code class="javascript=">&#123;todo.isDone &amp;&amp; &#39;已完成&#39;&#125;
-&#123;!todo.isDone &amp;&amp; &#39;未完成&#39;&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;todo.isDone &amp;&amp; <span class="hljs-string">&#x27;已完成&#x27;</span>&#125;<br>&#123;!todo.isDone &amp;&amp; <span class="hljs-string">&#x27;未完成&#x27;</span>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="JSX-特性：自動-escape"><a href="#JSX-特性：自動-escape" class="headerlink" title="JSX 特性：自動 escape"></a>JSX 特性：自動 escape</h3><p>此外，根據<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2ludHJvZHVjaW5nLWpzeC5odG1sI2pzeC1wcmV2ZW50cy1pbmplY3Rpb24tYXR0YWNrcw==">官方文件<i class="fa fa-external-link-alt"></i></span>，JSX 語法能夠預防 Injection Attacks，提供 escape 功能。</p>
 <p><img src="https://i.imgur.com/eRabFE4.png"></p>
 <p>如果真的想要 render 出 innerHTML，則需透過 <span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2RvbS1lbGVtZW50cy5odG1sI2Rhbmdlcm91c2x5c2V0aW5uZXJodG1s">dangerouslysetinnerhtml<i class="fa fa-external-link-alt"></i></span> 這個冗長的標籤，一般而言不會使用這個方法。</p>
 <p>但需要注意，如果在 a 連結標間中，有使用者輸入的區塊，例如：</p>
-<pre><code class="javascript=">&lt;a href=&#123;todo.content&#125;&gt;click me!&lt;/a&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;a href=&#123;todo.content&#125;&gt;click me!&lt;/a&gt;<br></code></pre></td></tr></table></figure>
+
 <p>這時若被惡意輸入 <code>javascript:alert()</code> 程式碼，點擊 a 連結就會執行該 JS 程式碼。這其實因為 React 沒有跳脫冒號，造成的 click based XSS：</p>
 <p><img src="https://i.imgur.com/bnbqnMb.png"></p>
 <p>防範方式有兩種：</p>
@@ -384,23 +368,11 @@ ReactDOM.render(&lt;Hello name=&quot;Heidi&quot;/&gt;, rootElement
 <li>不要在 a 標籤內放入使用者輸入</li>
 <li>加上 encodeURIComponent() 語法，把字串轉化成 escape 格式的字符串</li>
 </ul>
-<pre><code class="javascript="> &lt;a href=&#123;window.encodeURIComponent(todo.content)&#125;&gt;click me!&lt;/a&gt;</code></pre>
-<h3 id="常見的-component：Counter"><a href="#常見的-component：Counter" class="headerlink" title="常見的 component：Counter"></a>常見的 component：Counter</h3><p>最後再以常見的 Counter component 為例：</p>
-<pre><code class="javascript=">function Counter() &#123;
-  // useState() 會建立一個陣列 state, 傳入參數為初始值
-  const [value, setValue] = React.useState(1);
-  function handleClick() &#123;
-    // 透過呼叫 setValue() 來更動 state
-    setValue(value + 1);
-  &#125;
-  // 建立 onClick 監聽事件
-  return &lt;button onClick=&#123;handleClick&#125;&gt;&#123;value&#125;&lt;/button&gt;;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;a href=&#123;<span class="hljs-built_in">window</span>.encodeURIComponent(todo.content)&#125;&gt;click me!&lt;/a&gt;<br></code></pre></td></tr></table></figure>
 
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(
-&lt;Counter /&gt;, rootElement
-);</code></pre>
+<h3 id="常見的-component：Counter"><a href="#常見的-component：Counter" class="headerlink" title="常見的 component：Counter"></a>常見的 component：Counter</h3><p>最後再以常見的 Counter component 為例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Counter</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// useState() 會建立一個陣列 state, 傳入參數為初始值</span><br>  <span class="hljs-keyword">const</span> [value, setValue] = React.useState(<span class="hljs-number">1</span>);<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleClick</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-comment">// 透過呼叫 setValue() 來更動 state</span><br>    setValue(value + <span class="hljs-number">1</span>);<br>  &#125;<br>  <span class="hljs-comment">// 建立 onClick 監聽事件</span><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;handleClick&#125;</span>&gt;</span>&#123;value&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>;<br>&#125;<br><br><span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>);<br>ReactDOM.render(<br>&lt;Counter /&gt;, rootElement<br>);<br></code></pre></td></tr></table></figure>
+
 <p>透過點擊 button 觸發事件來改變 state，React 再根據 state 內容來 render 出畫面：</p>
 <iframe src="https://codesandbox.io/embed/chutan-react-n4z9g?fontsize=14&hidenavigation=1&theme=dark"
      style="width:80%; height:200px; border:0; border-radius: 4px; overflow:hidden;"
@@ -434,16 +406,8 @@ ReactDOM.render(
 </ul>
 <h3 id="包在標籤中間的-props：children"><a href="#包在標籤中間的-props：children" class="headerlink" title="包在標籤中間的 props：children"></a>包在標籤中間的 props：children</h3><p>在 React component 中，包在標籤中間的東西，稱為 children，children 也是一個 props。</p>
 <p>以 Todoitem 為例，這裡的 children 指的就是 <code>Watch a movie</code>：</p>
-<pre><code class="javascript=">function Todoitem(&#123;n, children&#125;) &#123;
-  return &lt;h1&gt;Todo &#123;n&#125;: &#123;children&#125;&lt;/h1&gt;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Todoitem</span>(<span class="hljs-params">&#123;n, children&#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Todo &#123;n&#125;: &#123;children&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>);<br>ReactDOM.render(<br>&lt;Todoitem n=&#123;<span class="hljs-number">1</span>&#125;&gt;<br>  Watch a movie<br>&lt;/Todoitem&gt;, rootElement<br>);<br></code></pre></td></tr></table></figure>
 
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(
-&lt;Todoitem n=&#123;1&#125;&gt;
-  Watch a movie
-&lt;/Todoitem&gt;, rootElement
-);</code></pre>
 <p><img src="https://i.imgur.com/gX8yUJ5.png"></p>
 <p>參考資料：</p>
 <ul>
@@ -467,42 +431,21 @@ ReactDOM.render(
 </ul>
 <p>這裡會以現成的程式來做示範，詳細說明可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL2NyZWF0ZS1yZWFjdC1hcHA=">facebook/create-react-app<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><p>依照下方指令安裝相關套件並啟動：</p>
-<pre><code>$ npx create-react-app my-app
-$ cd my-app
-$ npm start</code></pre>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig">$ <span class="hljs-string">npx </span><span class="hljs-built_in">create-react-app</span> <span class="hljs-string">my-app</span><br><span class="hljs-string">$</span> <span class="hljs-string">cd </span><span class="hljs-string">my-app</span><br><span class="hljs-string">$</span> <span class="hljs-string">npm </span><span class="hljs-string">start</span><br></code></pre></td></tr></table></figure>
+
 <p>成功運行後，就會在 localhost 開一個 server：</p>
 <p><img src="https://i.imgur.com/K7dEnLz.png"></p>
 <p>在開始專案之前，首先要閱讀 <code>README.md</code> 的說明，還有查看 <code>package.json</code> 確認安裝了哪些套件等訊息。</p>
 <p>再來是 src\index.js 檔案，和我們在 CodeSandbox 看到的內容非常類似：</p>
-<pre><code class="javascript=">import React from &#39;react&#39;;
-import ReactDOM from &#39;react-dom&#39;;
-import &#39;./index.css&#39;;
-import App from &#39;./App&#39;;
-// 與資料收集、效能有關
-import reportWebVitals from &#39;./reportWebVitals&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.css&#x27;</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span>;<br><span class="hljs-comment">// 與資料收集、效能有關</span><br><span class="hljs-keyword">import</span> reportWebVitals <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./reportWebVitals&#x27;</span>;<br><br>ReactDOM.render(<br>  &lt;React.StrictMode&gt;<br>    &lt;App /&gt;<br>  &lt;/React.StrictMode&gt;,<br>  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;root&#x27;</span>)<br>);<br><br>reportWebVitals();<br></code></pre></td></tr></table></figure>
 
-ReactDOM.render(
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;,
-  document.getElementById(&#39;root&#39;)
-);
-
-reportWebVitals();</code></pre>
 <ul>
 <li><code>React.StrictMode</code>：代表<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL3N0cmljdC1tb2RlLmh0bWwjaWRlbnRpZnlpbmctdW5zYWZlLWxpZmVjeWNsZXM=">嚴格模式<i class="fa fa-external-link-alt"></i></span>中，會像 ESLint 進行檢查與警告，但有時為了偵測，可能會呼叫兩次，造成和想像中不同的結果，因此建議不加上</li>
 <li><code>&lt;App /&gt;</code>：render 出 App conponent，也就是 render 的畫面</li>
 </ul>
 <p>可在 src\App.js 檔案，修改要 render 的畫面：</p>
-<pre><code class="javascript=">function App() &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      Hello World!
-    &lt;/div&gt;
-  );
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      Hello World!<br>    &lt;/div&gt;<br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></table></figure>
 
-export default App;</code></pre>
 <p>重整頁面即可看到結果：</p>
 <p><img src="https://i.imgur.com/HPUh5ly.png"></p>
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>到這裡我們瞭解 React 重要的概念 Component，以及如何使用 JSX 語法來建立 React 元素。</p>

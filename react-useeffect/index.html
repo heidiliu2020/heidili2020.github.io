@@ -270,77 +270,38 @@
 </blockquote>
 <p>簡單來說，就是透過 useEffect 這個 hook，告訴 React「component 在 render 之後要做的事情」。</p>
 <p>有別於一般的 hook 是傳值進去，userEffect 傳入的是 function，使用方法如下：</p>
-<pre><code class="javascript=">// 從 react 引入使用useEffect
-import &#123; useEffect &#125; from &quot;react&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 從 react 引入使用useEffect</span><br><span class="hljs-keyword">import</span> &#123; useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    alert(<span class="hljs-string">&quot;執行完畢!&quot;</span>);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  useEffect(() =&gt; &#123;
-    alert(&quot;執行完畢!&quot;);
-  &#125;);
-&#125;</code></pre>
 <p>就會在每次畫面 render 結束後執行 useEffect 傳入的 function：</p>
 <p><img src="https://i.imgur.com/QJJIuOp.png"></p>
 <p>但通常我們不會想要在每次 render 後都執行 function，像是設定在某些 state 改變時才會執行。</p>
 <h3 id="範例：把資料同步到-LocalStorage"><a href="#範例：把資料同步到-LocalStorage" class="headerlink" title="範例：把資料同步到 LocalStorage"></a>範例：把資料同步到 LocalStorage</h3><p>以把 todo APP 同步到 LocalStorage 這個功能為例：</p>
-<pre><code class="javascript=">function writeTodosToLocalStorage(todos) &#123;
-  // localStorage 只能存字串
-  window.localStorage.setItem(&quot;todos&quot;, JSON.stringify(todos));
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">writeTodosToLocalStorage</span>(<span class="hljs-params">todos</span>) </span>&#123;<br>  <span class="hljs-comment">// localStorage 只能存字串</span><br>  <span class="hljs-built_in">window</span>.localStorage.setItem(<span class="hljs-string">&quot;todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="setState-：非同步更新狀態"><a href="#setState-：非同步更新狀態" class="headerlink" title="setState()：非同步更新狀態"></a>setState()：非同步更新狀態</h3><p>此外，還有很重要的一點，就是之前實作的 setTodos() 功能其實是非同步行為。</p>
 <p>如果在新增 todo 的同時進行 <code>console.log(todos)</code>，會發現畫面 render 了，todos 卻還沒有更新：</p>
 <p><img src="https://i.imgur.com/ATpucjM.png"></p>
 <p>因此不能直接在 function 中寫入 todos，而是要直接寫入更新過的狀態，其他功能也以此類推，在每次改變 todo 時都要執行 writeTodosToLocalStorage()：</p>
-<pre><code class="javascript=">  const handleButtonClick = () =&gt; &#123;
-    setTodos([
-      &#123;
-        id: id.current,
-        content: value,
-      &#125;,
-      ...todos,
-    ]);
-    // 因為 setTodos 非同步，不能直接傳入 todos
-    writeTodosToLocalStorage([
-      &#123;
-        id: id.current,
-        content: value,
-      &#125;,
-      ...todos,
-    ]);
-    setValue(&quot;&quot;);
-    id.current++;
-  &#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> handleButtonClick = <span class="hljs-function">() =&gt;</span> &#123;<br>  setTodos([<br>    &#123;<br>      id: id.current,<br>      content: value,<br>    &#125;,<br>    ...todos,<br>  ]);<br>  <span class="hljs-comment">// 因為 setTodos 非同步，不能直接傳入 todos</span><br>  writeTodosToLocalStorage([<br>    &#123;<br>      id: id.current,<br>      content: value,<br>    &#125;,<br>    ...todos,<br>  ]);<br>  setValue(<span class="hljs-string">&quot;&quot;</span>);<br>  id.current++;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>上述這種做法，其實是我們過去利用 jQury 實作的想法，在變動資料的同時進行其他動作。</p>
 <p>但其實進行新增、編輯、刪除 todo 時有個共通點，就是會「todos 會改變」，接著就是 useEffect 登場的時候了！</p>
 <p>因為 useEffect() 會在每次 render 後執行，有 render 就代表 state 有變動。一旦有變動就執行同步 function，可把程式碼改寫如下：</p>
-<pre><code class="javascript=">// 每次 render 後會執行 useEffect 中的 function
-useEffect(() =&gt; &#123;
-  writeTodosToLocalStorage(todos);
-  console.log(JSON.stringify(todos));
-&#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 每次 render 後會執行 useEffect 中的 function</span><br>useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  writeTodosToLocalStorage(todos);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(todos));<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>這樣就成功在每次 render 後，都把最新的 todos 狀態同步到 localStorage：</p>
 <p><img src="https://i.imgur.com/UKSkzM7.png"></p>
 <p>但這樣做其實有個缺點，透過執行的 console.log()，可發現連在輸入 input 時也會執行 render，應該只需要在 todos 有改變時才進行 render。</p>
 <h3 id="useEffect-：可接收兩個參數"><a href="#useEffect-：可接收兩個參數" class="headerlink" title="useEffect()：可接收兩個參數"></a>useEffect()：可接收兩個參數</h3><p>而 useEffect 的第二個參數可以解決這個問題，需傳入一個陣列，用來放想要關注的資料，當變數改變時才會執行 useEffect：</p>
-<pre><code class="javascript=">useEffect(() =&gt; &#123; code &#125;, [array]);
-// 第一個參數：一個函式，表示要做什麼事
-// 第二個參數：一個陣列，定義哪寫變數改變時，才會重新執行 useEffect</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">useEffect(<span class="hljs-function">() =&gt;</span> &#123; code &#125;, [array]);<br><span class="hljs-comment">// 第一個參數：一個函式，表示要做什麼事</span><br><span class="hljs-comment">// 第二個參數：一個陣列，定義哪寫變數改變時，才會重新執行 useEffect</span><br></code></pre></td></tr></table></figure>
+
 <p>可改寫如下，代表在 todos 改變時才會重新執行 useEffect()：</p>
-<pre><code class="javascript=">useEffect(() =&gt; &#123;
-writeTodosToLocalStorage(todos);
-// 傳入第二個參數 [todos]
-&#125;, [todos]);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>writeTodosToLocalStorage(todos);<br><span class="hljs-comment">// 傳入第二個參數 [todos]</span><br>&#125;, [todos]);<br></code></pre></td></tr></table></figure>
+
 <p>透過 localStorage 的記憶功能，我們就能在頁面第一次 render 結束後，把 localStorage 中的 todos 同步到頁面上。</p>
 <h3 id="第二個參數是空陣列：不會重新執行"><a href="#第二個參數是空陣列：不會重新執行" class="headerlink" title="第二個參數是空陣列：不會重新執行"></a>第二個參數是空陣列：不會重新執行</h3><p>在第二個參數傳入空陣列，就只有第一次 render 會執行這個 useEffect，可用來進行初始化：</p>
-<pre><code class="javascript=">// 進行初始化: setTodos 或是拿 API
-useEffect(() =&gt; &#123;
-  // 拿取資料，沒有資料的話就是空字串（進行錯誤處理）
-  const todoData = window.localStorage.getItem(&quot;todos&quot;) || &quot;&quot;;
-  if (todoData) &#123;
-    // 把 todoData 放回 state
-    setTodos(JSON.parse(todoData));
-  &#125;
-// 傳入空陣列: 代表只有第一次 render 才會執行這個 useEffect
-&#125;, []);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 進行初始化: setTodos 或是拿 API</span><br>useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 拿取資料，沒有資料的話就是空字串（進行錯誤處理）</span><br>  <span class="hljs-keyword">const</span> todoData = <span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>) || <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">if</span> (todoData) &#123;<br>    <span class="hljs-comment">// 把 todoData 放回 state</span><br>    setTodos(<span class="hljs-built_in">JSON</span>.parse(todoData));<br>  &#125;<br><span class="hljs-comment">// 傳入空陣列: 代表只有第一次 render 才會執行這個 useEffect</span><br>&#125;, []);<br></code></pre></td></tr></table></figure>
+
 <h3 id="useEffect-會遇到的問題"><a href="#useEffect-會遇到的問題" class="headerlink" title="useEffect 會遇到的問題"></a>useEffect 會遇到的問題</h3><p>但是在重整頁面瞬間，會發現畫面閃了一下，這是因為第一次 render 畫面顯示的是 useState 初始設定，第二次 render 才是放入 todoDate：</p>
 <p><img src="https://i.imgur.com/asdZh1d.gif"></p>
 <p>那麼該如何解決 useEffect 這個問題呢？接下來會繼續介紹其他功能來改善。</p>
@@ -353,16 +314,8 @@ useEffect(() =&gt; &#123;
 <li>useLayoutEffect：同步函式，UI 會等 useLayoutEffect 中做的事情結束才會渲染</li>
 </ul>
 <p>實際修改剛才的程式碼：</p>
-<pre><code class="javascript=">// 從 react 引入 hook
-import &#123; useState, useRef, useEffect, useLayoutEffect &#125; from &quot;react&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 從 react 引入 hook</span><br><span class="hljs-keyword">import</span> &#123; useState, useRef, useEffect, useLayoutEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><br><span class="hljs-comment">// 把讀取 todoData 的 useEffect 改用 useLayoutEffect</span><br>  useLayoutEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> todoData = <span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>) || <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">if</span> (todoData) &#123;<br>      setTodos(<span class="hljs-built_in">JSON</span>.parse(todoData));<br>    &#125;<br>  &#125;, []);<br></code></pre></td></tr></table></figure>
 
-// 把讀取 todoData 的 useEffect 改用 useLayoutEffect
-  useLayoutEffect(() =&gt; &#123;
-    const todoData = window.localStorage.getItem(&quot;todos&quot;) || &quot;&quot;;
-    if (todoData) &#123;
-      setTodos(JSON.parse(todoData));
-    &#125;
-  &#125;, []);</code></pre>
 <p>如此畫面就不會再閃一次初始的資料了：</p>
 <p><img src="https://i.imgur.com/HNXymGK.gif"></p>
 <p>至於為什麼會產生這個情況，可從 React 的 Hook Flow 談起。</p>
@@ -376,23 +329,12 @@ import &#123; useState, useRef, useEffect, useLayoutEffect &#125; from &quot;rea
 <p>原本是在瀏覽器 paint 之後才 run effects，若能提早改變 state 並更新畫面，就會直接顯示最新的 state，而不會出現初始 state。</p>
 <p>除了透過 useLayoutEffect，還有另一種做法，同樣能解決畫面閃一下的問題，也就是接下來要介紹的 lazy initializer。</p>
 <p>因為 useState 可以傳入初始值，那就直接把要更新的 todoDate 作為 state 初始值：</p>
-<pre><code class="javascript=">function App() &#123;
-  // 從 localStorage 拿取資料
-  const todoData = window.localStorage.getItem(&quot;todos&quot;) || &quot;&quot;;
-  // 直接把 todoData 設為 state 初始值，沒有資料就設為空陣列
-  const [todos, setTodos] = useState(JSON.parse(todoData) || []);
-  // 略</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 從 localStorage 拿取資料</span><br>  <span class="hljs-keyword">const</span> todoData = <span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>) || <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-comment">// 直接把 todoData 設為 state 初始值，沒有資料就設為空陣列</span><br>  <span class="hljs-keyword">const</span> [todos, setTodos] = useState(<span class="hljs-built_in">JSON</span>.parse(todoData) || []);<br>  <span class="hljs-comment">// 略</span><br></code></pre></td></tr></table></figure>
+
 <p>但這麼會產生另一個問題，就是只有第一次 render 才會執行 useState 初始值，但後續 render 還是會進行撈取 todoData 的動作，又因為 useState 已經有值了，React 就會忽略裡面的東西，這其實會造成效能上的浪費。</p>
 <h3 id="lazy-initializer"><a href="#lazy-initializer" class="headerlink" title="lazy initializer"></a>lazy initializer</h3><p>useState 除了設定初始值，其實可以傳入一個 function，經由 function return 的值就會是 state 的初始值：</p>
-<pre><code class="javascript=">function App() &#123;
-  // 在 useState 傳入 function，會把回傳值設為初始值
-  const [todos, setTodos] = useState(() =&gt; &#123;
-    // 用來檢測 useState 是否只執行一次
-    console.log(&quot;init&quot;);
-    const todoData = window.localStorage.getItem(&quot;todos&quot;) || &quot;&quot;;
-    return JSON.parse(todoData) || [];
-  &#125;);
-// 略</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 在 useState 傳入 function，會把回傳值設為初始值</span><br>  <span class="hljs-keyword">const</span> [todos, setTodos] = useState(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 用來檢測 useState 是否只執行一次</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;init&quot;</span>);<br>    <span class="hljs-keyword">const</span> todoData = <span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>) || <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(todoData) || [];<br>  &#125;);<br><span class="hljs-comment">// 略</span><br></code></pre></td></tr></table></figure>
+
 <p>又因為初始值改變了，也要重新設定 todo id，修改後如下：</p>
 <blockquote>
 <ul>
@@ -400,56 +342,23 @@ import &#123; useState, useRef, useEffect, useLayoutEffect &#125; from &quot;rea
 <li>JSON.parse()：將資料由 JSON 格式字串轉回原本的資料型別</li>
 </ul>
 </blockquote>
-<pre><code class="javascript=">function App() &#123;
-  // 因為初始值改變了，也要重新設定 todo id
-  const id = useRef(1);
-  const [todos, setTodos] = useState(() =&gt; &#123;
-    // 把 todos 轉回陣列型態
-    let todoData = JSON.parse(window.localStorage.getItem(&quot;todos&quot;)) || &quot;&quot;;
-    // 改由陣列長度判斷是否為空陣列
-    if (todoData.length) &#123;
-      id.current = todoData[0].id + 1;
-    &#125; else &#123;
-      todoData = [];
-    &#125;
-    // 把 return 的值設定為初始值
-    return todoData;
-  &#125;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 因為初始值改變了，也要重新設定 todo id</span><br>  <span class="hljs-keyword">const</span> id = useRef(<span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">const</span> [todos, setTodos] = useState(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 把 todos 轉回陣列型態</span><br>    <span class="hljs-keyword">let</span> todoData = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>)) || <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-comment">// 改由陣列長度判斷是否為空陣列</span><br>    <span class="hljs-keyword">if</span> (todoData.length) &#123;<br>      id.current = todoData[<span class="hljs-number">0</span>].id + <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      todoData = [];<br>    &#125;<br>    <span class="hljs-comment">// 把 return 的值設定為初始值</span><br>    <span class="hljs-keyword">return</span> todoData;<br>  &#125;);<br></code></pre></td></tr></table></figure>
+
 <p>像這樣在 useState 透過傳入 function 來設定初始值，就是 run lazy initializer 的過程。因為只有第一次會執行，適合用於一些複雜的運算，這樣 function 就只會被執行一次，避免每次 render 產生的效能問題。</p>
 <h2 id="再探-useEffect：cleanup-effect"><a href="#再探-useEffect：cleanup-effect" class="headerlink" title="再探 useEffect：cleanup effect"></a>再探 useEffect：cleanup effect</h2><p>在 Hook Flow 中，有個步驟其實是先 cleanup effect，然後再 run effect，這是什麼意思呢？</p>
 <p>繼續用剛才的 todos 為範例，以下程式碼代表「每當 todos 改變，就會執行 useEffect 中的 function」：</p>
-<pre><code class="javascript=">  useEffect(() =&gt; &#123;
-    writeTodosToLocalStorage(todos);
-  &#125;, [todos]);</code></pre>
-<p>但其實在這個 function 中可以 return 另一個 function，又稱為 cleanup function，代表「在這個 effect 被清掉之前要做的事情」：</p>
-<pre><code class="javascript=">  useEffect(() =&gt; &#123;
-    // 每當 todos 改變，effect 要做的事
-    writeTodosToLocalStorage(todos);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  writeTodosToLocalStorage(todos);<br>&#125;, [todos]);<br></code></pre></td></tr></table></figure>
 
-    return () =&gt; &#123;
-    // effect 被清掉前要做的事
-    &#125;
-  &#125;, [todos]);</code></pre>
+<p>但其實在這個 function 中可以 return 另一個 function，又稱為 cleanup function，代表「在這個 effect 被清掉之前要做的事情」：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 每當 todos 改變，effect 要做的事</span><br>  writeTodosToLocalStorage(todos);<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// effect 被清掉前要做的事</span><br>  &#125;<br>&#125;, [todos]);<br></code></pre></td></tr></table></figure>
+
 <p>每次畫面渲染時，其實就是執行一次 APP() 這個 function，可透過這段程式碼來模擬流程：</p>
-<pre><code class="javascript=">function APP() &#123;
-  // ...
-  useEffect(() =&gt; &#123;
-    writeTodosToLocalStorage(todos);
-    console.log(&quot;useEffect: todos&quot;, JSON.stringify(todos));
-    // clean up
-    return () =&gt; &#123;
-      console.log(&quot;clearEffect: todos&quot;, JSON.stringify(todos));
-    &#125;;
-  &#125;, [todos]);
-  // ...</code></pre>
-<h4 id="1-進行第一次-render，執行-APP-，呼叫-useEffect"><a href="#1-進行第一次-render，執行-APP-，呼叫-useEffect" class="headerlink" title="1. 進行第一次 render，執行 APP()，呼叫 useEffect()"></a>1. 進行第一次 render，執行 APP()，呼叫 useEffect()</h4><pre><code class="javascript=">  useEffect(() =&gt; &#123;
-    writeTodosToLocalStorage(todos);
-    console.log(&quot;useEffect: todos&quot;, JSON.stringify(todos));
-// useEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;&#125;]</code></pre>
-<h4 id="2-點擊已完成，進行第二次-render，執行-APP-，先清除上一個-effect，再執行第二次-useEffect"><a href="#2-點擊已完成，進行第二次-render，執行-APP-，先清除上一個-effect，再執行第二次-useEffect" class="headerlink" title="2. 點擊已完成，進行第二次 render，執行 APP()，先清除上一個 effect，再執行第二次 useEffect"></a>2. 點擊已完成，進行第二次 render，執行 APP()，先清除上一個 effect，再執行第二次 useEffect</h4><pre><code class="javascript=">1. 先清除上一個 effect
-// clearEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;&#125;]
-2. 再進行第二次 useEffect
-// useEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;,&quot;isDone&quot;:true&#125;]</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">APP</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// ...</span><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    writeTodosToLocalStorage(todos);<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;useEffect: todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br>    <span class="hljs-comment">// clean up</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;clearEffect: todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br>    &#125;;<br>  &#125;, [todos]);<br>  <span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="1-進行第一次-render，執行-APP-，呼叫-useEffect"><a href="#1-進行第一次-render，執行-APP-，呼叫-useEffect" class="headerlink" title="1. 進行第一次 render，執行 APP()，呼叫 useEffect()"></a>1. 進行第一次 render，執行 APP()，呼叫 useEffect()</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    writeTodosToLocalStorage(todos);<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;useEffect: todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br><span class="hljs-comment">// useEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;&#125;]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-點擊已完成，進行第二次-render，執行-APP-，先清除上一個-effect，再執行第二次-useEffect"><a href="#2-點擊已完成，進行第二次-render，執行-APP-，先清除上一個-effect，再執行第二次-useEffect" class="headerlink" title="2. 點擊已完成，進行第二次 render，執行 APP()，先清除上一個 effect，再執行第二次 useEffect"></a>2. 點擊已完成，進行第二次 render，執行 APP()，先清除上一個 effect，再執行第二次 useEffect</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span> 先清除上一個 effect<br><span class="hljs-comment">// clearEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;&#125;]</span><br><span class="hljs-number">2.</span> 再進行第二次 useEffect<br><span class="hljs-comment">// useEffect: todos [&#123;&quot;id&quot;:2,&quot;content&quot;:&quot;render!&quot;,&quot;isDone&quot;:true&#125;]</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="cleanup-function-執行時機"><a href="#cleanup-function-執行時機" class="headerlink" title="cleanup function 執行時機"></a>cleanup function 執行時機</h3><p>結合上述範例，cleanup function 執行的時間點有兩個：</p>
 <ul>
 <li>要執行下一個 useEffect 的時候，要先清除上一個 effect</li>
@@ -461,222 +370,35 @@ import &#123; useState, useRef, useEffect, useLayoutEffect &#125; from &quot;rea
 <li>當 component 被 unmount 時要執行的事情</li>
 </ul>
 <p>以下方範例來說，代表「只有在這個 component 被 unmount 會執行 cleanup function」，又因為第二個參數是空陣列，所以這個 useEffect 只會執行一次：</p>
-<pre><code class="javascript=">  useEffect(() =&gt; &#123;
-    console.log(&quot;mount&quot;);
-    return () =&gt; &#123;
-      console.log(&quot;unmount&quot;);
-    &#125;;
-  &#125;, []);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;mount&quot;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;unmount&quot;</span>);<br>  &#125;;<br>&#125;, []);<br></code></pre></td></tr></table></figure>
+
 <h2 id="實作一個自己的鉤子"><a href="#實作一個自己的鉤子" class="headerlink" title="實作一個自己的鉤子"></a>實作一個自己的鉤子</h2><p>接下來要談談 hooks 最強大的地方，就是我們其實能寫一個自己 hook，又稱作 custom hook，命名開頭必須是 use 開頭，詳細內容可參考<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtY3VzdG9tLmh0bWw=">官方文件<i class="fa fa-external-link-alt"></i></span>。</p>
 <h3 id="實作一個-useInput"><a href="#實作一個-useInput" class="headerlink" title="實作一個 useInput"></a>實作一個 useInput</h3><p>以 input 元素為例，我們可以把 value 和 handleInputChange 等行為包在 useInput.js 檔案，寫法和之前的 APP.js 很類似：</p>
-<pre><code class="javascript=">// 從 react 引入 useState
-import &#123; useState &#125; from &quot;react&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 從 react 引入 useState</span><br><span class="hljs-keyword">import</span> &#123; useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><br><span class="hljs-comment">// 匯出 useInput()</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useInput</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> [value, setValue] = useState(<span class="hljs-string">&quot;&quot;</span>);<br>  <span class="hljs-keyword">const</span> handleChange = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>    setValue(e.target.value);<br>  &#125;;<br>  <span class="hljs-keyword">return</span> &#123;<br>    value,<br>    setValue,<br>    handleChange,<br>  &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 匯出 useInput()
-export default function useInput() &#123;
-  const [value, setValue] = useState(&quot;&quot;);
-  const handleChange = (e) =&gt; &#123;
-    setValue(e.target.value);
-  &#125;;
-  return &#123;
-    value,
-    setValue,
-    handleChange,
-  &#125;;
-&#125;</code></pre>
 <p>就可以用從 useInput.js 讀取到的 handleChange，取代原本的 handleInputChange：</p>
-<pre><code class="javascript=">// APP.js
-import useInput from &quot;./useInput&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// APP.js</span><br><span class="hljs-keyword">import</span> useInput <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./useInput&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">APP</span> </span>&#123;<br>  <span class="hljs-comment">// ...</span><br>  <span class="hljs-comment">// 從 useInput 讀取 value 資料</span><br>  <span class="hljs-keyword">const</span> &#123; value, setValue, handleChange &#125; = useInput();<br>  <span class="hljs-comment">// ...</span><br>  <span class="hljs-keyword">return</span> (<br>  &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>    &lt;input<br>      type=<span class="hljs-string">&quot;text&quot;</span><br>      placeholder=<span class="hljs-string">&quot;Add todo...&quot;</span><br>      value=&#123;value&#125;<br>      <span class="hljs-comment">// 改為 handleChange</span><br>      onChange=&#123;handleChange&#125;<br>      onKeyDown=&#123;handleKeyDown&#125;<br>    /&gt;<br></code></pre></td></tr></table></figure>
 
-function APP &#123;
-  // ...
-  // 從 useInput 讀取 value 資料
-  const &#123; value, setValue, handleChange &#125; = useInput();
-  // ...
-  return (
-  &lt;div className=&quot;App&quot;&gt;
-    &lt;input
-      type=&quot;text&quot;
-      placeholder=&quot;Add todo...&quot;
-      value=&#123;value&#125;
-      // 改為 handleChange
-      onChange=&#123;handleChange&#125;
-      onKeyDown=&#123;handleKeyDown&#125;
-    /&gt;</code></pre>
 <p>修改完程式也能正常運行，這樣寫的好處就是，如果有第二個 input 時，也能使用共通的邏輯，例如：</p>
-<pre><code class="javascript=">// 第一個 input
-const &#123; value, setValue, handleChange &#125; = useInput();
-// 第二個 input
-const &#123; value: todoName, setValue:setTodoName , handleChange: handleTodoName &#125; = useInput();</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 第一個 input</span><br><span class="hljs-keyword">const</span> &#123; value, setValue, handleChange &#125; = useInput();<br><span class="hljs-comment">// 第二個 input</span><br><span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">value</span>: todoName, <span class="hljs-attr">setValue</span>:setTodoName , <span class="hljs-attr">handleChange</span>: handleTodoName &#125; = useInput();<br></code></pre></td></tr></table></figure>
+
 <h3 id="實作一個-useTodos"><a href="#實作一個-useTodos" class="headerlink" title="實作一個 useTodos"></a>實作一個 useTodos</h3><p>我們也可以把 todos 的邏輯獨立成一個 hook，也就是 useTodos.js：</p>
-<pre><code class="javascript=">// useTodo.js
-import &#123; useState, useEffect, useRef &#125; from &quot;react&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// useTodo.js</span><br><span class="hljs-keyword">import</span> &#123; useState, useEffect, useRef &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">writeTodosToLocalStorage</span>(<span class="hljs-params">todos</span>) </span>&#123;<br>  <span class="hljs-built_in">window</span>.localStorage.setItem(<span class="hljs-string">&quot;todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useTodos</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> id = useRef(<span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">const</span> [todos, setTodos] = useState(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 把 todos 轉回陣列型態</span><br>    <span class="hljs-keyword">let</span> todoData = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>)) || <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-comment">// 改由陣列長度判斷是否為空陣列</span><br>    <span class="hljs-keyword">if</span> (todoData.length) &#123;<br>      id.current = todoData[<span class="hljs-number">0</span>].id + <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      todoData = [];<br>    &#125;<br>    <span class="hljs-keyword">return</span> todoData;<br>  &#125;);<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    writeTodosToLocalStorage(todos);<br>  &#125;, [todos]);<br><br>  <span class="hljs-keyword">return</span> &#123;<br>    todos,<br>    setTodos,<br>    id,<br>  &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function writeTodosToLocalStorage(todos) &#123;
-  window.localStorage.setItem(&quot;todos&quot;, JSON.stringify(todos));
-&#125;
-
-export default function useTodos() &#123;
-  const id = useRef(1);
-  const [todos, setTodos] = useState(() =&gt; &#123;
-    // 把 todos 轉回陣列型態
-    let todoData = JSON.parse(window.localStorage.getItem(&quot;todos&quot;)) || &quot;&quot;;
-    // 改由陣列長度判斷是否為空陣列
-    if (todoData.length) &#123;
-      id.current = todoData[0].id + 1;
-    &#125; else &#123;
-      todoData = [];
-    &#125;
-    return todoData;
-  &#125;);
-
-  useEffect(() =&gt; &#123;
-    writeTodosToLocalStorage(todos);
-  &#125;, [todos]);
-
-  return &#123;
-    todos,
-    setTodos,
-    id,
-  &#125;;
-&#125;</code></pre>
 <p>並引入 APP.js 使用：</p>
-<pre><code class="javascript=">import useInput from &quot;./useInput&quot;;
-import useTodos from &quot;./useTodos&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> useInput <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./useInput&quot;</span>;<br><span class="hljs-keyword">import</span> useTodos <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./useTodos&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 從 useTodos 讀取 todos 資料</span><br>  <span class="hljs-keyword">const</span> &#123; todos, setTodos, id &#125; = useTodos();<br>  <span class="hljs-comment">// 從 useInput 讀取 value 資料</span><br>  <span class="hljs-keyword">const</span> &#123; value, setValue, handleChange &#125; = useInput();<br>  <span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  // 從 useTodos 讀取 todos 資料
-  const &#123; todos, setTodos, id &#125; = useTodos();
-  // 從 useInput 讀取 value 資料
-  const &#123; value, setValue, handleChange &#125; = useInput();
-  // ...</code></pre>
 <h3 id="將-UI-與邏輯分開寫"><a href="#將-UI-與邏輯分開寫" class="headerlink" title="將 UI 與邏輯分開寫"></a>將 UI 與邏輯分開寫</h3><p>若再繼續細分功能，甚至可以做到把 UI 和 todos 邏輯完全分開，改寫如下：</p>
 <ul>
 <li>App.js</li>
 </ul>
-<pre><code class="javascript=">import TodoItem from &quot;./TodoItem&quot;;
-import useTodos from &quot;./useTodos&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> TodoItem <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./TodoItem&quot;</span>;<br><span class="hljs-keyword">import</span> useTodos <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./useTodos&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 從 useTodos 讀取 todos 資料</span><br>  <span class="hljs-keyword">const</span> &#123;<br>    todos,<br>    setTodos,<br>    id,<br>    handleButtonClick,<br>    handleKeyDown,<br>    handleTogglerIsDone,<br>    handleDeleteTodo,<br>    value,<br>    setValue,<br>    handleChange,<br>  &#125; = useTodos();<br><br>  <span class="hljs-comment">// 剩下 UI 畫面</span><br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;input<br>        type=<span class="hljs-string">&quot;text&quot;</span><br>        placeholder=<span class="hljs-string">&quot;Add todo...&quot;</span><br>        value=&#123;value&#125;<br>        onChange=&#123;handleChange&#125;<br>        onKeyDown=&#123;handleKeyDown&#125;<br>      /&gt;<br>      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;<br>      &#123;todos.map(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> (<br>        &lt;TodoItem<br>          key=&#123;todo.id&#125;<br>          todo=&#123;todo&#125;<br>          handleDeleteTodo=&#123;handleDeleteTodo&#125;<br>          handleTogglerIsDone=&#123;handleTogglerIsDone&#125;<br>        /&gt;<br>      ))&#125;<br>    &lt;/div&gt;<br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  // 從 useTodos 讀取 todos 資料
-  const &#123;
-    todos,
-    setTodos,
-    id,
-    handleButtonClick,
-    handleKeyDown,
-    handleTogglerIsDone,
-    handleDeleteTodo,
-    value,
-    setValue,
-    handleChange,
-  &#125; = useTodos();
-
-  // 剩下 UI 畫面
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;input
-        type=&quot;text&quot;
-        placeholder=&quot;Add todo...&quot;
-        value=&#123;value&#125;
-        onChange=&#123;handleChange&#125;
-        onKeyDown=&#123;handleKeyDown&#125;
-      /&gt;
-      &lt;button onClick=&#123;handleButtonClick&#125;&gt;Add Todo&lt;/button&gt;
-      &#123;todos.map((todo) =&gt; (
-        &lt;TodoItem
-          key=&#123;todo.id&#125;
-          todo=&#123;todo&#125;
-          handleDeleteTodo=&#123;handleDeleteTodo&#125;
-          handleTogglerIsDone=&#123;handleTogglerIsDone&#125;
-        /&gt;
-      ))&#125;
-    &lt;/div&gt;
-  );
-&#125;
-
-export default App;</code></pre>
 <ul>
 <li>useTodo.js</li>
 </ul>
-<pre><code class="javascript=">import &#123; useState, useEffect, useRef &#125; from &quot;react&quot;;
-import useInput from &quot;./useInput&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; useState, useEffect, useRef &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> useInput <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./useInput&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">writeTodosToLocalStorage</span>(<span class="hljs-params">todos</span>) </span>&#123;<br>  <span class="hljs-built_in">window</span>.localStorage.setItem(<span class="hljs-string">&quot;todos&quot;</span>, <span class="hljs-built_in">JSON</span>.stringify(todos));<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useTodos</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> id = useRef(<span class="hljs-number">1</span>);<br>  <span class="hljs-comment">// 從 useInput 讀取 value 資料</span><br>  <span class="hljs-keyword">const</span> &#123; value, setValue, handleChange &#125; = useInput();<br>  <span class="hljs-keyword">const</span> [todos, setTodos] = useState(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> todoData = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;todos&quot;</span>)) || <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">if</span> (todoData.length) &#123;<br>      id.current = todoData[<span class="hljs-number">0</span>].id + <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      todoData = [];<br>    &#125;<br>    <span class="hljs-keyword">return</span> todoData;<br>  &#125;);<br><br>  <span class="hljs-comment">// 點擊按鈕新增 todo</span><br>  <span class="hljs-keyword">const</span> handleButtonClick = <span class="hljs-function">() =&gt;</span> &#123;<br>    addTodo();<br>  &#125;;<br>  <span class="hljs-comment">// enter 新增 todo</span><br>  <span class="hljs-keyword">const</span> handleKeyDown = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (e.keyCode !== <span class="hljs-number">13</span>) <span class="hljs-keyword">return</span>;<br>    addTodo();<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> addTodo = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 檢查輸入欄位是否為空值，trim() 可清除字串前後空白</span><br>    <span class="hljs-keyword">if</span> (value.trim().length === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>    setTodos([<br>      &#123;<br>        id: id.current,<br>        content: value,<br>      &#125;,<br>      ...todos,<br>    ]);<br>    setValue(<span class="hljs-string">&quot;&quot;</span>);<br>    id.current++;<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> handleTogglerIsDone = <span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> &#123;<br>    setTodos(<br>      todos.map(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (todo.id !== id) <span class="hljs-keyword">return</span> todo;<br>        <span class="hljs-keyword">return</span> &#123;<br>          ...todo,<br>          isDone: !todo.isDone,<br>        &#125;;<br>      &#125;)<br>    );<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> handleDeleteTodo = <span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> &#123;<br>    setTodos(todos.filter(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.id !== id));<br>  &#125;;<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    writeTodosToLocalStorage(todos);<br>  &#125;, [todos]);<br><br>  <span class="hljs-keyword">return</span> &#123;<br>    todos,<br>    setTodos,<br>    id,<br>    handleButtonClick,<br>    handleKeyDown,<br>    handleTogglerIsDone,<br>    handleDeleteTodo,<br>    value,<br>    setValue,<br>    handleChange,<br>  &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function writeTodosToLocalStorage(todos) &#123;
-  window.localStorage.setItem(&quot;todos&quot;, JSON.stringify(todos));
-&#125;
-
-export default function useTodos() &#123;
-  const id = useRef(1);
-  // 從 useInput 讀取 value 資料
-  const &#123; value, setValue, handleChange &#125; = useInput();
-  const [todos, setTodos] = useState(() =&gt; &#123;
-    let todoData = JSON.parse(window.localStorage.getItem(&quot;todos&quot;)) || &quot;&quot;;
-    if (todoData.length) &#123;
-      id.current = todoData[0].id + 1;
-    &#125; else &#123;
-      todoData = [];
-    &#125;
-    return todoData;
-  &#125;);
-
-  // 點擊按鈕新增 todo
-  const handleButtonClick = () =&gt; &#123;
-    addTodo();
-  &#125;;
-  // enter 新增 todo
-  const handleKeyDown = (e) =&gt; &#123;
-    if (e.keyCode !== 13) return;
-    addTodo();
-  &#125;;
-
-  const addTodo = () =&gt; &#123;
-    // 檢查輸入欄位是否為空值，trim() 可清除字串前後空白
-    if (value.trim().length === 0) return;
-    setTodos([
-      &#123;
-        id: id.current,
-        content: value,
-      &#125;,
-      ...todos,
-    ]);
-    setValue(&quot;&quot;);
-    id.current++;
-  &#125;;
-
-  const handleTogglerIsDone = (id) =&gt; &#123;
-    setTodos(
-      todos.map((todo) =&gt; &#123;
-        if (todo.id !== id) return todo;
-        return &#123;
-          ...todo,
-          isDone: !todo.isDone,
-        &#125;;
-      &#125;)
-    );
-  &#125;;
-
-  const handleDeleteTodo = (id) =&gt; &#123;
-    setTodos(todos.filter((todo) =&gt; todo.id !== id));
-  &#125;;
-
-  useEffect(() =&gt; &#123;
-    writeTodosToLocalStorage(todos);
-  &#125;, [todos]);
-
-  return &#123;
-    todos,
-    setTodos,
-    id,
-    handleButtonClick,
-    handleKeyDown,
-    handleTogglerIsDone,
-    handleDeleteTodo,
-    value,
-    setValue,
-    handleChange,
-  &#125;;
-&#125;</code></pre>
 <p>其實和之前寫前後端分離的時候很類似，寫成自訂 hook 的過程，就像是把不同邏輯的 function 給模組化，這麼說似乎也沒錯，畢竟 hook 就是 fucntion。</p>
 <p>透過抽出共同邏輯的方式，可將功能包裝在 hooks，就算是在不同 UI，也同樣能利用 return 的值，在畫面上呈現想要的資料。</p>
 <h2 id="hooks-觀念總結"><a href="#hooks-觀念總結" class="headerlink" title="hooks 觀念總結"></a>hooks 觀念總結</h2><p>hooks 基本上可以分成下列幾種：</p>

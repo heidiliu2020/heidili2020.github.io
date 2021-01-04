@@ -372,13 +372,13 @@
 <ol start="13">
 <li>依照說明，在 CLI 輸入下列指令來連線</li>
 </ol>
-<pre><code class="=">$ chmod 400 &lt;私鑰檔案路徑&gt;
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">$ chmod <span class="hljs-number">400</span> &lt;私鑰檔案路徑&gt;<br><br>$ ssh -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&quot;&lt;私鑰檔案路徑&gt;&quot;</span> ubuntu@ec2-&lt; IPv4 位置&gt;<span class="hljs-selector-class">.us-east-2</span><span class="hljs-selector-class">.compute</span><span class="hljs-selector-class">.amazonaws</span>.com<br></code></pre></td></tr></table></figure>
 
-$ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.us-east-2.compute.amazonaws.com</code></pre>
 <hr>
 <h2 id="實用指令"><a href="#實用指令" class="headerlink" title="實用指令"></a>實用指令</h2><h3 id="更新-Ubuntu-Server"><a href="#更新-Ubuntu-Server" class="headerlink" title="更新 Ubuntu Server"></a>更新 Ubuntu Server</h3><p>安裝好 Ubuntu Server 後，需要把更新系統版本到最新，避免遇到安全性漏洞以及程式的 BUG。</p>
 <p>CLI 指令如下，其中 apt 是用來管理 ubuntu 軟體的程式（可想像成 <code>npm install</code>）：</p>
-<pre><code class="=">$ sudo apt update &amp;&amp; sudo apt upgrade &amp;&amp; sudo apt dist-upgrade</code></pre>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ sudo apt update &amp;&amp; sudo apt<span class="hljs-built_in"> upgrade </span>&amp;&amp; sudo apt dist-upgrade<br></code></pre></td></tr></table></figure>
+
 <h3 id="top：查看主機即時資訊"><a href="#top：查看主機即時資訊" class="headerlink" title="top：查看主機即時資訊"></a><code>top</code>：查看主機即時資訊</h3><p>會進去下方介面，可查看有哪些 process 在運行、或占用多少 Memory等等。點選 Q 鍵可離開。</p>
 <p><img src="https://i.imgur.com/zgZtaUB.png"></p>
 <h3 id="exit：結束連線狀態"><a href="#exit：結束連線狀態" class="headerlink" title="exit：結束連線狀態"></a><code>exit</code>：結束連線狀態</h3><p>輸入 <code>exit</code> 後就會直接登出，回到本地端。</p>
@@ -394,14 +394,16 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <h3 id="LAMP-設定步驟"><a href="#LAMP-設定步驟" class="headerlink" title="LAMP 設定步驟"></a>LAMP 設定步驟</h3><ol>
 <li>安裝 Tasksel 套件：使用 Tasksel 能快速配置 LAMP 環境</li>
 </ol>
-<pre><code class="=">$ sudo apt install tasksel</code></pre>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">$ sudo apt <span class="hljs-keyword">install</span> tasksel<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>跳出訊息「安裝會佔用 XX 空間，是否繼續安裝？(Y/n)」，輸入 Y。</p>
 </blockquote>
 <ol start="2">
 <li>使用 Tasksel 下載 lamp-server</li>
 </ol>
-<pre><code class="=">$ sudo tasksel install lamp-server</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ sudo tasksel <span class="hljs-keyword">install</span> lamp-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
 <p>會進入紫色的下載畫面：</p>
 <p><img src="https://i.imgur.com/S5t6yOa.png"></p>
 <ol start="3">
@@ -417,7 +419,8 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <h3 id="phpmyadmin-設定步驟"><a href="#phpmyadmin-設定步驟" class="headerlink" title="phpmyadmin 設定步驟"></a>phpmyadmin 設定步驟</h3><ol>
 <li>安裝 phpmyadmin</li>
 </ol>
-<pre><code class="=">$ sudo apt install phpmyadmin</code></pre>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">$ sudo apt <span class="hljs-keyword">install</span> phpmyadmin<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>跳出訊息「安裝會佔用 XX 空間，是否繼續安裝？(Y/n)」，輸入 Y。</p>
 </blockquote>
@@ -447,27 +450,32 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <ol>
 <li>修改 MySQL 登入設定，改成使用密碼登入</li>
 </ol>
-<pre><code class="=">$ sudo mysql -u root mysql</code></pre>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>sudo mysql -u root mysql<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>輸入 mysql 指令，啟用設定密碼</li>
 </ol>
 <ul>
 <li>讓 root 帳號啟用設定密碼的插件</li>
 </ul>
-<pre><code class="sql=">mysql&gt; UPDATE user SET plugin=&#39;mysql_native_password&#39; WHERE User=&#39;root&#39;;</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql&gt; UPDATE user SET plugin=&#x27;mysql_native_password&#x27; WHERE User=&#x27;root&#x27;;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>輸入指令重新載入特權表</li>
 </ul>
-<pre><code class="sql=">mysql&gt; FLUSH PRIVILEGES;</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql&gt; FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>退出 mysql 指令</li>
 </ul>
-<pre><code class="sql=">mysql&gt; exit</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql&gt; exit<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/TDNKk10.png"></p>
 <ol start="3">
 <li>設定 MySQL 的 root password</li>
 </ol>
-<pre><code class="=">$ sudo mysql_secure_installation</code></pre>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>sudo mysql_secure_installation<br></code></pre></td></tr></table></figure>
+
 <ol start="4">
 <li>是否設定密碼？輸入 <code>$ y</code>，開啟 VALIDATE PASSWORD 插件</li>
 <li>選擇密碼強度，除非需要非常注重安全性，這裡可輸入 0</li>
@@ -501,8 +509,8 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <li>密碼：<code>&lt;步驟 6 設定的 root 密碼&gt;</code></li>
 </ul>
 <h3 id="修正-MySQL-錯誤"><a href="#修正-MySQL-錯誤" class="headerlink" title="修正 MySQL 錯誤"></a>修正 MySQL 錯誤</h3><p>順利以 root 帳密登入 phpmyadmin 後，會發現有個問題，當我們想查看任一個資料庫的資料表，或是想要執行匯入匯出功能時，會跳出下列錯誤訊息：</p>
-<pre><code class="sql=">Warning in ./libraries/plugin_interface.lib.php#551
- count(): Parameter must be an array or an object that implements Countable</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">Warning in ./libraries/plugin_interface.lib.php<span class="hljs-comment">#551</span><br> count(): Parameter must be an array or an object that implements Countable<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/wqqSslF.png"></p>
 <p>原因是在 php 7.2 版本後，<code>count()</code> 在沒有添加參數的情形下，會噴出 Warning 警告訊息。這部分需要我們手動解決。其中有兩個部分需利用 vim 編輯器修改：</p>
 <blockquote>
@@ -511,20 +519,22 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <ol>
 <li>修改 Warning in ./libraries/plugin_interface.lib.php#551：</li>
 </ol>
-<pre><code class="=">$ sudo vim /usr/share/phpmyadmin/libraries/plugin_interface.lib.php</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ sudo vim <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/phpmyadmin/</span>libraries/plugin_interface.lib.php<br></code></pre></td></tr></table></figure>
+
 <p>將第 551 行的 <code>count($options) &gt; 0</code> 去掉，修改後如下：</p>
 <blockquote>
 <p>小技巧：可使用 PgDn 按鍵快速往下，不用一行一行往下滑XD</p>
 </blockquote>
-<pre><code class="php=">if ($options != null ) &#123;
-    // …
-&#125;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span> ($options != <span class="hljs-literal">null</span> ) &#123;<br>    <span class="hljs-comment">// …</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>修改 Warning in ./libraries/sql.lib.php#613：</li>
 </ol>
-<pre><code class="=">$ sudo vim /usr/share/phpmyadmin/libraries/sql.lib.php</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ sudo vim <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/phpmyadmin/</span>libraries/sql.lib.php<br></code></pre></td></tr></table></figure>
+
 <p>將第 613 行修改成換成下列判斷式：</p>
-<pre><code class="php=">|| ((count($analyzed_sql_results[&#39;select_expr&#39;]) == 1)</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">|| ((count($analyzed_sql_results[<span class="hljs-string">&#x27;select_expr&#x27;</span>]) == <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
 <p>完成以上步驟後，就可以正常操作 phpmyadmin 了！</p>
 <p>參考資料：</p>
 <ul>
@@ -582,9 +592,8 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <h2 id="部署寫好的程式到-Server"><a href="#部署寫好的程式到-Server" class="headerlink" title="部署寫好的程式到 Server"></a>部署寫好的程式到 Server</h2><ol>
 <li>首先確定有連線到 Server，也就是前面提到的這段指令：</li>
 </ol>
-<pre><code class="=">$ chmod 400 &lt;私鑰檔案路徑&gt;
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">$ chmod <span class="hljs-number">400</span> &lt;私鑰檔案路徑&gt;<br><br>$ ssh -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&quot;&lt;私鑰檔案路徑&gt;&quot;</span> ubuntu@ec2-&lt; IPv4 位置&gt;<span class="hljs-selector-class">.us-east-2</span><span class="hljs-selector-class">.compute</span><span class="hljs-selector-class">.amazonaws</span>.com<br></code></pre></td></tr></table></figure>
 
-$ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.us-east-2.compute.amazonaws.com</code></pre>
 <ol start="2">
 <li>輸入 <code>cd ..</code> 兩次，回到根目錄底下</li>
 <li>輸入 <code>ls</code> 找到 var 資料夾</li>
@@ -608,7 +617,8 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <li><code>chmod（change mode）</code>：改變檔案的權限 = 定義誰可以做什麽。</li>
 </ul>
 </blockquote>
-<pre><code class="=">$ sudo chown ubuntu /var/www/html</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ sudo chown ubuntu <span class="hljs-regexp">/var/</span>www/html<br></code></pre></td></tr></table></figure>
+
 <ol start="8">
 <li>修改完成後即可在 <code>var/www/html</code> 目錄新增檔案！這時再以 <code>la -al</code> 檢視，會發現變成 ubuntu 擁有權限：</li>
 </ol>
@@ -639,10 +649,8 @@ $ ssh -i &quot;&lt;私鑰檔案路徑&gt;&quot; ubuntu@ec2-&lt; IPv4 位置&gt;.
 <li>在瀏覽器輸入 <code>&lt;網域名稱/路徑&gt;</code>，確認是否有部署成功</li>
 </ol>
 <h3 id="修改-conn-php"><a href="#修改-conn-php" class="headerlink" title="修改 conn.php"></a>修改 <code>conn.php</code></h3><p>如果是部署動態網站，需要連線到遠端資料庫，那就需要修改 <code>conn.php</code> 連線資料庫需要的資料，也就是修改成剛剛設定的 root 帳密：</p>
-<pre><code>$server_name = &#39;localhost&#39;;
-$username = &#39;root&#39;;
-$password = &#39;&lt;root 密碼&gt;&#39;;
-$db_name = &#39;&lt;資料庫名稱&gt;&#39;;</code></pre>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-symbol">$server</span>_name = <span class="hljs-string">&#x27;localhost&#x27;</span>;<br><span class="hljs-symbol">$user</span>name = <span class="hljs-string">&#x27;root&#x27;</span>;<br><span class="hljs-symbol">$password</span> = <span class="hljs-string">&#x27;&lt;root 密碼&gt;&#x27;</span>;<br><span class="hljs-symbol">$d</span>b_name = <span class="hljs-string">&#x27;&lt;資料庫名稱&gt;&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="部署心得"><a href="#部署心得" class="headerlink" title="部署心得"></a>部署心得</h2><p>終於來到一直很期待的網站部署，想起之前隨意聊就有提過，完成十四週能夠架一個自己的網站，擁有屬於自己的網域，可以帥氣的和朋友分享自己做出的網站了！和助教索取折扣碼的當下，竟然莫名有點感動QQ</p>
 <p>發現自己終於走到課程的一半，雖然後面還有一段路要走，但也在過程中體會到，自己很喜歡在寫程式這件事中獲得的成就感。好像有點扯遠了，回到這禮拜的部署心得XD</p>

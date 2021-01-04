@@ -273,261 +273,76 @@
 <li>而不能傳入偽元素或 hover</li>
 <li>因為是 JavaScript 程式碼，需改為駝峰式命名</li>
 </ul>
-<pre><code class="javascript=">function Title(&#123; size &#125;) &#123;
-  if (size === &#39;XL&#39;) &#123;
-    return &lt;h1&gt;hello!&lt;/h1&gt;
-  &#125;
-  return(
-    // 兩個大括號包住: JavaScript 程式碼 + 以物件形式
-    &lt;h2 style=&#123;&#123;
-      color: 'blue',
-      // 需改為駝峰式命名
-      textAlign: 'center'
-    &#125;&#125;&gt;hello!&lt;/h2&gt;
-  )
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Title</span>(<span class="hljs-params">&#123; size &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (size === <span class="hljs-string">&#x27;XL&#x27;</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>hello!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>  &#125;<br>  <span class="hljs-keyword">return</span>(<br>    <span class="hljs-comment">// 兩個大括號包住: JavaScript 程式碼 + 以物件形式</span><br>    &lt;h2 style=&#123;&#123;<br>      color: <span class="hljs-string">&#x27;blue&#x27;</span>,<br>      <span class="hljs-comment">// 需改為駝峰式命名</span><br>      textAlign: <span class="hljs-string">&#x27;center&#x27;</span><br>    &#125;&#125;&gt;hello!&lt;/h2&gt;<br>  )<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>顯示結果：</p>
 <p><img src="https://i.imgur.com/QGFGRwV.png"></p>
 <h3 id="二、使用-webpack-打包"><a href="#二、使用-webpack-打包" class="headerlink" title="二、使用 webpack 打包"></a>二、使用 webpack 打包</h3><p>在標籤加上 className 屬性（因為 class 是保留字），會被瀏覽器渲染成 css 中的 class，再透過 webpack 打包來引入該 css 檔案：</p>
-<pre><code class="javascript=">// 透過 webpack 來引入 css
-import &#39;./App.css&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 透過 webpack 來引入 css</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./App.css&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;Title /&gt;<br>    &lt;/div&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;Title /&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
 <p>然後編輯 App.css 檔案：</p>
-<pre><code class="css=">.App &#123;
-  text-align: center;
-  background: yellowgreen;
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.App</span> &#123;<br>  <span class="hljs-attribute">text-align</span>: center;<br>  <span class="hljs-attribute">background</span>: yellowgreen;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>顯示結果：</p>
 <p><img src="https://i.imgur.com/nBoFnXg.png"></p>
 <h3 id="三、使用-styled-components-套件"><a href="#三、使用-styled-components-套件" class="headerlink" title="三、使用 styled-components 套件"></a>三、使用 styled-components 套件</h3><p>styled-components 是一個 library，也是目前的主流作法。用了 styled-components 套件之後，基本上就不需再直接寫 App.css 等檔案，之後會以此方法進行介紹。</p>
 <p>首先安裝 <span class="exturl" data-url="aHR0cHM6Ly9zdHlsZWQtY29tcG9uZW50cy5jb20v">styled-components<i class="fa fa-external-link-alt"></i></span> 套件，然後運行程式：</p>
-<pre><code>$ npm install --save styled-components
-$ npm run start</code></pre>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> npm install -<span class="hljs-literal">-save</span> styled<span class="hljs-literal">-components</span><br><span class="hljs-variable">$</span> npm run <span class="hljs-built_in">start</span><br></code></pre></td></tr></table></figure>
+
 <p>css 是透過標籤模板的寫法，在也就是在 “`” 反引號裡面寫入 css 樣式：</p>
-<pre><code class="css">style.p`&lt;css code&gt;`</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">style</span><span class="hljs-selector-class">.p</span>`&lt;<span class="hljs-selector-tag">css</span> <span class="hljs-selector-tag">code</span>&gt;`<br></code></pre></td></tr></table></figure>
+
 <p>修改 App.js 檔案，直接在 style 後面接元素名稱，並在反引號中寫入 css 程式碼：</p>
-<pre><code class="javascript=">// 引入 styled-components 套件
-import styled from &#39;styled-components&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 styled-components 套件</span><br><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;styled-components&#x27;</span>;<br> <br><span class="hljs-keyword">const</span> Description = styled.p<span class="hljs-string">`</span><br><span class="hljs-string">  color: red;</span><br><span class="hljs-string">  padding: 20px;</span><br><span class="hljs-string">  bottom: 1px solid #000;</span><br><span class="hljs-string">`</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;Title /&gt;<br>      &lt;Description&gt;  <span class="hljs-comment">// =&gt; 編譯後會變成 &lt;p&gt;</span><br>        這是副標題<br>      &lt;/Description&gt;<br>    &lt;/div&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-const Description = styled.p`
-  color: red;
-  padding: 20px;
-  bottom: 1px solid #000;
-`
-
-function App() &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;Title /&gt;
-      &lt;Description&gt;  // =&gt; 編譯後會變成 &lt;p&gt;
-        這是副標題
-      &lt;/Description&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
 <p>可以想成 Description 就是有 style.p 的 component，而 React 會動態隨機產生 className，並加入設定好的 class：</p>
 <p><img src="https://i.imgur.com/634Pzhw.png"></p>
 <h3 id="以切出簡單的-TodoItem-為例"><a href="#以切出簡單的-TodoItem-為例" class="headerlink" title="以切出簡單的 TodoItem 為例"></a>以切出簡單的 TodoItem 為例</h3><p>根據上述範例，其實就是在 styled 後面寫 css 程式碼，因此也可寫成 Sass 語法：</p>
-<pre><code class="javascript=">const TodoItemWrapper = styled.div`
-  max-width: 80%;
-  margin: 5px auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  border: 1px solid #eee;
-`
-const TodoContent = styled.div`
-  color: #000;
-`
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> TodoItemWrapper = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  max-width: 80%;</span><br><span class="hljs-string">  margin: 5px auto;</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string">  justify-content: space-between;</span><br><span class="hljs-string">  padding: 8px 16px;</span><br><span class="hljs-string">  border: 1px solid #eee;</span><br><span class="hljs-string">`</span><br><span class="hljs-keyword">const</span> TodoContent = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  color: #000;</span><br><span class="hljs-string">`</span><br><br><span class="hljs-comment">// 不用傳入任何東西，但仍需在最後加上反引號</span><br><span class="hljs-keyword">const</span> TodoButtonWrapper = styled.div<span class="hljs-string">``</span><br><br><span class="hljs-keyword">const</span> Button = styled.button<span class="hljs-string">`</span><br><span class="hljs-string">  padding: 4px;</span><br><span class="hljs-string">  color: #232332;</span><br><span class="hljs-string">  // 也可使用 Sass 語法</span><br><span class="hljs-string">  &amp;:hover &#123;</span><br><span class="hljs-string">    color: red;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">  &amp; + &amp; &#123;</span><br><span class="hljs-string">    margin-left: 4px;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;TodoItemWrapper&gt;<br>        &lt;TodoContent&gt;This is Todo&lt;/TodoContent&gt;<br>        &lt;TodoButtonWrapper&gt;<br>          &lt;Button&gt;未完成&lt;/Button&gt;<br>          &lt;Button&gt;刪除&lt;/Button&gt;<br>        &lt;/TodoButtonWrapper&gt;<br>      &lt;/TodoItemWrapper&gt;<br>    &lt;/div&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 不用傳入任何東西，但仍需在最後加上反引號
-const TodoButtonWrapper = styled.div``
-
-const Button = styled.button`
-  padding: 4px;
-  color: #232332;
-  // 也可使用 Sass 語法
-  &amp;:hover &#123;
-    color: red;
-  &#125;
-  &amp; + &amp; &#123;
-    margin-left: 4px;
-  &#125;
-`
-
-function App() &#123;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;TodoItemWrapper&gt;
-        &lt;TodoContent&gt;This is Todo&lt;/TodoContent&gt;
-        &lt;TodoButtonWrapper&gt;
-          &lt;Button&gt;未完成&lt;/Button&gt;
-          &lt;Button&gt;刪除&lt;/Button&gt;
-        &lt;/TodoButtonWrapper&gt;
-      &lt;/TodoItemWrapper&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/NTDXvq3.png"></p>
 <p>通常會把模板 TodoItem 獨立寫成 component，改寫後如下：</p>
-<pre><code class="javascript=">function TodoItem (&#123; size, content &#125;) &#123;
-  return (
-    &lt;TodoItemWrapper&gt;
-      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;
-      &lt;TodoButtonWrapper&gt;
-        &lt;Button&gt;未完成&lt;/Button&gt;
-        &lt;Button&gt;刪除&lt;/Button&gt;
-      &lt;/TodoButtonWrapper&gt;
-    &lt;/TodoItemWrapper&gt;
-  );
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TodoItem</span> (<span class="hljs-params">&#123; size, content &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;TodoItemWrapper&gt;<br>      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;<br>      &lt;TodoButtonWrapper&gt;<br>        &lt;Button&gt;未完成&lt;/Button&gt;<br>        &lt;Button&gt;刪除&lt;/Button&gt;<br>      &lt;/TodoButtonWrapper&gt;<br>    &lt;/TodoItemWrapper&gt;<br>  );<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> titleSize = <span class="hljs-string">&quot;M&quot;</span><br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;TodoItem content=&#123;<span class="hljs-number">123</span>&#125; /&gt;<br>      &lt;TodoItem content=&#123;<span class="hljs-number">456</span>&#125; size=<span class="hljs-string">&quot;XL&quot;</span> /&gt;<br>    &lt;/div&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  const titleSize = &quot;M&quot;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;TodoItem content=&#123;123&#125; /&gt;
-      &lt;TodoItem content=&#123;456&#125; size=&quot;XL&quot; /&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
 <p>也可以在 TodoContent 傳入參數 props，傳入參數的程式碼需寫在 <code>$&#123;...&#125;</code> 裡面，而在括號內的 css 程式碼則要用反引號包住：</p>
-<pre><code class="javascript=">const TodoContent = styled.div`
-  color: #000;
-  font-size: 12px;
-  $&#123;props =&gt; props.size === &#39;XL&#39; &amp;&amp; `
-    font-size: 20px;
-  `&#125;
-`</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> TodoContent = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  color: #000;</span><br><span class="hljs-string">  font-size: 12px;</span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;props =&gt; props.size === <span class="hljs-string">&#x27;XL&#x27;</span> &amp;&amp; <span class="hljs-string">`</span></span></span><br><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">    font-size: 20px;</span></span></span><br><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">  `</span>&#125;</span></span><br><span class="hljs-string">`</span><br></code></pre></td></tr></table></figure>
+
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/P06HZye.png"></p>
 <h2 id="styled-component-實戰"><a href="#styled-component-實戰" class="headerlink" title="styled component 實戰"></a>styled component 實戰</h2><p>有關 styled component 套件的詳細功能可參考<span class="exturl" data-url="aHR0cHM6Ly9zdHlsZWQtY29tcG9uZW50cy5jb20vZG9jcy9iYXNpY3M=">官方文件<i class="fa fa-external-link-alt"></i></span>，接著要舉一些常用語法作為範例。</p>
 <h3 id="範例一：透過-styled-繼承樣式"><a href="#範例一：透過-styled-繼承樣式" class="headerlink" title="範例一：透過 styled() 繼承樣式"></a>範例一：透過 styled() 繼承樣式</h3><ul>
 <li>如果是對 styled component 進行 restyle，裡面寫的 css 程式碼會蓋過原本的樣式：</li>
 </ul>
-<pre><code class="javascript=">// 繼承 Button 這個 styled component
-const GreenButton = styled(Button)`
-  background: green;
-  color: #eee;
-`
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 繼承 Button 這個 styled component</span><br><span class="hljs-keyword">const</span> GreenButton = styled(Button)<span class="hljs-string">`</span><br><span class="hljs-string">  background: green;</span><br><span class="hljs-string">  color: #eee;</span><br><span class="hljs-string">`</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TodoItem</span> (<span class="hljs-params">&#123; size, content &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;TodoItemWrapper&gt;<br>      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;<br>      &lt;TodoButtonWrapper&gt;<br>        &lt;Button&gt;未完成&lt;/Button&gt;<br>        &lt;GreenButton&gt;刪除&lt;/GreenButton&gt;<br>      &lt;/TodoButtonWrapper&gt;<br>    &lt;/TodoItemWrapper&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function TodoItem (&#123; size, content &#125;) &#123;
-  return (
-    &lt;TodoItemWrapper&gt;
-      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;
-      &lt;TodoButtonWrapper&gt;
-        &lt;Button&gt;未完成&lt;/Button&gt;
-        &lt;GreenButton&gt;刪除&lt;/GreenButton&gt;
-      &lt;/TodoButtonWrapper&gt;
-    &lt;/TodoItemWrapper&gt;
-  );
-&#125;</code></pre>
 <ul>
 <li>如果是對一般的 component 進行 restyle，則需要在 component 傳入 className，用來接收 BlackTodoItem 這個 class 屬性：</li>
 </ul>
-<pre><code class="javascript=">// 繼承 TodoItem component，需要傳入 className
-function TodoItem (&#123; className, size, content &#125;) &#123;
-  return (
-    &lt;TodoItemWrapper className=&#123;className&#125;&gt;
-      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;
-      &lt;TodoButtonWrapper&gt;
-        &lt;Button&gt;未完成&lt;/Button&gt;
-        &lt;GreenButton&gt;刪除&lt;/GreenButton&gt;
-      &lt;/TodoButtonWrapper&gt;
-    &lt;/TodoItemWrapper&gt;
-  );
-&#125;
-  // 繼承 TodoItem
-  const BlackTodoItem = styled(TodoItem)`
-    background: #000;
-  `
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 繼承 TodoItem component，需要傳入 className</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TodoItem</span> (<span class="hljs-params">&#123; className, size, content &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;TodoItemWrapper className=&#123;className&#125;&gt;<br>      &lt;TodoContent size=&#123;size&#125;&gt;&#123;content&#125;&lt;/TodoContent&gt;<br>      &lt;TodoButtonWrapper&gt;<br>        &lt;Button&gt;未完成&lt;/Button&gt;<br>        &lt;GreenButton&gt;刪除&lt;/GreenButton&gt;<br>      &lt;/TodoButtonWrapper&gt;<br>    &lt;/TodoItemWrapper&gt;<br>  );<br>&#125;<br>  <span class="hljs-comment">// 繼承 TodoItem</span><br>  <span class="hljs-keyword">const</span> BlackTodoItem = styled(TodoItem)<span class="hljs-string">`</span><br><span class="hljs-string">    background: #000;</span><br><span class="hljs-string">  `</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> titleSize = <span class="hljs-string">&quot;M&quot;</span><br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=<span class="hljs-string">&quot;App&quot;</span>&gt;<br>      &lt;TodoItem content=&#123;<span class="hljs-number">123</span>&#125; /&gt;<br>      &lt;BlackTodoItem content=&#123;<span class="hljs-number">456</span>&#125; size=<span class="hljs-string">&quot;XL&quot;</span> /&gt;<br>    &lt;/div&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function App() &#123;
-  const titleSize = &quot;M&quot;
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;TodoItem content=&#123;123&#125; /&gt;
-      &lt;BlackTodoItem content=&#123;456&#125; size=&quot;XL&quot; /&gt;
-    &lt;/div&gt;
-  );
-&#125;</code></pre>
 <p><img src="https://i.imgur.com/teWo6kl.png"></p>
 <h3 id="範例二：透過-MEDIA-QUERY-實作-RWD"><a href="#範例二：透過-MEDIA-QUERY-實作-RWD" class="headerlink" title="範例二：透過 MEDIA QUERY 實作 RWD"></a>範例二：透過 MEDIA QUERY 實作 RWD</h3><p>像 MEDIA QUERY 這類通用性高的程式碼，可以獨立放在 constants\style.js 檔案，以便重複使用：</p>
-<pre><code class="javascript=">export const MEDIA_QUERY_MD = &#39;@media screen and &#123;min-width: 768px&#125;&#39;
-export const MEDIA_QUERY_LG = &#39;@media screen and &#123;min-width: 1000px&#125;&#39;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> MEDIA_QUERY_MD = <span class="hljs-string">&#x27;@media screen and &#123;min-width: 768px&#125;&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> MEDIA_QUERY_LG = <span class="hljs-string">&#x27;@media screen and &#123;min-width: 1000px&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
 <p>接著就可直接在 App.js 引入使用：</p>
-<pre><code class="javascript=">import &#123; MEDIA_QUERY_MD, MEDIA_QUERY_LG&#125; from &#39;./constants/style&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; MEDIA_QUERY_MD, MEDIA_QUERY_LG&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./constants/style&#x27;</span>;<br><br><span class="hljs-keyword">const</span> Button = styled.button<span class="hljs-string">`</span><br><span class="hljs-string">  padding: 4px;</span><br><span class="hljs-string">  color: #232332;</span><br><span class="hljs-string">  font-size: 20px;</span><br><span class="hljs-string">  </span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;MEDIA_QUERY_MD&#125;</span> &#123;</span><br><span class="hljs-string">    font-size 16px;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;MEDIA_QUERY_LG&#125;</span> &#123;</span><br><span class="hljs-string">    font-size: 12px;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">  </span><br><span class="hljs-string">  &amp;:hover &#123;</span><br><span class="hljs-string">    color: red;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">  &amp; + &amp; &#123;</span><br><span class="hljs-string">    margin-left: 4px;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span><br></code></pre></td></tr></table></figure>
 
-const Button = styled.button`
-  padding: 4px;
-  color: #232332;
-  font-size: 20px;
-
-  $&#123;MEDIA_QUERY_MD&#125; &#123;
-    font-size 16px;
-  &#125;
-
-  $&#123;MEDIA_QUERY_LG&#125; &#123;
-    font-size: 12px;
-  &#125;
-
-  &amp;:hover &#123;
-    color: red;
-  &#125;
-  &amp; + &amp; &#123;
-    margin-left: 4px;
-  &#125;
-`</code></pre>
 <p>RWD 結果如下：</p>
 <p><img src="https://i.imgur.com/OVfi3XR.gif"></p>
 <h3 id="範例三：使用-Sass-向量變數"><a href="#範例三：使用-Sass-向量變數" class="headerlink" title="範例三：使用 Sass 向量變數"></a>範例三：使用 Sass 向量變數</h3><p>透過傳入 Global 參數，我們能使用 Sass 向量變數。</p>
 <p>舉例來說，我們可在 index.js 引入 <span class="exturl" data-url="aHR0cHM6Ly9zdHlsZWQtY29tcG9uZW50cy5jb20vZG9jcy9hcGkjdGhlbWVwcm92aWRlcg==">ThemeProvider<i class="fa fa-external-link-alt"></i></span>：</p>
-<pre><code class="javascript=">import &#123; ThemeProvider &#125; from &#39;styled-components&#39;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; ThemeProvider &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;styled-components&#x27;</span>;<br><br><span class="hljs-comment">// 宣告 theme 變數</span><br><span class="hljs-keyword">const</span> theme = &#123;<br>  colors: &#123;<br>    primary_300: <span class="hljs-string">&#x27;#ff7777&#x27;</span>,<br>    primary_400: <span class="hljs-string">&#x27;#e33e3e&#x27;</span>,<br>    primary_500: <span class="hljs-string">&#x27;#af0505&#x27;</span>,<br>  &#125;<br>&#125;<br><br>ReactDOM.render(<br>  <span class="hljs-comment">// 包住 App，並自訂 theme 屬性</span><br>  &lt;ThemeProvider theme=&#123;theme&#125;&gt;<br>    &lt;App /&gt;<br>  &lt;/ThemeProvider&gt;,<br>  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;root&#x27;</span>)<br>);<br></code></pre></td></tr></table></figure>
 
-// 宣告 theme 變數
-const theme = &#123;
-  colors: &#123;
-    primary_300: &#39;#ff7777&#39;,
-    primary_400: &#39;#e33e3e&#39;,
-    primary_500: &#39;#af0505&#39;,
-  &#125;
-&#125;
-
-ReactDOM.render(
-  // 包住 App，並自訂 theme 屬性
-  &lt;ThemeProvider theme=&#123;theme&#125;&gt;
-    &lt;App /&gt;
-  &lt;/ThemeProvider&gt;,
-  document.getElementById(&#39;root&#39;)
-);</code></pre>
 <p>這樣就可以在 App.js 中取用這些變數：</p>
-<pre><code class="javascript=">const TodoContent = styled.div`
-  font-size: 30px;
-  color: $&#123;props =&gt; props.theme.colors.primary_300&#125;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> TodoContent = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 30px;</span><br><span class="hljs-string">  color: <span class="hljs-subst">$&#123;props =&gt; props.theme.colors.primary_300&#125;</span>;</span><br><span class="hljs-string"></span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;MEDIA_QUERY_MD&#125;</span> &#123;</span><br><span class="hljs-string">    font-size: 20px;</span><br><span class="hljs-string">    color: <span class="hljs-subst">$&#123;props =&gt; props.theme.colors.primary_400&#125;</span>;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;MEDIA_QUERY_LG&#125;</span> &#123;</span><br><span class="hljs-string">    font-size: 12px;</span><br><span class="hljs-string">    color: <span class="hljs-subst">$&#123;props =&gt; props.theme.colors.primary_500&#125;</span>;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span><br></code></pre></td></tr></table></figure>
 
-  $&#123;MEDIA_QUERY_MD&#125; &#123;
-    font-size: 20px;
-    color: $&#123;props =&gt; props.theme.colors.primary_400&#125;;
-  &#125;
-
-  $&#123;MEDIA_QUERY_LG&#125; &#123;
-    font-size: 12px;
-    color: $&#123;props =&gt; props.theme.colors.primary_500&#125;;
-  &#125;
-`</code></pre>
 <p>也可以把 TodoItem component 獨立成 TodoItem.js 這個檔案，並且 export ：</p>
-<pre><code class="javascript=">export default function TodoItem() &#123;...&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TodoItem</span>(<span class="hljs-params"></span>) </span>&#123;...&#125;<br></code></pre></td></tr></table></figure>
+
 <p>並在 App.js 引入：</p>
-<pre><code class="javascript=">import TodoItem from &#39;./TodoItem&#39;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> TodoItem <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./TodoItem&#x27;</span><br></code></pre></td></tr></table></figure>
+
 <p>這麼做的好處就是，依照功能切割程式碼，能夠達到模組化，進而提高程式碼可讀性。</p>
 <p>參考資料：</p>
 <ul>

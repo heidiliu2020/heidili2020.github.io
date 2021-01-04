@@ -268,211 +268,22 @@
 <li>清除所有 todo：Clear</li>
 </ul>
 <p>以上功能只要利用前端就能達成，程式碼如下：</p>
-<h3 id="前端介面"><a href="#前端介面" class="headerlink" title="前端介面"></a>前端介面</h3><pre><code class="htmlmixed=">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
+<h3 id="前端介面"><a href="#前端介面" class="headerlink" title="前端介面"></a>前端介面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!DOCTYPE html&gt;<br>&lt;html lang&#x3D;&quot;en&quot;&gt;<br><br>&lt;head&gt;<br>  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;<br>  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;<br>  &lt;title&gt;Week12 Todo List&lt;&#x2F;title&gt;<br>  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery-3.5.1.js&quot;&gt;&lt;&#x2F;script&gt;<br>  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;stackpath.bootstrapcdn.com&#x2F;bootstrap&#x2F;4.5.2&#x2F;css&#x2F;bootstrap.min.css&quot;<br>    integrity&#x3D;&quot;sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;<br>  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;css&#x2F;style.css&quot;&gt;<br>&lt;&#x2F;head&gt;<br><br>&lt;body&gt;<br><br>  &lt;div class&#x3D;&quot;wrapper&quot;&gt;<br>    &lt;div class&#x3D;&quot;todo__header&quot;&gt;<br>      &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-save&quot; href&#x3D;&quot;#&quot;&gt;Save&lt;&#x2F;button&gt;<br>      &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn clear-all&quot; href&#x3D;&quot;#&quot;&gt;Reset&lt;&#x2F;button&gt;<br>    &lt;&#x2F;div&gt;<br>    &lt;h1&gt;Todo List&lt;&#x2F;h1&gt;<br>    &lt;div class&#x3D;&quot;todo__input-block&quot;&gt;<br>      &lt;input class&#x3D;&quot;todo__input&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Add New Todo Here...&quot; minlength&#x3D;&quot;1&quot; maxlength&#x3D;&quot;128&quot;&gt;<br>      &lt;button class&#x3D;&quot;btn-new&quot;&gt;&lt;&#x2F;button&gt;<br>    &lt;&#x2F;div&gt;<br>  <br>    &lt;ul class&#x3D;&quot;nav nav-middle justify-content-center todo__status&quot;&gt;<br>      &lt;li class&#x3D;&quot;nav-item&quot;&gt;<br>        &lt;a class&#x3D;&quot;nav-link active&quot; href&#x3D;&quot;#&quot; data-filter&#x3D;&quot;all&quot;&gt;All&lt;&#x2F;a&gt;<br>      &lt;&#x2F;li&gt;<br>      &lt;li class&#x3D;&quot;nav-item&quot;&gt;<br>        &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; data-filter&#x3D;&quot;in-progress&quot;&gt;In Progress&lt;&#x2F;a&gt;<br>      &lt;&#x2F;li&gt;<br>      &lt;li class&#x3D;&quot;nav-item&quot;&gt;<br>        &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; data-filter&#x3D;&quot;completed&quot;&gt;Completed&lt;&#x2F;a&gt;<br>      &lt;&#x2F;li&gt;<br>    &lt;&#x2F;ul&gt;<br><br>    &lt;ul class&#x3D;&quot;todo__list&quot;&gt;<br>      &lt;!-- 要新增 template 的區塊 --&gt;<br>      &lt;li class&#x3D;&quot;todo&quot;&gt;<br>        &lt;input class&#x3D;&quot;todo__check&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;todo-0&quot;&gt;<br>        &lt;label class&#x3D;&quot;todo__title&quot; for&#x3D;&quot;todo&quot;&gt;Coding&lt;&#x2F;label&gt;<br>        &lt;button class&#x3D;&quot;btn-delete&quot;&gt;&lt;&#x2F;button&gt;<br>      &lt;&#x2F;li&gt;<br>    &lt;&#x2F;ul&gt;<br>  &lt;&#x2F;div&gt;<br><br> <br>&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-  &lt;title&gt;Week12 Todo List&lt;/title&gt;
-  &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css&quot;
-    integrity=&quot;sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z&quot; crossorigin=&quot;anonymous&quot;&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;
-&lt;/head&gt;
+<h3 id="前端-JavaScript"><a href="#前端-JavaScript" class="headerlink" title="前端 JavaScript"></a>前端 JavaScript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>  <span class="hljs-keyword">let</span> id = <span class="hljs-number">1</span>; <br><br>  <span class="hljs-keyword">const</span> template = <span class="hljs-string">`</span><br><span class="hljs-string">    &lt;li class=&quot;todo&quot;&gt;</span><br><span class="hljs-string">      &lt;input class=&quot;todo__check&quot; type=&quot;checkbox&quot; id=&quot;todo-&#123;id&#125;&quot;&gt;</span><br><span class="hljs-string">      &lt;label class=&quot;todo__title&quot; for=&quot;todo-&#123;id&#125;&quot;&gt;&#123;content&#125;&lt;/label&gt;</span><br><span class="hljs-string">      &lt;button class=&quot;btn-delete&quot;&gt;&lt;/button&gt;</span><br><span class="hljs-string">    &lt;/li&gt;</span><br><span class="hljs-string">  `</span><br>  <span class="hljs-comment">// 新增功能: 點擊</span><br>  $(<span class="hljs-string">&#x27;.btn-new&#x27;</span>).click(<span class="hljs-function">() =&gt;</span> &#123;<br>    addTodo()<br>  &#125;);<br>  <span class="hljs-comment">// 新增功能: 按 Enter</span><br>  $(<span class="hljs-string">&#x27;.todo__input&#x27;</span>).keydown(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (e.key === <span class="hljs-string">&#x27;Enter&#x27;</span>) &#123;<br>      addTodo()<br>    &#125;<br>  &#125;);<br><br>  <span class="hljs-comment">// 刪除功能: 利用事件代理</span><br>  $(<span class="hljs-string">&#x27;.todo__list&#x27;</span>).on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-string">&#x27;.btn-delete&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>    $(e.target).parent().remove();<br>  &#125;);<br><br>  <span class="hljs-comment">// 標記狀態: 已完成 / 未完成</span><br>  $(<span class="hljs-string">&#x27;.todo__list&#x27;</span>).on(<span class="hljs-string">&#x27;change&#x27;</span>, <span class="hljs-string">&#x27;.todo__check&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> target = $(e.target);<br>    <span class="hljs-keyword">const</span> isChecked = target.is(<span class="hljs-string">&quot;:checked&quot;</span>);<br>    <span class="hljs-keyword">if</span> (isChecked) &#123;<br>      target.parents(<span class="hljs-string">&#x27;.todo&#x27;</span>).addClass(<span class="hljs-string">&#x27;checked&#x27;</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      target.parents(<span class="hljs-string">&#x27;.todo&#x27;</span>).removeClass(<span class="hljs-string">&#x27;checked&#x27;</span>);<br>    &#125;<br>  &#125;);<br><br>  <span class="hljs-comment">// 篩選 todo 狀態</span><br>  $(<span class="hljs-string">&#x27;.todo__status&#x27;</span>).on(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> target = $(e.target);<br>    <span class="hljs-keyword">const</span> filter = target.attr(<span class="hljs-string">&#x27;data-filter&#x27;</span>);<br>    $(<span class="hljs-string">&#x27;.todo__status a.active&#x27;</span>).removeClass(<span class="hljs-string">&#x27;active&#x27;</span>);<br>    target.addClass(<span class="hljs-string">&#x27;active&#x27;</span>);<br><br>    <span class="hljs-keyword">if</span> (filter === <span class="hljs-string">&#x27;all&#x27;</span>) &#123;<br>      $(<span class="hljs-string">&#x27;.todo&#x27;</span>).show();<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (filter === <span class="hljs-string">&#x27;in-progress&#x27;</span>) &#123;<br>      $(<span class="hljs-string">&#x27;.todo&#x27;</span>).show();<br>      $(<span class="hljs-string">&#x27;.todo.checked&#x27;</span>).hide();<br>    &#125; <span class="hljs-keyword">else</span> &#123;        <span class="hljs-comment">// completed</span><br>      $(<span class="hljs-string">&#x27;.todo&#x27;</span>).hide();<br>      $(<span class="hljs-string">&#x27;.todo.checked&#x27;</span>).show();<br>    &#125;<br>  &#125;);<br><br>  <span class="hljs-comment">// 清除所有 todo</span><br>  $(<span class="hljs-string">&#x27;.clear-all&#x27;</span>).click(<span class="hljs-function">() =&gt;</span> &#123;<br>    $(<span class="hljs-string">&#x27;.todo&#x27;</span>).remove();<br>  &#125;);<br><br>  <span class="hljs-comment">// 儲存 todo</span><br>  $(<span class="hljs-string">&#x27;.btn-save&#x27;</span>).click(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> todos = [];<br>    $(<span class="hljs-string">&#x27;.todo&#x27;</span>).each(<span class="hljs-function">(<span class="hljs-params">i, element</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">const</span> input = $(element).find(<span class="hljs-string">&#x27;.todo__check&#x27;</span>);<br>      <span class="hljs-keyword">const</span> label = $(element).find(<span class="hljs-string">&#x27;.todo__title&#x27;</span>);<br>      todos.push(&#123;<br>        id: input.attr(<span class="hljs-string">&#x27;id&#x27;</span>).replace(<span class="hljs-string">&#x27;todo-&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),      <span class="hljs-comment">// 把 todo-id 的 todo- 換成空字串</span><br>        content: label.text(),<br>        isDone: $(element).hasClass(<span class="hljs-string">&#x27;checked&#x27;</span>)<br>      &#125;);    <br>    &#125;);<br>    <span class="hljs-built_in">JSON</span>.stringify(todos);       <span class="hljs-comment">// 將 JS 物件轉換成 JSON 字串</span><br>  &#125;);<br><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addTodo</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> value = $(<span class="hljs-string">&#x27;.todo__input&#x27;</span>).val();<br>    <span class="hljs-keyword">if</span> (!value) <span class="hljs-keyword">return</span>;<br>    $(<span class="hljs-string">&#x27;.todo__list&#x27;</span>).prepend(<br>      template<br>        .replace(<span class="hljs-string">&#x27;&#123;content&#125;&#x27;</span>, <span class="hljs-built_in">escape</span>(value))<br>        .replace(<span class="hljs-regexp">/&#123;id&#125;/g</span>, id)<br>    );<br>    id += <span class="hljs-number">1</span>;<br>    $(<span class="hljs-string">&#x27;.todo__input&#x27;</span>).val(<span class="hljs-string">&#x27;&#x27;</span>);<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">escape</span>(<span class="hljs-params">toOutput</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> toOutput<br>      .replace(<span class="hljs-regexp">/&amp;/g</span>, <span class="hljs-string">&#x27;&amp;amp;&#x27;</span>)<br>      .replace(<span class="hljs-regexp">/&lt;/g</span>, <span class="hljs-string">&#x27;&amp;lt;&#x27;</span>)<br>      .replace(<span class="hljs-regexp">/&gt;/g</span>, <span class="hljs-string">&#x27;&amp;gt;&#x27;</span>)<br>      .replace(<span class="hljs-regexp">/&quot;/g</span>, <span class="hljs-string">&#x27;&amp;quot;&#x27;</span>)<br>      .replace(<span class="hljs-regexp">/&#x27;/g</span>, <span class="hljs-string">&#x27;&amp;#039;&#x27;</span>);<br>  &#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;body&gt;
-
-  &lt;div class=&quot;wrapper&quot;&gt;
-    &lt;div class=&quot;todo__header&quot;&gt;
-      &lt;button type=&quot;button&quot; class=&quot;btn btn-save&quot; href=&quot;#&quot;&gt;Save&lt;/button&gt;
-      &lt;button type=&quot;button&quot; class=&quot;btn clear-all&quot; href=&quot;#&quot;&gt;Reset&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;h1&gt;Todo List&lt;/h1&gt;
-    &lt;div class=&quot;todo__input-block&quot;&gt;
-      &lt;input class=&quot;todo__input&quot; type=&quot;text&quot; placeholder=&quot;Add New Todo Here...&quot; minlength=&quot;1&quot; maxlength=&quot;128&quot;&gt;
-      &lt;button class=&quot;btn-new&quot;&gt;&lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;ul class=&quot;nav nav-middle justify-content-center todo__status&quot;&gt;
-      &lt;li class=&quot;nav-item&quot;&gt;
-        &lt;a class=&quot;nav-link active&quot; href=&quot;#&quot; data-filter=&quot;all&quot;&gt;All&lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li class=&quot;nav-item&quot;&gt;
-        &lt;a class=&quot;nav-link&quot; href=&quot;#&quot; data-filter=&quot;in-progress&quot;&gt;In Progress&lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li class=&quot;nav-item&quot;&gt;
-        &lt;a class=&quot;nav-link&quot; href=&quot;#&quot; data-filter=&quot;completed&quot;&gt;Completed&lt;/a&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;ul class=&quot;todo__list&quot;&gt;
-      &lt;!-- 要新增 template 的區塊 --&gt;
-      &lt;li class=&quot;todo&quot;&gt;
-        &lt;input class=&quot;todo__check&quot; type=&quot;checkbox&quot; id=&quot;todo-0&quot;&gt;
-        &lt;label class=&quot;todo__title&quot; for=&quot;todo&quot;&gt;Coding&lt;/label&gt;
-        &lt;button class=&quot;btn-delete&quot;&gt;&lt;/button&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-
-
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="前端-JavaScript"><a href="#前端-JavaScript" class="headerlink" title="前端 JavaScript"></a>前端 JavaScript</h3><pre><code class="javascript=">&lt;script&gt;
-  let id = 1; 
-
-  const template = `
-    &lt;li class=&quot;todo&quot;&gt;
-      &lt;input class=&quot;todo__check&quot; type=&quot;checkbox&quot; id=&quot;todo-&#123;id&#125;&quot;&gt;
-      &lt;label class=&quot;todo__title&quot; for=&quot;todo-&#123;id&#125;&quot;&gt;&#123;content&#125;&lt;/label&gt;
-      &lt;button class=&quot;btn-delete&quot;&gt;&lt;/button&gt;
-    &lt;/li&gt;
-  `
-  // 新增功能: 點擊
-  $(&#39;.btn-new&#39;).click(() =&gt; &#123;
-    addTodo()
-  &#125;);
-  // 新增功能: 按 Enter
-  $(&#39;.todo__input&#39;).keydown(e =&gt; &#123;
-    if (e.key === &#39;Enter&#39;) &#123;
-      addTodo()
-    &#125;
-  &#125;);
-
-  // 刪除功能: 利用事件代理
-  $(&#39;.todo__list&#39;).on(&#39;click&#39;, &#39;.btn-delete&#39;, (e) =&gt; &#123;
-    $(e.target).parent().remove();
-  &#125;);
-
-  // 標記狀態: 已完成 / 未完成
-  $(&#39;.todo__list&#39;).on(&#39;change&#39;, &#39;.todo__check&#39;, (e) =&gt; &#123;
-    const target = $(e.target);
-    const isChecked = target.is(&quot;:checked&quot;);
-    if (isChecked) &#123;
-      target.parents(&#39;.todo&#39;).addClass(&#39;checked&#39;);
-    &#125; else &#123;
-      target.parents(&#39;.todo&#39;).removeClass(&#39;checked&#39;);
-    &#125;
-  &#125;);
-
-  // 篩選 todo 狀態
-  $(&#39;.todo__status&#39;).on(&#39;click&#39;, &#39;a&#39;, e =&gt; &#123;
-    const target = $(e.target);
-    const filter = target.attr(&#39;data-filter&#39;);
-    $(&#39;.todo__status a.active&#39;).removeClass(&#39;active&#39;);
-    target.addClass(&#39;active&#39;);
-
-    if (filter === &#39;all&#39;) &#123;
-      $(&#39;.todo&#39;).show();
-    &#125; else if (filter === &#39;in-progress&#39;) &#123;
-      $(&#39;.todo&#39;).show();
-      $(&#39;.todo.checked&#39;).hide();
-    &#125; else &#123;        // completed
-      $(&#39;.todo&#39;).hide();
-      $(&#39;.todo.checked&#39;).show();
-    &#125;
-  &#125;);
-
-  // 清除所有 todo
-  $(&#39;.clear-all&#39;).click(() =&gt; &#123;
-    $(&#39;.todo&#39;).remove();
-  &#125;);
-
-  // 儲存 todo
-  $(&#39;.btn-save&#39;).click(() =&gt; &#123;
-    let todos = [];
-    $(&#39;.todo&#39;).each((i, element) =&gt; &#123;
-      const input = $(element).find(&#39;.todo__check&#39;);
-      const label = $(element).find(&#39;.todo__title&#39;);
-      todos.push(&#123;
-        id: input.attr(&#39;id&#39;).replace(&#39;todo-&#39;, &#39;&#39;),      // 把 todo-id 的 todo- 換成空字串
-        content: label.text(),
-        isDone: $(element).hasClass(&#39;checked&#39;)
-      &#125;);    
-    &#125;);
-    JSON.stringify(todos);       // 將 JS 物件轉換成 JSON 字串
-  &#125;);
-
-  function addTodo() &#123;
-    const value = $(&#39;.todo__input&#39;).val();
-    if (!value) return;
-    $(&#39;.todo__list&#39;).prepend(
-      template
-        .replace(&#39;&#123;content&#125;&#39;, escape(value))
-        .replace(/&#123;id&#125;/g, id)
-    );
-    id += 1;
-    $(&#39;.todo__input&#39;).val(&#39;&#39;);
-  &#125;
-
-  function escape(toOutput) &#123;
-    return toOutput
-      .replace(/&amp;/g, &#39;&amp;amp;&#39;)
-      .replace(/&lt;/g, &#39;&amp;lt;&#39;)
-      .replace(/&gt;/g, &#39;&amp;gt;&#39;)
-      .replace(/&quot;/g, &#39;&amp;quot;&#39;)
-      .replace(/&#39;/g, &#39;&amp;#039;&#39;);
-  &#125;
-&lt;/script&gt;</code></pre>
 <h2 id="前後端串接"><a href="#前後端串接" class="headerlink" title="前後端串接"></a>前後端串接</h2><h3 id="目標功能"><a href="#目標功能" class="headerlink" title="目標功能"></a>目標功能</h3><ul>
 <li>儲存功能：Save</li>
 </ul>
 <h3 id="PHP-API"><a href="#PHP-API" class="headerlink" title="PHP API"></a>PHP API</h3><p>將前端得到的資料 <code>JSON.stringify(todos)</code>，利用 Ajax 方式 POST 到資料庫：</p>
-<pre><code class="javascript=">// 儲存 todo
-$(&#39;.btn-save&#39;).click(() =&gt; &#123;
-  let todos = [];
-  $(&#39;.todo&#39;).each((i, element) =&gt; &#123;
-    const input = $(element).find(&#39;.todo__check&#39;);
-    const label = $(element).find(&#39;.todo__title&#39;);
-    todos.push(&#123;
-      id: input.attr(&#39;id&#39;).replace(&#39;todo-&#39;, &#39;&#39;),      // 把 todo-id 的 todo- 換成空字串
-      content: label.text(),
-      isDone: $(element).hasClass(&#39;checked&#39;)
-    &#125;);    
-  &#125;);
-  const data = JSON.stringify(todos);       // 將 JS 物件轉換成 JSON 字串
-  $.ajax(&#123;
-    type: &#39;POST&#39;,
-    url: &#39;http://localhost/heidi/week12_local/hw2/api_add_todo.php&#39;,
-    data: &#123;
-      todo: data
-    &#125;,
-    success: function(resp) &#123;
-      const respId = resp.id
-      window.location = &#39;index.html?id=&#39; + respId;
-    &#125;,
-    error: function () &#123;
-      alert(&#39;Error!&#39;);
-    &#125;
-  &#125;);
-&#125;);</code></pre>
-<p>如此即可利用前端 JavaScript 從後端拿取 JSON 格式的資料，並用 <code>JSON.parse()</code> 將 JSON 字串轉換成 JavaScript 物件：</p>
-<pre><code class="javascript=">// URLSearchParams(): 解析網址參數
-const serchParams = new URLSearchParams(window.location.search);  // ?id=...
-const todoId = serchParams.get(&#39;id&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 儲存 todo</span><br>$(<span class="hljs-string">&#x27;.btn-save&#x27;</span>).click(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">let</span> todos = [];<br>  $(<span class="hljs-string">&#x27;.todo&#x27;</span>).each(<span class="hljs-function">(<span class="hljs-params">i, element</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> input = $(element).find(<span class="hljs-string">&#x27;.todo__check&#x27;</span>);<br>    <span class="hljs-keyword">const</span> label = $(element).find(<span class="hljs-string">&#x27;.todo__title&#x27;</span>);<br>    todos.push(&#123;<br>      id: input.attr(<span class="hljs-string">&#x27;id&#x27;</span>).replace(<span class="hljs-string">&#x27;todo-&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),      <span class="hljs-comment">// 把 todo-id 的 todo- 換成空字串</span><br>      content: label.text(),<br>      isDone: $(element).hasClass(<span class="hljs-string">&#x27;checked&#x27;</span>)<br>    &#125;);    <br>  &#125;);<br>  <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.stringify(todos);       <span class="hljs-comment">// 將 JS 物件轉換成 JSON 字串</span><br>  $.ajax(&#123;<br>    type: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>    url: <span class="hljs-string">&#x27;http://localhost/heidi/week12_local/hw2/api_add_todo.php&#x27;</span>,<br>    data: &#123;<br>      todo: data<br>    &#125;,<br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resp</span>) </span>&#123;<br>      <span class="hljs-keyword">const</span> respId = resp.id<br>      <span class="hljs-built_in">window</span>.location = <span class="hljs-string">&#x27;index.html?id=&#x27;</span> + respId;<br>    &#125;,<br>    error: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      alert(<span class="hljs-string">&#x27;Error!&#x27;</span>);<br>    &#125;<br>  &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-if (todoId) &#123;
-  $.getJSON(&#39;http://localhost/heidi/week12_local/hw2/api_get_todo.php?id=&#39; + todoId, function (data) &#123;
-    const todos = JSON.parse(data.data.todo);
-    restoreTodos(todos);
-  &#125;);
-&#125;</code></pre>
+<p>如此即可利用前端 JavaScript 從後端拿取 JSON 格式的資料，並用 <code>JSON.parse()</code> 將 JSON 字串轉換成 JavaScript 物件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// URLSearchParams(): 解析網址參數</span><br><span class="hljs-keyword">const</span> serchParams = <span class="hljs-keyword">new</span> URLSearchParams(<span class="hljs-built_in">window</span>.location.search);  <span class="hljs-comment">// ?id=...</span><br><span class="hljs-keyword">const</span> todoId = serchParams.get(<span class="hljs-string">&#x27;id&#x27;</span>);<br><br><span class="hljs-keyword">if</span> (todoId) &#123;<br>  $.getJSON(<span class="hljs-string">&#x27;http://localhost/heidi/week12_local/hw2/api_get_todo.php?id=&#x27;</span> + todoId, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> todos = <span class="hljs-built_in">JSON</span>.parse(data.data.todo);<br>    restoreTodos(todos);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>將拿到的資料再以 JS 處理新增到頁面，把模版 template 加上 content、id、todoClass：</p>
-<pre><code class="javascript=">function restoreTodos(todos) &#123;
-  if (todos.length === 0) return;
-  // id 要從讀取的最後一個 todo id 繼續增加
-  id = todos[todos.length - 1].id + 1;
-  for(let i = 0; i &lt; todos.length; i++) &#123;
-    const todo = todos[i];
-    $(&#39;.todo__list&#39;).prepend(
-      template
-        .replace(&#39;&#123;content&#125;&#39;, escape(todo.content))
-        .replace(/&#123;id&#125;/g, todo.id)
-        .replace(&#39;&#123;todoClass&#125;&#39;, todo.isDone ? &#39;checked&#39; : &#39;&#39;)
-    );
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">restoreTodos</span>(<span class="hljs-params">todos</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (todos.length === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>  <span class="hljs-comment">// id 要從讀取的最後一個 todo id 繼續增加</span><br>  id = todos[todos.length - <span class="hljs-number">1</span>].id + <span class="hljs-number">1</span>;<br>  <span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; todos.length; i++</span>)</span> &#123;<br>    <span class="hljs-keyword">const</span> todo = todos[i];<br>    $(<span class="hljs-string">&#x27;.todo__list&#x27;</span>).prepend(<br>      template<br>        .replace(<span class="hljs-string">&#x27;&#123;content&#125;&#x27;</span>, <span class="hljs-built_in">escape</span>(todo.content))<br>        .replace(<span class="hljs-regexp">/&#123;id&#125;/g</span>, todo.id)<br>        .replace(<span class="hljs-string">&#x27;&#123;todoClass&#125;&#x27;</span>, todo.isDone ? <span class="hljs-string">&#x27;checked&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>)<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="Single-Page-Application"><a href="#Single-Page-Application" class="headerlink" title="Single Page Application"></a>Single Page Application</h2><p>Single Page Application（單頁面應用程式），簡稱 SPA。是前端利用 Ajax 以非同步方式串接後端 API，如此可將前後端分離，在交換資料時不需換頁，可透過動態方式更新部分頁面。</p>
 <p>而早期的網頁主要採用 Multiple Page Application（多頁式應用程式）設計，與 SPA 概念相對應，每次交換資料時都需換頁。</p>

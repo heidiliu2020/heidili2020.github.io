@@ -305,28 +305,16 @@
 <li>混淆：藉此提升代碼閱讀難度，有一定程度的保護代碼作用</li>
 </ul>
 <p>配置範例：</p>
-<pre><code class="javascript=">let gulp = require(&#39;gulp&#39;),               // 載入 gulp
-let gulpUglify = require(&#39;gulp-uglify&#39;);  // 載入 gulp-uglify
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>),               <span class="hljs-comment">// 載入 gulp</span><br><span class="hljs-keyword">let</span> gulpUglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-uglify&#x27;</span>);  <span class="hljs-comment">// 載入 gulp-uglify</span><br><br>gulp.task(<span class="hljs-string">&#x27;script&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    gulp.src(<span class="hljs-string">&#x27;javascript/original/*.js&#x27;</span>)        <span class="hljs-comment">// 指定要處理的原始 JavaScript 檔案目錄</span><br>        .pipe(gulpUglify())                     <span class="hljs-comment">// 將 JavaScript 做最小化</span><br>        .pipe(gulp.dest(<span class="hljs-string">&#x27;javascript/minify&#x27;</span>));  <span class="hljs-comment">// 指定最小化後的 JavaScript 檔案目錄</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
-gulp.task(&#39;script&#39;, function () &#123;
-    gulp.src(&#39;javascript/original/*.js&#39;)        // 指定要處理的原始 JavaScript 檔案目錄
-        .pipe(gulpUglify())                     // 將 JavaScript 做最小化
-        .pipe(gulp.dest(&#39;javascript/minify&#39;));  // 指定最小化後的 JavaScript 檔案目錄
-&#125;);</code></pre>
 <h3 id="minify"><a href="#minify" class="headerlink" title="minify"></a>minify</h3><ul>
 <li><code>gulp-minify-css</code>：壓縮 CSS 檔案</li>
 <li>壓縮：藉由去掉空格、換行符號等，縮短變數跟 code 長度，以節省瀏覽器 Parse（解析）時間</li>
 <li>但更新的版本已經不太適用，改為使用 <code> gulp-clean-css</code></li>
 </ul>
 <p>配置範例：</p>
-<pre><code class="javascript=">let gulp = require(&#39;gulp&#39;);
-let cleanCSS = require(&#39;gulp-clean-css&#39;);
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>);<br><span class="hljs-keyword">let</span> cleanCSS = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-clean-css&#x27;</span>);<br><br>gulp.task(<span class="hljs-string">&#x27;minify-css&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">&#x27;styles/*.css&#x27;</span>)<br>    .pipe(cleanCSS(&#123;<span class="hljs-attr">compatibility</span>: <span class="hljs-string">&#x27;ie8&#x27;</span>&#125;))<br>    .pipe(gulp.dest(<span class="hljs-string">&#x27;dist&#x27;</span>));<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-gulp.task(&#39;minify-css&#39;, () =&gt; &#123;
-  return gulp.src(&#39;styles/*.css&#39;)
-    .pipe(cleanCSS(&#123;compatibility: &#39;ie8&#39;&#125;))
-    .pipe(gulp.dest(&#39;dist&#39;));
-&#125;);</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cDovL2tlanl1bi5naXRodWIuaW8vZ3VscC1sZWFybmluZy1ub3Rlcy9wbGd1aW5zL0phdmFTY3JpcHQvUGx1Z2lucy1KYXZhU2NyaXB0LWd1bHAtdWdsaWZ5Lmh0bWw=">【gulp-uglify】最小化 JavaScript | gulp 學習筆記<i class="fa fa-external-link-alt"></i></span></li>
@@ -343,10 +331,8 @@ gulp.task(&#39;minify-css&#39;, () =&gt; &#123;
 <li>不易引用套件：若想要引用他人撰寫的 library 套件，需考慮相容性問題，以及可能造成命名衝突。</li>
 </ol>
 <h3 id="如何安裝-1"><a href="#如何安裝-1" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>跟著官方教學步驟 <span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy9ndWlkZXMvZ2V0dGluZy1zdGFydGVkLw==">Getting Started<i class="fa fa-external-link-alt"></i></span> 安裝 webpack：</p>
-<pre><code>mkdir webpack-demo
-cd webpack-demo
-npm init -y
-npm install webpack webpack-cli --save-dev</code></pre>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">mkdir</span> webpack-<span class="hljs-built_in">demo</span><br>cd webpack-<span class="hljs-built_in">demo</span><br>npm init -y<br>npm install webpack webpack-cli --<span class="hljs-built_in">save</span>-dev<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/MP3ufbd.png"></p>
 <h3 id="相關語法"><a href="#相關語法" class="headerlink" title="相關語法"></a>相關語法</h3><blockquote>
 <p><code>dev</code>：代表開發時才會使用，打包後就不會出現在裡面（記錄在 package.json -&gt; devDependencies）</p>
@@ -354,56 +340,46 @@ npm install webpack webpack-cli --save-dev</code></pre>
 <ul>
 <li>下載 jquery</li>
 </ul>
-<pre><code>npm install jquery webpack-cli --save-dev</code></pre>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">npm <span class="hljs-keyword">install </span><span class="hljs-keyword">jquery </span>webpack-cli --save-dev<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>css-Loader：用來解析 CSS 檔</li>
 </ul>
-<pre><code>npm install --save-dev css-loader
-npm install --save-dev style-loader</code></pre>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs q">npm install --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> css-loader<br>npm install --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> style-loader<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>babel-loader</li>
 </ul>
-<pre><code>npm install -D babel-loader @babel/core @babel/preset-env</code></pre>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install -D babel-loader @babel/core @babel/preset-env<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>sass-loader</li>
 </ul>
-<pre><code>npm install sass-loader sass webpack --save-dev</code></pre>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">npm install sass-loader sass webpack --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="執行步驟"><a href="#執行步驟" class="headerlink" title="執行步驟"></a>執行步驟</h3><ul>
 <li>需要進行編譯的檔案，通常不會直接放在根目錄，而是會先放在 src（source code），使用工具轉換後再放到其他地方。</li>
 <li>webpack 預設執行檔案路徑如下：</li>
 </ul>
-<pre><code>webpack-demo/src/index.js</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">webpack-demo<span class="hljs-regexp">/src/i</span>ndex.js<br></code></pre></td></tr></table></figure>
+
 <p>以 index.js 引入 utils.js 為例：</p>
-<h4 id="utils-js"><a href="#utils-js" class="headerlink" title="utils.js"></a>utils.js</h4><pre><code class="javascript=">const Utils = &#123;
-  first: function(str) &#123;
-    return str[0]
-  &#125;
-&#125;
+<h4 id="utils-js"><a href="#utils-js" class="headerlink" title="utils.js"></a>utils.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> Utils = &#123;<br>  first: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">str</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> str[<span class="hljs-number">0</span>]<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">module</span>.exports = Utils<br></code></pre></td></tr></table></figure>
 
-module.exports = Utils</code></pre>
-<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><pre><code class="javascript=">const utils = require(&#39;./utils&#39;)
+<h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./utils&#x27;</span>)<br><br><span class="hljs-built_in">console</span>.log(utils.first(<span class="hljs-string">&#x27;abc&#x27;</span>))<br></code></pre></td></tr></table></figure>
 
-console.log(utils.first(&#39;abc&#39;))</code></pre>
 <p>在 CLI 執行 <code>npm src/index.js</code> 後印出 <code>a</code>，代表成功引入檔案。</p>
 <p><img src="https://i.imgur.com/QmPof6p.png"></p>
 <p>接著以 <code>npx webpack</code> 執行打包，完成會自動把檔案 main.js 放在資料夾 dist。</p>
 <p>若執行檔案 <code>npm dist/main.js</code> 仍會得到相同結果：</p>
 <p><img src="https://i.imgur.com/aE3nKoD.png"></p>
 <p>接著在 index.html 引入：</p>
-<pre><code class="javascript=">&lt;script src=&quot;dist/main.js&quot;&gt;&lt;/script&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script src=<span class="hljs-string">&quot;dist/main.js&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
 <p>即可透過 webpack 打包 module，讓我們能夠在瀏覽器上執行使用 require 語法。</p>
 <h3 id="webpack-config-js：預設執行檔"><a href="#webpack-config-js：預設執行檔" class="headerlink" title="webpack.config.js：預設執行檔"></a><code>webpack.config.js</code>：預設執行檔</h3><p>在安裝好 loader 後，需設定執行檔，透過指定 rules 來執行檔案：</p>
-<h4 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h4><pre><code class="javascript=">// webpack.config.js
-const path = require(&#39;path&#39;)
+<h4 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span><br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>   mode: <span class="hljs-string">&#x27;&#x27;</span>,<br>  entry: [<span class="hljs-string">&#x27;./src/index&#x27;</span>], <span class="hljs-comment">// 在 index 檔案後的 .js 副檔名是可選的</span><br>  output: &#123;<br>    path: path.join(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),<br>    filename: <span class="hljs-string">&#x27;bundle.js&#x27;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-module.exports = &#123;
-   mode: &#39;&#39;,
-  entry: [&#39;./src/index&#39;], // 在 index 檔案後的 .js 副檔名是可選的
-  output: &#123;
-    path: path.join(__dirname, &#39;dist&#39;),
-    filename: &#39;bundle.js&#39;
-  &#125;
-&#125;</code></pre>
 <h4 id="屬性介紹"><a href="#屬性介紹" class="headerlink" title="屬性介紹"></a>屬性介紹</h4><ul>
 <li>mode：使用的模式。預設為 production，代表正式生產環境版本；開發使用 development 則不會進行壓縮</li>
 <li>entry：是 bundle 的進入點，entry 是一個陣列。根據需求，webpack 允許可以有多個進入點，來產生多個 bundle 檔案。</li>
@@ -413,34 +389,8 @@ module.exports = &#123;
 </ul>
 </li>
 </ul>
-<h4 id="接著以打包-style-css-和-index-js-所需進行的設定為例："><a href="#接著以打包-style-css-和-index-js-所需進行的設定為例：" class="headerlink" title="接著以打包 style.css 和 index.js 所需進行的設定為例："></a>接著以打包 style.css 和 index.js 所需進行的設定為例：</h4><pre><code class="javascript=">const path = require(&#39;path&#39;);
+<h4 id="接著以打包-style-css-和-index-js-所需進行的設定為例："><a href="#接著以打包-style-css-和-index-js-所需進行的設定為例：" class="headerlink" title="接著以打包 style.css 和 index.js 所需進行的設定為例："></a>接著以打包 style.css 和 index.js 所需進行的設定為例：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  mode: <span class="hljs-string">&#x27;&#x27;</span>,<br>  entry: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,<br>  output: &#123;<br>    filename: <span class="hljs-string">&#x27;main.js&#x27;</span>,    <span class="hljs-comment">// 輸出檔案名稱</span><br>    path: path.resolve(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),　    <span class="hljs-comment">// 輸出位置</span><br>  &#125;,<br>  <span class="hljs-comment">// 載入 loader</span><br>  <span class="hljs-built_in">module</span>: &#123;<br>    rules: [<br>      &#123;<br>        test: <span class="hljs-regexp">/\.css$/i</span>,      <span class="hljs-comment">// .css 結尾的檔案均使用 css-loader 解析</span><br>        use: [<span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-string">&#x27;css-loader&#x27;</span>],<br>      &#125;,&#123;<br>        test: <span class="hljs-regexp">/\.m?js$/</span>,      <span class="hljs-comment">// .mjs 結尾的檔案均使用 babel-loader 解析</span><br>        exclude: <span class="hljs-regexp">/(node_modules|bower_components)/</span>,<br>        use: &#123;<br>          loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>          options: &#123;<br>            presets: [<span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>]<br>          &#125;<br>        &#125;<br>      &#125;<br>    ],<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-module.exports = &#123;
-  mode: &#39;&#39;,
-  entry: &#39;./src/index.js&#39;,
-  output: &#123;
-    filename: &#39;main.js&#39;,    // 輸出檔案名稱
-    path: path.resolve(__dirname, &#39;dist&#39;),　    // 輸出位置
-  &#125;,
-  // 載入 loader
-  module: &#123;
-    rules: [
-      &#123;
-        test: /\.css$/i,      // .css 結尾的檔案均使用 css-loader 解析
-        use: [&#39;style-loader&#39;, &#39;css-loader&#39;],
-      &#125;,&#123;
-        test: /\.m?js$/,      // .mjs 結尾的檔案均使用 babel-loader 解析
-        exclude: /(node_modules|bower_components)/,
-        use: &#123;
-          loader: &#39;babel-loader&#39;,
-          options: &#123;
-            presets: [&#39;@babel/preset-env&#39;]
-          &#125;
-        &#125;
-      &#125;
-    ],
-  &#125;,
-&#125;;</code></pre>
 <p>參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAyMC8wMS8yMS93ZWJwYWNrLW5ld2JpZS10dXRvcmlhbC8=">webpack 新手教學之淺談模組化與 snowpack<i class="fa fa-external-link-alt"></i></span></li>

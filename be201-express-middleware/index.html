@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 學習如何使用 Express 及其相關套件  P1 我理解為什麼會需要框架">
+  <meta name="description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  1234學習目標： P1 學習如何使用 Express 及其相關套件 P1 我理解為什麼會需要框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware">
 <meta property="og:url" content="https://heidiliu2020.github.io/be201-express-middleware/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  學習目標：   P1 學習如何使用 Express 及其相關套件  P1 我理解為什麼會需要框架">
+<meta property="og:description" content="本篇為 [BE201] 後端中階：Express 與 Sequelize 這門課程的學習筆記。如有錯誤歡迎指正！  1234學習目標： P1 學習如何使用 Express 及其相關套件 P1 我理解為什麼會需要框架">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/uvrlRi6.png">
 <meta property="og:image" content="https://i.imgur.com/N6etIbh.png">
@@ -273,10 +273,7 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
-<pre><code>學習目標：
-
- P1 學習如何使用 Express 及其相關套件
- P1 我理解為什麼會需要框架</code></pre>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標：<br><br> <span class="hljs-built_in">P1</span> 學習如何使用 Express 及其相關套件<br> <span class="hljs-built_in">P1</span> 我理解為什麼會需要框架<br></code></pre></td></tr></table></figure>
 <a id="more"></a>
 <hr>
 <h2 id="Middleware-中間介"><a href="#Middleware-中間介" class="headerlink" title="Middleware 中間介"></a>Middleware 中間介</h2><p>在上一篇筆記 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWJlMjAxLWV4cHJlc3Mtbm9kZQ==">後端中階 - Node.js + Express 框架：建立一個靜態網頁<i class="fa fa-external-link-alt"></i></span>，我們學到如何透過 Node.js 搭配 Express 框架，來快速建立一個靜態網頁。並瞭解到什麼是 MVC 架構，以及如何串接 MySQL 資料庫。</p>
@@ -293,104 +290,38 @@
 <li>再透過第三個參數 next 把控制權轉移到下一個 middleware</li>
 </ul>
 <p>舉個簡單的例子，在之前實作 todolist 的 index.js 中加入 <code>app.use()</code>，代表整個程式都能使用這個 middleware：</p>
-<pre><code class="javascript=">const express = require(&#39;express&#39;);
-const db = require(&#39;./db&#39;)
-const app = express();
-const port = 5002;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./db&#x27;</span>)<br><span class="hljs-keyword">const</span> app = express();<br><span class="hljs-keyword">const</span> port = <span class="hljs-number">5002</span>;<br><br><span class="hljs-keyword">const</span> todoController = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./controllers/todo&#x27;</span>)<br><br>app.set(<span class="hljs-string">&#x27;view engine&#x27;</span>, <span class="hljs-string">&#x27;ejs&#x27;</span>)<br><br><span class="hljs-comment">// app.use(): 代表整個程式都能使用這個 middleware</span><br>app.use(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Time: &#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>())<br>  res.end()<br>&#125;)<br><br>app.get(<span class="hljs-string">&#x27;/todos&#x27;</span>, todoController.getAll)<br>app.get(<span class="hljs-string">&#x27;/todos/:id&#x27;</span>, todoController.get)<br><br>app.listen(port, <span class="hljs-function">() =&gt;</span> &#123;<br>  db.connect()<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Example app listening at http://localhost:<span class="hljs-subst">$&#123;port&#125;</span>`</span>)<br>&#125;) <br></code></pre></td></tr></table></figure>
 
-const todoController = require(&#39;./controllers/todo&#39;)
-
-app.set(&#39;view engine&#39;, &#39;ejs&#39;)
-
-// app.use(): 代表整個程式都能使用這個 middleware
-app.use((req, res) =&gt; &#123;
-  console.log(&#39;Time: &#39;, new Date())
-  res.end()
-&#125;)
-
-app.get(&#39;/todos&#39;, todoController.getAll)
-app.get(&#39;/todos/:id&#39;, todoController.get)
-
-app.listen(port, () =&gt; &#123;
-  db.connect()
-  console.log(`Example app listening at http://localhost:$&#123;port&#125;`)
-&#125;) </code></pre>
 <p>重整瀏覽器頁面時，會發現畫面什麼東西都沒有：</p>
 <p><img src="https://i.imgur.com/N6etIbh.png"></p>
 <p>但是在 CLI 介面會印出執行結果，每重整一次畫面就會執行 log 一次：</p>
 <p><img src="https://i.imgur.com/J3r3CtM.png"></p>
 <p>之所以沒有得到 response，是因為沒有加入第三個參數，也就是呼叫 next 把控制權轉移到下一個 middleware。可以把程式碼修改如下：</p>
-<pre><code class="javascript=">app.use((req, res, next) =&gt; &#123;
-  console.log(&#39;Time: &#39;, new Date())
-  next()  // 呼叫 next 把控制權轉移到下一個 middleware
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.use(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Time: &#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>())<br>  next()  <span class="hljs-comment">// 呼叫 next 把控制權轉移到下一個 middleware</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <p>重整頁面後，就能看到經渲染過的畫面，同時 CLI 介面上也會印出接收 request 的時間：</p>
 <p><img src="https://i.imgur.com/9vEZvbU.png"></p>
 <p>這其實就是一個簡單的 middleware 應用。那這個機制實際上在 Express 有哪些用處呢？比如說，在 Express 程式中，並沒有內建解析透過 post method 的 request body、管理 session 機制等功能，就必須透過 middleware 來實現。</p>
 <p>此外，middleware 處理是有順序性的。以一個簡單的權限管理機制為範例，例如網址列上必須有 <code>admin</code> 才能顯示頁面：</p>
 <h4 id="方法一：最直覺的作法"><a href="#方法一：最直覺的作法" class="headerlink" title="方法一：最直覺的作法"></a>方法一：最直覺的作法</h4><p>這個方法是透過 Express 內建的 <code>.query</code> 語法，來拿到網址列上的參數。</p>
 <p>直接在兩個 Controllers 都加上 checkPermission() 進行權限驗證：</p>
-<pre><code class="javascript=">const todoModel = require(&#39;../models/todo&#39;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> todoModel = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models/todo&#x27;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkPermission</span>(<span class="hljs-params">req</span>) </span>&#123;<br>  <span class="hljs-comment">// 利用 .query 能夠拿到網址列上的參數</span><br>  <span class="hljs-keyword">return</span> req.query.admin === <span class="hljs-string">&#x27;1&#x27;</span>;<br>&#125;<br><br><span class="hljs-keyword">const</span> todoController = &#123;<br>  getAll: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// 如果驗證失敗就結束 request</span><br>    <span class="hljs-keyword">if</span> (!checkPermission(req)) <span class="hljs-keyword">return</span> res.end();<br>    todoModel.getAll(<span class="hljs-function">(<span class="hljs-params">err, results</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>      res.render(<span class="hljs-string">&#x27;todos&#x27;</span>, &#123;<br>        todos: results<br>      &#125;)<br>    &#125;)<br>  &#125;,<br><br>  get: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// 如果驗證失敗就結束 request</span><br>    <span class="hljs-keyword">if</span> (!checkPermission(req)) <span class="hljs-keyword">return</span> res.end();<br>    <span class="hljs-keyword">const</span> id = req.params.id<br>    todoModel.get(id, <span class="hljs-function">(<span class="hljs-params">err, results</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>      res.render(<span class="hljs-string">&#x27;todo&#x27;</span>, &#123;<br>        todo: results[<span class="hljs-number">0</span>]<br>      &#125;)<br>    &#125;)<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">module</span>.exports = todoController<br></code></pre></td></tr></table></figure>
 
-function checkPermission(req) &#123;
-  // 利用 .query 能夠拿到網址列上的參數
-  return req.query.admin === &#39;1&#39;;
-&#125;
-
-const todoController = &#123;
-  getAll: (req, res) =&gt; &#123;
-    // 如果驗證失敗就結束 request
-    if (!checkPermission(req)) return res.end();
-    todoModel.getAll((err, results) =&gt; &#123;
-      if (err) return console.log(err);
-      res.render(&#39;todos&#39;, &#123;
-        todos: results
-      &#125;)
-    &#125;)
-  &#125;,
-
-  get: (req, res) =&gt; &#123;
-    // 如果驗證失敗就結束 request
-    if (!checkPermission(req)) return res.end();
-    const id = req.params.id
-    todoModel.get(id, (err, results) =&gt; &#123;
-      if (err) return console.log(err);
-      res.render(&#39;todo&#39;, &#123;
-        todo: results[0]
-      &#125;)
-    &#125;)
-  &#125;
-&#125;
-
-module.exports = todoController</code></pre>
 <p>回到瀏覽器，會發現必須網址列加上 <code>?admin=1</code> 參數才能讀取畫面：</p>
 <p><img src="https://i.imgur.com/rJV2764.png"></p>
 <p>這樣就完成簡單的權限驗證機制，但這其實不是一個好做法，一旦 function 變多就會不易管理。這種情況就是 middleware 登場的時候了！</p>
 <h4 id="方法二：透過-middleware-機制"><a href="#方法二：透過-middleware-機制" class="headerlink" title="方法二：透過 middleware 機制"></a>方法二：透過 middleware 機制</h4><p>在 index.js 加上 app.use()，並傳入 next 參數，若網址列通過驗證就會把控制權傳下去：</p>
-<pre><code class="javascript=">app.use((req, res, next) =&gt; &#123;
-  // 如果網址列通過驗證，就把控制權傳下去
-  if (req.query.admin === &#39;1&#39;) &#123;
-    next();
-  &#125; else &#123;
-    // 不通過的話就顯示 Error
-    res.end(&#39;Error&#39;)
-  &#125;
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.use(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 如果網址列通過驗證，就把控制權傳下去</span><br>  <span class="hljs-keyword">if</span> (req.query.admin === <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>    next();<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 不通過的話就顯示 Error</span><br>    res.end(<span class="hljs-string">&#x27;Error&#x27;</span>)<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <p>執行結果如下：</p>
 <p><img src="https://i.imgur.com/WkQUoAq.png"></p>
 <p>這其實就是 middleware 的作用，相較於方法一，我們能透過 middleware 來簡化程式碼。</p>
 <p>此外，我們也能改寫上述程式碼，獨立出 checkPermission() 這個 function 來進行驗證：</p>
-<pre><code class="javascript=">function checkPermission(req, res, next) &#123;
-  if (req.query.admin === &#39;1&#39;) &#123;
-    next();
-  &#125; else &#123;
-    res.end(&#39;Error&#39;)
-  &#125;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkPermission</span>(<span class="hljs-params">req, res, next</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (req.query.admin === <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>    next();<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    res.end(<span class="hljs-string">&#x27;Error&#x27;</span>)<br>  &#125;<br>&#125;<br><br>app.use(checkPermission)<br></code></pre></td></tr></table></figure>
 
-app.use(checkPermission)</code></pre>
 <p>這種寫法的好處，在於我們可以針對不同路由進行處理。例如加在 <code>/todos</code> 時，就只有這個路由會被影響：</p>
-<pre><code class="javascript=">app.get(&#39;/todos&#39;, checkPermission, todoController.getAll)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.get(<span class="hljs-string">&#x27;/todos&#x27;</span>, checkPermission, todoController.getAll)<br></code></pre></td></tr></table></figure>
+
 <p>在 <code>/todos</code> 這個路由，必須加上 <code>?admin=1</code>  才能顯示畫面：</p>
 <p><img src="https://i.imgur.com/38VqxUf.png"></p>
 <p>但是 <code>/todos/:id</code> 這個路由不會受到影響，因為沒有加上 checkPermission() 這個 middleware：</p>
@@ -398,7 +329,8 @@ app.use(checkPermission)</code></pre>
 <p>在上一篇筆記的 todolist 範例中，之所以沒有寫到 next 來轉移控制權，是因為處理完就回傳 response 資料，既然不會用到 next 這個參數，就可省略宣告。</p>
 <h2 id="body-parser：用來解析-HTTP-Request"><a href="#body-parser：用來解析-HTTP-Request" class="headerlink" title="body-parser：用來解析 HTTP Request"></a>body-parser：用來解析 HTTP Request</h2><p>接著要來介紹 body-parser 這個很常使用到的 middleware，使用方法可參考 GitHub 上 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4cHJlc3Nqcy9ib2R5LXBhcnNlciNyZWFkbWU=">expressjs/body-parser<i class="fa fa-external-link-alt"></i></span> 的範例。</p>
 <p>body-parser 是一個用來解析解析 HTTP Request 的中間介。前面有提到說，我透過 Express 內建的語法，我們只能拿到 query string，因此只適用於 GET method，但若是 POST method 就必須透過 middleware 才能拿到 request body。</p>
-<h3 id="安裝-body-parser"><a href="#安裝-body-parser" class="headerlink" title="安裝 body-parser"></a>安裝 body-parser</h3><pre><code>$ npm install body-parser</code></pre>
+<h3 id="安裝-body-parser"><a href="#安裝-body-parser" class="headerlink" title="安裝 body-parser"></a>安裝 body-parser</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> <span class="hljs-keyword">body</span>-parser<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/4q8sKI0.png"></p>
 <h3 id="body-parser-語法"><a href="#body-parser-語法" class="headerlink" title="body-parser 語法"></a>body-parser 語法</h3><p>body-parser 根據不同語法，能夠處理下列幾種格式資料：</p>
 <ul>
@@ -424,77 +356,24 @@ app.use(checkPermission)</code></pre>
 </li>
 </ul>
 <p>程式碼範例如下：</p>
-<pre><code class="javascript=">app.use(bodyParser.urlencoded(&#123; extended: false &#125;))
-app.use(bodyParser.json())</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.use(bodyParser.urlencoded(&#123; <span class="hljs-attr">extended</span>: <span class="hljs-literal">false</span> &#125;))<br>app.use(bodyParser.json())<br></code></pre></td></tr></table></figure>
+
 <h3 id="實作新增-todo-功能"><a href="#實作新增-todo-功能" class="headerlink" title="實作新增 todo 功能"></a>實作新增 todo 功能</h3><p>同樣以之前的 todolist 範例，繼續實作新增 todo 功能：</p>
 <ol>
 <li>在 index.js 引入 <code>body-parser</code> 套件，就可以使用 bodyParser() 處理 Request。接著在根目錄新增一個處理 addTodo 的路由：</li>
 </ol>
-<pre><code class="javascript=">const express = require(&#39;express&#39;);
-// 記得要引入 body-parser 才能使用
-const bodyParser = require(&#39;body-parser&#39;)
-const db = require(&#39;./db&#39;)
-const app = express();
-const port = 5002;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-comment">// 記得要引入 body-parser 才能使用</span><br><span class="hljs-keyword">const</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;body-parser&#x27;</span>)<br><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./db&#x27;</span>)<br><span class="hljs-keyword">const</span> app = express();<br><span class="hljs-keyword">const</span> port = <span class="hljs-number">5002</span>;<br><br><span class="hljs-keyword">const</span> todoController = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./controllers/todo&#x27;</span>)<br><br>app.set(<span class="hljs-string">&#x27;view engine&#x27;</span>, <span class="hljs-string">&#x27;ejs&#x27;</span>)<br><span class="hljs-comment">// 處理 UTF-8 編碼的資料</span><br>app.use(bodyParser.urlencoded(&#123; <span class="hljs-attr">extended</span>: <span class="hljs-literal">false</span> &#125;))<br><span class="hljs-comment">// 處理 json 資料</span><br>app.use(bodyParser.json())<br><br>app.get(<span class="hljs-string">&#x27;/todos&#x27;</span>, todoController.getAll)<br>app.get(<span class="hljs-string">&#x27;/todos/:id&#x27;</span>, todoController.get)<br><span class="hljs-comment">// 在根目錄新增一個 addTodo 路由</span><br>app.get(<span class="hljs-string">&#x27;/&#x27;</span>, todoController.addTodo)<br><br>app.listen(port, <span class="hljs-function">() =&gt;</span> &#123;<br>  db.connect()<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Example app listening at http://localhost:<span class="hljs-subst">$&#123;port&#125;</span>`</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-const todoController = require(&#39;./controllers/todo&#39;)
-
-app.set(&#39;view engine&#39;, &#39;ejs&#39;)
-// 處理 UTF-8 編碼的資料
-app.use(bodyParser.urlencoded(&#123; extended: false &#125;))
-// 處理 json 資料
-app.use(bodyParser.json())
-
-app.get(&#39;/todos&#39;, todoController.getAll)
-app.get(&#39;/todos/:id&#39;, todoController.get)
-// 在根目錄新增一個 addTodo 路由
-app.get(&#39;/&#39;, todoController.addTodo)
-
-app.listen(port, () =&gt; &#123;
-  db.connect()
-  console.log(`Example app listening at http://localhost:$&#123;port&#125;`)
-&#125;)</code></pre>
 <ol start="2">
 <li>在 Controllers 新增一個處理 addTodo 的 Controller，須注意這裡只負責 render 渲染頁面，而不是真的處理新增 todo 動作：</li>
 </ol>
-<pre><code class="javascript=">const todoModel = require(&#39;../models/todo&#39;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> todoModel = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../models/todo&#x27;</span>)<br><br><span class="hljs-keyword">const</span> todoController = &#123;<br>  getAll: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    todoModel.getAll(<span class="hljs-function">(<span class="hljs-params">err, results</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>      res.render(<span class="hljs-string">&#x27;todos&#x27;</span>, &#123;<br>        todos: results<br>      &#125;)<br>    &#125;)<br>  &#125;,<br><br>  get: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> id = req.params.id<br>    todoModel.get(id, <span class="hljs-function">(<span class="hljs-params">err, results</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>      res.render(<span class="hljs-string">&#x27;todo&#x27;</span>, &#123;<br>        todo: results[<span class="hljs-number">0</span>]<br>      &#125;)<br>    &#125;)<br>  &#125;<br><br>  <span class="hljs-comment">// 這裡只負責 render 頁面，並不是真的處理新增 todo</span><br>  addTodo: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    res.render(<span class="hljs-string">&#x27;addTodo&#x27;</span>)<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">module</span>.exports = todoController<br></code></pre></td></tr></table></figure>
 
-const todoController = &#123;
-  getAll: (req, res) =&gt; &#123;
-    todoModel.getAll((err, results) =&gt; &#123;
-      if (err) return console.log(err);
-      res.render(&#39;todos&#39;, &#123;
-        todos: results
-      &#125;)
-    &#125;)
-  &#125;,
-
-  get: (req, res) =&gt; &#123;
-    const id = req.params.id
-    todoModel.get(id, (err, results) =&gt; &#123;
-      if (err) return console.log(err);
-      res.render(&#39;todo&#39;, &#123;
-        todo: results[0]
-      &#125;)
-    &#125;)
-  &#125;
-
-  // 這裡只負責 render 頁面，並不是真的處理新增 todo
-  addTodo: (req, res) =&gt; &#123;
-    res.render(&#39;addTodo&#39;)
-  &#125;
-&#125;
-
-module.exports = todoController</code></pre>
 <ol start="3">
 <li>接著要實作 addTodo 的 view 部分，也就是新增一個 addTodo.ejs 檔：</li>
 </ol>
-<pre><code class="javascript=">&lt;h1&gt;Add Todo&lt;/h1&gt;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;h1&gt;Add Todo&lt;/h1&gt;<br><br>&lt;form method=<span class="hljs-string">&quot;POST&quot;</span><span class="hljs-string">&quot; action=&quot;</span>/todos<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string">  Content: &lt;input type=&quot;</span>text<span class="hljs-string">&quot; name=&quot;</span>content<span class="hljs-string">&quot; /&gt;</span><br><span class="hljs-string">  &lt;input type=&quot;</span>submit<span class="hljs-string">&quot; /&gt;</span><br><span class="hljs-string">&lt;/form&gt;</span><br></code></pre></td></tr></table></figure>
 
-&lt;form method=&quot;POST&quot;&quot; action=&quot;/todos&quot;&gt;
-  Content: &lt;input type=&quot;text&quot; name=&quot;content&quot; /&gt;
-  &lt;input type=&quot;submit&quot; /&gt;
-&lt;/form&gt;</code></pre>
 <p>執行後可在瀏覽器確認是否有畫面：</p>
 <p><img src="https://i.imgur.com/scuiz9Q.png"></p>
 <p>這時如果點選提交，會跳轉到錯誤頁面，這是因為還沒有處理路由：</p>
@@ -502,190 +381,100 @@ module.exports = todoController</code></pre>
 <ol start="4">
 <li>回到 index.js 新增一個處理 newTodo 的路由：</li>
 </ol>
-<pre><code class="javascript=">// 新增一個處理 newTodo 的路由
-app.post(&#39;/todos&#39;, todoController.newTodo)
-app.get(&#39;/todos&#39;, todoController.getAll)
-app.get(&#39;/todos/:id&#39;, todoController.get)
-// 新增一個處裡 addTodo 的路由
-app.get(&#39;/&#39;, todoController.addTodo)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 新增一個處理 newTodo 的路由</span><br>app.post(<span class="hljs-string">&#x27;/todos&#x27;</span>, todoController.newTodo)<br>app.get(<span class="hljs-string">&#x27;/todos&#x27;</span>, todoController.getAll)<br>app.get(<span class="hljs-string">&#x27;/todos/:id&#x27;</span>, todoController.get)<br><span class="hljs-comment">// 新增一個處裡 addTodo 的路由</span><br>app.get(<span class="hljs-string">&#x27;/&#x27;</span>, todoController.addTodo)<br></code></pre></td></tr></table></figure>
+
 <ol start="5">
 <li>接著同樣新增一個處理 newTodo 的 Controller，確認是否有成功拿到表單資料：</li>
 </ol>
-<pre><code class="javascript=">newTodo: (req, res) =&gt; &#123;
-  // 透過 body-parser 解析 resquest body 來拿取 content
-  const content = req.body.content
-  // 先輸出確認是否有拿到資料
-  res.end(content)
-&#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">newTodo: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 透過 body-parser 解析 resquest body 來拿取 content</span><br>  <span class="hljs-keyword">const</span> content = req.body.content<br>  <span class="hljs-comment">// 先輸出確認是否有拿到資料</span><br>  res.end(content)<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <p>在瀏覽器提交表單，確認有拿到資料：</p>
 <p><img src="https://i.imgur.com/EQIScXT.png"></p>
 <p>之所以能夠拿到表單提交的資料，是透過 body-parser 這個中間介解析 resquest body，才能拿取 content，否則程式會因為無法解析而出現錯誤。</p>
 <ol start="6">
 <li>接著繼續修改 newTodo Controller，把資料交給 Model 處理：</li>
 </ol>
-<pre><code class="javascript=">newTodo: (req, res) =&gt; &#123;
-  // 透過 body-parser 解析 resquest body 來拿取 content
-  const content = req.body.content
-  todoModel.add(content, (err) =&gt; &#123;
-    if (err) return console.log(err);
-    // 重新導回 todos 頁面
-    res.redirect(&#39;/todos&#39;);
-  &#125;)
-&#125;,</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">newTodo: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 透過 body-parser 解析 resquest body 來拿取 content</span><br>  <span class="hljs-keyword">const</span> content = req.body.content<br>  todoModel.add(content, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(err);<br>    <span class="hljs-comment">// 重新導回 todos 頁面</span><br>    res.redirect(<span class="hljs-string">&#x27;/todos&#x27;</span>);<br>  &#125;)<br>&#125;,<br></code></pre></td></tr></table></figure>
+
 <ol start="7">
 <li>再來是處理 todoModel.add() 的部分，也就是在 Model 新增一個 add 功能：</li>
 </ol>
-<pre><code class="javascript=">// 新增 todoModel.add()
-add: (content, cb) =&gt; &#123;
-  db.query(
-    &#39;INSERT INTO todos(content) VALUES(?)&#39;, [content], (err, results) =&gt; &#123;
-      if (err) return cb(err);
-      cb(null)
-    &#125;
-  );
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 新增 todoModel.add()</span><br>add: <span class="hljs-function">(<span class="hljs-params">content, cb</span>) =&gt;</span> &#123;<br>  db.query(<br>    <span class="hljs-string">&#x27;INSERT INTO todos(content) VALUES(?)&#x27;</span>, [content], <span class="hljs-function">(<span class="hljs-params">err, results</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> cb(err);<br>      cb(<span class="hljs-literal">null</span>)<br>    &#125;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>回到瀏覽器確認是否能夠新增 todo：</p>
 <p><img src="https://i.imgur.com/Y9fPgmN.png"></p>
 <p>這樣就完成一個簡單的 Back-end 專案了！並且有 MVC 架構，也就是 View 顯示畫面，Model 處理資料，Controller 藉由不同路由接收 requset，會執行相對應的 method；還有透過 body-parser 這個 middleware 處理 POST 表單提交的資料。</p>
 <h2 id="express-session：負責管理-session"><a href="#express-session：負責管理-session" class="headerlink" title="express-session：負責管理 session"></a>express-session：負責管理 session</h2><p>再來介紹 Express 框架中，用來管理 session 的中間介：express-session，使用方法可參考 GitHub 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4cHJlc3Nqcy9zZXNzaW9u">expressjs/session<i class="fa fa-external-link-alt"></i></span> 頁面。</p>
-<h3 id="安裝-express-session"><a href="#安裝-express-session" class="headerlink" title="安裝 express-session"></a>安裝 express-session</h3><pre><code>$ npm install express-session</code></pre>
+<h3 id="安裝-express-session"><a href="#安裝-express-session" class="headerlink" title="安裝 express-session"></a>安裝 express-session</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> express-<span class="hljs-keyword">session</span><br></code></pre></td></tr></table></figure>
+
 <p><img src="https://i.imgur.com/jWw5ZYd.png"></p>
 <h3 id="實作簡易登入功能"><a href="#實作簡易登入功能" class="headerlink" title="實作簡易登入功能"></a>實作簡易登入功能</h3><p>接著延續前面的 todolist 範例，實作一個簡單的登入功能。</p>
 <ol>
 <li>在 index.js引入 express-session 套件：</li>
 </ol>
-<pre><code class="javascript=">// 引入 express-session
-const session = require(&#39;express-session&#39;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 express-session</span><br><span class="hljs-keyword">const</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express-session&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>接著設定 app 載入模組 express-session：</li>
 </ol>
-<pre><code class="javascript=">// 在 app.js 中設定載入模組 express-session
-app.use(session(&#123;
-  secret: &#39;keyboard cat&#39;,
-  resave: false,
-  saveUninitialized: true
-&#125;))</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 在 app.js 中設定載入模組 express-session</span><br>app.use(session(&#123;<br>  secret: <span class="hljs-string">&#x27;keyboard cat&#x27;</span>,<br>  resave: <span class="hljs-literal">false</span>,<br>  saveUninitialized: <span class="hljs-literal">true</span><br>&#125;))<br></code></pre></td></tr></table></figure>
+
 <ol start="3">
 <li>實作 login、提交表單、logout 的路由，須注意是 req.session，request 才有 session：</li>
 </ol>
-<pre><code class="javascript=">// 實作 login 路由
-app.get(&#39;/login&#39;, (req, res) =&gt; &#123;
-  res.render(&#39;login&#39;)
-&#125;)
-// login 提交表單的路由
-app.post(&#39;/login&#39;, (req, res) =&gt; &#123;
-  if (req.body.password === &#39;abc&#39;) &#123;
-    // 注意是 request 才有 session
-    req.session.isLogin = true
-    // 成功就導回首頁；失敗則導回上一頁
-    res.redirect(&#39;/&#39;)
-  &#125; else &#123;
-    res.redirect(&#39;/login&#39;)
-  &#125;
-&#125;)
-// 實作 logout 路由
-app.get(&#39;/logout&#39;, (req, res) =&gt; &#123;
-  req.session.isLogin = false
-  res.redirect(&#39;/&#39;)
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 實作 login 路由</span><br>app.get(<span class="hljs-string">&#x27;/login&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.render(<span class="hljs-string">&#x27;login&#x27;</span>)<br>&#125;)<br><span class="hljs-comment">// login 提交表單的路由</span><br>app.post(<span class="hljs-string">&#x27;/login&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (req.body.password === <span class="hljs-string">&#x27;abc&#x27;</span>) &#123;<br>    <span class="hljs-comment">// 注意是 request 才有 session</span><br>    req.session.isLogin = <span class="hljs-literal">true</span><br>    <span class="hljs-comment">// 成功就導回首頁；失敗則導回上一頁</span><br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    res.redirect(<span class="hljs-string">&#x27;/login&#x27;</span>)<br>  &#125;<br>&#125;)<br><span class="hljs-comment">// 實作 logout 路由</span><br>app.get(<span class="hljs-string">&#x27;/logout&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  req.session.isLogin = <span class="hljs-literal">false</span><br>  res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <ol start="4">
 <li>設定 Controller 部分，在 addTo 首頁加上 isLogin 參數，用來判別是否登入：</li>
 </ol>
-<pre><code class="javascript=">  addTodo: (req, res) =&gt; &#123;
-    res.render(&#39;addTodo&#39;, &#123;
-      isLogin: req.session.isLogin
-    &#125;)
-  &#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">addTodo: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.render(<span class="hljs-string">&#x27;addTodo&#x27;</span>, &#123;<br>    isLogin: req.session.isLogin<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ol start="5">
 <li>設定 view 部分，在 addTodo.ejs 頁面顯示是否登入，增加連結導向 login 頁面或 logout：</li>
 </ol>
-<pre><code class="javascript=">&lt;h1&gt;Add Todo&lt;/h1&gt;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;h1&gt;Add Todo&lt;/h1&gt;<br><br>&lt;% <span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-params">isLogin</span>)</span> &#123; %&gt;<br>  已經登入  &lt;a href=<span class="hljs-string">&quot;/logout&quot;</span>&gt;登出&lt;/a&gt;<br>&lt;% &#125; <span class="hljs-keyword">else</span> &#123; %&gt;<br>  請先登入  &lt;a href=<span class="hljs-string">&quot;/login&quot;</span>&gt;登入&lt;/a&gt;<br>&lt;% &#125; %&gt;<br><br>&lt;form method=<span class="hljs-string">&quot;POST&quot;</span><span class="hljs-string">&quot; action=&quot;</span>/todos<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string">  Content: &lt;input type=&quot;</span>text<span class="hljs-string">&quot; name=&quot;</span>content<span class="hljs-string">&quot; /&gt;</span><br><span class="hljs-string">  &lt;input type=&quot;</span>submit<span class="hljs-string">&quot; /&gt;</span><br><span class="hljs-string">&lt;/form&gt;</span><br></code></pre></td></tr></table></figure>
 
-&lt;% if(isLogin) &#123; %&gt;
-  已經登入  &lt;a href=&quot;/logout&quot;&gt;登出&lt;/a&gt;
-&lt;% &#125; else &#123; %&gt;
-  請先登入  &lt;a href=&quot;/login&quot;&gt;登入&lt;/a&gt;
-&lt;% &#125; %&gt;
-
-&lt;form method=&quot;POST&quot;&quot; action=&quot;/todos&quot;&gt;
-  Content: &lt;input type=&quot;text&quot; name=&quot;content&quot; /&gt;
-  &lt;input type=&quot;submit&quot; /&gt;
-&lt;/form&gt;</code></pre>
 <ol start="6">
 <li>新增 login.ejs 頁面，能夠輸入密碼提交表單：</li>
 </ol>
-<pre><code class="javascript=">&lt;h1&gt;Login&lt;/h1&gt;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;h1&gt;Login&lt;/h1&gt;<br><br>&lt;form method=<span class="hljs-string">&quot;POST&quot;</span> action=<span class="hljs-string">&quot;/login&quot;</span>&gt;<br>  Password: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span></span><br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> /&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;form method=&quot;POST&quot; action=&quot;/login&quot;&gt;
-  Password: &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
-  &lt;input type=&quot;submit&quot; /&gt;
-&lt;/form&gt;</code></pre>
 <p>執行結果：</p>
 <p><img src="https://i.imgur.com/3RZUKgn.png"></p>
 <p>這樣就透過 express-session 中間介提供的功能，完成簡單的登入登出功能。</p>
 <p>但這種寫法其實會遇到一個問題，也就是每個 render 的頁面都要加上 isLogin 判斷登入狀態，我們再來要介紹的中間介就可以解決這個問題。</p>
 <h2 id="connect-flash：顯示錯誤訊息"><a href="#connect-flash：顯示錯誤訊息" class="headerlink" title="connect-flash：顯示錯誤訊息"></a>connect-flash：顯示錯誤訊息</h2><p>藉由 connect-flash 提供的 flash message 功能，我們就能在頁面顯示錯誤訊息等等，其實這背後的機制就是透過 session，能夠和 express-session 搭配使用。</p>
 <p>使用方法可參考 GitHub 的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phcmVkaGFuc29uL2Nvbm5lY3QtZmxhc2g=">jaredhanson/connect-flash<i class="fa fa-external-link-alt"></i></span> 頁面。</p>
-<h3 id="安裝-connect-flash"><a href="#安裝-connect-flash" class="headerlink" title="安裝 connect-flash"></a>安裝 connect-flash</h3><pre><code>$ npm install connect-flash</code></pre>
+<h3 id="安裝-connect-flash"><a href="#安裝-connect-flash" class="headerlink" title="安裝 connect-flash"></a>安裝 connect-flash</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> npm install <span class="hljs-built_in">connect-flash</span><br></code></pre></td></tr></table></figure>
 <h3 id="實作錯誤顯示功能"><a href="#實作錯誤顯示功能" class="headerlink" title="實作錯誤顯示功能"></a>實作錯誤顯示功能</h3><ol>
 <li>在 index.js引入 connect-flash 套件：</li>
 </ol>
-<pre><code class="javascript=">// 引入 connect-flash
-const flash = require(&#39;connect-flash&#39;);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 connect-flash</span><br><span class="hljs-keyword">const</span> flash = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;connect-flash&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>設定 app 載入 flash 模組：</li>
 </ol>
-<pre><code class="javascript=">app.use(flash())</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.use(flash())<br></code></pre></td></tr></table></figure>
+
 <ol start="3">
 <li>在 login 路由使用 flash()，傳入的兩個參數分別代表 key: value：</li>
 </ol>
-<pre><code class="javascript=">app.get(&#39;/login&#39;, (req, res) =&gt; &#123;
-  res.render(&#39;login&#39;, &#123;
-    // 從 flash() 中拿取 errorMessage 這個 key 的 value
-    errorMessage: req.flash(&#39;errorMessage&#39;)
-  &#125;)
-&#125;)
-app.post(&#39;/login&#39;, (req, res) =&gt; &#123;
-  if (req.body.password === &#39;abc&#39;) &#123;
-    req.session.isLogin = true
-    res.redirect(&#39;/&#39;)
-  &#125; else &#123;
-    // falsh() 要傳入兩個參數，代表 key: value
-    req.flash(&#39;errorMessage&#39;, &#39;Please input the correct password.&#39;)
-    res.redirect(&#39;/login&#39;)
-  &#125;
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.get(<span class="hljs-string">&#x27;/login&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.render(<span class="hljs-string">&#x27;login&#x27;</span>, &#123;<br>    <span class="hljs-comment">// 從 flash() 中拿取 errorMessage 這個 key 的 value</span><br>    errorMessage: req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>)<br>  &#125;)<br>&#125;)<br>app.post(<span class="hljs-string">&#x27;/login&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (req.body.password === <span class="hljs-string">&#x27;abc&#x27;</span>) &#123;<br>    req.session.isLogin = <span class="hljs-literal">true</span><br>    res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// falsh() 要傳入兩個參數，代表 key: value</span><br>    req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>, <span class="hljs-string">&#x27;Please input the correct password.&#x27;</span>)<br>    res.redirect(<span class="hljs-string">&#x27;/login&#x27;</span>)<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
 <ol start="4">
 <li>設定 login.ejs，當登入失敗就會在畫面顯示 errorMessage：</li>
 </ol>
-<pre><code class="javascript=">&lt;h1&gt;Login&lt;/h1&gt;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;h1&gt;Login&lt;/h1&gt;<br><br>&lt;h2&gt;&lt;%= errorMessage %&gt;&lt;/h2&gt;<br><br>&lt;form method=<span class="hljs-string">&quot;POST&quot;</span> action=<span class="hljs-string">&quot;/login&quot;</span>&gt;<br>  Password: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span></span><br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> /&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;h2&gt;&lt;%= errorMessage %&gt;&lt;/h2&gt;
-
-&lt;form method=&quot;POST&quot; action=&quot;/login&quot;&gt;
-  Password: &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
-  &lt;input type=&quot;submit&quot; /&gt;
-&lt;/form&gt;</code></pre>
 <p>執行結果如下，當提交錯誤時會顯示 errorMessage，重整頁面後就會消失，這就是 flash 的功用：</p>
 <p><img src="https://i.imgur.com/OepYfsy.png"></p>
 <p>但這種寫法其實還是不夠簡潔，如果要判斷輸出錯誤都還是要向 isLogin 那樣加上 errorMessage。</p>
 <h3 id="重構程式碼：透過-res-locals-傳值給-view"><a href="#重構程式碼：透過-res-locals-傳值給-view" class="headerlink" title="重構程式碼：透過 res.locals 傳值給 view"></a>重構程式碼：透過 res.locals 傳值給 view</h3><p>其實在 express 中有個捷徑，我們可以自己新增 middleware。也就是把東西存放在 <code>res.locals</code> ，view 就可以直接從 locals 存取使用，可想像成全域變數的感覺：</p>
-<pre><code class="javascript=">// 透過 locals 傳值給 view: session 功能和 errorMessage
-app.use((req, res, next) =&gt; &#123;
-  res.locals.isLogin = req.session.isLogin
-  res.locals.errorMessage = req.flash(&#39;errorMessage&#39;)
-  // 記得加上 next() 把控制權轉移到下一個中間介
-  next()
-&#125;)
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 透過 locals 傳值給 view: session 功能和 errorMessage</span><br>app.use(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  res.locals.isLogin = req.session.isLogin<br>  res.locals.errorMessage = req.flash(<span class="hljs-string">&#x27;errorMessage&#x27;</span>)<br>  <span class="hljs-comment">// 記得加上 next() 把控制權轉移到下一個中間介</span><br>  next()<br>&#125;)<br><br><span class="hljs-comment">// 就不需在路由加上 errorMessage</span><br>app.get(<span class="hljs-string">&#x27;/login&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.render(<span class="hljs-string">&#x27;login&#x27;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-// 就不需在路由加上 errorMessage
-app.get(&#39;/login&#39;, (req, res) =&gt; &#123;
-  res.render(&#39;login&#39;)
-&#125;)</code></pre>
 <p>addTodo 的 Controller 也可以改回原本的：</p>
-<pre><code class="javascript=">addTodo: (req, res) =&gt; &#123;
-  res.render(&#39;addTodo&#39;）
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">addTodo: <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.render(<span class="hljs-string">&#x27;addTodo&#x27;</span>）<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>修改完成之後，同樣能夠執行程式，透過範例整理兩個重點：</p>
 <ul>
 <li>透過 req.flash() 可實作出 errorMessage</li>

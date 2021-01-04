@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL  [week 9] 利用 PHP 實作留言板 - 初階實作篇">
+  <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL [week 9] 利用 PHP 實作留言板 - 初階實作篇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 11] 資訊安全 - 雜湊與加密 &amp; 常見攻擊：SQL Injection、XSS">
 <meta property="og:url" content="https://heidiliu2020.github.io/hash-security/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL  [week 9] 利用 PHP 實作留言板 - 初階實作篇">
+<meta property="og:description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。  相關筆記：  [week 9] 後端基礎 - PHP 語法、資料庫 MySQL [week 9] 利用 PHP 實作留言板 - 初階實作篇">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/ymLoNYw.png">
 <meta property="og:image" content="https://i.imgur.com/zLfxN7g.png">
@@ -262,19 +262,10 @@
 </blockquote>
 <p>相關筆記：</p>
 <ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span></p>
-<a id="more"></a>
-<pre><code>學習目標：
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOV8lRTUlQkUlOEMlRTclQUIlQUYlRTUlOUYlQkElRTclQTQlOEVfUEhQJUUzJTgwJTgxTXlTUUwubWQ=">[week 9] 後端基礎 - PHP 語法、資料庫 MySQL<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL3dlZWsxMS93ZWVrOV8lRTUlODglQTklRTclOTQlQThQSFAlRTUlQUYlQTYlRTQlQkQlOUMlRTclOTUlOTklRTglQTglODAlRTYlOUQlQkYtJUU1JTg4JTlEJUU5JTlBJThFJUU1JUFGJUE2JUU0JUJEJTlDJUU3JUFGJTg3Lm1k">[week 9] 利用 PHP 實作留言板 - 初階實作篇<i class="fa fa-external-link-alt"></i></span><a id="more"></a>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標：<br><br> <span class="hljs-built_in">P1</span> 你知道什麼是雜湊（Hash <span class="hljs-meta">function</span>）<br> <span class="hljs-built_in">P1</span> 你知道什麼是加密（Encryption）<br> <span class="hljs-built_in">P1</span> 你知道雜湊與加密的差別<br> <span class="hljs-built_in">P1</span> 你知道什麼是 SQL Injection 以及如何防範<br> <span class="hljs-built_in">P1</span> 你知道什麼是 XSS 以及如何防範<br> <span class="hljs-built_in">P1</span> 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證<br> <span class="hljs-built_in">P2</span> 你知道什麼是 CSRF 以及如何防範<br></code></pre></td></tr></table></figure>
 
-P1 你知道什麼是雜湊（Hash function）
-P1 你知道什麼是加密（Encryption）
-P1 你知道雜湊與加密的差別
-P1 你知道什麼是 SQL Injection 以及如何防範
-P1 你知道什麼是 XSS 以及如何防範
-P1 你知道為什麼儘管前端做了驗證，後端還是要再做一次驗證
-P2 你知道什麼是 CSRF 以及如何防範</code></pre>
 </li>
 </ul>
 <hr>
@@ -333,21 +324,11 @@ P2 你知道什麼是 CSRF 以及如何防範</code></pre>
 </li>
 </ul>
 <h3 id="PHP-內建雜湊函式：password-hash"><a href="#PHP-內建雜湊函式：password-hash" class="headerlink" title="PHP 內建雜湊函式：password_hash()"></a>PHP 內建雜湊函式：<code>password_hash()</code></h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cucGhwLm5ldC9tYW51YWwvZW4vZnVuY3Rpb24ucGFzc3dvcmQtaGFzaC5waHA=">PHP 提供內建函式 <i class="fa fa-external-link-alt"></i></span><code>password_hash()</code> 能夠實現加密， 指令如下：</p>
-<pre><code class="php"> &lt;?php
-$hash = password_hash(&quot;要加密的字串&quot;, PASSWORD_DEFAULT);
-?&gt;</code></pre>
-<p>驗證指令：<code>password_verify(&quot;要驗證的字串&quot;, &quot;加密過的字串&quot;)</code>，會回傳一個 boolean</p>
-<pre><code class="php=">// 使用範例
-&lt;?php 
-$password = &#39;1234&#39;;    // 原始密碼
-$hash_password = password_hash($password, PASSWORD_DEFAULT);
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br>$hash = password_hash(<span class="hljs-string">&quot;要加密的字串&quot;</span>, PASSWORD_DEFAULT);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-if (password_verify($password , $hash_password))&#123;
-  echo &quot;密碼正確&quot;;  // true
-&#125; else &#123;
-  echo &quot;密碼錯誤&quot;;  // false
-&#125;
-?&gt; </code></pre>
+<p>驗證指令：<code>password_verify(&quot;要驗證的字串&quot;, &quot;加密過的字串&quot;)</code>，會回傳一個 boolean</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 使用範例</span><br><span class="hljs-meta">&lt;?php</span> <br>$password = <span class="hljs-string">&#x27;1234&#x27;</span>;    <span class="hljs-comment">// 原始密碼</span><br>$hash_password = password_hash($password, PASSWORD_DEFAULT);<br><br><span class="hljs-keyword">if</span> (password_verify($password , $hash_password))&#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;密碼正確&quot;</span>;  <span class="hljs-comment">// true</span><br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;密碼錯誤&quot;</span>;  <span class="hljs-comment">// false</span><br>&#125;<br><span class="hljs-meta">?&gt;</span> <br></code></pre></td></tr></table></figure>
+
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly90aW55dXJsLmNvbS95NjVwZ280dw==">[資訊安全] 密碼存明碼，怎麼不直接去裸奔算了？淺談 Hash , 用雜湊保護密碼<i class="fa fa-external-link-alt"></i></span></li>
@@ -364,15 +345,14 @@ if (password_verify($password , $hash_password))&#123;
 <li><p>正常的 SQL 語法</p>
 <ul>
 <li>帳號：123</li>
-<li>密碼：456<pre><code class="php=">SELECT * FROM users WHERE username=&#39;123&#39; AND password=&#39;456&#39;;</code></pre>
+<li>密碼：456<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * <span class="hljs-keyword">FROM</span> users WHERE username=<span class="hljs-string">&#x27;123&#x27;</span> <span class="hljs-keyword">AND</span> password=<span class="hljs-string">&#x27;456&#x27;</span>;<br></code></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>SQL injection</p>
 <ul>
 <li>帳號：<code>&#39; or 1=1#</code></li>
-<li>密碼：可輸入任意值（甚至不需輸入）<pre><code class="php=">SELECT * FROM users WHERE username=&#39;&#39; or 1=1# AND password=&#39;&#39;;</code></pre>
-</li>
+<li>密碼：可輸入任意值（甚至不需輸入）<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * <span class="hljs-keyword">FROM</span> users WHERE username=<span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span><span class="hljs-comment"># AND password=&#x27;&#x27;;</span><br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p><code>&#39;</code>：將 username 的 input 關閉</p>
@@ -386,9 +366,7 @@ if (password_verify($password , $hash_password))&#123;
 </ul>
 <h4 id="以之前實作的初階留言版為例："><a href="#以之前實作的初階留言版為例：" class="headerlink" title="以之前實作的初階留言版為例："></a>以之前實作的初階留言版為例：</h4><ol>
 <li>登入後在新增留言輸入：<code>&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code></li>
-<li>SQL 指令就變成：<pre><code class="php=">INSERT INTO comments(nickname, content)
-VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code></pre>
-</li>
+<li>SQL 指令就變成：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">INSERT INTO comments(nickname, content)<br>VALUES(<span class="hljs-string">&#x27;aaa&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>), (<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;Hacking!&#x27;</span>)<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure></li>
 <li>執行後會新增兩筆留言，nickname 分別是 aaa 和 admin</li>
 </ol>
 <p><img src="https://i.imgur.com/zLfxN7g.png"></p>
@@ -406,21 +384,8 @@ VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code>
 <li>若執行成功，則使用 <code>get_result()</code> 取出執行結果</li>
 </ol>
 <p>程式碼範例：</p>
-<pre><code class="php=">&lt;?php
-  // SQL 語法
-  $sql = &quot;INSERT INTO comments(nickname, content) VALUES(?, ?)&quot;;
-  // prepare() 預處理 
-  $stmt = $conn-&gt;prepare($sql);
-  // bind_param() 帶入參數
-  $stmt-&gt;bind_param(&#39;ss&#39;, $nickname, $content);
-  // execute() 執行 SQL 語法
-  $result = $stmt-&gt;execute();
-  // 確認是否執行成功
-  if (!$result) &#123;
-    die($conn-&gt;error);
-  // 取出執行結果
-  $result = $stmt-&gt;get_result();
-&#125;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-comment">// SQL 語法</span><br>  $sql = <span class="hljs-string">&quot;INSERT INTO comments(nickname, content) VALUES(?, ?)&quot;</span>;<br>  <span class="hljs-comment">// prepare() 預處理 </span><br>  $stmt = $conn-&gt;prepare($sql);<br>  <span class="hljs-comment">// bind_param() 帶入參數</span><br>  $stmt-&gt;bind_param(<span class="hljs-string">&#x27;ss&#x27;</span>, $nickname, $content);<br>  <span class="hljs-comment">// execute() 執行 SQL 語法</span><br>  $result = $stmt-&gt;execute();<br>  <span class="hljs-comment">// 確認是否執行成功</span><br>  <span class="hljs-keyword">if</span> (!$result) &#123;<br>    <span class="hljs-keyword">die</span>($conn-&gt;error);<br>  <span class="hljs-comment">// 取出執行結果</span><br>  $result = $stmt-&gt;get_result();<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4OTIwMQ==">[Postx1] 攻擊行為－SQL 資料隱碼攻擊 SQL injection<i class="fa fa-external-link-alt"></i></span></li>
@@ -437,7 +402,8 @@ VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code>
 </ul>
 <p><img src="https://i.imgur.com/zNQGEPN.png"></p>
 <p>以網頁輸入欄位為例。若在輸入欄位內刻意植入 Javascript 語法，例如下列程式碼，即可竊取使用者的 cookie 資料：</p>
-<pre><code class="=">&lt;script&gt;alert(document.cookie)；&lt;/script&gt;</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">alert(<span class="hljs-built_in">document</span>.cookie)；</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>Stored XSS（儲存型）</li>
 </ul>
@@ -451,12 +417,8 @@ VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code>
 <h4 id="Server-端"><a href="#Server-端" class="headerlink" title="Server 端"></a>Server 端</h4><ol>
 <li>過濾特殊字元：過濾所有 Client 端提供的內容，並轉譯成純文字。例如：使用 PHP 內建函式 <code>htmlentities（）</code>或 <code>htmlspecialchars（）</code></li>
 </ol>
-<pre><code class="php=">&lt;?php
-// utils.php
-  function escape($str) &#123;
-    return htmlspecialchars($str, ENT_QUOTES, &#39;UTF-8&#39;);
-  &#125;
-?&gt;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// utils.php</span><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">escape</span>(<span class="hljs-params">$str</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> htmlspecialchars($str, ENT_QUOTES, <span class="hljs-string">&#x27;UTF-8&#x27;</span>);<br>  &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>限制輸入內容長度或型態。雖然可藉由引入外部 JavaScript 來繞過，但還是能提高 XSS 攻擊難度</li>
 </ol>
@@ -506,12 +468,8 @@ VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code>
 </ul>
 <p>在 <code>form</code> 裡面加上一個 <code>hidden</code> 的欄位，叫做 <code>csrftoken</code>，填入的值為 Server 隨機產生的亂碼，並且存在 Server 的 session 中。</p>
 <p>按下 submit 後，Server 會比對表單中的 csrftoken 與存在 Server 端的是否相同。</p>
-<pre><code class="php=">// 範例程式碼
-&lt;form action=&quot;https://myblog.com/delete&quot; method=&quot;POST&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;3&quot;/&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;csrftoken&quot; value=&quot;&lt;亂碼&gt;&quot;/&gt;
-  &lt;input type=&quot;submit&quot; value=&quot;刪除文章&quot;/&gt;
-&lt;/form&gt;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br>&lt;form action=<span class="hljs-string">&quot;https://myblog.com/delete&quot;</span> method=<span class="hljs-string">&quot;POST&quot;</span>&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span> value=<span class="hljs-string">&quot;3&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;csrftoken&quot;</span> value=<span class="hljs-string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;刪除文章&quot;</span>/&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>缺點：若攻擊者先發出 request，還是能取得 csrftoken 來攻擊目標網站</li>
 </ul>
@@ -524,14 +482,8 @@ VALUES(&#39;aaa&#39;, &#39;&#39;), (&#39;admin&#39;, &#39;Hacking!&#39;)#</code>
 </ul>
 <p>與前一種解法相似，好處是不需要存任何東西在 Server 端。</p>
 <p>而是在 cookie 與 form 設置相同的 csrftoken，利用「cookie 只會從相同 domain 帶上來」機制，使攻擊者無法從不同 domain 戴上此 cookie。</p>
-<pre><code class="php=">// 範例程式碼
-Set-Cookie: csrftoken=&lt;亂碼&gt;
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br>Set-Cookie: csrftoken=&lt;亂碼&gt;<br><br>&lt;form action=<span class="hljs-string">&quot;https://myblog.com/delete&quot;</span> method=<span class="hljs-string">&quot;POST&quot;</span>&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span> value=<span class="hljs-string">&quot;3&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;hidden&quot;</span> name=<span class="hljs-string">&quot;csrftoken&quot;</span> value=<span class="hljs-string">&quot;&lt;亂碼&gt;&quot;</span>/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;刪除文章&quot;</span>/&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;form action=&quot;https://myblog.com/delete&quot; method=&quot;POST&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;3&quot;/&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;csrftoken&quot; value=&quot;&lt;亂碼&gt;&quot;/&gt;
-  &lt;input type=&quot;submit&quot; value=&quot;刪除文章&quot;/&gt;
-&lt;/form&gt;</code></pre>
 <ul>
 <li>缺點：攻擊者若掌握使用者底下任何一個 subdomain，就能夠幫使用者寫 cookie，藉此進行攻擊</li>
 </ul>
@@ -547,16 +499,13 @@ Set-Cookie: csrftoken=&lt;亂碼&gt;
 <ul>
 <li>例如：library axios 就有提供此功能。只要設定好 header 與 cookie 名稱，設定好之後的每一個 request，即可自動在 header 統一加上 cookie 值</li>
 </ul>
-<pre><code class="php=">// 範例程式碼
-// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token
-xsrfCookieName: &#39;XSRF-TOKEN&#39;, // default
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 範例程式碼</span><br><span class="hljs-comment">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span><br>xsrfCookieName: <span class="hljs-string">&#x27;XSRF-TOKEN&#x27;</span>, <span class="hljs-comment">// default</span><br><br><span class="hljs-comment">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span><br>xsrfHeaderName: <span class="hljs-string">&#x27;X-XSRF-TOKEN&#x27;</span>, <span class="hljs-comment">// default</span><br></code></pre></td></tr></table></figure>
 
-// `xsrfHeaderName` is the name of the http header that carries the xsrf token value
-xsrfHeaderName: &#39;X-XSRF-TOKEN&#39;, // default</code></pre>
 <h4 id="瀏覽器端的防禦：SameSite-cookie"><a href="#瀏覽器端的防禦：SameSite-cookie" class="headerlink" title="瀏覽器端的防禦：SameSite cookie"></a>瀏覽器端的防禦：SameSite cookie</h4><p>CSRF 之所以能夠成立，是瀏覽器的機制所導致，但我們也能從瀏覽器著手進行防禦，也就是透過 SameSite cookie。其原理是「幫 Cookie 再加上一層驗證」，防止來自不同 domain 的請求。</p>
 <p>做法是在 Set-cookie 的 session_id 後加上 SameSite 即可啟用此功能。由於這是較新的功能，目前瀏覽器中只有 Chrome 支援，使用前須注意。</p>
 <p>使用範例如下：</p>
-<pre><code class="php=">Set-Cookie: session_id=&lt;亂碼&gt;; SameSite</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">Set-Cookie: session_id=&lt;亂碼&gt;; SameSite<br></code></pre></td></tr></table></figure>
+
 <p>SameSite 有分 Strict（預設）與 Lax 兩種模式：</p>
 <ul>
 <li>Strict 模式（嚴格）<ul>

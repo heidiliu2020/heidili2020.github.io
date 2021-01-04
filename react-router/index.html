@@ -269,7 +269,8 @@
 <p>接下來我們使用 React 搭配 Router，實作一個 SPA（Single Page Application）架構的部落格。</p>
 <hr>
 <h2 id="React-Router：管理專案路由"><a href="#React-Router：管理專案路由" class="headerlink" title="React Router：管理專案路由"></a>React Router：管理專案路由</h2><p>可參考<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdHJvdXRlci5jb20vd2ViL2d1aWRlcy9xdWljay1zdGFydA==">官方文件<i class="fa fa-external-link-alt"></i></span>，我們可透過 React Router 套件來管理 URL 路由。</p>
-<h3 id="安裝-react-router-dom"><a href="#安裝-react-router-dom" class="headerlink" title="安裝 react-router-dom"></a>安裝 react-router-dom</h3><pre><code>$ npm install react-router-dom</code></pre>
+<h3 id="安裝-react-router-dom"><a href="#安裝-react-router-dom" class="headerlink" title="安裝 react-router-dom"></a>安裝 react-router-dom</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">$ npm <span class="hljs-keyword">install</span> react-router-dom<br></code></pre></td></tr></table></figure>
+
 <h3 id="用-Component-的概念設計-Router"><a href="#用-Component-的概念設計-Router" class="headerlink" title="用 Component 的概念設計 Router"></a>用 Component 的概念設計 Router</h3><p>React Router 同樣是要用寫 React 方式去理解，也就是以 Component 的概念去設計一個 Router。</p>
 <p>這其實和我們之前寫 Back-End 時很不一樣，例如 <code>app.get(&#39;/comment&#39;)</code> ，代表讀取留言的路由。</p>
 <p>可參考<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdHJvdXRlci5jb20vd2ViL2V4YW1wbGUvYmFzaWM=">官方<i class="fa fa-external-link-alt"></i></span>提供的範例：</p>
@@ -281,88 +282,24 @@
    ></iframe>
 
 <p>以下是上方範例的程式碼，透過連結改變的網址，由 Router 決定要 render 的畫面：</p>
-<pre><code class="javascript=">export default function BasicExample() &#123;
-  return (
-    &lt;Router&gt;
-      &lt;div&gt;
-&lt;!--    點選連結改變網址    --&gt;
-        &lt;ul&gt;
-          &lt;li&gt;
-            &lt;Link to=&quot;/&quot;&gt;Home&lt;/Link&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link to=&quot;/about&quot;&gt;About&lt;/Link&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link to=&quot;/dashboard&quot;&gt;Dashboard&lt;/Link&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">BasicExample</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;Router&gt;<br>      &lt;div&gt;<br>&lt;!--    點選連結改變網址    --&gt;<br>        &lt;ul&gt;<br>          &lt;li&gt;<br>            &lt;Link to=<span class="hljs-string">&quot;/&quot;</span>&gt;Home&lt;/Link&gt;<br>          &lt;/li&gt;<br>          &lt;li&gt;<br>            &lt;Link to=<span class="hljs-string">&quot;/about&quot;</span>&gt;About&lt;/Link&gt;<br>          &lt;/li&gt;<br>          &lt;li&gt;<br>            &lt;Link to=<span class="hljs-string">&quot;/dashboard&quot;</span>&gt;Dashboard&lt;/Link&gt;<br>          &lt;/li&gt;<br>        &lt;/ul&gt;<br><br>        &lt;hr /&gt;<br>&lt;!-- 根據不同網址 render 相對應頁面 --&gt;<br>        &lt;Switch&gt;<br>          &lt;Route exact path=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>            &lt;Home /&gt;<br>          &lt;/Route&gt;<br>          &lt;Route path=<span class="hljs-string">&quot;/about&quot;</span>&gt;<br>            &lt;About /&gt;<br>          &lt;/Route&gt;<br>          &lt;Route path=<span class="hljs-string">&quot;/dashboard&quot;</span>&gt;<br>            &lt;Dashboard /&gt;<br>          &lt;/Route&gt;<br>        &lt;/Switch&gt;<br>      &lt;/div&gt;<br>    &lt;/Router&gt;<br></code></pre></td></tr></table></figure>
 
-        &lt;hr /&gt;
-&lt;!-- 根據不同網址 render 相對應頁面 --&gt;
-        &lt;Switch&gt;
-          &lt;Route exact path=&quot;/&quot;&gt;
-            &lt;Home /&gt;
-          &lt;/Route&gt;
-          &lt;Route path=&quot;/about&quot;&gt;
-            &lt;About /&gt;
-          &lt;/Route&gt;
-          &lt;Route path=&quot;/dashboard&quot;&gt;
-            &lt;Dashboard /&gt;
-          &lt;/Route&gt;
-        &lt;/Switch&gt;
-      &lt;/div&gt;
-    &lt;/Router&gt;</code></pre>
 <h3 id="BrowserRouter-vs-HashRouter"><a href="#BrowserRouter-vs-HashRouter" class="headerlink" title="BrowserRouter vs HashRouter"></a>BrowserRouter vs HashRouter</h3><p>而在引入 Router 時，其實有兩種方式：</p>
 <ul>
 <li>BrowserRouter：直接在網址帶入路徑，但這種方式在 GitHub Pages 上其實會出現問題</li>
 </ul>
-<pre><code class="javascript=">import &#123;
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-&#125; from &quot;react-router-dom&quot;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123;<br>  BrowserRouter <span class="hljs-keyword">as</span> Router,<br>  Switch,<br>  Route,<br>  Link<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <p>如果是從首頁點選 dashboard，前端就會透過 JavaScript 提供的 API 把網址改成 /dashboard，能夠正常 render 畫面。</p>
 <p>但如果是直接在網址後帶上 /dashboard，GitHub Pages 會去找 dashboard 資料夾底下的 index.html，此時瀏覽器會直接發 request 到該頁面，發生不如預期的錯誤。</p>
 <ul>
 <li>HashRouter：會在網址加上 <code>/#/</code>，瀏覽器就會去載入 <code>#</code> 符號之前的網址，即可改善上述問題</li>
 </ul>
-<pre><code>Home  https://bnpsd.csb.app/#/
-dashboard  https://bnpsd.csb.app/#/dashboard</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">Home  https:<span class="hljs-regexp">//</span>bnpsd.csb.app<span class="hljs-regexp">/#/</span><br>dashboard  https:<span class="hljs-regexp">//</span>bnpsd.csb.app<span class="hljs-regexp">/#/</span>dashboard<br></code></pre></td></tr></table></figure>
+
 <p>有了以上關於 Router 的基本概念後，就來繼續實作專案吧！</p>
-<h3 id="實作：管理專案-Router"><a href="#實作：管理專案-Router" class="headerlink" title="實作：管理專案 Router"></a>實作：管理專案 Router</h3><h4 id="1-App-js：根據不同-Component-管理路由"><a href="#1-App-js：根據不同-Component-管理路由" class="headerlink" title="1. App.js：根據不同 Component 管理路由"></a>1. App.js：根據不同 Component 管理路由</h4><pre><code class="javascript=">import React, &#123; useState, useEffect &#125; from &quot;react&quot;;
-import styled from &quot;styled-components&quot;;
-import PropTypes from &quot;prop-types&quot;;
-import LoginPage from &quot;../../pages/LoginPage&quot;;
-import HomePage from &quot;../../pages/HomePage&quot;;
-import Header from &quot;../Header&quot;;
+<h3 id="實作：管理專案-Router"><a href="#實作：管理專案-Router" class="headerlink" title="實作：管理專案 Router"></a>實作：管理專案 Router</h3><h4 id="1-App-js：根據不同-Component-管理路由"><a href="#1-App-js：根據不同-Component-管理路由" class="headerlink" title="1. App.js：根據不同 Component 管理路由"></a>1. App.js：根據不同 Component 管理路由</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;styled-components&quot;</span>;<br><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;prop-types&quot;</span>;<br><span class="hljs-keyword">import</span> LoginPage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../pages/LoginPage&quot;</span>;<br><span class="hljs-keyword">import</span> HomePage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../pages/HomePage&quot;</span>;<br><span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../Header&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; HashRouter <span class="hljs-keyword">as</span> Router, Switch, Route &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">const</span> Root = styled.div<span class="hljs-string">``</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;Root&gt;<br>      &#123;<span class="hljs-comment">/* Router: 包在最外層 */</span>&#125;<br>      &lt;Router&gt;<br>        &#123;<span class="hljs-comment">/* 導覽列: 共同區塊 */</span>&#125;<br>        &lt;Header /&gt;<br>        &#123;<span class="hljs-comment">/* Switch: 確保只會匹配第一個符合網址列的路由 */</span>&#125;<br>        &lt;Switch&gt;<br>          &#123;<span class="hljs-comment">/* exact path: 代表完整匹配；若只有 path 是部分匹配 */</span>&#125;<br>          &lt;Route exact path=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>            &lt;HomePage /&gt;<br>          &lt;/Route&gt;<br>          &lt;Route exact path=<span class="hljs-string">&quot;/login&quot;</span>&gt;<br>            &lt;LoginPage /&gt;<br>          &lt;/Route&gt;<br>        &lt;/Switch&gt;<br>      &lt;/Router&gt;<br>    &lt;/Root&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-import &#123; HashRouter as Router, Switch, Route &#125; from &quot;react-router-dom&quot;;
-
-const Root = styled.div``;
-
-export default function App() &#123;
-  return (
-    &lt;Root&gt;
-      &#123;/* Router: 包在最外層 */&#125;
-      &lt;Router&gt;
-        &#123;/* 導覽列: 共同區塊 */&#125;
-        &lt;Header /&gt;
-        &#123;/* Switch: 確保只會匹配第一個符合網址列的路由 */&#125;
-        &lt;Switch&gt;
-          &#123;/* exact path: 代表完整匹配；若只有 path 是部分匹配 */&#125;
-          &lt;Route exact path=&quot;/&quot;&gt;
-            &lt;HomePage /&gt;
-          &lt;/Route&gt;
-          &lt;Route exact path=&quot;/login&quot;&gt;
-            &lt;LoginPage /&gt;
-          &lt;/Route&gt;
-        &lt;/Switch&gt;
-      &lt;/Router&gt;
-    &lt;/Root&gt;
-  );
-&#125;</code></pre>
 <ol start="2">
 <li>整理專案結構</li>
 </ol>
@@ -382,15 +319,11 @@ export default function App() &#123;
 </li>
 </ul>
 <p>以建立 HomePage Component 為例，Header 和 LoginPage 也是用這個模式：</p>
-<pre><code class="javascript=">// HomePage.js
-import React, &#123; useState, useEffect &#125; from &quot;react&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// HomePage.js</span><br><span class="hljs-keyword">import</span> React, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">HomePage</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Home Page<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-export default function HomePage() &#123;
-  return &lt;div&gt;Home Page&lt;/div&gt;;
-&#125;</code></pre>
 <p>而為了調整專案結構，需在 index.js 引入並引出 HomePage.js，可參考<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMzAyLXJlYWN0LWJvYXJk">上篇筆記<i class="fa fa-external-link-alt"></i></span>：</p>
-<pre><code class="javascript=">// index.js
-export &#123; default &#125; from &quot;./HomePage&quot;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// index.js</span><br><span class="hljs-keyword">export</span> &#123; <span class="hljs-keyword">default</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./HomePage&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <p>執行結果如下，可透過不同路由 render 相對應的頁面，其中 Header 是共同區塊不會變動：</p>
 <p><img src="https://i.imgur.com/ff3aVd1.png"></p>
 <p>參考資料：</p>
@@ -404,101 +337,11 @@ export &#123; default &#125; from &quot;./HomePage&quot;;</code></pre>
 <h3 id="方法一：透過-Link、useLoction"><a href="#方法一：透過-Link、useLoction" class="headerlink" title="方法一：透過 Link、useLoction"></a>方法一：透過 Link、useLoction</h3><ul>
 <li>使用 useLocation 讀取當前位置，再透過 $active 這個屬性判斷符合哪個路徑，render 出相對應畫面：</li>
 </ul>
-<pre><code class="javascript=">// 引入使用 Link, useLocation
-import &#123; Link, useLocation &#125; from &quot;react-router-dom&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入使用 Link, useLocation</span><br><span class="hljs-keyword">import</span> &#123; Link, useLocation &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">const</span> location = useLocation();<br><br>&lt;Nav to=<span class="hljs-string">&quot;/&quot;</span> $active=&#123;location.pathname === <span class="hljs-string">&quot;/&quot;</span>&#125;&gt;<br></code></pre></td></tr></table></figure>
 
-const location = useLocation();
-
-&lt;Nav to=&quot;/&quot; $active=&#123;location.pathname === &quot;/&quot;&#125;&gt;</code></pre>
 <p>程式碼如下：</p>
-<pre><code class="javascript=">import React, &#123; useState, useEffect &#125; from &quot;react&quot;;
-import styled from &quot;styled-components&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;styled-components&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; Link, useLocation &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">const</span> HeaderContainer = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  height: 58px;</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  justify-content: space-between;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string">  position: fixed;</span><br><span class="hljs-string">  top: 0;</span><br><span class="hljs-string">  left: 0;</span><br><span class="hljs-string">  right: 0;</span><br><span class="hljs-string">  border-bottom: 1px solid rgba(0, 0, 0, 0.2);</span><br><span class="hljs-string">  box-shadow: 0px 0px 6px rgb(199, 197, 197);</span><br><span class="hljs-string">  padding: 0px 32px;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> Brand = styled.h1<span class="hljs-string">`</span><br><span class="hljs-string">  margin: 0;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> NavbarList = styled.ul<span class="hljs-string">`</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string">  list-style-type: none;</span><br><span class="hljs-string">  text-decoration: none;</span><br><span class="hljs-string">  margin: 0;</span><br><span class="hljs-string">  padding: 0;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> Nav = styled(Link)<span class="hljs-string">`</span><br><span class="hljs-string">  height: 58px;</span><br><span class="hljs-string">  width: 100px;</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  justify-content: center;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string">  text-decoration: none;</span><br><span class="hljs-string">  color: #666;</span><br><span class="hljs-string"></span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;(props) =&gt;</span></span><br><span class="hljs-string"><span class="hljs-subst">    props.$active &amp;&amp;</span></span><br><span class="hljs-string"><span class="hljs-subst">    <span class="hljs-string">`</span></span></span><br><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">      background: #eee;</span></span></span><br><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">      color: #222;</span></span></span><br><span class="hljs-string"><span class="hljs-subst"><span class="hljs-string">  `</span>&#125;</span></span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> LeftNavbar = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string"></span><br><span class="hljs-string">  /* 代表在 LeftNavbar 底下的 NavbarList */</span><br><span class="hljs-string">  <span class="hljs-subst">$&#123;NavbarList&#125;</span> &#123;</span><br><span class="hljs-string">    margin-left: 32px;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Header</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 可拿到目前路徑</span><br>  <span class="hljs-keyword">const</span> location = useLocation();<br><br>  <span class="hljs-keyword">return</span> (<br>    &lt;HeaderContainer&gt;<br>      &lt;LeftNavbar&gt;<br>        &lt;Brand&gt;<br>          &lt;Link exact to=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>            React 部落格<br>          &lt;/Link&gt;<br>        &lt;/Brand&gt;<br>        &lt;NavbarList&gt;<br>          &lt;Nav to=<span class="hljs-string">&quot;/&quot;</span> $active=&#123;location.pathname === <span class="hljs-string">&quot;/&quot;</span>&#125;&gt;<br>            首頁<br>          &lt;/Nav&gt;<br>          &lt;Nav to=<span class="hljs-string">&quot;/new-post&quot;</span> $active=&#123;location.pathname === <span class="hljs-string">&quot;/new-post&quot;</span>&#125;&gt;<br>            發布文章<br>          &lt;/Nav&gt;<br>        &lt;/NavbarList&gt;<br>      &lt;/LeftNavbar&gt;<br>      &lt;NavbarList&gt;<br>        &lt;Nav to=<span class="hljs-string">&quot;/login&quot;</span> $active=&#123;location.pathname === <span class="hljs-string">&quot;/login&quot;</span>&#125;&gt;<br>          登入<br>        &lt;/Nav&gt;<br>      &lt;/NavbarList&gt;<br>    &lt;/HeaderContainer&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-import &#123; Link, useLocation &#125; from &quot;react-router-dom&quot;;
-
-const HeaderContainer = styled.div`
-  height: 58px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 6px rgb(199, 197, 197);
-  padding: 0px 32px;
-`;
-
-const Brand = styled.h1`
-  margin: 0;
-`;
-
-const NavbarList = styled.ul`
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  text-decoration: none;
-  margin: 0;
-  padding: 0;
-`;
-
-const Nav = styled(Link)`
-  height: 58px;
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: #666;
-
-  $&#123;(props) =&gt;
-    props.$active &amp;&amp;
-    `
-      background: #eee;
-      color: #222;
-  `&#125;
-`;
-
-const LeftNavbar = styled.div`
-  display: flex;
-  align-items: center;
-
-  /* 代表在 LeftNavbar 底下的 NavbarList */
-  $&#123;NavbarList&#125; &#123;
-    margin-left: 32px;
-  &#125;
-`;
-
-export default function Header() &#123;
-  // 可拿到目前路徑
-  const location = useLocation();
-
-  return (
-    &lt;HeaderContainer&gt;
-      &lt;LeftNavbar&gt;
-        &lt;Brand&gt;
-          &lt;Link exact to=&quot;/&quot;&gt;
-            React 部落格
-          &lt;/Link&gt;
-        &lt;/Brand&gt;
-        &lt;NavbarList&gt;
-          &lt;Nav to=&quot;/&quot; $active=&#123;location.pathname === &quot;/&quot;&#125;&gt;
-            首頁
-          &lt;/Nav&gt;
-          &lt;Nav to=&quot;/new-post&quot; $active=&#123;location.pathname === &quot;/new-post&quot;&#125;&gt;
-            發布文章
-          &lt;/Nav&gt;
-        &lt;/NavbarList&gt;
-      &lt;/LeftNavbar&gt;
-      &lt;NavbarList&gt;
-        &lt;Nav to=&quot;/login&quot; $active=&#123;location.pathname === &quot;/login&quot;&#125;&gt;
-          登入
-        &lt;/Nav&gt;
-      &lt;/NavbarList&gt;
-    &lt;/HeaderContainer&gt;
-  );
-&#125;</code></pre>
 <h3 id="方法二：NavLink"><a href="#方法二：NavLink" class="headerlink" title="方法二：NavLink"></a>方法二：NavLink</h3><p>除了使用 useLocation 來判斷當前路徑，React Router 還有提供 <span class="exturl" data-url="aHR0cHM6Ly9yZWFjdHJvdXRlci5jb20vd2ViL2FwaS9OYXZMaW5r">NavLink<i class="fa fa-external-link-alt"></i></span> 這個特殊的 Component，具有以下屬性：</p>
 <ul>
 <li>activeClassName(string)：設置選中樣式，預設為 active</li>
@@ -512,43 +355,21 @@ export default function Header() &#123;
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzczMjUxMi9hcnRpY2xlL2RldGFpbHMvMTAzMTgyODMxP3V0bV9tZWRpdW09ZGlzdHJpYnV0ZS5wY19yZWxldmFudF90MC5ub25lLXRhc2stYmxvZy1CbG9nQ29tbWVuZEZyb21CYWlkdS0xLmNvbnRyb2wmZGVwdGhfMS11dG1fc291cmNlPWRpc3RyaWJ1dGUucGNfcmVsZXZhbnRfdDAubm9uZS10YXNrLWJsb2ctQmxvZ0NvbW1lbmRGcm9tQmFpZHUtMS5jb250cm9s">React手册之Link和NaviLink区别<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>可透過 activeClassName 屬性或 inline style 行內樣式，來表示 NavLink 有無被選取，官方提供的範例如下：</p>
-<h4 id="引入使用-NavLink"><a href="#引入使用-NavLink" class="headerlink" title="引入使用 NavLink"></a>引入使用 NavLink</h4><pre><code class="javascript=">import &#123; NavLink &#125; from &#39;react-router-dom&#39;</code></pre>
-<h4 id="1-一般寫法"><a href="#1-一般寫法" class="headerlink" title="1. 一般寫法"></a>1. 一般寫法</h4><pre><code class="javascript=">&lt;NavLink to=&quot;/about&quot;&gt;About&lt;/NavLink&gt;</code></pre>
-<h4 id="2-activeClassName-string"><a href="#2-activeClassName-string" class="headerlink" title="2. activeClassName: string"></a>2. activeClassName: string</h4><pre><code class="javascript=">&lt;NavLink to=&quot;/faq&quot; activeClassName=&quot;selected&quot;&gt;
-  FAQs
-&lt;/NavLink&gt;</code></pre>
-<h4 id="3-activeStyle-object"><a href="#3-activeStyle-object" class="headerlink" title="3. activeStyle: object"></a>3. activeStyle: object</h4><pre><code class="javascript=">&lt;NavLink
-  to=&quot;/faq&quot;
-  activeStyle=&#123;&#123;
-    fontWeight: "bold",
-    color: "red"
-  &#125;&#125;
-&gt;
-  FAQs
-&lt;/NavLink&gt;</code></pre>
+<h4 id="引入使用-NavLink"><a href="#引入使用-NavLink" class="headerlink" title="引入使用 NavLink"></a>引入使用 NavLink</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; NavLink &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="1-一般寫法"><a href="#1-一般寫法" class="headerlink" title="1. 一般寫法"></a>1. 一般寫法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;NavLink to=<span class="hljs-string">&quot;/about&quot;</span>&gt;About&lt;/NavLink&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-activeClassName-string"><a href="#2-activeClassName-string" class="headerlink" title="2. activeClassName: string"></a>2. activeClassName: string</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;NavLink to=<span class="hljs-string">&quot;/faq&quot;</span> activeClassName=<span class="hljs-string">&quot;selected&quot;</span>&gt;<br>  FAQs<br>&lt;/NavLink&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-activeStyle-object"><a href="#3-activeStyle-object" class="headerlink" title="3. activeStyle: object"></a>3. activeStyle: object</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;NavLink<br>  to=<span class="hljs-string">&quot;/faq&quot;</span><br>  activeStyle=&#123;&#123;<br>    fontWeight: <span class="hljs-string">&quot;bold&quot;</span>,<br>    color: <span class="hljs-string">&quot;red&quot;</span><br>  &#125;&#125;<br>&gt;<br>  FAQs<br>&lt;/NavLink&gt;<br></code></pre></td></tr></table></figure>
+
 <p>但在實際應用的時候，有遇到個問題，就是如果想搭配 style-component 使用，會不知該如何傳入 activeClassName 這個 props！</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzQ0MTgyNTQvaG93LWRvLWktYWRkLWFuLWFjdGl2ZS1jbGFzcy10by1hLWxpbmstZnJvbS1yZWFjdC1yb3V0ZXI=">How do I add an active class to a Link from React Router?<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>針對如何在 NavLink 組件中使用 activeClassName 屬性，參考一些網路上的範例進行改寫，以下示範兩種作法：</p>
-<h4 id="1-透過-styled-component-在-NavLink-component，使用-attr-自訂屬性-activeClassName："><a href="#1-透過-styled-component-在-NavLink-component，使用-attr-自訂屬性-activeClassName：" class="headerlink" title="1. 透過 styled component 在 NavLink component，使用 .attr() 自訂屬性 activeClassName："></a>1. 透過 styled component 在 NavLink component，使用 .attr() 自訂屬性 activeClassName：</h4><pre><code class="javascript=">const activeClassName = &#39;nav-item-active&#39;
+<h4 id="1-透過-styled-component-在-NavLink-component，使用-attr-自訂屬性-activeClassName："><a href="#1-透過-styled-component-在-NavLink-component，使用-attr-自訂屬性-activeClassName：" class="headerlink" title="1. 透過 styled component 在 NavLink component，使用 .attr() 自訂屬性 activeClassName："></a>1. 透過 styled component 在 NavLink component，使用 .attr() 自訂屬性 activeClassName：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> activeClassName = <span class="hljs-string">&#x27;nav-item-active&#x27;</span><br><br><span class="hljs-keyword">const</span> StyledLink = styled(NavLink).attrs(&#123; activeClassName &#125;)<span class="hljs-string">`</span><br><span class="hljs-string"></span><br><span class="hljs-string">  &amp;.<span class="hljs-subst">$&#123;activeClassName&#125;</span> &#123;</span><br><span class="hljs-string">    background: #eee;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-comment">// ...</span><br>      &lt;NavbarList&gt;<br>        &lt;StyledLink exact to=<span class="hljs-string">&quot;/&quot;</span>&gt;首頁&lt;/StyledLink&gt;<br>        &lt;StyledLink to=<span class="hljs-string">&quot;/new-post&quot;</span>&gt;發布文章&lt;/StyledLink&gt;<br>      &lt;/NavbarList&gt;<br>    &lt;/LeftNavbar&gt;<br>    &lt;NavbarList&gt;<br>      &lt;StyledLink to=<span class="hljs-string">&quot;/login&quot;</span>&gt;登入&lt;/StyledLink&gt;<br>    &lt;/NavbarList&gt;<br></code></pre></td></tr></table></figure>
 
-const StyledLink = styled(NavLink).attrs(&#123; activeClassName &#125;)`
-
-  &amp;.$&#123;activeClassName&#125; &#123;
-    background: #eee;
-  &#125;
-`;
-
-// ...
-      &lt;NavbarList&gt;
-        &lt;StyledLink exact to=&quot;/&quot;&gt;首頁&lt;/StyledLink&gt;
-        &lt;StyledLink to=&quot;/new-post&quot;&gt;發布文章&lt;/StyledLink&gt;
-      &lt;/NavbarList&gt;
-    &lt;/LeftNavbar&gt;
-    &lt;NavbarList&gt;
-      &lt;StyledLink to=&quot;/login&quot;&gt;登入&lt;/StyledLink&gt;
-    &lt;/NavbarList&gt;</code></pre>
 <p>可參考下方範例：</p>
 <iframe src="https://codesandbox.io/embed/34z5152z1q?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:300px; border:0; border-radius: 4px; overflow:hidden;"
@@ -557,39 +378,8 @@ const StyledLink = styled(NavLink).attrs(&#123; activeClassName &#125;)`
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
 
-<h4 id="2-將-activeClassName-視為一個-props，當-NavLink-被選中時，才會加上-activeClassName-屬性："><a href="#2-將-activeClassName-視為一個-props，當-NavLink-被選中時，才會加上-activeClassName-屬性：" class="headerlink" title="2. 將 activeClassName 視為一個 props，當 NavLink 被選中時，才會加上 activeClassName 屬性："></a>2. 將 activeClassName 視為一個 props，當 NavLink 被選中時，才會加上 activeClassName 屬性：</h4><pre><code class="javascript=">const StyledLink = styled(NavLink)`
+<h4 id="2-將-activeClassName-視為一個-props，當-NavLink-被選中時，才會加上-activeClassName-屬性："><a href="#2-將-activeClassName-視為一個-props，當-NavLink-被選中時，才會加上-activeClassName-屬性：" class="headerlink" title="2. 將 activeClassName 視為一個 props，當 NavLink 被選中時，才會加上 activeClassName 屬性："></a>2. 將 activeClassName 視為一個 props，當 NavLink 被選中時，才會加上 activeClassName 屬性：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> StyledLink = styled(NavLink)<span class="hljs-string">`</span><br><span class="hljs-string"></span><br><span class="hljs-string">&amp;.<span class="hljs-subst">$&#123;(props) =&gt; props.activeClassName&#125;</span> &#123;</span><br><span class="hljs-string">    background: #eee;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Header</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;HeaderContainer&gt;<br>      &lt;LeftNavbar&gt;<br>        &lt;Brand&gt;<br>          &lt;Link exact to=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>            React 部落格<br>          &lt;/Link&gt;<br>        &lt;/Brand&gt;<br>        &lt;NavbarList&gt;<br>          &lt;StyledLink exact to=<span class="hljs-string">&quot;/&quot;</span> activeClassName=<span class="hljs-string">&quot;active&quot;</span>&gt;<br>            首頁<br>          &lt;/StyledLink&gt;<br>          &lt;StyledLink to=<span class="hljs-string">&quot;/new-post&quot;</span> activeClassName=<span class="hljs-string">&quot;active&quot;</span>&gt;<br>            發布文章<br>          &lt;/StyledLink&gt;<br>        &lt;/NavbarList&gt;<br>      &lt;/LeftNavbar&gt;<br>      &lt;NavbarList&gt;<br>        &lt;StyledLink to=<span class="hljs-string">&quot;/login&quot;</span> activeClassName=<span class="hljs-string">&quot;active&quot;</span>&gt;<br>          登入<br>        &lt;/StyledLink&gt;<br>      &lt;/NavbarList&gt;<br>    &lt;/HeaderContainer&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-&amp;.$&#123;(props) =&gt; props.activeClassName&#125; &#123;
-    background: #eee;
-  &#125;
-`;
-
-export default function Header() &#123;
-  return (
-    &lt;HeaderContainer&gt;
-      &lt;LeftNavbar&gt;
-        &lt;Brand&gt;
-          &lt;Link exact to=&quot;/&quot;&gt;
-            React 部落格
-          &lt;/Link&gt;
-        &lt;/Brand&gt;
-        &lt;NavbarList&gt;
-          &lt;StyledLink exact to=&quot;/&quot; activeClassName=&quot;active&quot;&gt;
-            首頁
-          &lt;/StyledLink&gt;
-          &lt;StyledLink to=&quot;/new-post&quot; activeClassName=&quot;active&quot;&gt;
-            發布文章
-          &lt;/StyledLink&gt;
-        &lt;/NavbarList&gt;
-      &lt;/LeftNavbar&gt;
-      &lt;NavbarList&gt;
-        &lt;StyledLink to=&quot;/login&quot; activeClassName=&quot;active&quot;&gt;
-          登入
-        &lt;/StyledLink&gt;
-      &lt;/NavbarList&gt;
-    &lt;/HeaderContainer&gt;
-  );
-&#125;</code></pre>
 <p>其他參考資料：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9jb2Rlc2FuZGJveC5pby9zL3pyOHhtMDkxMHA/ZmlsZT0vZXhhbXBsZS5qcw==">React Router - Basic<i class="fa fa-external-link-alt"></i></span>：使用 isActive 屬性來判斷要 render 哪個 component</li>
@@ -600,248 +390,59 @@ export default function Header() &#123;
 <p><img src="https://i.imgur.com/B6N7n53.png"></p>
 <h3 id="1-串連-API：拿取所有-posts"><a href="#1-串連-API：拿取所有-posts" class="headerlink" title="1. 串連 API：拿取所有 posts"></a>1. 串連 API：拿取所有 posts</h3><p>通常會在 src 路徑底下，新增一個 WebAPI.js 專門用來管理串連 API 相關程式碼。</p>
 <p>如下方程式碼，使用 fetch 串接 API 再進行資料處理：</p>
-<pre><code class="javascript=">const BASE_URL = &quot;https://student-json-api.lidemy.me&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> BASE_URL = <span class="hljs-string">&quot;https://student-json-api.lidemy.me&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getPosts = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">`<span class="hljs-subst">$&#123;BASE_URL&#125;</span>/posts?_sort=createdAt&amp;_order=desc`</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span><br>    res.json()<br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-export const getPosts = () =&gt; &#123;
-  return fetch(`$&#123;BASE_URL&#125;/posts?_sort=createdAt&amp;_order=desc`).then((res) =&gt;
-    res.json()
-  );
-&#125;;</code></pre>
 <h3 id="2-顯示文章標題-amp-時間"><a href="#2-顯示文章標題-amp-時間" class="headerlink" title="2. 顯示文章標題 &amp; 時間"></a>2. 顯示文章標題 &amp; 時間</h3><p>在文章列表頁面，我們希望能夠顯示文章標題（title）和時間（createdAt）這兩個資訊：</p>
-<pre><code class="javascript=">// HomePage.js
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// HomePage.js</span><br><br><span class="hljs-keyword">import</span> React, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;styled-components&quot;</span>;<br><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;prop-types&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; Link &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; getPosts &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../WebAPI&quot;</span>;<br><br><span class="hljs-keyword">const</span> Root = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  max-width: 80%;</span><br><span class="hljs-string">  margin: 0 auto;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostContainer = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  border-bottom: 1px solid rgba(0, 0, 0, 0.3);</span><br><span class="hljs-string">  padding: 16px;</span><br><span class="hljs-string">  display: flex;</span><br><span class="hljs-string">  justify-content: space-between;</span><br><span class="hljs-string">  align-items: center;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostTitle = styled(Link)<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 24px;</span><br><span class="hljs-string">  color: #333;</span><br><span class="hljs-string">  text-decoration: none;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostDate = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  color: rgba(0, 0, 0, 0.8);</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-comment">// PostList component: 顯示文章列表</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PostList</span>(<span class="hljs-params">&#123; post &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;PostContainer&gt;<br>      &lt;PostTitle to=&#123;<span class="hljs-string">`/posts/<span class="hljs-subst">$&#123;post.id&#125;</span>`</span>&#125;&gt;&#123;post.title&#125;&lt;/PostTitle&gt;<br>      &lt;PostDate&gt;&#123;<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(post.createdAt).toLocaleDateString()&#125;&lt;/PostDate&gt;<br>    &lt;/PostContainer&gt;<br>  );<br>&#125;<br><br>PostList.propTypes = &#123;<br>  post: PropTypes.object,<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">HomePage</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> [posts, setPosts] = useState([]);<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    getPosts().then(<span class="hljs-function">(<span class="hljs-params">posts</span>) =&gt;</span> setPosts(posts));<br>  &#125;, []);<br><br>  <span class="hljs-keyword">return</span> (<br>    &lt;Root&gt;<br>      &#123;posts.map(<span class="hljs-function">(<span class="hljs-params">post</span>) =&gt;</span> (<br>        &lt;PostList post=&#123;post&#125; /&gt;<br>      ))&#125;<br>    &lt;/Root&gt;<br>  );<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-import React, &#123; useState, useEffect &#125; from &quot;react&quot;;
-import styled from &quot;styled-components&quot;;
-import PropTypes from &quot;prop-types&quot;;
-
-import &#123; Link &#125; from &quot;react-router-dom&quot;;
-import &#123; getPosts &#125; from &quot;../../WebAPI&quot;;
-
-const Root = styled.div`
-  max-width: 80%;
-  margin: 0 auto;
-`;
-
-const PostContainer = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const PostTitle = styled(Link)`
-  font-size: 24px;
-  color: #333;
-  text-decoration: none;
-`;
-
-const PostDate = styled.div`
-  color: rgba(0, 0, 0, 0.8);
-`;
-
-// PostList component: 顯示文章列表
-function PostList(&#123; post &#125;) &#123;
-  return (
-    &lt;PostContainer&gt;
-      &lt;PostTitle to=&#123;`/posts/$&#123;post.id&#125;`&#125;&gt;&#123;post.title&#125;&lt;/PostTitle&gt;
-      &lt;PostDate&gt;&#123;new Date(post.createdAt).toLocaleDateString()&#125;&lt;/PostDate&gt;
-    &lt;/PostContainer&gt;
-  );
-&#125;
-
-PostList.propTypes = &#123;
-  post: PropTypes.object,
-&#125;;
-
-export default function HomePage() &#123;
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() =&gt; &#123;
-    getPosts().then((posts) =&gt; setPosts(posts));
-  &#125;, []);
-
-  return (
-    &lt;Root&gt;
-      &#123;posts.map((post) =&gt; (
-        &lt;PostList post=&#123;post&#125; /&gt;
-      ))&#125;
-    &lt;/Root&gt;
-  );
-&#125;
-</code></pre>
 <ul>
 <li>轉換時間格式</li>
 </ul>
-<pre><code class="javascript=">new Date(post.createdAt).toLocaleDateString()</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(post.createdAt).toLocaleDateString()<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>用 map() 處理 List 結構的資料：</li>
 </ul>
-<pre><code class="javascript=">  &#123;posts.map((post) =&gt; (
-    &lt;Post post=&#123;post&#125; /&gt;
-  ))&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;posts.map(<span class="hljs-function">(<span class="hljs-params">post</span>) =&gt;</span> (<br>  &lt;Post post=&#123;post&#125; /&gt;<br>))&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>title 改用連結，引入 Link component 使用</li>
 </ul>
-<pre><code class="javascript=">import &#123; Link &#125; from &quot;react-router-dom&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; Link &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">const</span> PostTitle = styled(Link)<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 24px;</span><br><span class="hljs-string">  color: #333;</span><br><span class="hljs-string">  text-decoration: none;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-comment">// ...</span><br>  <span class="hljs-comment">// 用 to=&#123;&#125; 設定點擊導向的路由</span><br>  &lt;PostTitle to=&#123;<span class="hljs-string">`/posts/<span class="hljs-subst">$&#123;post.id&#125;</span>`</span>&#125;&gt;&#123;post.title&#125;&lt;/PostTitle&gt;<br></code></pre></td></tr></table></figure>
 
-const PostTitle = styled(Link)`
-  font-size: 24px;
-  color: #333;
-  text-decoration: none;
-`;
-
-// ...
-  // 用 to=&#123;&#125; 設定點擊導向的路由
-  &lt;PostTitle to=&#123;`/posts/$&#123;post.id&#125;`&#125;&gt;&#123;post.title&#125;&lt;/PostTitle&gt;</code></pre>
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/dny0n1U.png"></p>
 <h2 id="實作：單一文章頁面"><a href="#實作：單一文章頁面" class="headerlink" title="實作：單一文章頁面"></a>實作：單一文章頁面</h2><h3 id="1-串聯-API：根據不同-id-拿取-post"><a href="#1-串聯-API：根據不同-id-拿取-post" class="headerlink" title="1. 串聯 API：根據不同 id 拿取 post"></a>1. 串聯 API：根據不同 id 拿取 post</h3><p>接著是單一文章頁面，當我們在 Router 使用動態參數來讀取個別資料時，會需要取得 URL 上的 id 值。</p>
 <p>在 WebAPI.js 中，根據路由上不同 id 來拿取相對應的 post：</p>
-<pre><code class="javascript=">export const getPost = (id) =&gt; &#123;
-  return fetch(`$&#123;BASE_URL&#125;/posts?id=$&#123;id&#125;`).then((res) =&gt; res.json());
-&#125;;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getPost = <span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">`<span class="hljs-subst">$&#123;BASE_URL&#125;</span>/posts?id=<span class="hljs-subst">$&#123;id&#125;</span>`</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> res.json());<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <h3 id="2-useParams：抓取-URL-上的指定值"><a href="#2-useParams：抓取-URL-上的指定值" class="headerlink" title="2. useParams：抓取 URL 上的指定值"></a>2. useParams：抓取 URL 上的指定值</h3><p>透過 react-router 提供的 Hooks：<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdHJvdXRlci5jb20vd2ViL2FwaS9Ib29rcy91c2VwYXJhbXM=">useParams<i class="fa fa-external-link-alt"></i></span> 就能更方便取得 id 值，而不需再透過 <code>props.match.params</code> 抓取 URL 路由的參數值。</p>
 <p>以下是官方文件提供的範例，這裡指定的值就是 <code>&#123;slug&#125;</code>：</p>
-<pre><code class="javascript=">import React from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-import &#123;
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams
-&#125; from &quot;react-router-dom&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-dom&quot;</span>;<br><span class="hljs-keyword">import</span> &#123;<br>  BrowserRouter <span class="hljs-keyword">as</span> Router,<br>  Switch,<br>  Route,<br>  useParams<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">BlogPost</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 指定參數值</span><br>  <span class="hljs-keyword">let</span> &#123; slug &#125; = useParams();<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Now showing post &#123;slug&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;<br><br>ReactDOM.render(<br>  &lt;Router&gt;<br>    &lt;Switch&gt;<br>      &lt;Route exact path=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>        &lt;HomePage /&gt;<br>      &lt;/Route&gt;<br>      <span class="hljs-comment">// 抓取 URL 上的指定參數值</span><br>      &lt;Route path=<span class="hljs-string">&quot;/blog/:slug&quot;</span>&gt;<br>        &lt;BlogPost /&gt;<br>      &lt;/Route&gt;<br>    &lt;/Switch&gt;<br>  &lt;/Router&gt;,<br>  node<br>);<br></code></pre></td></tr></table></figure>
 
-function BlogPost() &#123;
-  // 指定參數值
-  let &#123; slug &#125; = useParams();
-  return &lt;div&gt;Now showing post &#123;slug&#125;&lt;/div&gt;;
-&#125;
-
-ReactDOM.render(
-  &lt;Router&gt;
-    &lt;Switch&gt;
-      &lt;Route exact path=&quot;/&quot;&gt;
-        &lt;HomePage /&gt;
-      &lt;/Route&gt;
-      // 抓取 URL 上的指定參數值
-      &lt;Route path=&quot;/blog/:slug&quot;&gt;
-        &lt;BlogPost /&gt;
-      &lt;/Route&gt;
-    &lt;/Switch&gt;
-  &lt;/Router&gt;,
-  node
-);</code></pre>
 <h4 id="3-App-js-設定路由"><a href="#3-App-js-設定路由" class="headerlink" title="3. App.js 設定路由"></a>3. App.js 設定路由</h4><p>新增 PostPage 和 NewPostPage 的路由，並在 src\pages 資料夾建立 pages component 引入使用：</p>
-<pre><code class="javascript=">// 統一從 pages 的 index.js 引入
-import &#123;
-  HomePage,
-  NewPostPage,
-  PostPage,
-  LoginPage,
-&#125; from &quot;../../pages&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 統一從 pages 的 index.js 引入</span><br><span class="hljs-keyword">import</span> &#123;<br>  HomePage,<br>  NewPostPage,<br>  PostPage,<br>  LoginPage,<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../pages&quot;</span>;<br><br><span class="hljs-comment">// ...</span><br><br>  &lt;Switch&gt;<br>    &#123;<span class="hljs-comment">/* exact path: 完整匹配 */</span>&#125;<br>    &lt;Route exact path=<span class="hljs-string">&quot;/&quot;</span>&gt;<br>      &lt;HomePage /&gt;<br>    &lt;/Route&gt;<br>    &lt;Route exact path=<span class="hljs-string">&quot;/posts/:id&quot;</span>&gt;<br>      &lt;PostPage /&gt;<br>    &lt;/Route&gt;<br>    &lt;Route exact path=<span class="hljs-string">&quot;/new-post&quot;</span>&gt;<br>      &lt;NewPostPage /&gt;<br>    &lt;/Route&gt;<br>    &lt;Route exact path=<span class="hljs-string">&quot;/login&quot;</span>&gt;<br>      &lt;LoginPage /&gt;<br>    &lt;/Route&gt;<br>  &lt;/Switch&gt;<br></code></pre></td></tr></table></figure>
 
-// ...
-
-  &lt;Switch&gt;
-    &#123;/* exact path: 完整匹配 */&#125;
-    &lt;Route exact path=&quot;/&quot;&gt;
-      &lt;HomePage /&gt;
-    &lt;/Route&gt;
-    &lt;Route exact path=&quot;/posts/:id&quot;&gt;
-      &lt;PostPage /&gt;
-    &lt;/Route&gt;
-    &lt;Route exact path=&quot;/new-post&quot;&gt;
-      &lt;NewPostPage /&gt;
-    &lt;/Route&gt;
-    &lt;Route exact path=&quot;/login&quot;&gt;
-      &lt;LoginPage /&gt;
-    &lt;/Route&gt;
-  &lt;/Switch&gt;</code></pre>
 <p>稍微整理專案結構，在 <code>src\pages</code> 建立 index.js 來統一處理 pages 的引入引出動作：</p>
-<pre><code class="javascript=">import HomePage from &quot;./HomePage&quot;;
-import LoginPage from &quot;./LoginPage&quot;;
-import PostPage from &quot;./PostPage&quot;;
-import NewPostPage from &quot;./NewPostPage&quot;;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> HomePage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./HomePage&quot;</span>;<br><span class="hljs-keyword">import</span> LoginPage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./LoginPage&quot;</span>;<br><span class="hljs-keyword">import</span> PostPage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./PostPage&quot;</span>;<br><span class="hljs-keyword">import</span> NewPostPage <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./NewPostPage&quot;</span>;<br><br><span class="hljs-keyword">export</span> &#123; HomePage, LoginPage, PostPage, NewPostPage &#125;;<br></code></pre></td></tr></table></figure>
 
-export &#123; HomePage, LoginPage, PostPage, NewPostPage &#125;;</code></pre>
-<h4 id="4-實作-PostPage-js"><a href="#4-實作-PostPage-js" class="headerlink" title="4. 實作 PostPage.js"></a>4. 實作 PostPage.js</h4><pre><code class="javascript=">import React, &#123; useState, useEffect &#125; from &quot;react&quot;;
-import styled from &quot;styled-components&quot;;
+<h4 id="4-實作-PostPage-js"><a href="#4-實作-PostPage-js" class="headerlink" title="4. 實作 PostPage.js"></a>4. 實作 PostPage.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;styled-components&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; useParams &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; getPost &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../WebAPI&quot;</span>;<br><br><span class="hljs-keyword">const</span> PostContainer = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  padding: 0 30px;</span><br><span class="hljs-string">  max-width: 960px;</span><br><span class="hljs-string">  margin: 8px auto;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostHeader = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  margin-bottom: 16px;</span><br><span class="hljs-string">  padding: 16px 0;</span><br><span class="hljs-string">  border-bottom: 1px solid rgba(0, 0, 0, 0.1);</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostTitle = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 36px;</span><br><span class="hljs-string">  font-weight: 700;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostDate = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 16px;</span><br><span class="hljs-string">  color: rgba(0, 0, 0, 0.4);</span><br><span class="hljs-string">  margin-top: 16px;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> PostBody = styled.div<span class="hljs-string">`</span><br><span class="hljs-string">  font-size: 20px;</span><br><span class="hljs-string">  letter-spacing: 3px;</span><br><span class="hljs-string">  line-height: 1.5;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PostPage</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> [post, setPost] = useState(<span class="hljs-literal">null</span>);<br>  <span class="hljs-keyword">const</span> &#123; id &#125; = useParams();<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    getPost(id).then(<span class="hljs-function">(<span class="hljs-params">post</span>) =&gt;</span> setPost(post[<span class="hljs-number">0</span>]));<br>  &#125;, [id]);<br><br>  <span class="hljs-keyword">return</span> (<br>    &lt;PostContainer&gt;<br>      &lt;PostHeader&gt;<br>        &#123;<span class="hljs-comment">/* post &amp;&amp;: 確認陣列裡面有東西才會執行 */</span>&#125;<br>        &lt;PostTitle&gt;&#123;post &amp;&amp; post.title&#125;&lt;/PostTitle&gt;<br>        &lt;PostDate&gt;<br>          &#123;post &amp;&amp; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(post.createdAt).toLocaleString()&#125;<br>        &lt;/PostDate&gt;<br>      &lt;/PostHeader&gt;<br>      &lt;PostBody&gt;&#123;post &amp;&amp; post.body&#125;&lt;/PostBody&gt;<br>    &lt;/PostContainer&gt;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-import &#123; useParams &#125; from &quot;react-router-dom&quot;;
-import &#123; getPost &#125; from &quot;../../WebAPI&quot;;
-
-const PostContainer = styled.div`
-  padding: 0 30px;
-  max-width: 960px;
-  margin: 8px auto;
-`;
-
-const PostHeader = styled.div`
-  margin-bottom: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-`;
-
-const PostTitle = styled.div`
-  font-size: 36px;
-  font-weight: 700;
-`;
-
-const PostDate = styled.div`
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.4);
-  margin-top: 16px;
-`;
-
-const PostBody = styled.div`
-  font-size: 20px;
-  letter-spacing: 3px;
-  line-height: 1.5;
-`;
-
-export default function PostPage() &#123;
-  const [post, setPost] = useState(null);
-  const &#123; id &#125; = useParams();
-
-  useEffect(() =&gt; &#123;
-    getPost(id).then((post) =&gt; setPost(post[0]));
-  &#125;, [id]);
-
-  return (
-    &lt;PostContainer&gt;
-      &lt;PostHeader&gt;
-        &#123;/* post &amp;&amp;: 確認陣列裡面有東西才會執行 */&#125;
-        &lt;PostTitle&gt;&#123;post &amp;&amp; post.title&#125;&lt;/PostTitle&gt;
-        &lt;PostDate&gt;
-          &#123;post &amp;&amp; new Date(post.createdAt).toLocaleString()&#125;
-        &lt;/PostDate&gt;
-      &lt;/PostHeader&gt;
-      &lt;PostBody&gt;&#123;post &amp;&amp; post.body&#125;&lt;/PostBody&gt;
-    &lt;/PostContainer&gt;
-  );
-&#125;</code></pre>
 <ul>
 <li>用 useParams() 讀取網址列上的 id 值，並透過 useEffect 在 render 之後拿取資料，再以 setPost 來改變狀態：</li>
 </ul>
-<pre><code class="javascript=">  const [post, setPost] = useState(null);
-  const &#123; id &#125; = useParams();
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> [post, setPost] = useState(<span class="hljs-literal">null</span>);<br><span class="hljs-keyword">const</span> &#123; id &#125; = useParams();<br><br>useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  getPost(id).then(<span class="hljs-function">(<span class="hljs-params">post</span>) =&gt;</span> setPost(post[<span class="hljs-number">0</span>]));<br>&#125;, [id]);<br></code></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    getPost(id).then((post) =&gt; setPost(post[0]));
-  &#125;, [id]);</code></pre>
 <ul>
 <li>需以 <code>post &amp;&amp;</code> 確認陣列裡面有東西才會執行，以 <code>post.title</code> 為例：</li>
 </ul>
-<pre><code class="javascript=">&lt;PostTitle&gt;&#123;post &amp;&amp; post.title&#125;&lt;/PostTitle&gt;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;PostTitle&gt;&#123;post &amp;&amp; post.title&#125;&lt;/PostTitle&gt;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>顯示日期時間：</li>
 </ul>
-<pre><code class="javascript=">new Date(post.createdAt).toLocaleString()
-// &quot;2020/12/12 上午10:48:39&quot;
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(post.createdAt).toLocaleString()<br><span class="hljs-comment">// &quot;2020/12/12 上午10:48:39&quot;</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(post.createdAt).toLocaleDateString()<br><span class="hljs-comment">// &quot;2020/12/12&quot;</span><br></code></pre></td></tr></table></figure>
 
-new Date(post.createdAt).toLocaleDateString()
-// &quot;2020/12/12&quot;</code></pre>
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/AromKKu.png"></p>
 <hr>

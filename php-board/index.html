@@ -307,8 +307,8 @@
 </li>
 <li><code>require_once();</code>：取用資料夾中其他 library</li>
 </ul>
-<pre><code class="php=">require_once(&quot;conn.php&quot;);      // 連線到資料庫
-require_once(&quot;utils.php&quot;);     // 導入常用函式</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;conn.php&quot;</span>);      <span class="hljs-comment">// 連線到資料庫</span><br><span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;utils.php&quot;</span>);     <span class="hljs-comment">// 導入常用函式</span><br></code></pre></td></tr></table></figure>
+
 <h4 id="echo、print-r-與-var-dump-的區別"><a href="#echo、print-r-與-var-dump-的區別" class="headerlink" title="echo、print_r 與 var_dump 的區別"></a>echo、print_r 與 var_dump 的區別</h4><ul>
 <li><code>echo</code>：印出變數、字串等<ul>
 <li>例如: <code>echo &quot;hello World&quot;</code></li>
@@ -326,32 +326,15 @@ require_once(&quot;utils.php&quot;);     // 導入常用函式</code></pre>
 <li><code>fetch_assoc()</code>：讀取的資料 Key 值設定為欄位名稱的陣列</li>
 <li><code>fetch_row()</code>：讀取的資料 Key 值設定為依序的數字</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;?php
-  // 把 $result 資料的 Key 值設定為欄位名稱的陣列
-  while($row = $result-&gt;fetch_assoc()) &#123;
-?&gt;
-  &lt;div class=&quot;card&quot;&gt;
-    &lt;div class=&quot;card__avatar&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;card__body&quot;&gt;
-        &lt;div class=&quot;card__info&quot;&gt;
-          &lt;span class=&quot;card__author&quot;&gt;&lt;?php echo $row[&#39;nickname&#39;]; ?&gt;&lt;/span&gt;
-          &lt;span class=&quot;card__time&quot;&gt;&lt;?php echo $row[&#39;created_at&#39;]; ?&gt;&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;p class=&quot;card__content&quot;&gt;&lt;?php echo $row[&#39;content&#39;]; ?&gt;&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;board__hr&quot;&gt;&lt;/div&gt;
-&lt;?php &#125; ?&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;?php<br>  &#x2F;&#x2F; 把 $result 資料的 Key 值設定為欄位名稱的陣列<br>  while($row &#x3D; $result-&gt;fetch_assoc()) &#123;<br>?&gt;<br>  &lt;div class&#x3D;&quot;card&quot;&gt;<br>    &lt;div class&#x3D;&quot;card__avatar&quot;&gt;&lt;&#x2F;div&gt;<br>    &lt;div class&#x3D;&quot;card__body&quot;&gt;<br>        &lt;div class&#x3D;&quot;card__info&quot;&gt;<br>          &lt;span class&#x3D;&quot;card__author&quot;&gt;&lt;?php echo $row[&#39;nickname&#39;]; ?&gt;&lt;&#x2F;span&gt;<br>          &lt;span class&#x3D;&quot;card__time&quot;&gt;&lt;?php echo $row[&#39;created_at&#39;]; ?&gt;&lt;&#x2F;span&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;p class&#x3D;&quot;card__content&quot;&gt;&lt;?php echo $row[&#39;content&#39;]; ?&gt;&lt;&#x2F;p&gt;<br>    &lt;&#x2F;div&gt;<br>  &lt;&#x2F;div&gt;<br>  &lt;div class&#x3D;&quot;board__hr&quot;&gt;&lt;&#x2F;div&gt;<br>&lt;?php &#125; ?&gt;<br></code></pre></td></tr></table></figure>
+
 <p>若以 <code>print_r($row);</code> 印出上述程式碼，可知 <code>$row</code> 為陣列：<br><img src="https://i.imgur.com/EnxNFAl.png"></p>
 <h4 id="檢查是否存在"><a href="#檢查是否存在" class="headerlink" title="檢查是否存在"></a>檢查是否存在</h4><ul>
 <li><code>isset()</code>：檢查是否有此變數</li>
 <li><code>empty()</code>：檢查是否有值</li>
 </ul>
-<pre><code class="php=">$username = NULL;
-// 如果 session 中沒有存 username，就讀取 session
-if(!empty($_SESSION[&#39;username&#39;])) &#123;
-  $username = $_SESSION[&#39;username&#39;];
-&#125;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">$username = <span class="hljs-literal">NULL</span>;<br><span class="hljs-comment">// 如果 session 中沒有存 username，就讀取 session</span><br><span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>  $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><code>query()</code>：判斷資料庫查詢是否成功<ul>
 <li>順利執行回傳 true</li>
@@ -360,86 +343,25 @@ if(!empty($_SESSION[&#39;username&#39;])) &#123;
 </li>
 <li><code>exit()</code> 和 <code>die()</code>：兩者幾乎相同，均為輸出消息後退出程式</li>
 </ul>
-<pre><code class="php=">// 以 id 進行 DESC（遞減）排序：&quot;後新增的留言&quot;會排在前面
-$result = $conn-&gt;query(&quot;SELECT * FROM comments ORDER BY id DESC&quot;);
-// 檢查是否查詢成功
-if (!$result) &#123;
-  die(&#39;Error:&#39; . $conn-&gt;error);
-&#125;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 以 id 進行 DESC（遞減）排序：&quot;後新增的留言&quot;會排在前面</span><br>$result = $conn-&gt;query(<span class="hljs-string">&quot;SELECT * FROM comments ORDER BY id DESC&quot;</span>);<br><span class="hljs-comment">// 檢查是否查詢成功</span><br><span class="hljs-keyword">if</span> (!$result) &#123;<br>  <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Error:&#x27;</span> . $conn-&gt;error);<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><code>sprintf()</code>：裡面可放入替代字元</li>
 </ul>
 <p>例如使用 <code>sprintf()</code> 做 SELECT：</p>
-<pre><code class="php=">// handle_login.php
-  $sql = sprintf(
-    &quot;SELECT * FROM users WHERE username=&#39;%s&#39; AND password=&#39;%s&#39;&quot;,
-    $username,
-    $password
-  );
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// handle_login.php</span><br>  $sql = sprintf(<br>    <span class="hljs-string">&quot;SELECT * FROM users WHERE username=&#x27;%s&#x27; AND password=&#x27;%s&#x27;&quot;</span>,<br>    $username,<br>    $password<br>  );<br><br><span class="hljs-comment">// 把執行結果存在 $result 這個變數中</span><br>$result = $conn-&gt;query($sql);<br><span class="hljs-comment">// 確認是否有拿到結果</span><br><span class="hljs-keyword">if</span> (!$result) &#123;<br>  <span class="hljs-keyword">die</span>($conn-&gt;error);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 把執行結果存在 $result 這個變數中
-$result = $conn-&gt;query($sql);
-// 確認是否有拿到結果
-if (!$result) &#123;
-  die($conn-&gt;error);
-&#125;</code></pre>
 <p>用 <code>sprintf()</code> 做 INSERT INTO：</p>
-<pre><code class="php=">// handle_add_comment.php
-$sql = sprintf(
-  &quot;INSERT INTO comments(nickname, content) VALUES(&#39;%s&#39;, &#39;%s&#39;)&quot;,
-  $nickname,
-  $content
-  );
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// handle_add_comment.php</span><br>$sql = sprintf(<br>  <span class="hljs-string">&quot;INSERT INTO comments(nickname, content) VALUES(&#x27;%s&#x27;, &#x27;%s&#x27;)&quot;</span>,<br>  $nickname,<br>  $content<br>  );<br><br><span class="hljs-comment">// handle_register.php</span><br>$sql = sprintf(<br>  <span class="hljs-string">&quot;INSERT INTO users(nickname, username, password) VALUES(&#x27;%s&#x27;, &#x27;%s&#x27;, &#x27;%s&#x27;)&quot;</span>,<br>  $nickname,<br>  $username,<br>  $password<br>);<br></code></pre></td></tr></table></figure>
 
-// handle_register.php
-$sql = sprintf(
-  &quot;INSERT INTO users(nickname, username, password) VALUES(&#39;%s&#39;, &#39;%s&#39;, &#39;%s&#39;)&quot;,
-  $nickname,
-  $username,
-  $password
-);</code></pre>
 <h3 id="conn-php-連線資料庫"><a href="#conn-php-連線資料庫" class="headerlink" title="conn.php 連線資料庫"></a><code>conn.php</code> 連線資料庫</h3><blockquote>
 <p>【注意】由於 <code>conn.php</code> 放有帳號密碼等重要資料，因此在 commit 前需加入 <code>git.ignore</code>，不進行版本控制。</p>
 </blockquote>
 <p>程式碼如下：</p>
-<pre><code class="php=">&lt;?php
-  $server_name = &#39;localhost&#39;;
-  $username = &#39;heidi&#39;;
-  $password = &#39;1234&#39;;
-  $db_name = &#39;heidiDB&#39;;
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  $server_name = <span class="hljs-string">&#x27;localhost&#x27;</span>;<br>  $username = <span class="hljs-string">&#x27;heidi&#x27;</span>;<br>  $password = <span class="hljs-string">&#x27;1234&#x27;</span>;<br>  $db_name = <span class="hljs-string">&#x27;heidiDB&#x27;</span>;<br><br>  <span class="hljs-comment">// `mysqli` 的四個參數分別為：伺服器名稱、帳號、密碼、資料庫名稱</span><br>  $conn = <span class="hljs-keyword">new</span> mysqli($server_name, $username, $password, $db_name);<br><br>  <span class="hljs-comment">// 確認是否出現連線錯誤</span><br>  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">empty</span>($conn-&gt;connect_error)) &#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;資料庫連線錯誤:&#x27;</span> . $conn-&gt;connect_error);<br>  &#125;<br><br>  <span class="hljs-comment">// 設定編碼，避免出現亂碼</span><br>  $conn-&gt;query(<span class="hljs-string">&#x27;SET NAMES UTF8&#x27;</span>);<br>  <span class="hljs-comment">// 設定成臺灣時區</span><br>  $conn-&gt;query(<span class="hljs-string">&#x27;SET time_zone = &quot;+8:00&quot;&#x27;</span>);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure>
 
-  // `mysqli` 的四個參數分別為：伺服器名稱、帳號、密碼、資料庫名稱
-  $conn = new mysqli($server_name, $username, $password, $db_name);
+<h3 id="index-php-顯示所有留言"><a href="#index-php-顯示所有留言" class="headerlink" title="index.php 顯示所有留言"></a><code>index.php</code> 顯示所有留言</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  session_start();<br>  <span class="hljs-comment">// 連線到資料庫</span><br>  <span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;conn.php&quot;</span>);<br>  <span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;utils.php&quot;</span>);<br><br>  $username = <span class="hljs-literal">NULL</span>;<br>  <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>    $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>  &#125;<br><br>  <span class="hljs-comment">// 以 id 進行 desc（遞減）排序，也就是&quot;後新增的留言&quot;會排在前面</span><br>  $result = $conn-&gt;query(<span class="hljs-string">&quot;SELECT * FROM comments ORDER BY id DESC&quot;</span>);<br>  <span class="hljs-comment">// 檢查是否有資料</span><br>  <span class="hljs-keyword">if</span> (!$result) &#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Error:&#x27;</span> . $conn-&gt;error);<br>  &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-  // 確認是否出現連線錯誤
-  if (!empty($conn-&gt;connect_error)) &#123;
-    die(&#39;資料庫連線錯誤:&#39; . $conn-&gt;connect_error);
-  &#125;
-
-  // 設定編碼，避免出現亂碼
-  $conn-&gt;query(&#39;SET NAMES UTF8&#39;);
-  // 設定成臺灣時區
-  $conn-&gt;query(&#39;SET time_zone = &quot;+8:00&quot;&#39;);
-?&gt;
-</code></pre>
-<h3 id="index-php-顯示所有留言"><a href="#index-php-顯示所有留言" class="headerlink" title="index.php 顯示所有留言"></a><code>index.php</code> 顯示所有留言</h3><pre><code class="php=">&lt;?php
-  session_start();
-  // 連線到資料庫
-  require_once(&quot;conn.php&quot;);
-  require_once(&quot;utils.php&quot;);
-
-  $username = NULL;
-  if(!empty($_SESSION[&#39;username&#39;])) &#123;
-    $username = $_SESSION[&#39;username&#39;];
-  &#125;
-
-  // 以 id 進行 desc（遞減）排序，也就是&quot;後新增的留言&quot;會排在前面
-  $result = $conn-&gt;query(&quot;SELECT * FROM comments ORDER BY id DESC&quot;);
-  // 檢查是否有資料
-  if (!$result) &#123;
-    die(&#39;Error:&#39; . $conn-&gt;error);
-  &#125;
-?&gt;</code></pre>
 <hr>
 <h2 id="儲存狀態的方式：Cookie-amp-Session"><a href="#儲存狀態的方式：Cookie-amp-Session" class="headerlink" title="儲存狀態的方式：Cookie &amp; Session"></a>儲存狀態的方式：Cookie &amp; Session</h2><h3 id="使用-Cookie-記住-HTTP-狀態"><a href="#使用-Cookie-記住-HTTP-狀態" class="headerlink" title="使用 Cookie 記住 HTTP 狀態"></a>使用 Cookie 記住 HTTP 狀態</h3><p>首先要了解 Cookie 是什麼：</p>
 <ul>
@@ -461,29 +383,18 @@ $sql = sprintf(
 <li>把 username 寫入檔案</li>
 <li><code>set-cookie</code>: <code>session-id</code></li>
 </ol>
-<pre><code class="php=">// 使用 Session 時，均需在開頭加上 session_start()
-session_start();
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 使用 Session 時，均需在開頭加上 session_start()</span><br>session_start();<br><br>$username = htmlspecialchars($_POST[<span class="hljs-string">&#x27;username&#x27;</span>]);<br><br><span class="hljs-comment">// 把資料存在 Session 對應的 key 裡面</span><br>$_SEESION[<span class="hljs-string">&#x27;username&#x27;</span>] = $username;<br></code></pre></td></tr></table></figure>
 
-$username = htmlspecialchars($_POST[&#39;username&#39;]);
-
-// 把資料存在 Session 對應的 key 裡面
-$_SEESION[&#39;username&#39;] = $username;</code></pre>
 <h4 id="讀取-Session"><a href="#讀取-Session" class="headerlink" title="讀取 Session"></a>讀取 Session</h4><p>當 <code>$_SESSION</code> 讀取資料時，會進行下列三件事：</p>
 <ol>
 <li>從 cookie 裡讀取 PHPSESSID (token)</li>
 <li>從檔案裡面讀取 session id 的內容</li>
 <li>把內容放到 <code>$_SESSION</code></li>
 </ol>
-<pre><code class="php=">session_start();
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php">session_start();<br><br><span class="hljs-comment">// 若 Session 內有存過 username，則 $username 為剛才存的 $_SESSION[&#x27;username&#x27;] </span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>($_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>])) &#123;<br>  $username = $_SESSION[<span class="hljs-string">&#x27;username&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 若 Session 內有存過 username，則 $username 為剛才存的 $_SESSION[&#39;username&#39;] 
-if(isset($_SESSION[&#39;username&#39;])) &#123;
-  $username = $_SESSION[&#39;username&#39;];
-&#125;</code></pre>
-<h4 id="清除-Session"><a href="#清除-Session" class="headerlink" title="清除 Session"></a>清除 Session</h4><pre><code class="php=">session_start();
+<h4 id="清除-Session"><a href="#清除-Session" class="headerlink" title="清除 Session"></a>清除 Session</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">session_start();<br><br><span class="hljs-comment">// 直接清除所有 session</span><br>session_destroy();<br></code></pre></td></tr></table></figure>
 
-// 直接清除所有 session
-session_destroy();</code></pre>
 <p>參考資料：</p>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIyNzYwMg==">27. [WEB] Cookie &amp; Session 是什麼？<i class="fa fa-external-link-alt"></i></span></li>

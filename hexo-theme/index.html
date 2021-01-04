@@ -257,113 +257,43 @@
 <a id="more"></a>
 
 <h2 id="更換主題"><a href="#更換主題" class="headerlink" title="更換主題"></a>更換主題</h2><p>首先介紹 Hexo 專案架構：</p>
-<pre><code>.  // 根目錄
-├─ .deploy_git
-├─ node_modules
-├─ public　    // 使用 hexo g 指令生成的內容
-├─ scaffolds   // 模板
-├─ source　    // 存放原始檔案
-　　├─ _discarded　// 已刪除文章
-　　├─ _drafts　 // 未發布文章
-　　├─ _posts　　// 已發布文章（會被 push）
-　　├─ about　　 // 關於我
-　　└─ categories   // 分類
-├─ themes　      // 存放主題
-　　└─ landscape　// 預設主題
-　　　　├─ layout, scripts, source
-　　　　└─ _config.yml　// 修改主題設定
-└─ _config.yml　// 修改部落格的通用設定，例如：網站標題、網址、使用主題等</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs awk">.  <span class="hljs-regexp">//</span> 根目錄<br>├─ .deploy_git<br>├─ node_modules<br>├─ public　    <span class="hljs-regexp">//</span> 使用 hexo g 指令生成的內容<br>├─ scaffolds   <span class="hljs-regexp">//</span> 模板<br>├─ source　    <span class="hljs-regexp">//</span> 存放原始檔案<br>　　├─ _discarded　<span class="hljs-regexp">//</span> 已刪除文章<br>　　├─ _drafts　 <span class="hljs-regexp">//</span> 未發布文章<br>　　├─ _posts　　<span class="hljs-regexp">//</span> 已發布文章（會被 push）<br>　　├─ about　　 <span class="hljs-regexp">//</span> 關於我<br>　　└─ categories   <span class="hljs-regexp">//</span> 分類<br>├─ themes　      <span class="hljs-regexp">//</span> 存放主題<br>　　└─ landscape　<span class="hljs-regexp">//</span> 預設主題<br>　　　　├─ layout, scripts, source<br>　　　　└─ _config.yml　<span class="hljs-regexp">//</span> 修改主題設定<br>└─ _config.yml　<span class="hljs-regexp">//</span> 修改部落格的通用設定，例如：網站標題、網址、使用主題等<br></code></pre></td></tr></table></figure>
+
 <h3 id="下載主題"><a href="#下載主題" class="headerlink" title="下載主題"></a>下載主題</h3><p>以更換成 next 主題為例，可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">hexo-theme-next<i class="fa fa-external-link-alt"></i></span> 官方說明，將主題 clone 到本地端：</p>
-<pre><code>$ cd hexo
-$ git clone https://github.com/theme-next/hexo-theme-next themes/next</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ cd hexo<br>$ git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/theme-next/</span>hexo-theme-<span class="hljs-keyword">next</span> themes/<span class="hljs-keyword">next</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="修改-config-yml-的-theme-設定"><a href="#修改-config-yml-的-theme-設定" class="headerlink" title="修改 /_config.yml 的 theme 設定"></a>修改 /_config.yml 的 theme 設定</h3><p>更多主題可以到官網的 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3RoZW1lcy8=">Hexo Themes<i class="fa fa-external-link-alt"></i></span> 選擇，將主題 clone 下來後，修改根目錄的 _config.yml 檔案即可套用：</p>
-<pre><code class="yaml="># Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-theme: next</code></pre>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Extensions</span><br><span class="hljs-comment">## Plugins: https://hexo.io/plugins/</span><br><span class="hljs-comment">## Themes: https://hexo.io/themes/</span><br><span class="hljs-attr">theme:</span> <span class="hljs-string">next</span><br></code></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="自訂樣式"><a href="#自訂樣式" class="headerlink" title="自訂樣式"></a>自訂樣式</h2><p>在更早之前的版本，是透過 _custom.styl 來自訂樣式，目前則改成 source/_data 這個路徑。</p>
 <p>可參考這篇：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy85NzM=">NexT V7.2.0:How to change blog background？如何更改博客背景？<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="修改-next-config-yml-的-Custom-file-path-設定"><a href="#修改-next-config-yml-的-Custom-file-path-設定" class="headerlink" title="修改 next/_config.yml 的 Custom_file_path 設定"></a>修改 next/_config.yml 的 Custom_file_path 設定</h3><p>在 <code>/themes/next/_config.yml</code> 檔案，把 custom_file_path 的 style 註解拿掉：</p>
-<pre><code class="yaml="># Define custom file paths.
-# Create your custom files in site directory `source/_data` and uncomment needed files below.
-custom_file_path:
-  #head: source/_data/head.swig
-  #header: source/_data/header.swig
-  #sidebar: source/_data/sidebar.swig
-  #postMeta: source/_data/post-meta.swig
-  #postBodyEnd: source/_data/post-body-end.swig
-  #footer: source/_data/footer.swig
-  #bodyEnd: source/_data/body-end.swig
-  #variable: source/_data/variables.styl
-  #mixin: source/_data/mixins.styl
-  style: source/_data/styles.styl</code></pre>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Define custom file paths.</span><br><span class="hljs-comment"># Create your custom files in site directory `source/_data` and uncomment needed files below.</span><br><span class="hljs-attr">custom_file_path:</span><br>  <span class="hljs-comment">#head: source/_data/head.swig</span><br>  <span class="hljs-comment">#header: source/_data/header.swig</span><br>  <span class="hljs-comment">#sidebar: source/_data/sidebar.swig</span><br>  <span class="hljs-comment">#postMeta: source/_data/post-meta.swig</span><br>  <span class="hljs-comment">#postBodyEnd: source/_data/post-body-end.swig</span><br>  <span class="hljs-comment">#footer: source/_data/footer.swig</span><br>  <span class="hljs-comment">#bodyEnd: source/_data/body-end.swig</span><br>  <span class="hljs-comment">#variable: source/_data/variables.styl</span><br>  <span class="hljs-comment">#mixin: source/_data/mixins.styl</span><br>  <span class="hljs-attr">style:</span> <span class="hljs-string">source/_data/styles.styl</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="在-source-建立-data-資料夾"><a href="#在-source-建立-data-資料夾" class="headerlink" title="在 /source 建立 _data 資料夾"></a>在 /source 建立 _data 資料夾</h3><p>需注意這裡的 source 路徑並不是 next 主題資料夾，而是在 Hexo 專案根目錄的 source/_data，如果沒有 _data 資料夾需自行建立，並在裡面新增 styles.styl 檔案：</p>
 <p><img src="https://i.imgur.com/eueuD6k.png"></p>
 <h3 id="撰寫自訂樣式"><a href="#撰寫自訂樣式" class="headerlink" title="撰寫自訂樣式"></a>撰寫自訂樣式</h3><p>接著就可以在 styles.styl 檔案中撰寫樣式，例如設定背景圖片：</p>
-<pre><code class="css=">body &#123;
-  background: url(/images/bg.jpg);   // 圖片路徑
-  background-repeat: no-repeat;　// 不重複
-  background-attachment:fixed;　 //　固定背景
-  background-size: cover; // 將背景圖片放大至容器大小
-  background-position:50% 50%;  // 背景位置置中
-&#125;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;<br>  background: url(/images/bg.jpg);   // 圖片路徑<br>  background-repeat: no-repeat;　// 不重複<br>  background-attachment:fixed;　 //　固定背景<br>  background-size: cover; // 將背景圖片放大至容器大小<br>  background-position:50% 50%;  // 背景位置置中<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>記得把圖片放到對應位置 <code>/source/images/bg.jpg</code> 才能讀取到：</p>
 <p><img src="https://i.imgur.com/9F4gZn4.png"></p>
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/6n4wOCV.png"></p>
 <h2 id="取消歸檔的「嗯-目前共有-x-篇文章。-繼續努力。」"><a href="#取消歸檔的「嗯-目前共有-x-篇文章。-繼續努力。」" class="headerlink" title="取消歸檔的「嗯..! 目前共有 x 篇文章。 繼續努力。」"></a>取消歸檔的「嗯..! 目前共有 x 篇文章。 繼續努力。」</h2><p>原先看到可以把 /next/_config.yml 中的 cheers 設定為 false，但目前版本似乎沒有這個設定，後來是看到<span class="exturl" data-url="aHR0cHM6Ly9waW5nc2hpdWFuLmdpdGxhYi5pby9oZXhvX2dpdGxhYl9hZHNlbnNlX25jdHUuaHRtbA==">這篇文章<i class="fa fa-external-link-alt"></i></span>有提到可以直接修改 next/layout/archive.swig 檔案，把有出現 cheers 的區塊通通註解掉：</p>
-<pre><code class="yaml=">  &lt;div class=&quot;post-block&quot;&gt;
-    &lt;div class=&quot;posts-collapse&quot;&gt;
-#  以下通通註解掉   
-      &#123;###<div class="collection-title">
-        &#123;%- set posts_length = site.posts.length %&#125;
-        &#123;%- if posts_length > 210 %&#125;
-          &#123;%- set cheers = 'excellent' %&#125;
-        &#123;% elif posts_length > 130 %&#125;
-          &#123;%- set cheers = 'great' %&#125;
-        &#123;% elif posts_length > 80 %&#125;
-          &#123;%- set cheers = 'good' %&#125;
-        &#123;% elif posts_length > 50 %&#125;
-          &#123;%- set cheers = 'nice' %&#125;
-        &#123;% elif posts_length > 30 %&#125;
-          &#123;%- set cheers = 'ok' %&#125;
-        &#123;% else %&#125;
-          &#123;%- set cheers = 'um' %&#125;
-        &#123;%- endif %&#125;
-        <span class="collection-header">&#123;&#123; __('cheers.' + cheers) &#125;&#125;! &#123;&#123; _p('counter.archive_posts', site.posts.length) &#125;&#125; &#123;&#123; __('keep_on') &#125;&#125;&lt;/span&gt;
-      &lt;/div&gt;###&#125;
-#  以上通通註解掉 
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs yaml">  <span class="hljs-string">&lt;div</span> <span class="hljs-string">class=&quot;post-block&quot;&gt;</span><br>    <span class="hljs-string">&lt;div</span> <span class="hljs-string">class=&quot;posts-collapse&quot;&gt;</span><br><span class="hljs-comment">#  以下通通註解掉   </span><br>      &#123;<span class="hljs-comment">###&lt;div class=&quot;collection-title&quot;&gt;</span><br>        &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">=</span> <span class="hljs-string">site.posts.length</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%-</span> <span class="hljs-string">if</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">&gt;</span> <span class="hljs-number">210</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;excellent&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%</span> <span class="hljs-string">elif</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">&gt;</span> <span class="hljs-number">130</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;great&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%</span> <span class="hljs-string">elif</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">&gt;</span> <span class="hljs-number">80</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;good&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%</span> <span class="hljs-string">elif</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">&gt;</span> <span class="hljs-number">50</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;nice&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%</span> <span class="hljs-string">elif</span> <span class="hljs-string">posts_length</span> <span class="hljs-string">&gt;</span> <span class="hljs-number">30</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;ok&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%</span> <span class="hljs-string">else</span> <span class="hljs-string">%</span>&#125;<br>          &#123;<span class="hljs-string">%-</span> <span class="hljs-string">set</span> <span class="hljs-string">cheers</span> <span class="hljs-string">=</span> <span class="hljs-string">&#x27;um&#x27;</span> <span class="hljs-string">%</span>&#125;<br>        &#123;<span class="hljs-string">%-</span> <span class="hljs-string">endif</span> <span class="hljs-string">%</span>&#125;<br>        <span class="hljs-string">&lt;span</span> <span class="hljs-string">class=&quot;collection-header&quot;&gt;<span class="hljs-template-variable">&#123;&#123; __(&#x27;cheers.&#x27; + cheers) &#125;&#125;</span></span><span class="hljs-string">!</span> &#123;&#123; <span class="hljs-string">_p(&#x27;counter.archive_posts&#x27;</span>, <span class="hljs-string">site.posts.length)</span> &#125;&#125; &#123;&#123; <span class="hljs-string">__(&#x27;keep_on&#x27;)</span> &#125;&#125;<span class="hljs-string">&lt;/span&gt;</span><br>      <span class="hljs-string">&lt;/div&gt;###</span>&#125;<br><span class="hljs-comment">#  以上通通註解掉 </span><br><br>      &#123;&#123; <span class="hljs-string">post_template.render(page.posts)</span> &#125;&#125;<br><br>    <span class="hljs-string">&lt;/div&gt;</span><br>  <span class="hljs-string">&lt;/div&gt;</span><br></code></pre></td></tr></table></figure>
 
-      &#123;&#123; post_template.render(page.posts) &#125;&#125;
-
-    &lt;/div&gt;
-  &lt;/div&gt;</code></pre>
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/DRbxd52.png"></p>
 <hr>
 <h2 id="文章搜尋功能"><a href="#文章搜尋功能" class="headerlink" title="文章搜尋功能"></a>文章搜尋功能</h2><h3 id="修改-next-config-yml-的-local-search-設定"><a href="#修改-next-config-yml-的-local-search-設定" class="headerlink" title="修改 next _config.yml 的 local_search 設定"></a>修改 next _config.yml 的 local_search 設定</h3><p>修改<code> /themes/next/_config.yml</code> 檔案中的 local_search，把 enable 改為 ture：</p>
-<pre><code class="yaml="># Local Search
-# Dependencies: https://github.com/theme-next/hexo-generator-searchdb
-local_search:
-  enable: true
-  # If auto, trigger search by changing input.
-  # If manual, trigger search by pressing enter key or search button.
-  trigger: auto
-  # Show top n results per article, show all results by setting to -1
-  top_n_per_article: 1
-  # Unescape html strings to the readable one.
-  unescape: false
-  # Preload the search data when the page loads.
-  preload: false</code></pre>
-<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><pre><code>$ npm install hexo-generator-searchdb --save</code></pre>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Local Search</span><br><span class="hljs-comment"># Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span><br><span class="hljs-attr">local_search:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># If auto, trigger search by changing input.</span><br>  <span class="hljs-comment"># If manual, trigger search by pressing enter key or search button.</span><br>  <span class="hljs-attr">trigger:</span> <span class="hljs-string">auto</span><br>  <span class="hljs-comment"># Show top n results per article, show all results by setting to -1</span><br>  <span class="hljs-attr">top_n_per_article:</span> <span class="hljs-number">1</span><br>  <span class="hljs-comment"># Unescape html strings to the readable one.</span><br>  <span class="hljs-attr">unescape:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-comment"># Preload the search data when the page loads.</span><br>  <span class="hljs-attr">preload:</span> <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> hexo-generator-searchdb <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="新增內容到根目錄的-config-yml"><a href="#新增內容到根目錄的-config-yml" class="headerlink" title="新增內容到根目錄的 _config.yml"></a>新增內容到根目錄的 _config.yml</h3><p>在 <code>_config.yml</code> 檔案最下方加入這段內容：</p>
-<pre><code class="yaml="># 文章搜尋功能
-search:
-  path: search.xml
-  field: post
-  content: true
-  format: html</code></pre>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 文章搜尋功能</span><br><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">path:</span> <span class="hljs-string">search.xml</span><br>  <span class="hljs-attr">field:</span> <span class="hljs-string">post</span><br>  <span class="hljs-attr">content:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">format:</span> <span class="hljs-string">html</span><br></code></pre></td></tr></table></figure>
+
 <p>結果如下：</p>
 <p><img src="https://i.imgur.com/uPH9x7S.png"></p>
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>在之前寫的<a href="https://heidiliu2020.github.io/2020/11/07/hexo-github/">【學習筆記】如何使用 Hexo + GitHub Pages 架設個人網誌</a> 這篇，提到該如何更換 theme 主題，到現在終於生出來XD 主要還是因為自己想要更換背景，卻忘記當初是怎麼自定義樣式的，結果又繞了點遠路，果然整理過後的知識才是自己的，寫起來就不怕忘記啦！</p>

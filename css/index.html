@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標:   P1 你知道 CSS 是什麼  P1 你知道 inline、block 跟 inline-block 的區別  P1 你知道什麼是 box model  P1 你知道 position 的所有屬性及其差別  P2 你知道 :hover, :before, :after  P2 你知道">
+  <meta name="description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  123456789學習目標: P1 你知道 CSS 是什麼 P1 你知道 inline、block 跟 inline-block 的區別 P1 你知道什麼是 box model P1 你知道 position 的所有屬性及其差別 P2 你知道 :hover, :before, :after P2 你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 6] CSS - 認識基礎標籤 &amp; 屬性">
 <meta property="og:url" content="https://heidiliu2020.github.io/css/index.html">
 <meta property="og:site_name" content="前端新米">
-<meta property="og:description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標:   P1 你知道 CSS 是什麼  P1 你知道 inline、block 跟 inline-block 的區別  P1 你知道什麼是 box model  P1 你知道 position 的所有屬性及其差別  P2 你知道 :hover, :before, :after  P2 你知道">
+<meta property="og:description" content="本篇為 [FE101] 前端基礎：HTML 與 CSS 這門課程的學習筆記。如有錯誤歡迎指正。  123456789學習目標: P1 你知道 CSS 是什麼 P1 你知道 inline、block 跟 inline-block 的區別 P1 你知道什麼是 box model P1 你知道 position 的所有屬性及其差別 P2 你知道 :hover, :before, :after P2 你">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/HzfLkAY.png">
 <meta property="og:image" content="https://i.imgur.com/euaGSlb.png">
@@ -261,133 +261,73 @@
         <blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUxMDEtaHRtbC1jc3M=">[FE101] 前端基礎：HTML 與 CSS<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
-<pre><code>學習目標:
-
- P1 你知道 CSS 是什麼
- P1 你知道 inline、block 跟 inline-block 的區別
- P1 你知道什麼是 box model
- P1 你知道 position 的所有屬性及其差別
- P2 你知道 :hover, :before, :after
- P2 你知道 :nth-child 的各種用法
- P2 你熟悉 CSS selector，可以輕鬆選到想選到的元素</code></pre>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm">學習目標:<br><br> <span class="hljs-built_in">P1</span> 你知道 CSS 是什麼<br> <span class="hljs-built_in">P1</span> 你知道 inline、block 跟 inline-block 的區別<br> <span class="hljs-built_in">P1</span> 你知道什麼是 box model<br> <span class="hljs-built_in">P1</span> 你知道 position 的所有屬性及其差別<br> <span class="hljs-built_in">P2</span> 你知道 :hover, :before, :after<br> <span class="hljs-built_in">P2</span> 你知道 :nth-child 的各種用法<br> <span class="hljs-built_in">P2</span> 你熟悉 CSS selector，可以輕鬆選到想選到的元素<br></code></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="什麼是-CSS？"><a href="#什麼是-CSS？" class="headerlink" title="什麼是 CSS？"></a>什麼是 CSS？</h2><p>Cascading Style Sheets 階層式樣式表</p>
 <h2 id="如何引入-CSS"><a href="#如何引入-CSS" class="headerlink" title="如何引入 CSS"></a>如何引入 CSS</h2><h3 id="使用內部-CSS"><a href="#使用內部-CSS" class="headerlink" title="使用內部 CSS"></a>使用內部 CSS</h3><ol>
 <li>直接在 body 的元素內加上 <code>style=&quot;&quot;</code></li>
 </ol>
-<pre><code class="htmlmixed=">&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;網頁前端&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!--   文字變紅色 --&gt;
-    &lt;div style=&quot;color: red;&quot;&gt;
-      網頁前端課程
-    &lt;/div&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;<br>    &lt;title&gt;網頁前端&lt;&#x2F;title&gt;<br>  &lt;&#x2F;head&gt;<br>  &lt;body&gt;<br>    &lt;!--   文字變紅色 --&gt;<br>    &lt;div style&#x3D;&quot;color: red;&quot;&gt;<br>      網頁前端課程<br>    &lt;&#x2F;div&gt;<br><br>  &lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br></code></pre></td></tr></table></figure>
 
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
 <ol start="2">
 <li>在 head 裡加上 <code>&lt;style&gt;</code> 標籤：</li>
 </ol>
-<pre><code class="htmlmixed=">&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;網頁前端&lt;/title&gt;
-        &lt;style&gt;
-          div &#123;
-            color: blue;
-          &#125;
-        &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!--   文字變藍色 --&gt;
-    &lt;div&gt;
-      網頁前端課程
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;<br>    &lt;title&gt;網頁前端&lt;&#x2F;title&gt;<br>        &lt;style&gt;<br>          div &#123;<br>            color: blue;<br>          &#125;<br>        &lt;&#x2F;style&gt;<br>  &lt;&#x2F;head&gt;<br>  &lt;body&gt;<br>    &lt;!--   文字變藍色 --&gt;<br>    &lt;div&gt;<br>      網頁前端課程<br>    &lt;&#x2F;div&gt;<br>  &lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br></code></pre></td></tr></table></figure>
+
 <h3 id="使用外部-CSS"><a href="#使用外部-CSS" class="headerlink" title="使用外部 CSS"></a>使用外部 CSS</h3><p>使用 <code>&lt;link&gt;</code> 元素，從外部引用 CSS 檔，這是一個空白的元素（不需要結束標記）：</p>
 <ul>
 <li><code>href</code>：指定 CSS 檔的路徑，通常放在 css 或 styles 資料夾</li>
 <li><code>rel</code>：表示 HTML 頁面與連結其連結檔案的關係，連到 CSS 檔其值應為 stylesheet</li>
 </ul>
 <p>將 style.css 引入 index.html 為例：</p>
-<pre><code class="htmlmixed=">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-  &lt;title&gt;網頁前端&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot; &gt;
-&lt;/head&gt;
-&lt;body&gt;
-  網頁前端課程
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!DOCTYPE html&gt;<br>&lt;html lang&#x3D;&quot;en&quot;&gt;<br>&lt;head&gt;<br>  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;<br>  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;<br>  &lt;title&gt;網頁前端&lt;&#x2F;title&gt;<br>    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;css&#x2F;style.css&quot; &gt;<br>&lt;&#x2F;head&gt;<br>&lt;body&gt;<br>  網頁前端課程<br>&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br></code></pre></td></tr></table></figure>
+
 <p>內部引入的兩種方法，因不易維護而較少使用。使用外部引入的優點如下：</p>
 <ol>
 <li>將內容和外觀分開，結構較清楚</li>
 <li>可在不同頁面使用同一個樣式規則，不需修改每個檔案，便於維護</li>
 </ol>
 <h2 id="CSS-Selector"><a href="#CSS-Selector" class="headerlink" title="CSS Selector"></a>CSS Selector</h2><p>利用 CSS 選取器，可將規則套用在 HTML 文件的特定元素上，寫法如下：</p>
-<pre><code class="htmlmixed=">&lt;!-- 選取器 --&gt;
-selector &#123;
-  &lt;!--   宣告（分成屬性和值兩個部分） --&gt;
-  attribute: value;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 選取器 --&gt;<br>selector &#123;<br>  &lt;!--   宣告（分成屬性和值兩個部分） --&gt;<br>  attribute: value;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="全域選擇器"><a href="#全域選擇器" class="headerlink" title="全域選擇器"></a>全域選擇器</h3><ul>
 <li>Universal Selector：套用到文件的所有元素。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 所有背景均為藍色 --&gt;
-* &#123;
-  background: blue
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 所有背景均為藍色 --&gt;<br>* &#123;<br>  background: blue<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="標籤選取器"><a href="#標籤選取器" class="headerlink" title="標籤選取器"></a>標籤選取器</h3><ul>
 <li>找出符合的元素名稱。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 將所有 &lt;h3&gt; 元素套用該樣式 --&gt;
-h3 &#123;
-  color: red
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 將所有 &lt;h3&gt; 元素套用該樣式 --&gt;<br>h3 &#123;<br>  color: red<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="類別選取器"><a href="#類別選取器" class="headerlink" title="類別選取器"></a>類別選取器</h3><ul>
 <li>CLASS Selector：找出 class 屬性值符合句號後之值的元素。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 找出所有 class 屬性之值為 note 的元素 --&gt;
-.note &#123;&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 找出所有 class 屬性之值為 note 的元素 --&gt;<br>.note &#123;&#125;<br><br>&lt;!-- 找出所有 class 屬性之值為 note 的 &lt;h3&gt; 元素 --&gt;<br>h3.note&#123;&#125;<br></code></pre></td></tr></table></figure>
 
-&lt;!-- 找出所有 class 屬性之值為 note 的 &lt;h3&gt; 元素 --&gt;
-h3.note&#123;&#125;</code></pre>
 <h3 id="ID-選取器"><a href="#ID-選取器" class="headerlink" title="ID 選取器"></a>ID 選取器</h3><ul>
 <li>和 class 的最大不同，在於整個網頁上 id 只能有一個。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 找出 id 為 name 的元素 --&gt;
-#name &#123;&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 找出 id 為 name 的元素 --&gt;<br>#name &#123;&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="子元素選取器"><a href="#子元素選取器" class="headerlink" title="子元素選取器"></a>子元素選取器</h3><ul>
 <li>利用 <code>&gt;</code> 區隔兩個元素，表示在有父子關係的元素才會套用。</li>
 <li>與後代選取器的差異在於中間不能插入其他元素。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 找出任何身為 &lt;li&gt; 元素之子的 &lt;a&gt; 元素 --&gt;
-li &gt; a &#123;
-  color: red;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 找出任何身為 &lt;li&gt; 元素之子的 &lt;a&gt; 元素 --&gt;<br>li &gt; a &#123;<br>  color: red;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="後代選取器"><a href="#後代選取器" class="headerlink" title="後代選取器"></a>後代選取器</h3><ul>
 <li>利用空白鍵區隔兩個元素。</li>
 <li>中間可堆疊其他元素。</li>
 </ul>
-<pre><code class="htmlmixed=">&lt;!-- 找出任何位在 &lt;li&gt; 元素內的 &lt;a&gt; 元素 --&gt;
-li a &#123;
-  color: yellow;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 找出任何位在 &lt;li&gt; 元素內的 &lt;a&gt; 元素 --&gt;<br>li a &#123;<br>  color: yellow;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="偽類選取器"><a href="#偽類選取器" class="headerlink" title="偽類選取器"></a>偽類選取器</h3><blockquote>
 <p><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1BzZXVkby1jbGFzc2Vz">Pseudo-classes 偽類一覽表<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>以 hover（滑鼠滑入的樣式）為例：</p>
-<pre><code class="htmlmixed=">&lt;!-- 當滑鼠移至任何 a 連結上時，背景會變成黃色 --&gt;
-a:hover &#123;
-  background: yellow
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&lt;!-- 當滑鼠移至任何 a 連結上時，背景會變成黃色 --&gt;<br>a:hover &#123;<br>  background: yellow<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNvbS9jc3NyZWYvY3NzX3NlbGVjdG9ycy5hc3A=">CSS Selectors Reference - W3Schools<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="nth-child-n-選擇器"><a href="#nth-child-n-選擇器" class="headerlink" title="nth-child(n) 選擇器"></a>nth-child(n) 選擇器</h3><p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0MTEwNTgyMy5odG1s">CSS選取第幾個標籤元素：nth-child(n)、first-child、last-child<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="CSS-Selector-的權重計算方式"><a href="#CSS-Selector-的權重計算方式" class="headerlink" title="CSS Selector 的權重計算方式"></a>CSS Selector 的權重計算方式</h3><p>當選擇器作用在同一元素上時：</p>
@@ -396,7 +336,8 @@ a:hover &#123;
 <li>兩個權重相同：後面覆蓋前面</li>
 </ul>
 <p>權重由高到低如下：</p>
-<pre><code>!important &gt; inline style &gt; id &gt; class &gt; tag &gt; *</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">!important &gt; <span class="hljs-keyword">inline</span> style &gt; id &gt; <span class="hljs-class"><span class="hljs-keyword">class</span> &gt;</span> tag &gt; *<br></code></pre></td></tr></table></figure>
+
 <p>各類選擇器：</p>
 <ul>
 <li>!important：權重最高，但在實際開發過程，幾乎不會使用 !important 來覆蓋其他規則</li>
@@ -538,22 +479,13 @@ a:hover &#123;
 <h3 id="CSS-Reset"><a href="#CSS-Reset" class="headerlink" title="CSS Reset"></a>CSS Reset</h3><ul>
 <li>方法一：利用全域選擇器</li>
 </ul>
-<pre><code class="htmlmixed=">* &#123;
-  margin: 0;
-  padding: 0;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">* &#123;<br>  margin: 0;<br>  padding: 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>方法二：直接對元素進行設定</li>
 </ul>
-<pre><code class="htmlmixed=">/* 設定基底字體大小 */
-html &#123;
-  font-size: 12px;
-&#125;
-/* 取消預設空隙 */
-html, body, h1, h2, h3, h4, p&#123;
-  padding: 0;
-  margin: 0 ;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs htmlmixed">&#x2F;* 設定基底字體大小 *&#x2F;<br>html &#123;<br>  font-size: 12px;<br>&#125;<br>&#x2F;* 取消預設空隙 *&#x2F;<br>html, body, h1, h2, h3, h4, p&#123;<br>  padding: 0;<br>  margin: 0 ;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="CSS-Reset-與-CSS-normalize"><a href="#CSS-Reset-與-CSS-normalize" class="headerlink" title="CSS Reset 與 CSS normalize"></a>CSS Reset 與 CSS normalize</h3><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tZXllcndlYi5jb20vZXJpYy90b29scy9jc3MvcmVzZXQv">CSS Reset<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
@@ -578,26 +510,16 @@ html, body, h1, h2, h3, h4, p&#123;
 <p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyZWFkMDEuY29tL2NvbnRlbnQvMTU0NjY3MzI1MC5odG1s">css讓圖片自適應容器（div）大小- IT閱讀 - ITREAD01.COM<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="CSS-屬性用法紀錄"><a href="#CSS-屬性用法紀錄" class="headerlink" title="CSS 屬性用法紀錄"></a>CSS 屬性用法紀錄</h2><ol>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmphLWFueXRoaW5nLmNvbS8yMDE4LzAxLzE3L2Nzcy0lRTglQUUlOTMlRTklODElOEUlRTklOTUlQjclRTclOUElODQlRTYlOTYlODclRTUlQUQlOTclRTklOUElQjElRTglOTclOEYlRTglQUUlOEEtY3NzLXRvLW1ha2UtdGV4dC1vdmVyZmxvdy1lbGVnYW50LWlzLXdpdGgtZWxsaXBzZXMtc2luZ2xlLW9yLW11bHRpcGxlLWxpbmVzLw==">CSS 限制字數/行數，讓過長的文字隱藏變”…”<i class="fa fa-external-link-alt"></i></span></p>
-<pre><code class="css">/* 修飾過長的文字，ellipsis：用點點點來表示被切斷的字串 */
-text-overflow: ellipsis;
-/* 不進行換行 */
-white-space: nowrap</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* 修飾過長的文字，ellipsis：用點點點來表示被切斷的字串 */</span><br><span class="hljs-selector-tag">text-overflow</span>: <span class="hljs-selector-tag">ellipsis</span>;<br><span class="hljs-comment">/* 不進行換行 */</span><br><span class="hljs-selector-tag">white-space</span>: <span class="hljs-selector-tag">nowrap</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cudzNjcGx1cy5jb20vY29udGVudC9jc3MzLWJveC1zaGFkb3c=">box-shadow 屬性的參數<i class="fa fa-external-link-alt"></i></span></p>
-<pre><code class="css">/* 投影方式 X軸偏移 Y軸偏移 模糊半徑 擴展半徑 顏色&#125;*/
-box-shadow:inset x-offset y-offset blur-radius spread-radius color</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">  <span class="hljs-comment">/* 投影方式 X軸偏移 Y軸偏移 模糊半徑 擴展半徑 顏色&#125;*/</span><br><span class="hljs-selector-tag">box-shadow</span><span class="hljs-selector-pseudo">:inset</span> <span class="hljs-selector-tag">x-offset</span> <span class="hljs-selector-tag">y-offset</span> <span class="hljs-selector-tag">blur-radius</span> <span class="hljs-selector-tag">spread-radius</span> <span class="hljs-selector-tag">color</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubWlud3QuY29tL3dlYmRlc2lnbi1kZXYvY3NzLzIxNTM4Lmh0bWw=">[教學] CSS3 半透明背景的四種設定方法 (RGBa、HSLa、Opacity、HEX)<i class="fa fa-external-link-alt"></i></span></p>
-<pre><code class="css">opacity: x
-/* x　取值 0~1，該區塊元素均會調整透明度 */
-background: rgba(red, green, blue, alpha)
-/* alpha 代表透明度，取值 0~1 */</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">opacity</span>: <span class="hljs-selector-tag">x</span><br><span class="hljs-comment">/* x　取值 0~1，該區塊元素均會調整透明度 */</span><br><span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">rgba</span>(<span class="hljs-selector-tag">red</span>, <span class="hljs-selector-tag">green</span>, <span class="hljs-selector-tag">blue</span>, <span class="hljs-selector-tag">alpha</span>)<br><span class="hljs-comment">/* alpha 代表透明度，取值 0~1 */</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>決定換行的屬性</p>
-<pre><code class="css">/* 預設不換行 */
-flex-wrap: no-wrap;
-/* 換行 */
-flex-wrap: wrap;</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* 預設不換行 */</span><br><span class="hljs-selector-tag">flex-wrap</span>: <span class="hljs-selector-tag">no-wrap</span>;<br><span class="hljs-comment">/* 換行 */</span><br><span class="hljs-selector-tag">flex-wrap</span>: <span class="hljs-selector-tag">wrap</span>;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>文字跑板問題</p>
 </li>
