@@ -6885,6 +6885,111 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
       </tags>
   </entry>
   <entry>
+    <title>[學習筆記] React 內建的所有 Hooks 功能整理</title>
+    <url>/react-hooks/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇是參考<span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaG9va3MtcmVmZXJlbmNlLmh0bWw=">官方文件<i class="fa fa-external-link-alt"></i></span>，整理 React 內建的所有 Hooks API 功能。</p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li>Basic Hooks<ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useContext</li>
+</ul>
+</li>
+<li>Additional Hooks<ul>
+<li>useReducer</li>
+<li>useCallback</li>
+<li>useMemo</li>
+<li>useRef</li>
+<li>useImperativeHandle</li>
+<li>useLayoutEffect</li>
+<li>useDebugValue</li>
+</ul>
+</li>
+</ul>
+<h2 id="Basic-Hooks"><a href="#Basic-Hooks" class="headerlink" title="Basic Hooks"></a>Basic Hooks</h2><h3 id="useState：用來設定-component-的-state"><a href="#useState：用來設定-component-的-state" class="headerlink" title="useState：用來設定 component 的 state"></a>useState：用來設定 component 的 state</h3><ul>
+<li>第一次 render 時，回傳的 state 值會和 initialState 參數相同</li>
+<li>可透過 setState 來更新 state，state 一旦改變，就會觸發 React 去重新渲染畫面</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span>initialState
+
+<span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="useEffect：用來告訴-React-component-在-render-之後要做的事情"><a href="#useEffect：用來告訴-React-component-在-render-之後要做的事情" class="headerlink" title="useEffect：用來告訴 React component 在 render 之後要做的事情"></a>useEffect：用來告訴 React component 在 render 之後要做的事情</h3><ul>
+<li>第一個參數帶入的 function 會在「畫面渲染完成後」被呼叫</li>
+<li>第二個參數傳入一個陣列，用來放想要關注的資料，當變數改變時才會呼叫 useEffect</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">useEffect</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> subscription <span class="token operator">=</span> props<span class="token punctuation">.</span>source<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      subscription<span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>props<span class="token punctuation">.</span>source<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="useContext：解決跨多層傳遞資料的問題，就像建立了全域變數"><a href="#useContext：解決跨多層傳遞資料的問題，就像建立了全域變數" class="headerlink" title="useContext：解決跨多層傳遞資料的問題，就像建立了全域變數"></a>useContext：解決跨多層傳遞資料的問題，就像建立了全域變數</h3><ul>
+<li>讓父層的資料能夠被底下的任意子層存取，不需要像 props 一層一層傳遞下去，避免造成 Props drilling</li>
+<li>用 <code>React.createContext</code> 建立一個 context 物件，並由 <code>&lt;MyContext.Provider value=&#123;&#125;&gt;</code> 存取該物件的值，底下的子層就可以直接透過 useContext 來存取 MyContext</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> value <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>MyContext<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<br/>
+
+<h2 id="Additional-Hooks"><a href="#Additional-Hooks" class="headerlink" title="Additional Hooks"></a>Additional Hooks</h2><h3 id="useReducer：是-useState-的替代方案，當-state-邏輯變得複雜，需要操作多種-state-時可使用"><a href="#useReducer：是-useState-的替代方案，當-state-邏輯變得複雜，需要操作多種-state-時可使用" class="headerlink" title="useReducer：是 useState 的替代方案，當 state 邏輯變得複雜，需要操作多種 state 時可使用"></a>useReducer：是 useState 的替代方案，當 state 邏輯變得複雜，需要操作多種 state 時可使用</h3><ul>
+<li>state：當前的 state 值</li>
+<li>dispatch：透過參數來和 function 溝通，藉此控制處理方式</li>
+<li>reducer： 用來接受一個 <code>(state, action) =&gt; newState</code>，並回傳當前的 state 和對應的 dispatch 方法</li>
+<li>initState：設定 state 的初始值</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> dispatch<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useReducer</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> initState<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="useCallback：用來記憶父元件的記憶體位置，避免在重新渲染時被重新分配"><a href="#useCallback：用來記憶父元件的記憶體位置，避免在重新渲染時被重新分配" class="headerlink" title="useCallback：用來記憶父元件的記憶體位置，避免在重新渲染時被重新分配"></a>useCallback：用來記憶父元件的記憶體位置，避免在重新渲染時被重新分配</h3><ul>
+<li>第一個參數是 function，第二個參數是其依賴陣列，會回傳一個 memoized 的 callback</li>
+<li>在重新渲染時，只會在依賴改變時才更新，防止不必要的渲染，減少效能上的消耗</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> memoizedCallback <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">doSomething</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="useMemo：用途是當-component-重新渲染時，能避免複雜的程式被重複執行"><a href="#useMemo：用途是當-component-重新渲染時，能避免複雜的程式被重複執行" class="headerlink" title="useMemo：用途是當 component 重新渲染時，能避免複雜的程式被重複執行"></a>useMemo：用途是當 component 重新渲染時，能避免複雜的程式被重複執行</h3><ul>
+<li>第一個參數是 function，第二個參數是其依賴陣列，會回傳一個 memoized 的值</li>
+<li>在重新渲染時，傳到 useMemo 的 function 就只會在依賴改變時才執行，將 memoized 更新成回傳的值</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> memoizedValue <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">computeExpensiveValue</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="useRef：用來抓取-DOM-節點，存放的值不會受到-render-影響"><a href="#useRef：用來抓取-DOM-節點，存放的值不會受到-render-影響" class="headerlink" title="useRef：用來抓取 DOM 節點，存放的值不會受到 render 影響"></a>useRef：用來抓取 DOM 節點，存放的值不會受到 render 影響</h3><ul>
+<li>會回傳一個 mutable 的 ref object，其 <code>.current</code> 屬性會被初始為傳入的參數 initialValue</li>
+<li>當 <code>.current</code> 屬性有變動時不會觸發重新 render，而每次 render 時都會給同一個 ref object</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> refContainer <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span>initialValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>refContainer<span class="token punctuation">.</span>current<span class="token punctuation">)</span>
+<span class="token comment">// initialValue</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="useImperativeHandle：可以在父層調用子層中-ref，選取指定的-DOM-節點"><a href="#useImperativeHandle：可以在父層調用子層中-ref，選取指定的-DOM-節點" class="headerlink" title="useImperativeHandle：可以在父層調用子層中 ref，選取指定的 DOM 節點"></a>useImperativeHandle：可以在父層調用子層中 ref，選取指定的 DOM 節點</h3><ul>
+<li>第一個參數是接收的 ref</li>
+<li>第二個參數是傳給父層的方法</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">useImperativeHandle</span><span class="token punctuation">(</span>ref<span class="token punctuation">,</span> createHandle<span class="token punctuation">,</span> <span class="token punctuation">[</span>deps<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="useLayoutEffect：功能與-useEffect-相似，差別在於-useLayoutEffect-會在-render-之前執行"><a href="#useLayoutEffect：功能與-useEffect-相似，差別在於-useLayoutEffect-會在-render-之前執行" class="headerlink" title="useLayoutEffect：功能與 useEffect 相似，差別在於 useLayoutEffect 會在 render 之前執行"></a>useLayoutEffect：功能與 useEffect 相似，差別在於 useLayoutEffect 會在 render 之前執行</h3><h3 id="useDebugValue：可用來在-React-DevTools-中顯示自訂義-hook-的標籤"><a href="#useDebugValue：可用來在-React-DevTools-中顯示自訂義-hook-的標籤" class="headerlink" title="useDebugValue：可用來在 React DevTools 中顯示自訂義 hook 的標籤"></a>useDebugValue：可用來在 React DevTools 中顯示自訂義 hook 的標籤</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">useDebugValue</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>Hooks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[week 22] 再探 React：Function component vs Class component</title>
     <url>/react-class-function-hook/</url>
     <content><![CDATA[<blockquote>
