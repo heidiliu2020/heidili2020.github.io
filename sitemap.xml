@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidiliu2020.github.io/jquery-bootstrap/</loc>
+    
+    <lastmod>2021-01-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/express-middleware/</loc>
+    
+    <lastmod>2021-01-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/about/index.html</loc>
     
     <lastmod>2021-01-11</lastmod>
@@ -366,13 +380,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/fe201-jquery-bootstrap/</loc>
-    
-    <lastmod>2020-12-27</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/mtr04-plugin/</loc>
     
     <lastmod>2020-12-27</lastmod>
@@ -395,13 +402,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/js201-hw/</loc>
-    
-    <lastmod>2020-12-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/be201-express-middleware/</loc>
     
     <lastmod>2020-12-27</lastmod>
     

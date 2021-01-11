@@ -1094,7 +1094,7 @@ console.log(price)      &#x2F;&#x2F; 印出 20，因為區域變數不會覆蓋�
   </entry>
   <entry>
     <title>[week 12] 前端工具之一 - jQuery 與 Bootstrap</title>
-    <url>/fe201-jquery-bootstrap/</url>
+    <url>/jquery-bootstrap/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvZmUyMDE=">[FE201] 前端中階：那些前端會用到的工具們<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
 </blockquote>
@@ -10245,7 +10245,7 @@ $db_name &#x3D; &#39;&lt;資料庫名稱&gt;&#39;;<span aria-hidden="true" class
   </entry>
   <entry>
     <title>[week 17] 後端中階 - Express 中不可或缺的拼圖：淺談 Middleware</title>
-    <url>/be201-express-middleware/</url>
+    <url>/express-middleware/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUyMDEtZXhwcmVzcy1zZXF1ZWxpemU=">[BE201] 後端中階：Express 與 Sequelize<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
