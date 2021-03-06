@@ -20526,4 +20526,109 @@ rl.on(&#39;close&#39;, () &#x3D;&gt; &#123;
         <tag>JavaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[學習筆記] 如何撰好的 Git Commit Message</title>
+    <url>/git-commit-message/</url>
+    <content><![CDATA[<h2 id="為什麼-Commit-Message-很重要？"><a href="#為什麼-Commit-Message-很重要？" class="headerlink" title="為什麼 Commit Message 很重要？"></a>為什麼 Commit Message 很重要？</h2><p>Git 在每次 Commit 時，需要寫下 Git Commit Message（提交說明），用來記錄提交版本更動的摘要。</p>
+<blockquote>
+<p>任何專案都至少由兩個以上的開發者共同合作開發。</p>
+</blockquote>
+<a id="more"></a>
+
+<p>除了專案開發者，任何專案都會是跟其他開發者和、未來的自己共同開發維護的。當不同開發者接手專案時，能藉由瀏覽 Commit Message 內容快速進入狀況，瞭解程式異動的原因，如此也利於後續的維護。</p>
+<h3 id="何謂好的-Commit-Message？"><a href="#何謂好的-Commit-Message？" class="headerlink" title="何謂好的 Commit Message？"></a>何謂好的 Commit Message？</h3><p>一個好的 Git Commit Message 必須兼具 What &amp; Why &amp; How，能幫助開發者瞭解這個提交版本：</p>
+<ol>
+<li>做了什麼事情（What）</li>
+<li>為什麼要做這件事情（Why）</li>
+<li>用什麼方法做到的（How）</li>
+</ol>
+<h2 id="Commit-Message-的規範與準則"><a href="#Commit-Message-的規範與準則" class="headerlink" title="Commit Message 的規範與準則"></a>Commit Message 的規範與準則</h2><p>在團隊之間，撰寫 commit log 的方式應一致，也就是定義風格與內容，可透過遵守現有的慣例來實現。</p>
+<p>一個 Commit Message 主要由 Header + Body + Footer 組成：</p>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+&lt;BLANK LINE&gt;
+&lt;body&gt;
+&lt;BLANK LINE&gt;
+&lt;footer&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Message-Header-lt-type-gt-lt-scope-gt-lt-subject-gt"><a href="#Message-Header-lt-type-gt-lt-scope-gt-lt-subject-gt" class="headerlink" title="Message Header: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;"></a>Message Header: <code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</code></h3><ul>
+<li>type（必要）：commit 的類別<ul>
+<li>如：feat, fix, docs, style, refactor, test, chore</li>
+</ul>
+</li>
+<li>scope（可選）：commit 影響的範圍<ul>
+<li>如：資料庫、控制層、模板層等，視專案不同改變</li>
+</ul>
+</li>
+<li>subject（必要）：commit 的簡短描述<ul>
+<li>不超過 50 個字元</li>
+<li>結尾不加句號</li>
+<li>盡量讓 Commit 單一化，一次只更動一個主題</li>
+</ul>
+</li>
+</ul>
+<h3 id="Message-Body"><a href="#Message-Body" class="headerlink" title="Message Body"></a>Message Body</h3><ul>
+<li>對本次 Commit 的詳細描述，解釋 What &amp; Why &amp; How</li>
+<li>可以分成多行，每一行不超過 72 個字元</li>
+<li>說明程式碼變動的項目與原因，還有與先前行為的對比</li>
+</ul>
+<h3 id="Message-Footer"><a href="#Message-Footer" class="headerlink" title="Message Footer"></a>Message Footer</h3><ul>
+<li>填寫任務編號 <code>issue #1246</code></li>
+<li>BREAKING CHANGE（可略），記錄不兼容的變動，後面是對變動的描述、以及變動原因和遷移方法</li>
+</ul>
+<h2 id="Header：-lt-type-gt-類別規範"><a href="#Header：-lt-type-gt-類別規範" class="headerlink" title="Header：&lt;type&gt; 類別規範"></a>Header：<code>&lt;type&gt;</code> 類別規範</h2><p>type 代表提交 Commit 的類別，以下為使用慣例：</p>
+<ul>
+<li>feat：新增或修改功能（feature）</li>
+<li>fix：修補 bug（bug fix）</li>
+<li>docs：文件（documentation）</li>
+<li>style：格式<ul>
+<li>不影響程式碼運行的變動，例如：white-space, formatting, missing semi colons</li>
+</ul>
+</li>
+<li>refactor：重構 <ul>
+<li>不是新增功能，也非修補 bug 的程式碼變動</li>
+</ul>
+</li>
+<li>perf：改善效能（improves performance）</li>
+<li>test：增加測試（when adding missing tests）</li>
+<li>chore：maintain<ul>
+<li>不影響程式碼運行，建構程序或輔助工具的變動，例如修改 config、Grunt Task 任務管理工具</li>
+</ul>
+</li>
+<li>revert：撤銷回覆先前的 commit<ul>
+<li>例如：<code>revert：type(scope):subject</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Commit-Message-範例"><a href="#Commit-Message-範例" class="headerlink" title="Commit Message 範例"></a>Commit Message 範例</h3><p>以下舉幾個範例：</p>
+<pre class="line-numbers language-none"><code class="language-none">feat: message 新增信件通知功能
+feat(優惠券): 加入搜尋按鈕，調整畫面
+
+fix: 圓餅圖圖例跑版
+fix: 意見反應，信件看不到圖片問題
+
+style: 統一換行符號 CRLF to LF
+
+docs: 更新 README 相關資訊
+docs: 修正型別註解
+
+chore(submoudle): 變更 git url
+chore: 調整單元測試環境
+
+refactor(每日通知信件): 重構程式結構<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93YWRlaHVhbmdsZWFybmluZy5ibG9nc3BvdC5jb20vMjAxOS8wNS9jb21taXQtY29tbWl0LWNvbW1pdC13aHktd2hhdC1jb21taXQuaHRtbA==">Git Commit Message 這樣寫會更好，替專案引入規範與範例<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2Jsb2cuZm91cmRlc2lyZS5jb20vMjAxOC8wNy8wMy8lRTYlOTIlQjAlRTUlQUYlQUIlRTYlOUMlODklRTYlOTUlODglRTclOUElODQtZ2l0LWNvbW1pdC1tZXNzYWdlLw==">撰寫有效的 Git Commit Message<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmxvdWllLmx1LzIwMTcvMDMvMjEvJUU1JUE2JTgyJUU0JUJEJTk1JUU1JUFGJUFCJUU0JUI4JTgwJUU1JTgwJThCLWdpdC1jb21taXQtbWVzc2FnZS8jcnVsZXMwMw==">如何寫一個Git Commit Message | louie_lu’s blog<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vZG9jdW1lbnQvZC8xUXJERmNJaVBqU0xEbjNFTDE1SUp5Z05QaUhPUmdVMV9PT0FxV2ppRFU1WS9lZGl0Iw==">AngularJS Git Commit Message Conventions<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
 </search>
