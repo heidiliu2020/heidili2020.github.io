@@ -20535,7 +20535,7 @@ rl.on(&#39;close&#39;, () &#x3D;&gt; &#123;
 </blockquote>
 <a id="more"></a>
 
-<p>除了專案開發者，任何專案都會是跟其他開發者和、未來的自己共同開發維護的。當不同開發者接手專案時，能藉由瀏覽 Commit Message 內容快速進入狀況，瞭解程式異動的原因，如此也利於後續的維護。</p>
+<p>除了專案開發者，任何專案都會是跟其他開發者、以及未來的自己共同開發維護的。當不同開發者接手專案時，能藉由瀏覽 Commit Message 內容快速進入狀況，瞭解程式異動的原因，如此也利於後續的維護。</p>
 <h3 id="何謂好的-Commit-Message？"><a href="#何謂好的-Commit-Message？" class="headerlink" title="何謂好的 Commit Message？"></a>何謂好的 Commit Message？</h3><p>一個好的 Git Commit Message 必須兼具 What &amp; Why &amp; How，能幫助開發者瞭解這個提交版本：</p>
 <ol>
 <li>做了什麼事情（What）</li>
