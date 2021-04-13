@@ -515,7 +515,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/Lidemy/</loc>
+    <loc>https://heidiliu2020.github.io/tags/Angular/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,28 +529,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/ESLint/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/Git/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/fetch/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/promise/</loc>
+    <loc>https://heidiliu2020.github.io/tags/Lidemy/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -571,7 +550,35 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/ESLint/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/fetch/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/promise/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/GitHub/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Git/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -592,6 +599,20 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/hash/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/HTML-CSS/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/webpack/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
@@ -606,27 +627,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/HTML-CSS/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/hash/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/DOM/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/tags/ES6/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
@@ -634,7 +634,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/OOP/</loc>
+    <loc>https://heidiliu2020.github.io/tags/DOM/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -649,6 +649,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Bootstrap/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/OOP/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -739,7 +746,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/Closure/</loc>
+    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -760,21 +767,14 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/Closure/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/Sequelize/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/Angular/</loc>
-    <lastmod>2021-04-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
     <lastmod>2021-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
