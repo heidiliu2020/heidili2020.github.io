@@ -21218,4 +21218,298 @@ console.log(arr)
         <tag>lidemy</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Sass/SCSS 入門：變數、巢狀、混入、繼承</title>
+    <url>/sass-css-preprocessor/</url>
+    <content><![CDATA[<p>其實過去在 Lidemy 課程中，也有提過 CSS 預處理器的觀念：<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMjAxLXNhc3MtYW5kLWJhYmVs">[week 13] 前端工具之二 - CSS 預處理器、Babel<i class="fa fa-external-link-alt"></i></span>，因為工作上需要使用，發現自己對語法還是不太熟悉，於是這篇筆記就誕生了！</p>
+<a id="more"></a>
+
+<h2 id="What-is-CSS-預處理器？"><a href="#What-is-CSS-預處理器？" class="headerlink" title="What is CSS 預處理器？"></a>What is CSS 預處理器？</h2><p>我們所熟知的 CSS，是用來撰寫網頁樣式的語言，但隨著網頁開發複雜度提高，尤其是大型專案，在開發時也面臨許多問題：</p>
+<ul>
+<li>全域樣式會互相干擾，不易進行 debug，可維護性差</li>
+<li>重複撰寫相同樣式，程式碼不易閱讀</li>
+</ul>
+<p>為了解決這些問題，CSS 預處理器（CSS Preprocessor）就誕生了！透過將程式模組化的概念，新增了變數、巢狀結構、混入、繼承等寫法，作為 CSS 語法的擴充，用以改善程式碼的結構與可維護性。</p>
+<p>現今較為主流的 CSS 預處理器有下列三種，均賦予 CSS 動態語言的特性：</p>
+<ul>
+<li>Sass/SCSS：最廣為開發者使用</li>
+<li>Less：原先是基於 Ruby 開發，後來改用 Node.js 為基底實作</li>
+<li>Stylus：基於 Node.js 開發</li>
+</ul>
+<p>而本篇所探討的 Sass/SCSS，主要包含兩種寫法，分別是：</p>
+<ul>
+<li>舊版的 SASS<ul>
+<li>縮排語法，副檔名 .sass</li>
+<li>使用縮排方式編輯巢狀關係</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token selector">.nav </span>
+<span class="token property-line">  <span class="token property">background</span><span class="token punctuation">:</span> #eee</span>
+  <span class="token selector">li </span>
+<span class="token property-line">    <span class="token property">display</span><span class="token punctuation">:</span> inline-block</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>新版的 SCSS<ul>
+<li>塊語法，副檔名 .scss</li>
+<li>使用大括號區分選擇器，使用分號區分屬性，較貼近原生 CSS</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">.nav </span><span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #eee<span class="token punctuation">;</span>
+  <span class="token selector">li </span><span class="token punctuation">&#123;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>將上述範例程式碼，經編譯過的 CSS 寫法如下：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.nav</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #eee<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.nav li</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>需注意不管使用哪種 CSS 預處理器，程式碼都必須先編譯（compiled）成 CSS 的形式，才能讓瀏覽器解讀並呈現出畫面。</p>
+<h2 id="Sass-SCSS-基本語法"><a href="#Sass-SCSS-基本語法" class="headerlink" title="Sass/SCSS 基本語法"></a>Sass/SCSS 基本語法</h2><blockquote>
+<p>詳細教程可參考 <span class="exturl" data-url="aHR0cHM6Ly9zYXNzLWxhbmcuY29tL2d1aWRl">Sass 官網<i class="fa fa-external-link-alt"></i></span>。</p>
+</blockquote>
+<p>Sass/SCSS 提供的功能主要如下：</p>
+<ul>
+<li>參數與結構化 CSS<ul>
+<li>Nesting：巢狀語法</li>
+<li>Variables：變數設定</li>
+</ul>
+</li>
+<li>模組化 CSS<ul>
+<li>Import 引入檔案，用來分別進行管理</li>
+<li>Extend 繼承，處理共同樣式</li>
+<li>Mixin 混入，打包常用功能，替換局部變數</li>
+<li>Functions 函式</li>
+</ul>
+</li>
+<li>自動化 CSS<ul>
+<li>Condition 條件判斷</li>
+<li>Loop 跑迴圈：例如使用 <code>@each</code> 搭配 array、<code>@each</code> 搭配 map、for 迴圈</li>
+</ul>
+</li>
+</ul>
+<h3 id="變數-Variables"><a href="#變數-Variables" class="headerlink" title="變數 Variables"></a>變數 Variables</h3><p>使用說明：以錢字號 <code>$</code> 來宣告變數，通常會寫在程式碼最上方，只要有引用該變數的地方，均可統一修改管理，常用於：按鈕顏色、字型字體大小等。</p>
+<ul>
+<li>編譯前 SCSS</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token variable-line"><span class="token variable">$font-stack</span><span class="token punctuation">:</span>  Helvetica, sans-serif;</span>
+<span class="token variable-line"><span class="token variable">$primary-color</span><span class="token punctuation">:</span> #333;</span>
+
+<span class="token selector">body &#123;</span>
+<span class="token property-line">  <span class="token property">font</span><span class="token punctuation">:</span> 100<span class="token operator">%</span> <span class="token variable">$font-stack</span>;</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span>;</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>編譯後 CSS</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font</span><span class="token punctuation">:</span> 100% Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="巢狀結構-Nesting"><a href="#巢狀結構-Nesting" class="headerlink" title="巢狀結構 Nesting"></a>巢狀結構 Nesting</h3><p>使用說明：需注意縮排寫法，可使用 <code>&amp;</code> 符號來引用父選擇器，常用於 CSS 元件狀態 <code>:hover</code>、<code>:focus</code>、<code>:before</code>、<code>:after</code> 等。</p>
+<ul>
+<li>編譯前 SCSS</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token selector">nav &#123;</span>
+  <span class="token selector">ul &#123;</span>
+<span class="token property-line">    <span class="token property">margin</span><span class="token punctuation">:</span> 0;</span>
+<span class="token property-line">    <span class="token property">padding</span><span class="token punctuation">:</span> 0;</span>
+<span class="token property-line">    <span class="token property">list-style</span><span class="token punctuation">:</span> none;</span>
+  <span class="token selector">&#125;</span>
+
+  <span class="token selector">li &#123; display: inline-block; &#125;</span>
+
+  <span class="token selector">a &#123;</span>
+<span class="token property-line">    <span class="token property">display</span><span class="token punctuation">:</span> block;</span>
+<span class="token property-line">    <span class="token property">padding</span><span class="token punctuation">:</span> 6px 12px;</span>
+<span class="token property-line">    <span class="token property">text-decoration</span><span class="token punctuation">:</span> none;</span>
+<span class="token property-line">    <span class="token property">&amp;</span><span class="token punctuation">:</span><span class="token property">hover</span> &#123;</span>
+<span class="token property-line">      <span class="token property">color</span><span class="token punctuation">:</span> red;</span>
+    <span class="token selector">&#125;</span>
+  <span class="token selector">&#125;</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>編譯後 CSS</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">nav ul</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">nav li</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">nav a</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 6px 12px<span class="token punctuation">;</span>
+  <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">nav a:hover</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="混入-Mixins"><a href="#混入-Mixins" class="headerlink" title="混入 Mixins"></a>混入 Mixins</h3><p>使用說明：將經常被重複使用的程式碼獨立撰寫，以 <code>@mixin</code> 語法包裝起來，需要時透過 <code>@include</code> 引用，即可根據不同參數來設定相似的樣式，常用於 width、height、flex-center 等。</p>
+<ul>
+<li>編譯前 SCSS：<code>@mixin</code> 可傳入參數</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token comment">// 經常重複使用的樣式</span>
+<span class="token atrule-line"><span class="token atrule">@mixin</span> transform($property) &#123;</span>
+<span class="token property-line">  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token variable">$property</span>;</span>
+<span class="token property-line">  <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token variable">$property</span>;</span>
+<span class="token property-line">  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token variable">$property</span>;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token comment">// 需要套用樣式的程式碼</span>
+<span class="token selector">.box &#123; </span>
+<span class="token atrule-line">  <span class="token atrule">@include</span> transform(rotate(30deg));</span>
+<span class="token selector">&#125;</span>
+<span class="token selector">.avatar &#123; </span>
+<span class="token atrule-line">  <span class="token atrule">@include</span> transform(rotate(90deg));</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>編譯後 CSS：需注意可能出現大量重複的程式碼</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>30deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>30deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>30deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.avatar</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>90deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">-ms-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>90deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>90deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="繼承-Extent-Inderitance"><a href="#繼承-Extent-Inderitance" class="headerlink" title="繼承 Extent/Inderitance"></a>繼承 Extent/Inderitance</h3><p>使用說明：當許多選擇器具有相同樣式時，可透過<code>%</code> 佔位符號宣告，將所有相同樣式內容合併，在以 <code>@extend</code> 來引入使用。</p>
+<ul>
+<li>編譯前 SCSS：需注意有被 <code>@extend</code> 的 class 才會被編譯成 CSS 程式碼，並且整合到共用樣式</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token comment">/* This CSS will print because %message-shared is extended. */</span>
+<span class="token selector">%message-shared &#123;</span>
+<span class="token property-line">  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc;</span>
+<span class="token property-line">  <span class="token property">padding</span><span class="token punctuation">:</span> 10px;</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> #333;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token comment">// This CSS won't print because %equal-heights is never extended.</span>
+<span class="token selector">%equal-heights &#123;</span>
+<span class="token property-line">  <span class="token property">display</span><span class="token punctuation">:</span> flex;</span>
+<span class="token property-line">  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token selector">.message &#123;</span>
+<span class="token atrule-line">  <span class="token atrule">@extend</span> %message-shared;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token selector">.success &#123;</span>
+<span class="token atrule-line">  <span class="token atrule">@extend</span> %message-shared;</span>
+<span class="token property-line">  <span class="token property">border-color</span><span class="token punctuation">:</span> green;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token selector">.error &#123;</span>
+<span class="token atrule-line">  <span class="token atrule">@extend</span> %message-shared;</span>
+<span class="token property-line">  <span class="token property">border-color</span><span class="token punctuation">:</span> red;</span>
+<span class="token selector">&#125;</span>
+
+<span class="token selector">.warning &#123;</span>
+<span class="token atrule-line">  <span class="token atrule">@extend</span> %message-shared;</span>
+<span class="token property-line">  <span class="token property">border-color</span><span class="token punctuation">:</span> yellow;</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>編譯後 CSS：使用 <code>%message-shared</code> 佔位符號進行宣告的 class，並不會產生實體對象<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* This CSS will print because %message-shared is extended. */</span>
+<span class="token selector">.message, .success, .error, .warning</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.success</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border-color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.error</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.warning</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border-color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+</li>
+</ul>
+<h3 id="比較：-mixin-和-extend-使用時機"><a href="#比較：-mixin-和-extend-使用時機" class="headerlink" title="比較：@mixin 和 @extend 使用時機"></a>比較：<code>@mixin</code> 和 <code>@extend</code> 使用時機</h3><p>使用 <code>@mixin</code> 的好處，是減少重複撰寫樣式的時間，卻也可能造成編譯後的 CSS 樣式大量重複，使檔案異常肥大。</p>
+<p>這時可以改用有類似效果的 <code>@extend</code>，同樣能解決重用問題，搭配 placeholder 佔位選擇器，將目標對象進行合併而非載入。</p>
+<p>而 <code>@mixin</code> 和 <code>@extend</code> 兩者的使用時機與差異，可從下列兩點來思考：</p>
+<ul>
+<li>是否需傳遞參數</li>
+<li>是否需考慮編譯後 CSS 大小</li>
+</ul>
+<h3 id="模組-Modules"><a href="#模組-Modules" class="headerlink" title="模組 Modules"></a>模組 Modules</h3><p>使用說明：透過 <code>@import</code> 或 <code>@use</code> 語法，可將 SCSS 以模組化的形式，從其他 SCSS 檔案引入需要的樣式，需注意已存在的模組尚未全面支援 <code>@use</code>。</p>
+<ul>
+<li>編譯前 SCSS：要作為模組載入的 SCSS 檔案，名稱必須帶有底線，例如 <code>_base.scss</code>。</li>
+</ul>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token comment">// ./_base.scss</span>
+<span class="token variable-line"><span class="token variable">$font-stack</span><span class="token punctuation">:</span>    Helvetica, sans-serif;</span>
+<span class="token variable-line"><span class="token variable">$primary-color</span><span class="token punctuation">:</span> #333;</span>
+
+<span class="token selector">body &#123;</span>
+<span class="token property-line">  <span class="token property">font</span><span class="token punctuation">:</span> 100<span class="token operator">%</span> <span class="token variable">$font-stack</span>;</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span>;</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用 <code>@import</code>：會全部導入樣式，有可能產生命名衝突的狀況：</p>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token comment">// styles.scss</span>
+<span class="token atrule-line"><span class="token atrule">@import</span> 'base';</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>使用<code>@use</code>：代表「參照」，只選擇需要的部分使用，並戴上模組名稱來呼叫，降低衝突的可能性：</p>
+<pre class="line-numbers language-sass" data-language="sass"><code class="language-sass"><span class="token comment">// styles.scss</span>
+<span class="token atrule-line"><span class="token atrule">@use</span> 'base';</span>
+
+<span class="token selector">.inverse &#123;</span>
+<span class="token property-line">  <span class="token property">background-color</span><span class="token punctuation">:</span> base.<span class="token variable">$primary-color</span>;</span>
+<span class="token property-line">  <span class="token property">color</span><span class="token punctuation">:</span> white;</span>
+<span class="token selector">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>編譯後 CSS</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font</span><span class="token punctuation">:</span> 100% Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.inverse</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly90dy5hbHBoYWNhbXAuY28vYmxvZy9jc3MtcHJlcHJvY2Vzc29yLXNhc3Mtc2Nzcw==">Sass/SCSS 基本語法介紹，搞懂CSS 預處理器<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9mcmFua2tub3cuY29tL3Nhc3MtdHV0b3JpYWwv">SASS教學 ＋SCSS：CSS 再進化，掌握語法攻略<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDI0MzIzNQ==">SASS/SCSS 簡介<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd2RyNzQxMDAuZ2l0aHViLmlvLzIwMjAtMDYtMDMtc2Nzcy1leHRlbmQv">Sass / SCSS 預處理器 - @entend 繼承樣式與 Placeholder 佔位符選擇器<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
 </search>
