@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。   hw1：JavaScript 留言板">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[week 12] 利用 PHP 實作留言板 - API 篇">
+<meta property="og:url" content="https://heidiliu2020.github.io/php-api/index.html">
+<meta property="og:site_name" content="前端新米">
+<meta property="og:description" content="本篇為 [BE101] 用 PHP 與 MySQL 學習後端基礎 這門課程的學習筆記。如有錯誤歡迎指正。   hw1：JavaScript 留言板">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/RJIaktu.png">
+<meta property="og:image" content="https://i.imgur.com/n9O600m.png">
+<meta property="og:image" content="https://i.imgur.com/f4m5fNp.png">
+<meta property="og:image" content="https://i.imgur.com/2rjKvzl.png">
+<meta property="og:image" content="https://i.imgur.com/t5Me7wL.png">
+<meta property="article:published_time" content="2020-09-26T06:20:00.000Z">
+<meta property="article:modified_time" content="2020-12-27T16:27:45.511Z">
+<meta property="article:author" content="Heidi Liu">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/RJIaktu.png">
+
+<link rel="canonical" href="https://heidiliu2020.github.io/php-api/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[week 12] 利用 PHP 實作留言板 - API 篇 | 前端新米</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">前端新米</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Heidi's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-首頁">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-文章分類">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>文章分類</a>
+
+  </li>
+        <li class="menu-item menu-item-文章列表">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章列表</a>
+
+  </li>
+        <li class="menu-item menu-item-關於我">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於我</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/php-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
+      <meta itemprop="name" content="Heidi Liu">
+      <meta itemprop="description" content="海底修羅場｜日々進化中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="前端新米">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [week 12] 利用 PHP 實作留言板 - API 篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-09-26 14:20:00" itemprop="dateCreated datePublished" datetime="2020-09-26T14:20:00+08:00">2020-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-12-28 00:27:45" itemprop="dateModified" datetime="2020-12-28T00:27:45+08:00">2020-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Back-End/" itemprop="url" rel="index"><span itemprop="name">Back-End</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvYmUxMDEtcGhwLW15c3Fs">[BE101] 用 PHP 與 MySQL 學習後端基礎<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正。</p>
+</blockquote>
+<blockquote>
+<p>hw1：<span class="exturl" data-url="aHR0cDovL21lbnRvci1wcm9ncmFtLmNvL210cjA0Z3JvdXAyL0hlaWRpL3dlZWsxMi9odzEv">JavaScript 留言板<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<span id="more"></span>
+
+<h4 id="參考筆記"><a href="#參考筆記" class="headerlink" title="參考筆記"></a>參考筆記</h4><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrNF8lRTclQjYlQjIlRTglQjclQUYlRTUlOUYlQkElRTclQTQlOEUlRTYlQTYlODIlRTglQUIlOTYubWQ=">[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrOF8lRTUlODIlQjMlRTklODAlODElRTglQjMlODclRTYlOTYlOTklRTclOUElODQlRTYlOTYlQjklRTUlQkMlOEYlRTMlODAlODElRTclODAlOEYlRTglQTYlQkQlRTUlOTklQTglRTclOUElODQlRTklOTklOTAlRTUlODglQjYubWQ=">[week 8] 傳送資料的方式 &amp; 瀏覽器的限制<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h2 id="什麼是-API？"><a href="#什麼是-API？" class="headerlink" title="什麼是 API？"></a>什麼是 API？</h2><p>API 就是純資料的交換。資料以 JSON 形式儲存。</p>
+<p>在第八週時，我們學會使用 JavaScript 來串接 API，前端負責顯示資料，後端只負責提供資料。</p>
+<p>之前實作的留言板是透過 PHP 直接輸出內容。這週我們會透過 PHP 實作 API，再使用 JavaScript 串接 API 來動態顯示資料。</p>
+<h3 id="如何測試-API"><a href="#如何測試-API" class="headerlink" title="如何測試 API"></a>如何測試 API</h3><p>有幾種方式能夠測試 API 是否能成功運行。可參考這篇文章介紹：<span class="exturl" data-url="aHR0cHM6Ly9ub29iLnR3L3Bvc3RtYW4v">API 實作(三)：以 Postman 測試 API<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>瀏覽器：撰寫程式碼不易，步驟繁瑣</li>
+<li>curl 工具：不易進行 debug</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucG9zdG1hbi5jb20v">Postman<i class="fa fa-external-link-alt"></i></span>：方便使用，能夠針對不同分頁或欄位進行測試</li>
+</ul>
+<h2 id="練習：實作無會員機制的留言版-API"><a href="#練習：實作無會員機制的留言版-API" class="headerlink" title="練習：實作無會員機制的留言版 API"></a>練習：實作無會員機制的留言版 API</h2><h3 id="PHP-相關語法"><a href="#PHP-相關語法" class="headerlink" title="PHP 相關語法"></a>PHP 相關語法</h3><ul>
+<li><code>header(&#39;Content-Type: application/json; charset=utf-8&#39;);</code>：指定瀏覽器以 JSON 格式內容，UTF-8 字元編碼</li>
+<li><code>array_push()</code>：在一個陣列中，再插入一個值進去<ul>
+<li>語法：<code>array_push(欲增加的陣列, 值)</code><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> 
+  <span class="token variable">$array</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$array</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"Test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token function">print_r</span><span class="token punctuation">(</span><span class="token variable">$array</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token delimiter important">?></span></span>
+// 輸出結果: Array ( [0] => Test )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="用-PHP-實作-API"><a href="#用-PHP-實作-API" class="headerlink" title="用 PHP 實作 API"></a>用 PHP 實作 API</h3><p>首先要瞭解如何使用 PHP 做出 API，以 <code>api_comments.php</code> 下列程式碼為例：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token comment">// 宣告變數 comments 為空陣列</span>
+  <span class="token variable">$comments</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 把資料放到陣列 $comments，裡面再建立陣列 array</span>
+  <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"id"</span> <span class="token operator">=></span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"username"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"aaa"</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"content"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"123"</span>
+  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"id"</span> <span class="token operator">=></span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"username"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"bbb"</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"content"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"456"</span>
+  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"comments"</span> <span class="token operator">=></span> <span class="token variable">$comments</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 讓瀏覽器知道我們要印出 JSON 格式</span>
+  <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: application/json; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在瀏覽器接收到的 response 就是 JSON 格式的物件，可使用開發者工具查看內容：</p>
+<p><img src="https://i.imgur.com/RJIaktu.png"></p>
+<h3 id="實作-API：列出所有文章"><a href="#實作-API：列出所有文章" class="headerlink" title="實作 API：列出所有文章"></a>實作 API：列出所有文章</h3><p>把之前實作留言板 <code>index.php</code> 時，使用的語法結合到 <code>api_comments.php</code>，即可得到只輸出資料的 API：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"conn.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 和 index.php 抓取資料的語法相同</span>
+  <span class="token variable">$page</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$page</span> <span class="token operator">=</span> <span class="token function">intval</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token variable">$items_per_page</span> <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+  <span class="token variable">$offset</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token variable">$page</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token variable">$items_per_page</span><span class="token punctuation">;</span> 
+
+  <span class="token variable">$sql</span> <span class="token operator">=</span>  <span class="token string double-quoted-string">"SELECT "</span><span class="token operator">.</span>
+            <span class="token string double-quoted-string">"C.id as id, C.content AS content, "</span><span class="token operator">.</span> 
+            <span class="token string double-quoted-string">"C.created_at AS created_at, U.nickname AS nickname, U.username AS username "</span><span class="token operator">.</span>
+          <span class="token string double-quoted-string">"FROM heidi_comments AS C "</span><span class="token operator">.</span> 
+          <span class="token string double-quoted-string">"LEFT JOIN heidi_users AS U ON C.username = U.username "</span><span class="token operator">.</span>
+          <span class="token string double-quoted-string">"WHERE C.is_deleted IS NULL "</span><span class="token operator">.</span>
+          <span class="token string double-quoted-string">"ORDER BY C.id DESC "</span><span class="token operator">.</span>
+          <span class="token string double-quoted-string">"LIMIT ? OFFSET ? "</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token function">prepare</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">bind_param</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"ii"</span><span class="token punctuation">,</span> <span class="token variable">$items_per_page</span><span class="token punctuation">,</span> <span class="token variable">$offset</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Error:'</span> <span class="token operator">.</span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token property">error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">get_result</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$comments</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 把讀取的資料放到陣列 $comments，裡面再建立陣列 array，概念比較像 JS 物件</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token variable">$row</span> <span class="token operator">=</span> <span class="token variable">$result</span><span class="token operator">-></span><span class="token function">fetch_assoc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"id"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'id'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"username"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"nickname"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'nickname'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"content"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"created_at"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'created_at'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"comments"</span> <span class="token operator">=></span> <span class="token variable">$comments</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 讓瀏覽器知道我們要印出 JSON 格式</span>
+  <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: application/json; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述程式碼，和 <code>index.php</code> 同樣是讀取資料，差別在於 API 是把資料放到陣列 <code>$comments</code>，裡面再建立陣列 array，概念比較像 JS 物件。</p>
+<h3 id="實作-API：新增文章"><a href="#實作-API：新增文章" class="headerlink" title="實作 API：新增文章"></a>實作 API：新增文章</h3><p>以 <code>api_add_comment.php</code> 為例，寫法會和 <code>handle_add_comment.php</code>（新增留言功能）的邏輯類似：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'conn.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: application/json; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 若讀取失敗</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    <span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"Please input content"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token punctuation">&#125;</span>
+ 
+  <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"INSERT INTO heidi_comments(username, content)
+    VALUES(?, ?)"</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token function">prepare</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">bind_param</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'ss'</span><span class="token punctuation">,</span> <span class="token variable">$username</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 若執行失敗</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token property">error</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 若成功讀取資料</span>
+  <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">true</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"Success"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://i.imgur.com/n9O600m.png"></p>
+<h3 id="前端串接-API"><a href="#前端串接-API" class="headerlink" title="前端串接 API"></a>前端串接 API</h3><p>最後就是在前端頁面 <code>index.html</code> 串接寫好的 API：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>body<span class="token operator">></span>
+  <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"wrapper"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>main <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board"</span><span class="token operator">></span>　
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span> <span class="token operator">=</span><span class="token string">"board__header"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h1 <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board__tittle"</span><span class="token operator">></span>Comments<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board__btn-block"</span><span class="token operator">></span> 
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  
+      <span class="token operator">&lt;</span>form <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board__new-comment-form"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>textarea name<span class="token operator">=</span><span class="token string">"content"</span> rows<span class="token operator">=</span><span class="token string">"5"</span> placeholder<span class="token operator">=</span><span class="token string">"請輸入留言..."</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>textarea<span class="token operator">></span>
+        <span class="token operator">&lt;</span>input <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board__submit-btn"</span> type<span class="token operator">=</span><span class="token string">"submit"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"board__hr"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+
+    <span class="token operator">&lt;</span>section<span class="token operator">></span>
+       <span class="token comment">// 動態新增留言的區塊...</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+
+  <span class="token operator">&lt;</span>script<span class="token operator">></span>
+      <span class="token comment">// 發出 Request</span>
+      <span class="token keyword">var</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      request<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'api_comments.php'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      request<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">>=</span> <span class="token number">200</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">&lt;</span> <span class="token number">400</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">var</span> resp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>response<span class="token punctuation">;</span>
+          <span class="token keyword">var</span> json <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>resp<span class="token punctuation">)</span>
+          <span class="token keyword">var</span> comments <span class="token operator">=</span> json<span class="token punctuation">.</span>comments
+
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> comments<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> comment <span class="token operator">=</span> comments<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">var</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
+            div<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'card'</span><span class="token punctuation">)</span>
+            div<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+              &lt;div class="card__avatar">&lt;/div>
+              &lt;div class="card__body">
+                  &lt;div class="card__info">
+                    &lt;span class="card__author">
+                      </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token function">encodeHTML</span><span class="token punctuation">(</span>comment<span class="token punctuation">.</span>nickname<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">(@</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token function">encodeHTML</span><span class="token punctuation">(</span>comment<span class="token punctuation">.</span>username<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">)
+                    &lt;/span>
+                    &lt;span class="card__time">
+                      </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token function">encodeHTML</span><span class="token punctuation">(</span>comment<span class="token punctuation">.</span>created_at<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">
+                    &lt;/span>
+                  &lt;/div>
+                  &lt;p class="card__content"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token function">encodeHTML</span><span class="token punctuation">(</span>comment<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/p>
+              &lt;/div>
+            </span><span class="token template-punctuation string">`</span></span>
+            document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'section'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>div<span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> 
+      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      request<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">var</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.board__new-comment-form'</span><span class="token punctuation">)</span>
+      form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 阻止預設事件: 送出表單</span>
+        e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// 讀取輸入內容</span>
+        <span class="token keyword">var</span> content <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'textarea[name=content]'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value
+        <span class="token keyword">var</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 發出 POST Request</span>
+        request<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'POST'</span><span class="token punctuation">,</span> <span class="token string">'api_add_comment.php'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        request<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">,</span> <span class="token string">'application/x-www-form-urlencoded; charset=UTF-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        request<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">"username=aaa&amp;content="</span> <span class="token operator">+</span> <span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        request<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">>=</span> <span class="token number">200</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">&lt;</span> <span class="token number">400</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> resp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>response<span class="token punctuation">;</span>
+            <span class="token keyword">var</span> json <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>resp<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>json<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+              <span class="token comment">// 頁面重整: 可重新抓取留言</span>
+              location<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+              <span class="token function">alert</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>message<span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>       
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      <span class="token comment">// 字串均需進行 escape 跳脫</span>
+      <span class="token keyword">function</span> <span class="token function">encodeHTML</span><span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&amp;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'&amp;amp;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'&amp;lt;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'&amp;quot;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="實戰：增強版-JavaScript-留言板"><a href="#實戰：增強版-JavaScript-留言板" class="headerlink" title="實戰：增強版 JavaScript 留言板"></a>實戰：增強版 JavaScript 留言板</h2><p>接著要來打造後端 API，再利用前端 JavaScript 來串接 API 實作留言板功能。</p>
+<h3 id="建立後端-API"><a href="#建立後端-API" class="headerlink" title="建立後端 API"></a>建立後端 API</h3><h4 id="Step1-建立資料庫-discussions"><a href="#Step1-建立資料庫-discussions" class="headerlink" title="Step1. 建立資料庫 discussions"></a>Step1. 建立資料庫 discussions</h4><ul>
+<li>id</li>
+<li>site_key</li>
+<li>nickname</li>
+<li>content</li>
+<li>created_at</li>
+</ul>
+<h4 id="Step2-新增留言功能-api-add-comments-php"><a href="#Step2-新增留言功能-api-add-comments-php" class="headerlink" title="Step2. 新增留言功能 api_add_comments.php"></a>Step2. 新增留言功能 <code>api_add_comments.php</code></h4><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'conn.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 讓瀏覽器知道回覆的資料是 JSON 格式</span>
+  <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: application/json; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 錯誤處理: 確認資料是否為空值</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    <span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'nickname'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+    <span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'site_key'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+    <span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"Please input content"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token variable">$nickname</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'nickname'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$site_key</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'site_key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"INSERT INTO heidi_discussions(site_key, nickname, content) VALUES (?, ?, ?)"</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token function">prepare</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">bind_param</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'sss'</span><span class="token punctuation">,</span> <span class="token variable">$site_key</span><span class="token punctuation">,</span> <span class="token variable">$nickname</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 錯誤處理: 確認是否執行成功</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token property">error</span>     <span class="token comment">// 通常不會直接顯示錯誤訊息，因為可能包含敏感資訊</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 成功拿到資料</span>
+  <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"success"</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 把建立好的 $json 物件，轉成 JSON 字串輸出</span>
+  <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>利用 postman 以 <code>POST</code> 方式發出 request 測試，確認是否能新增留言到資料庫：</p>
+<p><img src="https://i.imgur.com/f4m5fNp.png" alt="postmanTest"></p>
+<h4 id="Step3-顯示留言功能-api-comments-php"><a href="#Step3-顯示留言功能-api-comments-php" class="headerlink" title="Step3. 顯示留言功能 api_comments.php"></a>Step3. 顯示留言功能 <code>api_comments.php</code></h4><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+  <span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'conn.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 讓瀏覽器知道回覆的資料是 JSON 格式</span>
+  <span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-Type: application/json; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 用 site_key 來區分不同的留言版</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    <span class="token keyword">empty</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'site_key'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token string double-quoted-string">"Please add site_key in url"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token variable">$site_key</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'site_key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token variable">$sql</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"SELECT nickname, content, created_at FROM heidi_discussions WHERE site_key = ? ORDER BY id DESC"</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span> <span class="token operator">=</span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token function">prepare</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">bind_param</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'s'</span><span class="token punctuation">,</span> <span class="token variable">$site_key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 錯誤處理: 確認是否執行成功</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"message"</span> <span class="token operator">=></span> <span class="token variable">$conn</span><span class="token operator">-></span><span class="token property">error</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 若執行成功就拿取資料</span>
+  <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$stmt</span><span class="token operator">-></span><span class="token function">get_result</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$discussions</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token variable">$row</span> <span class="token operator">=</span> <span class="token variable">$result</span><span class="token operator">-></span><span class="token function">fetch_assoc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$discussions</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+      <span class="token string double-quoted-string">"nickname"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"nickname"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"content"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"content"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string double-quoted-string">"created_at"</span> <span class="token operator">=></span> <span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"created_at"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token variable">$json</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+    <span class="token string double-quoted-string">"ok"</span> <span class="token operator">=></span> <span class="token constant boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string double-quoted-string">"discussions"</span> <span class="token operator">=></span> <span class="token variable">$discussions</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 把建立好的 $json 物件，轉成 JSON 字串輸出</span>
+  <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>利用 postman 以 <code>GET</code> 方式發出 request 測試，確認是否能讀取留言：</p>
+<p><img src="https://i.imgur.com/2rjKvzl.png"></p>
+<p>這樣就完成後端 API 的新增留言和顯示留言功能。</p>
+<h3 id="前端串接-API-1"><a href="#前端串接-API-1" class="headerlink" title="前端串接 API"></a>前端串接 API</h3><h4 id="Step1-建立-UI-頁面"><a href="#Step1-建立-UI-頁面" class="headerlink" title="Step1. 建立 UI 頁面"></a>Step1. 建立 UI 頁面</h4><p>首先利用 <span class="exturl" data-url="aHR0cHM6Ly9nZXRib290c3RyYXAuY29tL2RvY3MvNC41L2dldHRpbmctc3RhcnRlZC9pbnRyb2R1Y3Rpb24v">Bootstrap<i class="fa fa-external-link-alt"></i></span> 來快速建立前端頁面 <code>index.html</code></p>
+<h4 id="Step2-將前端頁面串接-API"><a href="#Step2-將前端頁面串接-API" class="headerlink" title="Step2. 將前端頁面串接 API"></a>Step2. 將前端頁面串接 API</h4><ul>
+<li>顯示留言 API</li>
+<li>新增留言 API</li>
+</ul>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;
+  &lt;title&gt;Week12 留言板&lt;&#x2F;title&gt;
+  &lt;!-- 引入 jQuery --&gt;
+  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery-3.5.1.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;!-- 引入 Bootstrap --&gt;
+  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;stackpath.bootstrapcdn.com&#x2F;bootstrap&#x2F;4.5.2&#x2F;css&#x2F;bootstrap.min.css&quot; integrity&#x3D;&quot;sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;
+  &lt;style&gt;
+    .add-comment-form &#123;
+      margin-bottom: 10px;
+    &#125;
+    .card &#123;
+      margin-bottom: 10px;
+    &#125;
+    .card-body h5, .card-body span &#123;
+      display: inline-block;
+      margin-right: 20px;
+    &#125;
+  &lt;&#x2F;style&gt;
+  &lt;script&gt;
+    &#x2F;&#x2F; 跳脫函式
+    function escape(toOutput) &#123;
+      return toOutput
+        .replace(&#x2F;&amp;&#x2F;g, &#39;&amp;&#39;)
+        .replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;)
+        .replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)
+        .replace(&#x2F;&quot;&#x2F;g, &#39;&quot;&#39;)
+        .replace(&#x2F;&#39;&#x2F;g, &#39;&amp;#039;&#39;);
+    &#125;
+    &#x2F;&#x2F; 渲染 comment: 處理讀取的資料 &amp; 決定加在最前面或最後面
+    function appendCommentToDOM(container, comment, isPrepend) &#123;
+      const html &#x3D; &#96;
+        &lt;div class&#x3D;&quot;card&quot;&gt;
+          &lt;div class&#x3D;&quot;card-body&quot;&gt;
+            &lt;h5 class&#x3D;&quot;card-title&quot;&gt;$&#123;escape(comment.nickname)&#125;&lt;&#x2F;h5&gt;
+            &lt;span&gt;$&#123;escape(comment.created_at)&#125;&lt;&#x2F;span&gt;
+            &lt;p class&#x3D;&quot;card-text&quot;&gt;$&#123;escape(comment.content)&#125;
+            &lt;&#x2F;p&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &#96;;
+      if (isPrepend) &#123;
+        container.prepend(html);
+      &#125; else &#123;
+        container.append(html);
+      &#125;
+    &#125;
+
+    const showUrl &#x3D; &#39;http:&#x2F;&#x2F;localhost&#x2F;heidi&#x2F;week12_local&#x2F;hw1&#x2F;api_comments.php?site_key&#x3D;heidi&#39;;
+    const addUrl &#x3D; &#39;http:&#x2F;&#x2F;localhost&#x2F;heidi&#x2F;week12_local&#x2F;hw1&#x2F;api_add_comments.php&#39;;
+
+    $(document).ready(() &#x3D;&gt; &#123;
+      &#x2F;&#x2F; 顯示留言
+      const commentDOM &#x3D; $(&#39;.comments&#39;)
+      $.ajax(&#123;
+        url: showUrl,
+      &#125;).done(function (data) &#123;
+        if (!data.ok) &#123;
+          alert(data.message);
+          return;
+        &#125;
+        &#x2F;&#x2F; 若 request 成功讀取資料
+        const comments &#x3D; data.discussions;
+        for (let comment of comments) &#123;
+          appendCommentToDOM(commentDOM, comment);
+        &#125;
+      &#125;);
+      
+      &#x2F;&#x2F; 新增留言: 將資料存到後端
+      $(&#39;.add-comment-form&#39;).submit(e &#x3D;&gt; &#123;
+        e.preventDefault();             &#x2F;&#x2F; 取消原生行為 -&gt; 不會送出表單
+        const newCommentData &#x3D; &#123;
+          &#39;site_key&#39;: &#39;heidi&#39;,
+          &#39;nickname&#39;: $(&#39;input[name&#x3D;nickname]&#39;).val(),
+          &#39;content&#39;: $(&#39;textarea[name&#x3D;content]&#39;).val()
+        &#125;
+        $.ajax(&#123;
+          type: &#39;POST&#39;,
+          url: addUrl,
+          data: newCommentData
+        &#125;).done(function(data) &#123;        &#x2F;&#x2F; done(): 以函數處理回傳的 data 資料
+          &#x2F;&#x2F; 執行失敗
+          if (!data.ok) &#123;
+            alert(data.message);
+            return;
+          &#125;
+          &#x2F;&#x2F; 執行成功: 按下送出後把欄位清空
+          $(&#39;input[name&#x3D;nickname]&#39;).val(&#39;&#39;);
+          $(&#39;textarea[name&#x3D;content]&#39;).val(&#39;&#39;);
+          &#x2F;&#x2F; 新增留言後以 JS 動態方式加到最上方
+          appendCommentToDOM(commentDOM, newCommentData, true);
+        &#125;);
+      &#125;);
+    &#125;);
+  &lt;&#x2F;script&gt;
+&lt;&#x2F;head&gt;
+
+&lt;body&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;form class&#x3D;&quot;add-comment-form&quot;&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;label for&#x3D;&quot;form-nickname&quot;&gt;暱稱&lt;&#x2F;label&gt;
+        &lt;input name&#x3D;&quot;nickname&quot; type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;form-nickname&quot; &gt;
+      &lt;&#x2F;div&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;label for&#x3D;&quot;content-textarea&quot;&gt;留言內容&lt;&#x2F;label&gt;
+        &lt;textarea name&#x3D;&quot;content&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;exampleFormControlTextarea1&quot; rows&#x3D;&quot;3&quot;&gt;&lt;&#x2F;textarea&gt;
+      &lt;&#x2F;div&gt;
+      &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-dark&quot;&gt;送出&lt;&#x2F;button&gt;
+    &lt;&#x2F;form&gt;
+    &lt;div class&#x3D;&quot;comments&quot;&gt;
+      &lt;!-- 以 JavaScript 動態顯示資料的區塊 --&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Step3-實作分頁機制"><a href="#Step3-實作分頁機制" class="headerlink" title="Step3. 實作分頁機制"></a>Step3. 實作分頁機制</h4><ul>
+<li><p>Offset/limit-based Pagination</p>
+<ul>
+<li>基於 Offset/limit 的分頁，也就是我們在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9UaGlzLWlzLUNvZGVkaWFyeS9ibG9iL21hc3Rlci93ZWVrMTFfJUU1JTg4JUE5JUU3JTk0JUE4UEhQJUU1JUFGJUE2JUU0JUJEJTlDJUU3JTk1JTk5JUU4JUE4JTgwJUU2JTlEJUJGXyVFNiU5NiVCMCVFNSVBMiU5RSVFNSU4QSU5RiVFOCU4MyVCRCVFNyVBRiU4Ny5tZA==">week11 實作的留言板<i class="fa fa-external-link-alt"></i></span></li>
+<li>可計算資料的總數量、目前頁數，或跳到指定的頁數</li>
+<li>缺點：當資料量大時執行緩慢</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 跳過 5 筆資料，回傳接下來的 5 筆資料</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> comments <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> id <span class="token keyword">DESC</span> <span class="token keyword">LIMIT</span> <span class="token number">5</span> <span class="token keyword">OFFSET</span> <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>Cursor-based pagination</p>
+<ul>
+<li>基於 Cursor（指標）的分頁</li>
+<li>可透過指定明確的起始點（Pointer）來回傳資料，例如：id 或 created_at</li>
+<li>缺點：沒有「總和」和「頁數」的概念</li>
+</ul>
+</li>
+</ul>
+<h4 id="相關函式"><a href="#相關函式" class="headerlink" title="相關函式"></a>相關函式</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 再包一層 function 避免重複輸入同樣的程式碼</span>
+<span class="token keyword">function</span> <span class="token function">getComments</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> commentDOM <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.comments'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.load-more'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// 點擊後就隱藏按鈕</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isEnd<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>          <span class="token comment">// 若拿完資料就直接返回</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">getCommentsAPI</span><span class="token punctuation">(</span>siteKey<span class="token punctuation">,</span> lastId<span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>data<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 若 request 成功讀取資料</span>
+    <span class="token keyword">const</span> comments <span class="token operator">=</span> data<span class="token punctuation">.</span>discussions<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> comment <span class="token keyword">of</span> comments<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">appendCommentToDOM</span><span class="token punctuation">(</span>commentDOM<span class="token punctuation">,</span> comment<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">let</span> length <span class="token operator">=</span> comments<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    <span class="token comment">// 沒有 lastId: 初始頁面的留言若 &lt; 5 直接返回</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>lastId <span class="token operator">&amp;&amp;</span> length <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token punctuation">(</span>comments<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> 
+    <span class="token comment">// 有 lastId: 若拿完資料就隱藏按鈕</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      isEnd <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.load-more'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      lastId <span class="token operator">=</span> comments<span class="token punctuation">[</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+      <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.comments'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>loadMoreButtonHTML<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 新增 "載入更多" 按鈕</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>參考資料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qaWVwZW5nLm1lLzIwMTkvMTIvMDYvbGVhcm5pbmctaG93LXRvLWltcGxlbWVudC1ncmFwaHFsLXBhZ2luYXRpb24=">深入淺出 GraphQL Pagination 實作<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<hr>
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h4 id="錯誤一-Reason"><a href="#錯誤一-Reason" class="headerlink" title="錯誤一 Reason"></a>錯誤一 Reason</h4><pre class="line-numbers language-none"><code class="language-none">Reason: CORS header &#39;Access-Control-Allow-Origin&#39; missing<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>原因：缺少表頭 <code>header(&#39;Access-Control-Allow-Origin: *&#39;);</code></li>
+<li>實際情況：可能是 php 檔語法上有錯誤，才會出現這個錯誤訊息</li>
+</ul>
+<h4 id="錯誤二-TypeError"><a href="#錯誤二-TypeError" class="headerlink" title="錯誤二 TypeError"></a>錯誤二 TypeError</h4><pre class="line-numbers language-none"><code class="language-none">TypeError: Cannot read property &#39;replace&#39; of undefined<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://i.imgur.com/t5Me7wL.png"></p>
+<ul>
+<li>原因：要進行跳脫的值為 null</li>
+<li>解決辦法：先判斷該值是否為空再進行 replace 操作</li>
+</ul>
+<p>參考網站：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2tfcHJpbmNlL2FydGljbGUvZGV0YWlscy84OTM1MDEyND91dG1fbWVkaXVtPWRpc3RyaWJ1dGUucGNfcmVsZXZhbnQubm9uZS10YXNrLWJsb2ctQmxvZ0NvbW1lbmRGcm9tTWFjaGluZUxlYXJuUGFpMi0xLmNoYW5uZWxfcGFyYW0mZGVwdGhfMS11dG1fc291cmNlPWRpc3RyaWJ1dGUucGNfcmVsZXZhbnQubm9uZS10YXNrLWJsb2ctQmxvZ0NvbW1lbmRGcm9tTWFjaGluZUxlYXJuUGFpMi0xLmNoYW5uZWxfcGFyYW0=">Cannot read property ‘replace’ of undefined<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/php-blog/" rel="prev" title="[week 11] 利用 PHP 實作陽春部落格">
+      <i class="fa fa-chevron-left"></i> [week 11] 利用 PHP 實作陽春部落格
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/php-todolist/" rel="next" title="[week 12] 結合前端與後端功能實作 Todo List">
+      [week 12] 結合前端與後端功能實作 Todo List <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+          <div style="">
+            
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+          </div>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%AD%86%E8%A8%98"><span class="nav-number">1.</span> <span class="nav-text">參考筆記</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-API%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">什麼是 API？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%B8%AC%E8%A9%A6-API"><span class="nav-number"></span> <span class="nav-text">如何測試 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%EF%BC%9A%E5%AF%A6%E4%BD%9C%E7%84%A1%E6%9C%83%E5%93%A1%E6%A9%9F%E5%88%B6%E7%9A%84%E7%95%99%E8%A8%80%E7%89%88-API"><span class="nav-number"></span> <span class="nav-text">練習：實作無會員機制的留言版 API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP-%E7%9B%B8%E9%97%9C%E8%AA%9E%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">PHP 相關語法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-PHP-%E5%AF%A6%E4%BD%9C-API"><span class="nav-number"></span> <span class="nav-text">用 PHP 實作 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C-API%EF%BC%9A%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0"><span class="nav-number"></span> <span class="nav-text">實作 API：列出所有文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C-API%EF%BC%9A%E6%96%B0%E5%A2%9E%E6%96%87%E7%AB%A0"><span class="nav-number"></span> <span class="nav-text">實作 API：新增文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%B8%B2%E6%8E%A5-API"><span class="nav-number"></span> <span class="nav-text">前端串接 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E6%88%B0%EF%BC%9A%E5%A2%9E%E5%BC%B7%E7%89%88-JavaScript-%E7%95%99%E8%A8%80%E6%9D%BF"><span class="nav-number"></span> <span class="nav-text">實戰：增強版 JavaScript 留言板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%BE%8C%E7%AB%AF-API"><span class="nav-number"></span> <span class="nav-text">建立後端 API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step1-%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E5%BA%AB-discussions"><span class="nav-number">1.</span> <span class="nav-text">Step1. 建立資料庫 discussions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step2-%E6%96%B0%E5%A2%9E%E7%95%99%E8%A8%80%E5%8A%9F%E8%83%BD-api-add-comments-php"><span class="nav-number">2.</span> <span class="nav-text">Step2. 新增留言功能 api_add_comments.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step3-%E9%A1%AF%E7%A4%BA%E7%95%99%E8%A8%80%E5%8A%9F%E8%83%BD-api-comments-php"><span class="nav-number">3.</span> <span class="nav-text">Step3. 顯示留言功能 api_comments.php</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%B8%B2%E6%8E%A5-API-1"><span class="nav-number"></span> <span class="nav-text">前端串接 API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step1-%E5%BB%BA%E7%AB%8B-UI-%E9%A0%81%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">Step1. 建立 UI 頁面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step2-%E5%B0%87%E5%89%8D%E7%AB%AF%E9%A0%81%E9%9D%A2%E4%B8%B2%E6%8E%A5-API"><span class="nav-number">2.</span> <span class="nav-text">Step2. 將前端頁面串接 API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step3-%E5%AF%A6%E4%BD%9C%E5%88%86%E9%A0%81%E6%A9%9F%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">Step3. 實作分頁機制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E5%87%BD%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">相關函式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug"><span class="nav-number"></span> <span class="nav-text">debug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E4%B8%80-Reason"><span class="nav-number">1.</span> <span class="nav-text">錯誤一 Reason</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E4%BA%8C-TypeError"><span class="nav-number">2.</span> <span class="nav-text">錯誤二 TypeError</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Heidi Liu"
+      src="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
+  <p class="site-author-name" itemprop="name">Heidi Liu</p>
+  <div class="site-description" itemprop="description">海底修羅場｜日々進化中</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='220,220,220' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://heidiliu2020.github.io/php-api/";
+    this.page.identifier = "php-api/";
+    this.page.title = "[week 12] 利用 PHP 實作留言板 - API 篇";
+    this.language = "zh_TW"; 
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://heidiblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

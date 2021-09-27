@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heidiliu2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"right","Pisces | Gemini":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。 部落格 DEMO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇">
+<meta property="og:url" content="https://heidiliu2020.github.io/react-optimization/index.html">
+<meta property="og:site_name" content="前端新米">
+<meta property="og:description" content="在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。 部落格 DEMO">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/MNaWqI0.gif">
+<meta property="article:published_time" content="2020-12-17T17:09:00.000Z">
+<meta property="article:modified_time" content="2020-12-29T14:55:00.991Z">
+<meta property="article:author" content="Heidi Liu">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="useEffect">
+<meta property="article:tag" content="useState">
+<meta property="article:tag" content="useContext">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/MNaWqI0.gif">
+
+<link rel="canonical" href="https://heidiliu2020.github.io/react-optimization/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇 | 前端新米</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK3E4H2TXJ"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SK3E4H2TXJ');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">前端新米</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Heidi's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-首頁">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-文章分類">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>文章分類</a>
+
+  </li>
+        <li class="menu-item menu-item-文章列表">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章列表</a>
+
+  </li>
+        <li class="menu-item menu-item-關於我">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於我</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/react-optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
+      <meta itemprop="name" content="Heidi Liu">
+      <meta itemprop="description" content="海底修羅場｜日々進化中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="前端新米">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-18 01:09:00" itemprop="dateCreated datePublished" datetime="2020-12-18T01:09:00+08:00">2020-12-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-12-29 22:55:00" itemprop="dateModified" datetime="2020-12-29T22:55:00+08:00">2020-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在完成部落格的基本功能之後，再來要進行優化的部分，也就是解決畫面閃爍的問題。</p>
+<p><a href="https://heidiliu2020.github.io/react-blog-test/#/">部落格 DEMO</a></p>
+<span id="more"></span>
+<h2 id="一、處理登入狀態的畫面閃爍"><a href="#一、處理登入狀態的畫面閃爍" class="headerlink" title="一、處理登入狀態的畫面閃爍"></a>一、處理登入狀態的畫面閃爍</h2><p>在 <span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWZlMzAyLXJlYWN0LWJsb2ctbG9naW4=">[week 22] React：用 SPA 架構實作一個部落格（二）- 身分驗證<i class="fa fa-external-link-alt"></i></span> 這篇筆記中，有提到登入狀態時，重整頁面會出現畫面閃爍的問題，之所以會有這個現象，是因為畫面進行了兩次 render：</p>
+<ul>
+<li>預設為登出狀態（第一次 render）</li>
+<li>當我們發 API 確認有登入之後，才會顯示登入狀態（第二次 render）</li>
+</ul>
+<p>為了解決這個問題，就是在「確認是否登入之前，不要顯示和登入登出狀態有關的東西」。</p>
+<h3 id="App-js：設定-isLoadingGetMe-狀態"><a href="#App-js：設定-isLoadingGetMe-狀態" class="headerlink" title="App.js：設定 isLoadingGetMe 狀態"></a>App.js：設定 isLoadingGetMe 狀態</h3><ul>
+<li>App.js</li>
+</ul>
+<p>在 App.js 執行開始，就先設定一個 isLoadingGetMe，預設值為 true，也就是不顯示登入登出：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">[</span>isLoadingGetMe<span class="token punctuation">,</span> setLoadingGetMe<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>一旦接收到 getMe() 回傳的 response 時，或是發現沒有 token 時，就會改成 false，顯示登入登出：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getMe <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../WebAPI"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getAuthToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../utils"</span><span class="token punctuation">;</span>
+
+<span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 以 getAuthToken 從 localStorage 讀取 token</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getAuthToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 有 token 才 call API</span>
+    <span class="token function">getMe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">setUser</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setLoadingGetMe</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">setLoadingGetMe</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>並透過 Provider 將參數設為全域變數：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> AuthContext<span class="token punctuation">,</span> LoadingContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../contexts"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">AuthContext.Provider</span></span> <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> user<span class="token punctuation">,</span> setUser <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Root</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">LoadingContext.Provider</span></span>
+        <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> isLoading<span class="token punctuation">,</span> setIsLoading<span class="token punctuation">,</span> isLoadingGetMe <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+      <span class="token punctuation">></span></span><span class="token plain-text">
+ 
+    //  ...   
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">LoadingContext.Provider</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Root</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">AuthContext.Provider</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="context-js：建立-context"><a href="#context-js：建立-context" class="headerlink" title="context.js：建立 context"></a>context.js：建立 context</h3><p>在 src/context.js 建立 context，初始值設為 null：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 初始值為 null</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> AuthContext <span class="token operator">=</span> <span class="token function">createContext</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> LoadingContext <span class="token operator">=</span> <span class="token function">createContext</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Header-js：根據-isLoadingGetMe-顯示登入狀態"><a href="#Header-js：根據-isLoadingGetMe-顯示登入狀態" class="headerlink" title="Header.js：根據 isLoadingGetMe 顯示登入狀態"></a>Header.js：根據 isLoadingGetMe 顯示登入狀態</h3><p>首先從 context.js 引入參數，以及引入需要的 hooks：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> useContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Link<span class="token punctuation">,</span> NavLink<span class="token punctuation">,</span> useHistory<span class="token punctuation">,</span> useLocation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"react-router-dom"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> AuthContext<span class="token punctuation">,</span> LoadingContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../contexts"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> setAuthToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../utils"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接著就可以根據 isLoadingGetMe 以及 user 的布林值，決定如何顯示登入狀態：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Header</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> isLoadingGetMe <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>LoadingContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> user<span class="token punctuation">,</span> setUser <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>AuthContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> location <span class="token operator">=</span> <span class="token function">useLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 登出功能</span>
+  <span class="token keyword">const</span> history <span class="token operator">=</span> <span class="token function">useHistory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">handleLogout</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">setAuthToken</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setUser</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>location<span class="token punctuation">.</span>pathname <span class="token operator">!==</span> <span class="token string">"/"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      history<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>HeaderContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Brand<span class="token operator">></span>
+        <span class="token operator">&lt;</span>Link to<span class="token operator">=</span><span class="token string">"/"</span> replace<span class="token operator">></span>
+          React 部落格
+        <span class="token operator">&lt;</span><span class="token operator">/</span>Link<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Brand<span class="token operator">></span>
+      <span class="token operator">&lt;</span>NavbarList<span class="token operator">></span>
+        <span class="token operator">&lt;</span>StyledLink exact to<span class="token operator">=</span><span class="token string">"/about"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+          關於我
+        <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+        <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/post-list/"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+          文章列表
+        <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+        <span class="token punctuation">&#123;</span>isLoadingGetMe <span class="token operator">?</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span>LoadingGetMe<span class="token operator">></span>資料讀取中<span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>LoadingGetMe<span class="token operator">></span>
+        <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span><span class="token operator">></span>
+            <span class="token punctuation">&#123;</span><span class="token operator">!</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+              <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/register"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+                註冊
+              <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+            <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#123;</span><span class="token operator">!</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+              <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/login"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+                登入
+              <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+            <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#123;</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+              <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/new-post"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+                發布文章
+              <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+            <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#123;</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+              <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">""</span> replace onClick<span class="token operator">=</span><span class="token punctuation">&#123;</span>handleLogout<span class="token punctuation">&#125;</span><span class="token operator">></span>
+                登出
+              <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+            <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+        <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>NavbarList<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>HeaderContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>重點在於 isLoadingGetMe  的判斷邏輯：</p>
+<ul>
+<li>如果 isLoadingGetMe 為 true，就不會顯示裡面和登入狀態有關的東西</li>
+<li>當 isLoadingGetMe 為 faluse，才會再根據 user 是否為 true，決定要顯示「註冊、登入」還是「發布文章、登出」</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>isLoadingGetMe <span class="token operator">?</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>LoadingGetMe<span class="token operator">></span>資料讀取中<span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>LoadingGetMe<span class="token operator">></span>
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span><span class="token operator">></span>
+    <span class="token punctuation">&#123;</span><span class="token operator">!</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/register"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+        註冊
+      <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+    <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#123;</span><span class="token operator">!</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/login"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+        登入
+      <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+    <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#123;</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">"/new-post"</span> replace activeClassName<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+        發布文章
+      <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+    <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#123;</span>user <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>StyledLink to<span class="token operator">=</span><span class="token string">""</span> replace onClick<span class="token operator">=</span><span class="token punctuation">&#123;</span>handleLogout<span class="token punctuation">&#125;</span><span class="token operator">></span>
+        登出
+      <span class="token operator">&lt;</span><span class="token operator">/</span>StyledLink<span class="token operator">></span>
+    <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="二、處理呼叫-API-造成的畫面閃爍"><a href="#二、處理呼叫-API-造成的畫面閃爍" class="headerlink" title="二、處理呼叫 API 造成的畫面閃爍"></a>二、處理呼叫 API 造成的畫面閃爍</h2><p>當我們需要 call API 時，必須考慮到非同步的問題。舉例來說，當我們進入文章列表時，第一次 render 會先看到空的列表，第二次 render 才會出現文章。</p>
+<p>為了解決這個問題，我們可以將第一次 render 改為 Loading 畫面，等到第二次 render 再顯示文章頁面。</p>
+<p>那麼就開始吧！</p>
+<h3 id="App-js：設定-isLoading-狀態"><a href="#App-js：設定-isLoading-狀態" class="headerlink" title="App.js：設定 isLoading 狀態"></a>App.js：設定 isLoading 狀態</h3><p>首先，同樣在 APP 執行時就先設第一個 isLoading 狀態，預設值為 false，當我們有進行 call API 的動作時才會設為 true：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">[</span>isLoading<span class="token punctuation">,</span> setIsLoading<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>同樣透過 Provider 將參數設為全域變數：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">LoadingContext.Provider</span></span>
+    <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> isLoading<span class="token punctuation">,</span> setIsLoading<span class="token punctuation">,</span> isLoadingGetMe <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    // ...
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">LoadingContext.Provider</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="PoseListPage-js：根據-isLoading-狀態顯示畫面"><a href="#PoseListPage-js：根據-isLoading-狀態顯示畫面" class="headerlink" title="PoseListPage.js：根據 isLoading 狀態顯示畫面"></a>PoseListPage.js：根據 isLoading 狀態顯示畫面</h3><p>接著引入 context，還有 isLoading 時要顯示的 Loading component：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> useState<span class="token punctuation">,</span> useEffect<span class="token punctuation">,</span> useRef<span class="token punctuation">,</span> useContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> LoadingContext<span class="token punctuation">,</span> AuthContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../../contexts"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Loading <span class="token keyword">from</span> <span class="token string">"../../components/Loading"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>接著是根據 isLoading 狀態顯示畫面，在 call API 時會設為 true，直到接收 response 後會設為 false：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">HomePage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> isLoading<span class="token punctuation">,</span> setIsLoading <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>LoadingContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>posts<span class="token punctuation">,</span> setPosts<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">setIsLoading</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">getPosts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">posts</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">setPosts</span><span class="token punctuation">(</span>posts<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">setIsLoading</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>setIsLoading<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>Root<span class="token operator">></span>
+      <span class="token punctuation">&#123;</span>isLoading <span class="token operator">?</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>Loading <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>PostsListContainer<span class="token operator">></span>
+          <span class="token operator">&lt;</span>PostsListTitle<span class="token operator">></span>最新文章<span class="token operator">&lt;</span><span class="token operator">/</span>PostsListTitle<span class="token operator">></span>
+          <span class="token punctuation">&#123;</span>posts <span class="token operator">&amp;&amp;</span> posts<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">post</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token operator">&lt;</span>PostList post<span class="token operator">=</span><span class="token punctuation">&#123;</span>post<span class="token punctuation">&#125;</span> key<span class="token operator">=</span><span class="token punctuation">&#123;</span>post<span class="token punctuation">.</span>id<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+          <span class="token operator">&lt;</span>ReadMore<span class="token operator">></span>
+            <span class="token operator">&lt;</span>Link to<span class="token operator">=</span><span class="token string">"/post-list"</span><span class="token operator">></span>查看更多<span class="token operator">&lt;</span><span class="token operator">/</span>Link<span class="token operator">></span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>ReadMore<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>PostsListContainer<span class="token operator">></span>
+      <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>Root<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="三、透過-react-spinner-設定-loading-畫面"><a href="#三、透過-react-spinner-設定-loading-畫面" class="headerlink" title="三、透過 react-spinner 設定 loading 畫面"></a>三、透過 react-spinner 設定 loading 畫面</h2><blockquote>
+<p>使用方法可參考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkaHUyMDAwL3JlYWN0LXNwaW5uZXJz">davidhu2000 / react-spinners<i class="fa fa-external-link-alt"></i></span> 介紹，以及樣式 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGF2aWRodS5pby9yZWFjdC1zcGlubmVycy8=">DEMO<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><pre class="line-numbers language-none"><code class="language-none">npm install react-spinners --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="官方使用範例"><a href="#官方使用範例" class="headerlink" title="官方使用範例"></a>官方使用範例</h3><p>官方範例是用 class component 去寫的，但其實概念和 function component 沒有差太多，狀態就從 App.js 設定的 isLoading 去判斷即可：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> css <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"@emotion/core"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ClipLoader <span class="token keyword">from</span> <span class="token string">"react-spinners/ClipLoader"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Can be a string as well. Need to ensure each key-value pair ends with ;</span>
+<span class="token keyword">const</span> override <span class="token operator">=</span> css<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">AwesomeComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      loading<span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">"sweet-loading"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>ClipLoader
+          css<span class="token operator">=</span><span class="token punctuation">&#123;</span>override<span class="token punctuation">&#125;</span>
+          size<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">150</span><span class="token punctuation">&#125;</span>
+          color<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"#123abc"</span><span class="token punctuation">&#125;</span>
+          loading<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>loading<span class="token punctuation">&#125;</span>
+        <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>Loading.js</li>
+</ul>
+<p>改寫 Loading component 如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> styled <span class="token keyword">from</span> <span class="token string">"styled-components"</span><span class="token punctuation">;</span>
+<span class="token comment">// 要引用的樣式</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> PuffLoader <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"react-spinners"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 全版的半透明背景</span>
+<span class="token keyword">const</span> LoadingWapper <span class="token operator">=</span> styled<span class="token punctuation">.</span>div<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Loading</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>LoadingWapper<span class="token operator">></span>
+      <span class="token operator">&lt;</span>PuffLoader size<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">60</span><span class="token punctuation">&#125;</span> color<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"#4A90E2"</span><span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>LoadingWapper<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>效果如下：</p>
+<p><img src="https://i.imgur.com/MNaWqI0.gif"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+              <a href="/tags/useEffect/" rel="tag"># useEffect</a>
+              <a href="/tags/useState/" rel="tag"># useState</a>
+              <a href="/tags/useContext/" rel="tag"># useContext</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/react-test/" rel="prev" title="[week 22] React：用 SPA 架構實作一個部落格（三）- 淺談測試">
+      <i class="fa fa-chevron-left"></i> [week 22] React：用 SPA 架構實作一個部落格（三）- 淺談測試
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/hexo-theme/" rel="next" title="【學習筆記】如何更換 Hexo 主題 & 自訂樣式">
+      【學習筆記】如何更換 Hexo 主題 & 自訂樣式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+          <div style="">
+            
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+          </div>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%95%E7%90%86%E7%99%BB%E5%85%A5%E7%8B%80%E6%85%8B%E7%9A%84%E7%95%AB%E9%9D%A2%E9%96%83%E7%88%8D"><span class="nav-number">1.</span> <span class="nav-text">一、處理登入狀態的畫面閃爍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#App-js%EF%BC%9A%E8%A8%AD%E5%AE%9A-isLoadingGetMe-%E7%8B%80%E6%85%8B"><span class="nav-number">1.1.</span> <span class="nav-text">App.js：設定 isLoadingGetMe 狀態</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-js%EF%BC%9A%E5%BB%BA%E7%AB%8B-context"><span class="nav-number">1.2.</span> <span class="nav-text">context.js：建立 context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header-js%EF%BC%9A%E6%A0%B9%E6%93%9A-isLoadingGetMe-%E9%A1%AF%E7%A4%BA%E7%99%BB%E5%85%A5%E7%8B%80%E6%85%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Header.js：根據 isLoadingGetMe 顯示登入狀態</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%99%95%E7%90%86%E5%91%BC%E5%8F%AB-API-%E9%80%A0%E6%88%90%E7%9A%84%E7%95%AB%E9%9D%A2%E9%96%83%E7%88%8D"><span class="nav-number">2.</span> <span class="nav-text">二、處理呼叫 API 造成的畫面閃爍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#App-js%EF%BC%9A%E8%A8%AD%E5%AE%9A-isLoading-%E7%8B%80%E6%85%8B"><span class="nav-number">2.1.</span> <span class="nav-text">App.js：設定 isLoading 狀態</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PoseListPage-js%EF%BC%9A%E6%A0%B9%E6%93%9A-isLoading-%E7%8B%80%E6%85%8B%E9%A1%AF%E7%A4%BA%E7%95%AB%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">PoseListPage.js：根據 isLoading 狀態顯示畫面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%80%8F%E9%81%8E-react-spinner-%E8%A8%AD%E5%AE%9A-loading-%E7%95%AB%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">三、透過 react-spinner 設定 loading 畫面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">安裝套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E4%BD%BF%E7%94%A8%E7%AF%84%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">官方使用範例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Heidi Liu"
+      src="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
+  <p class="site-author-name" itemprop="name">Heidi Liu</p>
+  <div class="site-description" itemprop="description">海底修羅場｜日々進化中</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMA==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;heidiliu2020"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9oZWlkaS1jb2RpbmcubWVkaXVtLmNvbS8=" title="Medium → https:&#x2F;&#x2F;heidi-coding.medium.com&#x2F;"><i class="fab fa-medium fa-fw"></i>Medium</span>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidi Liu</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='220,220,220' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://heidiliu2020.github.io/react-optimization/";
+    this.page.identifier = "react-optimization/";
+    this.page.title = "[week 22] React：用 SPA 架構實作一個部落格（四）- 優化篇";
+    this.language = "zh_TW"; 
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://heidiblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
