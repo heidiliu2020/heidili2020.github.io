@@ -22024,4 +22024,507 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <tag>Front-End</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【學習筆記】RxJS - 封裝程式的藝術</title>
+    <url>/rxjs-note/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1mMUtqSzhpckNiWQ==">JSDC 2017 - R201#D105​ RxJS - 封裝程式的藝術 By Jerry Hong<i class="fa fa-external-link-alt"></i></span> 這場演講的學習筆記。如有錯誤歡迎指正。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="What’s-RxJS？"><a href="#What’s-RxJS？" class="headerlink" title="What’s RxJS？"></a>What’s RxJS？</h2><p>有一種說法是，我們可以把 RxJS 想像成 <code>Lodash for async.</code>，專門用來處理非同步行為。</p>
+<p>或著更精準的說法，RxJS 就是「一個透過 Observable 來組合各種非同步行為的 Library」。</p>
+<p>但我們不是已經有 Promise 來處理非同步了？為什麼我們還需要學 Observable 呢？</p>
+<h2 id="Why-we-need-RxJS？"><a href="#Why-we-need-RxJS？" class="headerlink" title="Why we need RxJS？"></a>Why we need RxJS？</h2><p>以下方程式碼為例，這是用來實作無限滾動的程式碼：</p>
+<p><img src="https://i.imgur.com/wXgT9xs.png"></p>
+<p>這段程式碼的邏輯大致如下：</p>
+<ul>
+<li>註冊滾動事件：因為是無限滾動，我們需針對 Scroll 監聽事件。</li>
+<li>判斷滾動高度：透過 event 拿到 DOM 物件，即可計算出使用者目前 Scroll 頁面多少 %。</li>
+<li>發送 Request：當使用者 Scroll 超過 90%，就讓程式發送 Request，取得文章資料並顯示在畫面上。</li>
+</ul>
+<p>但這種寫法其實有些問題，每當使用者持續 Scroll 到 90% 時，會不斷發送同樣的 Request，此時畫面就會顯示許多重複的資料。</p>
+<h3 id="一般解法：設定-Flag"><a href="#一般解法：設定-Flag" class="headerlink" title="一般解法：設定 Flag"></a>一般解法：設定 Flag</h3><p>我們可以透過「設定 Flag（標記）」來解決上述遇到的問題。在範例中，就是藉由判斷 isRequesting 的布林值，來決定要不要發送 Request：</p>
+<ul>
+<li>isRequesting 初始值為 false，代表沒有發送請求，當 isRequesting 為 false 時才會發送 Request。</li>
+<li>發送 Request 前，設定 isRequesting 為 true。</li>
+<li>接收到 Response 後，設定 isRequesting 為 false。</li>
+</ul>
+<h3 id="使用-Promise-的限制"><a href="#使用-Promise-的限制" class="headerlink" title="使用 Promise 的限制"></a>使用 Promise 的限制</h3><p>但是這段複雜的程式碼，其實隱藏一些問題：</p>
+<ul>
+<li>兩個非同步行為 Scroll 事件 &amp; 發送 request</li>
+<li>同樣是非同步行為，卻使用不同的 pattern：Callback pattern &amp; Promise</li>
+<li>由於 Promise 無法處理 Scroll 等事件，因此必須用兩種不同的 pattern</li>
+<li>假設需求改成：接收到 fetch 資料，經過幾秒後再顯示訊息，則必須透過設定 setTimeout</li>
+</ul>
+<p>Promise 應該是為了解決 Callback 產生的問題，卻無法改善上述情形。</p>
+<p>此外，這是在只設置一個 Flag 的情況下，假如需求不斷增長，必須設定更多的 Flags 時，程式碼將會變得更加複雜⋯⋯</p>
+<blockquote>
+<p>我們一定要寫這麼醜的程式碼嗎？</p>
+</blockquote>
+<h3 id="VanillaJS-vs-RxJS"><a href="#VanillaJS-vs-RxJS" class="headerlink" title="VanillaJS vs RxJS"></a>VanillaJS vs RxJS</h3><p>以下分別是使用原生 JavaScript 和 RxJS 所撰寫的程式碼：</p>
+<p><img src="https://i.imgur.com/QXTxO4G.png"></p>
+<p>可以很明顯看出，後者 RxJS 的寫法，即使不知道這些方法的實際用途，卻也能從語意大概猜出每個 function 的功能，大大提高程式碼可讀性。</p>
+<hr>
+<h2 id="What-is-Observable？"><a href="#What-is-Observable？" class="headerlink" title="What is Observable？"></a>What is Observable？</h2><p>想要瞭解 RxJS，就必須先從 Observable 談起。簡單來說，Observable 就是一個集合，再加上時間的維度：</p>
+<pre class="line-numbers language-none"><code class="language-none">Obervable &#x3D; Collection + Time<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>再更白話一點，Observable 就像是一個「序列」，裡面的元素會隨著「時間推移」。</p>
+<h3 id="Observable-建立與訂閱"><a href="#Observable-建立與訂閱" class="headerlink" title="Observable 建立與訂閱"></a>Observable 建立與訂閱</h3><ul>
+<li>透過 Observable.fromEvent() 建立一個監聽 mousemove 事件的 observable：</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// mouseMove 這個變數就是一個 observable</span>
+<span class="token keyword">var</span> mouseMove <span class="token operator">=</span> Observable
+                  <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'mousemove'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>接著就可以訂閱這個 observable，執行 mouseMove.subscribe() 時，就會傳入的 function：</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 訂閱 mouseMove 這個 observable</span>
+<span class="token keyword">var</span> subscription <span class="token operator">=</span> mouseMove
+                    <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>x <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>最後可透過 unsubscribe() 來移除這個監聽事件：</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript">subscription<span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="更多建立-Observable-的方法"><a href="#更多建立-Observable-的方法" class="headerlink" title="更多建立 Observable 的方法"></a>更多建立 Observable 的方法</h3><p>以下舉幾個常見的方法，用來建立 Observable：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 同步送出 2, 3, 4 後馬上結束</span>
+Observable<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 與第一種方式相同，可同步送出 2, 3, 4 </span>
+Observable<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// from 可接收 Promise 物件，並轉成 Observable</span>
+Observable<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 有提供 ajax 方法，直接把 http request 包成一個 Observable</span>
+Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 透過 fromEvent 來監聽事件</span>
+Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 代表每 1000 毫秒，送出一個從 0 開始遞增的值</span>
+Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="觀念整理：observable-operator-oberver-subscription"><a href="#觀念整理：observable-operator-oberver-subscription" class="headerlink" title="觀念整理：observable / operator / oberver / subscription"></a>觀念整理：observable / operator / oberver / subscription</h3><p>這裡快速整理有關 observable 和 operators 的幾個重點：</p>
+<h4 id="observable"><a href="#observable" class="headerlink" title="/ observable /"></a>/ observable /</h4><ul>
+<li>是 Observable 的物件實例</li>
+<li>在尚未被訂閱之前，只是記憶體中的一個物件，不會送出元素</li>
+<li>可被訂閱（subscribe）</li>
+<li>具有多種運算子（operators）</li>
+</ul>
+<h4 id="operators"><a href="#operators" class="headerlink" title="/ operators /"></a>/ operators /</h4><ul>
+<li>是 Observable 的方法</li>
+<li>可對元素進行運算處理</li>
+<li>永遠回傳一個新的 observable（但有例外）</li>
+</ul>
+<p>以下方程式碼為例，其中 map 和 filter 就是 operators，用法其實就和 JavaScript 用來處理陣列的 map 和 filter 類似，只是對象換成了 Observable：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">var</span> sub <span class="token operator">=</span> Observable
+            <span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>          <span class="token comment">// 回傳一個新的元素</span>
+            <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment">// 過濾出想要的元素</span>
+            <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+              <span class="token function-variable function">next</span><span class="token operator">:</span> x <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span>
+              <span class="token function-variable function">error</span><span class="token operator">:</span> err <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+              <span class="token function-variable function">complete</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="observer"><a href="#observer" class="headerlink" title="/ observer /"></a>/ observer /</h4><ul>
+<li>用來訂閱 obervable 的物件</li>
+<li>具有三個方法：next, error, complete<ul>
+<li>next 為必要，error 與 complete 則是可選</li>
+</ul>
+</li>
+</ul>
+<h4 id="subscription"><a href="#subscription" class="headerlink" title="/ subscription /"></a>/ subscription /</h4><ul>
+<li>在 observable 訂閱後回傳的物件</li>
+<li>可用來退訂（unsubscribe），observable 就不會再執行其他動作</li>
+<li>可以和其他訂單合併，一直執行退訂動作</li>
+</ul>
+<h3 id="舉個例子：生產線"><a href="#舉個例子：生產線" class="headerlink" title="舉個例子：生產線"></a>舉個例子：生產線</h3><p><img src="https://i.imgur.com/5BLZJz0.png"></p>
+<ul>
+<li>observable 的元素：生產線上的產品</li>
+<li>operator：生產線上的機具，用來包裝或篩選產品</li>
+<li>observer：啟動生產線的人員</li>
+</ul>
+<h2 id="Marble-Diagram-彈珠圖"><a href="#Marble-Diagram-彈珠圖" class="headerlink" title="Marble Diagram 彈珠圖"></a>Marble Diagram 彈珠圖</h2><p>由於 Observable 具有時間的維度，因此我們常會使用圖像的方式來表達，也就是彈珠圖（Marble Diagram）。</p>
+<h3 id="呈現方式"><a href="#呈現方式" class="headerlink" title="呈現方式"></a>呈現方式</h3><ul>
+<li><code>-</code>：由左向右代表時間推移</li>
+<li><code>n(0-9/a-z)</code>：送出的元素（next）</li>
+<li><code>|</code>：送出結束（complete）</li>
+<li><code>#</code>：送出錯誤（error）</li>
+<li><code>()</code>：同步送出</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">---0---1---2---3--
+---0---1---2---3|
+---0---1---2---3#<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>以下舉幾個範例：</p>
+<ul>
+<li><code>Observable.of(1, 2, 3)</code>：同步送出後馬上結束</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token number">123</span><span class="token operator">|</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><code>Observable.interval(10)</code>：每隔 10 毫秒送出，注意 0 也會占一格</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">-</span><span class="token number">01234.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><code>Observable.fromEvent(DOM, &#39;click&#39;)</code>：監聽 click 事件，當使用者點擊時才會發送 event 物件</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">--</span><span class="token operator">-</span>e<span class="token operator">--</span>ee<span class="token operator">-</span>e<span class="token operator">--</span><span class="token operator">...</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="綜合範例"><a href="#綜合範例" class="headerlink" title="綜合範例"></a>綜合範例</h3><h4 id="例一：take-amp-map-amp-filter"><a href="#例一：take-amp-map-amp-filter" class="headerlink" title="例一：take &amp; map &amp; filter"></a>例一：take &amp; map &amp; filter</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>   <span class="token comment">// 每隔 10 毫秒送出</span>
+  <span class="token punctuation">.</span><span class="token function">take</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>                <span class="token comment">// 只取前三個元素</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>        <span class="token comment">// 將每個元素加 1</span>
+  <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token operator">/</span><span class="token number">2</span> <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// 篩選出除 2 餘數等於 1 的元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>彈珠圖如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">-</span><span class="token number">01234.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token operator">-</span><span class="token number">01</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token operator">-</span><span class="token number">12</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">|</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="例二：takeUntil-amp-fromEvent"><a href="#例二：takeUntil-amp-fromEvent" class="headerlink" title="例二：takeUntil &amp; fromEvent"></a>例二：takeUntil &amp; fromEvent</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>   <span class="token comment">// 每隔 20 毫秒送出</span>
+<span class="token punctuation">.</span><span class="token function">takeUntil</span><span class="token punctuation">(</span>      <span class="token comment">// 當某件事情發生時 Observable 會結束</span>
+  Observable
+    <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>彈珠圖如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">--</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">3</span><span class="token operator">-</span><span class="token number">4</span><span class="token operator">-</span><span class="token number">5.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>e<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token operator">--</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">|</span>          <span class="token comment">// 當點擊事件發生時馬上中止</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h4 id="例三：map-amp-margeAll-gt-mergeMap-gt-switchMap-gt-exhaustMap"><a href="#例三：map-amp-margeAll-gt-mergeMap-gt-switchMap-gt-exhaustMap" class="headerlink" title="例三：map &amp; margeAll =&gt; mergeMap =&gt; switchMap =&gt; exhaustMap"></a>例三：map &amp; margeAll =&gt; mergeMap =&gt; switchMap =&gt; exhaustMap</h4><ul>
+<li>map &amp; margeAll</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable
+  <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+    <span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">margeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 攤平變成一維</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>彈珠圖如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>e<span class="token operator">-</span>e<span class="token operator">--</span><span class="token operator">--</span>   <span class="token comment">// 使用者點擊兩次</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>o<span class="token operator">-</span>o<span class="token operator">--</span><span class="token operator">--</span>   <span class="token comment">// 將 event 物件轉成 request 物件，同樣是個 observable</span>
+     \ \
+     \ <span class="token operator">--</span><span class="token operator">--</span>r<span class="token operator">|</span>
+     <span class="token operator">--</span><span class="token operator">--</span>r<span class="token operator">|</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>r<span class="token operator">-</span>r<span class="token operator">-</span>  <span class="token comment">// 收到的 response</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果不使用 margeAll 就直接訂閱結果，會因為 Observable 裡面還有 Observable，而無法拿到實際的 response，因此需要先將二維的 Observable 攤平，再繼續往下送結果。</p>
+<ul>
+<li>map + margeAll =&gt; 可簡寫成 mergeMap</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable
+  <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">margeMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+    <span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>switchMap =&gt; 當第一個 Observable 尚未處理完，又送出第二個 Observable 時，取消舊的訂閱，只想保留新的結果</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable
+  <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+    <span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>彈珠圖如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>e<span class="token operator">-</span>e<span class="token operator">--</span><span class="token operator">--</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>o<span class="token operator">-</span>o<span class="token operator">--</span><span class="token operator">--</span>
+     \ \
+     \ <span class="token operator">--</span><span class="token operator">--</span>r<span class="token operator">|</span>    <span class="token comment">// 訂閱後進來的 Observable</span>
+     <span class="token operator">--</span><span class="token operator">!</span>      <span class="token comment">// 退訂原本的 Observable</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>r<span class="token operator">-</span>    <span class="token comment">// 只保留後面的 response</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>exhaustMap =&gt; 當第一個 Observable 尚未處理完，又送出第二個 Observable 時，不管新的，只想保留舊的結果</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable
+  <span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span><span class="token constant">DOM</span><span class="token punctuation">,</span> <span class="token string">'click'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">exhaustMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+    <span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>彈珠圖如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>e<span class="token operator">-</span>e<span class="token operator">--</span><span class="token operator">--</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>o<span class="token operator">-</span>o<span class="token operator">--</span><span class="token operator">--</span>
+     \ \
+     \ <span class="token operator">--</span><span class="token operator">--</span>r<span class="token operator">|</span>    <span class="token comment">// 不會訂閱後進來的 Observable</span>
+     <span class="token operator">--</span><span class="token operator">--</span>r<span class="token operator">|</span>    <span class="token comment">// 訂閱舊的 Observable</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>r<span class="token operator">--</span><span class="token operator">-</span>  <span class="token comment">// 只保留舊的 response</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="【範例】無限滾動"><a href="#【範例】無限滾動" class="headerlink" title="【範例】無限滾動"></a>【範例】無限滾動</h3><p>接著回到一開始的無限滾動，使用 RxJS 語法邏輯如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>scrollView<span class="token punctuation">,</span> <span class="token string">'scroll'</span><span class="token punctuation">)</span>  <span class="token comment">// scroll 事件</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">event</span> <span class="token operator">=></span> event<span class="token punctuation">.</span>target<span class="token punctuation">)</span>        <span class="token comment">// 轉成被 scroll 的 DOM 物件</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>hasScrolled<span class="token punctuation">)</span>                  <span class="token comment">// DOM 物件被 scroll 了幾 %</span>
+  <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">percent</span> <span class="token operator">=></span> percent <span class="token operator">></span> <span class="token number">0.9</span><span class="token punctuation">)</span>  <span class="token comment">// scroll 超過 90% 就繼續後面動作</span>
+  <span class="token punctuation">.</span><span class="token function">exhaustMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 在第一個 Observable 處理完之前，不會處理訂閱的 Observable</span>
+  <span class="token punctuation">.</span><span class="token function">take</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>    <span class="token comment">// 當接收到 3 次 response，這個 Observable 就直接 complete，不會再送出元素</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Do sometheing to change view</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="Make-Your-Code-Clean"><a href="#Make-Your-Code-Clean" class="headerlink" title="Make Your Code Clean"></a>Make Your Code Clean</h2><p>在熟悉如何使用 RxJS 語法之後，能夠提升程式碼可讀性；但，實際上真是如此嗎？</p>
+<p>隨著程式碼以及需求漸趨複雜，就算使用 Observable，還是可能會寫出不易閱讀的程式碼，這時我們需要思考的，是如何讓簡潔化我們寫的程式碼。</p>
+<p>也就是如何達成 Code Clean 的三大重點：</p>
+<ul>
+<li>Readable 可讀的</li>
+<li>Composable 可組合的</li>
+<li>Testable 可測試的</li>
+</ul>
+<h3 id="1-Readable-可讀的"><a href="#1-Readable-可讀的" class="headerlink" title="(1) Readable 可讀的"></a>(1) Readable 可讀的</h3><h3 id="【範例】scrollOverNinePercent-amp-getPostObservable"><a href="#【範例】scrollOverNinePercent-amp-getPostObservable" class="headerlink" title="【範例】scrollOverNinePercent &amp; getPostObservable"></a>【範例】<code>scrollOverNinePercent</code> &amp; <code>getPostObservable</code></h3><ol>
+<li>抽取出有意義的、可能被多次使用的 Observable，並 assign 給一個變數：<code>$scroll</code></li>
+</ol>
+<p><img src="https://i.imgur.com/02pG8l2.png"></p>
+<ol start="2">
+<li>抽取出共用的 Operator，並命名為一個 function：<code>scrollOverNinePercent()</code></li>
+</ol>
+<p><img src="https://i.imgur.com/nVzS445.png"></p>
+<ol start="3">
+<li>為了避免出現多個小括號，可使用 <code>let</code> operator，即可取得 function 的回傳值</li>
+</ol>
+<p><img src="https://i.imgur.com/oYZpodN.png"></p>
+<ol start="4">
+<li>將共用 function 放到獨立的檔案</li>
+</ol>
+<p><img src="https://i.imgur.com/9YHOHSi.png"></p>
+<ol start="5">
+<li>抽離 Observable creator，也就是抽出「有建立新的 Observable」的程式碼：<code>getPostObservable()</code></li>
+</ol>
+<p><img src="https://i.imgur.com/TFVZKyO.png"></p>
+<p>修改後的程式碼如下，透過簡化邏輯，提高了程式碼可讀性：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> scrollOverNinePercent <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'...'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getPostObservable <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxx'</span><span class="token punctuation">;</span>
+
+Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>scrollView<span class="token punctuation">,</span> <span class="token string">'scroll'</span><span class="token punctuation">)</span>  <span class="token comment">// scroll 事件</span>
+
+scroll$
+  <span class="token punctuation">.</span><span class="token function">let</span><span class="token punctuation">(</span>scrollOverNinePercent<span class="token punctuation">)</span>    <span class="token comment">// 判斷是否滾動超過 90%</span>
+  <span class="token punctuation">.</span><span class="token function">exhaustMap</span><span class="token punctuation">(</span>getPostObservable<span class="token punctuation">)</span> <span class="token comment">// 抓取文章 API</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Do sometheing to change view</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-Composable-可組合的"><a href="#2-Composable-可組合的" class="headerlink" title="(2) Composable 可組合的"></a>(2) Composable 可組合的</h3><p>可組合的意思並不在於是否可重用，重點是「能夠和其他程式碼組合，來針對不同情境使用」。</p>
+<p>在 RxJS 中，盡可能使用 Observable 來撰寫程式碼，因為 Observable 本身就是可組合的！</p>
+<h3 id="透過-Pipe-來組合多個-Operators"><a href="#透過-Pipe-來組合多個-Operators" class="headerlink" title="透過 Pipe 來組合多個 Operators"></a>透過 Pipe 來組合多個 Operators</h3><p>在演講中，有提到 RxJS 5.5 版本發佈了新特性：lettable operator，但其實 lettable 這個詞，後來又被改為 pipeable，因此後續皆以 Pipeable Operators（操作符）稱呼。</p>
+<p><code>pipe</code> 是 Observable 的一部分，不需導入即可使用，可代替 <code>let</code> 操作符，用來組合 Operators，傳入的 Observable 會回傳新的 Observable，再繼續往下傳遞。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">source$<span class="token punctuation">.</span><span class="token function">let</span><span class="token punctuation">(</span>myOperator<span class="token punctuation">)</span> 
+
+source$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>myOperator<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>要把 Operators 從 Observable 中獨立出來，必須解決 Operator 名稱和 JavaScript 的關鍵字衝突問題。</p>
+<p>因此對部分 Pipeable Operators 名稱進行修改：</p>
+<ul>
+<li>do -&gt; tap</li>
+<li>catch -&gt; catchError</li>
+<li>switch -&gt; switchAll</li>
+<li>finally -&gt; finalize</li>
+</ul>
+<blockquote>
+<p>詳細可參考這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9yZWFkMDEuY29tL3poLXR3L254ZDR5ekouaHRtbCMuWVYwQ1JwNHpaVFk=">[譯] Pipeable 操作符<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h3 id="【範例】scrollOver-amp-onErrorReturn"><a href="#【範例】scrollOver-amp-onErrorReturn" class="headerlink" title="【範例】scrollOver &amp; onErrorReturn"></a>【範例】<code>scrollOver</code> &amp; <code>onErrorReturn</code></h3><h4 id="1-scrollOverNinePercent-gt-scrollOver"><a href="#1-scrollOverNinePercent-gt-scrollOver" class="headerlink" title="1. scrollOverNinePercent() =&gt; scrollOver()"></a>1. <code>scrollOverNinePercent()</code> =&gt; <code>scrollOver()</code></h4><p>還記得我們剛才寫的 <code>scrollOverNinePercent()</code> 嗎？實際上，這個 Function 並不易用來重組，因為 scroll 觸發時機點不一定會在 90%。</p>
+<p><img src="https://i.imgur.com/9Co9BLb.png"></p>
+<p>這時可透過 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU5JUFCJTk4JUU5JTk4JUI2JUU1JTg3JUJEJUU2JTk1JUIw">Higher Order Function<i class="fa fa-external-link-alt"></i></span> 解決，也就是用一個 Function 回傳另一個新的 Function，作法如下：</p>
+<ol>
+<li>在第一個 Function 傳入 <code>criticalP</code>（代表臨界點），取代原本 0.9 的位置 </li>
+</ol>
+<p><img src="https://i.imgur.com/nC7dCI6.png"></p>
+<ol start="2">
+<li>接著可使用 Pipeable Operators，也就是改用 <code>pipe</code> 來組合多個 operator，傳入的 Observable 會回傳新的 Observable，再繼續往下傳遞</li>
+</ol>
+<p><img src="https://i.imgur.com/dec0xAI.png"></p>
+<p>修改後的程式碼如下，讓 scrollOver() 的使用更加彈性，同時也透過 pipe 來簡化程式碼邏輯：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> scrollOver <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'...'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getPostObservable <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxx'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> exhaustMap <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'rxjs/operators'</span><span class="token punctuation">;</span>
+
+Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>scrollView<span class="token punctuation">,</span> <span class="token string">'scroll'</span><span class="token punctuation">)</span>  <span class="token comment">// scroll 事件</span>
+
+scroll$
+  <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+    <span class="token function">scrollOver</span><span class="token punctuation">(</span><span class="token number">0.9</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">exhaustMap</span><span class="token punctuation">(</span>getPostObservable<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Do sometheing to change view</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-getPostObservable-gt-onErrorReturn"><a href="#2-getPostObservable-gt-onErrorReturn" class="headerlink" title="2. getPostObservable() =&gt; onErrorReturn()"></a>2. <code>getPostObservable()</code> =&gt; <code>onErrorReturn()</code></h4><ol>
+<li>取得文章的 Function，可能會需要進行錯誤處理，例如透過 <code>retry</code> 來重新發送</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token punctuation">&#123;</span> success<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getPostObservable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+  Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">retry</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 當文章取得失敗時，會重新嘗試三次後，還是失敗就拋出例外</span>
+    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> Observable<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>defaultData<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 如發送三次仍失敗，則回傳預設值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>經過簡化改回傳 Array，Array 會自動被轉成 Observable：</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token punctuation">&#123;</span> success<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getPostObservable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+  Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">retry</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">[</span>defaultData<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>同樣改用 pipe 來組合運算子</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> retry<span class="token punctuation">,</span> catError <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'rxjs/operators'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token punctuation">&#123;</span> success<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getPostObservable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+  Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+      <span class="token function">retry</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">catchError</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">[</span>defaultData<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>也可以試著自己定義一個 Pipeable Operators：<code>onErrorReturn</code></li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> retry<span class="token punctuation">,</span> catError <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'rxjs/operators'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token punctuation">&#123;</span> success<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">onErrorReturn</span> <span class="token operator">=</span> <span class="token parameter">defaultData</span> <span class="token operator">=></span>
+  <span class="token function">catchError</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">[</span>defaultData<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getPostObservable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+  Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+      <span class="token function">retry</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">onErrorReturn</span><span class="token punctuation">(</span>defaultData<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="5">
+<li>再把 <code>onErrorReturn</code> 放到獨立的檔案，這段邏輯即可被重用</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> retry<span class="token punctuation">,</span> catError <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'rxjs/operators'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> onErrorReturn <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'...'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> defaultData <span class="token operator">=</span> <span class="token punctuation">&#123;</span> success<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getPostObservable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+  Observable<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'url...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+      <span class="token function">retry</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">onErrorReturn</span><span class="token punctuation">(</span>defaultData<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="【其他應用】物件拖拉-vs-取消請求"><a href="#【其他應用】物件拖拉-vs-取消請求" class="headerlink" title="【其他應用】物件拖拉 vs 取消請求"></a>【其他應用】物件拖拉 vs 取消請求</h3><p>這裡舉 RxJS 的經典案例「物件拖拉（Drag &amp; Drop）」，可拆解成以下步驟：</p>
+<ol>
+<li>使用者對目標物按下滑鼠左鍵：mouseDown$</li>
+<li>使用者移動滑鼠：mouseMove$</li>
+<li>直到放開滑鼠左鍵：mouseUp$</li>
+</ol>
+<p>若以程式碼表示：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">mouseDown$
+  <span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span>  <span class="token comment">// 將監聽對象 mouseDown$ 轉成 mouseMove$</span>
+    mouseMove$<span class="token punctuation">.</span><span class="token function">takeUntil</span><span class="token punctuation">(</span>mouseUp$<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// 直到 mouseUp$ 時結束</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// do something</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再舉另一個「點擊 Neflix 影片清單後，馬上取消請求」為例，動作可拆解如下：</p>
+<ol>
+<li>使用者點擊影片方塊：mouseClick$</li>
+<li>發送 Request 讀取影片資訊：request$</li>
+<li>如果在尚未接收到 Response 之前，就按下取消關閉視窗：cancel$</li>
+</ol>
+<p>程式碼如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">mouseClick$
+  <span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> 
+    request$<span class="token punctuation">.</span><span class="token function">takeUntil</span><span class="token punctuation">(</span>cancel$<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// do something</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>嗯？這段程式碼怎麼好像似曾相識？</p>
+<p>把剛才的兩個範例拿來比對：</p>
+<p><img src="https://i.imgur.com/yhKwbV5.png"></p>
+<p>可以發現到，程式碼竟然有 87% 像！因為兩段邏輯其實極為類似，都是在「做某件事情後，再做另一個非同步行為」，而這個非同步行為，會在某個時間點、發生某件事情時而被取消。</p>
+<p>既然是相同邏輯，何不重用乎？</p>
+<h3 id="3-Testable-可測試的"><a href="#3-Testable-可測試的" class="headerlink" title="(3) Testable 可測試的"></a>(3) Testable 可測試的</h3><p>程式碼寫得好壞，通常是和「是否可進行測試」畫上等號的。因為能夠被測試的程式，才能被檢驗程式的品質。</p>
+<p>然而，在非同步的程式碼，其實是不易去撰寫測試的。</p>
+<p>通常在撰寫非同步測試時，會有以下兩種方法：</p>
+<ul>
+<li>模擬非同步測試<ul>
+<li>例如：使用 setTimeout 去模擬等待時間；或透過 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmVzdF8oSmF2YVNjcmlwdF9mcmFtZXdvcmsp">Jest<i class="fa fa-external-link-alt"></i></span> 模擬非同步行為，可參考這篇討論：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xvZGFzaC9sb2Rhc2gvaXNzdWVzLzI4OTM=">_.debounce() breaks fake timers #2893<i class="fa fa-external-link-alt"></i></span></li>
+<li>情境複雜不易模擬，且容易出錯</li>
+<li>出錯時不知道要找誰：Lodash 提供非同步行為 &amp; Jest 提供時間模擬</li>
+</ul>
+</li>
+<li>精確非同步測試<ul>
+<li>例如：真的等待需要的時間</li>
+<li>測試會花費過多的時間</li>
+</ul>
+</li>
+</ul>
+<p>那麼，RxJS 是如何解決非同步測試遇到的問題呢？</p>
+<h3 id="問題解決：Marble-Testing-彈珠測試"><a href="#問題解決：Marble-Testing-彈珠測試" class="headerlink" title="問題解決：Marble Testing 彈珠測試"></a>問題解決：Marble Testing 彈珠測試</h3><p>還記得我們在前面提到的彈珠圖嗎？我們可透過彈珠圖來撰寫非同步測試：</p>
+<ul>
+<li>用 Marble Diagram 撰寫測試<ul>
+<li>只要會畫圖就能寫測試</li>
+</ul>
+</li>
+<li>100% 可重複的測試</li>
+<li>RxJS 提供時間模擬，同時也提供測試方法<ul>
+<li>不需花時間等待測試結果</li>
+</ul>
+</li>
+</ul>
+<p>以下是之前舉的彈珠圖範例：</p>
+<p><img src="https://i.imgur.com/s3kEdzR.png"></p>
+<p>撰寫測試如下，透過預知最後結果的彈珠圖，我們可用來進行單元測：</p>
+<p><img src="https://i.imgur.com/asnKEUk.png"></p>
+<ul>
+<li>更多 Unit Test 教學，可參考這篇：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmplcnJ5LWhvbmcuY29tL3NwZWFraW5nL3J4anMtbWFyYmxlLXRlc3Rpbmcv">如何「畫圖」寫測試 - RxJS Marble Test<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><blockquote>
+<p>Programming is thinking, not typing. – Cassy Pottan</p>
+</blockquote>
+<p>我們在撰寫程式時，重要的應該是如何去思考，而非單純敲打文字。</p>
+<blockquote>
+<p>Be a Programmer, not just a Coder.</p>
+</blockquote>
+<p>當一個有想法的開發者，而不只是一個碼農。</p>
+<p>時隔半年再來重新回顧 RxJS 的演講，一開始還不太懂 pipe 和 subscribe 使用時機？Operators 之間的差別？Observable 到底好用在哪？直到陸續在工作中實際應用，儘管偶爾和是會寫出和自己預期不符的程式碼，踩過一個又一個坑，累積不少經驗值之後，終於逐漸理解 Observable 的神奇魔力，期許自己未來能夠掌握 RxJS，靈活應對各種非同步行為。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmplcnJ5LWhvbmcuY29tL3NwZWFraW5nL3J4anMtYXJ0Lw==">RxJS - 封裝程式的藝術 - 演講簡報<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubGVhcm5yeGpzLmlvLw==">btroncone/learn-rxjs<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1J4SlMtQ04vbGVhcm4tcnhqcy1vcGVyYXRvcnM=">RxJS-CN/learn-rxjs-operators<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEwMzM2Ny9pcm9ubWFuLzExOTk=">30 天精通 RxJS<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNy8xMi8wOC9yeGpzLw==">希望是最淺顯易懂的 RxJS 教學<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+      </categories>
+      <tags>
+        <tag>Angular</tag>
+        <tag>RxJS</tag>
+      </tags>
+  </entry>
 </search>
