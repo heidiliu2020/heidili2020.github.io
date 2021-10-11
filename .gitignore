@@ -3,6 +3,7 @@
 
 # Production
 /public
+/.deploy_git
 
 # Config
 *.yml
