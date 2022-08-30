@@ -23092,4 +23092,252 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <tag>Regex</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Angular 延伸｜ NGXS 狀態管理入門</title>
+    <url>/angular-ngxs/</url>
+    <content><![CDATA[<p>本篇主要是認識 NGXS 這套狀態管理工具，瞭解基本概念，以及和 NGRX 使用上的差異。</p>
+<span id="more"></span>
+
+<h2 id="NGXS-簡介"><a href="#NGXS-簡介" class="headerlink" title="NGXS 簡介"></a>NGXS 簡介</h2><ul>
+<li>用於 Angular 的狀態管理框架（State Management），使用 RxJS 管理程式中的所有狀態</li>
+<li>通常應用於大型專案，需處理較複雜的狀態管理</li>
+<li>為單一 Store<ul>
+<li>優點：可循環調用其他 State 的 Action、統一使用 dispatch  調度 action</li>
+<li>缺點：需統一管理所有的 Action、Action 類型不能重複</li>
+</ul>
+</li>
+</ul>
+<h2 id="安裝-NGXS"><a href="#安裝-NGXS" class="headerlink" title="安裝 NGXS"></a>安裝 NGXS</h2><ol>
+<li>透過 npm 安裝 @ngxs/store 套件</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">npm install @ngxs<span class="token operator">/</span>store<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>b. 在 <code>app.module.ts</code> 引入 <code>NgxsModule</code></p>
+<pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> BrowserModule <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/platform-browser'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> NgModule <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> NgxsModule <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ngxs/store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> AppComponent <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./app.component'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> environment <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"src/environments/environment"</span>
+
+<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  declarations<span class="token operator">:</span> <span class="token punctuation">[</span>
+								 AppComponent
+								<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+						BrowserModule<span class="token punctuation">,</span> 
+            NgxsModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>                    <span class="token comment">// 註冊 state</span>
+							developmentMode<span class="token operator">:</span> <span class="token operator">!</span>environment<span class="token punctuation">.</span>production<span class="token punctuation">.</span> <span class="token comment">// 開發模式，可進行額外檢查</span>
+						<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> 
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  bootstrap<span class="token operator">:</span> <span class="token punctuation">[</span>AppComponent<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="NGXS-基本概念"><a href="#NGXS-基本概念" class="headerlink" title="NGXS 基本概念"></a>NGXS 基本概念</h2><p>NGXS 包含四個概念，以下是官網介紹：</p>
+<ul>
+<li>Store: Global state container, action dispatcher and selector</li>
+<li>Actions: Class describing the action to take and its associated metadata</li>
+<li>State: Class definition of the state</li>
+<li>Selects: State slice selectors</li>
+</ul>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/891e8b3b-a979-41e1-b9f7-44e7f070ab12/Untitled.png" alt="Untitled"></p>
+<h3 id="建立-State：定義狀態容器的類"><a href="#建立-State：定義狀態容器的類" class="headerlink" title="建立 State：定義狀態容器的類"></a>建立 State：定義狀態容器的類</h3><ul>
+<li>State 是單純的 class 檔</li>
+<li>透過 <code>ng g class &lt;&lt;state file name&gt;&gt;</code> 指令產生 ts 檔案<ul>
+<li>例如：<code>ng g class todos.state</code>，Class 名稱會是 <code>TodosState</code></li>
+</ul>
+</li>
+<li><code>todos.state.ts</code>：  <pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Injectable <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> State <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ngxs/store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoItem</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">public</span> content<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">TodosStateModel</span> <span class="token punctuation">&#123;</span>
+  dataset<span class="token operator">:</span> TodoItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">State</span></span><span class="token operator">&lt;</span>TodosStateModel<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token comment">// 用來描述 state 狀態，定義資料型別</span>
+  name<span class="token operator">:</span> <span class="token string">'todos'</span><span class="token punctuation">,</span>          <span class="token comment">// state 在 store 的名稱</span>
+  defaults<span class="token operator">:</span> <span class="token punctuation">&#123;</span>             <span class="token comment">// 預設值</span>
+    dataset<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodosState</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>建立完 state 之後，再到 <code>app.module.ts</code><br> 的 <code>NgxsModule.forRoot([])</code> 引入 State：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> TodosState <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./todos.state'</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  declarations<span class="token operator">:</span> <span class="token punctuation">[</span>AppComponent<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+						BrowserModule<span class="token punctuation">,</span> 
+            NgxsModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span><span class="token punctuation">[</span>TodosState<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>  
+							developmentMode<span class="token operator">:</span> <span class="token operator">!</span>environment<span class="token punctuation">.</span>production<span class="token punctuation">.</span>
+						<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> 
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  bootstrap<span class="token operator">:</span> <span class="token punctuation">[</span>AppComponent<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="建立-Actions：要執行的方法"><a href="#建立-Actions：要執行的方法" class="headerlink" title="建立 Actions：要執行的方法"></a>建立 Actions：要執行的方法</h3><ul>
+<li>可直接在 state class 底下，設定要被執行的 action 方法</li>
+<li>addTodo(StateContenxt<T>, ActionClass? )<ul>
+<li>StateContenxt<T>：取得可操作此 state 的 context 物件，內建幾種方法：<ul>
+<li>getState(): T：取得目前 state 的值</li>
+<li>setState(val: T)：重新建立 or 重設目前 state 的值</li>
+<li>patchState(val: part<T>)：更新目前 state 的值</li>
+<li>dispatch([actions])：觸發一或多個 actions，可傳入陣列</li>
+</ul>
+</li>
+<li>ActionClass：取得 action 對應的 Class 實體</li>
+</ul>
+</li>
+<li><code>todos.state.ts</code>：</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> State<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> StateContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ngxs/store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoItem</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">public</span> content<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">TodosStateModel</span> <span class="token punctuation">&#123;</span>
+  dataset<span class="token operator">:</span> TodoItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ADDTODO</span> <span class="token punctuation">&#123;</span>
+  payload<span class="token operator">:</span> TodoItem<span class="token punctuation">;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>payload <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TodoItem</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+@State<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TodosStateModel</span></span><span class="token punctuation">></span></span><span class="token plain-text">(</span><span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">'todos'</span><span class="token punctuation">,</span>
+  defaults<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    dataset<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token plain-text">)
+export class TodosState </span><span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>
+	    <span class="token keyword">private</span> apiService<span class="token operator">:</span> ApiService     <span class="token comment">// 可注入 service，如：呼叫 API</span>
+		<span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+    
+    @<span class="token function">Action</span><span class="token punctuation">(</span><span class="token constant">ADDTODO</span><span class="token punctuation">)</span>                     <span class="token comment">// 定義 action 名稱</span>
+	 	<span class="token function">addTodo</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> getState<span class="token punctuation">,</span> setState <span class="token punctuation">&#125;</span><span class="token operator">:</span> StateContext<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TodosStateModel</span></span><span class="token punctuation">></span></span><span class="token plain-text">, </span><span class="token punctuation">&#123;</span> payload <span class="token punctuation">&#125;</span><span class="token plain-text">: ADDTODO) </span><span class="token punctuation">&#123;</span>
+				<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>apiService<span class="token punctuation">.</span><span class="token function">todoApi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>  <span class="token comment">// 呼叫 API</span>
+					<span class="token function">tap</span><span class="token punctuation">(</span><span class="token parameter">_</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+						<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 取得目前 state 值</span>
+		        <span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>                   <span class="token comment">// 重新設定 state 值</span>
+		          <span class="token operator">...</span>state<span class="token punctuation">,</span>
+		          dataset<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span>state<span class="token punctuation">.</span>dataset<span class="token punctuation">,</span> payload<span class="token punctuation">]</span>
+		        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token punctuation">)</span>
+  	<span class="token punctuation">&#125;</span><span class="token plain-text">
+&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Store：全域-State-的容器"><a href="#Store：全域-State-的容器" class="headerlink" title="Store：全域 State 的容器"></a>Store：全域 State 的容器</h3><ul>
+<li>Store 是 action 的 Dispatcher 和 Selector</li>
+<li>透過 <code>store.dispatch(new AddTodo(&#39;title&#39;))</code> 方法，執行對應的 Action 和取得資料</li>
+<li><code>app.component.ts</code></li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Store<span class="token punctuation">,</span> Select <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ngxs/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Observable <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'rxjs/Observable'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> TodoItem <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./todos.state'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  selector<span class="token operator">:</span> <span class="token string">'app-root'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'./app.component.html'</span><span class="token punctuation">,</span>
+  styleUrls<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'./app.component.css'</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token punctuation">&#123;</span>
+  title <span class="token operator">=</span> <span class="token string">'app'</span><span class="token punctuation">;</span>
+  @<span class="token function">Select</span><span class="token punctuation">(</span><span class="token string">'todos.dataset'</span><span class="token punctuation">)</span> todos<span class="token operator">:</span> Observable<span class="token operator">&lt;</span>TodoItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> store<span class="token operator">:</span> Store</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Select：從全域-Store-容器中取得特定-State"><a href="#Select：從全域-Store-容器中取得特定-State" class="headerlink" title="Select：從全域 Store 容器中取得特定 State"></a>Select：從全域 Store 容器中取得特定 State</h3><ul>
+<li><code>@Select</code>：如上方範例，可透過 path 訂閱指定 state，其資料型態為 Observable<ul>
+<li>若不使用 <code>@Select</code> 裝飾器，也可改寫成 <code>store.select()</code> 語法，如下：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token punctuation">&#123;</span>  
+  todos<span class="token operator">:</span> Observable<span class="token operator">&lt;</span>TodoItem<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> store<span class="token operator">:</span> Store</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>todos <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>todos<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>建立一個簡易的 Todo List 模板：</p>
+<ul>
+<li><code>app.component.html</code></li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">*ngFor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>let item of todos | async<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    &#123;&#123; item.content &#125;&#125;
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">#todoInput</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>addTodo(todoInput)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Add Todo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>透過 <code>store.dispatch([actions])</code> 可執行一至多個 actions，回傳值為 Observable：</p>
+<ul>
+<li><code>app.component.ts</code></li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token function">addTodo</span><span class="token punctuation">(</span><span class="token parameter">input</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ADDTODO</span><span class="token punctuation">(</span>input<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'state: '</span><span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    input<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="實際應用：Todo-List"><a href="#實際應用：Todo-List" class="headerlink" title="實際應用：Todo List"></a>實際應用：Todo List</h2><p>根據上方程式碼，可參考下方範例：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hbmd1bGFyLWl2eS10YmJtMWIuc3RhY2tibGl0ei5pby8=">https://angular-ivy-tbbm1b.stackblitz.io/<i class="fa fa-external-link-alt"></i></span></p>
+<p>總結使用 Ngxs 步驟如下：</p>
+<ol>
+<li>建立 State Class</li>
+<li>建立 Action Class</li>
+<li>將 State Class 引入 NgxsModule</li>
+<li>在 Component 透過 <code>@Select</code> 訂閱指定狀態</li>
+<li>在 Component 透過 <code>store.dispatch()</code> 方法執行 action</li>
+</ol>
+<h2 id="NGXS-vs-NGRX"><a href="#NGXS-vs-NGRX" class="headerlink" title="NGXS vs NGRX"></a>NGXS vs <span class="exturl" data-url="aHR0cHM6Ly9uZ3J4LmlvLw==">NGRX<i class="fa fa-external-link-alt"></i></span></h2><ul>
+<li>均能夠搭配 Angular 的依賴注入使用</li>
+<li>均為 CQRS 模式（Command Query Responsibility Segregation）：將模型分為讀取資料和寫入資料的架構模式</li>
+<li>NGXS 使用裝飾器定義 State、Action，隱藏 reducers、effects 概念，並使用 TypeScript 定義類別，有效減少模板文件</li>
+<li>Redux + RxJS + Angular：NGXS 與 NGRX 雖然同樣遵循 Redux 機制，但前者 NGXS 更貼近 RxJS 設計，在處理資料流上能有效減少開發成本</li>
+</ul>
+<h2 id="延遲載入"><a href="#延遲載入" class="headerlink" title="延遲載入"></a>延遲載入</h2><ul>
+<li>NgxsModule.forRoot([])：在根 module 註冊 state</li>
+<li>NgxsModule.forFeature([])：使用 forFeature 註冊 state，以實現延遲載入（Lazy Loading Modules ）</li>
+</ul>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>自己在過去專案中並沒有使用過 NGXS 來管理狀態，剛好最近接手的案子有碰到，才趁著機會研究前人撰寫的程式碼邏輯。</p>
+<p>和 React 組件分層設計，須仰賴 Redux 狀態管理不同；Angualr 本身內建的 Service 概念，搭配 RxJS 使用，其實就能應對較複雜的狀態管理。再透過引入使用 NGXS ，更能有效簡化程式碼，以便後續維護。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><span class="exturl" data-url="aHR0cHM6Ly9uZ3hzLmlvLw==">NGXS: Introduction<i class="fa fa-external-link-alt"></i></span></strong></li>
+<li><strong><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmtldmlueWFuZy5uZXQvMjAxOC8wMy8zMC9hbmd1bGFyLW5neHMv">[Angular] 第一次體驗NGXS<i class="fa fa-external-link-alt"></i></span></strong></li>
+<li><strong><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAxNjUxMzY4NA==">ngxs入门- SegmentFault 思否<i class="fa fa-external-link-alt"></i></span></strong></li>
+<li><strong><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NTEyMTc3NQ==">Angular 真的需要状态管理么？ - 知乎专栏<i class="fa fa-external-link-alt"></i></span></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Angular</category>
+      </categories>
+      <tags>
+        <tag>Angular</tag>
+        <tag>Front-End</tag>
+        <tag>NGXS</tag>
+      </tags>
+  </entry>
 </search>
