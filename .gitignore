@@ -4,6 +4,8 @@
 # Production
 /public
 /.deploy_git
+.deploy_git
 
 # Config
 *.yml
+
