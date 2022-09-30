@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/javascript-es6/</loc>
+    <lastmod>2022-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://heidiliu2020.github.io/javascript-npm/</loc>
+    <lastmod>2022-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://heidiliu2020.github.io/javascript-jest/</loc>
+    <lastmod>2022-09-30</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/stripe-payment/</loc>
     <lastmod>2022-09-05</lastmod>
   </url>
@@ -102,10 +114,6 @@
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/html/</loc>
-    <lastmod>2020-12-29</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/javascript-es6/</loc>
     <lastmod>2020-12-29</lastmod>
   </url>
   <url>

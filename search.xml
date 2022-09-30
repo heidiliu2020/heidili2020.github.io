@@ -4158,20 +4158,18 @@ window<span class="token punctuation">.</span><span class="token function">addEv
       </tags>
   </entry>
   <entry>
-    <title>[week 3] JavaScript：ES6 語法 + npm + Jest</title>
-    <url>/javascript-es6/</url>
+    <title>[week 3] JavaScript：認識 Module &amp; NPM 套件庫</title>
+    <url>/javascript-npm/</url>
     <content><![CDATA[<blockquote>
 <p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDItamF2YXNjcmlwdC1lczYtbnBt">[JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
 </blockquote>
 <pre class="line-numbers language-none"><code class="language-none">學習目標：
 
  理解常用內建函式如何使用
- 熟悉程式語法並知道如何解決基礎問題
- 了解為什麼我們需要 unit test
- 了解什麼是 unit test
- 了解如何寫 unit test
- 了解如何測試一個 function<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 熟悉程式語法並知道如何解決基礎問題<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <span id="more"></span>
+
 <hr>
 <h2 id="何謂-Modules-模組（模塊）？"><a href="#何謂-Modules-模組（模塊）？" class="headerlink" title="何謂 Modules 模組（模塊）？"></a>何謂 Modules 模組（模塊）？</h2><p>在開發過程中，若將各種功能放在一起，程式間可能會互相影響甚至產生 bug，日後也不易進行維護。</p>
 <p>因此，我們可以將不同功能視為一個模組（Module），例如：金流、登入、權限、會員等等，再用主程式將所有模組串接起來，透過模組化統一進行管理。</p>
@@ -4289,234 +4287,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><img src="https://i.imgur.com/fvF1YuH.png" alt="scripts"></p>
 <h3 id="npm-run-39-key-39"><a href="#npm-run-39-key-39" class="headerlink" title="npm run &#39;key&#39;"></a><code>npm run &#39;key&#39;</code></h3><p>在終端機輸入 <code>npm run start</code> 即可透過 key 來運行該指令：</p>
 <p><img src="https://i.imgur.com/K3XhyO3.png" alt="npm run start"></p>
-<hr>
-<h2 id="如何測試程式？"><a href="#如何測試程式？" class="headerlink" title="如何測試程式？"></a>如何測試程式？</h2><p>測試程式的作用是「模擬外部如何使用目標程式，驗證目標程式的行為是否符合預期」。</p>
-<h3 id="利用-console-log-測試"><a href="#利用-console-log-測試" class="headerlink" title="利用 console.log() 測試"></a>利用 <code>console.log()</code> 測試</h3><p>在前面幾個章節，我們通常會使用 console.log()，來測幾個範例確認是否正確。也需要考慮到邊界條件（edge case）來進行測試。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 以測試 `repeat` 函式為例：</span>
-
-<span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span> times</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    result <span class="token operator">+=</span> str
-  <span class="token punctuation">&#125;</span>
-  <span class="token keyword">return</span> result
-<span class="token punctuation">&#125;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// 印出 aaaaa</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'z!Z!Z!!'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 印出　z!Z!Z!!z!Z!Z!!</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// 印出空字串</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 印出空字串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>接著優化測試資料：直接判斷函式執行結果是否正確。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 優化測試資料：</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'z!Z!Z!!'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'z!Z!Z!!z!Z!Z!!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 均印出 true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>這是最簡單的測試方法，但這麼做的缺點是很難「規模化」。我們可以利用別人寫好的框架來便利測試。</p>
-<h3 id="利用現成的框架-Jest-測試"><a href="#利用現成的框架-Jest-測試" class="headerlink" title="利用現成的框架 Jest 測試"></a>利用現成的框架 <span class="exturl" data-url="aHR0cHM6Ly9qZXN0anMuaW8v">Jest<i class="fa fa-external-link-alt"></i></span> 測試</h3><ol>
-<li>用 npm 下載 Jest：輸入指令 <code>npm install -save-dev jest</code></li>
-</ol>
-<p><img src="https://i.imgur.com/P2V2LzG.png"></p>
-<ol start="2">
-<li>利用模組將「測試」與「要測試的 Function」分開。</li>
-</ol>
-<ul>
-<li>在要測試的檔案 index.js 加上：<code>module.exports = &#39;要輸出的值&#39;</code></li>
-</ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span> times</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    result <span class="token operator">+=</span> str
-  <span class="token punctuation">&#125;</span>
-  <span class="token keyword">return</span> result
-<span class="token punctuation">&#125;</span>
-
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> repeat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>建立 index.test.js 檔案：<code>touch index.test.js</code>，習慣用 <code>test.js</code> 取名<br>並在檔案中引用 index.js 輸出的值：<code>var repeat = require(&#39;./引入的檔案&#39;)</code></li>
-</ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 可輸入 node index.test.js 測試是否引入成功</span>
-<span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 印出 aaaaa，引入成功</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>在 index.test.js 加入 Jest 語法：<code>test(&#39;描述文字&#39;, &#39;要做的測試&#39;)</code></li>
-</ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
-
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="3">
-<li>更新 package.json 檔案的 <code>&quot;scripts&quot;</code>：加入 <code>&quot;test&quot;: &quot;jest&quot;</code></li>
-</ol>
-<p><img src="https://i.imgur.com/85bIvDU.png" alt="&quot;test&quot;: &quot;jest&quot;"></p>
-<ol start="4">
-<li>如此即可運行 <code>npm run test</code> 進行測試，看到 PASS 可知測試有成功：</li>
-</ol>
-<p><img src="https://i.imgur.com/KGT6Vht.png" alt="test"></p>
-<p>之所以要用 npm 來跑 jest，而不是直接在終端機輸入 jest 指令，是因為 jest 只安裝在該專案底下，要使用時才會拿出來用。</p>
-<p>若只想測特定檔案，可以修改 <code>&quot;scripts&quot;</code>：<code>&quot;test&quot;: &quot;jest index.test.js&quot;</code>，後面加上檔名。</p>
-<p><img src="https://i.imgur.com/4byHuvz.png"></p>
-<p>或是用 <code>npx jest index.jest.js</code>，同樣能夠執行測試：</p>
-<p><img src="https://i.imgur.com/VGCuYis.png"></p>
-<p>也可以多跑幾個測式：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
-
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於aaaaa'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'abc 重複 1 次應該要等於abc'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" 重複 10 次應該要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://i.imgur.com/Ief4HX8.png" alt="測試結果"></p>
-<p>也可以把測試項目放在 <code>describe()</code> 函式裡，這種寫法會更有結構一點：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 架構：</span>
-
-<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">describe('測試 XX', function()&#123;
-  test('名稱', function() &#123;
-    expect('回傳值').toBe('預期結果');
-  &#125;)
-&#125;)</span><span class="token template-punctuation string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
-
-<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'測試 repeat'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於aaaaa'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'abc 重複 1 次應該要等於abc'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" 重複 10 次應該要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Unit-test-單元測試"><a href="#Unit-test-單元測試" class="headerlink" title="Unit test 單元測試"></a>Unit test 單元測試</h3><p>單元測試指的是測試一個工作單元（a unit of work）的行為。上述範例測試單一函式，就是一種單元測試。可用來確認每個 Unit 是否正確，也能夠進行規模化測試。</p>
-<hr>
-<h3 id="補充：如何在-Windows-上執行-Jest-也能有紅綠標籤"><a href="#補充：如何在-Windows-上執行-Jest-也能有紅綠標籤" class="headerlink" title="補充：如何在 Windows 上執行 Jest 也能有紅綠標籤"></a>補充：如何在 Windows 上執行 Jest 也能有紅綠標籤</h3><p>方法：把 <code>package.json</code> 裡的 <code>&quot;script&quot;</code> 中的內容改為 <code>&quot;test&quot;: &quot;jest --colors&quot;</code>，FAIL 和 PASS 標籤就會是紅綠標籤。</p>
-<p><img src="https://i.imgur.com/LaX4cI3.png" alt="color"></p>
-<p>奇怪的是，在 git commit 時都沒有問題，在執行 Jest 時卻出現亂碼。不太確定是不是因為更改 locale 才解決的，總之介面很神奇的變成中文了，可喜可賀。</p>
-<p><img src="https://i.imgur.com/4OCokvV.png" alt="UTF-8"></p>
-<p>參考資料：</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL2plc3QvaXNzdWVzLzM4Nzc=">Colorful output in Bash terminal does not work (–colors option) <i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-<hr>
-<h3 id="先寫測試再寫程式：TDD"><a href="#先寫測試再寫程式：TDD" class="headerlink" title="先寫測試再寫程式：TDD"></a>先寫測試再寫程式：TDD</h3><p>Test-driven Development（測試驅動開發），是一種開發流程，簡言之就是「先寫測試在開發」。相較於傳統的「先開發在寫測試」模式，TDD 有幾項優點：</p>
-<ol>
-<li>能確保測試程式的撰寫</li>
-<li>從使用方觀點切入，有助於在開發初期釐清程式介面如何設計</li>
-<li>便於日後 Debug</li>
-</ol>
-<h3 id="實作-TDD"><a href="#實作-TDD" class="headerlink" title="實作 TDD"></a>實作 TDD</h3><p>可利用 Jest 模組，先建立 <code>test()</code> 架構，再來撰寫主要程式碼。步驟可參考：<span class="exturl" data-url="aHR0cHM6Ly90dy5hbHBoYWNhbXAuY28vYmxvZy90ZGQtdGVzdC1kcml2ZW4tZGV2ZWxvcG1lbnQtZXhhbXBsZQ==">TDD 開發五步驟，帶你實戰 Test-Driven Development 範例<i class="fa fa-external-link-alt"></i></span></p>
-<h4 id="步驟一、選定一個目標功能，來新增測試案例"><a href="#步驟一、選定一個目標功能，來新增測試案例" class="headerlink" title="步驟一、選定一個目標功能，來新增測試案例"></a>步驟一、選定一個目標功能，來新增測試案例</h4><p>先寫好測試預期結果，並盡量列出邊界條件。在這個步驟還不會撰寫目標程式內容。這裡用 <code>reverse</code> 函式為例：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 先寫出預期結果：</span>
-
-<span class="token keyword">var</span> reverse <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
-
-<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'測試 reverse'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'123 reverse 要等於 321'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'321'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'!!! reverse 要等於 !!!'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">'!!!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'!!!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" reverse 要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="步驟二、執行測試，得到-Failed（紅燈）"><a href="#步驟二、執行測試，得到-Failed（紅燈）" class="headerlink" title="步驟二、執行測試，得到 Failed（紅燈）"></a>步驟二、執行測試，得到 Failed（紅燈）</h4><p>因為還沒撰寫目標程式，結果就會是 Failed。此步驟目的是確保測試程式可執行，沒有語法錯誤。</p>
-<p><img src="https://i.imgur.com/A38CQ2C.png" alt="運行測試"></p>
-<h4 id="步驟三、實作「最低限度」的產品程式"><a href="#步驟三、實作「最低限度」的產品程式" class="headerlink" title="步驟三、實作「最低限度」的產品程式"></a>步驟三、實作「最低限度」的產品程式</h4><p>開始寫程式，以能夠通過測試為目標，不求將程式碼優化一步到位。完成到一個階段就可運行 jest 查看是否有錯誤：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//開始寫程式</span>
-
-<span class="token keyword">function</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> str<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    result <span class="token operator">+=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token keyword">return</span> result
-<span class="token punctuation">&#125;</span>
-
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> reverse<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="步驟四：再次執行測試，得到-Passed（綠燈）"><a href="#步驟四：再次執行測試，得到-Passed（綠燈）" class="headerlink" title="步驟四：再次執行測試，得到 Passed（綠燈）"></a>步驟四：再次執行測試，得到 Passed（綠燈）</h4><p>在這個階段，即完成一個可運作且正確的程式版本，包含產品程式和測試程式。</p>
-<p><img src="https://i.imgur.com/dJHNZ1j.png" alt="Passed"></p>
-<h4 id="步驟五：重構程式"><a href="#步驟五：重構程式" class="headerlink" title="步驟五：重構程式"></a>步驟五：重構程式</h4><p>最後是優化「產品程式」和「測試程式」的程式碼，因為測試程式也是專案需維護的一部份。如此即可提升程式的可讀性、可維護性、擴充性。</p>
-<hr>
-<h2 id="什麼是-ECMAScript"><a href="#什麼是-ECMAScript" class="headerlink" title="什麼是 ECMAScript"></a>什麼是 ECMAScript</h2><p>是一種標準和規範，Javascript 這門語言就是遵循 ECMAScript 規範實作。於 2015 年發布 ECMAScript 第六版，因此又稱 ES2015 或 ES6，在 ES6 之前的版本就稱作 ES5。</p>
-<p>目前大部分的瀏覽器均支援 ES6，但仍有少數舊型不支援。因此我們可以透過 Babel 轉譯器，將 ES6 代碼轉換為 ES5 代碼，如此就不須擔心支援問題。</p>
-<h2 id="ES6-新語法"><a href="#ES6-新語法" class="headerlink" title="ES6 新語法"></a>ES6 新語法</h2><h3 id="宣告變數-let-與-const"><a href="#宣告變數-let-與-const" class="headerlink" title="宣告變數 let 與 const"></a>宣告變數 let 與 const</h3><ul>
-<li>ES5：使用 var</li>
-<li>ES6：使用 let 與 const</li>
-</ul>
-<p>兩者最大差異在於：</p>
-<ol>
-<li>重複宣告：const 用於宣告常數，不會被重新賦值</li>
-<li>作用域不同：<ul>
-<li>var：作用於整個函數範圍中（function scope）</li>
-<li>let 與 const：均為區塊作用域（block scope），如此可避免污染到大括號外的變數</li>
-</ul>
-</li>
-</ol>
-<h3 id="Template-Literals-模板字串符"><a href="#Template-Literals-模板字串符" class="headerlink" title="Template Literals 模板字串符"></a>Template Literals 模板字串符</h3><p>Template 的意思是樣板。Template Literals 可用於字串拼接。</p>
-<h4 id="ES5"><a href="#ES5" class="headerlink" title="ES5"></a>ES5</h4><ul>
-<li>使用單引號（<code>&#39;&#39;</code>）或雙引號（<code>&quot;&quot;</code>）</li>
-<li>缺點：必須用 <code>+</code> 或 <code>,</code> 來串接字串，且無法換行</li>
-</ul>
-<h4 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h4><ul>
-<li>使用反引號（``）</li>
-<li>優點：可用於多行字串拼接，也可在反引號中放入 <code>$&#123;變數&#125;</code></li>
-</ul>
-<h3 id="Destructuring-解構賦值"><a href="#Destructuring-解構賦值" class="headerlink" title="Destructuring 解構賦值"></a>Destructuring 解構賦值</h3><ul>
-<li>可以把陣列或物件的資料解開，並擷取成獨立的變數</li>
-</ul>
-<h3 id="Spread-Operator-展開運算子"><a href="#Spread-Operator-展開運算子" class="headerlink" title="Spread Operator 展開運算子"></a>Spread Operator 展開運算子</h3><ul>
-<li>使用 <code>...</code> 運算子，展開陣列或物件</li>
-</ul>
-<h3 id="Rest-Parameters-其餘參數"><a href="#Rest-Parameters-其餘參數" class="headerlink" title="Rest Parameters 其餘參數"></a>Rest Parameters 其餘參數</h3><ul>
-<li>使用 … 運算子，集合剩餘的元素變成陣列，就可以在不確定陣列長度的情況下，傳入參數。</li>
-</ul>
-<h3 id="Default-Parameters-設定參數預設值"><a href="#Default-Parameters-設定參數預設值" class="headerlink" title="Default Parameters 設定參數預設值"></a>Default Parameters 設定參數預設值</h3><ul>
-<li>可以幫參數加入預設值</li>
-</ul>
-<h3 id="箭頭函式"><a href="#箭頭函式" class="headerlink" title="箭頭函式"></a>箭頭函式</h3><ul>
-<li>Arrow Function，縮寫為 function</li>
-<li>優點：簡化程式碼，幫助閱讀</li>
-</ul>
-<h3 id="Import-amp-Export-引入與輸出"><a href="#Import-amp-Export-引入與輸出" class="headerlink" title="Import &amp; Export 引入與輸出"></a>Import &amp; Export 引入與輸出</h3><ul>
-<li>引入與輸出 module，類似 <code>require</code> 與 <code>module.exports</code> 的用法</li>
-</ul>
-<h3 id="Babel-簡介"><a href="#Babel-簡介" class="headerlink" title="Babel 簡介"></a>Babel 簡介</h3><ul>
-<li>是一種 JavaScript 轉譯器，可將 ES6 新語法轉換為 ES5 舊語法</li>
-<li>安裝指令：<code>npm install babel-loader @babel/core @babel/preset-env --save-dev</code></li>
-</ul>
-<p>參考資料：</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvdmFyaWFibGUtYW5kLWZyb250ZGVzay1hNTNhMDQ0MGFmM2M=">從博物館寄物櫃理解變數儲存模型<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNSU5QiU5QiVFOSU4MCVCMS1qYXZhc2NyaXB0LWVzNi0lRTglODglODctYmFiZWwtNWI1ZTI1NDUwNzY3">[第五週] JavaScript — ES6 與 Babel<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -23505,6 +23275,273 @@ paymentElement<span class="token punctuation">.</span><span class="token functio
       <tags>
         <tag>Front-End</tag>
         <tag>Stripe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 3] 初探 Jest：如何測試程式？</title>
+    <url>/javascript-jest/</url>
+    <content><![CDATA[<pre class="line-numbers language-none"><code class="language-none">學習目標：
+
+ 了解為什麼我們需要 unit test
+ 了解什麼是 unit test
+ 了解如何寫 unit test
+ 了解如何測試一個 function<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>測試程式的作用是「模擬外部如何使用目標程式，驗證目標程式的行為是否符合預期」。</p>
+<h2 id="利用-console-log-測試"><a href="#利用-console-log-測試" class="headerlink" title="利用 console.log() 測試"></a>利用 <code>console.log()</code> 測試</h2><p>在前面幾個章節，我們通常會使用 console.log()，來測幾個範例確認是否正確。也需要考慮到邊界條件（edge case）來進行測試。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 以測試 `repeat` 函式為例：</span>
+
+<span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span> times</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    result <span class="token operator">+=</span> str
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> result
+<span class="token punctuation">&#125;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// 印出 aaaaa</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'z!Z!Z!!'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 印出　z!Z!Z!!z!Z!Z!!</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// 印出空字串</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 印出空字串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接著優化測試資料：直接判斷函式執行結果是否正確。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 優化測試資料：</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'z!Z!Z!!'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'z!Z!Z!!z!Z!Z!!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 均印出 true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>這是最簡單的測試方法，但這麼做的缺點是很難「規模化」。我們可以利用別人寫好的框架來便利測試。</p>
+<h2 id="利用現成的框架-Jest-測試"><a href="#利用現成的框架-Jest-測試" class="headerlink" title="利用現成的框架 Jest 測試"></a>利用現成的框架 <span class="exturl" data-url="aHR0cHM6Ly9qZXN0anMuaW8v">Jest<i class="fa fa-external-link-alt"></i></span> 測試</h2><ol>
+<li>用 npm 下載 Jest：輸入指令 <code>npm install -save-dev jest</code></li>
+</ol>
+<p><img src="https://i.imgur.com/P2V2LzG.png"></p>
+<ol start="2">
+<li>利用模組將「測試」與「要測試的 Function」分開。</li>
+</ol>
+<ul>
+<li>在要測試的檔案 index.js 加上：<code>module.exports = &#39;要輸出的值&#39;</code></li>
+</ul>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span> times</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    result <span class="token operator">+=</span> str
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> result
+<span class="token punctuation">&#125;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> repeat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>建立 index.test.js 檔案：<code>touch index.test.js</code>，習慣用 <code>test.js</code> 取名<br>並在檔案中引用 index.js 輸出的值：<code>var repeat = require(&#39;./引入的檔案&#39;)</code></li>
+</ul>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 可輸入 node index.test.js 測試是否引入成功</span>
+<span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 印出 aaaaa，引入成功</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>在 index.test.js 加入 Jest 語法：<code>test(&#39;描述文字&#39;, &#39;要做的測試&#39;)</code></li>
+</ul>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>更新 package.json 檔案的 <code>&quot;scripts&quot;</code>：加入 <code>&quot;test&quot;: &quot;jest&quot;</code></li>
+</ol>
+<p><img src="https://i.imgur.com/85bIvDU.png" alt="&quot;test&quot;: &quot;jest&quot;"></p>
+<ol start="4">
+<li>如此即可運行 <code>npm run test</code> 進行測試，看到 PASS 可知測試有成功：</li>
+</ol>
+<p><img src="https://i.imgur.com/KGT6Vht.png" alt="test"></p>
+<p>之所以要用 npm 來跑 jest，而不是直接在終端機輸入 jest 指令，是因為 jest 只安裝在該專案底下，要使用時才會拿出來用。</p>
+<p>若只想測特定檔案，可以修改 <code>&quot;scripts&quot;</code>：<code>&quot;test&quot;: &quot;jest index.test.js&quot;</code>，後面加上檔名。</p>
+<p><img src="https://i.imgur.com/4byHuvz.png"></p>
+<p>或是用 <code>npx jest index.jest.js</code>，同樣能夠執行測試：</p>
+<p><img src="https://i.imgur.com/VGCuYis.png"></p>
+<p>也可以多跑幾個測式：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於aaaaa'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'abc 重複 1 次應該要等於abc'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" 重複 10 次應該要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://i.imgur.com/Ief4HX8.png" alt="測試結果"></p>
+<p>也可以把測試項目放在 <code>describe()</code> 函式裡，這種寫法會更有結構一點：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 架構：</span>
+
+<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">describe('測試 XX', function()&#123;
+  test('名稱', function() &#123;
+    expect('回傳值').toBe('預期結果');
+  &#125;)
+&#125;)</span><span class="token template-punctuation string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> repeat <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'測試 repeat'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'a 重複 5 次應該要等於aaaaa'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'aaaaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'abc 重複 1 次應該要等於abc'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" 重複 10 次應該要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Unit-test-單元測試"><a href="#Unit-test-單元測試" class="headerlink" title="Unit test 單元測試"></a>Unit test 單元測試</h2><p>單元測試指的是測試一個工作單元（a unit of work）的行為。上述範例測試單一函式，就是一種單元測試。可用來確認每個 Unit 是否正確，也能夠進行規模化測試。</p>
+<hr>
+<h2 id="補充：如何在-Windows-上執行-Jest-也能有紅綠標籤"><a href="#補充：如何在-Windows-上執行-Jest-也能有紅綠標籤" class="headerlink" title="補充：如何在 Windows 上執行 Jest 也能有紅綠標籤"></a>補充：如何在 Windows 上執行 Jest 也能有紅綠標籤</h2><p>方法：把 <code>package.json</code> 裡的 <code>&quot;script&quot;</code> 中的內容改為 <code>&quot;test&quot;: &quot;jest --colors&quot;</code>，FAIL 和 PASS 標籤就會是紅綠標籤。</p>
+<p><img src="https://i.imgur.com/LaX4cI3.png" alt="color"></p>
+<p>奇怪的是，在 git commit 時都沒有問題，在執行 Jest 時卻出現亂碼。不太確定是不是因為更改 locale 才解決的，總之介面很神奇的變成中文了，可喜可賀。</p>
+<p><img src="https://i.imgur.com/4OCokvV.png" alt="UTF-8"></p>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL2plc3QvaXNzdWVzLzM4Nzc=">Colorful output in Bash terminal does not work (–colors option) <i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<hr>
+<h2 id="先寫測試再寫程式：TDD"><a href="#先寫測試再寫程式：TDD" class="headerlink" title="先寫測試再寫程式：TDD"></a>先寫測試再寫程式：TDD</h2><p>Test-driven Development（測試驅動開發），是一種開發流程，簡言之就是「先寫測試在開發」。相較於傳統的「先開發在寫測試」模式，TDD 有幾項優點：</p>
+<ol>
+<li>能確保測試程式的撰寫</li>
+<li>從使用方觀點切入，有助於在開發初期釐清程式介面如何設計</li>
+<li>便於日後 Debug</li>
+</ol>
+<h2 id="實作-TDD"><a href="#實作-TDD" class="headerlink" title="實作 TDD"></a>實作 TDD</h2><p>可利用 Jest 模組，先建立 <code>test()</code> 架構，再來撰寫主要程式碼。步驟可參考：<span class="exturl" data-url="aHR0cHM6Ly90dy5hbHBoYWNhbXAuY28vYmxvZy90ZGQtdGVzdC1kcml2ZW4tZGV2ZWxvcG1lbnQtZXhhbXBsZQ==">TDD 開發五步驟，帶你實戰 Test-Driven Development 範例<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="步驟一、選定一個目標功能，來新增測試案例"><a href="#步驟一、選定一個目標功能，來新增測試案例" class="headerlink" title="步驟一、選定一個目標功能，來新增測試案例"></a>步驟一、選定一個目標功能，來新增測試案例</h3><p>先寫好測試預期結果，並盡量列出邊界條件。在這個步驟還不會撰寫目標程式內容。這裡用 <code>reverse</code> 函式為例：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 先寫出預期結果：</span>
+
+<span class="token keyword">var</span> reverse <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index'</span><span class="token punctuation">)</span>
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'測試 reverse'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'123 reverse 要等於 321'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'321'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'!!! reverse 要等於 !!!'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">'!!!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'!!!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">' "" reverse 要等於 ""'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="步驟二、執行測試，得到-Failed（紅燈）"><a href="#步驟二、執行測試，得到-Failed（紅燈）" class="headerlink" title="步驟二、執行測試，得到 Failed（紅燈）"></a>步驟二、執行測試，得到 Failed（紅燈）</h3><p>因為還沒撰寫目標程式，結果就會是 Failed。此步驟目的是確保測試程式可執行，沒有語法錯誤。</p>
+<p><img src="https://i.imgur.com/A38CQ2C.png" alt="運行測試"></p>
+<h3 id="步驟三、實作「最低限度」的產品程式"><a href="#步驟三、實作「最低限度」的產品程式" class="headerlink" title="步驟三、實作「最低限度」的產品程式"></a>步驟三、實作「最低限度」的產品程式</h3><p>開始寫程式，以能夠通過測試為目標，不求將程式碼優化一步到位。完成到一個階段就可運行 jest 查看是否有錯誤：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//開始寫程式</span>
+
+<span class="token keyword">function</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> str<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    result <span class="token operator">+=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> result
+<span class="token punctuation">&#125;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> reverse<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="步驟四：再次執行測試，得到-Passed（綠燈）"><a href="#步驟四：再次執行測試，得到-Passed（綠燈）" class="headerlink" title="步驟四：再次執行測試，得到 Passed（綠燈）"></a>步驟四：再次執行測試，得到 Passed（綠燈）</h3><p>在這個階段，即完成一個可運作且正確的程式版本，包含產品程式和測試程式。</p>
+<p><img src="https://i.imgur.com/dJHNZ1j.png" alt="Passed"></p>
+<h3 id="步驟五：重構程式"><a href="#步驟五：重構程式" class="headerlink" title="步驟五：重構程式"></a>步驟五：重構程式</h3><p>最後是優化「產品程式」和「測試程式」的程式碼，因為測試程式也是專案需維護的一部份。如此即可提升程式的可讀性、可維護性、擴充性。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 3] JavaScript：ES6 語法</title>
+    <url>/javascript-es6/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇為 <span class="exturl" data-url="aHR0cHM6Ly9saWRlbXkuY29tL3AvanMxMDItamF2YXNjcmlwdC1lczYtbnBt">[JS102] 升級你的 JavaScript 技能：ES6 + npm + Jest<i class="fa fa-external-link-alt"></i></span> 這門課程的學習筆記。如有錯誤歡迎指正！</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">學習目標：
+
+ 理解常用內建函式如何使用
+ 熟悉程式語法並知道如何解決基礎問題<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h2 id="What-is-ECMAScript？"><a href="#What-is-ECMAScript？" class="headerlink" title="What is ECMAScript？"></a>What is ECMAScript？</h2><p>是一種標準和規範，Javascript 這門語言就是遵循 ECMAScript 規範實作。於 2015 年發布 ECMAScript 第六版，因此又稱 ES2015 或 ES6，在 ES6 之前的版本就稱作 ES5。</p>
+<p>目前大部分的瀏覽器均支援 ES6，但仍有少數舊型不支援。因此我們可以透過 Babel 轉譯器，將 ES6 代碼轉換為 ES5 代碼，如此就不須擔心支援問題。</p>
+<h2 id="ES6-新語法"><a href="#ES6-新語法" class="headerlink" title="ES6 新語法"></a>ES6 新語法</h2><h3 id="宣告變數-let-與-const"><a href="#宣告變數-let-與-const" class="headerlink" title="宣告變數 let 與 const"></a>宣告變數 let 與 const</h3><ul>
+<li>ES5：使用 var</li>
+<li>ES6：使用 let 與 const</li>
+</ul>
+<p>兩者最大差異在於：</p>
+<ol>
+<li>重複宣告：const 用於宣告常數，不會被重新賦值</li>
+<li>作用域不同：<ul>
+<li>var：作用於整個函數範圍中（function scope）</li>
+<li>let 與 const：均為區塊作用域（block scope），如此可避免污染到大括號外的變數</li>
+</ul>
+</li>
+</ol>
+<h3 id="Template-Literals-模板字串符"><a href="#Template-Literals-模板字串符" class="headerlink" title="Template Literals 模板字串符"></a>Template Literals 模板字串符</h3><p>Template 的意思是樣板。Template Literals 可用於字串拼接。</p>
+<h4 id="ES5"><a href="#ES5" class="headerlink" title="ES5"></a>ES5</h4><ul>
+<li>使用單引號（<code>&#39;&#39;</code>）或雙引號（<code>&quot;&quot;</code>）</li>
+<li>缺點：必須用 <code>+</code> 或 <code>,</code> 來串接字串，且無法換行</li>
+</ul>
+<h4 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h4><ul>
+<li>使用反引號（``）</li>
+<li>優點：可用於多行字串拼接，也可在反引號中放入 <code>$&#123;變數&#125;</code></li>
+</ul>
+<h3 id="Destructuring-解構賦值"><a href="#Destructuring-解構賦值" class="headerlink" title="Destructuring 解構賦值"></a>Destructuring 解構賦值</h3><ul>
+<li>可以把陣列或物件的資料解開，並擷取成獨立的變數</li>
+</ul>
+<h3 id="Spread-Operator-展開運算子"><a href="#Spread-Operator-展開運算子" class="headerlink" title="Spread Operator 展開運算子"></a>Spread Operator 展開運算子</h3><ul>
+<li>使用 <code>...</code> 運算子，展開陣列或物件</li>
+</ul>
+<h3 id="Rest-Parameters-其餘參數"><a href="#Rest-Parameters-其餘參數" class="headerlink" title="Rest Parameters 其餘參數"></a>Rest Parameters 其餘參數</h3><ul>
+<li>使用 … 運算子，集合剩餘的元素變成陣列，就可以在不確定陣列長度的情況下，傳入參數。</li>
+</ul>
+<h3 id="Default-Parameters-設定參數預設值"><a href="#Default-Parameters-設定參數預設值" class="headerlink" title="Default Parameters 設定參數預設值"></a>Default Parameters 設定參數預設值</h3><ul>
+<li>可以幫參數加入預設值</li>
+</ul>
+<h3 id="箭頭函式"><a href="#箭頭函式" class="headerlink" title="箭頭函式"></a>箭頭函式</h3><ul>
+<li>Arrow Function，縮寫為 function</li>
+<li>優點：簡化程式碼，幫助閱讀</li>
+</ul>
+<h3 id="Import-amp-Export-引入與輸出"><a href="#Import-amp-Export-引入與輸出" class="headerlink" title="Import &amp; Export 引入與輸出"></a>Import &amp; Export 引入與輸出</h3><ul>
+<li>引入與輸出 module，類似 <code>require</code> 與 <code>module.exports</code> 的用法</li>
+</ul>
+<h3 id="Babel-簡介"><a href="#Babel-簡介" class="headerlink" title="Babel 簡介"></a>Babel 簡介</h3><ul>
+<li>是一種 JavaScript 轉譯器，可將 ES6 新語法轉換為 ES5 舊語法</li>
+<li>安裝指令：<code>npm install babel-loader @babel/core @babel/preset-env --save-dev</code></li>
+</ul>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BodWxpdHcvdmFyaWFibGUtYW5kLWZyb250ZGVzay1hNTNhMDQ0MGFmM2M=">從博物館寄物櫃理解變數儲存模型<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BtaWFoc3V3b3JrLyVFNyVBQyVBQyVFNSU5QiU5QiVFOSU4MCVCMS1qYXZhc2NyaXB0LWVzNi0lRTglODglODctYmFiZWwtNWI1ZTI1NDUwNzY3">[第五週] JavaScript — ES6 與 Babel<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
 </search>
