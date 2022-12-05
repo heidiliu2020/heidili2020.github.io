@@ -2091,7 +2091,7 @@ request<span class="token punctuation">.</span><span class="token function">send
 
 <p>確認可在瀏覽器上印出 text 內容：</p>
 <p><img src="https://i.imgur.com/rqFF0In.png"></p>
-<h4 id="jaon"><a href="#jaon" class="headerlink" title=".jaon()"></a><code>.jaon()</code></h4><p>若確定 Response 是 JSON 格式，可使用 <code>.json()</code> 以相同寫法來處理，回傳的結果會如同 <code>JSON.parse()</code> 幫我們轉成 json 格式：</p>
+<h4 id="json"><a href="#json" class="headerlink" title=".json()"></a><code>.json()</code></h4><p>若確定 Response 是 JSON 格式，可使用 <code>.json()</code> 以相同寫法來處理，回傳的結果會如同 <code>JSON.parse()</code> 幫我們轉成 json 格式：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> api200 <span class="token operator">=</span> <span class="token string">'https://run.mocky.io/v3/d49195d4-9e5b-4b63-8b13-6f97e46eb605'</span>
 
 <span class="token function">fetch</span><span class="token punctuation">(</span>api200<span class="token punctuation">)</span>
