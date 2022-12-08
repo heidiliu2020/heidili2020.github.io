@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://heidiliu2020.github.io/about/index.html</loc>
+    <loc>https://heidiliu2020.github.io/review/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/pd101-lidemy/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/lidemy-learning-2/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/lidemy-learing-1/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/lidemy-common-examples/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/command-line/</loc>
     
     <lastmod>2022-12-08</lastmod>
     
@@ -10,6 +45,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/about/index.html</loc>
     
     <lastmod>2022-12-08</lastmod>
     
@@ -145,27 +187,6 @@
     <loc>https://heidiliu2020.github.io/react-hooks/</loc>
     
     <lastmod>2021-01-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/command-line/</loc>
-    
-    <lastmod>2021-01-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/pd101-lidemy/</loc>
-    
-    <lastmod>2021-01-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/lidemy-common-examples/</loc>
-    
-    <lastmod>2021-01-04</lastmod>
     
   </url>
   
@@ -450,13 +471,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/review/</loc>
-    
-    <lastmod>2020-12-27</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/git/</loc>
     
     <lastmod>2020-12-27</lastmod>
@@ -513,21 +527,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/lidemy-learing-1/</loc>
-    
-    <lastmod>2020-12-27</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/hexo-github/</loc>
-    
-    <lastmod>2020-12-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/lidemy-learning-2/</loc>
     
     <lastmod>2020-12-27</lastmod>
     
@@ -607,13 +607,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/JavaScript/</loc>
-    <lastmod>2022-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/Lidemy/</loc>
     <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -809,6 +802,13 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
+    <lastmod>2022-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/phpmyadmin/</loc>
     <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
@@ -909,13 +909,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/categories/Lidemy/</loc>
-    <lastmod>2022-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/categories/Front-End/</loc>
     <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
@@ -938,6 +931,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/React/</loc>
+    <lastmod>2022-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/categories/lidemy/</loc>
     <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
