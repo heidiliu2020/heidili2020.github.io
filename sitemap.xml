@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/fetch-promise/</loc>
     
     <lastmod>2022-12-05</lastmod>
@@ -89,13 +96,6 @@
     <loc>https://heidiliu2020.github.io/sass-css-preprocessor/</loc>
     
     <lastmod>2021-04-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
-    
-    <lastmod>2021-04-05</lastmod>
     
   </url>
   
@@ -557,7 +557,7 @@
 
   <url>
     <loc>https://heidiliu2020.github.io/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -565,329 +565,322 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Angular/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Front-End/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/NGXS/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Back-End/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/System-Design/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Database/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/JavaScript/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Lidemy/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/CSS/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/ESLint/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/fetch/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/promise/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Git/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/GitHub/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/webpack/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/gulp/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/hash/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Hexo/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/hexo-admin/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/HTML-CSS/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/DOM/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/ES6/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/OOP/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/jQuery/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Bootstrap/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/PHP/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/MySQL/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/React/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Hooks/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/useEffect/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/useState/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/useContext/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/test/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Stripe/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/TypeScipt/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/phpmyadmin/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Express/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Middleware/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Node-js/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/HTTP/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Closure/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Hoisting/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/RxJS/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Sequelize/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Security/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/P2P/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -896,70 +889,63 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Angular/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Back-End/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/JavaScript/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Lidemy/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Front-End/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Git/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Hexo/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/React/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/categories/lidemy/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Note/</loc>
-    <lastmod>2022-12-05</lastmod>
+    <lastmod>2022-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

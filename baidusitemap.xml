@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
+    <lastmod>2022-12-08</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/fetch-promise/</loc>
     <lastmod>2022-12-05</lastmod>
   </url>
@@ -51,10 +55,6 @@
   <url>
     <loc>https://heidiliu2020.github.io/sass-css-preprocessor/</loc>
     <lastmod>2021-04-13</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
-    <lastmod>2021-04-05</lastmod>
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/angular-binding/</loc>
