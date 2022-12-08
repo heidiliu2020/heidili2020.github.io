@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidiliu2020.github.io/about/index.html</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
     
     <lastmod>2022-12-08</lastmod>
@@ -129,13 +136,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/express-middleware/</loc>
-    
-    <lastmod>2021-01-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/about/index.html</loc>
     
     <lastmod>2021-01-11</lastmod>
     
