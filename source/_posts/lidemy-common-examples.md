@@ -1,9 +1,9 @@
 title: 常見重點整理 - 命名慣例 & 開發時注意事項
 author: Heidi Liu
 tags:
-  - Lidemy
+  - lidemy
 categories:
-  - Lidemy
+  - lidemy
 date: 2020-10-02 00:34:00
 
 ---

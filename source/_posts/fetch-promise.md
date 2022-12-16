@@ -1,11 +1,11 @@
 title: '[week 13] Fetch & Promise 補充'
 author: Heidi Liu
 tags:
-  - Back-End
+  - Front-End
   - fetch
   - promise
 categories:
-  - Back-End
+  - Front-End
 date: 2020-09-30 20:20:00
 ---
 > 本篇為 Limedy「Fetch 與 Promise 補充系列」課程的學習筆記。如有錯誤歡迎指正。
@@ -145,7 +145,7 @@ fetch(api200)
 
 ![](https://i.imgur.com/rqFF0In.png)
 
-#### `.jaon()`
+#### `.json()`
 
 若確定 Response 是 JSON 格式，可使用 `.json()` 以相同寫法來處理，回傳的結果會如同 `JSON.parse()` 幫我們轉成 json 格式：
 
