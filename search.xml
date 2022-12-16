@@ -1518,102 +1518,6 @@ ii. lower-roman<span aria-hidden="true" class="line-numbers-rows"><span></span><
       </tags>
   </entry>
   <entry>
-    <title>[week 3] 設定 ESLint：用來檢查語法的工具</title>
-    <url>/eslint/</url>
-    <content><![CDATA[<h2 id="什麼是-ESLint？"><a href="#什麼是-ESLint？" class="headerlink" title="什麼是 ESLint？"></a>什麼是 ESLint？</h2><p>ESLint（ECMAScript + lint）是用來檢查 JavaScript 程式碼的工具。可在 commit 前檢查語法錯誤、提示潛在的 bug，藉此有效提高程式碼質量，和統一基本的 coding style。</p>
-<blockquote>
-<p>參考資料：</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sYXJyeWx1LmJsb2cvaW1wcm92ZS1jb2RlLXF1YWxpdHktdXNpbmctZXNsaW50LTc0MmNmMWYzODRmMQ==">[JS] 使用 ESLint 提高程式碼品質<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvNjkzMzcwLw==">深入淺出eslint——關於我學習eslint的心得<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-</blockquote>
-<span id="more"></span>
-<h3 id="如何安裝"><a href="#如何安裝" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>要在 Node.js 上運行 ESLint，必須安裝 npm，接著運行下列程式碼：</p>
-<h4 id="npm-install-g-eslint-：安裝-eslint-套件"><a href="#npm-install-g-eslint-：安裝-eslint-套件" class="headerlink" title="npm install -g eslint ：安裝 eslint 套件"></a><code>npm install -g eslint </code>：安裝 eslint 套件</h4><p>在 package.json &gt; scripts &gt; lint，可查看 eslint 的檢查範圍：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 代表 homeworks 底下所有的 js 檔案都要經過 eslint 的規則檢查</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-		<span class="token string">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ./homeworks/**/*.js"</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>若程式碼均符合規則，即可順利 commit：</li>
-</ul>
-<p><img src="https://i.imgur.com/c9Nv0Gh.png"></p>
-<ul>
-<li>若有不符合規則的程式碼，則會出現下列訊息，告知幾行幾欄出現 error 需進行修正，通過才可進行 commit：</li>
-</ul>
-<p><img src="https://i.imgur.com/FLkbnqX.png"></p>
-<hr>
-<h2 id="如何忽略檢查語法"><a href="#如何忽略檢查語法" class="headerlink" title="如何忽略檢查語法"></a>如何忽略檢查語法</h2><p>若想忽略規則，可在檔案中加入 <code>eslint-disable</code> 指令。</p>
-<h3 id="忽略所有規則"><a href="#忽略所有規則" class="headerlink" title="忽略所有規則"></a>忽略所有規則</h3><p>放在檔案開頭：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;* eslint-disable *&#x2F;                    &#x2F;&#x2F; 在該檔案關閉 ESLint<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="忽略特定規則"><a href="#忽略特定規則" class="headerlink" title="忽略特定規則"></a>忽略特定規則</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;* eslint no-unused-vars: 0 *&#x2F;            &#x2F;&#x2F; off 或 0 代表關閉規則<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="忽略單行"><a href="#忽略單行" class="headerlink" title="忽略單行"></a>忽略單行</h3><p>忽略所有規則。可分為「忽略同一行」或「忽略下一行」兩種寫法。</p>
-<pre class="line-numbers language-none"><code class="language-none">var a &#x3D; 10;   &#x2F;&#x2F; eslint-disable-line
-
-&#x2F;&#x2F; eslint-disable-next-line
-var result &#x3D; &#39;&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>忽略特定規則。直接在指令後面加「想要忽略的規則名稱」。</p>
-<pre class="line-numbers language-none"><code class="language-none">alert(&#39;Hello&#39;);       &#x2F;&#x2F; eslint-disable-line no-alert
-
-&#x2F;&#x2F; eslint-disable-next-line no-alert
-alert(&#39;Hello&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<hr>
-<h2 id="eslint-報錯例子"><a href="#eslint-報錯例子" class="headerlink" title="eslint 報錯例子"></a>eslint 報錯例子</h2><h3 id="1-換行符問題"><a href="#1-換行符問題" class="headerlink" title="1. 換行符問題"></a>1. 換行符問題</h3><p><code>Expected linebreaks to be &#39;LF&#39; but found &#39;CRLF&#39; </code></p>
-<p>原因：不同系統不同工具下換行符的問題。</p>
-<p>解決方法：如果是 windows 系統，點擊vscode右下角，將默認 CRLF 改為 LF。</p>
-<blockquote>
-<p>參考資料：</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudHdibG9ncy5uZXQvYS81YmIwMjA0YzJiNzE3Nzc4MWEwZmMwMzg=">項目中 eslint 報錯： Expected linebreaks to be ‘LF’ but found ‘CRLF’<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjM0Mjk3NS9hcnRpY2xlL2RldGFpbHMvODE0ODYzNzM=">VUE項目中eslint報錯： Expected linebreaks to be ‘LF’ but found ‘CRLF’<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-</blockquote>
-<h3 id="2-宣告變數需使用-const-或-let"><a href="#2-宣告變數需使用-const-或-let" class="headerlink" title="2. 宣告變數需使用 const 或 let"></a>2. 宣告變數需使用 const 或 let</h3><p><code>&#39;arr&#39; is never reassigned. Use &#39;const&#39; instead       prefer-const</code></p>
-<p>原因：eslint 會嚴格的抓 const 跟 let 的使用，而不是用 var 宣告變數。</p>
-<p>解決方法：沒有重新賦值過的變數都要用 const 宣告，其餘則是let。</p>
-<ul>
-<li>const（常數）：代表不變的數值。宣告時就要同時賦值，且不能再更動。</li>
-<li>let：和 var 作用差不多，但 let 所宣告的變數，只在代碼塊區域內有效。也就是說，被所屬 <code>&#123; &#125;</code> 包起來的 let 變數，不會被外面（全域）影響。</li>
-</ul>
-<p>舉個例子：</p>
-<pre class="line-numbers language-none"><code class="language-none">let price &#x3D; 20;          &#x2F;&#x2F; 全域變數
-if (true) &#123;              
-  let price &#x3D; 30;        &#x2F;&#x2F; 區域變數
-&#125;
-console.log(price)      &#x2F;&#x2F; 印出 20，因為區域變數不會覆蓋全域變數<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxMzE4OA==">Day02【ES6 小筆記】變數宣告 - let、const 哪裡好？跟 var 說掰掰<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<h4 id="3-縮排問題"><a href="#3-縮排問題" class="headerlink" title="3. 縮排問題"></a>3. 縮排問題</h4><p>原因：開頭必須使用 2 個空白來設定縮排，但 VSCode 預設是 4 個空白。</p>
-<p>解決方法：</p>
-<ol>
-<li>點選狀態列上的 [空白:4] </li>
-<li>選擇 [使用空格鍵進行縮排]</li>
-<li>選擇定位點長度 2 </li>
-<li>即可修改成 2 個空白設定縮排</li>
-</ol>
-<blockquote>
-<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B5dWppZXdhbmcvcmFpbHMtdmlzdWFsLXN0dWRpby1jb2RlLSVFNCVCRiVBRSVFNiU5NCVCOS10YWIlRTglQTglQUQlRTUlQUUlOUEtNzRiMGZjNzQ4ZjI4">[Rails] Visual Studio Code 修改 Tab設定<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ESLint</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>[week 6] CSS - 認識基礎標籤 &amp; 屬性</title>
     <url>/css/</url>
     <content><![CDATA[<blockquote>
@@ -1990,6 +1894,102 @@ html, body, h1, h2, h3, h4, p&#123;
       </categories>
       <tags>
         <tag>Front-End</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[week 3] 設定 ESLint：用來檢查語法的工具</title>
+    <url>/eslint/</url>
+    <content><![CDATA[<h2 id="什麼是-ESLint？"><a href="#什麼是-ESLint？" class="headerlink" title="什麼是 ESLint？"></a>什麼是 ESLint？</h2><p>ESLint（ECMAScript + lint）是用來檢查 JavaScript 程式碼的工具。可在 commit 前檢查語法錯誤、提示潛在的 bug，藉此有效提高程式碼質量，和統一基本的 coding style。</p>
+<blockquote>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sYXJyeWx1LmJsb2cvaW1wcm92ZS1jb2RlLXF1YWxpdHktdXNpbmctZXNsaW50LTc0MmNmMWYzODRmMQ==">[JS] 使用 ESLint 提高程式碼品質<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvNjkzMzcwLw==">深入淺出eslint——關於我學習eslint的心得<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+</blockquote>
+<span id="more"></span>
+<h3 id="如何安裝"><a href="#如何安裝" class="headerlink" title="如何安裝"></a>如何安裝</h3><p>要在 Node.js 上運行 ESLint，必須安裝 npm，接著運行下列程式碼：</p>
+<h4 id="npm-install-g-eslint-：安裝-eslint-套件"><a href="#npm-install-g-eslint-：安裝-eslint-套件" class="headerlink" title="npm install -g eslint ：安裝 eslint 套件"></a><code>npm install -g eslint </code>：安裝 eslint 套件</h4><p>在 package.json &gt; scripts &gt; lint，可查看 eslint 的檢查範圍：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 代表 homeworks 底下所有的 js 檔案都要經過 eslint 的規則檢查</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+		<span class="token string">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ./homeworks/**/*.js"</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>若程式碼均符合規則，即可順利 commit：</li>
+</ul>
+<p><img src="https://i.imgur.com/c9Nv0Gh.png"></p>
+<ul>
+<li>若有不符合規則的程式碼，則會出現下列訊息，告知幾行幾欄出現 error 需進行修正，通過才可進行 commit：</li>
+</ul>
+<p><img src="https://i.imgur.com/FLkbnqX.png"></p>
+<hr>
+<h2 id="如何忽略檢查語法"><a href="#如何忽略檢查語法" class="headerlink" title="如何忽略檢查語法"></a>如何忽略檢查語法</h2><p>若想忽略規則，可在檔案中加入 <code>eslint-disable</code> 指令。</p>
+<h3 id="忽略所有規則"><a href="#忽略所有規則" class="headerlink" title="忽略所有規則"></a>忽略所有規則</h3><p>放在檔案開頭：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;* eslint-disable *&#x2F;                    &#x2F;&#x2F; 在該檔案關閉 ESLint<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="忽略特定規則"><a href="#忽略特定規則" class="headerlink" title="忽略特定規則"></a>忽略特定規則</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;* eslint no-unused-vars: 0 *&#x2F;            &#x2F;&#x2F; off 或 0 代表關閉規則<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="忽略單行"><a href="#忽略單行" class="headerlink" title="忽略單行"></a>忽略單行</h3><p>忽略所有規則。可分為「忽略同一行」或「忽略下一行」兩種寫法。</p>
+<pre class="line-numbers language-none"><code class="language-none">var a &#x3D; 10;   &#x2F;&#x2F; eslint-disable-line
+
+&#x2F;&#x2F; eslint-disable-next-line
+var result &#x3D; &#39;&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>忽略特定規則。直接在指令後面加「想要忽略的規則名稱」。</p>
+<pre class="line-numbers language-none"><code class="language-none">alert(&#39;Hello&#39;);       &#x2F;&#x2F; eslint-disable-line no-alert
+
+&#x2F;&#x2F; eslint-disable-next-line no-alert
+alert(&#39;Hello&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="eslint-報錯例子"><a href="#eslint-報錯例子" class="headerlink" title="eslint 報錯例子"></a>eslint 報錯例子</h2><h3 id="1-換行符問題"><a href="#1-換行符問題" class="headerlink" title="1. 換行符問題"></a>1. 換行符問題</h3><p><code>Expected linebreaks to be &#39;LF&#39; but found &#39;CRLF&#39; </code></p>
+<p>原因：不同系統不同工具下換行符的問題。</p>
+<p>解決方法：如果是 windows 系統，點擊vscode右下角，將默認 CRLF 改為 LF。</p>
+<blockquote>
+<p>參考資料：</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudHdibG9ncy5uZXQvYS81YmIwMjA0YzJiNzE3Nzc4MWEwZmMwMzg=">項目中 eslint 報錯： Expected linebreaks to be ‘LF’ but found ‘CRLF’<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjM0Mjk3NS9hcnRpY2xlL2RldGFpbHMvODE0ODYzNzM=">VUE項目中eslint報錯： Expected linebreaks to be ‘LF’ but found ‘CRLF’<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+</blockquote>
+<h3 id="2-宣告變數需使用-const-或-let"><a href="#2-宣告變數需使用-const-或-let" class="headerlink" title="2. 宣告變數需使用 const 或 let"></a>2. 宣告變數需使用 const 或 let</h3><p><code>&#39;arr&#39; is never reassigned. Use &#39;const&#39; instead       prefer-const</code></p>
+<p>原因：eslint 會嚴格的抓 const 跟 let 的使用，而不是用 var 宣告變數。</p>
+<p>解決方法：沒有重新賦值過的變數都要用 const 宣告，其餘則是let。</p>
+<ul>
+<li>const（常數）：代表不變的數值。宣告時就要同時賦值，且不能再更動。</li>
+<li>let：和 var 作用差不多，但 let 所宣告的變數，只在代碼塊區域內有效。也就是說，被所屬 <code>&#123; &#125;</code> 包起來的 let 變數，不會被外面（全域）影響。</li>
+</ul>
+<p>舉個例子：</p>
+<pre class="line-numbers language-none"><code class="language-none">let price &#x3D; 20;          &#x2F;&#x2F; 全域變數
+if (true) &#123;              
+  let price &#x3D; 30;        &#x2F;&#x2F; 區域變數
+&#125;
+console.log(price)      &#x2F;&#x2F; 印出 20，因為區域變數不會覆蓋全域變數<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxMzE4OA==">Day02【ES6 小筆記】變數宣告 - let、const 哪裡好？跟 var 說掰掰<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h4 id="3-縮排問題"><a href="#3-縮排問題" class="headerlink" title="3. 縮排問題"></a>3. 縮排問題</h4><p>原因：開頭必須使用 2 個空白來設定縮排，但 VSCode 預設是 4 個空白。</p>
+<p>解決方法：</p>
+<ol>
+<li>點選狀態列上的 [空白:4] </li>
+<li>選擇 [使用空格鍵進行縮排]</li>
+<li>選擇定位點長度 2 </li>
+<li>即可修改成 2 個空白設定縮排</li>
+</ol>
+<blockquote>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B5dWppZXdhbmcvcmFpbHMtdmlzdWFsLXN0dWRpby1jb2RlLSVFNCVCRiVBRSVFNiU5NCVCOS10YWIlRTglQTglQUQlRTUlQUUlOUEtNzRiMGZjNzQ4ZjI4">[Rails] Visual Studio Code 修改 Tab設定<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ESLint</tag>
       </tags>
   </entry>
   <entry>
@@ -2710,6 +2710,82 @@ refactor(每日通知信件): 重構程式結構<span aria-hidden="true" class="
       </tags>
   </entry>
   <entry>
+    <title>Git 版本控制：如何進行多人協作 &amp; 同步分支 </title>
+    <url>/git-workflow/</url>
+    <content><![CDATA[<h2 id="實作新功能一定要在分支進行"><a href="#實作新功能一定要在分支進行" class="headerlink" title="實作新功能一定要在分支進行"></a>實作新功能一定要在分支進行</h2><p>不管是在個人專案，還是在多人協作時，都必須記得在實作新功能時，一定要在分支上進行：</p>
+<span id="more"></span>
+
+<pre class="line-numbers language-none"><code class="language-none">$ git branch &lt;new_branch&gt;  &#x2F;&#x2F; 開新分支
+$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到新分支
+$ git commit -am &#39;new_commit&#39; 
+$ git push origin &lt;new_branch&gt;  &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="多人協作之狀況劇"><a href="#多人協作之狀況劇" class="headerlink" title="多人協作之狀況劇"></a>多人協作之狀況劇</h2><p>在課程最一開始寫的 Git 筆記：<a href="https://heidiliu2020.github.io/git-github/">[week 1] 版本控制 - Git 進階指令 &amp; GitHub</a>，也有提到一些常見狀況劇。</p>
+<p>最近在進行 Final Project 時，體驗到多人協作和個人專案的不同，有許多需要注意的地方，這裡舉幾個自己實際遇到的狀況以及解決方式：</p>
+<ul>
+<li>狀況一：如何同步分支</li>
+<li>狀況二：如何新增要忽略版本控制的檔案</li>
+<li>狀況三：如何撤回已經 push 的 branch</li>
+<li>狀況四：我 commit 了可是我又不想 commit 了</li>
+</ul>
+<h3 id="狀況一：在-push-分支之前，該如何讓分支同步-master？"><a href="#狀況一：在-push-分支之前，該如何讓分支同步-master？" class="headerlink" title="狀況一：在 push 分支之前，該如何讓分支同步 master？"></a>狀況一：在 push 分支之前，該如何讓分支同步 master？</h3><p>當我們要 push 分支時，如果沒有先同步 master 進度，就會出現衝突問題，有兩種方式解決：</p>
+<h4 id="第一種：切回-master-同步，直接再開一個新分支"><a href="#第一種：切回-master-同步，直接再開一個新分支" class="headerlink" title="第一種：切回 master 同步，直接再開一個新分支"></a>第一種：切回 master 同步，直接再開一個新分支</h4><p>這個方法可以確保新分支一定是同步遠端的狀態，缺點就是要記得先備份好要 commit 的內容，才能切回 master 同步：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git checkout master  &#x2F;&#x2F; 切回 master
+$ git pull origin master  &#x2F;&#x2F; 同步遠端 master
+$ git branch &lt;new_branch&gt; &#x2F;&#x2F; 新開分支
+$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到分支
+$ git commit -am &#39;new_commit&#39; 
+$ git push origin &lt;new_branch&gt; &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="第二種：繼續在舊的分支開發，需要先同步分支"><a href="#第二種：繼續在舊的分支開發，需要先同步分支" class="headerlink" title="第二種：繼續在舊的分支開發，需要先同步分支"></a>第二種：繼續在舊的分支開發，需要先同步分支</h4><p>較推薦這個方法，直接在舊分支同步遠端，就不須再另外新開分支：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git pull origin master  &#x2F;&#x2F; 同步遠端 master
+$ git commit -am &#39;new_commit&#39;
+$ git push origin &lt;old_branch&gt; &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>依照上述其中一種方式，之後就可以在 GitHub 頁面發 PR 進行 merge，解決衝突問題。<br><br></p>
+<h3 id="狀況二：不小心把要被忽略的檔案-push-上去了！"><a href="#狀況二：不小心把要被忽略的檔案-push-上去了！" class="headerlink" title="狀況二：不小心把要被忽略的檔案 push 上去了！"></a>狀況二：不小心把要被忽略的檔案 push 上去了！</h3><p>如果是在建立 <code>.gitignore</code> 之前，不小心把要被版本控制忽略的檔案給 push 上 GitHub 的話該怎麼辦呢？</p>
+<p>以 React 中會自動生成的 <code>.eslintcache</code> 為例，如果在忽略之前就先把檔案 push 上去，之後多人協作要進行 merge 時，都必須解決衝突問題，這時只要按照以下步驟：</p>
+<h4 id="1-切換到-master，同步專案"><a href="#1-切換到-master，同步專案" class="headerlink" title="1. 切換到 master，同步專案"></a>1. 切換到 master，同步專案</h4><pre class="line-numbers language-none"><code class="language-none">$ git pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-刪掉本地端的-eslintcache-檔案"><a href="#2-刪掉本地端的-eslintcache-檔案" class="headerlink" title="2. 刪掉本地端的 .eslintcache 檔案"></a>2. 刪掉本地端的 <code>.eslintcache</code> 檔案</h4><h4 id="3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制"><a href="#3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制" class="headerlink" title="3. 將 .eslintcache 加入專案根目錄的 .gitignore 忽略版本控制"></a>3. 將 <code>.eslintcache</code> 加入專案根目錄的 <code>.gitignore</code> 忽略版本控制</h4><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; .gitignore 檔案
+
+*.eslintcache<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-commit-本次操作，commit-名稱可自行修改"><a href="#4-commit-本次操作，commit-名稱可自行修改" class="headerlink" title="4. commit 本次操作，commit 名稱可自行修改"></a>4. commit 本次操作，commit 名稱可自行修改</h4><pre class="line-numbers language-none"><code class="language-none">$ git commit -am &quot;fix: remove .eslintcache&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了"><a href="#5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了" class="headerlink" title="5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了"></a>5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了</h4><pre class="line-numbers language-none"><code class="language-none">$ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="6-讓其他協作者-pull-同步專案，修改完成！"><a href="#6-讓其他協作者-pull-同步專案，修改完成！" class="headerlink" title="6. 讓其他協作者 pull 同步專案，修改完成！"></a>6. 讓其他協作者 pull 同步專案，修改完成！</h4><br>
+
+<h3 id="狀況三：我-commit-了可是我又不想-commit-了"><a href="#狀況三：我-commit-了可是我又不想-commit-了" class="headerlink" title="狀況三：我 commit 了可是我又不想 commit 了"></a>狀況三：我 commit 了可是我又不想 commit 了</h3><h4 id="回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本："><a href="#回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本：" class="headerlink" title="回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本："></a>回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本：</h4><ul>
+<li>HEAD 代表最新的，^ 代表前一個，因此 HEAD^ 就是上一個 commit 的狀態</li>
+<li>預設是 –mixed，可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NzMwMw==">Git reset 的三種模式（soft mixed hard）<i class="fa fa-external-link-alt"></i></span>比較</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">$ git reset HEAD^  &#x2F;&#x2F; 退回到上一個 commit，等同於 git reset HEAD~1
+$ git log   &#x2F;&#x2F; 可查看版本號
+$ git reset &lt;38e7e30 &gt;  &#x2F;&#x2F; 退回到 &lt;38e7e30&gt; 這個 commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<br>
+
+<h3 id="狀況四：如何撤回已經-push-的-branch"><a href="#狀況四：如何撤回已經-push-的-branch" class="headerlink" title="狀況四：如何撤回已經 push 的 branch"></a>狀況四：如何撤回已經 push 的 branch</h3><h4 id="1-退回本地端的-commit-狀態"><a href="#1-退回本地端的-commit-狀態" class="headerlink" title="1. 退回本地端的 commit 狀態"></a>1. 退回本地端的 commit 狀態</h4><p>需注意這裡用 <code>git reset --hard</code> 指令，除了回到指定 commit 版本，程式碼也會回到指定版本的狀態：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git log   &#x2F;&#x2F; 可查看版本號
+$ git reset --hard &lt;6gye93e&gt;  &#x2F;&#x2F; 退回到 &lt;6gye93e&gt; 這個 commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-強制-push-本地端-branch-到遠端"><a href="#2-強制-push-本地端-branch-到遠端" class="headerlink" title="2. 強制 push 本地端 branch 到遠端"></a>2. 強制 push 本地端 branch 到遠端</h4><p>由於本地端分支版本低於遠端分支版本，這裡必須使用 <code>--force</code> 來強制 push 想要拆掉重做的 branch：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git push origin &lt;branch&gt; --force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>這樣就成功撤銷已經 push 的 branch，回到指定的 commit 狀態了！<br><br></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>其實 Git 版本控制是在 Lidemy 課程最一開始學的，之後繳交作業都是透過 Git 進行，中間也曾遇到種種狀況，像是不小心把同步課程大綱也 push 上去等等。</p>
+<p>最近和同學實際進行團體協作，才發現需要注意的事情又更多了！常常一個不注意下錯指令，把應該 push 的分支 push 成 master，還沒同步分支必須解決的衝突問題等等，趁這個機會把一些自己實際遇到的狀況給寫下來。熟悉多人協作以後，感覺自己又對版本控制有更深一層的認識。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[week 1] 版本控制 - Git 概念 ＆ 基本指令</title>
     <url>/git/</url>
     <content><![CDATA[<blockquote>
@@ -2839,82 +2915,6 @@ git config --global user.email &quot;your email&quot;<span aria-hidden="true" cl
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 版本控制：如何進行多人協作 &amp; 同步分支 </title>
-    <url>/git-workflow/</url>
-    <content><![CDATA[<h2 id="實作新功能一定要在分支進行"><a href="#實作新功能一定要在分支進行" class="headerlink" title="實作新功能一定要在分支進行"></a>實作新功能一定要在分支進行</h2><p>不管是在個人專案，還是在多人協作時，都必須記得在實作新功能時，一定要在分支上進行：</p>
-<span id="more"></span>
-
-<pre class="line-numbers language-none"><code class="language-none">$ git branch &lt;new_branch&gt;  &#x2F;&#x2F; 開新分支
-$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到新分支
-$ git commit -am &#39;new_commit&#39; 
-$ git push origin &lt;new_branch&gt;  &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="多人協作之狀況劇"><a href="#多人協作之狀況劇" class="headerlink" title="多人協作之狀況劇"></a>多人協作之狀況劇</h2><p>在課程最一開始寫的 Git 筆記：<a href="https://heidiliu2020.github.io/git-github/">[week 1] 版本控制 - Git 進階指令 &amp; GitHub</a>，也有提到一些常見狀況劇。</p>
-<p>最近在進行 Final Project 時，體驗到多人協作和個人專案的不同，有許多需要注意的地方，這裡舉幾個自己實際遇到的狀況以及解決方式：</p>
-<ul>
-<li>狀況一：如何同步分支</li>
-<li>狀況二：如何新增要忽略版本控制的檔案</li>
-<li>狀況三：如何撤回已經 push 的 branch</li>
-<li>狀況四：我 commit 了可是我又不想 commit 了</li>
-</ul>
-<h3 id="狀況一：在-push-分支之前，該如何讓分支同步-master？"><a href="#狀況一：在-push-分支之前，該如何讓分支同步-master？" class="headerlink" title="狀況一：在 push 分支之前，該如何讓分支同步 master？"></a>狀況一：在 push 分支之前，該如何讓分支同步 master？</h3><p>當我們要 push 分支時，如果沒有先同步 master 進度，就會出現衝突問題，有兩種方式解決：</p>
-<h4 id="第一種：切回-master-同步，直接再開一個新分支"><a href="#第一種：切回-master-同步，直接再開一個新分支" class="headerlink" title="第一種：切回 master 同步，直接再開一個新分支"></a>第一種：切回 master 同步，直接再開一個新分支</h4><p>這個方法可以確保新分支一定是同步遠端的狀態，缺點就是要記得先備份好要 commit 的內容，才能切回 master 同步：</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git checkout master  &#x2F;&#x2F; 切回 master
-$ git pull origin master  &#x2F;&#x2F; 同步遠端 master
-$ git branch &lt;new_branch&gt; &#x2F;&#x2F; 新開分支
-$ git checkout &lt;new_branch&gt;  &#x2F;&#x2F; 切換到分支
-$ git commit -am &#39;new_commit&#39; 
-$ git push origin &lt;new_branch&gt; &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="第二種：繼續在舊的分支開發，需要先同步分支"><a href="#第二種：繼續在舊的分支開發，需要先同步分支" class="headerlink" title="第二種：繼續在舊的分支開發，需要先同步分支"></a>第二種：繼續在舊的分支開發，需要先同步分支</h4><p>較推薦這個方法，直接在舊分支同步遠端，就不須再另外新開分支：</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git pull origin master  &#x2F;&#x2F; 同步遠端 master
-$ git commit -am &#39;new_commit&#39;
-$ git push origin &lt;old_branch&gt; &#x2F;&#x2F; push 分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>依照上述其中一種方式，之後就可以在 GitHub 頁面發 PR 進行 merge，解決衝突問題。<br><br></p>
-<h3 id="狀況二：不小心把要被忽略的檔案-push-上去了！"><a href="#狀況二：不小心把要被忽略的檔案-push-上去了！" class="headerlink" title="狀況二：不小心把要被忽略的檔案 push 上去了！"></a>狀況二：不小心把要被忽略的檔案 push 上去了！</h3><p>如果是在建立 <code>.gitignore</code> 之前，不小心把要被版本控制忽略的檔案給 push 上 GitHub 的話該怎麼辦呢？</p>
-<p>以 React 中會自動生成的 <code>.eslintcache</code> 為例，如果在忽略之前就先把檔案 push 上去，之後多人協作要進行 merge 時，都必須解決衝突問題，這時只要按照以下步驟：</p>
-<h4 id="1-切換到-master，同步專案"><a href="#1-切換到-master，同步專案" class="headerlink" title="1. 切換到 master，同步專案"></a>1. 切換到 master，同步專案</h4><pre class="line-numbers language-none"><code class="language-none">$ git pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="2-刪掉本地端的-eslintcache-檔案"><a href="#2-刪掉本地端的-eslintcache-檔案" class="headerlink" title="2. 刪掉本地端的 .eslintcache 檔案"></a>2. 刪掉本地端的 <code>.eslintcache</code> 檔案</h4><h4 id="3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制"><a href="#3-將-eslintcache-加入專案根目錄的-gitignore-忽略版本控制" class="headerlink" title="3. 將 .eslintcache 加入專案根目錄的 .gitignore 忽略版本控制"></a>3. 將 <code>.eslintcache</code> 加入專案根目錄的 <code>.gitignore</code> 忽略版本控制</h4><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; .gitignore 檔案
-
-*.eslintcache<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="4-commit-本次操作，commit-名稱可自行修改"><a href="#4-commit-本次操作，commit-名稱可自行修改" class="headerlink" title="4. commit 本次操作，commit 名稱可自行修改"></a>4. commit 本次操作，commit 名稱可自行修改</h4><pre class="line-numbers language-none"><code class="language-none">$ git commit -am &quot;fix: remove .eslintcache&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了"><a href="#5-push-到-GitHub-master，這時-GitHub-上的專案就不會出現應該被忽略的檔案了" class="headerlink" title="5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了"></a>5. push 到 GitHub master，這時 GitHub 上的專案就不會出現應該被忽略的檔案了</h4><pre class="line-numbers language-none"><code class="language-none">$ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="6-讓其他協作者-pull-同步專案，修改完成！"><a href="#6-讓其他協作者-pull-同步專案，修改完成！" class="headerlink" title="6. 讓其他協作者 pull 同步專案，修改完成！"></a>6. 讓其他協作者 pull 同步專案，修改完成！</h4><br>
-
-<h3 id="狀況三：我-commit-了可是我又不想-commit-了"><a href="#狀況三：我-commit-了可是我又不想-commit-了" class="headerlink" title="狀況三：我 commit 了可是我又不想 commit 了"></a>狀況三：我 commit 了可是我又不想 commit 了</h3><h4 id="回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本："><a href="#回到上一個-commit-狀態，保留檔案變更，需要再-commit-來新增版本：" class="headerlink" title="回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本："></a>回到上一個 commit 狀態，保留檔案變更，需要再 commit 來新增版本：</h4><ul>
-<li>HEAD 代表最新的，^ 代表前一個，因此 HEAD^ 就是上一個 commit 的狀態</li>
-<li>預設是 –mixed，可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NzMwMw==">Git reset 的三種模式（soft mixed hard）<i class="fa fa-external-link-alt"></i></span>比較</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">$ git reset HEAD^  &#x2F;&#x2F; 退回到上一個 commit，等同於 git reset HEAD~1
-$ git log   &#x2F;&#x2F; 可查看版本號
-$ git reset &lt;38e7e30 &gt;  &#x2F;&#x2F; 退回到 &lt;38e7e30&gt; 這個 commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<br>
-
-<h3 id="狀況四：如何撤回已經-push-的-branch"><a href="#狀況四：如何撤回已經-push-的-branch" class="headerlink" title="狀況四：如何撤回已經 push 的 branch"></a>狀況四：如何撤回已經 push 的 branch</h3><h4 id="1-退回本地端的-commit-狀態"><a href="#1-退回本地端的-commit-狀態" class="headerlink" title="1. 退回本地端的 commit 狀態"></a>1. 退回本地端的 commit 狀態</h4><p>需注意這裡用 <code>git reset --hard</code> 指令，除了回到指定 commit 版本，程式碼也會回到指定版本的狀態：</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git log   &#x2F;&#x2F; 可查看版本號
-$ git reset --hard &lt;6gye93e&gt;  &#x2F;&#x2F; 退回到 &lt;6gye93e&gt; 這個 commit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="2-強制-push-本地端-branch-到遠端"><a href="#2-強制-push-本地端-branch-到遠端" class="headerlink" title="2. 強制 push 本地端 branch 到遠端"></a>2. 強制 push 本地端 branch 到遠端</h4><p>由於本地端分支版本低於遠端分支版本，這裡必須使用 <code>--force</code> 來強制 push 想要拆掉重做的 branch：</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git push origin &lt;branch&gt; --force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>這樣就成功撤銷已經 push 的 branch，回到指定的 commit 狀態了！<br><br></p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>其實 Git 版本控制是在 Lidemy 課程最一開始學的，之後繳交作業都是透過 Git 進行，中間也曾遇到種種狀況，像是不小心把同步課程大綱也 push 上去等等。</p>
-<p>最近和同學實際進行團體協作，才發現需要注意的事情又更多了！常常一個不注意下錯指令，把應該 push 的分支 push 成 master，還沒同步分支必須解決的衝突問題等等，趁這個機會把一些自己實際遇到的狀況給寫下來。熟悉多人協作以後，感覺自己又對版本控制有更深一層的認識。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -4168,6 +4168,52 @@ $ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next th
       <tags>
         <tag>Front-End</tag>
         <tag>HTML&amp;CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【學習筆記】女巫攻擊 vs. 日蝕攻擊 vs. DDoS 攻擊</title>
+    <url>/information-security-about-p2p/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/dOrGjQy.png"></p>
+<h3 id="從-P2P-網路說起"><a href="#從-P2P-網路說起" class="headerlink" title="從 P2P 網路說起"></a>從 P2P 網路說起</h3><span id="more"></span>
+
+<p>我們所熟悉的傳統網站架構，是把所有資源都放在同一台伺服器（Server），當使用者（Client）有需要時再向伺服器發出請求。一旦單一伺服器停擺，就有可能造成整個服務中斷的問題。</p>
+<p><img src="https://i.imgur.com/OycTetl.png"></p>
+<ul>
+<li>圖片來源： <span class="exturl" data-url="aHR0cHM6Ly9jb21tb25zLndpa2ltZWRpYS5vcmcvdy9pbmRleC5waHA/Y3VyaWQ9MjU1MTc0NQ==">https://commons.wikimedia.org/w/index.php?curid=2551745<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p>而 <strong>Peer to Peer（P2P）網路</strong>，則是網路區塊的所有人均負責儲存全部或部分的資料。除了向其他IP 位址發出請求外，本身也負責處理收到的請求，同時扮演 Client 和 Server 的角色，透過「去中心化」，避免資料被中心化機構所掌控或修改，進而確保資訊安全。</p>
+<p><img src="https://i.imgur.com/cRfMTpC.png"></p>
+<ul>
+<li>圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9jb21tb25zLndpa2ltZWRpYS5vcmcvdy9pbmRleC5waHA/Y3VyaWQ9MjU1MTcyMw==">https://commons.wikimedia.org/w/index.php?curid=2551723<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p>然而 P2P 網路也同樣淺藏著風險，十年前橫行一時的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvRm94eQ==">Foxy<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0JpdENvbWV0">BitComet<i class="fa fa-external-link-alt"></i></span> 等軟體就是基於 P2P 技術來下載資源，但前者除了電腦容易中毒，也會大量消耗網路和硬體資源。</p>
+<p>接下來介紹幾種常見的 P2P 網路攻擊，均為攻擊者透過攻擊「節點」擾亂網路，差別在於最終攻擊目標和方式的不同：</p>
+<h3 id="女巫攻擊（Sybil-Attack）"><a href="#女巫攻擊（Sybil-Attack）" class="headerlink" title="女巫攻擊（Sybil Attack）"></a><strong>女巫攻擊（Sybil Attack）</strong></h3><ul>
+<li>方式：是指單一攻擊者透過偽造多重身份以假冒惡意節點，藉此向其他正常節點提供大量不正確的資訊，從而控制網絡取得利益</li>
+<li>目的：破壞網路協議的信譽體系</li>
+</ul>
+<h3 id="日蝕攻擊（Eclipse-Attack）"><a href="#日蝕攻擊（Eclipse-Attack）" class="headerlink" title="日蝕攻擊（Eclipse Attack）"></a><strong>日蝕攻擊（Eclipse Attack）</strong></h3><ul>
+<li>方式：確保目標的所有連接都建立在攻擊者所控制的節點上</li>
+<li>目的：透過攻擊手段使受害者連接的節點被攻擊者所控制，進而操控受害者節點的通信</li>
+</ul>
+<h3 id="DDoS（Distributed-Denial-of-Service）-分布式拒絕服務攻擊"><a href="#DDoS（Distributed-Denial-of-Service）-分布式拒絕服務攻擊" class="headerlink" title="DDoS（Distributed Denial of Service）= 分布式拒絕服務攻擊"></a>DDoS（Distributed Denial of Service）= 分布式拒絕服務攻擊</h3><ul>
+<li>方式：攻擊者透過控制不同位置的多台機器，並利用這些機器對受害者實施攻擊</li>
+<li>目的：透過大量占用網絡中的節點資源，使這些節點無法提供正常服務，進而影響到整個區塊鏈網絡的運行</li>
+</ul>
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>這陣子時常聽聞幣圈的新聞，藉此科普一些和網路攻擊相關的小知識。其實除了上述這些，還有很多聽起來很酷專有名詞，像是這篇<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNjE1OQ==">《Day21|P2P網路(2)：共識─拜占庭將軍問題》<i class="fa fa-external-link-alt"></i></span> 和提到吸血鬼攻擊的<span class="exturl" data-url="aHR0cHM6Ly9hYm1lZGlhLmlvL3N1c2hpc3dhcC12YW1waXJlLW1pbmluZy1hbHBoYS10cmFjdG9y">《SushiSwap 槓上 Uniswap，你知道最新的「吸血鬼挖礦攻擊」嗎？》<i class="fa fa-external-link-alt"></i></span>，瞭解到因應這些網路攻擊，該如何制定規則去防止攻擊者達成目的等等。</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDExOTk4Mi9pcm9ubWFuLzIyNTU=">從0開始架構區塊鏈 系列<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucGFuZXdzbGFiLmNvbS96aF9oay9hcnRpY2xlZGV0YWlscy9ENDEyMDQ3MTcuaHRtbA==">科普 | 日蝕攻擊、DDoS攻擊<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmxvY2t0ZW1wby5jb20vYW5hbHlzaXMtb24tdGhlLWN1cnJlbnQtYXR0YWNrLW1lYW5zLW1hbGxlYWJpbGl0eS1zeWJpbC1hbmQtZHVzdC8=">新手科普| 什麼是「交易延展性攻擊、粉塵攻擊和女巫攻擊」<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucGFuZXdzbGFiLmNvbS96aF9oay9hcnRpY2xlZGV0YWlscy9EMjkyNjI3MDAuaHRtbA==">日食攻擊、女巫攻擊、吸血鬼攻擊都是什麼？<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>Security</tag>
+        <tag>P2P</tag>
       </tags>
   </entry>
   <entry>
@@ -6251,6 +6297,192 @@ $<span class="token punctuation">.</span><span class="token function">getJSON</s
       </tags>
   </entry>
   <entry>
+    <title>測試二三事（上）｜還記得你說，要和我寫測試</title>
+    <url>/learn-about-testing/</url>
+    <content><![CDATA[<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>過去在程式導師實驗課程中，整理過這兩篇筆記探討「測試」是怎麼回事：</p>
+<ul>
+<li><a href="https://heidiliu2020.github.io/javascript-jest/">[week 3] 初探 Jest：如何測試程式？</a></li>
+<li><a href="https://heidiliu2020.github.io/react-test/">[week 22] React：用 SPA 架構實作一個部落格（三）- 淺談測試</a></li>
+</ul>
+<p>在轉職後的第一家公司，組內曾嘗試在既有專案中撰寫測試，卻因時程緊湊而不了了之。但或許是一聽到測試就浮現「好麻煩⋯⋯」的想法吧？與其花這個時間去寫程式來進行測試，還不如多修幾個 BUG 來得有效益，打從心底想逃避這件事情，只覺得測試是理想，讓這項 TODO 一直被延宕。</p>
+<span id="more"></span>
+
+<p>而在求職過程中，時常被問是否有過測試經驗；到了現在第二間公司，寫測試這議題又再次浮現。回想起過去在專案中，時不時發生「改 A 壞 B」 的情況，如果透過測試來事先預期結果，或許就能減少這類錯誤的發生。</p>
+<p>於是乎，這篇文章就誕生了ಠ_ಠ </p>
+<p>在實作過程中，試著統整過去所學並且記錄下來，文章大致會分成四個段落，在正式介紹 Cypress 這套測試框架之前，會先在上篇補充測試相關的知識：</p>
+<ul>
+<li>Why we need test?</li>
+<li>What is Testing?</li>
+<li>Why Cypress?</li>
+<li>How to start?</li>
+</ul>
+<p>那麼就開始吧！</p>
+<h2 id="Why-we-need-test"><a href="#Why-we-need-test" class="headerlink" title="Why we need test?"></a>Why we need test?</h2><p>所以說，為何我們需要測試？</p>
+<p>誠如前言提到，透過測試我們能夠先預期結果，找出非預期的錯誤情境。在轉體開發過程中，隨著需求日漸複雜化，多人協作開發不易維護，再加上時程壓力，若沒有制定流程規範，實在很難透過手動測試一次到位。</p>
+<p>讓自動化測試取代人工測試，除了能降低成本，也有助於快速驗證程式是否能正常運作，並透過測試報告找出問題所在，不至於在茫茫程式海中迷失方向。</p>
+<p>總歸而言，測試能夠確保程式碼的可靠性，避免人為錯誤，提升程式碼的質量、重用性與可維護性。</p>
+<h2 id="What-is-Testing"><a href="#What-is-Testing" class="headerlink" title="What is Testing?"></a>What is Testing?</h2><p>說了這麼多，到底怎樣才是測試呢？</p>
+<p>從我們最熟悉的人工測試，到寫程式來測試程式，其實都是基於同樣的道理：「測試是藉由程式來模擬現實，比較『預期結果』和『實際結果』是否相同的過程」。</p>
+<h3 id="自動化測試金字塔-Test-Automation-Pyramid"><a href="#自動化測試金字塔-Test-Automation-Pyramid" class="headerlink" title="自動化測試金字塔 Test Automation Pyramid"></a>自動化測試金字塔 Test Automation Pyramid</h3><p>簡單來說，測試依規模大致可分成三個層次，構成自動化測試金字塔，如下圖所示：</p>
+<p><img src="https://i.imgur.com/L9sS6uH.png"></p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hdXRvbWF0aW9ucGFuZGEuY29tLzIwMTgvMDgvMDEvdGhlLXRlc3RpbmctcHlyYW1pZC8=">Automation Panda<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>在測試金字塔中，越靠上方所耗費成本越高、執行時間越長；反之，越靠底下所耗費成本低，執行時間越短。</p>
+<p>而依照測試方法不同，又可分為黑箱測試與白箱測試：</p>
+<ul>
+<li>黑箱測試（Black-box Testing）/ 功能測試<ul>
+<li>以使用者的角度，針對程式的功能面進行測試</li>
+<li>應用於整合測試和系統測試</li>
+<li>舉例：在表格欄位輸入錯誤的資料格式，檢測系統是否存在漏洞</li>
+</ul>
+</li>
+<li>白箱測試（White-box Testing）/ 結構測試<ul>
+<li>以程式語言的角度，測試內部結構或流程</li>
+<li>應用於單元測試</li>
+<li>舉例：使用訂單系統，依使用者的情境模擬操作</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/ymjyD7I.png"></p>
+<h3 id="單元測試-Unit-Testing"><a href="#單元測試-Unit-Testing" class="headerlink" title="單元測試 Unit Testing"></a>單元測試 Unit Testing</h3><ul>
+<li>以程式碼的最小單位（function、method 等）進行測試，也是自動測試化的基礎</li>
+<li>驗證單一行為、執行快速、具獨立性</li>
+<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly9qZXN0anMuaW8v">Jest<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9tb2NoYWpzLm9yZy8=">mochajs<i class="fa fa-external-link-alt"></i></span> &amp; <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYWlqcy9jaGFp">chai<i class="fa fa-external-link-alt"></i></span></li>
+<li>常見開發模式：TDD &amp; BDD</li>
+</ul>
+<p>這裡介紹兩種與單元測試（Unit Test）相關的開發流程：</p>
+<ul>
+<li><strong>TDD（Test-Deriven Development）測試驅動開發</strong><ul>
+<li>先寫測試，後實作功能</li>
+<li>專注功能的實現</li>
+<li>開發流程會在「單元測試 ⇒ 撰寫能通過測試的程式碼 ⇒ 重構」三者之間循環</li>
+</ul>
+</li>
+<li><strong>BDD （Behavior-Deriven Development）行為驅動開發</strong><ul>
+<li>為 TDD 的進化版，但會先寫測試規格書，再寫測試，後實作功能</li>
+<li>專注系統的行為，較貼近使用者的角度進行測試</li>
+<li>使用 <code>describe()</code> 和 <code>it()</code> 需求為導向的設計語意化<img src="https://i.imgur.com/8NgSbPj.png">  </li>
+</ul>
+</li>
+</ul>
+<h3 id="整合測試-Integration-Testing"><a href="#整合測試-Integration-Testing" class="headerlink" title="整合測試 Integration Testing"></a>整合測試 Integration Testing</h3><ul>
+<li>整合兩個以上的元件（Component）或模組（Module）之間的互動測試</li>
+<li>使用 Mock Data 模擬 Mock API 回傳內容，檢測 render DOM 是否呈現預期結果</li>
+<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly9hbmd1bGFyLmlvL2FwaS9jb3JlL3Rlc3RpbmcvVGVzdEJlZA==">TestBed<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly90ZXN0aW5nLWxpYnJhcnkuY29tLw==">Testing Library<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9lbnp5bWVqcy5naXRodWIuaW8vZW56eW1lLw==">Enzyme<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p>為什麼需要整合測試？單元測試都通過不就代表都 OK 了？下圖提供非常好的例子：</p>
+<p><img src="https://i.imgur.com/H30Yzer.gif"></p>
+<blockquote>
+<p>門鎖 OK、開關門 OK、鎖門？？</p>
+</blockquote>
+<p>根據不同情境所需，有時即使單元測試沒測出問題，一旦跨模組整合就出事了，因此這個階段更重視不同元件或環境之間的整合互動，也更貼近使用者實際行為。</p>
+<h3 id="端對端測試-End-to-end-Testing-E2E-Testing"><a href="#端對端測試-End-to-end-Testing-E2E-Testing" class="headerlink" title="端對端測試 End-to-end Testing / E2E Testing"></a>端對端測試 End-to-end Testing / E2E Testing</h3><ul>
+<li>會運行一個瀏覽器，藉由模擬使用者操作，將手動測試轉變成程式碼自動執行</li>
+<li>是對真實系統進行的測試，較費時且維護成本高</li>
+<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3lwcmVzcy5pby8=">Cypress、<i class="fa fa-external-link-alt"></i></span><span class="exturl" data-url="aHR0cHM6Ly9uaWdodHdhdGNoanMub3JnLw==">Nightwatch<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B1cHBldGVlci9wdXBwZXRlZXI=">Puppeteer<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvdHJhY3RvcnRlc3Qub3JnLw==">Protractor<i class="fa fa-external-link-alt"></i></span>（<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FuZ3VsYXIvcHJvdHJhY3Rvci9pc3N1ZXMvNTUwMg==">Angular v12 後棄用，不再內建於新專案中<i class="fa fa-external-link-alt"></i></span>）</li>
+</ul>
+<p>如下所示，為 Cypress 使用範例，能夠看到使用者實際操作頁面的過程：</p>
+<p><img src="https://i.imgur.com/GzISa0E.gif"></p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmN5cHJlc3MuaW8vZ3VpZGVzL3Rvb2xpbmcvdmlzdWFsLXRlc3Rpbmc=">Visual Testing | Cypress Documentation<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="Consolusion"><a href="#Consolusion" class="headerlink" title="Consolusion"></a>Consolusion</h2><p>雖說寫測試很重要，但並非寫好寫滿就是最好作法，畢竟需求情境百百種，仍需考慮使用時機與情境，才不會本末導致，花費更多時間維護測試腳本。</p>
+<p>透過撰寫測試，<del>強迫</del>讓開發者寫出容易被測試的程式碼，並在有限的資源中，以有效的測試來確保程式的品質。</p>
+<p>然而，這些測試的道理我都懂，但到底該如何開始呢？下篇會繼續探討，如何透過 Cypress 這套工具進行 E2E Testing，並且實際應用到專案中！</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxOS8wMi8xOC9Vbml0LXRlc3RpbmctSW50ZWdyYXRpb24tdGVzdGluZy1lMmUtdGVzdGluZw==">一次搞懂單元測試、整合測試、端對端測試之間的差異 | The Will Will Web<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZGV2L3dlYmRldi93ZWItdGVzdGluZy8=">[web] 程式是人寫出來的，測試也是| PJCHENder 未整理筆記<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDA5MDcyOC9pcm9ubWFuLzM4ODE=">Angular 深入淺出三十天：表單與測試系列 - iT 邦幫忙<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmFtb3d1LmNvbS9jeXByZXNzLW9uLXJhaWxzLw==">Hahow for Business 如何跑E2E 測試？ - Amo’s Blog<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Testing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常見重點整理 - 命名慣例 &amp; 開發時注意事項</title>
+    <url>/lidemy-common-examples/</url>
+    <content><![CDATA[<ul>
+<li>參考資料：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpZGVteS9tZW50b3ItcHJvZ3JhbS00dGgvYmxvYi9tYXN0ZXIvZXhhbXBsZXMvY29tbW9uLm1k">https://github.com/Lidemy/mentor-program-4th/blob/master/examples/common.md<i class="fa fa-external-link-alt"></i></span><span id="more"></span>
+
+</li>
+</ul>
+<h2 id="什麼是好的-code？"><a href="#什麼是好的-code？" class="headerlink" title="什麼是好的 code？"></a>什麼是好的 code？</h2><ol>
+<li>符合命名慣例以及命名一致性</li>
+<li>合理的變數名稱</li>
+</ol>
+<h2 id="三種常見的命名慣例"><a href="#三種常見的命名慣例" class="headerlink" title="三種常見的命名慣例"></a>三種常見的命名慣例</h2><h3 id="駝峰式命名（Camel-case）"><a href="#駝峰式命名（Camel-case）" class="headerlink" title="駝峰式命名（Camel case）"></a>駝峰式命名（Camel case）</h3><ul>
+<li>就像駝峰會一高一低</li>
+<li>單字之間不空格，而是直接連起來，但是連起來的第一個字要大寫</li>
+<li>例如：有一個 handle add post 的 function，就會叫做 handleAddPost</li>
+</ul>
+<p>駝峰又有分兩種：</p>
+<ol>
+<li>小駝峰（lower camel case）：開頭是小寫，就像上面的範例 handleAddPost</li>
+<li>大駝峰（upper camel case）：又被稱為 Pascal Case。開頭變成大寫，也就會變成 HandleAddPost</li>
+</ol>
+<h3 id="蛇型命名（Snake-case）"><a href="#蛇型命名（Snake-case）" class="headerlink" title="蛇型命名（Snake case）"></a>蛇型命名（Snake case）</h3><ul>
+<li>蛇就是底線的意思，利用底線來連接單字，然後全部都是小寫</li>
+<li>同上述範例，會變成：handle_add_post</li>
+</ul>
+<h3 id="烤肉串命名（Kebab-case）"><a href="#烤肉串命名（Kebab-case）" class="headerlink" title="烤肉串命名（Kebab case）"></a>烤肉串命名（Kebab case）</h3><ul>
+<li>Kebab 是烤肉串的意思，<code>-</code> 符號看起來就像那跟棍子</li>
+<li>同上述範例，會變成：handle-add-post</li>
+</ul>
+<p>認識這三種常見的命名慣例以及名詞之後，接著要來熟悉不同地方的命名慣例。也就是說，不同程式語言或是不同環境，使用的命名慣例也可能會不一樣。</p>
+<p>需注意的是，命名慣例雖然沒有強制性，但開發時基本上都會依照這套慣例，避免寫出他人認為不好的 code。</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>在 JavaScript 中，不管是 function 或變數，習慣使用 lower camel case，也就是 <code>handleAddPost</code>。</p>
+<p>在特殊情況下，可以使用大寫駝峰式，例如：</p>
+<ol>
+<li>XMLHttpRequest</li>
+<li>Number</li>
+<li>Set</li>
+</ol>
+<p>這些變數可以算是物件導向中的 class，因此習慣以大寫開頭。而 React 中的 也同樣會使用大寫開頭方式命名。</p>
+<h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><ul>
+<li>常數具有不變的特性，通常以 snake case + 全大寫來命名</li>
+<li>例如：圓周率 PI，就會是 <code>Math.PI</code>；或是 client id 會寫成 CLIENT_ID</li>
+</ul>
+<h2 id="資料庫-table-與欄位"><a href="#資料庫-table-與欄位" class="headerlink" title="資料庫 table 與欄位"></a>資料庫 table 與欄位</h2><ul>
+<li>資料庫以 snake case 命名為主</li>
+<li>table 名稱的慣例是複數，所以使用者資料會叫做 users</li>
+<li>欄位名稱同樣是 snake case，以建立時間為例：created_at</li>
+</ul>
+<h2 id="Url"><a href="#Url" class="headerlink" title="Url"></a>Url</h2><p>snake case 或 kebab case 這兩種慣例都蠻常見的，可能會長這樣：</p>
+<ol>
+<li>handle_add_post</li>
+<li>handle-add-post</li>
+</ol>
+<h2 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h2><ul>
+<li>大原則：不確定縮寫或簡稱時，就乖乖寫好寫滿<ul>
+<li>例如：event handler 傳進來的參數 event，常見的簡寫就是 evt 或是 e</li>
+</ul>
+</li>
+<li>function 通常搭配動詞開頭，get 和 set 就是常見動詞。例如 getGames 或是 getStreams，setName 或是 setTitle</li>
+</ul>
+<h2 id="程式碼排版"><a href="#程式碼排版" class="headerlink" title="程式碼排版"></a>程式碼排版</h2><p>例如統一空兩格，可透過調整編輯器設定，上傳到 GitHub 後要確認過沒有跑版問題。</p>
+<hr>
+<h2 id="資訊安全"><a href="#資訊安全" class="headerlink" title="資訊安全"></a>資訊安全</h2><ol>
+<li>程式碼都是公開的：後台管理界面一定要做驗證，才能進行權限管理</li>
+<li>不要存著僥倖心態：永遠都預設把你要輸出的東西做編碼（例如：跳脫）以後才輸出，而不是直接輸出，就可以避免掉很多的 XSS 攻擊。</li>
+</ol>
+<h2 id="前端檢查-vs-後端檢查"><a href="#前端檢查-vs-後端檢查" class="headerlink" title="前端檢查 vs 後端檢查"></a>前端檢查 vs 後端檢查</h2><p>前端做資料檢查，只是為了增進使用者體驗，後端做資料檢查才是真的檢查。</p>
+]]></content>
+      <categories>
+        <category>lidemy</category>
+      </categories>
+      <tags>
+        <tag>lidemy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【中場心得】半年過去了，我仍在學習程式的路上（上篇）</title>
     <url>/lidemy-learing-1/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/YLhLtnT.png"><br>（Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQGZveHhtZA==">Matt Duncan<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20v">Unsplash<i class="fa fa-external-link-alt"></i></span>）</p>
@@ -6332,82 +6564,6 @@ $<span class="token punctuation">.</span><span class="token function">getJSON</s
 <p>比起這些過去，更重要的是現在。但正因為經歷了這些過去，才會有今天的自己，這是誰也無法改變的事實。也因為有這些不光彩的過去，才能讓我終於醒悟，原來從以前到現在，自己都是有選擇的，而自己也必須去承擔那些選擇的後果。</p>
 <p>其實我覺得很幸運，生長在一個能夠讓我自由探索未來的家庭。儘管我的人生不斷在繞遠路，仍舊對生命徬徨，卻還是能感受到家人的支持，對此總有說不完的感激。想要回報他們，也更加堅定自己想在這條路走下去的想法。</p>
 <p>現在想想，過去經歷的這些其實好像也沒什麼了，至少現在的我找到了想繼續努力的目標，而我也正朝那個方向前進著。</p>
-]]></content>
-      <categories>
-        <category>lidemy</category>
-      </categories>
-      <tags>
-        <tag>lidemy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常見重點整理 - 命名慣例 &amp; 開發時注意事項</title>
-    <url>/lidemy-common-examples/</url>
-    <content><![CDATA[<ul>
-<li>參考資料：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpZGVteS9tZW50b3ItcHJvZ3JhbS00dGgvYmxvYi9tYXN0ZXIvZXhhbXBsZXMvY29tbW9uLm1k">https://github.com/Lidemy/mentor-program-4th/blob/master/examples/common.md<i class="fa fa-external-link-alt"></i></span><span id="more"></span>
-
-</li>
-</ul>
-<h2 id="什麼是好的-code？"><a href="#什麼是好的-code？" class="headerlink" title="什麼是好的 code？"></a>什麼是好的 code？</h2><ol>
-<li>符合命名慣例以及命名一致性</li>
-<li>合理的變數名稱</li>
-</ol>
-<h2 id="三種常見的命名慣例"><a href="#三種常見的命名慣例" class="headerlink" title="三種常見的命名慣例"></a>三種常見的命名慣例</h2><h3 id="駝峰式命名（Camel-case）"><a href="#駝峰式命名（Camel-case）" class="headerlink" title="駝峰式命名（Camel case）"></a>駝峰式命名（Camel case）</h3><ul>
-<li>就像駝峰會一高一低</li>
-<li>單字之間不空格，而是直接連起來，但是連起來的第一個字要大寫</li>
-<li>例如：有一個 handle add post 的 function，就會叫做 handleAddPost</li>
-</ul>
-<p>駝峰又有分兩種：</p>
-<ol>
-<li>小駝峰（lower camel case）：開頭是小寫，就像上面的範例 handleAddPost</li>
-<li>大駝峰（upper camel case）：又被稱為 Pascal Case。開頭變成大寫，也就會變成 HandleAddPost</li>
-</ol>
-<h3 id="蛇型命名（Snake-case）"><a href="#蛇型命名（Snake-case）" class="headerlink" title="蛇型命名（Snake case）"></a>蛇型命名（Snake case）</h3><ul>
-<li>蛇就是底線的意思，利用底線來連接單字，然後全部都是小寫</li>
-<li>同上述範例，會變成：handle_add_post</li>
-</ul>
-<h3 id="烤肉串命名（Kebab-case）"><a href="#烤肉串命名（Kebab-case）" class="headerlink" title="烤肉串命名（Kebab case）"></a>烤肉串命名（Kebab case）</h3><ul>
-<li>Kebab 是烤肉串的意思，<code>-</code> 符號看起來就像那跟棍子</li>
-<li>同上述範例，會變成：handle-add-post</li>
-</ul>
-<p>認識這三種常見的命名慣例以及名詞之後，接著要來熟悉不同地方的命名慣例。也就是說，不同程式語言或是不同環境，使用的命名慣例也可能會不一樣。</p>
-<p>需注意的是，命名慣例雖然沒有強制性，但開發時基本上都會依照這套慣例，避免寫出他人認為不好的 code。</p>
-<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>在 JavaScript 中，不管是 function 或變數，習慣使用 lower camel case，也就是 <code>handleAddPost</code>。</p>
-<p>在特殊情況下，可以使用大寫駝峰式，例如：</p>
-<ol>
-<li>XMLHttpRequest</li>
-<li>Number</li>
-<li>Set</li>
-</ol>
-<p>這些變數可以算是物件導向中的 class，因此習慣以大寫開頭。而 React 中的 也同樣會使用大寫開頭方式命名。</p>
-<h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><ul>
-<li>常數具有不變的特性，通常以 snake case + 全大寫來命名</li>
-<li>例如：圓周率 PI，就會是 <code>Math.PI</code>；或是 client id 會寫成 CLIENT_ID</li>
-</ul>
-<h2 id="資料庫-table-與欄位"><a href="#資料庫-table-與欄位" class="headerlink" title="資料庫 table 與欄位"></a>資料庫 table 與欄位</h2><ul>
-<li>資料庫以 snake case 命名為主</li>
-<li>table 名稱的慣例是複數，所以使用者資料會叫做 users</li>
-<li>欄位名稱同樣是 snake case，以建立時間為例：created_at</li>
-</ul>
-<h2 id="Url"><a href="#Url" class="headerlink" title="Url"></a>Url</h2><p>snake case 或 kebab case 這兩種慣例都蠻常見的，可能會長這樣：</p>
-<ol>
-<li>handle_add_post</li>
-<li>handle-add-post</li>
-</ol>
-<h2 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h2><ul>
-<li>大原則：不確定縮寫或簡稱時，就乖乖寫好寫滿<ul>
-<li>例如：event handler 傳進來的參數 event，常見的簡寫就是 evt 或是 e</li>
-</ul>
-</li>
-<li>function 通常搭配動詞開頭，get 和 set 就是常見動詞。例如 getGames 或是 getStreams，setName 或是 setTitle</li>
-</ul>
-<h2 id="程式碼排版"><a href="#程式碼排版" class="headerlink" title="程式碼排版"></a>程式碼排版</h2><p>例如統一空兩格，可透過調整編輯器設定，上傳到 GitHub 後要確認過沒有跑版問題。</p>
-<hr>
-<h2 id="資訊安全"><a href="#資訊安全" class="headerlink" title="資訊安全"></a>資訊安全</h2><ol>
-<li>程式碼都是公開的：後台管理界面一定要做驗證，才能進行權限管理</li>
-<li>不要存著僥倖心態：永遠都預設把你要輸出的東西做編碼（例如：跳脫）以後才輸出，而不是直接輸出，就可以避免掉很多的 XSS 攻擊。</li>
-</ol>
-<h2 id="前端檢查-vs-後端檢查"><a href="#前端檢查-vs-後端檢查" class="headerlink" title="前端檢查 vs 後端檢查"></a>前端檢查 vs 後端檢查</h2><p>前端做資料檢查，只是為了增進使用者體驗，後端做資料檢查才是真的檢查。</p>
 ]]></content>
       <categories>
         <category>lidemy</category>
@@ -23374,162 +23530,6 @@ rl.on(&#39;close&#39;, () &#x3D;&gt; &#123;
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【學習筆記】女巫攻擊 vs. 日蝕攻擊 vs. DDoS 攻擊</title>
-    <url>/information-security-about-p2p/</url>
-    <content><![CDATA[<p><img src="https://i.imgur.com/dOrGjQy.png"></p>
-<h3 id="從-P2P-網路說起"><a href="#從-P2P-網路說起" class="headerlink" title="從 P2P 網路說起"></a>從 P2P 網路說起</h3><span id="more"></span>
-
-<p>我們所熟悉的傳統網站架構，是把所有資源都放在同一台伺服器（Server），當使用者（Client）有需要時再向伺服器發出請求。一旦單一伺服器停擺，就有可能造成整個服務中斷的問題。</p>
-<p><img src="https://i.imgur.com/OycTetl.png"></p>
-<ul>
-<li>圖片來源： <span class="exturl" data-url="aHR0cHM6Ly9jb21tb25zLndpa2ltZWRpYS5vcmcvdy9pbmRleC5waHA/Y3VyaWQ9MjU1MTc0NQ==">https://commons.wikimedia.org/w/index.php?curid=2551745<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>而 <strong>Peer to Peer（P2P）網路</strong>，則是網路區塊的所有人均負責儲存全部或部分的資料。除了向其他IP 位址發出請求外，本身也負責處理收到的請求，同時扮演 Client 和 Server 的角色，透過「去中心化」，避免資料被中心化機構所掌控或修改，進而確保資訊安全。</p>
-<p><img src="https://i.imgur.com/cRfMTpC.png"></p>
-<ul>
-<li>圖片來源：<span class="exturl" data-url="aHR0cHM6Ly9jb21tb25zLndpa2ltZWRpYS5vcmcvdy9pbmRleC5waHA/Y3VyaWQ9MjU1MTcyMw==">https://commons.wikimedia.org/w/index.php?curid=2551723<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>然而 P2P 網路也同樣淺藏著風險，十年前橫行一時的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvRm94eQ==">Foxy<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0JpdENvbWV0">BitComet<i class="fa fa-external-link-alt"></i></span> 等軟體就是基於 P2P 技術來下載資源，但前者除了電腦容易中毒，也會大量消耗網路和硬體資源。</p>
-<p>接下來介紹幾種常見的 P2P 網路攻擊，均為攻擊者透過攻擊「節點」擾亂網路，差別在於最終攻擊目標和方式的不同：</p>
-<h3 id="女巫攻擊（Sybil-Attack）"><a href="#女巫攻擊（Sybil-Attack）" class="headerlink" title="女巫攻擊（Sybil Attack）"></a><strong>女巫攻擊（Sybil Attack）</strong></h3><ul>
-<li>方式：是指單一攻擊者透過偽造多重身份以假冒惡意節點，藉此向其他正常節點提供大量不正確的資訊，從而控制網絡取得利益</li>
-<li>目的：破壞網路協議的信譽體系</li>
-</ul>
-<h3 id="日蝕攻擊（Eclipse-Attack）"><a href="#日蝕攻擊（Eclipse-Attack）" class="headerlink" title="日蝕攻擊（Eclipse Attack）"></a><strong>日蝕攻擊（Eclipse Attack）</strong></h3><ul>
-<li>方式：確保目標的所有連接都建立在攻擊者所控制的節點上</li>
-<li>目的：透過攻擊手段使受害者連接的節點被攻擊者所控制，進而操控受害者節點的通信</li>
-</ul>
-<h3 id="DDoS（Distributed-Denial-of-Service）-分布式拒絕服務攻擊"><a href="#DDoS（Distributed-Denial-of-Service）-分布式拒絕服務攻擊" class="headerlink" title="DDoS（Distributed Denial of Service）= 分布式拒絕服務攻擊"></a>DDoS（Distributed Denial of Service）= 分布式拒絕服務攻擊</h3><ul>
-<li>方式：攻擊者透過控制不同位置的多台機器，並利用這些機器對受害者實施攻擊</li>
-<li>目的：透過大量占用網絡中的節點資源，使這些節點無法提供正常服務，進而影響到整個區塊鏈網絡的運行</li>
-</ul>
-<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>這陣子時常聽聞幣圈的新聞，藉此科普一些和網路攻擊相關的小知識。其實除了上述這些，還有很多聽起來很酷專有名詞，像是這篇<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNjE1OQ==">《Day21|P2P網路(2)：共識─拜占庭將軍問題》<i class="fa fa-external-link-alt"></i></span> 和提到吸血鬼攻擊的<span class="exturl" data-url="aHR0cHM6Ly9hYm1lZGlhLmlvL3N1c2hpc3dhcC12YW1waXJlLW1pbmluZy1hbHBoYS10cmFjdG9y">《SushiSwap 槓上 Uniswap，你知道最新的「吸血鬼挖礦攻擊」嗎？》<i class="fa fa-external-link-alt"></i></span>，瞭解到因應這些網路攻擊，該如何制定規則去防止攻擊者達成目的等等。</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDExOTk4Mi9pcm9ubWFuLzIyNTU=">從0開始架構區塊鏈 系列<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucGFuZXdzbGFiLmNvbS96aF9oay9hcnRpY2xlZGV0YWlscy9ENDEyMDQ3MTcuaHRtbA==">科普 | 日蝕攻擊、DDoS攻擊<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmxvY2t0ZW1wby5jb20vYW5hbHlzaXMtb24tdGhlLWN1cnJlbnQtYXR0YWNrLW1lYW5zLW1hbGxlYWJpbGl0eS1zeWJpbC1hbmQtZHVzdC8=">新手科普| 什麼是「交易延展性攻擊、粉塵攻擊和女巫攻擊」<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucGFuZXdzbGFiLmNvbS96aF9oay9hcnRpY2xlZGV0YWlscy9EMjkyNjI3MDAuaHRtbA==">日食攻擊、女巫攻擊、吸血鬼攻擊都是什麼？<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Note</category>
-      </categories>
-      <tags>
-        <tag>Security</tag>
-        <tag>P2P</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>測試二三事（上）｜還記得你說，要和我寫測試</title>
-    <url>/learn-about-testing/</url>
-    <content><![CDATA[<p><img src="/images/pasted-2.png" alt="upload successful"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>過去在程式導師實驗課程中，整理過這兩篇筆記探討「測試」是怎麼回事：</p>
-<ul>
-<li><a href="https://heidiliu2020.github.io/javascript-jest/">[week 3] 初探 Jest：如何測試程式？</a></li>
-<li><a href="https://heidiliu2020.github.io/react-test/">[week 22] React：用 SPA 架構實作一個部落格（三）- 淺談測試</a></li>
-</ul>
-<p>在轉職後的第一家公司，組內曾嘗試在既有專案中撰寫測試，卻因時程緊湊而不了了之。但或許是一聽到測試就浮現「好麻煩⋯⋯」的想法吧？與其花這個時間去寫程式來進行測試，還不如多修幾個 BUG 來得有效益，打從心底想逃避這件事情，只覺得測試是理想，讓這項 TODO 一直被延宕。</p>
-<span id="more"></span>
-
-<p>而在求職過程中，時常被問是否有過測試經驗；到了現在第二間公司，寫測試這議題又再次浮現。回想起過去在專案中，時不時發生「改 A 壞 B」 的情況，如果透過測試來事先預期結果，或許就能減少這類錯誤的發生。</p>
-<p>於是乎，這篇文章就誕生了ಠ_ಠ </p>
-<p>在實作過程中，試著統整過去所學並且記錄下來，文章大致會分成四個段落，在正式介紹 Cypress 這套測試框架之前，會先在上篇補充測試相關的知識：</p>
-<ul>
-<li>Why we need test?</li>
-<li>What is Testing?</li>
-<li>Why Cypress?</li>
-<li>How to start?</li>
-</ul>
-<p>那麼就開始吧！</p>
-<h2 id="Why-we-need-test"><a href="#Why-we-need-test" class="headerlink" title="Why we need test?"></a>Why we need test?</h2><p>所以說，為何我們需要測試？</p>
-<p>誠如前言提到，透過測試我們能夠先預期結果，找出非預期的錯誤情境。在轉體開發過程中，隨著需求日漸複雜化，多人協作開發不易維護，再加上時程壓力，若沒有制定流程規範，實在很難透過手動測試一次到位。</p>
-<p>讓自動化測試取代人工測試，除了能降低成本，也有助於快速驗證程式是否能正常運作，並透過測試報告找出問題所在，不至於在茫茫程式海中迷失方向。</p>
-<p>總歸而言，測試能夠確保程式碼的可靠性，避免人為錯誤，提升程式碼的質量、重用性與可維護性。</p>
-<h2 id="What-is-Testing"><a href="#What-is-Testing" class="headerlink" title="What is Testing?"></a>What is Testing?</h2><p>說了這麼多，到底怎樣才是測試呢？</p>
-<p>從我們最熟悉的人工測試，到寫程式來測試程式，其實都是基於同樣的道理：「測試是藉由程式來模擬現實，比較『預期結果』和『實際結果』是否相同的過程」。</p>
-<h3 id="自動化測試金字塔-Test-Automation-Pyramid"><a href="#自動化測試金字塔-Test-Automation-Pyramid" class="headerlink" title="自動化測試金字塔 Test Automation Pyramid"></a>自動化測試金字塔 Test Automation Pyramid</h3><p>簡單來說，測試依規模大致可分成三個層次，構成自動化測試金字塔，如下圖所示：</p>
-<p><img src="https://i.imgur.com/L9sS6uH.png"></p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9hdXRvbWF0aW9ucGFuZGEuY29tLzIwMTgvMDgvMDEvdGhlLXRlc3RpbmctcHlyYW1pZC8=">Automation Panda<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>在測試金字塔中，越靠上方所耗費成本越高、執行時間越長；反之，越靠底下所耗費成本低，執行時間越短。</p>
-<p>而依照測試方法不同，又可分為黑箱測試與白箱測試：</p>
-<ul>
-<li>黑箱測試（Black-box Testing）/ 功能測試<ul>
-<li>以使用者的角度，針對程式的功能面進行測試</li>
-<li>應用於整合測試和系統測試</li>
-<li>舉例：在表格欄位輸入錯誤的資料格式，檢測系統是否存在漏洞</li>
-</ul>
-</li>
-<li>白箱測試（White-box Testing）/ 結構測試<ul>
-<li>以程式語言的角度，測試內部結構或流程</li>
-<li>應用於單元測試</li>
-<li>舉例：使用訂單系統，依使用者的情境模擬操作</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/ymjyD7I.png"></p>
-<h3 id="單元測試-Unit-Testing"><a href="#單元測試-Unit-Testing" class="headerlink" title="單元測試 Unit Testing"></a>單元測試 Unit Testing</h3><ul>
-<li>以程式碼的最小單位（function、method 等）進行測試，也是自動測試化的基礎</li>
-<li>驗證單一行為、執行快速、具獨立性</li>
-<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly9qZXN0anMuaW8v">Jest<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9tb2NoYWpzLm9yZy8=">mochajs<i class="fa fa-external-link-alt"></i></span> &amp; <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYWlqcy9jaGFp">chai<i class="fa fa-external-link-alt"></i></span></li>
-<li>常見開發模式：TDD &amp; BDD</li>
-</ul>
-<p>這裡介紹兩種與單元測試（Unit Test）相關的開發流程：</p>
-<ul>
-<li><strong>TDD（Test-Deriven Development）測試驅動開發</strong><ul>
-<li>先寫測試，後實作功能</li>
-<li>專注功能的實現</li>
-<li>開發流程會在「單元測試 ⇒ 撰寫能通過測試的程式碼 ⇒ 重構」三者之間循環</li>
-</ul>
-</li>
-<li><strong>BDD （Behavior-Deriven Development）行為驅動開發</strong><ul>
-<li>為 TDD 的進化版，但會先寫測試規格書，再寫測試，後實作功能</li>
-<li>專注系統的行為，較貼近使用者的角度進行測試</li>
-<li>使用 <code>describe()</code> 和 <code>it()</code> 需求為導向的設計語意化<img src="https://i.imgur.com/8NgSbPj.png">  </li>
-</ul>
-</li>
-</ul>
-<h3 id="整合測試-Integration-Testing"><a href="#整合測試-Integration-Testing" class="headerlink" title="整合測試 Integration Testing"></a>整合測試 Integration Testing</h3><ul>
-<li>整合兩個以上的元件（Component）或模組（Module）之間的互動測試</li>
-<li>使用 Mock Data 模擬 Mock API 回傳內容，檢測 render DOM 是否呈現預期結果</li>
-<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly9hbmd1bGFyLmlvL2FwaS9jb3JlL3Rlc3RpbmcvVGVzdEJlZA==">TestBed<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly90ZXN0aW5nLWxpYnJhcnkuY29tLw==">Testing Library<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9lbnp5bWVqcy5naXRodWIuaW8vZW56eW1lLw==">Enzyme<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>為什麼需要整合測試？單元測試都通過不就代表都 OK 了？下圖提供非常好的例子：</p>
-<p><img src="https://i.imgur.com/H30Yzer.gif"></p>
-<blockquote>
-<p>門鎖 OK、開關門 OK、鎖門？？</p>
-</blockquote>
-<p>根據不同情境所需，有時即使單元測試沒測出問題，一旦跨模組整合就出事了，因此這個階段更重視不同元件或環境之間的整合互動，也更貼近使用者實際行為。</p>
-<h3 id="端對端測試-End-to-end-Testing-E2E-Testing"><a href="#端對端測試-End-to-end-Testing-E2E-Testing" class="headerlink" title="端對端測試 End-to-end Testing / E2E Testing"></a>端對端測試 End-to-end Testing / E2E Testing</h3><ul>
-<li>會運行一個瀏覽器，藉由模擬使用者操作，將手動測試轉變成程式碼自動執行</li>
-<li>是對真實系統進行的測試，較費時且維護成本高</li>
-<li>常用套件：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3lwcmVzcy5pby8=">Cypress、<i class="fa fa-external-link-alt"></i></span><span class="exturl" data-url="aHR0cHM6Ly9uaWdodHdhdGNoanMub3JnLw==">Nightwatch<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B1cHBldGVlci9wdXBwZXRlZXI=">Puppeteer<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvdHJhY3RvcnRlc3Qub3JnLw==">Protractor<i class="fa fa-external-link-alt"></i></span>（<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FuZ3VsYXIvcHJvdHJhY3Rvci9pc3N1ZXMvNTUwMg==">Angular v12 後棄用，不再內建於新專案中<i class="fa fa-external-link-alt"></i></span>）</li>
-</ul>
-<p>如下所示，為 Cypress 使用範例，能夠看到使用者實際操作頁面的過程：</p>
-<p><img src="https://i.imgur.com/GzISa0E.gif"></p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmN5cHJlc3MuaW8vZ3VpZGVzL3Rvb2xpbmcvdmlzdWFsLXRlc3Rpbmc=">Visual Testing | Cypress Documentation<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<h2 id="Consolusion"><a href="#Consolusion" class="headerlink" title="Consolusion"></a>Consolusion</h2><p>雖說寫測試很重要，但並非寫好寫滿就是最好作法，畢竟需求情境百百種，仍需考慮使用時機與情境，才不會本末導致，花費更多時間維護測試腳本。</p>
-<p>透過撰寫測試，<del>強迫</del>讓開發者寫出容易被測試的程式碼，並在有限的資源中，以有效的測試來確保程式的品質。</p>
-<p>然而，這些測試的道理我都懂，但到底該如何開始呢？下篇會繼續探討，如何透過 Cypress 這套工具進行 E2E Testing，並且實際應用到專案中！</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbmlhc3AuY29tL3Bvc3QvMjAxOS8wMi8xOC9Vbml0LXRlc3RpbmctSW50ZWdyYXRpb24tdGVzdGluZy1lMmUtdGVzdGluZw==">一次搞懂單元測試、整合測試、端對端測試之間的差異 | The Will Will Web<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZGV2L3dlYmRldi93ZWItdGVzdGluZy8=">[web] 程式是人寫出來的，測試也是| PJCHENder 未整理筆記<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDA5MDcyOC9pcm9ubWFuLzM4ODE=">Angular 深入淺出三十天：表單與測試系列 - iT 邦幫忙<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmFtb3d1LmNvbS9jeXByZXNzLW9uLXJhaWxzLw==">Hahow for Business 如何跑E2E 測試？ - Amo’s Blog<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Testing</tag>
       </tags>
   </entry>
 </search>

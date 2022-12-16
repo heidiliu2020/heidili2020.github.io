@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/about/index.html</loc>
+    
+    <lastmod>2022-12-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/review/</loc>
     
     <lastmod>2022-12-08</lastmod>
@@ -52,13 +59,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/about-lidemy/</loc>
-    
-    <lastmod>2022-12-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/about/index.html</loc>
     
     <lastmod>2022-12-08</lastmod>
     
@@ -620,6 +620,13 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/CSS/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -704,6 +711,20 @@
   </url>
   
   <url>
+    <loc>https://heidiliu2020.github.io/tags/Security/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/P2P/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/tags/DOM/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -733,6 +754,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Bootstrap/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Testing/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -809,13 +837,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/lidemy/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/tags/phpmyadmin/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -878,27 +899,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/Security/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/P2P/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/tags/Testing/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
@@ -917,6 +917,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/JavaScript/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/categories/lidemy/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -944,21 +951,14 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/categories/React/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/categories/lidemy/</loc>
-    <lastmod>2022-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/categories/Note/</loc>
+    <lastmod>2022-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/categories/React/</loc>
     <lastmod>2022-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
