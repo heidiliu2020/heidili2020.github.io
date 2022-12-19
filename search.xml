@@ -302,6 +302,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>Angular</category>
       </categories>
       <tags>
@@ -464,6 +465,7 @@ $ ng serve --open<span aria-hidden="true" class="line-numbers-rows"><span></span
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>Angular</category>
       </categories>
   </entry>
@@ -707,6 +709,7 @@ export class TodosState </span><span class="token punctuation">&#123;</span>
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>Angular</category>
       </categories>
       <tags>
@@ -865,6 +868,7 @@ export class TodosState </span><span class="token punctuation">&#123;</span>
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>Database</category>
       </categories>
       <tags>
         <tag>Back-End</tag>
@@ -3492,6 +3496,7 @@ xsrfHeaderName<span class="token punctuation">:</span> <span class="token string
       <tags>
         <tag>Back-End</tag>
         <tag>hash</tag>
+        <tag>security</tag>
       </tags>
   </entry>
   <entry>
@@ -3570,6 +3575,7 @@ $ hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <p>參考文章：<span class="exturl" data-url="aHR0cHM6Ly9lZDUyMS5naXRodWIuaW8vMjAxOS8wOC9oZXhvLWFkbWluLw==">[教學] 我的第一篇 Hexo 文章：使用 hexo-admin 後台管理工具<i class="fa fa-external-link-alt"></i></span></p>
 ]]></content>
       <categories>
+        <category>Blog</category>
         <category>Hexo</category>
       </categories>
       <tags>
@@ -3764,6 +3770,7 @@ $ hexo d     &#x2F;&#x2F; 部署至 GitHub<span aria-hidden="true" class="line-n
 </ul>
 ]]></content>
       <categories>
+        <category>Blog</category>
         <category>Hexo</category>
       </categories>
       <tags>
@@ -3900,6 +3907,7 @@ $ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next th
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>在之前寫的<a href="https://heidiliu2020.github.io/2020/11/07/hexo-github/">【學習筆記】如何使用 Hexo + GitHub Pages 架設個人網誌</a> 這篇，提到該如何更換 theme 主題，到現在終於生出來XD 主要還是因為自己想要更換背景，卻忘記當初是怎麼自定義樣式的，結果又繞了點遠路，果然整理過後的知識才是自己的，寫起來就不怕忘記啦！</p>
 ]]></content>
       <categories>
+        <category>Blog</category>
         <category>Hexo</category>
       </categories>
       <tags>
@@ -5242,6 +5250,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       </categories>
       <tags>
         <tag>JavaScript</tag>
+        <tag>Testing</tag>
       </tags>
   </entry>
   <entry>
@@ -6480,9 +6489,11 @@ $<span class="token punctuation">.</span><span class="token function">getJSON</s
 <h2 id="前端檢查-vs-後端檢查"><a href="#前端檢查-vs-後端檢查" class="headerlink" title="前端檢查 vs 後端檢查"></a>前端檢查 vs 後端檢查</h2><p>前端做資料檢查，只是為了增進使用者體驗，後端做資料檢查才是真的檢查。</p>
 ]]></content>
       <categories>
-        <category>lidemy</category>
+        <category>Note</category>
       </categories>
       <tags>
+        <tag>Front-End</tag>
+        <tag>JavaScript</tag>
         <tag>lidemy</tag>
       </tags>
   </entry>
@@ -7311,6 +7322,7 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
       </categories>
       <tags>
         <tag>lidemy</tag>
+        <tag>Testing</tag>
       </tags>
   </entry>
   <entry>
@@ -7436,8 +7448,10 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>PHP</category>
       </categories>
       <tags>
+        <tag>Back-End</tag>
         <tag>PHP</tag>
       </tags>
   </entry>
@@ -7689,8 +7703,10 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>PHP</category>
       </categories>
       <tags>
+        <tag>Back-End</tag>
         <tag>PHP</tag>
       </tags>
   </entry>
@@ -8091,8 +8107,10 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>PHP</category>
       </categories>
       <tags>
+        <tag>Back-End</tag>
         <tag>PHP</tag>
         <tag>MySQL</tag>
       </tags>
@@ -8356,8 +8374,10 @@ npm install webpack webpack-cli --save-dev<span aria-hidden="true" class="line-n
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>PHP</category>
       </categories>
       <tags>
+        <tag>Back-End</tag>
         <tag>PHP</tag>
       </tags>
   </entry>
@@ -8761,6 +8781,7 @@ export default class Counter extends React.Component &#123;
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -8866,6 +8887,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h3 id="useLayoutEffect：功能與-useEffect-相似，差別在於-useLayoutEffect-會在-render-之前執行"><a href="#useLayoutEffect：功能與-useEffect-相似，差別在於-useLayoutEffect-會在-render-之前執行" class="headerlink" title="useLayoutEffect：功能與 useEffect 相似，差別在於 useLayoutEffect 會在 render 之前執行"></a>useLayoutEffect：功能與 useEffect 相似，差別在於 useLayoutEffect 會在 render 之前執行</h3><h3 id="useDebugValue：可用來在-React-DevTools-中顯示自訂義-hook-的標籤"><a href="#useDebugValue：可用來在-React-DevTools-中顯示自訂義-hook-的標籤" class="headerlink" title="useDebugValue：可用來在 React DevTools 中顯示自訂義 hook 的標籤"></a>useDebugValue：可用來在 React DevTools 中顯示自訂義 hook 的標籤</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">useDebugValue</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9138,6 +9160,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <p>此外，除了可以利用線上編輯器 CodeSandbox，也可以在本地端安裝官方提供的 create-react-app 套件，來快速建置 React 開發環境。</p>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9427,6 +9450,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <p><img src="https://i.imgur.com/MNaWqI0.gif"></p>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9498,6 +9522,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9800,6 +9825,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9947,11 +9973,12 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
+        <tag>Testing</tag>
         <tag>React</tag>
-        <tag>test</tag>
       </tags>
   </entry>
   <entry>
@@ -10418,6 +10445,7 @@ onChange<span class="token operator">=</span><span class="token punctuation">&#1
 <p>一旦 components 資料夾中，結構變得更複雜時，會再根據不同功能來區分資料夾，例如 common、post，注意當檔案是 compontent 時，才會以大寫英文開頭命名。</p>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -10550,6 +10578,7 @@ onChange<span class="token operator">=</span><span class="token punctuation">&#1
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>其實關於 React 優化，還是不太瞭解該如何使用 hooks 來避免重新渲染，只有大概瞭解原理，還有並不是所有情況都是用性能優化。除非是在大型專案，需要進行昂貴的計算才可能會用到，因此這部分等之後有機會再來深入研究。</p>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -10775,6 +10804,7 @@ onChange<span class="token operator">=</span><span class="token punctuation">&#1
 <p>瞭解到這些概念後，我們就能正式入門 React 這套 JavaScript Library。</p>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -12743,7 +12773,8 @@ $db_name &#x3D; &#39;&lt;資料庫名稱&gt;&#39;;<span aria-hidden="true" class
       </categories>
       <tags>
         <tag>Back-End</tag>
-        <tag>phpmyadmin</tag>
+        <tag>Database</tag>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
@@ -13220,6 +13251,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>Express</category>
       </categories>
       <tags>
         <tag>Back-End</tag>
@@ -13812,6 +13844,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>Express</category>
       </categories>
       <tags>
         <tag>Back-End</tag>
@@ -14489,6 +14522,7 @@ request<span class="token punctuation">.</span><span class="token function">patc
         <category>Front-End</category>
       </categories>
       <tags>
+        <tag>Front-End</tag>
         <tag>HTTP</tag>
       </tags>
   </entry>
@@ -17123,8 +17157,10 @@ obj<span class="token punctuation">.</span><span class="token function">test</sp
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>PHP</category>
       </categories>
       <tags>
+        <tag>Back-End</tag>
         <tag>PHP</tag>
       </tags>
   </entry>
@@ -17753,6 +17789,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -18235,6 +18272,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -18700,6 +18738,7 @@ document<span class="token punctuation">.</span><span class="token function">que
 </ul>
 ]]></content>
       <categories>
+        <category>Front-End</category>
         <category>React</category>
       </categories>
       <tags>
@@ -19855,9 +19894,11 @@ $ npx sequelize-cli db:migrate:all<span aria-hidden="true" class="line-numbers-r
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>Sequelize</category>
       </categories>
       <tags>
         <tag>Back-End</tag>
+        <tag>Database</tag>
         <tag>Sequelize</tag>
       </tags>
   </entry>
@@ -20875,6 +20916,7 @@ integrity&#x3D;&quot;sha384-TX8t27EcRE3e&#x2F;ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0j
 ]]></content>
       <categories>
         <category>Back-End</category>
+        <category>Express</category>
       </categories>
       <tags>
         <tag>Back-End</tag>
@@ -23873,7 +23915,7 @@ title: 啦啦啦
 <p><a href="https://hackmd.io/xM0LI_7bSdSf8wGNiAbqcQ"><img src="https://hackmd.io/xM0LI_7bSdSf8wGNiAbqcQ/badge" alt="hackmd-github-sync-badge"></a></p>
 ]]></content>
       <categories>
-        <category>React</category>
+        <category>Blog</category>
         <category>Docusaurus</category>
       </categories>
       <tags>
