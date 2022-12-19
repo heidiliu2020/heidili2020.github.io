@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/docusaurus-react-blog/</loc>
+    <lastmod>2022-12-19</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/php-mysql/</loc>
     <lastmod>2022-12-19</lastmod>
   </url>
@@ -66,10 +70,6 @@
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/hexo-admin/</loc>
-    <lastmod>2022-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/docusaurus-react-blog/</loc>
     <lastmod>2022-12-19</lastmod>
   </url>
   <url>
