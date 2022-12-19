@@ -3,6 +3,7 @@ tags:
   - GitHub
   - Hexo
 categories:
+  - Blog
   - Hexo
 author: Heidi Liu
 date: 2020-11-07 20:10:00

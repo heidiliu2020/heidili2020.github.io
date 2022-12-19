@@ -1,9 +1,11 @@
 title: '[week 12] 利用 PHP 實作留言板 - API 篇'
 author: Heidi Liu
 tags:
+  - Back-End
   - PHP
 categories:
   - Back-End
+  - PHP
 date: 2020-09-26 14:20:00
 ---
 > 本篇為 [[BE101] 用 PHP 與 MySQL 學習後端基礎](https://lidemy.com/p/be101-php-mysql) 這門課程的學習筆記。如有錯誤歡迎指正。

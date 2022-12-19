@@ -2,6 +2,7 @@ title: '[week 3] 初探 Jest：如何測試程式？'
 author: Heidi Liu
 tags:
   - JavaScript
+  - Testing
 categories:
   - JavaScript
 date: 2020-07-25 15:34:00

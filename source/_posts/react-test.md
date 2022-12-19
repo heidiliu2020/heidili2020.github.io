@@ -2,8 +2,9 @@ title: '[week 22] React：用 SPA 架構實作一個部落格（三）- 淺談�
 author: Heidi Liu
 tags:
   - React
-  - test
+  - Testing
 categories:
+  - Front-End
   - React
 date: 2020-12-17 01:08:00
 ---

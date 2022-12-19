@@ -1,10 +1,13 @@
 title: '[week 9] 後端基礎 - PHP 語法、資料庫 MySQL'
 author: Heidi Liu
 tags:
+  - Back-End
   - PHP
   - MySQL
+  - Database
 categories:
   - Back-End
+  - PHP
 date: 2020-08-21 14:09:00
 ---
 > 本篇為 [[BE101] 用 PHP 與 MySQL 學習後端基礎](https://lidemy.com/p/be101-php-mysql) 這門課程的學習筆記。如有錯誤歡迎指正。

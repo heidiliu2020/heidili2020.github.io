@@ -2,6 +2,7 @@ title: 初探 Angular｜基本介紹與環境建置
 author: Heidi Liu
 tags: []
 categories:
+  - Front-End
   - Angular
 date: 2021-03-10 22:00:00
 ---

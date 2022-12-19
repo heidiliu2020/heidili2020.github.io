@@ -3,8 +3,10 @@ author: Heidi Liu
 tags:
   - Back-End
   - Sequelize
+  - Database
 categories:
   - Back-End
+  - Sequelize
 date: 2020-10-31 00:39:00
 ---
 > 本篇為 [[BE201] 後端中階：Express 與 Sequelize](https://lidemy.com/p/be201-express-sequelize) 這門課程的學習筆記。如有錯誤歡迎指正！

@@ -2,7 +2,8 @@ title: '[week 14] 網站部署 - 設定 AWS EC2 遠端主機 +  Ubuntu LAMP 環�
 author: Heidi Liu
 tags:
   - Back-End
-  - phpmyadmin
+  - Server
+  - Database
 categories:
   - Back-End
 date: 2020-10-03 00:12:00

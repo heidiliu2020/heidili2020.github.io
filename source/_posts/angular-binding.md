@@ -3,6 +3,7 @@ author: Heidi Liu
 tags:
   - Angular
 categories:
+  - Front-End
   - Angular
 date: 2021-03-21 22:04:00
 ---

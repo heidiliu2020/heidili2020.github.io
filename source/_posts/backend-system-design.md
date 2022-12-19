@@ -6,6 +6,7 @@ tags:
   - Database
 categories:
   - Back-End
+  - Database
 date: 2020-10-01 14:20:00
 ---
 > 本篇為「程式導師實驗計畫：Lesson 8-2 之資料庫」這門課程的學習筆記。如有錯誤歡迎指正。

@@ -1,11 +1,11 @@
 title: Angular 延伸｜ NGXS 狀態管理入門
 author: Heidi Liu
 tags:
-  - Front-End
   - Angular
+  - Front-End
   - NGXS
-
 categories:
+  - Front-End
   - Angular
 date: 2022-08-30 09:54:00
 ---

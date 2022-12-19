@@ -6,6 +6,7 @@ tags:
   - Middleware
 categories:
   - Back-End
+  - Express
 date: 2020-10-29 00:37:00
 ---
 > 本篇為 [[BE201] 後端中階：Express 與 Sequelize](https://lidemy.com/p/be201-express-sequelize) 這門課程的學習筆記。如有錯誤歡迎指正！

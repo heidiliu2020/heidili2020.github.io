@@ -1,9 +1,11 @@
 title: '[week 11] 利用 PHP 實作陽春部落格'
 author: Heidi Liu
 tags:
+  - Back-End
   - PHP
 categories:
   - Back-End
+  - PHP
 date: 2020-09-24 14:20:00
 ---
 可以將部落格想成「只有一人」能新增文章的留言版。

@@ -1,7 +1,10 @@
 title: 【學習筆記】如何更換 Hexo 主題 & 自訂樣式
 author: Heidi Liu
-tags: []
+tags:
+  - Hexo
+  - Blog
 categories:
+  - Blog
   - Hexo
 date: 2020-12-28 12:56:00
 ---

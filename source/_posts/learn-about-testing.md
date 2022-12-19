@@ -8,9 +8,7 @@ categories:
 date: 2022-12-16 14:24:00
 ---
 
-
 ![upload successful](/images/pasted-2.png)
-
 ## 前言
 
 過去在程式導師實驗課程中，整理過這兩篇筆記探討「測試」是怎麼回事：
