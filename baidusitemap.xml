@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/docusaurus-react-blog/</loc>
+    <lastmod>2022-12-19</lastmod>
+  </url>
+  <url>
+    <loc>https://heidiliu2020.github.io/hexo-theme/</loc>
+    <lastmod>2022-12-19</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/learn-about-testing/</loc>
     <lastmod>2022-12-16</lastmod>
   </url>
@@ -247,10 +255,6 @@
   <url>
     <loc>https://heidiliu2020.github.io/react-usecontext/</loc>
     <lastmod>2020-12-29</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/hexo-theme/</loc>
-    <lastmod>2020-12-28</lastmod>
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/php-api/</loc>

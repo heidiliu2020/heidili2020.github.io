@@ -3902,6 +3902,10 @@ $ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next th
       <categories>
         <category>Hexo</category>
       </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+      </tags>
   </entry>
   <entry>
     <title>[week 6] HTML - 認識基礎標籤</title>
@@ -23530,6 +23534,352 @@ rl.on(&#39;close&#39;, () &#x3D;&gt; &#123;
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【學習筆記】如何使用 Docusaurus &amp; React 快速架設靜態網站</title>
+    <url>/docusaurus-react-blog/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/7UpoFaC.jpg"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這是繼 HackMD 和 Hexo 之後，找到的下一個據點，打從第一眼看到 docs 版面配置，就在心底讚嘆：「這不就是我一直想做的功能嗎！」</p>
+<p>能夠快速把過去所學的知識打包起來，並以有效率的方式整理，適用於內容驅動型的網站，並且內建支援夜間模式轉換功能。此外，使用的還是快被自己遺忘 React.js 語法，簡直一石多鳥，相見恨晚。</p>
+<p>於是乎，這篇筆記就誕生了。</p>
+<span id="more"></span>
+
+<p>主要會介紹如何使用 Docusaurus 搭配 React 快速架設個人網站。文章可分為下列幾個部分：</p>
+<ul>
+<li>前言</li>
+<li>什麼是 Docusaurus？<ul>
+<li>為什麼選擇 Docusaurus？</li>
+</ul>
+</li>
+<li>環境建置</li>
+<li>專案架構<ul>
+<li>Docusaurus 設定檔</li>
+<li>建立模板頁面</li>
+<li>支援 TypeScript 語法</li>
+</ul>
+</li>
+</ul>
+<h2 id="什麼是-Docusaurus？"><a href="#什麼是-Docusaurus？" class="headerlink" title="什麼是 Docusaurus？"></a>什麼是 Docusaurus？</h2><p><img src="https://i.imgur.com/BNVL8zg.png"></p>
+<blockquote>
+<p>Document（文件）+ saurus（恐龍）= Docusaurus<br>一直覺得這名字很難記，透過拆字希望能幫助記憶:3</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL2RvY3M=">Docusaurus<i class="fa fa-external-link-alt"></i></span> 是由 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuc291cmNlLmZiLmNvbS8=">Facebook 推出<i class="fa fa-external-link-alt"></i></span>的開源靜態網站生成工具，以 React 技術構建，提供快速建置以文檔內容為核心的網站。</p>
+<h3 id="為什麼選擇-Docusaurus？"><a href="#為什麼選擇-Docusaurus？" class="headerlink" title="為什麼選擇 Docusaurus？"></a>為什麼選擇 Docusaurus？</h3><p><img src="https://i.imgur.com/UuV6bh4.png"></p>
+<p>開頭有提到 Docusaurus 幾項特點，再參照官網說明後整理如下：</p>
+<ul>
+<li>支援 Markdown 擴充格式 <span class="exturl" data-url="aHR0cHM6Ly9tZHhqcy5jb20v">MDX<i class="fa fa-external-link-alt"></i></span></li>
+<li>可在文檔中編寫 <span class="exturl" data-url="aHR0cHM6Ly96aC1oYW50LnJlYWN0anMub3JnL2RvY3MvaW50cm9kdWNpbmctanN4Lmh0bWw=">JSX<i class="fa fa-external-link-alt"></i></span> 語法，並渲染為 React 的 component</li>
+<li>支援 i18n，可使用 <span class="exturl" data-url="aHR0cHM6Ly9jcm93ZGluLmNvbS8=">Crowdin<i class="fa fa-external-link-alt"></i></span> 將文檔翻譯成 70 多種語言</li>
+<li>文檔版本控制</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWxnb2xpYS5jb20v">algolia<i class="fa fa-external-link-alt"></i></span> 搜索功能</li>
+<li>實際應用範例：<span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGUtcmVhY3QtYXBwLmRldi8=">Create React App<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdG5hdGl2ZS5kZXYv">React Native<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9ndWxwanMuY29tLw==">Gulp<i class="fa fa-external-link-alt"></i></span> 等，更多可參考<span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL3poLUNOL3Nob3djYXNl">官網列表<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h2 id="環境建置"><a href="#環境建置" class="headerlink" title="環境建置"></a>環境建置</h2><blockquote>
+<p>詳細教學可參考<span class="exturl" data-url="aHR0cHM6Ly90dXRvcmlhbC5kb2N1c2F1cnVzLmlvL2RvY3MvaW50cm8=">官網連結<i class="fa fa-external-link-alt"></i></span>。</p>
+</blockquote>
+<p>步驟如下：</p>
+<ol>
+<li>初始化專案</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">$ npx @docusaurus&#x2F;init@latest init my-website classic
+$ npx docusaurus --version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>切換路徑至剛才建立好的專案底下</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">$ cd my-blog<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>運行專案 </li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">$ npm run start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="4">
+<li>即可在 <code>http://localhost:3000/</code> 看到專案預設頁面如下，自動建立了首頁和 Tutorial、Blog 兩個文檔頁面： </li>
+</ol>
+<p><img src="https://i.imgur.com/4Ypjr15.png"></p>
+<ol start="5">
+<li>在部署前，需將網站資料打包到 <code>/build</code> 資料夾中，即可在 GitHub 等平台部署靜態網頁</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">$ npm run build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h2><p>以下是官網提供的範例架構：</p>
+<pre class="line-numbers language-none"><code class="language-none">my-website         &#x2F;&#x2F; 根目錄
+├── blog           &#x2F;&#x2F; 部落格文章
+│   ├── 2019-05-28-hola.md
+│   ├── 2019-05-29-hello-world.md
+│   └── 2020-05-30-welcome.md
+├── docs           &#x2F;&#x2F; 文檔
+│   ├── doc1.md
+│   ├── doc2.md
+│   ├── doc3.md
+│   └── mdx.md
+├── src
+│   ├── css        &#x2F;&#x2F; 樣式管理
+│   │   └── custom.css
+│   └── pages      &#x2F;&#x2F; 頁面管理
+│       ├── styles.module.css
+│       └── index.js
+├── static        &#x2F;&#x2F; 放置靜態檔案
+│   └── img
+├── docusaurus.config.js  &#x2F;&#x2F; 專案配置
+├── package.json
+├── README.md
+├── sidebars.js           &#x2F;&#x2F; docs 側邊欄配置
+└── yarn.lock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>blog<ul>
+<li>預設名稱：blog-examples-from-docusaurus)</li>
+<li>路由：<code>/blog</code></li>
+<li>存放 blog markdown 檔，也就是部落格文章</li>
+<li>文檔名稱需符合 <code>yyyy-mm-dd-file-name.md</code></li>
+</ul>
+</li>
+<li>docs<ul>
+<li>預設名稱：docs-examples-from-docusaurus</li>
+<li>路由：<code>/docs</code></li>
+<li>存放 markdown 文檔</li>
+</ul>
+</li>
+<li>src<ul>
+<li>css<ul>
+<li>custom.css 用來自定義樣式</li>
+</ul>
+</li>
+<li>pages<ul>
+<li>預設的 index.js 包含 Home Component</li>
+<li>可用來新增頁面和對應路由，參考<span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL2RvY3MvY3JlYXRpbmctcGFnZXM=">官網教學<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>static<ul>
+<li>存放靜態資源，例如圖片檔</li>
+</ul>
+</li>
+<li>docusaurus.config.js<ul>
+<li>網站配置設定檔</li>
+<li>等同於 Docusaurus v1 中的 siteConfig.js 檔</li>
+</ul>
+</li>
+<li>sidebars.js<ul>
+<li>自定義 docs 側邊欄</li>
+</ul>
+</li>
+</ul>
+<p>接著開啟剛才建置完成的專案目錄，docs 資料夾內的文檔對應頁面如下：</p>
+<p><img src="https://i.imgur.com/Rkpmx9z.png"></p>
+<h3 id="Docusaurus-網站相關配置"><a href="#Docusaurus-網站相關配置" class="headerlink" title="Docusaurus 網站相關配置"></a>Docusaurus 網站相關配置</h3><p>其中 <span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL2RvY3MvZG9jdXNhdXJ1cy5jb25maWcuanM=">docusaurus.config.js<i class="fa fa-external-link-alt"></i></span> 這個檔案，主要用來設定框架配置：</p>
+<h4 id="Required-fields-必要配置"><a href="#Required-fields-必要配置" class="headerlink" title="Required fields 必要配置"></a>Required fields 必要配置</h4><ul>
+<li>網站名稱、連結、根目錄</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  title<span class="token operator">:</span> <span class="token string">'Docusaurus'</span><span class="token punctuation">,</span>
+  url<span class="token operator">:</span> <span class="token string">'https://docusaurus.io'</span><span class="token punctuation">,</span>
+  baseUrl<span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Optional-fields-自選配置"><a href="#Optional-fields-自選配置" class="headerlink" title="Optional fields 自選配置"></a>Optional fields 自選配置</h4><ul>
+<li>網站圖示、網站標語</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  favicon<span class="token operator">:</span> <span class="token string">'/img/favicon.ico'</span><span class="token punctuation">,</span>
+  tagline<span class="token operator">:</span>
+    <span class="token string">'Docusaurus makes it easy to maintain Open Source documentation websites.'</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>i18n 多國語系</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  i18n<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    defaultLocale<span class="token operator">:</span> <span class="token string">'zh-TW'</span><span class="token punctuation">,</span>     <span class="token comment">// 預設語系</span>
+    locales<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'en'</span><span class="token punctuation">,</span> <span class="token string">'zh-TW'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>   <span class="token comment">// 語系配置</span>
+    localeConfigs<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      en<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        label<span class="token operator">:</span> <span class="token string">'English'</span><span class="token punctuation">,</span>
+        direction<span class="token operator">:</span> <span class="token string">'ltr'</span><span class="token punctuation">,</span>       <span class="token comment">// 閱讀方向為左到右</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token string">'zh-TW'</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        label<span class="token operator">:</span> <span class="token string">'繁體中文（台灣）'</span><span class="token punctuation">,</span>
+        direction<span class="token operator">:</span> <span class="token string">'ltr'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>GitHub 用戶、專案、主機名稱，用於專案部署</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Docusaurus' organization is facebook</span>
+  organizationName<span class="token operator">:</span> <span class="token string">'facebook'</span><span class="token punctuation">,</span>
+  projectName<span class="token operator">:</span> <span class="token string">'docusaurus'</span><span class="token punctuation">,</span>
+ githubHost<span class="token operator">:</span> <span class="token string">'github.com'</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>自定義主題外觀：例如 navbar、footer</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  themeConfig<span class="token operator">:</span> <span class="token punctuation">&#123;</span>              <span class="token comment">// 自定義主題配置</span>
+    hideableSidebar<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>   <span class="token comment">// 側邊欄可否收起展開</span>
+    colorMode<span class="token operator">:</span> <span class="token punctuation">&#123;</span>              <span class="token comment">// 深淺色配置</span>
+      defaultMode<span class="token operator">:</span> <span class="token string">'light'</span><span class="token punctuation">,</span>
+      disableSwitch<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      respectPrefersColorScheme<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      switchConfig<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        darkIcon<span class="token operator">:</span> <span class="token string">'🌙'</span><span class="token punctuation">,</span>
+        lightIcon<span class="token operator">:</span> <span class="token string">'\u2600'</span><span class="token punctuation">,</span>
+        <span class="token comment">// React inline style object</span>
+        <span class="token comment">// see https://reactjs.org/docs/dom-elements.html#style</span>
+        darkIconStyle<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          marginLeft<span class="token operator">:</span> <span class="token string">'2px'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        lightIconStyle<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          marginLeft<span class="token operator">:</span> <span class="token string">'1px'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    navbar<span class="token operator">:</span> <span class="token punctuation">&#123;</span>                 <span class="token comment">// 導覽列</span>
+      title<span class="token operator">:</span> <span class="token string">'Site Title'</span><span class="token punctuation">,</span>    <span class="token comment">// 網站標題</span>
+      logo<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        alt<span class="token operator">:</span> <span class="token string">'Site Logo'</span><span class="token punctuation">,</span>
+        src<span class="token operator">:</span> <span class="token string">'img/logo.svg'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      items<span class="token operator">:</span> <span class="token punctuation">[</span>                <span class="token comment">// 導覽列 => docs, blog...等</span>
+        <span class="token punctuation">&#123;</span>
+          to<span class="token operator">:</span> <span class="token string">'docs/docusaurus.config.js'</span><span class="token punctuation">,</span>
+          activeBasePath<span class="token operator">:</span> <span class="token string">'docs'</span><span class="token punctuation">,</span>
+          label<span class="token operator">:</span> <span class="token string">'docusaurus.config.js'</span><span class="token punctuation">,</span>
+          position<span class="token operator">:</span> <span class="token string">'left'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token comment">// ... other links</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    footer<span class="token operator">:</span> <span class="token punctuation">&#123;</span>               <span class="token comment">// 底部區塊配置</span>
+      style<span class="token operator">:</span> <span class="token string">'dark'</span><span class="token punctuation">,</span>
+      links<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+          title<span class="token operator">:</span> <span class="token string">'Docs'</span><span class="token punctuation">,</span>
+          items<span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">&#123;</span>
+              label<span class="token operator">:</span> <span class="token string">'Docs'</span><span class="token punctuation">,</span>
+              to<span class="token operator">:</span> <span class="token string">'docs/doc1'</span><span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token comment">// ... other links</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      logo<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        alt<span class="token operator">:</span> <span class="token string">'Facebook Open Source Logo'</span><span class="token punctuation">,</span>
+        src<span class="token operator">:</span> <span class="token string">'https://docusaurus.io/img/oss_logo.png'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      copyright<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Copyright © </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> Facebook, Inc.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token comment">// You can also put own HTML here</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>plugins 插件</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>themes 主題</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  themes<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// 互動式程式碼編輯器</span>
+    require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'@docusaurus/theme-live-codeblock'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// 搜尋功能</span>
+    require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'@docusaurus/theme-search-algolia'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// 程式碼高亮顯示</span>
+    require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'@docusaurus/theme-classic'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>customFields：因 Docusaurus 不允許 <code>docusaurus.config.js</code> 檔案中存在未知欄位，可在此區塊自定義欄位</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  customFields<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    admin<span class="token operator">:</span> <span class="token string">'endi'</span><span class="token punctuation">,</span>
+    superman<span class="token operator">:</span> <span class="token string">'lol'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>scripts：<code>&lt;script&gt;</code> 經過編譯後會插入 HTML 的 <code>&lt;head&gt;</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  scripts<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// String format.</span>
+    <span class="token string">'https://docusaurus.io/script.js'</span><span class="token punctuation">,</span>
+    <span class="token comment">// Object format.</span>
+    <span class="token punctuation">&#123;</span>
+      src<span class="token operator">:</span>
+        <span class="token string">'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js'</span><span class="token punctuation">,</span>
+      async<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>    <span class="token comment">// 是否同步</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="建立模板頁面"><a href="#建立模板頁面" class="headerlink" title="建立模板頁面"></a>建立模板頁面</h3><p><img src="https://i.imgur.com/7vcwgeU.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">---
+id: intro
+title: 啦啦啦
+---
+
+這是我的 *新文件内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>markdown 內容<br>將你的文檔以 .md 文件的形式添加到 /docs 文件夾中，並確保每個文件都有正確的 header<br>最簡單的標題如下<br>id 是連結名稱，例如 docs/intro.html<br>title 是瀏覽器頁面的標題</p>
+<h3 id="支援-TypeScript-語法"><a href="#支援-TypeScript-語法" class="headerlink" title="支援 TypeScript 語法"></a>支援 TypeScript 語法</h3><ul>
+<li>在初始化專案的語法最後，加上 <code>--typescript</code>：</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">npx @docusaurus&#x2F;init@latest init my-website classic --typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>接著安裝 typescript 需要的相關套件：</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">npm install --save-dev typescript @docusaurus&#x2F;module-type-aliases @types&#x2F;react @types&#x2F;react-router-dom @types&#x2F;react-helmet @tsconfig&#x2F;docusaurus<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>在位於根目錄的 tsconfig.json 檔案中，新增以下內容：</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token punctuation">&#123;</span>
+  <span class="token string">"extends"</span><span class="token operator">:</span> <span class="token string">"@tsconfig/docusaurus/tsconfig.json"</span><span class="token punctuation">,</span>
+  <span class="token string">"include"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"src/"</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><blockquote>
+<p>詳細可參考<span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL3poLUNOL2RvY3MvZGVwbG95bWVudCNkZXBsb3lpbmctdG8tZ2l0aHViLXBhZ2Vz">官網教學<i class="fa fa-external-link-alt"></i></span>。</p>
+</blockquote>
+<p>過去在部署 Hexo Blog 時，就曾寫過關於<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQEhlaWRpLUxpdS9ub3RlLWhleG8tZ2l0aHViIyVFOSU4MyVBOCVFNyVCRCVCMiVFNSU4OCVCMC1HaXRIdWI=">如何將專案部署到 GitHub<i class="fa fa-external-link-alt"></i></span> 的筆記，這次嘗試在 Vercel 或 Netlify 平台進行部署，以及透過設定 DNS 紀錄，達成自動轉址功能，搜尋相關設定網路上其實也有不少大神分享，因此就不再作贅述。</p>
+<p>最後，這是架設好的 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmhlaWRpbGl1LnR3Lw==">docusaurus2 個人網站<i class="fa fa-external-link-alt"></i></span>，沒想到很久前一直卡關的 DNS 設定，這次竟然蠻順利就達成目的了！之後會陸續把過去寫的學習筆記整理過，再彙整到小恐龍上，期許自己能夠循序漸進，每天都比昨天的自己更進步一些。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lZGR5Y2hhbmcubWUvZG9jdXNhdXJ1cy12Mi1pbnRybw==">Docusaurus 2 介紹與使用<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VzaGljaWt1LmNuL3BsL3AzRHAvemgtdHc=">10 大靜態網站生成工具<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jaGFybGVzZmVuZy5jbi9nYXRzYnktdnMtZG9jdXNhdXJ1cy8=">基于 React 的 CMS 框架对比：Docusaurus vs. Gatsby<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmFsYW53ZWkuY29tL2Jsb2cvMjAyMS8wMy8yMS9kb2N1c2F1cnVzLWdpdGh1Yi1kZXBsb3kv">Docusaurus 配置 GitHub Action 自动发布<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmFsYW50c2FpLm5ldC9wb3N0cy8yMDE4LzA3L21pZ3JhdGUtYmxvZy10by1zc2ctZGVtby1kZXZvcHMtOC1uZXRsaWZ5LWZyZWUtc3RhdGljLXNpdGUtaG9zdGluZy1zZXJ2aWNlI1dpektNT3V0bGluZV8xNTMwNDQ5Mjc1ODU0NDkx">[部落格改版學DevOps][08]netlify 超佛心的靜態網站hosting服務 - 不只做hosting還有更多<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p><a href="https://hackmd.io/xM0LI_7bSdSf8wGNiAbqcQ"><img src="https://hackmd.io/xM0LI_7bSdSf8wGNiAbqcQ/badge" alt="hackmd-github-sync-badge"></a></p>
+]]></content>
+      <categories>
+        <category>React</category>
+        <category>Docusaurus</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>Docusaurus</tag>
+        <tag>Blog</tag>
       </tags>
   </entry>
 </search>
