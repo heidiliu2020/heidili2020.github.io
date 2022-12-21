@@ -370,7 +370,7 @@ npm install --save-dev typescript @docusaurus/module-type-aliases @types/react @
 
 過去在部署 Hexo Blog 時，就曾寫過關於[如何將專案部署到 GitHub](https://hackmd.io/@Heidi-Liu/note-hexo-github#%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub) 的筆記，這次嘗試在 Vercel 或 Netlify 平台進行部署，以及透過設定 DNS 紀錄，達成自動轉址功能，搜尋相關設定網路上其實也有不少大神分享，因此就不再作贅述。
 
-最後，這是架設好的 [docusaurus2 個人網站](https://blog.heidiliu.tw/)，沒想到很久前一直卡關的 DNS 設定，這次竟然蠻順利就達成目的了！之後會陸續把過去寫的學習筆記整理過，再彙整到小恐龍上，期許自己能夠循序漸進，每天都比昨天的自己更進步一些。
+最後，這是架設好的 [docusaurus2 個人網站](https://heidiliu-wiki.netlify.app/)，沒想到很久前一直卡關的 DNS 設定，這次竟然蠻順利就達成目的了！之後會陸續把過去寫的學習筆記整理過，再彙整到小恐龍上，期許自己能夠循序漸進，每天都比昨天的自己更進步一些。
 
 ## 參考資料
 

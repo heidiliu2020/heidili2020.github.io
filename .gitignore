@@ -9,3 +9,7 @@
 # Config
 *.yml
 
+db.json
+.deploy*/
+Thumbs.db
+public/
