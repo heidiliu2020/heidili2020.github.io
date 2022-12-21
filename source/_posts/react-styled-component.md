@@ -1,6 +1,7 @@
 title: '[week 21] React 基礎：style & 如何撰寫 CSS'
 author: Heidi Liu
 tags:
+  - Front-End
   - CSS
   - React
 categories:

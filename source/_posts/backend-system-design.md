@@ -127,7 +127,7 @@ $conn->commit();
 
 ## 再探 DNS
 
-在課程[第四週的網路基礎概論](https://github.com/heidiliu2020/This-is-Codediary/blob/master/week4_%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96.md)時我們也曾提過 DNS（域名系統）。
+在課程[第四週的網路基礎概論](https://heidiliu2020.github.io/http-protocol/)時我們也曾提過 DNS（域名系統）。
 
 - 全名是 Domain Name System
 - 負責將域名轉換成 IP 位置。可將 DNS 伺服器作為一個分散式資料庫

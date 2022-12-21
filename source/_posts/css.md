@@ -2,8 +2,10 @@ title: '[week 6] CSS - 認識基礎標籤 & 屬性'
 author: Heidi Liu
 tags:
   - Front-End
+  - CSS
 categories:
   - Front-End
+  - HTML & CSS
 date: 2020-07-26 13:52:00
 ---
 > 本篇為 [[FE101] 前端基礎：HTML 與 CSS](https://lidemy.com/p/fe101-html-css) 這門課程的學習筆記。如有錯誤歡迎指正。

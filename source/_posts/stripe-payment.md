@@ -3,6 +3,7 @@ author: Heidi Liu
 tags:
   - Front-End
   - Stripe
+  - Payment Flow
 categories:
   - Front-End
 date: 2022-09-05 11:03:00

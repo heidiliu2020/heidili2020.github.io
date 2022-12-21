@@ -2,8 +2,11 @@ title: '[week 13] 前端工具之二 - CSS 預處理器、Babel'
 author: Heidi Liu
 tags:
   - Front-End
+  - CSS
+  - Babel
 categories:
   - Front-End
+  - HTML & CSS
 date: 2020-09-27 14:20:00
 ---
 > 本篇為 [[FE201] 前端中階：那些前端會用到的工具們](https://lidemy.com/p/fe201) 這門課程的學習筆記。如有錯誤歡迎指正。

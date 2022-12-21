@@ -2,9 +2,11 @@ title: Sass/SCSS 入門：變數、巢狀、混入、繼承
 author: Heidi Liu
 tags:
   - Front-End
+  - SCSS
   - CSS
 categories:
   - Front-End
+  - HTML & CSS
 date: 2021-04-13 21:20:00
 ---
 其實過去在 Lidemy 課程中，也有提過 CSS 預處理器的觀念：[[week 13] 前端工具之二 - CSS 預處理器、Babel](https://hackmd.io/@Heidi-Liu/note-fe201-sass-and-babel)，因為工作上需要使用，發現自己對語法還是不太熟悉，於是整理了這篇筆記。瞭解這套工具的由來，基本語法的使用，以及如何幫助我們解決前端開發可能遇到的問題。

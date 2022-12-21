@@ -53,7 +53,7 @@ coderbridge -  [week 1] 版本控制 - Git 概念 ＆ 基本指令](https://jtli
 還記得在寫 week4 的第一項作業時完全沒有頭緒，最後還是先找了參考解答，了解整個流程應該要如何操作。了解之後其實就和課程提到的實戰練習很像，知道不同 Method 的使用時機。還有最一開始的傳紙條故事，其實就和送出請求、回傳資料的概念是一樣的，重新看過文章後才漸漸有所體會。
 
 #### 尚須整理 & 補筆記（curl 指令）
-- [[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API](https://hackmd.io/Wdw-PHZoToSxi-MwykV8aQ#%E6%B7%BA%E8%AB%87-API)
+- [[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API](https://heidiliu2020.github.io/http-protocol/)
 
 ---
 

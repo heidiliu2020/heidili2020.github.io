@@ -16,7 +16,7 @@ date: 2020-09-26 14:20:00
 
 #### 參考筆記
 
-- [[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API](https://github.com/heidiliu2020/This-is-Codediary/blob/master/week4_%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96.md)
+- [[week 4] 網路基礎概論 - HTTP 協定、TCP/IP、API](https://heidiliu2020.github.io/http-protocol/)
 - [[week 8] 傳送資料的方式 & 瀏覽器的限制](https://github.com/heidiliu2020/This-is-Codediary/blob/master/week8_%E5%82%B3%E9%80%81%E8%B3%87%E6%96%99%E7%9A%84%E6%96%B9%E5%BC%8F%E3%80%81%E7%80%8F%E8%A6%BD%E5%99%A8%E7%9A%84%E9%99%90%E5%88%B6.md)
 
 ## 什麼是 API？
