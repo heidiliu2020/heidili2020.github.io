@@ -2,6 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidiliu2020.github.io/react-styled-component/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/sass-css-preprocessor/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/sass-babel/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/html/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/css/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/css-list-style/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/css-optimization/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/stripe-payment/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/http-protocol/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/browser-and-ajax/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/review/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/php-api/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/backend-system-design/</loc>
+    
+    <lastmod>2022-12-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/docusaurus-react-blog/</loc>
     
     <lastmod>2022-12-19</lastmod>
@@ -24,13 +115,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/sequelize-orm/</loc>
-    
-    <lastmod>2022-12-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/http-api/</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -65,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/backend-system-design/</loc>
-    
-    <lastmod>2022-12-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/backend-aws-ubuntu/</loc>
     
     <lastmod>2022-12-19</lastmod>
@@ -94,13 +171,6 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/php-blog/</loc>
-    
-    <lastmod>2022-12-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/php-api/</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -184,13 +254,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/react-styled-component/</loc>
-    
-    <lastmod>2022-12-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/react-usecontext/</loc>
     
     <lastmod>2022-12-19</lastmod>
@@ -268,13 +331,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/review/</loc>
-    
-    <lastmod>2022-12-08</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/lidemy-learning-2/</loc>
     
     <lastmod>2022-12-08</lastmod>
@@ -331,13 +387,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/stripe-payment/</loc>
-    
-    <lastmod>2022-09-05</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/typescript/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -362,20 +411,6 @@
     <loc>https://heidiliu2020.github.io/javascript-for-loop/</loc>
     
     <lastmod>2021-09-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/css-list-style/</loc>
-    
-    <lastmod>2021-05-02</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/sass-css-preprocessor/</loc>
-    
-    <lastmod>2021-04-13</lastmod>
     
   </url>
   
@@ -429,20 +464,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/html/</loc>
-    
-    <lastmod>2020-12-29</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/css/</loc>
-    
-    <lastmod>2020-12-29</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/javascript-event/</loc>
     
     <lastmod>2020-12-29</lastmod>
@@ -450,21 +471,7 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/sass-babel/</loc>
-    
-    <lastmod>2020-12-29</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/gulp-webpack/</loc>
-    
-    <lastmod>2020-12-29</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidiliu2020.github.io/css-optimization/</loc>
     
     <lastmod>2020-12-29</lastmod>
     
@@ -711,13 +718,6 @@
   </url>
   
   <url>
-    <loc>https://heidiliu2020.github.io/tags/HTML-CSS/</loc>
-    <lastmod>2022-12-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heidiliu2020.github.io/tags/Security/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>daily</changefreq>
@@ -920,6 +920,48 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/API/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Protocol/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Payment-Flow/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/HTML/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Babel/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/SCSS/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1022,6 +1064,20 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/categories/Back-End/Sequelize/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/categories/Front-End/Internet/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/categories/Front-End/HTML-CSS/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

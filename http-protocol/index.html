@@ -39,7 +39,7 @@
   <meta name="description" content="本篇為 [NET101] 網路基礎概論（搭配 JS 實作練習） 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   知道網路背後大概的運作模式  知道什麼是 Request 跟 Response  知道什麼是 DNS 以及運作原理  知道 HTTP 與 HTTPS 的差異  知道 localhost 跟 127.0.0.1 是什麼  知道 GET 與 POST 的差別  知道常用的 HTT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[week 4] 網路基礎概論 - HTTP 協定、TCP&#x2F;IP">
-<meta property="og:url" content="https://heidiliu2020.github.io/http-api/index.html">
+<meta property="og:url" content="https://heidiliu2020.github.io/http-protocol/index.html">
 <meta property="og:site_name" content="前端新米">
 <meta property="og:description" content="本篇為 [NET101] 網路基礎概論（搭配 JS 實作練習） 這門課程的學習筆記。如有錯誤歡迎指正。  學習目標：   知道網路背後大概的運作模式  知道什麼是 Request 跟 Response  知道什麼是 DNS 以及運作原理  知道 HTTP 與 HTTPS 的差異  知道 localhost 跟 127.0.0.1 是什麼  知道 GET 與 POST 的差別  知道常用的 HTT">
 <meta property="og:locale" content="zh_TW">
@@ -72,14 +72,15 @@
 <meta property="og:image" content="https://i.imgur.com/rxiOXN2.png">
 <meta property="og:image" content="https://i.imgur.com/RbyGVvV.png">
 <meta property="article:published_time" content="2020-07-12T05:39:00.000Z">
-<meta property="article:modified_time" content="2022-12-19T02:54:50.625Z">
+<meta property="article:modified_time" content="2022-12-21T03:33:52.920Z">
 <meta property="article:author" content="Heidi Liu">
 <meta property="article:tag" content="Front-End">
 <meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="Protocol">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/EYmEfr8.png">
 
-<link rel="canonical" href="https://heidiliu2020.github.io/http-api/">
+<link rel="canonical" href="https://heidiliu2020.github.io/http-protocol/">
 
 
 <script id="page-configurations">
@@ -245,7 +246,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/http-api/">
+    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/http-protocol/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
@@ -275,7 +276,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-12-19 10:54:50" itemprop="dateModified" datetime="2022-12-19T10:54:50+08:00">2022-12-19</time>
+                <time title="修改時間：2022-12-21 11:33:52" itemprop="dateModified" datetime="2022-12-21T11:33:52+08:00">2022-12-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,20 +286,24 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Front-End/" itemprop="url" rel="index"><span itemprop="name">Front-End</span></a>
                 </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/Internet/" itemprop="url" rel="index"><span itemprop="name">Internet</span></a>
+                </span>
             </span>
 
-          
+          <br>
             <span class="post-meta-item" title="文章字數">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span></span>
+              <span>13k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>NaN:aN</span>
+              <span>12 分鐘</span>
             </span>
 
         </div>
@@ -983,6 +988,7 @@ request<span class="token punctuation">.</span><span class="token function">patc
           <div class="post-tags">
               <a href="/tags/Front-End/" rel="tag"># Front-End</a>
               <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+              <a href="/tags/Protocol/" rel="tag"># Protocol</a>
           </div>
 
         
@@ -1081,18 +1087,18 @@ request<span class="token punctuation">.</span><span class="token function">patc
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -1266,8 +1272,8 @@ window.addEventListener('pjax:success', () => {
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://heidiliu2020.github.io/http-api/";
-    this.page.identifier = "http-api/";
+    this.page.url = "https://heidiliu2020.github.io/http-protocol/";
+    this.page.identifier = "http-protocol/";
     this.page.title = "[week 4] 網路基礎概論 - HTTP 協定、TCP/IP";
     this.language = "zh_TW"; 
     };
