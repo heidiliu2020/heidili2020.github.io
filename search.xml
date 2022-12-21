@@ -11556,7 +11556,7 @@ form<span class="token operator">:</span> <span class="token punctuation">&#123;
 <li>得到回應為：<code>&#123; message: &#39;\n希望之後他們能引進語音輸入系統，我就只要講講話就好。下一關的 token 為 &#123;NeuN&#125;\n&#39; &#125;</code></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjk/dG9rZW49JTdCTmV1TiU3RA==">https://lidemy-http-challenge.herokuapp.com/lv9?token={NeuN}<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<h2 id="Lv9"><a href="#Lv9" class="headerlink" title="Lv9"></a>Lv9</h2><ul>
+<h3 id="Lv9"><a href="#Lv9" class="headerlink" title="Lv9"></a>Lv9</h3><ul>
 <li>了解如何在 Header 帶上參數 <code>X-Library-Number</code> 和 <code>User-Agent</code>。想到在 Request 補充影片剛好就有提到 <code>User-Agent</code> 的用途，查到了這篇文章：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODA4NjI1Mg==">談談UserAgent 字符串的規律和偽造方法<i class="fa fa-external-link-alt"></i></span>。</li>
 </ul>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">method<span class="token operator">:</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
@@ -11582,7 +11582,7 @@ headers<span class="token operator">:</span> <span class="token punctuation">&#1
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjEwP3Rva2VuPSU3QmR1WkRzRzN0dm9BJTdE">https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG3tvoA}<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
-<h2 id="Lv10"><a href="#Lv10" class="headerlink" title="Lv10"></a>Lv10</h2><ul>
+<h3 id="Lv10"><a href="#Lv10" class="headerlink" title="Lv10"></a>Lv10</h3><ul>
 <li><p>了解如何把數字放在 query string，並且用 num 當作 key 傳入，藉由回傳值判斷是否為目標數字。</p>
 </li>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9saWRlbXktaHR0cC1jaGFsbGVuZ2UuaGVyb2t1YXBwLmNvbS9sdjEwP3Rva2VuPSU3QmR1WkRzRzN0dm9BJTdEJmFtcDtudW09OTYxMw==">https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG3tvoA}&amp;num=9613<i class="fa fa-external-link-alt"></i></span></p>
@@ -14463,7 +14463,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
  知道 HTTP method 有哪些
  知道基本的 HTTP statud code，像是 200、301、400、404、500<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id=""><a href="#" class="headerlink" title=""></a><span id="more"></span></h2><h2 id="HTTP-是什麼？"><a href="#HTTP-是什麼？" class="headerlink" title="HTTP 是什麼？"></a>HTTP 是什麼？</h2><p>全名是 HyperText Transfer Protocol，中文翻作「 超文本傳輸協定」。</p>
+<span id="more"></span>
+
+<h2 id="HTTP-是什麼？"><a href="#HTTP-是什麼？" class="headerlink" title="HTTP 是什麼？"></a>HTTP 是什麼？</h2><p>全名是 HyperText Transfer Protocol，中文翻作「 超文本傳輸協定」。</p>
 <p>HTTP 是一套網路傳輸協定，為<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCNiU4NSVFNiU5NiU4NyVFNiU5QyVBQyVFNCVCQyVBMCVFOCVCRSU5MyVFNSU4RCU4RiVFOCVBRSVBRQ==">全球資訊網的資料通訊的基礎<i class="fa fa-external-link-alt"></i></span>。也就是說，網頁前端和後端在溝通時，就是透過 HTTP 協定進行。</p>
 <h3 id="為什麼我們需要-Protocol（協定）？"><a href="#為什麼我們需要-Protocol（協定）？" class="headerlink" title="為什麼我們需要 Protocol（協定）？"></a>為什麼我們需要 Protocol（協定）？</h3><p>簡言之，協定就是一個「標準」。協定是為了讓彼此溝通而建立的規範，制定標準以統一格式，如此能夠進行規模化。</p>
 <h2 id="Client-amp-Server"><a href="#Client-amp-Server" class="headerlink" title="Client &amp; Server"></a>Client &amp; Server</h2><p>而透過協議溝通的兩端，通常可分為客戶端（Client）和伺服器端（Server）。</p>
