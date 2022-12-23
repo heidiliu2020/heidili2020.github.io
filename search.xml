@@ -24225,7 +24225,7 @@ Sec<span class="token operator">-</span>WebSocket<span class="token operator">-<
 </ul>
 <p>那麼就開始吧！</p>
 <h3 id="Server-端：建置-WebSocket-環境"><a href="#Server-端：建置-WebSocket-環境" class="headerlink" title="Server 端：建置 WebSocket 環境"></a>Server 端：建置 WebSocket 環境</h3><p>這裡以 Node.js 為例，使用 <span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tLw==">Express<i class="fa fa-external-link-alt"></i></span> 框架搭配 WebSocket 套件來建立環境。</p>
-<p>關於如何使用 Express 來架設 Server，可參考過去寫的筆記：**<a href="https://heidiliu2020.github.io/express/">[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁</a>。**</p>
+<p>關於如何使用 Express 來架設 Server，可參考過去寫的筆記：<a href="https://heidiliu2020.github.io/express/">[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁</a>。</p>
 <ul>
 <li>首先是安裝套件</li>
 </ul>
