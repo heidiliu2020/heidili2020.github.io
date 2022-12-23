@@ -24173,4 +24173,369 @@ rl.on(&#39;close&#39;, () &#x3D;&gt; &#123;
         <tag>JavaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>淺談 WebSocket 協定：實作一個簡單的即時聊天室吧！</title>
+    <url>/websocket/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/xLBMhye.png"></p>
+<blockquote>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9sZWVzb25oc3UuYmxvZ3Nwb3QuY29tLzIwMTgvMDcvc29ja2V0d2Vic29ja2V0c29ja2V0aW8uaHRtbA==">https://leesonhsu.blogspot.com/2018/07/socketwebsocketsocketio.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="What-is-WebSocket"><a href="#What-is-WebSocket" class="headerlink" title="What is WebSocket?"></a>What is WebSocket?</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L1dlYlNvY2tldA==">WebSocket<i class="fa fa-external-link-alt"></i></span> 是 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0hUTUw1">HTML5<i class="fa fa-external-link-alt"></i></span> 提供的一種網路傳輸協定，是瀏覽器（Client）與伺服器（Server）交換資料的方式之一。</p>
+<span id="more"></span>
+
+<p>與我們較為熟知的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCNiU4NSVFNiU5NiU4NyVFNiU5QyVBQyVFNCVCQyVBMCVFOCVCRSU5MyVFNSU4RCU4RiVFOCVBRSVBRQ==">HTTP<i class="fa fa-external-link-alt"></i></span> 或 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCNiU4NSVFNiU5NiU4NyVFNiU5QyVBQyVFNCVCQyVBMCVFOCVCRSU5MyVFNSVBRSU4OSVFNSU4NSVBOCVFNSU4RCU4RiVFOCVBRSVBRQ==">HTTPS<i class="fa fa-external-link-alt"></i></span> 協定，同樣位於 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L09TSSVFNiVBOCVBMSVFNSU5RSU4Qg==">OSI 模型<i class="fa fa-external-link-alt"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNSVCQSU5NCVFNyU5NCVBOCVFNSVCMSU4Mg==">應用層<i class="fa fa-external-link-alt"></i></span>，且基於傳輸層的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUJDJUEwJUU4JUJFJTkzJUU2JThFJUE3JUU1JTg4JUI2JUU1JThEJThGJUU4JUFFJUFF">TCP<i class="fa fa-external-link-alt"></i></span> 協定。其最大不同在於，WebSocket 協定只需連線一次，就能保持雙向溝通，不需重複發送 Request，因此回應更即時，進而提升 Web 通訊速度。</p>
+<h2 id="Why-WebSocket"><a href="#Why-WebSocket" class="headerlink" title="Why WebSocket?"></a>Why WebSocket?</h2><ul>
+<li>HTTP 協定只能由 Client 端「單向」發送請求，無法由 Server 端主動發送請求；WebSocket 協定則允許 Server 端主動向 Client 端推播資料，實現「雙向溝通」機制</li>
+<li>透過 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvSFRUUCVFNiU4QyU4MSVFNCVCOSU4NSVFOCVCRiU5RSVFNiU4RSVBNQ==">HTTP 1.1 持久連接（keep-alive）<i class="fa fa-external-link-alt"></i></span>，有效解決 HTTP <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVCQyVBQSVFOCVBOSVBMg==">輪詢（Polling）<i class="fa fa-external-link-alt"></i></span>產生的效能問題，節省伺服器資源</li>
+<li>實際範例：訊息推播、即時聊天室、共同編輯等功能</li>
+</ul>
+<p><img src="https://i.imgur.com/S3Mhxau.png"></p>
+<h2 id="How-to-use-WebSocket"><a href="#How-to-use-WebSocket" class="headerlink" title="How to use WebSocket?"></a>How to use WebSocket?</h2><p>WebSocket 的建立是由瀏覽器透過 JavaScript 指令，發起一個 HTTP Request 來實現。請求網址會長這樣：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">ws<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>wsapi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>若經過 SSL 加密（WebSocket Secure），則加密連接網址會變成：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">wss<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>secure<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>wsapi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>WebSocket 進行一次雙方握手過程，Client 端發送資訊：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token constant">GET</span> ws<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">8080</span> <span class="token constant">HTTP</span><span class="token operator">/</span><span class="token number">1.1</span>             <span class="token comment">// 透過 HTTP/1.1 進行交握</span>
+Origin<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">8080</span>                <span class="token comment">// Client 端 URL</span>
+Host<span class="token operator">:</span> localhost<span class="token operator">:</span><span class="token number">8080</span>
+Upgrade<span class="token operator">:</span> websocket                           <span class="token comment">// 表示發送 WebSocket 類型請求</span>
+Connection<span class="token operator">:</span> Upgrade                          <span class="token comment">// 表示 Client 希望連接升級</span>
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Key<span class="token operator">:</span> xqBt3ImNzJbYqRINxEFlkg<span class="token operator">==</span>  <span class="token comment">// base64 編碼密文，瀏覽器在每次握手隨機生成</span>
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Protocol<span class="token operator">:</span> chat<span class="token punctuation">,</span> superchat      <span class="token comment">// 用來區分同 URL 下不同 Server 需要之協議</span>
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Version<span class="token operator">:</span> <span class="token number">13</span>                    <span class="token comment">// 支持的 WebSocket 版本號</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Server 端回應資訊：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token constant">HTTP</span><span class="token operator">/</span><span class="token number">1.1</span> <span class="token number">101</span>  Switching Protocols    <span class="token comment">// 表示成功建立連接</span>
+Upgrade<span class="token operator">:</span> websocket     
+Connection<span class="token operator">:</span> Upgrade     
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Accept<span class="token operator">:</span> K7DJLdLooIwIG<span class="token operator">/</span>MOpvWFB3y3FE8<span class="token operator">=</span> <span class="token comment">// Server 端回覆對應的加密</span>
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Protocol<span class="token operator">:</span> chat         <span class="token comment">// Server 端使用的協議</span>
+Sec<span class="token operator">-</span>WebSocket<span class="token operator">-</span>Location<span class="token operator">:</span> ws<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">8080</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可參考 MDN 上提供的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1dlYlNvY2tldA==">WebSocket API<i class="fa fa-external-link-alt"></i></span> 使用範例，建立簡單的 WebSocket 連線。</p>
+<p>接下來會分幾個步驟來實作 WebSocket，其中又分 Server 和 Client 兩個面向進行：</p>
+<ul>
+<li>Step1. 建置 WebSocket Server</li>
+<li>Step2. 從 Client 發送請求給 WebSocket Server 建立連線</li>
+<li>Step3. Server 處理來自 Client 的訊息與回應</li>
+<li>Step4. Client 處理來自 Server 的訊息與回應</li>
+<li>Step5. 實戰練習：實現 Server 與多個 Client 連線溝通</li>
+</ul>
+<p>那麼就開始吧！</p>
+<h3 id="Server-端：建置-WebSocket-環境"><a href="#Server-端：建置-WebSocket-環境" class="headerlink" title="Server 端：建置 WebSocket 環境"></a>Server 端：建置 WebSocket 環境</h3><p>這裡以 Node.js 為例，使用 <span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzanMuY29tLw==">Express<i class="fa fa-external-link-alt"></i></span> 框架搭配 WebSocket 套件來建立環境。</p>
+<p>關於如何使用 Express 來架設 Server，可參考過去寫的筆記：**<a href="https://heidiliu2020.github.io/express/">[week 17] 後端中階 - 使用 Node.js + Express 框架建立一個靜態網頁</a>。**</p>
+<ul>
+<li>首先是安裝套件</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">$ npm install express
+$ npm install ws<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>安裝完套件後，在專案中建立 <code>server.js</code> 檔案，作為專案的進入點：</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// import library</span>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> ServerSocket <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'ws'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Server   <span class="token comment">// 引用 Server</span>
+
+<span class="token comment">// 指定一個 port</span>
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">8080</span>
+
+<span class="token comment">// 建立 express 物件並用來監聽 8080 port</span>
+<span class="token keyword">const</span> server <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[Server] Listening on https://localhost:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 建立實體，透過 ServerSocket 開啟 WebSocket 的服務</span>
+<span class="token keyword">const</span> wss <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> server <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Connection opened</span>
+wss<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token parameter">ws</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Client connected]'</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Connection closed</span>
+    ws<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'close'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Close connected'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>即可輸入下方指令來運行 Server：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">$ node server<span class="token punctuation">.</span>js<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>出現以下 log 代表 Server 正在監聽 8080 port：</p>
+<p><img src="https://i.imgur.com/mwIvN1w.png"></p>
+<h3 id="Client-端：與-WebSocket-Server-連線"><a href="#Client-端：與-WebSocket-Server-連線" class="headerlink" title="Client 端：與 WebSocket Server 連線"></a>Client 端：與 WebSocket Server 連線</h3><p>處理完 Server 後，接下來要從 Client 端連結 WebSocket 服務。這裡需另起一個專案，包含 index.html 和 index.js 兩個檔案。</p>
+<ul>
+<li>UI 畫面：新增一個 index.html 檔案</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+        <span class="token comment">&lt;!-- Connect or Disconnect WebSocket Server --></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>connect<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Connect<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>disconnect<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Disconnect<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+        <span class="token comment">&lt;!-- Send Message to Server --></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+            Message: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sendMsg<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sendBtn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Send<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+        <span class="token comment">&lt;!-- Import index.js after UI rendered --></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>./index.js<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>渲染後如下圖所示：</p>
+<p><img src="https://i.imgur.com/0zhHOVC.png"></p>
+<ul>
+<li>邏輯處理：新增一個 index.js 檔案</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">var</span> ws
+
+<span class="token comment">// 監聽 click 事件</span>
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#connect'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[click connect]'</span><span class="token punctuation">)</span>
+    <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#disconnect'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[click disconnect]'</span><span class="token punctuation">)</span>
+    <span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendBtn'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> msg <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendMsg'</span><span class="token punctuation">)</span>
+    <span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token operator">?.</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token comment">// Create WebSocket connection</span>
+    ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token string">'ws://localhost:8080'</span><span class="token punctuation">)</span> 
+    <span class="token comment">// 在開啟連線時執行</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onopen</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[open connection]'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ws<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 在關閉連線時執行</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onclose</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[close connection]'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>可搭配 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZGV4emVyby9odHRwLXNlcnZlcg==">https://github.com/indexzero/http-server<i class="fa fa-external-link-alt"></i></span> 套件快速架設 <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdC8=">localhost<i class="fa fa-external-link-alt"></i></span> 測試環境：</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 安裝套件</span>
+$ npm install http<span class="token operator">-</span>server
+<span class="token comment">// 運行 http-server</span>
+$ http<span class="token operator">-</span>server <span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span>
+
+<span class="token comment">// 預設為 8080 port，這裡指定 3000 port 為例</span>
+$ http<span class="token operator">-</span>server <span class="token operator">-</span>p <span class="token number">3000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>實際運行如下方所示 ：</p>
+<p><img src="https://i.imgur.com/SYUbMM9.gif"></p>
+<p>建立好 WebSocket 連結之後，就可以進行雙向溝通了！</p>
+<h3 id="Server-端：處理接發送-message"><a href="#Server-端：處理接發送-message" class="headerlink" title="Server 端：處理接發送 message"></a>Server 端：處理接發送 message</h3><p>Server 端分別能使用 <code>send</code> 發送訊息，以及透過監聽 <code>message</code> 事件接收來自 Client 的訊息：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// Connection opened</span>
+wss<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token parameter">ws</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Client connected]'</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// Listen for messages from client</span>
+	ws<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Message from client]: '</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+	    <span class="token comment">// Send message to client</span>
+	    ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'[Get message from server]'</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Client-端：處理接發送-message"><a href="#Client-端：處理接發送-message" class="headerlink" title="Client 端：處理接發送 message"></a>Client 端：處理接發送 message</h3><p>同樣的，Client 端也能使用 <code>send</code> 送出訊息，以及透過 <code>onmessage</code> 接收 Server 端的訊息：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 監聽 click 事件</span>
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendBtn'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> msg <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendMsg'</span><span class="token punctuation">)</span>
+    <span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token operator">?.</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Listen for messages from Server</span>
+<span class="token keyword">function</span> <span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Send messages to Server</span>
+    ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+    <span class="token comment">// Listen for messages from Server</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token parameter">event</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[send message]'</span><span class="token punctuation">,</span> event<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="實戰練習：實作一個簡單的即時聊天室"><a href="#實戰練習：實作一個簡單的即時聊天室" class="headerlink" title="實戰練習：實作一個簡單的即時聊天室"></a>實戰練習：實作一個簡單的即時聊天室</h2><p>先前提到 WebSocket 常應用於即時聊天室等功能，也就是實現 Server 同時與多個 Client 連線。那該如何在 ClientA 傳送訊息給 Server 的同時，讓 ClientB 也接收到來自 Server 回傳的訊息呢？</p>
+<p>這時就要仰賴「廣播功能」，首先透過 <code>ws</code> 提供的方法 <code>clients</code> 取得目前所有連線中的 Clients 資訊，再使用 forEach 迴圈送出訊息給每個 Client：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// Connection opened</span>
+wss<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token parameter">ws</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Client connected]'</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// Listen for messages from client</span>
+	ws<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Message from client]: '</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+	    <span class="token comment">// Get clients who connected</span>
+	    <span class="token keyword">let</span> clients <span class="token operator">=</span> wss<span class="token punctuation">.</span>clients
+	    <span class="token comment">// Use loop for sending messages to each client</span>
+	    clients<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">client</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	        client<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'[Broadcast][Get message from server]'</span><span class="token punctuation">)</span>
+	    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>至於如何區分各個 Client，可參考這篇提供的方法：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTMzNjQyNDMvd2Vic29ja2V0c2VydmVyLW5vZGUtanMtaG93LXRvLWRpZmZlcmVudGlhdGUtY2xpZW50cw==">《webSocketServer node.js how to differentiate clients》<i class="fa fa-external-link-alt"></i></span>，直接賦值 id 一個隨機變數。</p>
+<p>或是參考 github 上的這篇討論 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlYnNvY2tldHMvd3MvaXNzdWVzLzg1OQ==">《unique identifier for each client request to websocket server》<i class="fa fa-external-link-alt"></i></span>，直接取 request header 中的 <code>&#39;sec-websocket-key&#39;</code> 給每個 Client 新屬性 id：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">wss<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">ws<span class="token punctuation">,</span> req</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">var</span> id <span class="token operator">=</span> req<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'sec-websocket-key'</span><span class="token punctuation">]</span>
+      <span class="token comment">// Do something...</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>總之目的是取得各個使用者獨一無二的識別證，透過這些識別證，又能夠對照到我們所熟悉的遊戲 ID 或是帳號。</p>
+<p>經整理後的程式碼如下：</p>
+<ul>
+<li>Server 端：server.js</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// import library</span>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> ServerSocket <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'ws'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Server   <span class="token comment">// 引用 Server</span>
+
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">8080</span>
+
+<span class="token comment">// 建立 express 物件並用來監聽 8080 port</span>
+<span class="token keyword">const</span> server <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[Server] Listening on https://localhost:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 建立實體，透過 ServerSocket 開啟 WebSocket 的服務</span>
+<span class="token keyword">const</span> wss <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> server <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Connection opened</span>
+wss<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">ws<span class="token punctuation">,</span> req</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    ws<span class="token punctuation">.</span>id <span class="token operator">=</span> req<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'sec-websocket-key'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
+    ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[Client </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ws<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> is connected!]</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Listen for messages from client</span>
+    ws<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Message from client] data: '</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+        <span class="token comment">// Get clients who has connected</span>
+        <span class="token keyword">let</span> clients <span class="token operator">=</span> wss<span class="token punctuation">.</span>clients
+        <span class="token comment">// Use loop for sending messages to each client</span>
+        clients<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">client</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            client<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ws<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">: </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span> data<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Connection closed</span>
+    ws<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'close'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[Close connected]'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>Client 端：index.js</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">var</span> ws
+
+<span class="token comment">// 監聽 click 事件</span>
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#connect'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#disconnect'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendBtn'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> msg <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#sendMsg'</span><span class="token punctuation">)</span>
+    <span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token operator">?.</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token comment">// Create WebSocket connection</span>
+    ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token string">'ws://localhost:8080'</span><span class="token punctuation">)</span> 
+    
+    <span class="token comment">// ws = new WebSocket('ws://192.168.17.35:58095') </span>
+    <span class="token comment">// 在開啟連線時執行</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onopen</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[open connection]'</span><span class="token punctuation">)</span>
+        <span class="token comment">// Listen for messages from Server</span>
+        ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[Message from server]:\n %c</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>event<span class="token punctuation">.</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">,</span> <span class="token string">'color: blue'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Send messages to Server</span>
+    ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ws<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 在關閉連線時執行</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onclose</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[close connection]'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>實際運行如下圖，完成具備廣播功能的即時聊天室！</p>
+<p><img src="https://i.imgur.com/AdQEjiF.gif"></p>
+<h2 id="WebSocket-API"><a href="#WebSocket-API" class="headerlink" title="WebSocket API"></a>WebSocket API</h2><p>在實際練習後，這裡整理一些常用的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvQVBJL1dlYlNvY2tldA==">WebSocket API<i class="fa fa-external-link-alt"></i></span>：</p>
+<ul>
+<li><code>new WebSocket()</code>：和 Server 建立 WebSocket 連線</li>
+</ul>
+<h3 id="WebSocket-Event"><a href="#WebSocket-Event" class="headerlink" title="WebSocket Event"></a>WebSocket Event</h3><p>在建立 WebSocket 連線之後，即可透過 <code>addEventListener()</code> 監聽各種 Events，做出不同的對應方法，可參考 MDN 上的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1dlYlNvY2tldCNldmVudHM=">Events<i class="fa fa-external-link-alt"></i></span>：</p>
+<ul>
+<li>open：成功和 Server 建立連線時觸發</li>
+<li>message：接收到 Server 端訊息時觸發</li>
+<li>close：關閉連線時觸發</li>
+<li>error：連線發生錯誤時觸發</li>
+</ul>
+<h3 id="WebSocket-Methods"><a href="#WebSocket-Methods" class="headerlink" title="WebSocket Methods"></a>WebSocket Methods</h3><p>同樣在建立 WebSocket 連線後，可使用以下 WebSocket 提供的方法進行互動：</p>
+<ul>
+<li>send()：發送訊息給 Server</li>
+<li>close()：關閉連線</li>
+</ul>
+<h2 id="比較：Socket-WebSocket-Socket-IO"><a href="#比較：Socket-WebSocket-Socket-IO" class="headerlink" title="比較：Socket / WebSocket  / Socket.IO"></a>比較：Socket / WebSocket  / Socket.IO</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNyVCNiVCMiVFOCVCNyVBRiVFNiU4RiU5MiVFNSVCQSVBNw==">Socket<i class="fa fa-external-link-alt"></i></span>、Websocket、<span class="exturl" data-url="aHR0cDovL3NvY2tldC5pby8=">Socket.io<i class="fa fa-external-link-alt"></i></span> 這三者都和網路即時通訊有關，名稱也有 87 像，但實際上是不同的東西，以下做簡單的整理介紹：</p>
+<p><img src="https://i.imgur.com/aI5zQVj.png"></p>
+<blockquote>
+<p>參考資料：<span class="exturl" data-url="aHR0cHM6Ly9sZWVzb25oc3UuYmxvZ3Nwb3QuY29tLzIwMTgvMDcvc29ja2V0d2Vic29ja2V0c29ja2V0aW8uaHRtbA==">https://leesonhsu.blogspot.com/2018/07/socketwebsocketsocketio.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h3 id="Socket：傳輸與應用層之間的接口"><a href="#Socket：傳輸與應用層之間的接口" class="headerlink" title="Socket：傳輸與應用層之間的接口"></a>Socket：傳輸與應用層之間的接口</h3><ul>
+<li>是應用層與 TCP/IP 協議之間的抽象層介面，是一組 API 接口</li>
+<li>使用者可透過 Socket 來操作 TCP/IP 協議通信</li>
+<li>傳輸方式多為 stream</li>
+<li>傳輸載體類型為 binary</li>
+</ul>
+<h3 id="WebSocket：應用層協議"><a href="#WebSocket：應用層協議" class="headerlink" title="WebSocket：應用層協議"></a>WebSocket：應用層協議</h3><ul>
+<li>為了改善 Web 即時雙向通訊而創造出來的協議</li>
+<li>瀏覽器底層使用 Socket 作為通訊介面</li>
+<li>載體類型有二種：binary（二進位）或 text（文字），只能擇一使用</li>
+</ul>
+<h3 id="Socket-IO：一套-JavaScript-函式庫"><a href="#Socket-IO：一套-JavaScript-函式庫" class="headerlink" title="Socket.IO：一套 JavaScript 函式庫"></a>Socket.IO：一套 JavaScript 函式庫</h3><ul>
+<li>是一套用來建立即時通訊應用的 JavaScript 函式庫，透過 <span class="exturl" data-url="aHR0cDovL3NvY2tldC5pby8=">Socket.IO<i class="fa fa-external-link-alt"></i></span> 能夠實現 Server 與多個 Client 之間的溝通</li>
+<li>是建立在 WebSocket 之上的套件，並支持代理和負載平衡器</li>
+<li>由兩部分組成，包含 Server 端的 node.js 和 Client 端的 JavaScript</li>
+<li>核心是 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NvY2tldGlvL2VuZ2luZS5pbw==">engine.io<i class="fa fa-external-link-alt"></i></span>，透過 WebSocket 和 HTTP long-polling 方式實現伺服器和客戶端之間的連線</li>
+</ul>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>這次同樣是工作上接手新專案，需要研究 WebSocket 相關技術，於是又把過去一些網路基礎知識給複習一遍，每次都對網路協議多了一層認識。</p>
+<p>對自己而言算是比較陌生的領域，即使大概知道功用是什麼，實際操作起來又是另一回事，但學習新知識果然還是很快樂，期許自己能夠早日上手。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzIwMjE1NTYx">WebSocket 是什么原理？为什么可以实现持久连接？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3lpeWltaWFvLmNvbS9odG1sL2h0bWw1LXdlYnNvY2tldC5odG1s">HTML5 WebSocket<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2Vuam95LWxpZmUtZW5qb3ktY29kaW5nL2phdmFzY3JpcHQtd2Vic29ja2V0LSVFOCVBRSU5MyVFNSU4OSU4RCVFNSVCRSU4QyVFNyVBQiVBRiVFNiVCMiU5MiVFNiU5QyU4OSVFOCVCNyU5RCVFOSU5QiVBMi0zNDUzNmMzMzNlMWI=">JavaScript | WebSocket 讓前後端沒有距離 - Medium<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWVzb25oc3UuYmxvZ3Nwb3QuY29tLzIwMTgvMDcvc29ja2V0d2Vic29ja2V0c29ja2V0aW8uaHRtbA==">【筆記】Socket，Websocket，Socket.io的差異<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZGV2L25wbS9ucG0tc29ja2V0LWlvLw==">[note] socket.io 筆記<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvZGluZy5pbi8yMDIwLzAzLzI1LyVFNyU5NCVBOC1zb2NrZXQtaW8tJUU1JTgxJTlBJUU0JUI4JTgwJUU1JTgwJThCJUU1JThEJUIzJUU2JTk5JTgyJUU4JTgxJThBJUU1JUE0JUE5JUU1JUFFJUE0JUU1JTkwJUE3JUVGJUJDJTgxJUVGJUJDJTg4JUU3JTlCJUI0JUU2JTkyJUFEJUU3JUFEJTg2JUU4JUE4JTk4JUVGJUJDJTg5Lw==">用Socket.io 做一個即時聊天室吧！（直播筆記）<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+        <category>Internet</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>WebSocket</tag>
+      </tags>
+  </entry>
 </search>
