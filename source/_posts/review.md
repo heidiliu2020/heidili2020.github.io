@@ -191,7 +191,7 @@ form: {
 - 得到回應為：`{ message: '\n希望之後他們能引進語音輸入系統，我就只要講講話就好。下一關的 token 為 {NeuN}\n' }`
 - https://lidemy-http-challenge.herokuapp.com/lv9?token={NeuN}
 
-## Lv9
+### Lv9
 
 - 了解如何在 Header 帶上參數 `X-Library-Number` 和 `User-Agent`。想到在 Request 補充影片剛好就有提到 `User-Agent` 的用途，查到了這篇文章：[談談UserAgent 字符串的規律和偽造方法](https://zhuanlan.zhihu.com/p/28086252)。
 
@@ -219,7 +219,7 @@ form: {
 
 - https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG3tvoA}
 
-## Lv10
+### Lv10
 
 - 了解如何把數字放在 query string，並且用 num 當作 key 傳入，藉由回傳值判斷是否為目標數字。
 
