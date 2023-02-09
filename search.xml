@@ -24989,7 +24989,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token property">touch-action</span><span class="token punctuation">:</span> manipulation<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="A-2-JS-解法：-handle-touchstart-touchend-event"><a href="#A-2-JS-解法：-handle-touchstart-touchend-event" class="headerlink" title="A-2.  JS 解法：**handle touchstart/touchend event**"></a>A-2.  <strong><strong>JS</strong></strong> 解法：**<strong>handle touchstart/touchend event**</strong></h3><p>監聽這兩個 event 原理如下：</p>
+<h3 id="A-2-JS-解法：handle-touchstart-touchend-event"><a href="#A-2-JS-解法：handle-touchstart-touchend-event" class="headerlink" title="A-2.  JS 解法：handle touchstart/touchend event"></a>A-2.  <strong><strong>JS</strong></strong> 解法：<strong>handle touchstart/touchend event</strong></h3><p>監聽這兩個 event 原理如下：</p>
 <ul>
 <li>touchstart：透過偵測 <code>e.touches.length</code>（觸控點數目）handle pinch 手勢</li>
 </ul>
