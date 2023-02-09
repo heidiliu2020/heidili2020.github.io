@@ -24943,4 +24943,114 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <tag>Interview</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[學習筆記] 關於 iOS Safari 的那些坑：禁止選取 &amp; 縮放設定</title>
+    <url>/safari-pinch-and-double-tap/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/BjhUbsU.png"></p>
+<p>這次專案開發是針對 iOS 系統，需要解決畫面縮放的問題，有些關鍵字來回搜尋好多遍，卻還是容易搞混，於是乎乾脆記錄下來，日後如果遇到這類型問題，也會直接更新在這篇。</p>
+<span id="more"></span>
+
+<h2 id="A-前言：進入-meta-元宇宙"><a href="#A-前言：進入-meta-元宇宙" class="headerlink" title="A. 前言：進入 meta 元宇宙"></a>A. 前言：進入 meta 元宇宙</h2><p><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSFRNTC9FbGVtZW50L21ldGEvbmFtZQ==">meta tag<i class="fa fa-external-link-alt"></i></span> 是網頁 HTML 架構中的一種描述標籤，提供網頁的內容資訊給瀏覽器或搜尋引擎，語法如下：</p>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;meta name&#x3D;&quot;參數&quot; content&#x3D;&quot;具體參數值&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在 android 系統與 iOS 10 以前的行動裝置，透過設定 HTML meta tag 的 viewport（可視區域），我們能控制畫面顯示的寬高、縮放比例以及是否允許縮放。</p>
+<h3 id="A-0-user-scalable-no：禁止縮放畫面"><a href="#A-0-user-scalable-no：禁止縮放畫面" class="headerlink" title="A-0. user-scalable=no：禁止縮放畫面"></a>A-0. <code>user-scalable=no</code>：禁止縮放畫面</h3><p>一般而言，在行動裝置的瀏覽器中，使用者可透過以下手勢來達到縮放頁面（zoom-in/zoom-out）的效果：</p>
+<ul>
+<li><strong>pinch</strong>：兩指縮放</li>
+<li><strong>double-tap</strong>：雙擊縮放</li>
+</ul>
+<p>若在網頁的 <code>&lt;head&gt;</code> 區塊加入以下屬性，即可達到「禁止使用者縮放畫面」的效果：</p>
+<pre class="line-numbers language-htmlmixed" data-language="htmlmixed"><code class="language-htmlmixed">&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, user-scalable&#x3D;no&quot;&gt;
+
+&#x2F;&#x2F; 等同於
+&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, minimum-scale&#x3D;1, maximum-scale&#x3D;1&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述 content 屬性說明：</p>
+<ul>
+<li><code>width=device-width</code>：設定瀏覽器頁面的寬度同裝置的寬度，即自動符合不同手機螢幕預設的最佳解析度</li>
+<li><code>initial-scale=1.0</code>：設定畫面初始縮放比例為 100%，即不放大也不縮小</li>
+<li><code>minimum-scale=1, maximum-scale=1</code>：設定畫面最小和最大的縮放比例，均為 1 代表無法縮放</li>
+<li><code>user-scalable=0</code>：不允許使用者改變縮放比例</li>
+</ul>
+<p>但到 iOS 10 之後的版本，為了提高 Safari 網頁的輔助功能，便忽略 meta 設定中的 <code>user-scalable=no</code> 屬性，使得「不允許使用者改變縮放比例」這項限制失效，以下是<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2xpYnJhcnkvYXJjaGl2ZS9yZWxlYXNlbm90ZXMvR2VuZXJhbC9XaGF0c05ld0luU2FmYXJpL0FydGljbGVzL1NhZmFyaV8xMF8wLmh0bWw=">官網原文<i class="fa fa-external-link-alt"></i></span>：</p>
+<blockquote>
+<p>To improve accessibility on websites in Safari, users can now pinch-to-zoom even when a website sets user-scalable=no in the viewport.</p>
+<p>為了提高 Safari 網站中的輔助功能，即使在網站中的 viewport 設定 user-scalable=no，用戶仍可用手指進行縮放。</p>
+</blockquote>
+<p>查了資料發現 meta viewport 特性原來最早就是由 Apple 公司引入，旨在解決不同行動裝置畫面顯示的問題；到現在選擇忽略 <code>user-scalable=no</code>，雖然本意是好的，讓使用者能夠自由縮放畫面至合適的大小，卻也因此失去開發網頁的彈性。</p>
+<p>但山不轉人轉，我們還是能透過其他語法來達到想要的結果，以下舉幾個範例：</p>
+<ul>
+<li>CSS 屬性 <code>touch-action: manipulation</code>：禁止 double-tap</li>
+<li>監聽 JS 事件 <code>touchstart/touchend</code>：禁止 pinch &amp;  double-tap</li>
+<li>監聽 JS 事件<code>gesturestart</code>：禁止 pinch</li>
+</ul>
+<h3 id="A-1-CSS-解法：以-touch-action-manipulation-禁止-double-tap"><a href="#A-1-CSS-解法：以-touch-action-manipulation-禁止-double-tap" class="headerlink" title="A-1. CSS 解法：以 touch-action: manipulation 禁止 double-tap"></a>A-1. <strong><strong>CSS</strong></strong> 解法：以 <strong><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQ1NTL3RvdWNoLWFjdGlvbg==">touch-action: manipulation<i class="fa fa-external-link-alt"></i></span> 禁止 double-tap</strong></h3><p>加上 <code>touch-action: manipulation</code> 屬性，讓元素只能使用滑動或兩指縮放，即忽略 double tap 手勢的縮放：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">html, body</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">touch-action</span><span class="token punctuation">:</span> manipulation<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="A-2-JS-解法：-handle-touchstart-touchend-event"><a href="#A-2-JS-解法：-handle-touchstart-touchend-event" class="headerlink" title="A-2.  JS 解法：**handle touchstart/touchend event**"></a>A-2.  <strong><strong>JS</strong></strong> 解法：**<strong>handle touchstart/touchend event**</strong></h3><p>監聽這兩個 event 原理如下：</p>
+<ul>
+<li>touchstart：透過偵測 <code>e.touches.length</code>（觸控點數目）handle pinch 手勢</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'touchstart'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>touches <span class="token operator">&amp;&amp;</span> event<span class="token punctuation">.</span>touches<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  <span class="token comment">// 禁止多指觸控</span>
+     event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> passive<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>由於 iOS 11.1 版本的變動，預設 <code>passive: true</code> 以提高使用性能，但也因此造成 <code>e.preventDefault()</code> 語法失效。因此需加上 <code>&#123; passive: false &#125;</code> 屬性，主動告訴瀏覽器這裡的監聽將使用 <code>event.preventDefault()</code>，即可阻止事件後面的動作。</p>
+<p>可參考這篇討論：<a href="https://stackoverflow.com/questions/49500339/cant-prevent-touchmove-from-scrolling-window-on-ios">scroll - Can’t prevent <code>touchmove</code> from scrolling window on iOS - Stack Overflow</a></p>
+<ul>
+<li>touchend：透過偵測點擊時間差 handle double-tap 手勢</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">let</span> lastTouchEndTime <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'touchend'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> now <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>now <span class="token operator">-</span> lastTouchEndTime<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">300</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>      <span class="token comment">// 偵測時間差是否小於 300ms</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  lastTouchEndTime <span class="token operator">=</span> now<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>之所以 <code>touchend</code> 會取 <code>300ms</code> 時間差，是因為每一次在使用者 touch 螢幕時，都會產生 300ms 的延遲去監聽是否觸發 double-tap。在兩次 touch 之間的時間差小於 300ms 的情況下執行 <code>event.preventDefault()</code>，即可取消 double-tap 動作所觸發的縮放效果。</p>
+<h3 id="A-3-JS-解法：gesturestart-event-兩指以上事件觸發"><a href="#A-3-JS-解法：gesturestart-event-兩指以上事件觸發" class="headerlink" title="A-3. JS 解法：gesturestart event 兩指以上事件觸發"></a>A-3. JS 解法：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL0VsZW1lbnQvZ2VzdHVyZXN0YXJ0X2V2ZW50">gesturestart<i class="fa fa-external-link-alt"></i></span> event 兩指以上事件觸發</h3><p>可參考 MDN 文件 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL0VsZW1lbnQvZ2VzdHVyZXN0YXJ0X2V2ZW50">Element: gesturestart event - Web APIs | MDN (mozilla.org)<i class="fa fa-external-link-alt"></i></span>，和 touchEvent 類似，但僅適用於 iOS 系統。</p>
+<p>gesturestart 會在兩指以上觸碰螢幕時觸發，即可忽略  pinch tap 手勢的兩指縮放：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// [Safari only] gesturestart event: multi finger gestures touching </span>
+document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'gesturestart'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 阻止兩指縮放畫面</span>
+  event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="B-其他想記錄的"><a href="#B-其他想記錄的" class="headerlink" title="B. 其他想記錄的"></a>B. 其他想記錄的</h2><h3 id="B-1-mouseEvent-vs-touchEvent-vs-gesturestart"><a href="#B-1-mouseEvent-vs-touchEvent-vs-gesturestart" class="headerlink" title="B-1. mouseEvent vs touchEvent vs gesturestart"></a>B-1. mouseEvent vs touchEvent vs gesturestart</h3><ul>
+<li>mouseEvent 一次只能有一個觸擊點</li>
+<li>touchEvent 支援多點觸控</li>
+<li>gesturestart 兩指以上觸碰時觸發，僅 iOS 支援</li>
+</ul>
+<p><img src="https://i.imgur.com/IJ6LKrt.png"></p>
+<h3 id="B-2-user-select-none：-禁止區塊反白選取"><a href="#B-2-user-select-none：-禁止區塊反白選取" class="headerlink" title="B-2. user-select: none：**禁止區塊反白選取**"></a>B-2. <code>user-select: none</code>：**<strong>禁止區塊反白選取**</strong></h3><p>即雙點擊不會選取到文字區塊：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">*</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span> <span class="token comment">/* Chrome Safari */</span>        
+  <span class="token property">-moz-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>    <span class="token comment">/* Firefox */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="C-小結"><a href="#C-小結" class="headerlink" title="C. 小結"></a>C. 小結</h2><p>如果被問到工作上曾遇過什麼樣的困難，除了溝通技巧，我想「跨平台開發」肯定能名列前茅。</p>
+<p>畢竟光是不同作業系統（如：Windows、Mac、Android、iOS）、不同行動裝置（Pixel、Samsung、iPhone、iPad）、不同版本（Android 10-14、iOS 10-16.3），甚至是不同瀏覽器（Safari、Chrome、Firefox、Edge）等，都可能出現非預期的結果，有時不一定是程式碼有錯誤，而是版本不支援導致，必須仰賴多方測試，才能確定是否能夠兼容各個平台系統。</p>
+<p>想當然耳，一名工程師哪可能同時擁有這麼多種裝置，要面面俱到尤其困難，更多的情況是「遇到問題再說」，或盡可能吸收前人的智慧，避免再踩到類似的坑。</p>
+<h2 id="D-Reference"><a href="#D-Reference" class="headerlink" title="D. Reference"></a>D. Reference</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNDM4OTkzMi9ob3ctZG8teW91LWRpc2FibGUtdmlld3BvcnQtem9vbWluZy1vbi1tb2JpbGUtc2FmYXJp">html - How do you disable viewport zooming on Mobile Safari? - Stack Overflow<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BsaXR0bGVEb2cvJUU1JUE2JTgyJUU0JUJEJTk1JUU4JUE3JUEzJUU2JUIxJUJBLXVzZXItc2NhbGFibGUtbm8tJUU1JUIxJUFDJUU2JTgwJUE3JUU4JUEyJUFCaW9zLXNhZmFyaS1pZ25vcmUtZTZhMDUzMTA1MGJh">“user-scalable=no”屬性被iOS Safari ignore的解決方法 | by 狗狗 | Medium<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BqYWNreTgxMDEyNC8lRTclQTYlODElRTYlQUQlQTItc2FmYXJpLSVFNCVCOCVBRC1kb3VibGUtdGFwLSVFNyU5QSU4NCVFNyVCOCVBRSVFNSVCMCU4RiVFNSU5MiU4QyVFNiU5NCVCRSVFNSVBNCVBNy02NjE4MDJmYTI3Y2I=">禁止Safari 中Double Tap 的縮小和放大. 在很多情況下 - Medium<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>Safari</tag>
+      </tags>
+  </entry>
 </search>
