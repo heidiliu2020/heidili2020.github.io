@@ -24944,7 +24944,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
-    <title>[學習筆記] 關於 iOS Safari 的那些坑：禁止選取 &amp; 縮放設定</title>
+    <title>【學習筆記】 關於 iOS Safari 的那些坑：禁止選取 &amp; 縮放設定</title>
     <url>/safari-pinch-and-double-tap/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/BjhUbsU.png"></p>
 <p>這次專案開發是針對 iOS 系統，需要解決畫面縮放的問題，有些關鍵字來回搜尋好多遍，卻還是容易搞混，於是乎乾脆記錄下來，日後如果遇到這類型問題，也會直接更新在這篇。</p>
