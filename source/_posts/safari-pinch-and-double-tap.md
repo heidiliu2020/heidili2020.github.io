@@ -1,4 +1,4 @@
-title: '[學習筆記] 關於 iOS Safari 的那些坑：禁止選取 & 縮放設定'
+title: '【學習筆記】 關於 iOS Safari 的那些坑：禁止選取 & 縮放設定'
 author: Heidi Liu
 tags:
   - Front-End
@@ -13,7 +13,7 @@ date: 2023-02-09 10:56:00
 
 <!--more-->
 
-## A. 前言：進入 meta 元宇宙
+## 前言：進入 meta 元宇宙
 
 [meta tag](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta/name) 是網頁 HTML 架構中的一種描述標籤，提供網頁的內容資訊給瀏覽器或搜尋引擎，語法如下：
 
@@ -23,12 +23,14 @@ date: 2023-02-09 10:56:00
 
 在 android 系統與 iOS 10 以前的行動裝置，透過設定 HTML meta tag 的 viewport（可視區域），我們能控制畫面顯示的寬高、縮放比例以及是否允許縮放。
 
-### A-0. `user-scalable=no`：禁止縮放畫面
+## Zoom in/out on mobile device
 
 一般而言，在行動裝置的瀏覽器中，使用者可透過以下手勢來達到縮放頁面（zoom-in/zoom-out）的效果：
 
 - **pinch**：兩指縮放
 - **double-tap**：雙擊縮放
+
+### `user-scalable=no`：禁止縮放畫面
 
 若在網頁的 `<head>` 區塊加入以下屬性，即可達到「禁止使用者縮放畫面」的效果：
 
@@ -60,7 +62,7 @@ date: 2023-02-09 10:56:00
 - 監聽 JS 事件 `touchstart/touchend`：禁止 pinch &  double-tap
 - 監聽 JS 事件`gesturestart`：禁止 pinch
 
-### A-1. ****CSS**** 解法：以 **[touch-action: manipulation](https://developer.mozilla.org/zh-CN/docs/Web/CSS/touch-action) 禁止 double-tap**
+### ****CSS**** 解法：以 **[touch-action: manipulation](https://developer.mozilla.org/zh-CN/docs/Web/CSS/touch-action) 禁止 double-tap**
 
 加上 `touch-action: manipulation` 屬性，讓元素只能使用滑動或兩指縮放，即忽略 double tap 手勢的縮放：
 
@@ -70,7 +72,7 @@ html, body {
 }
 ```
 
-### A-2.  ****JS**** 解法：****handle touchstart/touchend event****
+### ****JS**** 解法：**handle touchstart/touchend event**
 
 監聽這兩個 event 原理如下：
 
@@ -104,7 +106,7 @@ document.addEventListener('touchend', (event) => {
 
 之所以 `touchend` 會取 `300ms` 時間差，是因為每一次在使用者 touch 螢幕時，都會產生 300ms 的延遲去監聽是否觸發 double-tap。在兩次 touch 之間的時間差小於 300ms 的情況下執行 `event.preventDefault()`，即可取消 double-tap 動作所觸發的縮放效果。
 
-### A-3. JS 解法：[gesturestart](https://developer.mozilla.org/en-US/docs/Web/API/Element/gesturestart_event) event 兩指以上事件觸發
+### JS 解法：[gesturestart](https://developer.mozilla.org/en-US/docs/Web/API/Element/gesturestart_event) event 兩指以上事件觸發
 
 可參考 MDN 文件 [Element: gesturestart event - Web APIs | MDN (mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/API/Element/gesturestart_event)，和 touchEvent 類似，但僅適用於 iOS 系統。
 
@@ -118,9 +120,9 @@ document.addEventListener('gesturestart', function(event) {
 });
 ```
 
-## B. 其他想記錄的
+## 其他想記錄的
 
-### B-1. mouseEvent vs touchEvent vs gesturestart
+### mouseEvent vs touchEvent vs gesturestart
 
 - mouseEvent 一次只能有一個觸擊點
 - touchEvent 支援多點觸控
@@ -128,7 +130,7 @@ document.addEventListener('gesturestart', function(event) {
 
 ![](https://i.imgur.com/IJ6LKrt.png)
 
-### B-2. `user-select: none`：****禁止區塊反白選取****
+### `user-select: none`：**禁止區塊反白選取**
 
 即雙點擊不會選取到文字區塊：
 
@@ -140,7 +142,7 @@ document.addEventListener('gesturestart', function(event) {
 }
 ```
 
-## C. 小結
+## 小結
 
 如果被問到工作上曾遇過什麼樣的困難，除了溝通技巧，我想「跨平台開發」肯定能名列前茅。
 
@@ -148,7 +150,7 @@ document.addEventListener('gesturestart', function(event) {
 
 想當然耳，一名工程師哪可能同時擁有這麼多種裝置，要面面俱到尤其困難，更多的情況是「遇到問題再說」，或盡可能吸收前人的智慧，避免再踩到類似的坑。
 
-## D. Reference
+## Reference
 
 - [html - How do you disable viewport zooming on Mobile Safari? - Stack Overflow](https://stackoverflow.com/questions/4389932/how-do-you-disable-viewport-zooming-on-mobile-safari)
 - [“user-scalable=no”屬性被iOS Safari ignore的解決方法 | by 狗狗 | Medium](https://medium.com/@littleDog/%E5%A6%82%E4%BD%95%E8%A7%A3%E6%B1%BA-user-scalable-no-%E5%B1%AC%E6%80%A7%E8%A2%ABios-safari-ignore-e6a0531050ba)

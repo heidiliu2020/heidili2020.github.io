@@ -1,4 +1,4 @@
-title: 【學習筆記】JavaScript - Regex 正則表達式
+title: 【學習筆記】JavaScript：Regex 正則表達式
 author: Heidi Liu
 tags:
   - JavaScript
