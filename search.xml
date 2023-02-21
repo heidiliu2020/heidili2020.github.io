@@ -24539,7 +24539,7 @@ document<span class="token punctuation">.</span><span class="token function">que
       </tags>
   </entry>
   <entry>
-    <title>【學習筆記】JavaScript - Regex 正則表達式</title>
+    <title>【學習筆記】JavaScript：Regex 正則表達式</title>
     <url>/regex/</url>
     <content><![CDATA[<p><img src="/images/pasted-5.png" alt="upload successful"><br>參考來源：<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnBhZC5pby9ibG9nL2RldmVsb3BtZW50L3RoZS1jb21wbGV0ZS1ndWlkZS10by1yZWd1bGFyLWV4cHJlc3Npb25zLXJlZ2V4Lw==">https://coderpad.io/blog/development/the-complete-guide-to-regular-expressions-regex/<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="Why-we-need-Regular-Expression"><a href="#Why-we-need-Regular-Expression" class="headerlink" title="Why we need Regular Expression?"></a>Why we need Regular Expression?</h2><p>正則表達式（Regular Expression），常簡寫為 RegEx、RegExp 或 RE，代表描述一種字串匹配的模式（pattern）。在程式語言中，通常用來搜尋、比對、替換符合某個模式的文字。</p>
