@@ -25056,7 +25056,10 @@ document<span class="token punctuation">.</span><span class="token function">add
   <entry>
     <title>【學習筆記】JavaScript 尋找字串的方法：includes/indexOf/search/match</title>
     <url>/search-string-in-javascript/</url>
-    <content><![CDATA[<p><img src="https://i.imgur.com/nZfxv6r.jpg"><br>Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQHJvY2luYW50ZV8xMT91dG1fc291cmNlPXVuc3BsYXNoJnV0bV9tZWRpdW09cmVmZXJyYWwmdXRtX2NvbnRlbnQ9Y3JlZGl0Q29weVRleHQ=">Mick Haupt<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vcGhvdG9zL2VRMlo5YXk5V3dzP3V0bV9zb3VyY2U9dW5zcGxhc2gmdXRtX21lZGl1bT1yZWZlcnJhbCZ1dG1fY29udGVudD1jcmVkaXRDb3B5VGV4dA==">Unsplash<i class="fa fa-external-link-alt"></i></span></p>
+    <content><![CDATA[<p><img src="https://i.imgur.com/nZfxv6r.jpg"></p>
+<blockquote>
+<p>Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQHJvY2luYW50ZV8xMT91dG1fc291cmNlPXVuc3BsYXNoJnV0bV9tZWRpdW09cmVmZXJyYWwmdXRtX2NvbnRlbnQ9Y3JlZGl0Q29weVRleHQ=">Mick Haupt<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vcGhvdG9zL2VRMlo5YXk5V3dzP3V0bV9zb3VyY2U9dW5zcGxhc2gmdXRtX21lZGl1bT1yZWZlcnJhbCZ1dG1fY29udGVudD1jcmVkaXRDb3B5VGV4dA==">Unsplash<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
 <p>在處理資料時，查找字串是一種常見的操作，JavaScript 提供不同的方法來搜索字串。其中，最常用的方法包括：search、indexOf、includes 和 match，能夠辨別字串裡是否有想要查找的文字：</p>
 <ul>
 <li>String.prototype.search( )</li>
@@ -25068,7 +25071,7 @@ document<span class="token punctuation">.</span><span class="token function">add
 <span id="more"></span>
 
 <hr>
-<h2 id="String-prototype-search-：檢測字串是否包含，有的話回傳-index，否則回傳-1"><a href="#String-prototype-search-：檢測字串是否包含，有的話回傳-index，否則回傳-1" class="headerlink" title="String.prototype.search( )：檢測字串是否包含，有的話回傳 index，否則回傳 -1"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL3NlYXJjaA==">String.prototype.search( )<i class="fa fa-external-link-alt"></i></span>：<strong>檢測字串是否包含，有的話回傳 index，否則回傳 -1</strong></h2><ul>
+<h2 id="String-prototype-search-：檢測字串是否包含，有的話回傳-index，否則回傳-1"><a href="#String-prototype-search-：檢測字串是否包含，有的話回傳-index，否則回傳-1" class="headerlink" title="String.prototype.search( )：檢測字串是否包含，有的話回傳 index，否則回傳 -1"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL3NlYXJjaA==">String.prototype.search( )<i class="fa fa-external-link-alt"></i></span>：檢測字串是否包含，有的話回傳 index，否則回傳 -1</h2><ul>
 <li>搜索指定字符串，並返回匹配字串第一個字的索引值</li>
 <li>若找不到，則返回 -1</li>
 <li>可支援正則表達式</li>
@@ -25099,7 +25102,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>rule2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 13</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>rule3<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="String-prototype-indexOf-：檢測字串是否包含，有的話回傳-index，否則回傳-1"><a href="#String-prototype-indexOf-：檢測字串是否包含，有的話回傳-index，否則回傳-1" class="headerlink" title="String.prototype.indexOf()**：檢測字串是否包含，有的話回傳 index，否則回傳 -1**"></a><strong><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL2luZGV4T2Y=">String.prototype.indexOf()<i class="fa fa-external-link-alt"></i></span>**：</strong>檢測字串是否包含，有的話回傳 index，否則回傳 -1**</h2><ul>
+<h2 id="String-prototype-indexOf-：檢測字串是否包含，有的話回傳-index，否則回傳-1"><a href="#String-prototype-indexOf-：檢測字串是否包含，有的話回傳-index，否則回傳-1" class="headerlink" title="String.prototype.indexOf()：檢測字串是否包含，有的話回傳 index，否則回傳 -1"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL2luZGV4T2Y=">String.prototype.indexOf()<i class="fa fa-external-link-alt"></i></span>：檢測字串是否包含，有的話回傳 index，否則回傳 -1</h2><ul>
 <li>搜索指定字符串，並返回匹配字串第一個字的索引值</li>
 <li>若沒有找到，則返回 -1</li>
 <li>第二個參數 position 為選填屬性，代表從哪個 index 找起</li>
@@ -25122,7 +25125,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>position3<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// -1</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>position4<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="String-prototype-match-：尋找並取出內容，有的話以陣列回傳，否則回傳-null"><a href="#String-prototype-match-：尋找並取出內容，有的話以陣列回傳，否則回傳-null" class="headerlink" title="String.prototype.match()：尋找並取出內容，有的話以陣列回傳，否則回傳 null"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL21hdGNo">String.prototype.match()<i class="fa fa-external-link-alt"></i></span>：<strong>尋找並取出內容，有的話以陣列回傳，否則回傳 null</strong></h2><ul>
+<h2 id="String-prototype-match-：尋找並取出內容，有的話以陣列回傳，否則回傳-null"><a href="#String-prototype-match-：尋找並取出內容，有的話以陣列回傳，否則回傳-null" class="headerlink" title="String.prototype.match()：尋找並取出內容，有的話以陣列回傳，否則回傳 null"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5nL21hdGNo">String.prototype.match()<i class="fa fa-external-link-alt"></i></span>：尋找並取出內容，有的話以陣列回傳，否則回傳 null</h2><ul>
 <li>搜索指定字符串，並返回一個或多個與指定值匹配的數組</li>
 <li>若找不到則返回 null</li>
 <li>支援正則表達式</li>
