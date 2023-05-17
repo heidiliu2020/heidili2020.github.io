@@ -54,7 +54,7 @@
 <meta property="og:image" content="https://hackmd.io/_uploads/ByFz66WBh.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/S11Rn6WB2.png">
 <meta property="article:published_time" content="2023-05-17T03:45:00.000Z">
-<meta property="article:modified_time" content="2023-05-17T03:50:50.681Z">
+<meta property="article:modified_time" content="2023-05-17T09:28:11.472Z">
 <meta property="article:author" content="Heidi Liu">
 <meta property="article:tag" content="Front-End">
 <meta name="twitter:card" content="summary">
@@ -250,7 +250,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2023-05-17 11:45:00 / 修改時間：11:50:50" itemprop="dateCreated datePublished" datetime="2023-05-17T11:45:00+08:00">2023-05-17</time>
+              <time title="創建時間：2023-05-17 11:45:00 / 修改時間：17:28:11" itemprop="dateCreated datePublished" datetime="2023-05-17T11:45:00+08:00">2023-05-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,22 +345,22 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <p>以下是不同裝置上的瀏覽器對 Fullscreen API 支援度：</p>
 <p><img src="https://hackmd.io/_uploads/rk2Y3pZSh.png"></p>
 <p>可以看到 Safari 雖然在行動裝置僅支援到 iOS 12，在 PC 上還是能支援到 16.4。但需注意的是，不像其他瀏覽器，Fullscreen API 只能套用在 video 元素上，若用在其他像是 div 元素時一概沒有反應，這點真的很不友善。</p>
-<p>但如果因為功能需求，必須套用在 div 元素上的話，還是有方法可以繞過這個限制，例如透過 PWA 來實現全螢幕效果，外觀就像 Native app 一樣。</p>
+<p>但如果因為功能需求，必須套用在 div 元素上的話，還是有方法可以繞過這個限制，例如透過 PWA 來實現全螢幕效果，外觀就像 Native APP 一樣。</p>
 <h3 id="What-is-PWA"><a href="#What-is-PWA" class="headerlink" title="What is PWA?"></a>What is PWA?</h3><p><img src="https://hackmd.io/_uploads/ByFz66WBh.png"><br>Ref: <span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlcnRvcC5wbC9lbi9wcm9ncmVzc2l2ZS13ZWItYXBwLXB3YS8=">https://www.evertop.pl/en/progressive-web-app-pwa/<i class="fa fa-external-link-alt"></i></span></p>
 <p>以下是 MDN 關於 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvUHJvZ3Jlc3NpdmVfd2ViX2FwcHM=">PWA<i class="fa fa-external-link-alt"></i></span> 的介紹：</p>
 <blockquote>
 <p><strong>Progressive Web Apps</strong> (PWAs) are web apps that use <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1NlcnZpY2VfV29ya2VyX0FQSQ==">service workers<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvTWFuaWZlc3Q=">manifests<i class="fa fa-external-link-alt"></i></span>, and other web-platform features in combination with <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9Qcm9ncmVzc2l2ZV9FbmhhbmNlbWVudA==">progressive enhancement<i class="fa fa-external-link-alt"></i></span> to give users an experience on par with native apps.</p>
 </blockquote>
 <blockquote>
-<p>漸進式網路應用程式（PWAs）透過 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1NlcnZpY2VfV29ya2VyX0FQSQ==">service workers<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvTWFuaWZlc3Q=">manifests<i class="fa fa-external-link-alt"></i></span> 技術，並以漸進增強策略，建立跨平台 web 應用程式，提供用戶體驗近似於原生程式的功能。</p>
+<p>漸進式網路應用程式（PWAs）是透過 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1NlcnZpY2VfV29ya2VyX0FQSQ==">service workers<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvTWFuaWZlc3Q=">manifests<i class="fa fa-external-link-alt"></i></span> 技術，並以漸進增強策略，建立跨平台 web 應用程式，提供用戶體驗近似於原生程式的功能。</p>
 </blockquote>
 <p>這裡簡單介紹上述提到的 Service Worker 與 Manifest 兩項技術：</p>
 <ul>
-<li>Service Worker：可想像是位於 Web App 與網路連接之間的代理人，讓網頁擁夠像 Native App 一樣支援離線和訊息推播功能</li>
-<li>Manifest：透過設定 manifest.json 檔，可自訂啟動畫面、安裝在主畫面顯示的名稱與 icon 等</li>
+<li>Service Worker：可想像是位於 Web APP 與網路連接之間的代理人，讓網頁擁夠像 Native APP 一樣支援離線和訊息推播功能</li>
+<li>Manifest：藉由設定 manifest.json 檔的參數，可自訂啟動畫面、安裝在主畫面顯示的名稱與 icon 等</li>
 </ul>
-<p>透過 PWA 建立跨平台 Web 應用程式，使用者只需將網頁加到主畫面，開啟時就不會顯示網址列，外表就和 Native APP 一樣是全螢幕，能夠有更好的沉浸式體驗。</p>
-<p>除此之外，使用 PWA 還有其他好處，像是安裝快速、定義快取、離線瀏覽、可被搜尋等優點，藉此提升使用者體驗。詳細可參考這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOC8xMC8xMy9wd2EtaW4tYWN0aW9uLw==">PWA 實戰經驗分享 - Huli’s blog<i class="fa fa-external-link-alt"></i></span>，有提到如何實作 PWA 以及不同平台可能遇到的問題的等等。</p>
+<p>透過 PWA 建立的 Web APP，使用者只需將網頁加到主畫面，開啟時就不會顯示網址列，外表就和 Native APP 一樣是全螢幕，能夠有更好的沉浸式體驗。</p>
+<p>除此之外，使用 PWA 還有其他好處，像是安裝快速、定義快取、離線瀏覽、可被搜尋等優點，藉此提升使用者體驗。詳細可參考這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAxOC8xMC8xMy9wd2EtaW4tYWN0aW9uLw==">PWA 實戰經驗分享 - Huli’s blog<i class="fa fa-external-link-alt"></i></span>，有提到如何實作 PWA 以及不同平台可能遇到的問題等等。</p>
 <h3 id="Vibration-API-使裝置震動"><a href="#Vibration-API-使裝置震動" class="headerlink" title="Vibration API 使裝置震動"></a>Vibration API 使裝置震動</h3><ul>
 <li>Reference：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1ZpYnJhdGlvbl9BUEk=">Vibration API - MDN Web Docs<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
