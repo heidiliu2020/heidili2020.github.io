@@ -25236,6 +25236,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </li>
 <li>或建立一個 div 容器在頁面上，把需要的 Debug 資訊放在這裡，像是監聽事件等，這做法同樣是透過更新 DOM 元素</li>
 <li>或更新 mac 上的 Safari 版本至 16.4，但需注意 Safari 16.4 僅支援 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmFwcGxlLmNvbS96aC10dy9IVDIxMzY3MQ==">macOS Big Sur 和 macOS Monterey<i class="fa fa-external-link-alt"></i></span> 較新的 macOS 版本，目前手上的 mac 因為版本較舊還沒嘗試此解法</li>
+<li>2023.8 將 macOS 更新至 Monterey 12.6.6 版本以後，即可將 Safari 版本升級到 16.4，Console 又回來了，可喜可賀^_^</li>
 </ul>
 <h2 id="Resize-fires-multiple-times"><a href="#Resize-fires-multiple-times" class="headerlink" title="Resize fires multiple times"></a>Resize fires multiple times</h2><ul>
 <li>Reference：<ul>
@@ -25299,6 +25300,124 @@ window<span class="token punctuation">.</span><span class="token function">addEv
       </categories>
       <tags>
         <tag>Front-End</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【學習筆記】如何在 iOS APP 透過 WKWebView 實現內嵌網頁功能</title>
+    <url>/ios-app-webview/</url>
+    <content><![CDATA[<p><img src="https://hackmd.io/_uploads/BJXLBiH6n.jpg"></p>
+<blockquote>
+<p>Photo by <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vQGRhbmllbGtvcnBhaT91dG1fc291cmNlPXVuc3BsYXNoJnV0bV9tZWRpdW09cmVmZXJyYWwmdXRtX2NvbnRlbnQ9Y3JlZGl0Q29weVRleHQ=">Daniel Korpai<i class="fa fa-external-link-alt"></i></span> on <span class="exturl" data-url="aHR0cHM6Ly91bnNwbGFzaC5jb20vcGhvdG9zL1kzTEdXQ3NyZ21nP3V0bV9zb3VyY2U9dW5zcGxhc2gmdXRtX21lZGl1bT1yZWZlcnJhbCZ1dG1fY29udGVudD1jcmVkaXRDb3B5VGV4dA==">Unsplash<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="What-is-Webview？"><a href="#What-is-Webview？" class="headerlink" title="What is Webview？"></a>What is Webview？</h2><p>Webview 其實就是一個精簡的瀏覽器，透過渲染引擎（Webkit）呈現網頁內容，中文又翻作「網頁視圖」。</p>
+<span id="more"></span>
+
+<p>和我們所熟悉的瀏覽器（例如：iOS / Safari 和 Android / Chrome）相比，最大差異在於，外觀介面沒有網址列、功能鍵等功能。</p>
+<p>透過 Webview 實現的混合模式開發（Hyprid APP），相較於原生開發（Native APP），具備跨平台開發、開發效率高、降低成本、可離線執行等優點；然而，也須考量效能性、安全性與兼容性等問題。</p>
+<h2 id="iOS-APP-顯示網頁的三種方式"><a href="#iOS-APP-顯示網頁的三種方式" class="headerlink" title="iOS APP 顯示網頁的三種方式"></a>iOS APP 顯示網頁的三種方式</h2><p>iOS SDK 提供三種方式，讓開發者用來顯示網頁內容：</p>
+<h3 id="透過-UIApplication-外開網頁視窗"><a href="#透過-UIApplication-外開網頁視窗" class="headerlink" title="透過 UIApplication 外開網頁視窗"></a>透過 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2RvY3VtZW50YXRpb24vdWlraXQvdWlhcHBsaWNhdGlvbi8=">UIApplication<i class="fa fa-external-link-alt"></i></span> 外開網頁視窗</h3><p><code>UIApplication.shared.open</code> 是 Swift 中的一個 API，功能是可暫時離開當前 APP，開啟指定的 URL。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">SwiftUI</span>
+<span class="token keyword">struct</span> <span class="token class-name">ContentView</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Button</span><span class="token punctuation">(</span>action<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token function">URL</span><span class="token punctuation">(</span>string<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"https://heidiliu2020.github.io/"</span></span><span class="token punctuation">)</span><span class="token operator">!</span>
+            <span class="token class-name">UIApplication</span><span class="token punctuation">.</span>shared<span class="token punctuation">.</span><span class="token keyword">open</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"點我前往連結"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2RvY3VtZW50YXRpb24vd2Via2l0L3drd2Vidmlldw==">WKWebView<i class="fa fa-external-link-alt"></i></span></h3><p>和 Android 的 Webview 元件類似，iOS 同樣有 Webview 能用來顯示網頁內容。</p>
+<p>而在 iOS 的 WebView 分為 UIWebView 和 iOS 8+ 新增的 WKWebView 兩種類型。</p>
+<p>WebKit 框架中的 WKWebView 相較於前者，在於性能與穩定性的提升，具備 Nitro JavaScript 引擎的等優點。並透過 <code>UIViewRepresentable</code> 協定包裝 View，顯示特定的網頁內容。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">SwiftUI</span>
+<span class="token keyword">import</span> <span class="token class-name">WebKit</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">WebView</span><span class="token punctuation">:</span> <span class="token class-name">UIViewRepresentable</span> <span class="token punctuation">&#123;</span>
+    
+    <span class="token keyword">func</span> <span class="token function-definition function">makeUIView</span><span class="token punctuation">(</span>context<span class="token punctuation">:</span> <span class="token class-name">Context</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">UIView</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// return UIView object</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">func</span> <span class="token function-definition function">updateUIView</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> uiView<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">UIView</span><span class="token punctuation">,</span> context<span class="token punctuation">:</span> <span class="token class-name">Context</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// update UIView</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用上需注意 WKWebView 沒有內建的 Back &amp; Forward 按鍵，若需提供返回歷史頁面等功能，必須自行開發一個自訂的網頁瀏覽器。</p>
+<h3 id="SFSafariViewController"><a href="#SFSafariViewController" class="headerlink" title="SFSafariViewController"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2RvY3VtZW50YXRpb24vc2FmYXJpc2VydmljZXMvc2ZzYWZhcml2aWV3Y29udHJvbGxlci8=">SFSafariViewController<i class="fa fa-external-link-alt"></i></span></h3><p>相較於 WKWebView 的限制，iOS 9 中導入的控制器 SFSafariViewController，能使用與 Safari 瀏覽器相同的功能，例如切換上下頁。</p>
+<p>方法是透過 <code>UIViewControllerRepresentable</code> 協定定義 SwiftUI view 型別，將 SFSafariViewController 包裝成 SwiftUI view，即可顯示網頁內容。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">SwiftUI</span>
+<span class="token keyword">import</span> <span class="token class-name">SafariServices</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">SafariView</span><span class="token punctuation">:</span> <span class="token class-name">UIViewControllerRepresentable</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// TODO...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="實戰練習"><a href="#實戰練習" class="headerlink" title="實戰練習"></a>實戰練習</h2><h3 id="Step1-環境架設：安裝-XCode"><a href="#Step1-環境架設：安裝-XCode" class="headerlink" title="Step1. 環境架設：安裝 XCode"></a>Step1. 環境架設：安裝 XCode</h3><p>首先進入<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2Rvd25sb2FkL2FwcGxpY2F0aW9ucy8=">官網下載頁面<i class="fa fa-external-link-alt"></i></span>，登入後選擇要下載 XCode 版本。</p>
+<p><img src="https://hackmd.io/_uploads/BJ0BxoST3.png"></p>
+<p>不同版本的 XCode，在使用上須考慮開發環境、APP 套件與 iOS 版本相容性，若需要安裝特定版本的 XCode，可參考這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnBveWNoYW5nLm5ldC9tYW51YWxseS1kb3dubG9hZC1tdWx0aXBsZS12ZXJzaW9ucy1vZi14Y29kZS8=">如何手動快速下載不同版本的Xcode - Poy Chang<i class="fa fa-external-link-alt"></i></span>。</p>
+<h3 id="Step2-建立新專案"><a href="#Step2-建立新專案" class="headerlink" title="Step2. 建立新專案"></a>Step2. 建立新專案</h3><p>運行 XCode 後，點擊「Create a new Xcode project」建立新專案。</p>
+<p><img src="https://hackmd.io/_uploads/B1ST1sB63.png"></p>
+<p>接著點選 APP 建立專案範本，內建範本有預設程式碼，能夠協助快速開發：</p>
+<p><img src="https://hackmd.io/_uploads/HkRefsBan.png"></p>
+<h3 id="Step3-利用-UIViewRepresentable-協定調用-WKWebView"><a href="#Step3-利用-UIViewRepresentable-協定調用-WKWebView" class="headerlink" title="Step3. 利用 UIViewRepresentable 協定調用 WKWebView"></a>Step3. 利用 UIViewRepresentable 協定調用 WKWebView</h3><p>接著透過 <code>UIViewRepresentable</code> 協定包裝 View，顯示指定的網頁內容：</p>
+<ul>
+<li>ContentView.swift</li>
+</ul>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">SwiftUI</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">ContentView</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">WebView</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token function">URL</span><span class="token punctuation">(</span>string<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"https://heidiliu2020.github.io/"</span></span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">edgesIgnoringSafeArea</span><span class="token punctuation">(</span><span class="token punctuation">.</span>all<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">ContentView_Previews</span><span class="token punctuation">:</span> <span class="token class-name">PreviewProvider</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">var</span> previews<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ContentView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>SwiftUIView.swift</li>
+</ul>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">SwiftUI</span>
+<span class="token keyword">import</span> <span class="token class-name">WebKit</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">WebView</span><span class="token punctuation">:</span> <span class="token class-name">UIViewRepresentable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> url<span class="token punctuation">:</span> <span class="token constant">URL</span>
+
+    <span class="token keyword">func</span> <span class="token function-definition function">makeUIView</span><span class="token punctuation">(</span>context<span class="token punctuation">:</span> <span class="token class-name">Context</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">WKWebView</span>  <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> wkwebView <span class="token operator">=</span> <span class="token class-name">WKWebView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        wkwebView<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token class-name">URLRequest</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> url<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> wkwebView
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">func</span> <span class="token function-definition function">updateUIView</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> uiView<span class="token punctuation">:</span> <span class="token class-name">WKWebView</span><span class="token punctuation">,</span> context<span class="token punctuation">:</span> <span class="token class-name">Context</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Step4-Building-and-running-an-app"><a href="#Step4-Building-and-running-an-app" class="headerlink" title="Step4. Building and running an app"></a>Step4. <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL2RvY3VtZW50YXRpb24veGNvZGUvYnVpbGRpbmctYW5kLXJ1bm5pbmctYW4tYXBw">Building and running an app<i class="fa fa-external-link-alt"></i></span></h3><p>最後是運行 APP 驗證結果，點選上方的開始鍵執行 Building，點開右側的選單可選擇要運行的裝置版本，或是透過傳輸線連接在實體機上進行測試。</p>
+<p><img src="https://hackmd.io/_uploads/BkG1Usrpn.png"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>同樣是因為專案上的測試需求，沒想到這回又再次把 Xcode 安裝回電腦中，也許因為過去曾稍微接觸過一點，這回相對沒那麼迷惘。</p>
+<p>能夠直接把 APP Build 到實體手機測試，和透過 XCode 模擬器終究還是有很大區別，雖然要實際上架到 App Store 需要課金，但以現階段而言也已經很夠用了。回顧過去所接觸的知識，似乎明白儘管當初一知半解，只要再多經歷幾次也能夠好好運用這些技術了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwY29kYS5jb20vc3dpZnR1aS10ZXh0dmlldy11aXZpZXdyZXByZXNlbnRhYmxlLw==">使用 UIViewRepresentable 協定　讓你輕鬆建立 SwiftUI TextView<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwY29kYS5jb20udHcvc3dpZnR1aS1jYW1lcmEtcGhvdG8tbGlicmFyeS8=">利用 UIViewControllerRepresentable 協定　在 SwiftUI 存取相簿並使用相機<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Native</category>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Native</tag>
+        <tag>iOS</tag>
+        <tag>Webview</tag>
       </tags>
   </entry>
 </search>
