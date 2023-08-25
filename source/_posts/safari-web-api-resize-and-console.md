@@ -45,6 +45,7 @@ Photo by [Pandhuya Niking](https://unsplash.com/@dispandu?utm_source=unsplash&ut
     - 如果是原生 JavaScript 專案，可參考這份套件 https://github.com/fnando/i18n-js 來實作
 - 或建立一個 div 容器在頁面上，把需要的 Debug 資訊放在這裡，像是監聽事件等，這做法同樣是透過更新 DOM 元素
 - 或更新 mac 上的 Safari 版本至 16.4，但需注意 Safari 16.4 僅支援 [macOS Big Sur 和 macOS Monterey](https://support.apple.com/zh-tw/HT213671) 較新的 macOS 版本，目前手上的 mac 因為版本較舊還沒嘗試此解法
+- 2023.8 將 macOS 更新至 Monterey 12.6.6 版本以後，即可將 Safari 版本升級到 16.4，Console 又回來了，可喜可賀^_^
 
 ## Resize fires multiple times
 
@@ -84,7 +85,7 @@ window.addEventListener("resize", (e) => {
 
 可以看到 Safari 雖然在行動裝置僅支援到 iOS 12，在 PC 上還是能支援到 16.4。但需注意的是，不像其他瀏覽器，Fullscreen API 只能套用在 video 元素上，若用在其他像是 div 元素時一概沒有反應，這點真的很不友善。
 
-但如果因為功能需求，必須套用在 div 元素上的話，還是有方法可以繞過這個限制，例如透過 PWA 來實現全螢幕效果，外觀就像 Native app 一樣。
+但如果因為功能需求，必須套用在 div 元素上的話，還是有方法可以繞過這個限制，例如透過 PWA 來實現全螢幕效果，外觀就像 Native APP 一樣。
 
 ### What is PWA?
 
@@ -96,17 +97,17 @@ Ref: https://www.evertop.pl/en/progressive-web-app-pwa/
 > **Progressive Web Apps** (PWAs) are web apps that use [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API), [manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest), and other web-platform features in combination with [progressive enhancement](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement) to give users an experience on par with native apps.
 > 
 
-> 漸進式網路應用程式（PWAs）透過 [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)、[manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest) 技術，並以漸進增強策略，建立跨平台 web 應用程式，提供用戶體驗近似於原生程式的功能。
+> 漸進式網路應用程式（PWAs）是透過 [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)、[manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest) 技術，並以漸進增強策略，建立跨平台 web 應用程式，提供用戶體驗近似於原生程式的功能。
 > 
 
 這裡簡單介紹上述提到的 Service Worker 與 Manifest 兩項技術：
 
-- Service Worker：可想像是位於 Web App 與網路連接之間的代理人，讓網頁擁夠像 Native App 一樣支援離線和訊息推播功能
-- Manifest：透過設定 manifest.json 檔，可自訂啟動畫面、安裝在主畫面顯示的名稱與 icon 等
+- Service Worker：可想像是位於 Web APP 與網路連接之間的代理人，讓網頁擁夠像 Native APP 一樣支援離線和訊息推播功能
+- Manifest：藉由設定 manifest.json 檔的參數，可自訂啟動畫面、安裝在主畫面顯示的名稱與 icon 等
 
-透過 PWA 建立跨平台 Web 應用程式，使用者只需將網頁加到主畫面，開啟時就不會顯示網址列，外表就和 Native APP 一樣是全螢幕，能夠有更好的沉浸式體驗。
+透過 PWA 建立的 Web APP，使用者只需將網頁加到主畫面，開啟時就不會顯示網址列，外表就和 Native APP 一樣是全螢幕，能夠有更好的沉浸式體驗。
 
-除此之外，使用 PWA 還有其他好處，像是安裝快速、定義快取、離線瀏覽、可被搜尋等優點，藉此提升使用者體驗。詳細可參考這篇文章：[PWA 實戰經驗分享 - Huli's blog](https://blog.huli.tw/2018/10/13/pwa-in-action/)，有提到如何實作 PWA 以及不同平台可能遇到的問題的等等。
+除此之外，使用 PWA 還有其他好處，像是安裝快速、定義快取、離線瀏覽、可被搜尋等優點，藉此提升使用者體驗。詳細可參考這篇文章：[PWA 實戰經驗分享 - Huli's blog](https://blog.huli.tw/2018/10/13/pwa-in-action/)，有提到如何實作 PWA 以及不同平台可能遇到的問題等等。
 
 
 ### Vibration API 使裝置震動
