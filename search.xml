@@ -25051,6 +25051,7 @@ document<span class="token punctuation">.</span><span class="token function">add
       <tags>
         <tag>Front-End</tag>
         <tag>Safari</tag>
+        <tag>iOS</tag>
       </tags>
   </entry>
   <entry>
@@ -25300,6 +25301,8 @@ window<span class="token punctuation">.</span><span class="token function">addEv
       </categories>
       <tags>
         <tag>Front-End</tag>
+        <tag>iOS</tag>
+        <tag>WebAPI</tag>
       </tags>
   </entry>
   <entry>
@@ -25411,8 +25414,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 </ul>
 ]]></content>
       <categories>
-        <category>Native</category>
-        <category>iOS</category>
+        <category>Front-End</category>
       </categories>
       <tags>
         <tag>Native</tag>
