@@ -5,8 +5,7 @@ tags:
   - iOS
   - Webview
 categories:
-  - Native
-  - iOS
+  - Front-End
 date: 2023-08-25 17:01:00
 ---
 ![](https://hackmd.io/_uploads/BJXLBiH6n.jpg)
