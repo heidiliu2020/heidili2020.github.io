@@ -26327,13 +26327,10 @@ git@github.com:beego/beego.git<span aria-hidden="true" class="line-numbers-rows"
 
 <p>以下是正文。</p>
 <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>「每次 review 的時候，好像總是被指正變數名稱⋯⋯」</p>
-<p>「作為日本人，用英文命名還是有點困難⋯⋯」</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>「每次 review 的時候，好像總是被指正變數名稱⋯⋯」<br>「作為日本人，用英文命名還是有點困難⋯⋯」</p>
 <p>您有這樣的煩惱嗎？</p>
-<p>本文將以流程圖的形式，說明「當工程師在英文命名遇到困難時該怎麼辦」！</p>
-<p>學成後也許就能從菜鳥工程師畢業了！？</p>
-<p>※本文根據 Laravel, Vue.js 專案規則為基礎進行解說。</p>
-<p>也包括專案的內部規則，請注意這點。</p>
+<p>本文將以流程圖的形式，說明「當工程師在英文命名遇到困難時該怎麼辦」！學成後也許就能從菜鳥工程師畢業了！？</p>
+<p>※本文根據 Laravel, Vue.js 專案規則為基礎進行解說。內容也包括專案的內部規則，請注意這點。</p>
 <h2 id="適用對象"><a href="#適用對象" class="headerlink" title="適用對象"></a>適用對象</h2><p>本文適合以下對象：</p>
 <ul>
 <li>菜鳥工程師</li>
@@ -26351,7 +26348,7 @@ git@github.com:beego/beego.git<span aria-hidden="true" class="line-numbers-rows"
 <p><img src="https://hackmd.io/_uploads/Hyy5k-81a.png"></p>
 <p>上圖流程意思大致如下：</p>
 <ul>
-<li>變數、常數、表格命名<ul>
+<li>變數、常數、Table、Column 命名<ul>
 <li>是否顯示日期 =&gt; 是：(A) 動詞+at/on</li>
 <li>是否為布林值 =&gt; 是：(B) 形容詞+名詞</li>
 <li>是否為切換顯示/隱藏的 flag =&gt; 是：(C) show+名詞</li>
@@ -26361,7 +26358,7 @@ git@github.com:beego/beego.git<span aria-hidden="true" class="line-numbers-rows"
 <li>=&gt; 否：(G) is+形容詞</li>
 </ul>
 </li>
-<li>函數命名<ul>
+<li>函數、類別命名<ul>
 <li>是否為事件函數 =&gt; 是：(H) on+名詞+形容詞</li>
 <li>是否表示轉換某物 =&gt; 是：(I) to+名詞</li>
 <li>是否想改變什麼狀態 =&gt; 是：(J) 動詞+受詞+形容詞</li>
