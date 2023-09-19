@@ -26176,7 +26176,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <p>在網站沒有內建搜索功能的情況下，可以通過域名搜索來實現簡單的搜索功能。</p>
 <h2 id="盡可能搜尋最新資訊！"><a href="#盡可能搜尋最新資訊！" class="headerlink" title="盡可能搜尋最新資訊！"></a>盡可能搜尋最新資訊！</h2><p>由於技術日新月異，幾年前的文章可能已經過時並不再適用。</p>
 <p>在搜尋資料時，需考慮內容更新的時間，養成以最新的資料為優先的習慣。</p>
-<p>Google 搜尋也提供設定時間範圍的功能。如果在搜尋時發現許多舊文章，可透過調整<strong>「工具 → 不限時間 → 自訂時間範圍」</strong>設定搜索的時間範圍。</p>
+<p>Google 搜尋也提供設定時間範圍的功能。如果在搜尋時發現許多舊文章，可透過調整 <strong>「工具 → 不限時間 → 自訂時間範圍」</strong> 設定搜索的時間範圍。</p>
 <p><img src="https://imgur.com/FQTQCud.png"></p>
 <h2 id="比較-Service-或-Library-時，使用關鍵字-vs！"><a href="#比較-Service-或-Library-時，使用關鍵字-vs！" class="headerlink" title="比較 Service 或 Library 時，使用關鍵字 vs！"></a>比較 Service 或 Library 時，使用關鍵字 <code>vs</code>！</h2><p><img src="https://imgur.com/3Vj3u1v.png"></p>
 <p>在Service 或 Library 名稱後加上關鍵字 <code>vs</code>，會顯示相近的搜尋建議。內容包括自己尚不瞭解的技術，可以在評估技術時提供參考。</p>
@@ -26314,6 +26314,339 @@ git@github.com:beego/beego.git<span aria-hidden="true" class="line-numbers-rows"
         <tag>Google</tag>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[2023 15th鐵人賽] [Day4] 寫給菜鳥工程師有關變數/函數/方法的英文命名規則</title>
+    <url>/ironman-2023-day-4/</url>
+    <content><![CDATA[<blockquote>
+<p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vWXV0YU1hbmFrYS9pdGVtcy82MmRkYTI1NmJiN2JhNmMwODM5OQ==">初心者プログラマーのための変数/関数/メソッドの英語命名規則 - Qiita<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>這篇文章是介紹英文命名規則，根據命名對象、使用情境、狀態等進行分類，並舉出使用範例。</p>
+<span id="more"></span>
+
+<p>以下是正文。</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>「每次 review 的時候，好像總是被指正變數名稱⋯⋯」</p>
+<p>「作為日本人，用英文命名還是有點困難⋯⋯」</p>
+<p>您有這樣的煩惱嗎？</p>
+<p>本文將以流程圖的形式，說明「當工程師在英文命名遇到困難時該怎麼辦」！</p>
+<p>學成後也許就能從菜鳥工程師畢業了！？</p>
+<p>※本文根據 Laravel, Vue.js 專案規則為基礎進行解說。</p>
+<p>也包括專案的內部規則，請注意這點。</p>
+<h2 id="適用對象"><a href="#適用對象" class="headerlink" title="適用對象"></a>適用對象</h2><p>本文適合以下對象：</p>
+<ul>
+<li>菜鳥工程師</li>
+<li>程式語言初學者</li>
+<li>對 PHP(Laravel), JavaScript(Vue.js) 英文命名陷入苦戰</li>
+</ul>
+<h2 id="必備知識"><a href="#必備知識" class="headerlink" title="必備知識"></a>必備知識</h2><p>以下內容是基於瞭解中學和高中學習內容的前提下進行說明。請知悉。</p>
+<ul>
+<li>三單現（第三人稱單數現在式）的 s 是什麼？</li>
+<li>五大句型(SV/SVC/SVO/SVOO/SVOC)是什麼？</li>
+<li>詞性（名詞/形容詞/動詞）是什麼？</li>
+<li>什麼是以 ~ing 或 ~ed 結尾的形容詞？</li>
+</ul>
+<h2 id="總覽"><a href="#總覽" class="headerlink" title="總覽"></a>總覽</h2><p>可參考下方流程圖進行命名：</p>
+<p><img src="https://hackmd.io/_uploads/Hyy5k-81a.png"></p>
+<p>上圖流程意思大致如下：</p>
+<ul>
+<li>變數、常數、表格命名<ul>
+<li>是否顯示日期 =&gt; 是：(A) 動詞+at/on</li>
+<li>是否為布林值 =&gt; 是：(B) 形容詞+名詞</li>
+<li>是否為切換顯示/隱藏的 flag =&gt; 是：(C) show+名詞</li>
+<li>是否為功能ON/OFF的 flag =&gt; 是：(D) 名詞+enabled</li>
+<li>是否為表示存在的 flag =&gt; 是：(E) 名詞+exists</li>
+<li>是否擁有/包含某物的 flag =&gt; 是：(F) has/contains+名詞</li>
+<li>=&gt; 否：(G) is+形容詞</li>
+</ul>
+</li>
+<li>函數命名<ul>
+<li>是否為事件函數 =&gt; 是：(H) on+名詞+形容詞</li>
+<li>是否表示轉換某物 =&gt; 是：(I) to+名詞</li>
+<li>是否想改變什麼狀態 =&gt; 是：(J) 動詞+受詞+形容詞</li>
+<li>=&gt; 否：(K) 動詞+受詞</li>
+</ul>
+</li>
+</ul>
+<p>接下來會依序介紹各種命名使用情境與範例。</p>
+<h2 id="A-動詞-at-on"><a href="#A-動詞-at-on" class="headerlink" title="(A)動詞+at/on"></a>(A)動詞+at/on</h2><p>表示日期和時間時，參照以下方式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 使用 at 表示時日</span>
+updatedAt  <span class="token comment">// 更新時日</span>
+importedAt <span class="token comment">// 匯入時日</span>
+
+<span class="token comment">// 使用 on 表示時日</span>
+deletedOn <span class="token comment">// 刪除時日</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="B-形容詞-名詞"><a href="#B-形容詞-名詞" class="headerlink" title="(B)形容詞+名詞"></a>(B)形容詞+名詞</h2><p>當賦予非 boolean 值的變數時，通常會依照以下規則：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+
+<span class="token comment">// 形容詞+名詞</span>
+specialCategory <span class="token comment">// 特殊類別</span>
+
+<span class="token comment">// 形容詞可以是動詞的被動式(~ed)或 ing 形式</span>
+importedPlayerNames <span class="token comment">// 匯入的多個選手名稱</span>
+deletedPlayers <span class="token comment">// 刪除的多個選手</span>
+payingPlayer   <span class="token comment">// 付款的選手</span>
+
+<span class="token comment">// 若沒有形容詞，僅使用名詞或「名詞+名詞」表示也可以</span>
+errorCode <span class="token comment">// 錯誤代碼</span>
+centerImageFilePath <span class="token comment">// 中央圖片檔案路徑</span>
+terminalIdsArray    <span class="token comment">// 包含多個終端 ID 的陣列</span>
+
+<span class="token comment">// 也可使用 名詞+without/before/after~ 的結構</span>
+userWithoutPermission <span class="token comment">// 無權限的使用者</span>
+itemTypeBeforeUpdate  <span class="token comment">// 更新前的商品類型</span>
+quantityAfterOrder    <span class="token comment">// 訂單的數量</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>更多詳細內容請參閱<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vWXV0YU1hbmFrYS9pdGVtcy82MmRkYTI1NmJiN2JhNmMwODM5OSMlRTUlQkQlQTIlRTUlQUUlQjklRTglQTklOUUlRTMlODElQUIlRTklOTYlQTIlRTMlODElOTklRTMlODIlOEIlRTMlODMlODYlRTMlODIlQUYlRTMlODMlOEIlRTMlODMlODMlRTMlODIlQUY=">形容詞<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vWXV0YU1hbmFrYS9pdGVtcy82MmRkYTI1NmJiN2JhNmMwODM5OSMlRTUlOTAlOEQlRTglQTklOUUlRTMlODElQUIlRTklOTYlQTIlRTMlODElOTklRTMlODIlOEIlRTMlODMlODYlRTMlODIlQUYlRTMlODMlOEIlRTMlODMlODMlRTMlODIlQUY=">名詞的技巧<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="C-show-名詞"><a href="#C-show-名詞" class="headerlink" title="(C)show+名詞"></a>(C)show+名詞</h2><p>需要切換顯示/隱藏的 flag 時，可依照以下方式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+showConfirmationModal
+<span class="token comment">// true: 顯示確認視窗</span>
+<span class="token comment">// false: 隱藏確認視窗</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>名詞的部分也可放入形容詞+名詞，如(A)所示。</p>
+<h2 id="D-名詞-enabled"><a href="#D-名詞-enabled" class="headerlink" title="(D)名詞+enabled"></a>(D)名詞+enabled</h2><p>當需要切換某個功能ON/OFF 的 flag 時，可依照以下方式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+autoScrollEnabled
+<span class="token comment">// true: 自動滾動 ON</span>
+<span class="token comment">// false: 自動滾動 OFF</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>雖然也可以使用 disabled，但雙重否定可能較不容易理解，因此最好避免使用。</p>
+<p>名詞的部分也可放入形容詞+名詞，如(A)所示。</p>
+<h2 id="E-名詞-exists"><a href="#E-名詞-exists" class="headerlink" title="(E)名詞+exists"></a>(E)名詞+exists</h2><p>當需要表示存在與否的 flag 時，可按以下方式，需注意詞序的不同：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+soldOutItemExists
+<span class="token comment">// true: 完售的商品存在</span>
+<span class="token comment">// false: 完售的商品不存在</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>名詞的部分也可放入形容詞+名詞，如(A)所示。</p>
+<h2 id="F-has-contains-名詞"><a href="#F-has-contains-名詞" class="headerlink" title="(F)has/contains+名詞"></a>(F)has/contains+名詞</h2><p>當需要表示是否擁有/包含某物的 flag 時，可依照以下方式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+containsCheckedOutPlayers
+<span class="token comment">// true: 包含已經 checkout 的選手</span>
+<span class="token comment">// false: 不包含已經 checkout 的選手</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>名詞的部分也可放入形容詞+名詞，如(A)所示。</p>
+<h2 id="G-is-形容詞"><a href="#G-is-形容詞" class="headerlink" title="(G)is+形容詞"></a>(G)is+形容詞</h2><p>以下是表示 boolean flag 的基本形式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+isNew
+isImported  <span class="token comment">// 是否已經匯入。動詞的被動式(~ed)也是形容詞的一種</span>
+isOrderable <span class="token comment">// 是否可訂購。也可使用 動詞+able</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="is-的-is-前綴可以省略嗎？"><a href="#is-的-is-前綴可以省略嗎？" class="headerlink" title="is~ 的 is 前綴可以省略嗎？"></a>is~ 的 is 前綴可以省略嗎？</h3><p>由於形容詞本身即可表達意義，因此也有人認為 is 應該可以被省略，這取決於專案內統一的慣例。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例</span>
+imported <span class="token comment">// 是否已匯入</span>
+deleted  <span class="token comment">// 是否已刪除</span>
+updated  <span class="token comment">// 是否已更新</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="H-on-名詞-形容詞"><a href="#H-on-名詞-形容詞" class="headerlink" title="(H)on+名詞+形容詞"></a>(H)on+名詞+形容詞</h2><p>這種命名方式在前端開發中較頻繁使用，常用於事件相關的函數命名。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">onRowClicked <span class="token comment">// 當行被點擊時</span>
+onPaginationChanged   <span class="token comment">// 當分頁改變時</span>
+onDeleteButtonClicked <span class="token comment">// 當刪除按鈕被點擊時</span>
+onItemDisabled <span class="token comment">// 當物品被禁用時</span>
+
+<span class="token comment">// 對象明確的情況，也可使用「on+動詞」的被動式(~ed)</span>
+onClicked   <span class="token comment">// 當被點擊時</span>
+onSubmitted <span class="token comment">// 當提交時</span>
+
+<span class="token comment">// 也有一派認為使用「on+動詞」更好</span>
+onClick  <span class="token comment">// 當被點擊時</span>
+onSubmit <span class="token comment">// 當提交時</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="I-to-名詞"><a href="#I-to-名詞" class="headerlink" title="(I)to+名詞"></a>(I)to+名詞</h2><p>當需要表示轉換某物時，也可以簡化命名：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// NG...雖然不是不行，但太長了... </span>
+<span class="token keyword">const</span> <span class="token function-variable function">convertTimeFromSecondsToMinutes</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// OK. 由於參數明確指定為秒數，因此能夠理解這是一個轉換秒→分鐘的函數。</span>
+<span class="token keyword">const</span> <span class="token function-variable function">toMinutes</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">seconds</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="J-動詞-受詞-形容詞"><a href="#J-動詞-受詞-形容詞" class="headerlink" title="(J)動詞+受詞+形容詞"></a>(J)動詞+受詞+形容詞</h2><p>當需要表示改變對象狀態的函數時使用：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 設定收據已印刷</span>
+<span class="token comment">// 表示 receipt = printed</span>
+setReceiptPrinted<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="K-動詞-受詞"><a href="#K-動詞-受詞" class="headerlink" title="(K)動詞+受詞"></a>(K)動詞+受詞</h2><p>最常見的函數命名方式：</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">joinStrings <span class="token comment">// 串接字串</span>
+switchTableWidth <span class="token comment">// 切換表格寬度</span>
+sortCategories   <span class="token comment">// 排序類別</span>
+toggleArchivedItems <span class="token comment">// 切換在庫商品</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>受詞可以是名詞、名詞+名詞、形容詞+名詞，與(A)相似。</p>
+<h2 id="按詞性的技巧"><a href="#按詞性的技巧" class="headerlink" title="按詞性的技巧"></a>按詞性的技巧</h2><p>接下來，將根據詞性提供一些命名技巧。</p>
+<h3 id="名詞相關的技巧"><a href="#名詞相關的技巧" class="headerlink" title="名詞相關的技巧"></a>名詞相關的技巧</h3><h3 id="名詞-名詞"><a href="#名詞-名詞" class="headerlink" title="名詞+名詞"></a>名詞+名詞</h3><p>儘管文法上應該以「名詞 of 名詞」方式書寫才對，但這會讓名稱變得過於冗長。</p>
+<p>只需將名詞以 2 到 3 個單詞的方式聯接，同樣也能夠傳達意思。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 雖然不算 NG 但太長了...</span>
+codeOfError
+pathOfFileOfCenterImage
+
+<span class="token comment">// OK</span>
+errorCode
+centerImageFilePath<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>建議將 id, name, code, response, request, path, url 等單詞放在句尾，開頭接別的名詞，這是很常見的命名方式！</p>
+<h3 id="注意單數和複數形式"><a href="#注意單數和複數形式" class="headerlink" title="注意單數和複數形式"></a>注意單數和複數形式</h3><p>光是單數或複數形式的名詞，就能傳達不同的名稱含義。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 例1</span>
+getSystemConfigs   <span class="token comment">// 取得多個系統設定</span>
+updateSystemConfig <span class="token comment">// 更新一個系統設定</span>
+
+<span class="token comment">// 例2</span>
+playerCount   <span class="token comment">// 玩家數量固定為 1，是常數嗎？</span>
+playersCount  <span class="token comment">// 玩家數量以整數存取，代表一個玩家人數</span>
+playersCounts <span class="token comment">// 玩家數量以數組形式存取，代表多個玩家人數，是物件嗎？</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="盡量避免使用不可數名詞"><a href="#盡量避免使用不可數名詞" class="headerlink" title="盡量避免使用不可數名詞"></a>盡量避免使用不可數名詞</h3><p>由於單數型和複數型有助於名詞的表達，因此不建議使用沒有複數型的名詞（不可數名詞）。</p>
+<p>請儘量替換為可數名詞。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 不可數名詞</span>
+data<span class="token punctuation">,</span> code<span class="token punctuation">,</span> information<span class="token punctuation">,</span> software
+
+getData <span class="token comment">// NG. 無法確定取得的資料是一個還是多個。</span>
+getTexts <span class="token comment">// OK. 明確表示可取得多個資料，且能夠知道資料類型</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用資料型別表示"><a href="#使用資料型別表示" class="headerlink" title="使用資料型別表示"></a>使用資料型別表示</h3><p>使用 ~Array, ~Object, ~String, ~Collection 等表示資料型別的名詞，也是推薦的做法。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">terminalIdsArray <span class="token comment">// 包含多個終端 ID 的陣列</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="避免太過詳細"><a href="#避免太過詳細" class="headerlink" title="避免太過詳細"></a>避免太過詳細</h3><p>您是否曾經為了更容易理解，使命名變得過長呢？</p>
+<p>使用名詞的單數/複數型已經能充分傳達訊息，因此也可以省略部分名稱。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 雖然不算 NG，但太長了...</span>
+someItems
+allItems
+individualItem
+
+<span class="token comment">// OK. 使用單數/複數型即可表達</span>
+items
+item<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="善用-without-before-after"><a href="#善用-without-before-after" class="headerlink" title="善用 without, before, after"></a>善用 <strong>without, before, after</strong></h3><p>透過在名詞後加上這些詞語，能夠更詳細地表達情境或條件。</p>
+<p>能夠掌握這些原則，基本上就已經沒問題了。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">userWithoutPermission  <span class="token comment">// 「沒有權限的」用戶</span>
+itemTypeBeforeUpdate   <span class="token comment">// 「更新前的」項目類型</span>
+itemQuantityAfterOrder <span class="token comment">// 「下單後的」庫存數量</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="形容詞相關的技巧"><a href="#形容詞相關的技巧" class="headerlink" title="形容詞相關的技巧"></a>形容詞相關的技巧</h3><h3 id="用動詞的被動式-ed-表示形容詞也-OK"><a href="#用動詞的被動式-ed-表示形容詞也-OK" class="headerlink" title="用動詞的被動式 (~ed) 表示形容詞也 OK"></a>用動詞的被動式 (~ed) 表示形容詞也 OK</h3><p>表達「被～」、「已經完成～」的情況時，使用動詞的被動式 (~ed) 作為形容詞是個不錯的做法。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">importedPlayerNames <span class="token comment">// 被導入的玩家名稱 = 已導入的玩家名稱</span>
+deletedPlayers <span class="token comment">// 被刪除的玩家 = 已刪除的玩家</span>
+disabledItem   <span class="token comment">// 被禁用的商品 = 已禁用的商品</span>
+limitedQuantity <span class="token comment">// 被限定的數量 = 已限定數量</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ing-形也屬於形容詞的一種"><a href="#ing-形也屬於形容詞的一種" class="headerlink" title="ing 形也屬於形容詞的一種"></a>ing 形也屬於形容詞的一種</h3><p>表達「正在做～」的情況時，使用動詞的 ing 形作為形容詞是個不錯的做法。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">payingPlayer <span class="token comment">// 正在支付的玩家 = 付費者</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="ing-和-ed-之間的差異"><a href="#ing-和-ed-之間的差異" class="headerlink" title="~ing 和 ~ed 之間的差異"></a>~ing 和 ~ed 之間的差異</h3><p>~ing 的情況，表示「名詞正在做某個動作」或「即將進行某事」。</p>
+<p>~ed 的情況，表示「名詞已經被做了某事」或「已經完成某事」。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">payingPlayer <span class="token comment">// 支付 = 付款的玩家 or 即將付款的玩家</span>
+PaidPlayer   <span class="token comment">// 被支付 = 被付款的玩家 or 已付款的玩家</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="善用否定型的形容詞"><a href="#善用否定型的形容詞" class="headerlink" title="善用否定型的形容詞"></a>善用否定型的形容詞</h3><pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// NG (不建議在開頭接 Not)</span>
+notCategorized
+notCompleted
+
+<span class="token comment">// OK (搜尋即可找到相關資訊)</span>
+uncategorized
+incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="避免使用雙重否定"><a href="#避免使用雙重否定" class="headerlink" title="避免使用雙重否定"></a>避免使用雙重否定</h2><p>否定形容詞通常容易理解，但如果和 if 語句結合使用，可能導致程式碼變得難以理解。</p>
+<p>當否定形容詞和否定條件組合在一起時，容易混淆 true 和 false，使程式碼變得不易閱讀且容易造成誤解。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// NG</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>disabled<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// OK</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>enabled<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>請根據下方表格中形容詞的肯定型/否定型，試著撰寫 if 語句。</p>
+<table>
+<thead>
+<tr>
+<th>肯定型</th>
+<th>否定型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>visible</td>
+<td>hidden</td>
+</tr>
+<tr>
+<td>public</td>
+<td>secret</td>
+</tr>
+<tr>
+<td>active</td>
+<td>inactive</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>disabled</td>
+</tr>
+<tr>
+<td>~</td>
+<td>in~</td>
+</tr>
+<tr>
+<td>~</td>
+<td>im~</td>
+</tr>
+<tr>
+<td>~</td>
+<td>dis~</td>
+</tr>
+<tr>
+<td>~</td>
+<td>un~</td>
+</tr>
+</tbody></table>
+<h3 id="動詞相關的技巧"><a href="#動詞相關的技巧" class="headerlink" title="動詞相關的技巧"></a>動詞相關的技巧</h3><h3 id="動詞只有一個！"><a href="#動詞只有一個！" class="headerlink" title="動詞只有一個！"></a>動詞只有一個！</h3><p>Be 動詞不會和普通動詞一起使用。</p>
+<p>請注意像是「isExists~」的寫法並不正確！</p>
+<h3 id="PHP-和-JS-的常見動詞"><a href="#PHP-和-JS-的常見動詞" class="headerlink" title="PHP 和 JS 的常見動詞"></a>PHP 和 JS 的常見動詞</h3><p>經常使用的動詞(PHP)</p>
+<ul>
+<li>delete(刪除)</li>
+<li>filter(篩選)</li>
+<li>get(取得)</li>
+<li>store(保存)</li>
+<li>update(更新)</li>
+</ul>
+<p>偶爾使用的動詞(PHP)</p>
+<ul>
+<li>archive(歸檔)</li>
+<li>bulkUpdate(批量更新)</li>
+<li>cancel(取消)</li>
+<li>count(計數)</li>
+<li>download(下載)</li>
+<li>duplicate(複製)</li>
+<li>export(匯出)</li>
+<li>hide(隱藏)</li>
+<li>import(匯入)</li>
+<li>reset(重置)</li>
+<li>start(開始)</li>
+<li>set(改變狀態。動詞+形容詞：setDisabled。動詞+受詞+形容詞：setReceiptPrinted)</li>
+</ul>
+<p>經常使用的動詞(JS)</p>
+<ul>
+<li>change(改變狀態)</li>
+<li>click(點擊)</li>
+<li>join(連接字串)</li>
+<li>show(表示)</li>
+<li>sort(分類)</li>
+<li>submit(提交)</li>
+<li>switch(改變狀態)</li>
+<li>toggle(切換 ON↔︎OFF)</li>
+</ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以上總結程式語言初學者常見的英文命名規則。</p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96ZW5uLmRldi9jY2NjYy9hcnRpY2xlcy81YTYwMzM2ZjU0ZjQyOQ==">英語できない人が変数名の命名を完璧にできるようになる方法を教えようと思ったけどめんどくさくて途中で投げ出すも結構長々といいこと書いてる記事<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20veXNrc3prL2l0ZW1zLzVhN2Y5OWM5NzQ3NzNmMDNhODJh">真偽値を返す関数のネーミング<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<blockquote>
+<p>15th鐵人賽目錄傳送門：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEzNTU1OC9pcm9ubWFuLzYyOTA=">https://ithelp.ithome.com.tw/users/20135558/ironman/6290<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>2023鐵人賽</category>
+      </categories>
+      <tags>
+        <tag>ironman2023</tag>
+        <tag>Qiita</tag>
+        <tag>naming</tag>
       </tags>
   </entry>
 </search>
