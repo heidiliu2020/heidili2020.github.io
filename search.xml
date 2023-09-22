@@ -26947,7 +26947,7 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vYXV0b3Rha2VyMTk4NC9pdGVtcy9hMzA5MTc3MmRiYjBmYjkxNDczZA==">ソフトウェアはなぜバージョンアップしなければならないのか - Qiita<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>有時在一些官網下載軟體時（例如 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2Vu">node.js<i class="fa fa-external-link-alt"></i></span> 或 <span class="exturl" data-url="aHR0cHM6Ly91YnVudHUuY29tL2Rvd25sb2FkL2Rlc2t0b3A=">Ubuntu<i class="fa fa-external-link-alt"></i></span> ），會發現官方有提供兩種版本，分別是「LTS」和「Current」，其中 LTS 代表 Long Term Support（長期支援），穩定版本確保程式的安全性與可靠性，避免更新可能造成的風險。</p>
-<p>軟體除了新增需求以外，是否就不需要再進行版本更新了？這篇文章將會介紹為何軟體需要版本更新，以及更新頻率可能帶來不同的結果。</p>
+<p>軟體除了新增需求、修復 BUG 以外，是否就不需要再進行版本更新了？這篇文章將會介紹為何軟體需要版本更新，以及更新頻率可能帶來不同的結果。</p>
 <span id="more"></span>
 
 <p>那麼，以下正文開始！</p>
@@ -26969,7 +26969,7 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <p>像這樣<strong>有機會大幅提高工作時數</strong>的情況，是版本升級讓人感到麻煩的原因。</p>
 <p><img src="https://imgur.com/boLEH1c.png"></p>
 <blockquote>
-<p>版本升級導致業務崩壞</p>
+<p>版本升級導致業務中斷</p>
 </blockquote>
 <h3 id="版本升級頻率低將導致更新失敗"><a href="#版本升級頻率低將導致更新失敗" class="headerlink" title="版本升級頻率低將導致更新失敗"></a>版本升級頻率低將導致更新失敗</h3><p>那麼，維護所需工時會因版本升級頻率而有何變化呢？如果某個業務在版本升級中出現問題，下一個版本並不會自動回復到原本的設計，故障點依然存在。請務必考慮到這一點。</p>
 <ul>
