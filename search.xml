@@ -27296,7 +27296,6 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 
 <p>以下正文開始！</p>
 <hr>
-<p>[toc]</p>
 <p>前幾天，我和同事們進行一次討論，內容是關於「工程師都在終端機上設置什麼樣的 alias？」，因此我試著從 GitHub 上的 <strong>1000 個 Repository</strong> 程式碼中進行調查。</p>
 <p>2019/04/10 根據評論進行微幅修改。感謝所有留下評論的人。<br>2019/04/11 嘗試寫了這篇文章： <span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vcmVpcmVpYXMvaXRlbXMvMjMwYzc3YjNmZjU1NzU4MzI2NTQ=">常用的 vimrc 設置排名<i class="fa fa-external-link-alt"></i></span><br>2019/04/15 也寫了插件版本：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vcmVpcmVpYXMvaXRlbXMvNTM2NGRjYWFkYTFhNWI4OGEyMDY=">最常用的 vim 插件 top20<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="什麼是-alias"><a href="#什麼是-alias" class="headerlink" title="什麼是 alias"></a>什麼是 alias</h2><p>根據 wikipedia：</p>
