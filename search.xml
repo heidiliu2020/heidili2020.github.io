@@ -27771,8 +27771,8 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <p>簡而言之，這是一個能夠穩定工作，但停滯不前的職場環境。<br>由於業務上已經能足夠獲利，因此不需要追求更多的成長。<br>當然，這種生活方式也是一種選擇，如果認為這樣過也不錯，那就不需要再繼續往下閱讀。</p>
 <p>本文將提供一些方向，給喜歡拓展技術，並且樂於創造的工程師，同時卻也對現狀感到困惑的人。</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下內容，基本上是目前我所身處的環境中，經常會談論的 <code>基礎</code> 內容。<br>雖然不能說是完全理解，但這些詞彙和概念，都是經常出現在對話中的內容。<br>作為一名工程師，不能只是瞭解框架和追求趨勢，更需要的是強化基礎能力。</p>
-<h2 id="如何提升工程師的基礎能力"><a href="#如何提升工程師的基礎能力" class="headerlink" title="如何提升工程師的基礎能力"></a>如何提升工程師的基礎能力</h2><h3 id="學習設計模式"><a href="#學習設計模式" class="headerlink" title="學習設計模式"></a>學習設計模式</h3><p>有些以 GoF 為代表的設計模式，如多線程編程模式，函數式編程模式。不論是哪種物件導向的語言，都可以應用 GoF 的設計模式。</p>
-<p>如果是多線程編程，可以試著了解 CyclicBarrier、CountDownLatch 等。<br>如果是 Java，那麼參考 java.util.concurrent 套件中的實作應該會有所幫助。<br>如果是函數式編程，可以學習 LoanPattern 或在 Scala 中使用 mixin 的 CakePattern，以及 Monad等。</p>
+<h2 id="如何提升工程師的基礎能力"><a href="#如何提升工程師的基礎能力" class="headerlink" title="如何提升工程師的基礎能力"></a>如何提升工程師的基礎能力</h2><h3 id="學習設計模式"><a href="#學習設計模式" class="headerlink" title="學習設計模式"></a>學習設計模式</h3><p>有些以 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOCVBRSVCRSVFOCVBRSVBMSVFNiVBOCVBMSVFNSVCQyU4RiVFRiVCQyU5QSVFNSU4RiVBRiVFNSVBNCU4RCVFNyU5NCVBOCVFOSU5RCVBMiVFNSU5MCU5MSVFNSVBRiVCOSVFOCVCMSVBMSVFOCVCRCVBRiVFNCVCQiVCNiVFNyU5QSU4NCVFNSU5RiVCQSVFNyVBMSU4MA==">GoF<i class="fa fa-external-link-alt"></i></span> 為代表的設計模式，如多線程編程模式，函數式編程模式。不論是哪種物件導向的語言，都可以應用 GoF 的設計模式。</p>
+<p>如果是多線程編程，可以試著了解 CyclicBarrier、CountDownLatch 等。<br>如果是 Java，那麼參考 java.util.concurrent 套件中的實作應該會有所幫助。<br>如果是函數式編程，可以學習 LoanPattern 或在 Scala 中使用 mixin 的 CakePattern，以及 Monad 等。</p>
 <p>依循這些模式的程式碼，不僅能夠實現預期功能，也能寫出更好的風格，同時提高靈活性和穩健性。</p>
 <h3 id="理解基礎架構和網路知識"><a href="#理解基礎架構和網路知識" class="headerlink" title="理解基礎架構和網路知識"></a>理解基礎架構和網路知識</h3><p>在當今的時代，即便是開發應用程式，通常也需要處理網路連線相關問題。瞭解協議的特點，以及 HTTP（瀏覽器）的規範，並優雅地完成實作。</p>
 <ul>
@@ -27782,10 +27782,10 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <li>Routing</li>
 <li>Middleware</li>
 </ul>
-<p>此外，還有近期不斷發展的 Immutable Infrastructure（不可變基礎設施）和虛擬化技術。 學習docker、kubernetes 和CloudFormation 等工具，例如錯誤監視系統、統計訊息管理等中介軟體和服務。</p>
+<p>此外，還有近期不斷發展的 Immutable Infrastructure（不可變基礎設施）和虛擬化技術。 學習 docker、kubernetes 和 CloudFormation 等工具，例如錯誤監視系統、統計訊息管理等中介軟體和服務。</p>
 <p>藉由理解這些領域的知識，將有助於提升開發速度，並加強穩健性。 一旦能構思出理想的基礎設施配置，對於建構在這之上的應用程式也會有不同的見解。</p>
-<h3 id="閱讀開源軟體的程式碼"><a href="#閱讀開源軟體的程式碼" class="headerlink" title="閱讀開源軟體的程式碼"></a>閱讀開源軟體的程式碼</h3><p>現今，有許多優秀的工程師選擇公開程式碼。（真是美好的時代啊⋯⋯）<br>GitHub上許多知名框架的程式碼，也是以開源方式進行開發。<br>透過閱讀我們熟悉的框架程式碼，瞭解其中的機制、思維，以及程式碼風格。<br>如果是 Java，試著閱讀 JDK 類別的程式碼也是不錯的選擇。<br>和至今所寫的程式碼相比，說不定能發現更好的寫法，此外也有機會學習到，符合框架理念的類別分割方法等內容。</p>
-<h3 id="體驗雲端環境服務"><a href="#體驗雲端環境服務" class="headerlink" title="體驗雲端環境服務"></a>體驗雲端環境服務</h3><p>使用雲端系統以迅速啟動服務，已經變成常態。<br>根據不同情況，可能需要具備雲端系統相關的知識。試著瞭解有哪些可利用的服務，並實際動手使用看看吧。<br>由於能夠以小時為單位租借，投資知識的費用只需要數百日幣，能以相當低的成本取得新知識。<br>如果連這筆金額都無法投資，那對工程師自身的成長又能投注多少熱情呢？<br>不論哪種雲端服務， AWS、GCP 或 Azure 都可以。<br>如果可以，除了基本的EC2等伺服器實例，也可以試著使用特定功能的雲端服務。</p>
+<h3 id="閱讀開源軟體的程式碼"><a href="#閱讀開源軟體的程式碼" class="headerlink" title="閱讀開源軟體的程式碼"></a>閱讀開源軟體的程式碼</h3><p>現今，有許多優秀的工程師選擇公開程式碼。（真是美好的時代啊⋯⋯）<br>GitHub 上許多知名框架的程式碼，也是以開源方式進行開發。<br>透過閱讀我們熟悉的框架程式碼，瞭解其中的機制、思維，以及程式碼風格。<br>如果是 Java，試著閱讀 JDK 類別的程式碼也是不錯的選擇。<br>和至今所寫的程式碼相比，說不定能發現更好的寫法，此外也有機會學習到，符合框架理念的類別分割方法等內容。</p>
+<h3 id="體驗雲端環境服務"><a href="#體驗雲端環境服務" class="headerlink" title="體驗雲端環境服務"></a>體驗雲端環境服務</h3><p>使用雲端系統以迅速啟動服務，已經變成常態。<br>根據不同情況，可能需要具備雲端系統相關的知識。試著瞭解有哪些可利用的服務，並實際動手使用看看吧。<br>由於能夠以小時為單位租借，投資知識的費用只需要數百日幣，能以相當低的成本取得新知識。<br>如果連這筆金額都無法投資，那對工程師自身的成長又能投注多少熱情呢？<br>不論哪種雲端服務， AWS、GCP 或 Azure 都可以。<br>如果可以，除了基本的 EC2 等伺服器實例，也可以試著使用特定功能的雲端服務。</p>
 <p>以 AWS 為例，還有像是 CodeBuild 和 CodeDeploy 等的 CI 環境，以及 CloudFormation 等服務。並且提供了多個儲存選項。為什麼提供多個選項呢？在什麼情況下，使用這些服務能夠提升開發速度？為了成為能夠提供建議的工程師，瞭解這些知識是有必要的。</p>
 <p>如果能夠深入瞭解，這將成為一種優勢。<br>在這個時代，使用雲端服務已成為常態，並且將會是工程師必備的基本知識。</p>
 <h3 id="學習架構模式"><a href="#學習架構模式" class="headerlink" title="學習架構模式"></a>學習架構模式</h3><p>在 GoF 等設計模式中，定義每個類別的角色，如果想實作成一個應用程式，將會在程式中產生大規模的數據流動。</p>
