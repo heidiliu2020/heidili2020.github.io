@@ -27685,7 +27685,7 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <hr>
 <p>在英語問答網站 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L1F1b3Jh">Quora<i class="fa fa-external-link-alt"></i></span> 上看到關於 <span class="exturl" data-url="aHR0cHM6Ly93d3cucXVvcmEuY29tL1doeS1kb2Vzbi10LUphcGFuLWV4Y2VsLWluLXNvZnR3YXJlLWFzLXRoZXktZGlkLWluLWhhcmR3YXJl">Why doesn’t Japan excel in software as they did in hardware? (為什麼日本無法像硬體時代一樣在軟體方面表現出色？)<i class="fa fa-external-link-alt"></i></span> 的討論，對底下的分析有點興趣，因此整理了這篇內容。</p>
 <h2 id="假設1：追求完美的日本"><a href="#假設1：追求完美的日本" class="headerlink" title="假設1：追求完美的日本"></a>假設1：追求完美的日本</h2><blockquote>
-<p>有位法國友人經營一家擁有 10 名工程師的軟體開發公司，他和路易·威登日本分公司的電腦系統經理達成了共識：軟體不同於硬體，也不屬於工業應用。不能像 <span class="exturl" data-url="aHR0cHM6Ly93d3cudG95b3RhLmNvbS50dy9zaG93cm9vbS9DT1JPTExBX1NQT1JULw==">Toyota Corolla（豐田卡羅拉）<i class="fa fa-external-link-alt"></i></span>在 50 年內經從精雕細琢、不斷改進並達到完美。想要達到 Zero bug（零錯誤）以追求「完美」是不可能的，因此，這違背了追求「Zero default（零缺陷）」的整體品質和持續改進的日本文化精神。</p>
+<p>有位法國友人經營一家擁有 10 名工程師的軟體開發公司，他和路易·威登日本分公司的電腦系統經理達成了共識：軟體不同於硬體，也不屬於工業應用。不能像 <span class="exturl" data-url="aHR0cHM6Ly93d3cudG95b3RhLmNvbS50dy9zaG93cm9vbS9DT1JPTExBX1NQT1JULw==">Toyota Corolla（豐田卡羅拉）<i class="fa fa-external-link-alt"></i></span>在 50 年內經由精雕細琢、不斷改進並達到完美。想要達到 Zero bug（零錯誤）以追求「完美」是不可能的，因此，這違背了追求「Zero default（零缺陷）」的整體品質和持續改進的日本文化精神。</p>
 </blockquote>
 <ul>
 <li>日本是職人之國，不論是漢字書寫、摺紙技術、烹飪與機械工藝等各種藝術，均能完美掌握並發揮到淋漓盡致。然而，這種文化對軟體開發而言可能是反效果：人們不會琢磨軟體直到完美，競爭對手如 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNSVCRSVBRSVFOCVCRCVBRg==">Microsoft<i class="fa fa-external-link-alt"></i></span>，則會儘早將產品投入市場。</li>
@@ -27725,7 +27725,7 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <li>於是我建議總裁，除非將自家的電腦改為 IBM 兼容，否則不該嘗試進入美國市場。然而，這讓總裁感到不安，於是雇用他人，試圖以現有產品進入美國市場。最終導致失敗，SORD 被東芝收購，總裁則利用收購款成立 IBM 兼容的個人電腦製造商。</li>
 <li>在這之後，SHARP、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNiU5NyVBNSVFNiU5QyVBQyVFOSU5QiVCQiVFNiVCMCVBMw==">NEC<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUIyJUJFJUU1JUI3JUE1JUU2JTg0JTlCJUU2JTk5JUFFJUU3JTk0JTlG">Epson<i class="fa fa-external-link-alt"></i></span> 等公司，開始製造 IBM 兼容且支援日語的個人電腦，卻已經浪費了寶貴的時間。IBM 兼容軟體的文檔一開始是英語，直到很久以後才出現日語版本。軟體工程師雖然可以查看文檔進行工作，但需付出相當大的努力。</li>
 </ul>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>與從內部視角看我們的業界不同，從外部以及國際視角來進行分析如何，對部分觀點有同感，是非常有趣的議題，其中也能窺見辛辣的評論。<br>作為日本的軟體開發者，對此有何感想呢？</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>與從內部視角看我們的業界不同，而是從外部以及國際視角來進行分析，是非常有趣的議題，對部分觀點有同感，其中也能窺見辛辣的評論。<br>作為日本的軟體開發者，對此有何感想呢？</p>
 <h2 id="更多討論"><a href="#更多討論" class="headerlink" title="更多討論"></a>更多討論</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9iLmhhdGVuYS5uZS5qcC9lbnRyeS9zL25vdGUuZGlnaXRhbC5nby5qcC9uL24zNjkwNDgyYjk2NzY=">デジタル庁は「行政の透明化」を掲げ、noteでの発信を始めます。｜デジタル庁（準備中）<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9ub3RlLmNvbS9pcHNqL24vbmU5ZWViODhhZGI2NA==">接触確認アプリCOCOAからの教訓<i class="fa fa-external-link-alt"></i></span></li>
@@ -27747,6 +27747,97 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
         <tag>軟體開發</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[2023 15th鐵人賽] Day13 - 工程師邁向下一階段的學習方法</title>
+    <url>/ironman-2023-day-13/</url>
+    <content><![CDATA[<blockquote>
+<p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vbmV3dGEvaXRlbXMvZjRhZmY4Y2RkODcwNmQ1ZDA4YzU=">エンジニアの次のステップへの勉強法 - Qiita<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>接下來會針對職涯部分，依序介紹學習方法、履歷撰寫方式、以及面試準備方向等文章。即便是從日本環境的角度撰寫，道理還是大致相通。</p>
+<p>本篇首先介紹的是「學習方法」，技能方面較偏向後端技術，未來求職可以作為參考。</p>
+<span id="more"></span>
+
+<p>以下正文開始。</p>
+<hr>
+<p>那些能夠根據指示完成工作，對不同程式語言大多能夠上手的工程師，有時會發現他們在這種環境下，反而成長停滯不前。<br>他們熱愛技術，也熱愛創造，卻發現自己的成長受制於環境。<br>在這些的環境中，將可能導致成長停滯：</p>
+<ul>
+<li>缺乏互相討論新技術資訊的工程師</li>
+<li>工作對於技術水平需求不高</li>
+<li>改善週期緩慢</li>
+<li>缺乏整合開發流程的人</li>
+</ul>
+<p>簡而言之，這是一個能夠穩定工作，但停滯不前的職場環境。<br>由於業務上已經能足夠獲利，因此不需要追求更多的成長。<br>當然，這種生活方式也是一種選擇，如果認為這樣過也不錯，那就不需要再繼續往下閱讀。</p>
+<p>本文將提供一些方向，給喜歡拓展技術，並且樂於創造的工程師，同時卻也對現狀感到困惑的人。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下內容，基本上是目前我所身處的環境中，經常會談論的 <code>基礎</code> 內容。<br>雖然不能說是完全理解，但這些詞彙和概念，都是經常出現在對話中的內容。<br>作為一名工程師，不能只是瞭解框架和追求趨勢，更需要的是強化基礎能力。</p>
+<h2 id="如何提升工程師的基礎能力"><a href="#如何提升工程師的基礎能力" class="headerlink" title="如何提升工程師的基礎能力"></a>如何提升工程師的基礎能力</h2><h3 id="學習設計模式"><a href="#學習設計模式" class="headerlink" title="學習設計模式"></a>學習設計模式</h3><p>有些以 GoF 為代表的設計模式，如多線程編程模式，函數式編程模式。不論是哪種物件導向的語言，都可以應用 GoF 的設計模式。</p>
+<p>如果是多線程編程，可以試著了解 CyclicBarrier、CountDownLatch 等。<br>如果是 Java，那麼參考 java.util.concurrent 套件中的實作應該會有所幫助。<br>如果是函數式編程，可以學習 LoanPattern 或在 Scala 中使用 mixin 的 CakePattern，以及 Monad等。</p>
+<p>依循這些模式的程式碼，不僅能夠實現預期功能，也能寫出更好的風格，同時提高靈活性和穩健性。</p>
+<h3 id="理解基礎架構和網路知識"><a href="#理解基礎架構和網路知識" class="headerlink" title="理解基礎架構和網路知識"></a>理解基礎架構和網路知識</h3><p>在當今的時代，即便是開發應用程式，通常也需要處理網路連線相關問題。瞭解協議的特點，以及 HTTP（瀏覽器）的規範，並優雅地完成實作。</p>
+<ul>
+<li>TCP</li>
+<li>HTTP Protocol</li>
+<li>DNS</li>
+<li>Routing</li>
+<li>Middleware</li>
+</ul>
+<p>此外，還有近期不斷發展的 Immutable Infrastructure（不可變基礎設施）和虛擬化技術。 學習docker、kubernetes 和CloudFormation 等工具，例如錯誤監視系統、統計訊息管理等中介軟體和服務。</p>
+<p>藉由理解這些領域的知識，將有助於提升開發速度，並加強穩健性。 一旦能構思出理想的基礎設施配置，對於建構在這之上的應用程式也會有不同的見解。</p>
+<h3 id="閱讀開源軟體的程式碼"><a href="#閱讀開源軟體的程式碼" class="headerlink" title="閱讀開源軟體的程式碼"></a>閱讀開源軟體的程式碼</h3><p>現今，有許多優秀的工程師選擇公開程式碼。（真是美好的時代啊⋯⋯）<br>GitHub上許多知名框架的程式碼，也是以開源方式進行開發。<br>透過閱讀我們熟悉的框架程式碼，瞭解其中的機制、思維，以及程式碼風格。<br>如果是 Java，試著閱讀 JDK 類別的程式碼也是不錯的選擇。<br>和至今所寫的程式碼相比，說不定能發現更好的寫法，此外也有機會學習到，符合框架理念的類別分割方法等內容。</p>
+<h3 id="體驗雲端環境服務"><a href="#體驗雲端環境服務" class="headerlink" title="體驗雲端環境服務"></a>體驗雲端環境服務</h3><p>使用雲端系統以迅速啟動服務，已經變成常態。<br>根據不同情況，可能需要具備雲端系統相關的知識。試著瞭解有哪些可利用的服務，並實際動手使用看看吧。<br>由於能夠以小時為單位租借，投資知識的費用只需要數百日幣，能以相當低的成本取得新知識。<br>如果連這筆金額都無法投資，那對工程師自身的成長又能投注多少熱情呢？<br>不論哪種雲端服務， AWS、GCP 或 Azure 都可以。<br>如果可以，除了基本的EC2等伺服器實例，也可以試著使用特定功能的雲端服務。</p>
+<p>以 AWS 為例，還有像是 CodeBuild 和 CodeDeploy 等的 CI 環境，以及 CloudFormation 等服務。並且提供了多個儲存選項。為什麼提供多個選項呢？在什麼情況下，使用這些服務能夠提升開發速度？為了成為能夠提供建議的工程師，瞭解這些知識是有必要的。</p>
+<p>如果能夠深入瞭解，這將成為一種優勢。<br>在這個時代，使用雲端服務已成為常態，並且將會是工程師必備的基本知識。</p>
+<h3 id="學習架構模式"><a href="#學習架構模式" class="headerlink" title="學習架構模式"></a>學習架構模式</h3><p>在 GoF 等設計模式中，定義每個類別的角色，如果想實作成一個應用程式，將會在程式中產生大規模的數據流動。</p>
+<ul>
+<li>Layered Model（階層型架構）</li>
+<li>DDD（Domain-driven design = 領域驅動模型）</li>
+<li>Clean Architecture 整潔架構</li>
+<li>Cloud Architecture 雲計算架構</li>
+<li>Microservices Architecture 微服務架構</li>
+</ul>
+<p>過去主要關注應用程式中的封裝結構，但最近開始思考伺服器以外的架構。架構是程式碼的基礎，如果基礎穩固，即使是尚未成熟的工程師，也能夠編寫易於維護的程式碼。</p>
+<p>在建立應用程式系統的過程中，為了擁有更廣的視野，開始學習架構模式吧。</p>
+<h3 id="學習開發流程"><a href="#學習開發流程" class="headerlink" title="學習開發流程"></a>學習開發流程</h3><p>在公司開發，通常需要多人合作進行。<br>若希望能最大化開發團隊的產出，和提高個人開發能力相比，更重要的應該是改善團隊流程。雖然不是必備知識，但學習敏捷開發以及思考如何應用，將有助於提高團隊和自身的表現。</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU2JTk1JThGJUU2JThEJUI3JUU4JUJEJUFGJUU0JUJCJUI2JUU1JUJDJTgwJUU1JThGJTkx">Agile 敏捷式開發<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvU2NydW0=">Scrum 開發<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU2JTlFJTgxJUU5JTk5JTkwJUU3JUJDJTk2JUU3JUE4JThC">XP = Extreme programming 極限開發<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNyVCMiVCRSVFNyU5QiU4QSVFOCVCRCVBRiVFNCVCQiVCNiVFNSVCQyU4MCVFNSU4RiU5MQ==">Lean Software Development 精實軟體開發<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNyVCQiU5MyVFNSVBRiVCOSVFNyVCQyU5NiVFNyVBOCU4Qg==">Pair programming 結對程式設計<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvVGVhbV9wcm9ncmFtbWluZw==">Mob Programming 群體程式設計<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSU5NyU5QyVFOSU4RCVCNSVFNyVCOCVCRSVFNiU5NSU4OCVFNiU4QyU4NyVFNiVBOCU5OQ==">KPT = Key Performance Indicators 關鍵績效指標<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h3 id="學習大數據處理"><a href="#學習大數據處理" class="headerlink" title="學習大數據處理"></a>學習大數據處理</h3><p>面對每天增加數十億件數據的系統，至今為止的傳統架構可能已無法應對這種情況。雖然這取決於業務需求，但瞭解大數據處理，將能夠帶來一些優勢。</p>
+<p>多數情況下，使用 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0JpZ1F1ZXJ5">BigQuery<i class="fa fa-external-link-alt"></i></span> 或 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0FtYXpvbl9SZWRzaGlmdA==">RedShift<i class="fa fa-external-link-alt"></i></span> 等工具可能就已足夠，但對於 Web 應用程式伺服器來說，必須注意延遲的問題。解決延遲並實現可擴展的架構，將使系統更為突出。</p>
+<p>此外，瞭解專門用於大規模處理的環境，如 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0FwYWNoZV9IYWRvb3A=">Hadoop<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0FwYWNoZV9IaXZl">HIVE<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFOSU5QiVCMiVFNyVBQiVBRiVFOSU4MSU4QiVFNyVBRSU5Nw==">ECS<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L0FwYWNoZV9TcGFyaw==">Spark<i class="fa fa-external-link-alt"></i></span> 等框架，也將有所幫助。</p>
+<p>儘管也能自行操作來驗證，但要進行大規模數據實驗仍有一定難度。因此，透過學習來改變環境，尋找能夠提供這些設備的公司，或許是提高自身工程師水平的一條近路。</p>
+<h3 id="通過機器學習獲取額外知識"><a href="#通過機器學習獲取額外知識" class="headerlink" title="通過機器學習獲取額外知識"></a>通過機器學習獲取額外知識</h3><p>在雲端服務中，提供能夠輕鬆使用機器學習數據的服務。<br>此外，還有可執行機器學習的基礎設施，這些也能夠自行建立。<br>視情況也會使用到 GPU 處理或 FPGA 等技術。</p>
+<p>雖然統計和機器學習，可能不同於工程師具備的技能，但我認為這是目前流行的技術組合之一。<br>順帶一提，我自己本身不太會這些（&gt;_&lt;）。</p>
+<h3 id="瞭解技術以外的趨勢，尋找能發揮技術的機會"><a href="#瞭解技術以外的趨勢，尋找能發揮技術的機會" class="headerlink" title="瞭解技術以外的趨勢，尋找能發揮技術的機會"></a>瞭解技術以外的趨勢，尋找能發揮技術的機會</h3><p>利用<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JThDJUJBJUU1JTlEJTk3JUU5JTkzJUJF">區塊鏈<i class="fa fa-external-link-alt"></i></span>技術的虛擬貨幣，如 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNiVBRiU5NCVFNyU4OSVCOSVFNSVCOCU4MQ==">Bitcoin（比特幣）<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSU4NyU5MSVFOCU5RSU4RCVFNyVBNyU5MSVFNiU4QSU4MA==">Fintech（金融科技）<i class="fa fa-external-link-alt"></i></span>等，以及個人化廣告技術、EC 電子商務和各種媒體的推薦引擎、搜索引擎等。</p>
+<p>技術水平 + 商業應用，對於工程師來說，是一個充滿挑戰的環境。這有助於提升工程師的技術水平，瞭解哪些環境能夠最大化個人技術價值，對於自身成長是有必要的。</p>
+<h2 id="追尋新技術的五種方法"><a href="#追尋新技術的五種方法" class="headerlink" title="追尋新技術的五種方法"></a>追尋新技術的五種方法</h2><p>由於技術不斷在進化，光是提升基礎知識，可能還是會有不足的部分。</p>
+<p>為了成為更強大的工程師，我們需要擴展技術的視野，以下提供一些追蹤資訊的方法。</p>
+<h3 id="參加研討會"><a href="#參加研討會" class="headerlink" title="參加研討會"></a>參加研討會</h3><p>研討會可能不會深入探討技術細節，通常會提供一些使用案例。<br>透過這個場合，能夠建立對未知領域的基本概念，有機會瞭解之前不曾聽過的知識內容。<br>若想要更深入瞭解，就必須自己動手操作，但參加研討會對於獲得新知識和技能來說，也是一個不錯的機會。</p>
+<p>此外，有些研討會可能設有交流會，可以和平時不會接觸到的工程師進行交流，甚至找到轉職的機會。人脈關係是非常重要的。</p>
+<h3 id="在-Twitter-上關注最新資訊"><a href="#在-Twitter-上關注最新資訊" class="headerlink" title="在 Twitter 上關注最新資訊"></a>在 Twitter 上關注最新資訊</h3><p>一些知名人士經常會在 Twitter 上發布訊息，這些訊息通常會談論到最新技術。<br>因此透過關注這些 Twitter 帳戶，即可掌握最新的技術動態。每個領域都有一些知名的人，可以一點一點累積，慢慢擴大關注人數。</p>
+<h3 id="查看官方文文件"><a href="#查看官方文文件" class="headerlink" title="查看官方文文件"></a>查看官方文文件</h3><p>最新資訊通常會記錄在官方網站上。包括 AWS 的新服務、GCP 的新服務、其他框架的開發進展、ISSUE、Pull Request 的處理情況、未來的願景等等。</p>
+<p>也許不會馬上導入這些最新服務，不確定什麼時候會需要使用，但定期查看官方文件將有助於累積知識。<br>此外，Google、AWS、Microsoft 等公司網站上，還提供雲架構的相關解釋，構成管理的概念說明，以及開發流程和管理方面的資訊。不僅提供有關雲服務的知識，還提供提高基本知識的文章，因此有空時也可以翻閱看看。</p>
+<h3 id="查看-GitHub"><a href="#查看-GitHub" class="headerlink" title="查看 GitHub"></a>查看 GitHub</h3><p>這部分與閱讀開源程式碼有關，但 GitHub 有個頁面能夠查看趨勢。</p>
+<p>不一定是閱讀開源程式碼，也能透過查看星數多的專案，閱讀 README 等內容，瞭解有哪些產品正在被開發，以及掌握目前的趨勢，這將有助於提高對技術的構想與感知能力。<br>頻率不用很高，偶爾查看或許就會有有趣的發現。</p>
+<h3 id="查看-Qiita-的文章"><a href="#查看-Qiita-的文章" class="headerlink" title="查看 Qiita 的文章"></a>查看 Qiita 的文章</h3><p>最近的趨勢頁面，經常會出現受到大眾歡迎的文章內容，這導致探討核心且有趣的文章不容易排行在上位，但可以透過追蹤自己喜歡的作者，即可在時間軸頁面查看更新的文章。<br>我自己也有在 Qiita 上寫文章，建議可以試試看w</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>我一直希望能夠為有幹勁的工程師，創造一個有利於成長的環境。<br>建立一個能讓有幹勁和實力的工程師，充分發揮其價值的系統。<br>如果有任何問題、評論或需要提供方向，歡迎隨時留言，我會進行答覆。<br>希望提供這些想法給願意實際執行，而非只停留在空想的人，讓他們在學習上有個方向。<br>此外，如果有其他方法或想法，請在評論或引用等方式分享！</p>
+<blockquote>
+<p>15th鐵人賽目錄傳送門：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEzNTU1OC9pcm9ubWFuLzYyOTA=">https://ithelp.ithome.com.tw/users/20135558/ironman/6290<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>2023鐵人賽</category>
+      </categories>
+      <tags>
+        <tag>ironman2023</tag>
+        <tag>Qiita</tag>
+        <tag>Learning</tag>
       </tags>
   </entry>
 </search>
