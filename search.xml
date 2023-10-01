@@ -28110,15 +28110,14 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <span id="more"></span>
 
 <h2 id="基礎：JavaScript-的特點"><a href="#基礎：JavaScript-的特點" class="headerlink" title="基礎：JavaScript 的特點"></a>基礎：JavaScript 的特點</h2><p>首先，必須瞭解 JavaScript 與其他程式語言的差別。</p>
-<p><strong>JavaScript</strong> 是一種在 Chrome 或 Firefox 等「<strong>瀏覽器上</strong>」運行的程式語言；而一般的程式語言，例如 <strong>Python</strong> 和 <strong>Ruby</strong>，通常是在「<strong>電腦上</strong>」運行。<a href="%E5%8E%9F%E6%9C%AC%E6%87%89%E8%A9%B2%E7%94%A8%E3%80%8C%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E4%B8%8A%E3%80%8D%E8%A1%A8%E9%81%94%EF%BC%8C%E7%82%BA%E4%BA%86%E6%9B%B4%E7%B0%A1%E5%96%AE%E6%98%8E%E7%9E%AD%EF%BC%8C%E4%BD%BF%E7%94%A8%E3%80%8C%E9%9B%BB%E8%85%A6%E4%B8%8A%E3%80%8D%E7%9A%84%E8%A1%A8%E9%81%94%E6%96%B9%E5%BC%8F%E3%80%82~~%E5%85%B6%E5%AF%A6%E6%B2%92%E6%9C%89%E9%80%99%E5%9B%9E%E4%BA%8B%EF%BC%8C%E5%96%AE%E7%B4%94%E6%98%AF%E5%9B%A0%E7%82%BA%E4%B9%8B%E5%89%8D%E8%A3%BD%E4%BD%9C%E7%9A%84%E5%9C%96%E4%B8%AD%E5%AF%AB%E8%91%97%E3%80%8C%E9%9B%BB%E8%85%A6%E3%80%8D~~">^1</a></p>
+<p><strong>JavaScript</strong> 是一種在 Chrome 或 Firefox 等「<strong>瀏覽器上</strong>」運行的程式語言；而一般的程式語言，例如 <strong>Python</strong> 和 <strong>Ruby</strong>，通常是在「<strong>電腦上</strong>」運行。<code>[註1]</code></p>
 <p><img src="https://imgur.com/6eP6NKJ.png"></p>
 <p>執行環境的區別，在於<strong>是否能夠訪問 OS（作業系統）的功能</strong>。</p>
-<p>「作業系統的功能」指的是檔案讀寫、以及網路通信等功能。在電腦上運行的應用程式（包括 Python 和 Ruby 等語言）就可以處理這些功能。<a href="%E8%BF%91%E5%B9%B4%E4%BE%86%EF%BC%8C%E7%94%B1%E6%96%BC%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E6%9C%89%E6%89%80%E6%8F%90%E5%8D%87%EF%BC%8C%E5%8D%B3%E4%BD%BF%E6%98%AF%E5%AE%89%E8%A3%9D%E7%9A%84%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%EF%BC%8C%E4%B9%9F%E7%84%A1%E6%B3%95%E4%BB%BB%E6%84%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%B5%B1%E7%9A%84%E6%89%80%E6%9C%89%E5%8A%9F%E8%83%BD%EF%BC%8C%E7%95%B6%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%E5%98%97%E8%A9%A6%E4%BD%BF%E7%94%A8%E7%89%B9%E5%AE%9A%E5%8A%9F%E8%83%BD%E6%99%82%EF%BC%8C%E9%80%9A%E5%B8%B8%E9%9C%80%E8%A6%81%E7%B6%93%E9%81%8E%E4%BD%BF%E7%94%A8%E8%80%85%E6%8E%88%E6%AC%8A%E3%80%82">^2</a></p>
+<p>「作業系統的功能」指的是檔案讀寫、以及網路通信等功能。在電腦上運行的應用程式（包括 Python 和 Ruby 等語言）就可以處理這些功能。<code>[註2]</code></p>
 <p><img src="https://i.imgur.com/M1CR0Eg.png"></p>
-<p>然而，如果在瀏覽器上運行的程式（JavaScript），擁有作業系統的功能權限，這將存在安全風險。[^3] 舉例來說，只要進到某個網站，就可能被人未經允許讀寫電腦上的檔案，或刪除部分檔案內容，這會是很嚴重的問題。 [^4]</p>
-<p>[^3]: ActiveX 這類的技術能夠實現這一點。<br>[^4]: 雖然與 JavaScript 無關，但我想起很久以前某個遊戲更新，導致包括作業系統等無關數據也被刪除的 HDD BURST 事件，瞭解到程式在某種程度上是能夠任意操作的。</p>
+<p>然而，如果在瀏覽器上運行的程式（JavaScript），擁有作業系統的功能權限，這將存在安全風險。<code>[註3]</code> 舉例來說，只要進到某個網站，就可能被人未經允許讀寫電腦上的檔案，或刪除部分檔案內容，這會是很嚴重的問題。 <code>[註4]</code></p>
 <p>也因為如此，在瀏覽器上運行的 JavaScript，被設計成沒有權限使用作業系統的功能。</p>
-<p>但如果完全沒有權限，還是會有些不便，因此瀏覽器會限制性允許 JavaScript 請求作業系統的功能權限。<a href="%E7%80%8F%E8%A6%BD%E5%99%A8%E6%98%AF%E7%B6%93%E7%94%B1%E5%AE%89%E8%A3%9D%E7%9A%84%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%EF%BC%8C%E5%9B%A0%E6%AD%A4%E7%95%B6%E7%84%B6%E6%9C%89%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%9A%84%E5%8A%9F%E8%83%BD%E6%AC%8A%E9%99%90%E3%80%82">^5</a> 近年來，瀏覽器也允許 JavaScript 對相機和麥克風的權限，這讓在瀏覽器上進行網路會議變得更加方便。</p>
+<p>但如果完全沒有權限，還是會有些不便，因此瀏覽器會限制性允許 JavaScript 請求作業系統的功能權限。<code>[註5]</code> 近年來，瀏覽器也允許 JavaScript 對相機和麥克風的權限，這讓在瀏覽器上進行網路會議變得更加方便。</p>
 <p><img src="https://i.imgur.com/6M0deBc.png"></p>
 <blockquote>
 <p>關於前端與瀏覽器之間的關係，推薦閱讀 Huli 撰寫的資安系列文章：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMxNDEyNQ==">[Day2] 瀏覽器的安全模型<i class="fa fa-external-link-alt"></i></span></p>
@@ -28127,12 +28126,10 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <p><img src="https://i.imgur.com/bwSylYh.png"></p>
 <p>儘管受到許多誤解，但 Node.js 既不是 Web Server，也不是像 Rails 或 Django 的 Web 框架，而是 <strong>JavaScript 的執行環境</strong>。</p>
 <p>在 Windows 安裝 Python 時，會得到「python.exe」；同樣地，在安裝 Node.js 時，也會得到「node.exe」。<br>就像「python.exe」是用於執行 Python 程式碼的應用程式，「node.exe」是用於執行 JavaScript 程式碼的應用程式 = JavaScript 的執行環境。</p>
-<p>在 Node.js 中，可編寫 JavaScript 程式來請求作業系統的功能權限。[^6] 意即能夠處理在瀏覽器上無法執行的操作，像是自由讀寫檔案，以及網路通信等作業系統功能。</p>
-<p>[^6]: 我曾寫過「JavaScript 有操作作業系統的功能權限」，但這其實是很微妙的表達方式，要實際獲得操作系統的功能權限，必須透過 C++ 編寫 Node.js 的擴充功能，通常會提供 Standard Library 或 Third party Library 使用。</p>
+<p>在 Node.js 中，可編寫 JavaScript 程式來請求作業系統的功能權限。<code>[註6]</code> 意即能夠處理在瀏覽器上無法執行的操作，像是自由讀寫檔案，以及網路通信等作業系統功能。</p>
 <p><img src="https://i.imgur.com/hu0sgZY.png"></p>
 <p>因此，Node.js 能夠像使用 Python 或 Ruby 一樣建立 Web 應用程式，但 Node.js 也可用於各種其他用途。</p>
-<h3 id="Node-js-是伺服器端的-JavaScript-執行環境嗎？"><a href="#Node-js-是伺服器端的-JavaScript-執行環境嗎？" class="headerlink" title="Node.js 是伺服器端的 JavaScript 執行環境嗎？"></a>Node.js 是伺服器端的 JavaScript 執行環境嗎？</h3><p>在與 Node.js 相關的文章中，經常會看到 Node.js 被描述為「伺服器端的 JavaScript 執行環境」。這是 Node.js 的設計目標，是為了<strong>構築能夠處理大量同時連線的網路應用程式</strong>，而被設計出的 JavaScript 環境。[^7]</p>
-<p>[^7]: 有一種名為 CommonJS（ServerJS）用於伺服器端的規範，設計在瀏覽器之外的環境中運行 JavaScript，Node.js 從初期就遵循此規範。</p>
+<h3 id="Node-js-是伺服器端的-JavaScript-執行環境嗎？"><a href="#Node-js-是伺服器端的-JavaScript-執行環境嗎？" class="headerlink" title="Node.js 是伺服器端的 JavaScript 執行環境嗎？"></a>Node.js 是伺服器端的 JavaScript 執行環境嗎？</h3><p>在與 Node.js 相關的文章中，經常會看到 Node.js 被描述為「伺服器端的 JavaScript 執行環境」。這是 Node.js 的設計目標，是為了<strong>構築能夠處理大量同時連線的網路應用程式</strong>，而被設計出的 JavaScript 環境。<code>[註7]</code></p>
 <p>因為具備「可使用 JavaScript 建立 Web 應用程式（Web Server）」的特點，因此經常被描述「Node.js 是伺服器端的 JavaScript 執行環境」。</p>
 <p>而在當今的 Web 業界中，Node.js 也廣泛用於<strong>客戶端 JavaScript 的開發環境</strong>。此外，Node.js 也經常用於在本地端電腦上開發「在瀏覽器中運行的 JavaScript」的環境。</p>
 <p>這是因為開發者發現，Node.js 具備「能夠在電腦（作業系統）上運行 JavaScript」的特點，因此出現越來越多方便客戶端 JavaScript 進行開發的 Library，這部分稍後也會詳細說明。</p>
@@ -28195,6 +28192,8 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 <p>正如人們所言，與其他語言相比，JavaScript 確實有些設計上的不足（部分原因在於其起源），即使在相同條件下也會有所質疑⋯⋯但我能理解這些看法。然而，沒有哪種程式語言能夠像 JavaScript 一樣，擁有如此眾多的年輕用戶，包含 Library 等在內，以驚人的速度發展，趨勢變化莫測。</p>
 <p>jQuery 等技術現今已被當作歷史文物，但這些卻是在 Rails 和 Django 之後才誕生的（雖然比較起來有點微妙），發展節奏極為快速。我認為，在這個時代誕生，能夠參與並享受像這樣激動人心的 JavaScript 演進浪潮，是非常令人興奮且愉快的事情。</p>
 <p>最後，如開頭所述，希望能在本文中解答一些常見疑問，像是「Node.js 不是 Web Server 嗎？只是想用 ES2015 編寫程式碼，為什麼必須安裝呢？」等問題。</p>
+<hr>
+<p><code>[註1]</code>: 原本應該用「作業系統上」表達，為了更簡單明瞭，使用「電腦上」的表達方式。<del>其實沒有這回事，單純是因為之前製作的圖中寫著「電腦」</del><br><code>[註2]</code>: 近年來，由於作業系統的安全性有所提升，即使是安裝的應用程式，也無法任意操作系統的所有功能，當應用程式嘗試使用特定功能時，通常需要經過使用者授權。<br><code>[註3]</code>: ActiveX 這類的技術能夠實現這一點。<br><code>[註4]</code>: 雖然與 JavaScript 無關，但我想起很久以前某個遊戲更新，導致包括作業系統等無關數據也被刪除的 HDD BURST 事件，瞭解到程式在某種程度上是能夠任意操作的。<br><code>[註5]</code>: 瀏覽器是經由安裝的應用程式，因此當然有作業系統的功能權限。<br><code>[註6]</code>: 我曾寫過「JavaScript 有操作作業系統的功能權限」，但這其實是很微妙的表達方式，要實際獲得操作系統的功能權限，必須透過 C++ 編寫 Node.js 的擴充功能，通常會提供 Standard Library 或 Third party Library 使用。<br><code>[註7]</code>: 有一種名為 CommonJS（ServerJS）用於伺服器端的規範，設計在瀏覽器之外的環境中運行 JavaScript，Node.js 從初期就遵循此規範。</p>
 <blockquote>
 <p>15th鐵人賽目錄傳送門：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEzNTU1OC9pcm9ubWFuLzYyOTA=">https://ithelp.ithome.com.tw/users/20135558/ironman/6290<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
