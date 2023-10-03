@@ -28489,4 +28489,70 @@ document<span class="token punctuation">.</span><span class="token function">que
         <tag>Qiita</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[2023 15th鐵人賽] Day18 - 推薦給前端工程師的 Chrome 擴充功能</title>
+    <url>/ironman-2023-day-18/</url>
+    <content><![CDATA[<blockquote>
+<p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vWVNhc2Fnby9pdGVtcy9lMjk4MDNmZjQ2MGYzYTVhNmRhND91dG1fc291cmNlPVFpaXRhJUUzJTgzJThCJUUzJTgzJUE1JUUzJTgzJUJDJUUzJTgyJUI5JnV0bV9jYW1wYWlnbj04MzVhZWZkNDg2LVFpaXRhX25ld3NsZXR0ZXJfNTc3XzA4XzAyJnV0bV9tZWRpdW09ZW1haWwmdXRtX3Rlcm09MF9lNDRmZWFhMDgxLTgzNWFlZmQ0ODYtNjI4MjA0NDk=">フロントエンドエンジニアにおすすめchrome拡張機能 - Qiita<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>在閱讀 Qiita 時，發現有不少統整系列的文章，可能是對於某技術、指令、學習方法或書籍相關的總整理，例如：</p>
+<ul>
+<li>XXX 設計方法 OO 選</li>
+<li>XXX 研修資料まとめ</li>
+<li>XXX Top10</li>
+</ul>
+<p>這篇文章則是介紹六種 Chrome 擴充功能，對前端開發而言很實用的工具：</p>
+<ul>
+<li>UI Build Assistant</li>
+<li>Responsive Viewer</li>
+<li>Take Webpage Screenshots Entirely - FireShot</li>
+<li>WhatFont</li>
+<li>Talend API Tester - Free Edition</li>
+<li>CSSViewer</li>
+</ul>
+<span id="more"></span>
+
+<p>這幾項自己試用之後，也覺得蠻方便，或許之後開發有機會考慮使用，推薦實際安裝用看看！</p>
+<p>那麼，以下正文開始。</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位好，我是在都內從事軟體工程師的 <span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vWVNhc2Fnbw==">YSasago<i class="fa fa-external-link-alt"></i></span>，經常會使用 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9pbnRsL3poLVRXL2Nocm9tZS8=">Chrome<i class="fa fa-external-link-alt"></i></span> 瀏覽器來進行前端開發。<br>Chrome 擁有許多能夠協助開發的 <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9jYXRlZ29yeS9leHRlbnNpb25z">Chrome 擴充功能<i class="fa fa-external-link-alt"></i></span>，我想在本篇文章，介紹自己在前端開發時，常使用到的擴充功能。</p>
+<h2 id="UI-Build-Assistant"><a href="#UI-Build-Assistant" class="headerlink" title="UI Build Assistant"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdWktYnVpbGQtYXNzaXN0YW50L2NsYmhpZWFtYWpsYWtqb2Jjb2loZWtsYW9sZGNqaGpm">UI Build Assistant<i class="fa fa-external-link-alt"></i></span></h2><p>雖然 ICON 是 IT 大學，看起來蠻有趣的：</p>
+<p><img src="https://hackmd.io/_uploads/ryO-NDdea.png"></p>
+<p>但透過這個擴充功能，能夠一鍵將背景和線條著色，即可清楚看到佈局方式，方便進行 margin 邊距等樣式調整。</p>
+<p><img src="https://i.imgur.com/PLhPIu0.png"></p>
+<p>此外，作者<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1DWHJXNXJxUC1XWQ==">しまぶーさん<i class="fa fa-external-link-alt"></i></span> 的 YouTube 影片，對前端學習非常有幫助，我自己也經常作為參考。</p>
+<h2 id="Responsive-Viewer"><a href="#Responsive-Viewer" class="headerlink" title="Responsive Viewer"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvcmVzcG9uc2l2ZS12aWV3ZXIvaW5tb3BlaWVwZ2Zsamtwa2lkY2xmZ2JnYm1mY2VubmI=">Responsive Viewer<i class="fa fa-external-link-alt"></i></span></h2><p>接下來，要介紹的是 <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvcmVzcG9uc2l2ZS12aWV3ZXIvaW5tb3BlaWVwZ2Zsamtwa2lkY2xmZ2JnYm1mY2VubmI=">Responsive Viewer<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>使用這個擴充功能，可以一鍵檢視開發界面在不同大小下的呈現狀態。<br>在進行響應式設計時，經常在最後檢查時使用。</p>
+<p><img src="https://i.imgur.com/ETuO6LN.png"></p>
+<h2 id="Take-Webpage-Screenshots-Entirely-FireShot"><a href="#Take-Webpage-Screenshots-Entirely-FireShot" class="headerlink" title="Take Webpage Screenshots Entirely - FireShot"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFrZS13ZWJwYWdlLXNjcmVlbnNob3RzL21jYnBibG9jZ21nZm5wampwcG5kamttZ2phb2dmY2Vn">Take Webpage Screenshots Entirely - FireShot<i class="fa fa-external-link-alt"></i></span></h2><p><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFrZS13ZWJwYWdlLXNjcmVlbnNob3RzL21jYnBibG9jZ21nZm5wampwcG5kamttZ2phb2dmY2Vn">FireShot<i class="fa fa-external-link-alt"></i></span> 是能夠輕鬆截取網頁截圖的擴充功能，對自己來說也是使用率最高的。<br>因為可以輕鬆截取整個頁面，經常會在請別人 Review 開發內容時使用。</p>
+<p><img src="https://hackmd.io/_uploads/SkmKVPugp.png"></p>
+<h2 id="WhatFont"><a href="#WhatFont" class="headerlink" title="WhatFont"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvd2hhdGZvbnQvamFib3BvYmdjcGptZWRsanBiY2FhYmxwbWxtZmNvZ20/aGw9amE=">WhatFont<i class="fa fa-external-link-alt"></i></span></h2><p>接下來要介紹的 <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvd2hhdGZvbnQvamFib3BvYmdjcGptZWRsanBiY2FhYmxwbWxtZmNvZ20=">WhatFont<i class="fa fa-external-link-alt"></i></span>，是能夠查看使用字體的擴充功能。</p>
+<p>啟用此擴充功能後，只需將游標移動到想要知道的網頁字體上，即可顯示字體風格。<br>在開發過程中，字體風格經常會因為數字和文字而改變，透過使用這項功能，能夠確保自己不會忘記字體有所更改。</p>
+<p><img src="https://i.imgur.com/5mgXpiX.png"></p>
+<h2 id="Talend-API-Tester-Free-Edition"><a href="#Talend-API-Tester-Free-Edition" class="headerlink" title="Talend API Tester - Free Edition"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFsZW5kLWFwaS10ZXN0ZXItZnJlZS1lZC9hZWpvZWxhb2dnZW1iY2FoYWdpbWRpbGlhbWxjZG1mbQ==">Talend API Tester - Free Edition<i class="fa fa-external-link-alt"></i></span></h2><p>使用 <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFsZW5kLWFwaS10ZXN0ZXItZnJlZS1lZC9hZWpvZWxhb2dnZW1iY2FoYWdpbWRpbGlhbWxjZG1mbQ==">Talend API Tester<i class="fa fa-external-link-alt"></i></span> 這個擴充功能，能夠在瀏覽器中驗證 API 的操作。</p>
+<p>在開發過程中，如果需要快速瞭解 API 的 Response 時，將會使用這個工具。<br>整體 UI 非常直觀，即使對於初學者也能很容易上手。</p>
+<p><img src="https://i.imgur.com/yX8JayM.png"></p>
+<blockquote>
+<p>【補充】Talend API Tester 和常見的 <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvcG9zdG1hbi9maGJqZ2JpZmxpbmpiZGdnZWhjZGRjYm5jZGRkb21vcD9obD16aC1UVw==">Postman<i class="fa fa-external-link-alt"></i></span> 比較：兩者均是用於測試 RESTful API 的工具，但根據用途、授權方式、測試報告、可擴展性等方面可能有所差異。<br>詳細可參考這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcy90YWxlbmQlMjBhcGklMjB0ZXN0ZXIlMjB2cyUyMHBvc3RtYW4=">talend api tester vs postman<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="CSSViewer"><a href="#CSSViewer" class="headerlink" title="CSSViewer"></a><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvY3Nzdmlld2VyL2dnZmdpamJwaWhlZWdlZmxpY2llbW9mb2JobW9mZ2Nl">CSSViewer<i class="fa fa-external-link-alt"></i></span></h2><p>使用 <a href="(https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce)">CSSViewer</a> 的擴充功能，即可在瀏覽器中檢查 CSS。</p>
+<p>在開始用這個擴充功能之前，經常需要開啟 Chrome 的開發者工具，來選擇需要檢查的 CSS。如果透過 CSSViewer，只需將游標移動到想檢查的 CSS 位置，即可顯示對應的 CSS。<br>在需要快速檢查 CSS 時，這功能非常方便。</p>
+<p><img src="https://i.imgur.com/gHF9ixd.png"></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>這次我整理了在前端開發中，經常使用到的 Chrome 擴充功能。<br>由於還有許多想介紹的 Chrome 擴充功能，往後將會繼續進行更新。</p>
+<p>有許多免費的擴充功能，能夠使開發工作更加便利，Chrome 擴充功能真的很棒呢。<br>如果有其他推薦的擴充功能，也歡迎留言告訴我，感謝閱讀到最後。</p>
+<blockquote>
+<p>15th鐵人賽目錄傳送門：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEzNTU1OC9pcm9ubWFuLzYyOTA=">https://ithelp.ithome.com.tw/users/20135558/ironman/6290<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>2023鐵人賽</category>
+        <category>Front-End</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>ironman2023</tag>
+        <tag>Qiita</tag>
+        <tag>Chrome</tag>
+      </tags>
+  </entry>
 </search>
