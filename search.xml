@@ -1463,6 +1463,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </categories>
       <tags>
         <tag>lidemy</tag>
+        <tag>terminal</tag>
       </tags>
   </entry>
   <entry>
@@ -7078,6 +7079,7 @@ $<span class="token punctuation">.</span><span class="token function">getJSON</s
         <tag>Front-End</tag>
         <tag>JavaScript</tag>
         <tag>lidemy</tag>
+        <tag>Naming Conventions</tag>
       </tags>
   </entry>
   <entry>
@@ -25593,6 +25595,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
@@ -25842,6 +25845,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
@@ -26311,6 +26315,7 @@ git@github.com:beego/beego.git<span aria-hidden="true" class="line-numbers-rows"
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>Google</tag>
@@ -26641,11 +26646,12 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
-        <tag>naming</tag>
+        <tag>Naming Conventions</tag>
       </tags>
   </entry>
   <entry>
@@ -26784,6 +26790,7 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
         <tag>Advertising</tag>
@@ -26935,6 +26942,7 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
         <tag>Security</tag>
@@ -27015,10 +27023,13 @@ incomplete<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
+        <tag>軟體開發</tag>
+        <tag>版本升級</tag>
       </tags>
   </entry>
   <entry>
@@ -27095,8 +27106,10 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
+        <tag>hash</tag>
         <tag>Security</tag>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
@@ -27188,6 +27201,7 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>GitHub</tag>
@@ -27277,8 +27291,10 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
+        <tag>OOP</tag>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
         <tag>SOLID</tag>
@@ -27667,11 +27683,13 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
         <tag>alias</tag>
+        <tag>terminal</tag>
       </tags>
   </entry>
   <entry>
@@ -27744,11 +27762,13 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>豆知識篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
         <tag>軟體開發</tag>
+        <tag>業界分析</tag>
       </tags>
   </entry>
   <entry>
@@ -27835,6 +27855,7 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>職涯篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
@@ -27946,10 +27967,13 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>職涯篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
+        <tag>resume</tag>
+        <tag>日本求職</tag>
       </tags>
   </entry>
   <entry>
@@ -28094,10 +28118,13 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>職涯篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
         <tag>Qiita</tag>
+        <tag>日本求職</tag>
+        <tag>interview</tag>
       </tags>
   </entry>
   <entry>
@@ -28202,6 +28229,7 @@ kF<span class="token operator">/</span>aoRk0RaLBSH3CwU47jmacYoGtrFa <span class=
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>Front-End</category>
       </categories>
       <tags>
         <tag>Node.js</tag>
@@ -28483,6 +28511,7 @@ document<span class="token punctuation">.</span><span class="token function">que
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>Front-End</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -28548,7 +28577,7 @@ document<span class="token punctuation">.</span><span class="token function">que
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
-        <category>Front-End</category>
+        <category>工具篇</category>
       </categories>
       <tags>
         <tag>Front-End</tag>
@@ -29500,6 +29529,7 @@ document<span class="token punctuation">.</span><span class="token function">que
 ]]></content>
       <categories>
         <category>2023鐵人賽</category>
+        <category>入門篇</category>
       </categories>
       <tags>
         <tag>ironman2023</tag>
