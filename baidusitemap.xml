@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://heidiliu2020.github.io/ironman-2023-day-21/</loc>
+    <loc>https://heidiliu2020.github.io/pd101-lidemy/</loc>
+    <lastmod>2023-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://heidiliu2020.github.io/ironman-2023-day-22/</loc>
     <lastmod>2023-10-06</lastmod>
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/ironman-2023-day-20/</loc>
-    <lastmod>2023-10-05</lastmod>
+    <lastmod>2023-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://heidiliu2020.github.io/ironman-2023-day-21/</loc>
+    <lastmod>2023-10-06</lastmod>
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/ironman-2023-day-19/</loc>
@@ -230,10 +238,6 @@
   </url>
   <url>
     <loc>https://heidiliu2020.github.io/react-test/</loc>
-    <lastmod>2022-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://heidiliu2020.github.io/pd101-lidemy/</loc>
     <lastmod>2022-12-19</lastmod>
   </url>
   <url>
