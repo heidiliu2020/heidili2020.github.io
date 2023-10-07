@@ -3,9 +3,10 @@ author: Heidi Liu
 tags:
   - ironman2023
   - Qiita
-  - naming
+  - Naming Conventions
 categories:
   - 2023鐵人賽
+  - 入門篇
 date: 2023-09-19 14:35:00
 ---
 > 原文連結：[初心者プログラマーのための変数/関数/メソッドの英語命名規則 - Qiita](https://qiita.com/YutaManaka/items/62dda256bb7ba6c08399)

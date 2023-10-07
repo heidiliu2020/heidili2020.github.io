@@ -4,8 +4,10 @@ tags:
   - ironman2023
   - Qiita
   - SOLID
+  - OOP
 categories:
   - 2023鐵人賽
+  - 入門篇
 date: 2023-09-25 08:31:25
 ---
 

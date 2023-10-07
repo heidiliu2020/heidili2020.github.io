@@ -3,8 +3,11 @@ author: Heidi Liu
 tags:
   - ironman2023
   - Qiita
+  - resume
+  - 日本求職
 categories:
   - 2023鐵人賽
+  - 職涯篇
 date: 2023-09-29 08:54:01
 ---
 

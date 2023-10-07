@@ -3,8 +3,11 @@ author: Heidi Liu
 tags:
   - ironman2023
   - Qiita
+  - 軟體開發
+  - 版本升級
 categories:
   - 2023鐵人賽
+  - 豆知識篇
 date: 2023-09-22 08:07:20
 ---
 

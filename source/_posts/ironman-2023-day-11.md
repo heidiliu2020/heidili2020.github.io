@@ -4,8 +4,10 @@ tags:
   - ironman2023
   - Qiita
   - alias
+  - terminal
 categories:
   - 2023鐵人賽
+  - 豆知識篇
 date: 2023-09-26 08:31:25
 ---
 

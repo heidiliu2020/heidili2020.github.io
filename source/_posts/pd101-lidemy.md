@@ -3,6 +3,8 @@ author: Heidi Liu
 tags:
   - lidemy
   - Testing
+  - 產品開發
+  - agile
 categories:
   - lidemy
 date: 2020-11-02 00:41:00
