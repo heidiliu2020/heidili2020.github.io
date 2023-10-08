@@ -29693,48 +29693,46 @@ ChatGPT<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 請將以下函數的文件以 xx 形式呈現
 
 <span class="token punctuation">[</span>範例<span class="token punctuation">]</span> 請將下方函數的說明以 JSDoc 形式表示：
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>function isLeapYear(year) {<br>    if ((year % 4 === 0 &amp;&amp; year % 100 !== 0) || (year % 400 === 0)) {<br>        return true;<br>    } else {<br>        return false;<br>    }<br>}</p>
-<pre class="line-numbers language-none"><code class="language-none">&#96;&#96;&#96;
 
-![](https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;HkQYoz1Wp.png)
+<span class="token keyword">function</span> <span class="token function">isLeapYear</span><span class="token punctuation">(</span><span class="token parameter">year</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>year <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> year <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">!==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>year <span class="token operator">%</span> <span class="token number">400</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-以下是中文版本：
-
-![](https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;rke9oz1ba.png)
-
-### 重構
-
-以下程式碼的[引用出處](https:&#x2F;&#x2F;www.seplus.jp&#x2F;dokushuzemi&#x2F;blog&#x2F;2018&#x2F;07&#x2F;practice_refactoring.html)。
-
-&#96;&#96;&#96;jsx
-以下をリファクタリングして
+<p><img src="https://hackmd.io/_uploads/HkQYoz1Wp.png"></p>
+<p>以下是中文版本：</p>
+<p><img src="https://hackmd.io/_uploads/rke9oz1ba.png"></p>
+<h3 id="重構"><a href="#重構" class="headerlink" title="重構"></a>重構</h3><p>以下程式碼的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VwbHVzLmpwL2Rva3VzaHV6ZW1pL2Jsb2cvMjAxOC8wNy9wcmFjdGljZV9yZWZhY3RvcmluZy5odG1s">引用出處<i class="fa fa-external-link-alt"></i></span>。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">以下をリファクタリングして
 
 請重構以下內容
 
-[範例] 請重構以下程式碼：
+<span class="token punctuation">[</span>範例<span class="token punctuation">]</span> 請重構以下程式碼：
 
-package composing_methods.replace_temp_with_query.after;
+<span class="token keyword">package</span> composing_methods<span class="token punctuation">.</span>replace_temp_with_query<span class="token punctuation">.</span>after<span class="token punctuation">;</span>
 
-public class Example &#123;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">&#123;</span>
 
-    private int quantity;
-    private int itemPrice;
+    <span class="token keyword">private</span> int quantity<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> int itemPrice<span class="token punctuation">;</span>
 
-    public double getPrice() &#123;
+    <span class="token keyword">public</span> double <span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 
-        int basePrice &#x3D; quantity * itemPrice;
-        double discountFactor;
+        int basePrice <span class="token operator">=</span> quantity <span class="token operator">*</span> itemPrice<span class="token punctuation">;</span>
+        double discountFactor<span class="token punctuation">;</span>
 
-        if(basePrice &gt; 1000) &#123;
-            discountFactor &#x3D; 0.95;
-        &#125; else &#123;
-            discountFactor &#x3D; 0.98;
-        &#125;
+        <span class="token keyword">if</span><span class="token punctuation">(</span>basePrice <span class="token operator">></span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            discountFactor <span class="token operator">=</span> <span class="token number">0.95</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            discountFactor <span class="token operator">=</span> <span class="token number">0.98</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        return basePrice * discountFactor;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> basePrice <span class="token operator">*</span> discountFactor<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://hackmd.io/_uploads/SJX6oMkbT.png"></p>
 <p><img src="https://hackmd.io/_uploads/SktpozyWa.png"></p>

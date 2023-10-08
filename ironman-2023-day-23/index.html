@@ -51,6 +51,8 @@
 <meta property="og:image" content="https://hackmd.io/_uploads/BJoBiG1Za.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/S1SwoMyWp.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/rJz_sGJZT.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkQYoz1Wp.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rke9oz1ba.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/SJX6oMkbT.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/SktpozyWa.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/BJ01nz1Z6.png">
@@ -63,7 +65,7 @@
 <meta property="og:image" content="https://hackmd.io/_uploads/rynXnfJbT.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/HJWK3Mk-6.png">
 <meta property="article:published_time" content="2023-10-07T00:52:01.000Z">
-<meta property="article:modified_time" content="2023-10-08T01:39:21.436Z">
+<meta property="article:modified_time" content="2023-10-08T01:46:42.625Z">
 <meta property="article:author" content="Heidi Liu">
 <meta property="article:tag" content="ironman2023">
 <meta property="article:tag" content="Qiita">
@@ -267,7 +269,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2023-10-08 09:39:21" itemprop="dateModified" datetime="2023-10-08T09:39:21+08:00">2023-10-08</time>
+                <time title="修改時間：2023-10-08 09:46:42" itemprop="dateModified" datetime="2023-10-08T09:46:42+08:00">2023-10-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,13 +290,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>4k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 分鐘</span>
+              <span>3 分鐘</span>
             </span>
 
         </div>
@@ -458,48 +460,46 @@ ChatGPT<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 請將以下函數的文件以 xx 形式呈現
 
 <span class="token punctuation">[</span>範例<span class="token punctuation">]</span> 請將下方函數的說明以 JSDoc 形式表示：
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>function isLeapYear(year) {<br>    if ((year % 4 === 0 &amp;&amp; year % 100 !== 0) || (year % 400 === 0)) {<br>        return true;<br>    } else {<br>        return false;<br>    }<br>}</p>
-<pre class="line-numbers language-none"><code class="language-none">&#96;&#96;&#96;
 
-![](https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;HkQYoz1Wp.png)
+<span class="token keyword">function</span> <span class="token function">isLeapYear</span><span class="token punctuation">(</span><span class="token parameter">year</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>year <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> year <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">!==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>year <span class="token operator">%</span> <span class="token number">400</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-以下是中文版本：
-
-![](https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;rke9oz1ba.png)
-
-### 重構
-
-以下程式碼的[引用出處](https:&#x2F;&#x2F;www.seplus.jp&#x2F;dokushuzemi&#x2F;blog&#x2F;2018&#x2F;07&#x2F;practice_refactoring.html)。
-
-&#96;&#96;&#96;jsx
-以下をリファクタリングして
+<p><img src="https://hackmd.io/_uploads/HkQYoz1Wp.png"></p>
+<p>以下是中文版本：</p>
+<p><img src="https://hackmd.io/_uploads/rke9oz1ba.png"></p>
+<h3 id="重構"><a href="#重構" class="headerlink" title="重構"></a>重構</h3><p>以下程式碼的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VwbHVzLmpwL2Rva3VzaHV6ZW1pL2Jsb2cvMjAxOC8wNy9wcmFjdGljZV9yZWZhY3RvcmluZy5odG1s">引用出處<i class="fa fa-external-link-alt"></i></span>。</p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx">以下をリファクタリングして
 
 請重構以下內容
 
-[範例] 請重構以下程式碼：
+<span class="token punctuation">[</span>範例<span class="token punctuation">]</span> 請重構以下程式碼：
 
-package composing_methods.replace_temp_with_query.after;
+<span class="token keyword">package</span> composing_methods<span class="token punctuation">.</span>replace_temp_with_query<span class="token punctuation">.</span>after<span class="token punctuation">;</span>
 
-public class Example &#123;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">&#123;</span>
 
-    private int quantity;
-    private int itemPrice;
+    <span class="token keyword">private</span> int quantity<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> int itemPrice<span class="token punctuation">;</span>
 
-    public double getPrice() &#123;
+    <span class="token keyword">public</span> double <span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 
-        int basePrice &#x3D; quantity * itemPrice;
-        double discountFactor;
+        int basePrice <span class="token operator">=</span> quantity <span class="token operator">*</span> itemPrice<span class="token punctuation">;</span>
+        double discountFactor<span class="token punctuation">;</span>
 
-        if(basePrice &gt; 1000) &#123;
-            discountFactor &#x3D; 0.95;
-        &#125; else &#123;
-            discountFactor &#x3D; 0.98;
-        &#125;
+        <span class="token keyword">if</span><span class="token punctuation">(</span>basePrice <span class="token operator">></span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            discountFactor <span class="token operator">=</span> <span class="token number">0.95</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            discountFactor <span class="token operator">=</span> <span class="token number">0.98</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        return basePrice * discountFactor;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> basePrice <span class="token operator">*</span> discountFactor<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://hackmd.io/_uploads/SJX6oMkbT.png"></p>
 <p><img src="https://hackmd.io/_uploads/SktpozyWa.png"></p>
@@ -713,7 +713,7 @@ xxっぽく、敬語を使わず可愛く、yyについて説明してくださ�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatGPT-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text">ChatGPT 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AF%84%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">使用範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%95%8F-%E5%9B%9E%E7%AD%94"><span class="nav-number">2.1.</span> <span class="nav-text">提問-回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%B5%E4%BD%9C-Wikipedia-%E9%A2%A8%E6%A0%BC%E7%9A%84%E6%96%87%E7%AB%A0"><span class="nav-number">2.2.</span> <span class="nav-text">創作 Wikipedia 風格的文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BB%BB%E5%8B%99%E5%88%97%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">建立任務列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%99%82%E9%96%93%E8%A1%A8"><span class="nav-number">2.4.</span> <span class="nav-text">建立時間表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%B8%E7%B4%8D"><span class="nav-number">2.5.</span> <span class="nav-text">歸納</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E5%88%97%E9%BB%9E%E7%94%A8%E6%96%87%E7%AB%A0%E5%91%88%E7%8F%BE"><span class="nav-number">2.6.</span> <span class="nav-text">將列點用文章呈現</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E6%96%87%E7%AB%A0%E5%88%97%E9%BB%9E%E5%91%88%E7%8F%BE"><span class="nav-number">2.7.</span> <span class="nav-text">將文章列點呈現</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.</span> <span class="nav-text">程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.1.</span> <span class="nav-text">生成程式碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">生成程式碼的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6"><span class="nav-number">3.3.</span> <span class="nav-text">單元測試</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DB-%E8%A8%AD%E8%A8%88%EF%BC%88%E8%B3%87%E6%96%99%E5%BA%AB%E8%A8%AD%E8%A8%88%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">DB 設計（資料庫設計）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E4%BA%8B"><span class="nav-number">4.</span> <span class="nav-text">故事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B0%A3%E8%AE%8A%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">語氣變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E4%BB%BF%E8%A7%92%E8%89%B2%E7%9A%84%E8%AA%9E%E6%B0%A3%E4%BE%86%E5%9B%9E%E7%AD%94"><span class="nav-number">4.2.</span> <span class="nav-text">模仿角色的語氣來回答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bonus"><span class="nav-number">5.</span> <span class="nav-text">Bonus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-3-%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">GPT-3 的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%A6%8F%E6%A8%A1%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.2.</span> <span class="nav-text">大規模語言模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatGPT-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text">ChatGPT 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AF%84%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">使用範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%95%8F-%E5%9B%9E%E7%AD%94"><span class="nav-number">2.1.</span> <span class="nav-text">提問-回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%B5%E4%BD%9C-Wikipedia-%E9%A2%A8%E6%A0%BC%E7%9A%84%E6%96%87%E7%AB%A0"><span class="nav-number">2.2.</span> <span class="nav-text">創作 Wikipedia 風格的文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BB%BB%E5%8B%99%E5%88%97%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">建立任務列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%99%82%E9%96%93%E8%A1%A8"><span class="nav-number">2.4.</span> <span class="nav-text">建立時間表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%B8%E7%B4%8D"><span class="nav-number">2.5.</span> <span class="nav-text">歸納</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E5%88%97%E9%BB%9E%E7%94%A8%E6%96%87%E7%AB%A0%E5%91%88%E7%8F%BE"><span class="nav-number">2.6.</span> <span class="nav-text">將列點用文章呈現</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E6%96%87%E7%AB%A0%E5%88%97%E9%BB%9E%E5%91%88%E7%8F%BE"><span class="nav-number">2.7.</span> <span class="nav-text">將文章列點呈現</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.</span> <span class="nav-text">程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.1.</span> <span class="nav-text">生成程式碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">生成程式碼的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%A7%8B"><span class="nav-number">3.3.</span> <span class="nav-text">重構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6"><span class="nav-number">3.4.</span> <span class="nav-text">單元測試</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DB-%E8%A8%AD%E8%A8%88%EF%BC%88%E8%B3%87%E6%96%99%E5%BA%AB%E8%A8%AD%E8%A8%88%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">DB 設計（資料庫設計）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E4%BA%8B"><span class="nav-number">4.</span> <span class="nav-text">故事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B0%A3%E8%AE%8A%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">語氣變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E4%BB%BF%E8%A7%92%E8%89%B2%E7%9A%84%E8%AA%9E%E6%B0%A3%E4%BE%86%E5%9B%9E%E7%AD%94"><span class="nav-number">4.2.</span> <span class="nav-text">模仿角色的語氣來回答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bonus"><span class="nav-number">5.</span> <span class="nav-text">Bonus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-3-%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">GPT-3 的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%A6%8F%E6%A8%A1%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.2.</span> <span class="nav-text">大規模語言模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
