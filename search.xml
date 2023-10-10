@@ -29958,7 +29958,7 @@ xxっぽく、敬語を使わず可愛く、yyについて説明してくださ�
       </tags>
   </entry>
   <entry>
-    <title>[2023 15th鐵人賽] Day24 - 啊？你還在用 ChatGPT 嗎？ Bing 可以免費使用 GPT-4 喔！ </title>
+    <title>[2023 15th鐵人賽] Day25 - 成為具備需求定義～系統設計能力人才的文章！ </title>
     <url>/ironman-2023-day-25/</url>
     <content><![CDATA[<blockquote>
 <p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vU2FrdTczMS9pdGVtcy83NDFmY2YwZjQwZGQ5ODllZTRmOCMlRTUlOUYlQkElRTYlOUMlQUMlRTglQTglQUQlRTglQTglODglRTclOTQlQkIlRTklOUQlQTIlRTglQTglQUQlRTglQTglODglRTYlQTklOUYlRTglODMlQkQlRTglQTglQUQlRTglQTglODglRTMlODMlODclRTMlODMlQkMlRTMlODIlQkYlRTglQTglQUQlRTglQTglODglRTMlODElQUUlRTQlQkQlOUMlRTMlODIlOEElRTYlOTYlQjk=">要件定義～システム設計ができる人材になれる記事 - Qiita<i class="fa fa-external-link-alt"></i></span></p>
@@ -29993,7 +29993,7 @@ xxっぽく、敬語を使わず可愛く、yyについて説明してくださ�
 <p>■應用編：</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cudWRlbXkuY29tL2NvdXJzZS9idXNpbmVzc19yZXF1aXJlbWVudF9hbmFseXNpc19hbmRfc3lzdGVtX2Rlc2lnbi8/Y291cG9uQ29kZT1GOTE2NUM1MDhDNjdBMTAxREI0Qw==">【超実践】ビジネス要件分析・基本設計・詳細設計をやり抜く実践ワーク講座<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這是由 <span class="exturl" data-url="aHR0cHM6Ly9kaWdpc2FrdS5jby5qcC8=">DEGISAKU 株式會社<i class="fa fa-external-link-alt"></i></span>提供的程式設計文章。</p>
-<p>這次要討論的是與需求定義文件・系統設計相關的主題。</p>
+<p>這次要討論的是與需求定義・系統設計相關的主題。</p>
 <p>在學習程式設計時，是否曾經有過這樣的經驗呢？</p>
 <p><strong>「即使學習也做不出產品」<br>「到底開發是怎麼進行？」<br>「需求定義是什麼？」</strong></p>
 <p>為了解決這些困擾，首先讓我們瞭解<strong>開發過程的整體概念</strong>。<br>請參考下圖的「軟體開發過程」，</p>
@@ -30002,11 +30002,11 @@ xxっぽく、敬語を使わず可愛く、yyについて説明してくださ�
 <blockquote>
 <p>軟體開發過程，由左至右分別是：</p>
 <ul>
-<li>企劃 &gt; 業務設計 &gt; 需求定義文件 &gt; 設計 &gt; 實作（程式設計） &gt; 測試 &gt; 發布 &gt; 維護</li>
+<li>企劃 &gt; 業務設計 &gt; 需求定義 &gt; 設計 &gt; 實作（程式設計） &gt; 測試 &gt; 發布 &gt; 維護</li>
 </ul>
 </blockquote>
-<p>因此，本文將針對開始實作（程式設計）之前，必須進行的「企劃 &gt; 設計」過程依序做介紹。<br>內容將特別著重於，工程師必須理解的「需求定義文件」和「設計」階段。</p>
-<p>此外，據說在整個開發過程中，大約<strong>有二到三成的時間用於實作（程式設計）</strong>；<strong>另一方面，需求定義文件和設計等上游流程，約占總時間的五成</strong>。</p>
+<p>因此，本文將針對開始實作（程式設計）之前，必須進行的「企劃 &gt; 設計」過程依序做介紹。<br>內容將特別著重於，工程師必須理解的「需求定義」和「設計」階段。</p>
+<p>此外，據說在整個開發過程中，大約<strong>有二到三成的時間用於實作（程式設計）</strong>；<strong>另一方面，需求定義和設計等上游流程，約占總時間的五成</strong>。</p>
 <p>這意味著，<strong>擁有需求定義和設計能力的人，必然能提高對開發專案的貢獻度</strong>。藉由這個機會，讓我們好好學習這些技能，來擴大發展的機會吧。</p>
 <p>本文的章節安排如下：</p>
 <ul>
