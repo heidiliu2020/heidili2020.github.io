@@ -31035,4 +31035,128 @@ Asia/Taipei<span aria-hidden="true" class="line-numbers-rows"><span></span><span
         <tag>Log</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[2023 15th鐵人賽] Day29 - AWS Engineer Roadmap 2023</title>
+    <url>/ironman-2023-day-29/</url>
+    <content><![CDATA[<blockquote>
+<p>原文連結：<span class="exturl" data-url="aHR0cHM6Ly9xaWl0YS5jb20vS3Vyb2thd2FLb3VoZWkvaXRlbXMvMzgzNjgwMmZjM2EwMjg2ZjY2OGY=">AWSエンジニアロードマップ2023<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>終於來到了這篇，其實當初在決定要報名今年鐵人賽的時候，是想要從 AWS 主題著手，但一方面沒什麼自信能夠在三十天內寫出完整架構，一方面也還在摸索學習的步調。</p>
+<p>本篇文章將會介紹 AWS 學習指標，部分圖解和影片以日文為主，但透過 Roadmap 還有每週主題，還是能夠參考並安排自己的學習進度，架構如下所示：</p>
+<ul>
+<li>第 1 週：AWS 基礎知識（AWS Basics）</li>
+<li>第 2～3 週：網路與內容傳遞（Networking and Content Delivery）</li>
+<li>第 4 週：運算服務（Compute Services）</li>
+<li>第 5 週：安全、身份和合規性（Security, Identity, and Compliance）</li>
+<li>第 6 週：資料庫（Database）</li>
+<li>第 7 週：儲存（Storage）</li>
+<li>第 8 週：管理和管控治理（Management and Governance）</li>
+<li>第 9 週：容器、無伺服器運算、應用程式整合（Containers and Serverless Computing, Application Integration）</li>
+<li>第 10 週：分析、遷移、其他（Analytics, Migrations）</li>
+<li>第 11〜12 週：SAA 認證模擬測驗<ul>
+<li>練習 SAA 的注意事項</li>
+</ul>
+</li>
+</ul>
+<p>實際學習主要還是建議搭配 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3Lz9uYzI9aF9xbF9kb2NfZG8=">AWS 官方文件<i class="fa fa-external-link-alt"></i></span>，或是其他線上課程等管道來進行。此外，也給自己訂下目標，希望今年結束前能夠達成，有機會的話，到時候再來整理一篇更詳細的準備心得。</p>
+<span id="more"></span>
+
+<p>那麼，以下正文開始。</p>
+<hr>
+<p><img src="https://i.imgur.com/gDb4iD0.png"></p>
+<ul>
+<li>將 AWS 的學習路線統整後，以「路線圖風格」呈現。</li>
+<li>黃色的圓圈代表重要的項目。</li>
+<li>「完全沒有 AWS 經驗」的人來說，通常需要約「3 個月」的學習時間才能「通過 SAA 取得證照資格」。</li>
+</ul>
+<p>（對於有經驗的人來說，可以在更短時間內通過考試。）</p>
+<ul>
+<li>通過 SAA 測驗後，建議學習其他證照內容的同時，需搭配實際操作來學習。</li>
+</ul>
+<p>即使是 ChatGPT，應該無法提供這樣的路線圖⛅️</p>
+<h2 id="第-1-週：AWS-基礎知識（AWS-Basics）"><a href="#第-1-週：AWS-基礎知識（AWS-Basics）" class="headerlink" title="第 1 週：AWS 基礎知識（AWS Basics）"></a>第 1 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9nZXR0aW5nLXN0YXJ0ZWQv">AWS 基礎知識（AWS Basics）<i class="fa fa-external-link-alt"></i></span></h2><p>首先，以下整理一下有關「AWS」和「傳統的 IT 基礎架構」的基本知識。<br>為什麼 AWS 會受到如此多的關注？瞭解 AWS 擁有哪些優勢非常重要。</p>
+<iframe width="734" height="413" src="https://www.youtube.com/embed/156B6cZ_2aQ" title="AWSが使われる理由、クラウドサービスのメリット、なぜ今AWSを学ぶべきなのか？【11:32】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<p>就地部署軟體（On-Premises）的缺點如下：</p>
+<ul>
+<li>需要大量的初期成本</li>
+<li>需要預測容量（Capacity）</li>
+<li>從購買到部署伺服器，通常需要約一個月的時間</li>
+</ul>
+<p>等項目。</p>
+<p>另一方面，AWS 能夠根據實際使用量來支付費用，因此不需預測容量。</p>
+<p>可以立即使用、從任何地方連接，且應用標準化的技術。</p>
+<p>基於上述幾項特點，可預期 AWS 的優勢將遠高於就地部署軟體，並且在成本、彈性和可訪問性等方面能夠得到提升。</p>
+<p><img src="https://hackmd.io/_uploads/Skq9SoSba.png"></p>
+<iframe width="708" height="315" src="https://www.youtube.com/embed/nNWdBqdbn9w" title="AWSグローバルインフラストラクチャ【4:50】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vcGxheWxpc3Q/bGlzdD1QTDJuQ0UyaVItbHBtN1hGQUpSMG5nRDFya2hlSGdYXzBi">更多 AWS 相關基礎知識的影片可參考這裡<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="第-2～3-週：網路與內容傳遞（Networking-and-Content-Delivery）"><a href="#第-2～3-週：網路與內容傳遞（Networking-and-Content-Delivery）" class="headerlink" title="第 2～3 週：網路與內容傳遞（Networking and Content Delivery）"></a>第 2～3 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9wcm9kdWN0cy9uZXR3b3JraW5nLw==">網路與內容傳遞（Networking and Content Delivery）<i class="fa fa-external-link-alt"></i></span></h2><p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3ZwYy9sYXRlc3QvdXNlcmd1aWRlL3doYXQtaXMtYW1hem9uLXZwYy5odG1s">VPC<i class="fa fa-external-link-alt"></i></span> 是最重要的項目。應具備網路知識，如果對<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNSVBRCU5MCVFNyVCRCU5MQ==">子網路遮罩<i class="fa fa-external-link-alt"></i></span>或<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNiU5NyVBMCVFNyVCMSVCQiVFNSU4OCVBQiVFNSU5RiU5RiVFOSU5NyVCNCVFOCVCNyVBRiVFNyU5NCVCMQ==">無類別域間路由（CIDR）<i class="fa fa-external-link-alt"></i></span>計算不熟悉，則需要複習這部分內容。</p>
+<iframe width="781" height="439" src="https://www.youtube.com/embed/2317shavNoo" title="【VPC講座1】リージョン / アベイラビリティゾーン / サブネット【9:02】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<p>對於 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9yb3V0ZTUzLw==">Route 53<i class="fa fa-external-link-alt"></i></span>，只要能瞭解必備知識 DNS，與名稱解析相關的概念，就不會太困難。<br>由於 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9jbG91ZGZyb250Lw==">CloudFront<i class="fa fa-external-link-alt"></i></span> 設定項目較多，如果在初期階段過於深入研究，可能會因此感到挫折。</p>
+<p><img src="https://hackmd.io/_uploads/SyyLLsSZ6.png"></p>
+<h2 id="第-4-週：運算服務（Compute-Services）"><a href="#第-4-週：運算服務（Compute-Services）" class="headerlink" title="第 4 週：運算服務（Compute Services）"></a>第 4 週：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3doaXRlcGFwZXJzL2xhdGVzdC9hd3Mtb3ZlcnZpZXcvY29tcHV0ZS1zZXJ2aWNlcy5odG1s">運算服務（Compute Services）<i class="fa fa-external-link-alt"></i></span></h2><p>瞭解如何購買 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9lYzIv">EC2<i class="fa fa-external-link-alt"></i></span>，對於考試和實務都非常重要，這部分也須充分理解。<br>如果只是建立伺服器，可透過圖形使用介面（GUI）在一分鐘內搞定，而進一步架構和維護，瞭解 Linux 的基本知識和命令更為重要。</p>
+<p><img src="https://hackmd.io/_uploads/HyqIIiBZp.png"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9hdXRvc2NhbGluZy8=">Auto Scaling<i class="fa fa-external-link-alt"></i></span> 則需要瞭解各種擴展策略（Scaling Policies）的差異。</p>
+<p><img src="https://hackmd.io/_uploads/HJ_KUiBZa.png"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9lbGFzdGljYmVhbnN0YWxrLw==">Elastic Beanstalk<i class="fa fa-external-link-alt"></i></span><br>只需掌握服務概述，並試著實際運行即可（以下是 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L2VsYXN0aWNiZWFuc3RhbGsvbGF0ZXN0L2RnL2NvbmNlcHRzLXdlYnNlcnZlci5odG1s">Web 伺服器環境<i class="fa fa-external-link-alt"></i></span>，還有<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L2VsYXN0aWNiZWFuc3RhbGsvbGF0ZXN0L2RnL2NvbmNlcHRzLXdvcmtlci5odG1s">工作者環境<i class="fa fa-external-link-alt"></i></span>也需掌握）。</p>
+<p><img src="https://hackmd.io/_uploads/BJ6_LoSb6.png"></p>
+<h2 id="第-5-週：安全、身份和合規性（Security-Identity-and-Compliance）"><a href="#第-5-週：安全、身份和合規性（Security-Identity-and-Compliance）" class="headerlink" title="第 5 週：安全、身份和合規性（Security, Identity, and Compliance）"></a>第 5 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9hcmNoaXRlY3R1cmUvc2VjdXJpdHktaWRlbnRpdHktY29tcGxpYW5jZS8=">安全、身份和合規性（Security, Identity, and Compliance）<i class="fa fa-external-link-alt"></i></span></h2><p>AWS 除了以一般的密碼方式，還使用<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3JlZHNoaWZ0L2xhdGVzdC9kZy90X1JvbGVzLmh0bWw=">基於角色型的存取控制（RBAC）<i class="fa fa-external-link-alt"></i></span>功能進行權限管理。透過瞭解<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L0lBTS9sYXRlc3QvVXNlckd1aWRlL2lkLmh0bWw=">角色的概念<i class="fa fa-external-link-alt"></i></span>以及如何<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L0lBTS9sYXRlc3QvVXNlckd1aWRlL2FjY2Vzc19wb2xpY2llc19jcmVhdGUuaHRtbA==">建立 IAM 政策<i class="fa fa-external-link-alt"></i></span>，將能夠從容地處理權限錯誤等問題。</p>
+<p><img src="https://hackmd.io/_uploads/rkB9IoB-p.png"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L2NvZ25pdG8vbGF0ZXN0L2RldmVsb3Blcmd1aWRlL3doYXQtaXMtYW1hem9uLWNvZ25pdG8uaHRtbA==">Cognito<i class="fa fa-external-link-alt"></i></span> 是一項受管服務，用於控制對 Web 和行動應用程式的存取，提供使用者註冊和登入的身份驗證功能。</p>
+<p><img src="https://hackmd.io/_uploads/HyE3LoBbT.png"></p>
+<h2 id="第-6-週：資料庫（Database）"><a href="#第-6-週：資料庫（Database）" class="headerlink" title="第 6 週：資料庫（Database）"></a>第 6 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9wcm9kdWN0cy9kYXRhYmFzZXMv">資料庫（Database）<i class="fa fa-external-link-alt"></i></span></h2><p>瞭解如何區別 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9yZHMv">Relational Database Service（RDS）<i class="fa fa-external-link-alt"></i></span> 的 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9yZHMvZmVhdHVyZXMvbXVsdGktYXov">Multi AZ 部署<i class="fa fa-external-link-alt"></i></span> 和<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9yZHMvZmVhdHVyZXMvcmVhZC1yZXBsaWNhcy8=">讀取複本（Read Replica）<i class="fa fa-external-link-alt"></i></span>非常重要。。</p>
+<p><img src="https://hackmd.io/_uploads/SyNTUiB-T.png"></p>
+<p>此外，也需瞭解 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9keW5hbW9kYi8=">NoSQL 的 DynamoDB<i class="fa fa-external-link-alt"></i></span> 和記憶體資料庫的 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9lbGFzdGljYWNoZS8=">ElastiCache<i class="fa fa-external-link-alt"></i></span> 等，以及與傳統的<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSU5NyU5QyVFOCU4MSVBRiVFNSVCQyU4RiVFOCVCMyU4NyVFNiU5NiU5OSVFNSVCQSVBQiVFNyVBRSVBMSVFNyU5MCU4NiVFNyVCMyVCQiVFNyVCNSVCMQ==">關連式資料庫管理系統（RDBMS）<i class="fa fa-external-link-alt"></i></span>的不同之處。</p>
+<p><img src="https://hackmd.io/_uploads/SydgRdvbp.png"></p>
+<h2 id="第-7-週：儲存（Storage）"><a href="#第-7-週：儲存（Storage）" class="headerlink" title="第 7 週：儲存（Storage）"></a>第 7 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9wcm9kdWN0cy9zdG9yYWdlLw==">儲存（Storage）<i class="fa fa-external-link-alt"></i></span></h2><p>需要理解 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9zMy9zdG9yYWdlLWNsYXNzZXMv">Amazon Simple Storage Service（Amazon S3）儲存類別<i class="fa fa-external-link-alt"></i></span>，以及把握三種 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9zMy9zdG9yYWdlLWNsYXNzZXMvZ2xhY2llci8=">Glacier<i class="fa fa-external-link-alt"></i></span> 的特性。</p>
+<p><img src="https://hackmd.io/_uploads/r1IQDiHba.png"></p>
+<h2 id="第-8-週：管理和管控治理（Management-and-Governance）"><a href="#第-8-週：管理和管控治理（Management-and-Governance）" class="headerlink" title="第 8 週：管理和管控治理（Management and Governance）"></a>第 8 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9wcm9kdWN0cy9tYW5hZ2VtZW50LWFuZC1nb3Zlcm5hbmNlLw==">管理和管控治理（Management and Governance）<i class="fa fa-external-link-alt"></i></span></h2><p>在工作現場，通常需要設定 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3N5c3RlbXMtbWFuYWdlci9sYXRlc3QvdXNlcmd1aWRlL3Nlc3Npb24tbWFuYWdlci5odG1s">Session Manager<i class="fa fa-external-link-alt"></i></span>，因此需要能夠在不查看文件的情況下進行設定。</p>
+<p>儘管初學者可以透過 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3L1RlcmFfVGVybQ==">Teraterm<i class="fa fa-external-link-alt"></i></span> 的 SSH 連接來理解如何運作，但目前這種連接方式已經有點過時。</p>
+<p><img src="https://hackmd.io/_uploads/S1CMwoSWa.png"></p>
+<h2 id="第-9-週：容器、無伺服器運算、應用程式整合（Containers-and-Serverless-Computing-Application-Integration）"><a href="#第-9-週：容器、無伺服器運算、應用程式整合（Containers-and-Serverless-Computing-Application-Integration）" class="headerlink" title="第 9 週：容器、無伺服器運算、應用程式整合（Containers and Serverless Computing, Application Integration）"></a>第 9 週：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9jb250YWluZXJzLw==">容器<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9zZXJ2ZXJsZXNzLw==">無伺服器運算<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9wcm9kdWN0cy9hcHBsaWNhdGlvbi1pbnRlZ3JhdGlvbi8=">應用程式整合<i class="fa fa-external-link-alt"></i></span>（Containers and Serverless Computing, Application Integration）</h2><p>理解 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9lY3Mv">Elastic Container Service（ESC）<i class="fa fa-external-link-alt"></i></span>的結構至關重要。特別是理解<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L0FtYXpvbkVDUy9sYXRlc3QvZGV2ZWxvcGVyZ3VpZGUvdGFza19kZWZpbml0aW9ucy5odG1s">任務定義（Task Definition）<i class="fa fa-external-link-alt"></i></span>的必備知識 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vZW5naW5lL3JlZmVyZW5jZS9idWlsZGVyLw==">Dockerfile<i class="fa fa-external-link-alt"></i></span>。</p>
+<p><img src="https://hackmd.io/_uploads/BJ2bwsrWa.png"></p>
+<h2 id="第-10-週：分析、遷移、其他（Analytics-Migrations）"><a href="#第-10-週：分析、遷移、其他（Analytics-Migrations）" class="headerlink" title="第 10 週：分析、遷移、其他（Analytics, Migrations）"></a>第 10 週：分析、遷移、其他（Analytics, Migrations）</h2><p>需記住 <span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9raW5lc2lzL2RhdGEtc3RyZWFtcy8=">Kinesis Data Streams<i class="fa fa-external-link-alt"></i></span> 是即時的，<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9raW5lc2lzL2RhdGEtZmlyZWhvc2Uv">Firehose<i class="fa fa-external-link-alt"></i></span> 則幾乎是即時的，熟記這點或許對考試得分有所幫助。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9raW5lc2lzL2RhdGEtc3RyZWFtcy8=">Kinesis Data Streams<i class="fa fa-external-link-alt"></i></span> 是即時的：</p>
+<p><img src="https://hackmd.io/_uploads/HywNvsSWT.png"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9raW5lc2lzL2RhdGEtZmlyZWhvc2Uv">Kinesis Data Firehose<i class="fa fa-external-link-alt"></i></span> 是幾乎即時的：</p>
+<p><img src="https://hackmd.io/_uploads/HJDrDoSZT.png"></p>
+<h2 id="第-11〜12-週：SAA-認證模擬測驗"><a href="#第-11〜12-週：SAA-認證模擬測驗" class="headerlink" title="第 11〜12 週：SAA 認證模擬測驗"></a>第 11〜12 週：SAA 認證模擬測驗</h2><p>最後，建議參加「<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9jZXJ0aWZpY2F0aW9uL2NlcnRpZmllZC1zb2x1dGlvbnMtYXJjaGl0ZWN0LWFzc29jaWF0ZS8=">SAA - 解決方案架構師<i class="fa fa-external-link-alt"></i></span>」認證考試，作為知識的客觀證明。</p>
+<p>即使對完全沒有經驗的人來說，也能夠在三個月內取得認證資格。</p>
+<p>然而，除了取得認證以外，透過實際操作來取得實作技能並加深理解，將能夠提高在該領域解決問題的能力以及適應力，成為更有價值的技術人員」。</p>
+<p>測驗費用：16,500 日圓（含稅） = 150 USD<br>全年可以考試：可以線上或在最近的測試中心參加考試</p>
+<h3 id="練習-SAA-的注意事項"><a href="#練習-SAA-的注意事項" class="headerlink" title="練習 SAA 的注意事項"></a>練習 SAA 的注意事項</h3><p>建議使用符合以下條件的練習問題集：</p>
+<ul>
+<li>問題的質量是否達到正式考試水平</li>
+</ul>
+<p><strong>解答大量質量低下的問題等同是在浪費時間</strong>，應該避免花時間在不太重要的問題上。相對於盲目地解答大量質量低下的問題，透過多次解答正式考試水平的問題 3～4 次（大約 200 到 260 道問題），將能更有效地提高技能。</p>
+<ul>
+<li>解答是否易於理解</li>
+</ul>
+<p>為了使初學者更容易理解，<strong>除了文字以外，還應提供相關的圖片解說</strong>。<br>這將有助於更深入理解概念，並提升學習效率。</p>
+<ul>
+<li>是否有能夠提問的環境</li>
+</ul>
+<p>如果在學習過程中，無法妥善解決疑問，可能會成為進入下一個主題的障礙，導致學習進度緩慢。透過有一個能夠提問的環境，將能迅速解決疑問，以順利推進學習不掉，還可以防止失去動力。</p>
+<h2 id="最後"><a href="#最後" class="headerlink" title="最後"></a>最後</h2><p>感謝您看到最後！希望這個路線圖對於學習指標或公司培訓有所幫助。</p>
+<p>如果對路線圖有任何想法，請在 Qiita 的評論中，或透過 <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9Bd3Nza2lsbEMvc3RhdHVzLzE2MzY4NzczMzAyNDQzMjEyODA/cz0yMA==">Twitter<i class="fa fa-external-link-alt"></i></span> 發送私訊給筆者，期待聽到建設性的回饋！</p>
+<p>那麼！預祝擁有美好的 AWS Life！</p>
+<blockquote>
+<p>15th鐵人賽目錄傳送門：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEzNTU1OC9pcm9ubWFuLzYyOTA=">https://ithelp.ithome.com.tw/users/20135558/ironman/6290<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>2023鐵人賽</category>
+        <category>雲端篇</category>
+      </categories>
+      <tags>
+        <tag>ironman2023</tag>
+        <tag>Qiita</tag>
+        <tag>AWS</tag>
+        <tag>Roadmap</tag>
+      </tags>
+  </entry>
 </search>
