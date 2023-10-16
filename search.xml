@@ -25577,7 +25577,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <p>之所以會接觸到 Qiita 這個社群平台，主要是看到 2020 年這篇鐵人賽主題：<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDEyOTcxMS9pcm9ubWFuLzMyMjQ=">從 Qiita 看日本前端趨勢<i class="fa fa-external-link-alt"></i></span>。雖然這系列很可惜沒有完賽，但也很慶幸因為這個契機，能夠藉這個管道從日本人的角度探索各種技術知識。</p>
 <p>自己本身也自學過一點日文，希望能延續這個主題，透過參加這次鐵人賽作為動力，強迫自己累積更多翻譯經驗，同時又能精進前後端等各領域的知識，真是一石三鳥！</p>
 <h2 id="主題架構"><a href="#主題架構" class="headerlink" title="主題架構"></a>主題架構</h2><p>雖然標題包含「前端工程師」，但不代表主題會特別著重前端領域。在這為期三十天鐵人挑戰賽，希望能夠根據不同領域，挑選幾篇感興趣的內容進行翻譯，也許領域有點雜，還是希望能發揮工程師的雜食精神（？）把各種知識吞下，即使無法在一開始就全盤理解，先求有個知識背景，或許將來的自己有機會用上也說不定。</p>
-<p>內容預計將涵蓋以下主題，後續也可能進行增刪微調，之後會再回來補上文章連結：</p>
+<p>內容預計將涵蓋以下主題，後續也可能進行增刪微調：</p>
 <h3 id="非程式語言"><a href="#非程式語言" class="headerlink" title="非程式語言"></a>非程式語言</h3><ul>
 <li>入門篇</li>
 <li>豆知識篇</li>
@@ -25589,7 +25589,174 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <li>後端技術篇</li>
 <li>雲端篇</li>
 </ul>
-<p>…TBD</p>
+<h2 id="文章列表"><a href="#文章列表" class="headerlink" title="文章列表"></a>文章列表</h2><p>文章類別與連結，整理列表如下：</p>
+<blockquote>
+<p>本系列文章已同步更新至<a href="https://heidiliu2020.github.io/categories/2023%E9%90%B5%E4%BA%BA%E8%B3%BD/">個人部落格</a>。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Categories</th>
+<th>Blog</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMxNTIwNA==">Day1 - 前言與系列大綱<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-1/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMxOTcxOA==">Day2 - 寫給工程師的自我管理入門<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-2/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMTI0NQ==">Day3 - 工程師必備技能——Google 之力<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-3/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMTM5Nw==">Day4    - 寫給菜鳥工程師有關變數/函數/方法的英文命名規則<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-4/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMzEyMA==">Day5 - 解析惡名昭彰的滑動廣告<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-5/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMzgyMA==">Day6 - 你知道使用免費 Wi-Fi 時可能洩露機密訊息的途徑有哪些嗎<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-6/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyNDY3Ng==">Day7 - 為什麼軟體必須要版本升級<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-7/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyNTQ5MA==">Day8 - 鹽加密的鹽通常會存放在哪裡<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-8/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyNjE5OQ==">Day9 - 有魅力的 Repository 會如何撰寫 README.md<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-9/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyNjIzMQ==">Day10 - 透過圖文理解 S.O.L.I.D 原則<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-10/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyODEyMQ==">Day11 - 調查工程師的 alias 設定排行<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-11/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyODEyMA==">Day12 - 外國「為什麼日本無法像硬體時代一樣在軟體方面表現出色？」<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>豆知識篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-12/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyOTY1OA==">Day13 - 工程師邁向下一階段的學習方法<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>職涯篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-13/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMDM3Ng==">Day14 - 希望看到的工程師履歷撰寫方式<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>職涯篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-14/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMTE4OA==">Day15 - 面試官在面試工程師時真正想知道的事情 <i class="fa fa-external-link-alt"></i></span></td>
+<td><code>職涯篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-15/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMTgyMQ==">Day16 - Node.js 是什麼？為什麼大家都在使用？<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>前端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-16/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMjQ2NA==">Day17 - 告別 jQuery：現代開發不可或缺的 JavaScript 方法<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>前端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-17/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMzE3MA==">Day18 - 推薦給前端工程師的 Chrome 擴充功能<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>工具篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-18/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzMzc0NQ==">Day19 - 使用 Visual Studio Code 時絕對要安裝的擴充套件 Top20【2022年最新版】<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>工具篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-19/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNDQ3Mg==">Day20 - 馬上就能使用的免費 Web API 總覽【2023年最新版】<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>前端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-20/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNDY4MA==">Day21 - 日本數位廳的網站太扯了www<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>前端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-21/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNTYyNA==">Day22 - 程式設計最難的部分我認為是「估算成本」<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-22/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNjM1OQ==">Day23 - ChatGPT 使用方法總整理<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>工具篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-23/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNjg4Mg==">Day24 - 啊？你還在用 ChatGPT 嗎？ Bing 可以免費使用 GPT-4 喔！<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>工具篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-24/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNzQ5Mg==">Day25 - 成為具備需求定義～系統設計能力人才的文章<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>後端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-25/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNzg4Mw==">Day26 - 擁有 20 多年工程師經驗的我，在撰寫設計規格書時所注意的事情<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-26/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzODMwNQ==">Day27 - [常有的事]克服「卡住時，請立刻提問」的方法<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-27/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzODkwNQ==">Day28 - 事到如今問不出口的 Log 基礎和設計指南<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>後端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-28/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzOTQwMw==">Day29 - AWS Engineer Roadmap 2023<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>雲端篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-29/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzOTk3Mg==">Day30 - 對技術不感興趣有什麼錯？<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>職涯篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-30/">LINK</a></td>
+</tr>
+<tr>
+<td><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzOTk5OQ==">Day31 - 結語 &amp; 關於翻譯的一點心得<i class="fa fa-external-link-alt"></i></span></td>
+<td><code>入門篇</code></td>
+<td><a href="https://heidiliu2020.github.io/ironman-2023-day-31/">LINK</a></td>
+</tr>
+</tbody></table>
 <p>自己並非專職翻譯，用詞可能會無法完整傳達原文想表達的意境，若發現文章內有錯誤或需要改進的地方，還請讀者們留言指教，謝謝。</p>
 <p>那麼，雖然壓線在最後一天發文，期許自己能夠順利完賽，我們明天見！</p>
 ]]></content>
