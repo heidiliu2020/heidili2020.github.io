@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidiliu2020.github.io/ironman-2023-day-31/</loc>
+    
+    <lastmod>2023-10-16</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidiliu2020.github.io/ironman-2023-day-30/</loc>
     
     <lastmod>2023-10-16</lastmod>
@@ -1524,6 +1531,13 @@
   
   <url>
     <loc>https://heidiliu2020.github.io/tags/Roadmap/</loc>
+    <lastmod>2023-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heidiliu2020.github.io/tags/Translation/</loc>
     <lastmod>2023-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
