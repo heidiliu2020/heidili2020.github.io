@@ -31908,8 +31908,8 @@ Asia/Taipei<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 </ul>
 <h2 id="為何選擇-Next-js？"><a href="#為何選擇-Next-js？" class="headerlink" title="為何選擇 Next.js？"></a>為何選擇 Next.js？</h2><p>在使用任何新技術之前，都要先問為什麼會做出這個選擇，是否有解決實作上面臨的問題 <del>（畢竟面試也很常會被問到）</del>，先瞭解前因後果，也有助於掌握各種工具的使用時機。</p>
 <p>這裡我們可以從 React 提供的功能作為切入點，React 是由 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rL3JlYWN0">Facebook<i class="fa fa-external-link-alt"></i></span> 團隊所維護的 JavaScript 函式庫。</p>
-<p>Angular、React、Vue，也就是俗稱的前端三大框架，常用於快速開發單頁式應用程式（Single Page Application，SPA），可達到前後端分離，以及與提升使用者體驗等目的，例如 Gmail、Facebook 和 Netflix 等平台。</p>
-<p>然而，由於 SPA 是利用客戶端渲染<br>（CSR），由 JavaScript 動態產生內容，檢視原始碼會發現無法看到新增的內容，將導致 SEO（搜尋引擎最佳化）較差的問題；也因為初次載入頁面需下載大量的 JavaScript 檔案，使第一次渲染較為費時，反而降低使用者體驗。</p>
+<p>Angular、React、Vue，也就是俗稱的前端三大「框架」，常用於快速開發單頁式應用程式（Single Page Application，SPA），可達到前後端分離，以及提升使用者體驗等目的，例如 Gmail、Facebook 和 Netflix 等平台。</p>
+<p>然而，由於 SPA 是利用客戶端渲染（CSR）技術，由 JavaScript 動態產生內容，若檢視原始碼會發現無法看到新增的內容，這將導致 SEO（搜尋引擎最佳化）較差的問題；也因為初次載入頁面需下載大量的 JavaScript 檔案，使第一次渲染較為費時，反而降低使用者體驗。</p>
 <p>那該怎麼辦呢？</p>
 <p>只要第一個畫面改由伺服器端渲染（SSR），即可解決 SEO 問題，其他畫面仍維持使用者端渲染（CSR），減少伺服器運算負荷，如此不就能夠兩者兼得了嗎？</p>
 <p>React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置」等設定來實現 SSR，但相對來說門檻較高，需耗費較多成本學習。</p>
