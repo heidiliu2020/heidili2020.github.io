@@ -31977,4 +31977,214 @@ Asia/Taipei<span aria-hidden="true" class="line-numbers-rows"><span></span><span
         <tag>Next.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【學習筆記】Next.js 路由系統：App Router vs Page Router</title>
+    <url>/nextjs-app-router/</url>
+    <content><![CDATA[<p><img src="https://hackmd.io/_uploads/SkK9xkWqp.png" alt="Parallel Routes"></p>
+<blockquote>
+<p>Ref: <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZy9wYXJhbGxlbC1yb3V0ZXMjc3RyZWFtaW5n">Next.js - Parallel Routes<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>接續上篇文章 <a href="https://heidiliu2020.github.io/next-react-ssr/">【學習筆記】談談 Next.js：基於 React 的 SSR 框架</a>，初步瞭解 Next.js 這套框架的特性以及網頁渲染方式，本篇將實際建立 Next.js 專案，以及介紹 Page Router 與 APP Router 兩種路由系統的差異。</p>
+<span id="more"></span>
+
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>詳細步驟可參考<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvZ2V0dGluZy1zdGFydGVkL2luc3RhbGxhdGlvbg==">官方文件<i class="fa fa-external-link-alt"></i></span>，注意目前版本的 Next.js v14 需要安裝 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnLw==">Node.js v18.17<i class="fa fa-external-link-alt"></i></span> 或以上版本才支援。</p>
+<h3 id="nvm：Node-Version-Manager"><a href="#nvm：Node-Version-Manager" class="headerlink" title="nvm：Node Version Manager"></a>nvm：Node Version Manager</h3><p>若已經安裝過 Node.js 卻顯示版本不符，可透過 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL252bS1zaC9udm0=">nvm<i class="fa fa-external-link-alt"></i></span> 這項 Node.js 版本管理工具，在不同專案中切換 Node.js 版本。</p>
+<p>首先在終端機輸入下方指令安裝 nvm：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ curl -o- https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;nvm-sh&#x2F;nvm&#x2F;v0.39.1&#x2F;install.sh | bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>接著透過下方指令，即可安裝與套用指定版本的 Node.js：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ nvm install v18.17.0
+&#x2F;&#x2F; 安裝指定版本 Node.js
+ 
+$ nvm use v18.17.0
+&#x2F;&#x2F; 套用指定版本的 Node.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>也可透過以下指定確認目前版本，以及已安裝的版本：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ node -v
+&#x2F;&#x2F; 確認目前 Node.js 版本
+
+$ nvm ls
+&#x2F;&#x2F; 列出所有本機端已安裝的 Node.js 版本
+
+$ nvm ls-remote
+&#x2F;&#x2F; 列出目前遠端可使用的 Node.js 版本<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="專案建置"><a href="#專案建置" class="headerlink" title="專案建置"></a>專案建置</h3><p>依照下方指令建立 next 專案，在後方加上 <code>--ts</code> 或 <code>--typescript</code> 即可支援 TypeScript 語法：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ npx create-next-app
+or
+$ npx create-next-app --ts<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>接著會依序出現下列幾個提問，分別如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">What is your project named? my-app
+&#x2F;&#x2F; 專案名稱，格式需為英文小寫
+
+Would you like to use TypeScript? No &#x2F; Yes
+&#x2F;&#x2F; 是否支援 TypeScript
+
+Would you like to use ESLint? No &#x2F; Yes
+&#x2F;&#x2F; 是否使用 ESLint（用來規範 Coding Style 的套件）
+
+Would you like to use Tailwind CSS? No &#x2F; Yes
+&#x2F;&#x2F; 是否使用 Tailwind CSS
+
+Would you like to use &#96;src&#x2F;&#96; directory? No &#x2F; Yes
+&#x2F;&#x2F; 是否在 &#x2F;app 外加一層 src 資料夾
+
+Would you like to use App Router? (recommended) No &#x2F; Yes
+&#x2F;&#x2F; 是否使用 App Router 
+
+Would you like to customize the default import alias (@&#x2F;*)? No &#x2F; Yes
+&#x2F;&#x2F; 是否自訂 alias 調整預設的 baseURL 匯入路徑
+
+What import alias would you like configured? @&#x2F;*
+&#x2F;&#x2F; alias 預設使用 @ 是否修改<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>建置完成後，初始專案架構主要分成以下三大類：</p>
+<ul>
+<li>app：放置 components、pages 與 api 等檔案<ul>
+<li>layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元件</li>
+<li>page.tsx：在資料夾底下需包含 <code>page.tsx</code> 檔案，才會被定義為一個 route segment，如：<code>app/blog/page.tsx</code></li>
+<li>globals.css：定義全域樣式</li>
+</ul>
+</li>
+<li>public：放置靜態檔案，如圖片等<ul>
+<li>需要引入 <code>/public/next.svg</code> 檔案時，路徑可直接指向 <code>/next.svg</code></li>
+</ul>
+</li>
+<li>設定檔：包含 <code>next.config.js</code>、<code>tsconfig.json</code>、<code>package.json</code> 等用於設定專案配置的檔案</li>
+</ul>
+<p>接著輸入 <code>cd my-app</code> 指令移動到專案根目錄，再以 <code>npm run dev</code> 指令運行開發伺服器，進入 <code>http://localhost:3000/</code> 即可看到初始頁面如下，也就是 <code>app/page.tsx</code> 的內容：</p>
+<p><img src="https://hackmd.io/_uploads/ryQN1aXtT.png" alt="image"></p>
+<h2 id="Router-System-路由系統"><a href="#Router-System-路由系統" class="headerlink" title="Router System 路由系統"></a>Router System 路由系統</h2><p>過去我們在 React 專案中，曾使用 <code>react-router-dom</code> 這項套件來實現路由功能，詳細可參考這篇筆記：<a href="https://heidiliu2020.github.io/react-router/">[week 22] React：用 SPA 架構實作一個部落格（一）- Router</a>。</p>
+<p>由於 Next.js 使用基於檔案系統的路由（file-system based router），會依照專案的檔案結構自動定義路由。</p>
+<p>而根據版本不同，Next.js 提供兩種管理頁面路由的方式，分別是舊版本適用的 Pages Router 以及 v13 後推出的 App Router，兩者差異在於：</p>
+<ul>
+<li>Pages Router<ul>
+<li>定義頁面層級的路由</li>
+<li>所有元件為 React Client Component（客戶端元件）</li>
+<li>只能使用 Next.js 提供的預設規則，如：檔案名稱即為路徑</li>
+</ul>
+</li>
+<li>App Router<ul>
+<li>定義應用程式層級的路由</li>
+<li>所有元件預設為 React Server Component（伺服器端元件）</li>
+<li>可自定義路由規則，如：使用正則表達式匹配特定路徑</li>
+</ul>
+</li>
+</ul>
+<p>如上所言，在 App Router 中所有元件預設為 React Server Component（RSC），意思是由伺服器將 React Component 準備好，再傳給 Client 顯示在畫面上。</p>
+<p>而 RSC 的優缺點如下：</p>
+<ul>
+<li>優點<ul>
+<li>整合後端操作，如存取資料庫（DB）、讀取檔案（File System）</li>
+<li>降低資料間的依賴關係，改善請求瀑布流（Waterfall）導致的效能問題</li>
+<li>降低 JS Bundle Size 以提升頁面效能</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>無法使用 React Hooks</li>
+<li>無法使用瀏覽器 API</li>
+<li>無法操作 DOM 事件監聽</li>
+</ul>
+</li>
+</ul>
+<p>面對上述缺點，Next.js 可依照使用情境不同，將元件定義為 Server Component 或 Client Component。舉例來說，當某個元件需要使用 Hooks 管理時，可透過在程式碼開頭加上 <code>&#39;use client&#39;</code> 來標示元件類型，該元件底下的子元件也會自動視為 Client Component。</p>
+<p>但也因為如此，相較於 Page Router，新版的 App Router 學習曲線會較高，需瞭解 Server 如何運作，以及判斷哪些元件適合放在 Server 或 Client 端，在使用時須特別注意。</p>
+<p>介紹完 Page Router 和 App Router 之間的差異，接著談談兩者專案架構，以及對應路由的方式。</p>
+<h3 id="Page-Router：基於檔案的路由系統"><a href="#Page-Router：基於檔案的路由系統" class="headerlink" title="Page Router：基於檔案的路由系統"></a>Page Router：基於檔案的路由系統</h3><p>檔案架構示意：</p>
+<pre class="line-numbers language-none"><code class="language-none">└── pages
+    ├── index.tsx
+    ├── login.tsx
+    ├── api
+    │   └── user.tsx
+    ├── posts
+    │   └── [id].tsx
+    └── blog
+        ├── index.tsx
+        └── setting.tsx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>檔案與對應的頁面路由如下：</p>
+<ul>
+<li><code>pages/index.tsx</code> → <code>/</code></li>
+<li><code>pages/blog/index.tsx</code> → <code>/blog</code></li>
+<li><code>pages/blog/setting.tsx</code> → <code>/blog/setting</code></li>
+<li><code>pages/posts/[id].tsx</code>  → <code>/posts/[id]</code><ul>
+<li>檔名可作為動態路由的參數，透過 <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvcGFnZXMvYXBpLXJlZmVyZW5jZS9mdW5jdGlvbnMvdXNlLXJvdXRlcg==">useRoute<i class="fa fa-external-link-alt"></i></span> 這個 Hook 取得 route 相關資訊</li>
+</ul>
+</li>
+<li>呼叫 API：<code>page/api/user.tsx</code></li>
+</ul>
+<p>可參考官方部落格的這篇文章<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2Jsb2cvbGF5b3V0cy1yZmM=">《Layouts RFC》<i class="fa fa-external-link-alt"></i></span>，包含以下檔案對應頁面路由的示意圖：</p>
+<p><img src="https://hackmd.io/_uploads/B1-kgTiKp.png" alt="image"></p>
+<h3 id="App-Router：基於目錄的路由系統"><a href="#App-Router：基於目錄的路由系統" class="headerlink" title="App Router：基於目錄的路由系統"></a>App Router：基於目錄的路由系統</h3><p>目錄架構示意：</p>
+<pre class="line-numbers language-none"><code class="language-none">└── app
+    ├── blog
+    │   └── [slug]
+    │        └── page.tsx
+    ├── login
+    │   └── page.tsx
+    ├── @analytics
+    │   ├── page.tsx
+    │   ├── error.tsx
+    │   └── loading.tsx
+    ├── api
+    │   └── user
+    │       ├── index.ts
+    │       └── route.ts  
+    ├── components
+    │   ├── loading.tsx
+    │   └── button.tsx    
+    ├── globals.css
+    ├── layout.tsx
+    └── page.tsx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文件目錄與對應的頁面路由如下：</p>
+<ul>
+<li><code>app/page.tsx</code> → <code>/</code></li>
+<li><code>app/login/page.tsx</code> → <code>/login</code></li>
+<li><code>app/blog/[slug]/page.tsx</code> → <code>/blog/[slug]</code><ul>
+<li>目錄可作為動態路由的參數，並以 props 傳入元件</li>
+</ul>
+</li>
+<li>呼叫 API：<code>app/api/user/route.tsx</code></li>
+<li><code>@</code> 開頭的 folder 不會對路由造成影響：<ul>
+<li><code>app/@analytics/page.tsx</code> 實際渲染的路由為 /，這個特殊的檔案夾是用來切分同一個路由底下的不同邏輯區塊。</li>
+</ul>
+</li>
+</ul>
+<p>可參考<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZw==">官方文件<i class="fa fa-external-link-alt"></i></span>，以下是目錄對應頁面路由的示意圖：</p>
+<p><img src="https://hackmd.io/_uploads/SyBL03sK6.png" alt="image"></p>
+<h2 id="File-Convention-檔案規則"><a href="#File-Convention-檔案規則" class="headerlink" title="File Convention 檔案規則"></a>File Convention 檔案規則</h2><p>詳細的路由架構，可參考<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZw==">官方文件<i class="fa fa-external-link-alt"></i></span>，也可以直接在頁面左上方切換查看 App Router 或 Page Router。</p>
+<p>此外，Next.js 有設定<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZyNmaWxlLWNvbnZlbnRpb25z">保留字<i class="fa fa-external-link-alt"></i></span>給特殊檔案，以建立具有特定行為的 UI，以下副檔名為 <code>.js</code>、<code>.jsx</code>、<code>.tsx</code> 可視專案而定：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9sYXlvdXQ=">layout.js<i class="fa fa-external-link-alt"></i></span>：定義共用 UI 元件</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy90ZW1wbGF0ZQ==">template.js<i class="fa fa-external-link-alt"></i></span>：類似 layout，處理需要重新渲染的 Layout UI</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9wYWdl">page.js<i class="fa fa-external-link-alt"></i></span>：建立路由的主要 UI，並使路徑可公開存取</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9yb3V0ZQ==">route.js<i class="fa fa-external-link-alt"></i></span>：建立伺服器端 API 端點</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9sb2FkaW5n">loading.js<i class="fa fa-external-link-alt"></i></span>：在載入時顯示載入中 UI</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9ub3QtZm91bmQ=">not-found.js<i class="fa fa-external-link-alt"></i></span>：處理 notFound error（HTTP 404）或任何未知路徑錯誤</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9lcnJvcg==">error.js<i class="fa fa-external-link-alt"></i></span>：顯示錯誤 UI，必須為 Client Components</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZy9lcnJvci1oYW5kbGluZw==">global-error.js<i class="fa fa-external-link-alt"></i></span>：全域錯誤 UI</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2FwaS1yZWZlcmVuY2UvZmlsZS1jb252ZW50aW9ucy9kZWZhdWx0">default.js<i class="fa fa-external-link-alt"></i></span>：處理 <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZy9wYXJhbGxlbC1yb3V0ZXM=">Parallel Routes（平行路由）<i class="fa fa-external-link-alt"></i></span> 遇到渲染問題時，用來替代顯示的 UI（fallback UI）</li>
+</ul>
+<p>以下是官方文件提供的路由範例架構，可以看到父層和子層均有 layout、error 以及 loading 元件，用來處理各自的邏輯：</p>
+<p><img src="https://hackmd.io/_uploads/BJGCACec6.png" alt="router image"></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>在查路由相關的資料時，會發現因為 App Router 是 Next.js v13 後才推出的路由系統，架構上和 Page Router 不相容，規則也有所差異，因此特別列出來進行比較，實際開發時使用預設的 App Router 即可。</p>
+<p>接下來預計會實作一個的部落格，希望包含簡易的登入機制、API 串接、顯示文章列表等功能。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li>Next.js 官方文件：<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24=">App Router<i class="fa fa-external-link-alt"></i></span> &amp; <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvcGFnZXM=">Page Router<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnR5cGVhcnQuY2MvbmV4dGpzMTMtcXVpY2stZ3VpZGUv">快速入門 Next.Js 13 App Router, RSC(React Server Component), SEO相關說明<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMzNDQyNQ==">Day 19 - Parallel Routes 路由的平行宇宙 - iT 邦幫忙<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>React</tag>
+        <tag>Next.js</tag>
+      </tags>
+  </entry>
 </search>
