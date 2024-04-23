@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://hackmd.io/_uploads/ry0hNlrZA.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/HyMMe1Sb0.png">
 <meta property="article:published_time" content="2024-04-23T08:44:00.000Z">
-<meta property="article:modified_time" content="2024-04-23T08:45:29.479Z">
+<meta property="article:modified_time" content="2024-04-23T08:51:25.124Z">
 <meta property="article:author" content="Heidi Liu">
 <meta property="article:tag" content="Front-End">
 <meta property="article:tag" content="React">
@@ -237,7 +237,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2024-04-23 16:44:00 / 修改時間：16:45:29" itemprop="dateCreated datePublished" datetime="2024-04-23T16:44:00+08:00">2024-04-23</time>
+              <time title="創建時間：2024-04-23 16:44:00 / 修改時間：16:51:25" itemprop="dateCreated datePublished" datetime="2024-04-23T16:44:00+08:00">2024-04-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -346,20 +346,24 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>(3) 在 <code>next.config.js</code> 設定檔引入使用 <code>next-i18next</code>：</p>
-<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> i18n <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'./next-i18next.config'</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// next.config.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> i18n <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'./next-i18next.config'</span><span class="token punctuation">)</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   i18n<span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>(4) 修改 <code>src/pages/_app.tsx</code> 檔案，以 <code>appWithTranslation</code> 這個 <span class="exturl" data-url="aHR0cHM6Ly9sZWdhY3kucmVhY3Rqcy5vcmcvZG9jcy9oaWdoZXItb3JkZXItY29tcG9uZW50cy5odG1s">HOC（高階組件）<i class="fa fa-external-link-alt"></i></span>包住整個 App：</p>
-<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> appWithTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'next-i18next'</span>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// src/pages/_app.tsx</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> appWithTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'next-i18next'</span>
 
 <span class="token keyword">const</span> <span class="token function-variable function">MyApp</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> Component<span class="token punctuation">,</span> pageProps <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
   <span class="token operator">&lt;</span>Component <span class="token punctuation">&#123;</span><span class="token operator">...</span>pageProps<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
 <span class="token punctuation">)</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">appWithTranslation</span><span class="token punctuation">(</span>MyApp<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">appWithTranslation</span><span class="token punctuation">(</span>MyApp<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="【補充】Higher-Order-Components（HOC，高階組件）"><a href="#【補充】Higher-Order-Components（HOC，高階組件）" class="headerlink" title="【補充】Higher-Order Components（HOC，高階組件）"></a>【補充】Higher-Order Components（HOC，高階組件）</h4><ul>
 <li>HOC 並不是 React 提供的 API，而是和 JavsScript 中的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSVBQiU5OCVFOSU5OCVCNiVFNSU4NyVCRCVFNiU5NSVCMA==">Higher Order Function（高階函式）<i class="fa fa-external-link-alt"></i></span>類似的一個函式，高階函式可代入另一個函式作為參數，最終回傳一個函式作為結果</li>
@@ -511,7 +515,7 @@ export default resources;<span aria-hidden="true" class="line-numbers-rows"><spa
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>其實一開始研究實作 i18n 功能時，看到官方文件整個頭昏眼花，Next.js 內建的路由實作上又稍嫌複雜，React 生態不像 Angular 框架能直接引入內建功能實作，反而有很多種套件能夠選擇使用。</p>
-<p>但問題來了，套件引入使用下來卻噴一堆 Error，才發現到由於 Next.js 路由系統架構，需搭配支援 App Router 或 Page Router 的套件使用，這部分覺得官方文件說明稍嫌複雜，其實想成是在實作 React 多國語系功能就單純許多；雖然文中提及的 Page Router 還沒有機會實作，概念上還有點模糊，但還是先寫下筆記留作紀錄。</p>
+<p>但問題來了，套件引入使用下來卻噴一堆 Error，才發現到由於 Next.js 路由系統架構，需搭配支援 App Router 或 Page Router 的套件使用，其實想成是在實作 React 多國語系功能就單純許多；雖然文中提及的 Page Router 還沒有機會實作，概念上還有點模糊，但還是先寫下筆記留作紀錄。</p>
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MjM4NjE5ODkwOTkzNzU4MjYz">一篇文章了解如何在 Next.js 中集成 i18n 国际化（含踩坑及开发配置）<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qaWFuZ3NodXV1LmNvbS9kb2NzL1JlYWN0L25leHQtaTE4bi8=">【Next】i18n使用 - JohnShu Blog<i class="fa fa-external-link-alt"></i></span></li>
