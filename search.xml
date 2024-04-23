@@ -32248,4 +32248,261 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
         <tag>Next.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【學習筆記】Next.js 實現多國語系：react-i18next &amp; next-i18next</title>
+    <url>/nextjs-i18next/</url>
+    <content><![CDATA[<p><img src="https://hackmd.io/_uploads/ry0hNlrZA.png" alt="i18n"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在開發網站時，多國語系功能（i18n）是很常見的需求，能根據使用者需求切換網站顯示的語言。這陣子在 Next.js 專案中意外踩了幾個坑，寫下學習筆記作為紀錄。</p>
+<span id="more"></span>
+
+<p>本篇分為以下幾個段落：</p>
+<ul>
+<li>What is i18n？</li>
+<li>如何實作<ul>
+<li>Next.js 內建：路由層級</li>
+<li>選擇套件：react-i18next &amp; next-i18next</li>
+</ul>
+</li>
+<li>使用範例<ul>
+<li>SSG/SSR：使用 next-i18next</li>
+<li>SPA：使用 react-i18next</li>
+</ul>
+</li>
+</ul>
+<h2 id="What-is-i18n？"><a href="#What-is-i18n？" class="headerlink" title="What is i18n？"></a>What is i18n？</h2><p>i18n 是由  internationalization（國際化）英文縮寫而來，18 代表 i 到 n 之間的字母數量。</p>
+<p>透過 i18n 多國語系功能，能夠讓不同語系的使用者，根據需求選定顯示語言和格式，減少在地化的時間成本，達到國際化的目的。</p>
+<h2 id="如何實作"><a href="#如何實作" class="headerlink" title="如何實作"></a>如何實作</h2><h3 id="Next-js-內建：路由層級"><a href="#Next-js-內建：路由層級" class="headerlink" title="Next.js 內建：路由層級"></a>Next.js 內建：路由層級</h3><p>在介紹套件之前，先介紹 Next.js 官方<span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvcGFnZXMvYnVpbGRpbmcteW91ci1hcHBsaWNhdGlvbi9yb3V0aW5nL2ludGVybmF0aW9uYWxpemF0aW9u">內建 i18n 功能<i class="fa fa-external-link-alt"></i></span>，透過路由層級（routing）設定不同語言轉至不同路徑，設定範例如下：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// next.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  i18n<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    locales<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'en'</span><span class="token punctuation">,</span> <span class="token string">'zh'</span><span class="token punctuation">,</span> <span class="token string">'jp'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    defaultLocale<span class="token operator">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根據上述配置，即可搭配 <code>next/link</code>、<code>next/router</code>，根據路由顯示對應的語言，路徑如下：</p>
+<ul>
+<li><code>/posts</code>：預設為 <code>en</code></li>
+<li><code>/zh/blog</code></li>
+<li><code>/jp/blog</code></li>
+</ul>
+<p>其中需注意 <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvcGFnZXMvYnVpbGRpbmcteW91ci1hcHBsaWNhdGlvbi9yb3V0aW5nL2ludGVybmF0aW9uYWxpemF0aW9u">Page Router<i class="fa fa-external-link-alt"></i></span> 和 <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vcm91dGluZy9pbnRlcm5hdGlvbmFsaXphdGlvbg==">App Router<i class="fa fa-external-link-alt"></i></span> 在路由設定上有所不同，詳細可參考官方提供的範例，以下介紹常見的 i18n 套件作為範例。</p>
+<blockquote>
+<p>關於 Page router 和 App router 的差別，可參考之前的筆記：<a href="https://heidiliu2020.github.io/nextjs-app-router/">【學習筆記】Next.js 路由系統：App Router vs Page Router</a></p>
+</blockquote>
+<h3 id="選擇套件：react-i18next-amp-next-i18next"><a href="#選擇套件：react-i18next-amp-next-i18next" class="headerlink" title="選擇套件：react-i18next &amp; next-i18next"></a>選擇套件：react-i18next &amp; next-i18next</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2kxOG5leHQvbmV4dC1pMThuZXh0">i18next/next-i18next<i class="fa fa-external-link-alt"></i></span><ul>
+<li>支援 Page Router </li>
+<li>支援 SSG/SSR</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2kxOG5leHQvcmVhY3QtaTE4bmV4dA==">i18next/react-i18next<i class="fa fa-external-link-alt"></i></span><ul>
+<li>支援 APP Router，因此 Next.js v13 後的版本建議搭配使用</li>
+<li>支援 SPA</li>
+</ul>
+</li>
+</ul>
+<p>可參考上述兩種套件的 npm 下載數：</p>
+<p><img src="https://hackmd.io/_uploads/HyMMe1Sb0.png" alt="next-i18n"></p>
+<h2 id="使用範例"><a href="#使用範例" class="headerlink" title="使用範例"></a>使用範例</h2><h3 id="SSR：使用-next-i18next"><a href="#SSR：使用-next-i18next" class="headerlink" title="SSR：使用 next-i18next"></a>SSR：使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2kxOG5leHQvbmV4dC1pMThuZXh0">next-i18next<i class="fa fa-external-link-alt"></i></span></h3><p>(1) 首先是安裝套件：</p>
+<pre class="line-numbers language-none"><code class="language-none">npm install next-i18next --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>(2) 在根目錄新增 <code>next-i18next.config.js</code> 設定檔：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// next-i18next.config.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  i18n<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    locales<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'en'</span><span class="token punctuation">,</span> <span class="token string">'jp'</span><span class="token punctuation">,</span> <span class="token string">'zh'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    defaultLocale<span class="token operator">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  fallbackLng<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'en'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(3) 在 <code>next.config.js</code> 設定檔引入使用 <code>next-i18next</code>：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> i18n <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'./next-i18next.config'</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  i18n<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(4) 修改 <code>src/pages/_app.tsx</code> 檔案，以 <code>appWithTranslation</code> 這個 <span class="exturl" data-url="aHR0cHM6Ly9sZWdhY3kucmVhY3Rqcy5vcmcvZG9jcy9oaWdoZXItb3JkZXItY29tcG9uZW50cy5odG1s">HOC（高階組件）<i class="fa fa-external-link-alt"></i></span>包住整個 App：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> appWithTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'next-i18next'</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">MyApp</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> Component<span class="token punctuation">,</span> pageProps <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>Component <span class="token punctuation">&#123;</span><span class="token operator">...</span>pageProps<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">appWithTranslation</span><span class="token punctuation">(</span>MyApp<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="【補充】Higher-Order-Components（HOC，高階組件）"><a href="#【補充】Higher-Order-Components（HOC，高階組件）" class="headerlink" title="【補充】Higher-Order Components（HOC，高階組件）"></a>【補充】Higher-Order Components（HOC，高階組件）</h4><ul>
+<li>HOC 並不是 React 提供的 API，而是和 JavsScript 中的 <span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSVBQiU5OCVFOSU5OCVCNiVFNSU4NyVCRCVFNiU5NSVCMA==">Higher Order Function（高階函式）<i class="fa fa-external-link-alt"></i></span>類似的一個函式，高階函式可代入另一個函式作為參數，最終回傳一個函式作為結果</li>
+<li>而 HOC 則是可代入元件（Component）作為參數，並回傳一個新的元件</li>
+<li>目的是將共用邏輯放在 HOC 中，變動的部分由 Component 的 props 和 state 傳入</li>
+</ul>
+<p>(5) 在 <code>public/locales/&lt;locale&gt;/&lt;namespace&gt;.json</code> 路徑加入多國語系檔案，架構參考如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">.
+└── public
+    └── locales
+        ├── en
+        |   ├── posts.json
+        |   └── common.json
+        ├── jp
+        |   ├── posts.json
+        |   └── common.json
+        └── zh
+            ├── posts.json
+            └── common.json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(6) 在頁面引入語系檔案：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> serverSideTranslations <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'next-i18next/serverSideTranslations'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getStaticProps</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> locale <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token operator">...</span><span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token function">serverSideTranslations</span><span class="token punctuation">(</span>locale<span class="token punctuation">,</span> <span class="token punctuation">[</span>
+        <span class="token string">'common'</span><span class="token punctuation">,</span>
+        <span class="token string">'posts'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token comment">// Will be passed to the page component as props</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(7) 即可在頁面引入 <code>useTranslation</code> hook 使用，注意需從 <code>next-i18next</code> 引用：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'next-i18next'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">Header</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> t <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useTranslation</span><span class="token punctuation">(</span><span class="token string">'common'</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">></span><span class="token punctuation">&#123;</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'home-title'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="SPA：使用-react-i18next"><a href="#SPA：使用-react-i18next" class="headerlink" title="SPA：使用 react-i18next"></a>SPA：使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2kxOG5leHQvcmVhY3QtaTE4bmV4dA==">react-i18next<i class="fa fa-external-link-alt"></i></span></h3><p>非 SSR、SSG 環境，只需直接引用 <code>react-i18next</code> 套件即可。</p>
+<p>(1) 首先是安裝套件：</p>
+<pre class="line-numbers language-none"><code class="language-none">npm install react-i18next i18next --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>(2) 建立 <code>app/i18n</code> 目錄，放置管理 i18n 的相關檔案（初始 i18n、翻譯文檔），範例如下：</p>
+<ul>
+<li><code>i18n/index.ts</code>：初始 i18n 相關設定</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// i18n/index.ts</span>
+
+<span class="token keyword">import</span> i18n <span class="token keyword">from</span> <span class="token string">'i18next'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> initReactI18next <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-i18next'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> resources <span class="token keyword">from</span> <span class="token string">'./lang-resource'</span><span class="token punctuation">;</span>
+
+i18n
+  <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>initReactI18next<span class="token punctuation">)</span>  <span class="token comment">// 初始化設定</span>
+  <span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    resources<span class="token punctuation">,</span>            <span class="token comment">// 引入定義語系與對應文字的 json 檔</span>
+    lng<span class="token operator">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>            <span class="token comment">// 預設語系為 en</span>
+    fallbackLng<span class="token operator">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>    <span class="token comment">// 若找不到對應語系則回傳 en</span>
+    defaultNS<span class="token operator">:</span> <span class="token string">'common'</span><span class="token punctuation">,</span>
+    preload<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'en'</span><span class="token punctuation">,</span> <span class="token string">'ja'</span><span class="token punctuation">,</span> <span class="token string">'zh'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    ns<span class="token operator">:</span> <span class="token string">'common'</span><span class="token punctuation">,</span>
+    interpolation<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      escapeValue<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">parseMissingKeyHandler</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token punctuation">,</span>
+    react<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      useSuspense<span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> i18n<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>i18n/lang-resource</code>：定義語系與對應文字的 json 檔</li>
+</ul>
+<pre class="line-numbers language-jsonld" data-language="jsonld"><code class="language-jsonld">&#x2F;&#x2F; i18n&#x2F;lang-resource
+
+const resources &#x3D; &#123;
+  en: &#123;
+    common: &#123;
+        &#39;login&#39;: &#39;Login&#39;,
+        &#39;logout&#39;: &#39;Log out&#39;,
+      &#125;,
+  &#125;,
+  ja: &#123;
+    common: &#123;
+        &#39;login&#39;: &#39;ログイン&#39;,
+        &#39;logout&#39;: &#39;ログアウト&#39;, 
+    &#125;,
+  &#125;,
+  zh: &#123;
+    common: &#123;
+        &#39;login&#39;: &#39;登入&#39;,
+        &#39;logout&#39;: &#39;登出&#39;, 
+    &#125;,
+  &#125;,
+&#125;;
+
+export default resources;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(3) 設定完成後，即可在 <code>app/pages/layout</code> 引入 <code>i18n/index.ts</code> 使用：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// app/pages/layout</span>
+
+<span class="token keyword">import</span> <span class="token string">'./i18n'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">RootLayout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以 <code>app/pages/login/page.tsx</code> 為例：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// app/pages/login/page.tsx</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-i18next'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Login</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> t <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useTranslation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>p<span class="token operator">></span><span class="token punctuation">&#123;</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'login'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+            <span class="token operator">&lt;</span>p<span class="token operator">></span><span class="token punctuation">&#123;</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'logout'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token punctuation">)</span>    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(4) 若要切換語系，可使用 <code>i18n.changeLanguage</code> 方法：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// app/component/header.tsx</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useTranslation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-i18next'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">Header</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> t<span class="token punctuation">,</span> i18n <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">useTranslation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+  <span class="token keyword">const</span> <span class="token function-variable function">handleChangeLanguage</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      i18n<span class="token punctuation">.</span><span class="token function">changeLanguage</span><span class="token punctuation">(</span><span class="token string">'en'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>其實一開始研究實作 i18n 功能時，看到官方文件整個頭昏眼花，Next.js 內建的路由實作上又稍嫌複雜，React 生態不像 Angular 框架能直接引入內建功能實作，反而有很多種套件能夠選擇使用。</p>
+<p>但問題來了，套件引入使用下來卻噴一堆 Error，才發現到由於 Next.js 路由系統架構，需搭配支援 App Router 或 Page Router 的套件使用，這部分覺得官方文件說明稍嫌複雜，其實想成是在實作 React 多國語系功能就單純許多；雖然文中提及的 Page Router 還沒有機會實作，概念上還有點模糊，但還是先寫下筆記留作紀錄。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MjM4NjE5ODkwOTkzNzU4MjYz">一篇文章了解如何在 Next.js 中集成 i18n 国际化（含踩坑及开发配置）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qaWFuZ3NodXV1LmNvbS9kb2NzL1JlYWN0L25leHQtaTE4bi8=">【Next】i18n使用 - JohnShu Blog<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMzAxNw==">【DAY20】React Native - 多語系切換 (react-i18next)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMwODMxNQ==">使用 next-i18next 實作中英文多語系 - Modern Next.js Blog 系列 #28<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Front-End</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>React</tag>
+        <tag>Next.js</tag>
+        <tag>i18n</tag>
+      </tags>
+  </entry>
 </search>

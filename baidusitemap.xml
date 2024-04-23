@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heidiliu2020.github.io/nextjs-i18next/</loc>
+    <lastmod>2024-04-23</lastmod>
+  </url>
+  <url>
     <loc>https://heidiliu2020.github.io/nextjs-window-error/</loc>
     <lastmod>2024-03-18</lastmod>
   </url>
