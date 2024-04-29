@@ -32188,26 +32188,31 @@ What import alias would you like configured? @&#x2F;*
       </tags>
   </entry>
   <entry>
-    <title>【學習筆記】如何修復 &quot;Window is not defined&quot; error in Next.js</title>
+    <title>【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&amp;「use client &amp; missing generateStaticParams() error」</title>
     <url>/nextjs-window-error/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>事情發生在開發 Next.js APP，要實作 Google 登入驗證，需要使用 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1dpbmRvdw==">Window<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL0RvY3VtZW50">Document<i class="fa fa-external-link-alt"></i></span> 物件時，發現程式會報出以下錯誤：</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇主要用來記錄 Next.js 開發過程採的坑，後續也會不定期更新：</p>
+<ul>
+<li>問題一：如何修復 <code>&quot;Window is not defined&quot;</code> error</li>
+<li>問題二：在 use client 頁面實作動態路由顯示 <code>missing generateStaticParams()</code> error</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="問題一：如何修復-“Window-is-not-defined”-error-in-Next-js"><a href="#問題一：如何修復-“Window-is-not-defined”-error-in-Next-js" class="headerlink" title="問題一：如何修復 “Window is not defined” error in Next.js"></a>問題一：如何修復 “Window is not defined” error in Next.js</h2><p>事情發生在開發 Next.js APP，要實作 Google 登入驗證，需要使用 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1dpbmRvdw==">Window<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL0RvY3VtZW50">Document<i class="fa fa-external-link-alt"></i></span> 物件時，發現程式會報出以下錯誤：</p>
 <pre class="line-numbers language-none"><code class="language-none">ReferenceError: window is not defined
 
 or
 
 ReferenceError: document is not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span id="more"></span>
-
-<h2 id="發生原因"><a href="#發生原因" class="headerlink" title="發生原因"></a>發生原因</h2><p>這是由於 Next.js 預設為伺服器渲染（Server-side Rendering），會在 Node.js 環境下預渲染頁面，並將生成的 HTML 內容發送給 Client 端。</p>
+<h3 id="發生原因"><a href="#發生原因" class="headerlink" title="發生原因"></a>發生原因</h3><p>這是由於 Next.js 預設為伺服器渲染（Server-side Rendering），會在 Node.js 環境下預渲染頁面，並將生成的 HTML 內容發送給 Client 端。</p>
 <p>因此渲染過程是在 Server 端而非在瀏覽器中，由於程式無法識別 Window / Document 物件而回報上述 Error。</p>
-<h2 id="如何解決？"><a href="#如何解決？" class="headerlink" title="如何解決？"></a>如何解決？</h2><p>解決方法可透過條件渲染（Conditional Rendering），確保 Next.js 只在 Client 端執行指定的程式碼，</p>
+<h3 id="如何解決？"><a href="#如何解決？" class="headerlink" title="如何解決？"></a>如何解決？</h3><p>解決方法可透過條件渲染（Conditional Rendering），確保 Next.js 只在 Client 端執行指定的程式碼，</p>
 <p>可透過以下兩種方式來實現：</p>
 <ul>
 <li>檢查 window 是否存在</li>
 <li>使用 useEffect hook</li>
 </ul>
-<h3 id="1-檢查-window-是否存在"><a href="#1-檢查-window-是否存在" class="headerlink" title="(1) 檢查 window 是否存在"></a>(1) 檢查 window 是否存在</h3><p>判斷 window 是否存在，確定在瀏覽器中才執行指定的程式碼：</p>
+<h4 id="1-檢查-window-是否存在"><a href="#1-檢查-window-是否存在" class="headerlink" title="(1) 檢查 window 是否存在"></a>(1) 檢查 window 是否存在</h4><p>判斷 window 是否存在，確定在瀏覽器中才執行指定的程式碼：</p>
 <pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token function-variable function">isBrowser</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">typeof</span> window <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> window <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -32216,7 +32221,7 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h3 id="2-使用-useEffect-等-Hooks"><a href="#2-使用-useEffect-等-Hooks" class="headerlink" title="(2) 使用 useEffect 等 Hooks"></a>(2) 使用 useEffect 等 Hooks</h3><p>透過 useEffect 等方法，可確保程式碼只會在 Client 端執行：</p>
+<h4 id="2-使用-useEffect-等-Hooks"><a href="#2-使用-useEffect-等-Hooks" class="headerlink" title="(2) 使用 useEffect 等 Hooks"></a>(2) 使用 useEffect 等 Hooks</h4><p>透過 useEffect 等方法，可確保程式碼只會在 Client 端執行：</p>
 <pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token string">'use client'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> useEffect <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 
@@ -32232,10 +32237,78 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTUxNTEwNDEvd2luZG93LWlzLW5vdC1kZWZpbmVkLWluLW5leHQtanMtcmVhY3QtYXBw">Window is not defined in Next.js React app<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcy9yZWFjdCUyMHdpbmRvdyUyMGlzJTIwbm90JTIwZGVmaW5lZCUyMG5leHQlMjBqcw==">如何修复Next.js中的 “window is not defined”？ - 掘金<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h2 id="問題二：在-use-client-頁面實作動態路由顯示-missing-generateStaticParams-error"><a href="#問題二：在-use-client-頁面實作動態路由顯示-missing-generateStaticParams-error" class="headerlink" title="問題二：在 use client 頁面實作動態路由顯示 missing generateStaticParams() error"></a>問題二：在 use client 頁面實作動態路由顯示 <code>missing generateStaticParams()</code> error</h2><p>事情發生在開發 Next.js APP，實作 dynamic routing 時（如：<code>server/[evo]/page.tsx</code>），會顯示以下錯誤：</p>
+<p><img src="https://hackmd.io/_uploads/HJ8MieYbA.png" alt="error"></p>
+<p>上述錯誤訊息中的<code>&quot;output: export&quot;</code>，是 Next.js 提供支援 <span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vZGVwbG95aW5nL3N0YXRpYy1leHBvcnRz">Static Exports（靜態導出）<i class="fa fa-external-link-alt"></i></span>，透過在設定檔 <code>next.config.js</code> 加上參數：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/** @type &#123;import('next').NextConfig&#125; */</span>
+<span class="token keyword">const</span> nextConfig <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  output<span class="token operator">:</span> <span class="token string">'export'</span><span class="token punctuation">,</span> <span class="token comment">// Outputs a Single-Page Application (SPA)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> nextConfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如此一來，即可在 <code>next build</code> 建置時實現 SPA （single-page application），將會在 <code>out</code> 資料夾底下生成靜態檔案，將每個路由分解為單獨的 HTML 檔案，避免在 Client 端載入不必要的 JS 程式碼，減少 bundle 大小以提高頁面效能。</p>
+<h3 id="發生原因-1"><a href="#發生原因-1" class="headerlink" title="發生原因"></a>發生原因</h3><p>但在 Next.js 若想要實現 Dynamic Routes（動態路由），必須加上 <code>generateStaticParams()</code> 方法，這段 function 只能在 Server Component 執行，在 Client Component 並不支援。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vZGVwbG95aW5nL3N0YXRpYy1leHBvcnRzI3Vuc3VwcG9ydGVkLWZlYXR1cmVz">官方文件（Deploying: Static Exports | Next.js）<i class="fa fa-external-link-alt"></i></span> 也提到 App Routing 若想要 Dynamic Routes 必須搭配「只能在 SSR 運行的 <code>generateStaticParams()</code>」：</p>
+<p><img src="https://hackmd.io/_uploads/S1xrigt-A.png" alt="unsupported"></p>
+<h3 id="如何解決？-1"><a href="#如何解決？-1" class="headerlink" title="如何解決？"></a>如何解決？</h3><p>如果想要輸出 SPA，又希望能在 <code>&#39;use client&#39;</code> 情境中實現動態路由，則元件拆成兩個部分實作：</p>
+<ul>
+<li>在 Server Component 引入 <code>generateStaticParams()</code> 方法，以實現動態路由</li>
+<li>接著引入 Client Component，即可使用 Hooks</li>
+</ul>
+<p>以下是範例程式碼，詳細可參考這篇文章<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BnaXZ2ZW1lZWUvdXNhZ2Utb2YtZ2VuZXJhdGVzdGF0aWNwYXJhbXMtd2l0aC11c2UtY2xpZW50LWEwNTljMjNmNzMxNg==">《usage of generateStaticParams with use client | by Vivi - Medium》<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li><code>server/[evo]/page.tsx</code>：在 Server Component 引入 <code>generateStaticParams()</code> 方法，以實現動態路由</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// server/[evo]/page.tsx</span>
+
+<span class="token keyword">import</span> EvoPage<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Props <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"."</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">generateStaticParams</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> <span class="token string">'test'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> <span class="token string">'stage'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> <span class="token string">'public'</span> <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">ServerEvoPage</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> params <span class="token punctuation">&#125;</span><span class="token operator">:</span> Props<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[ServerEvoPage] params'</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>EvoPage params<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> params<span class="token punctuation">.</span>evo <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>server/[evo]/index.tsx</code>：在上述 Server Component 引入 Client Component，即可使用 Hooks：</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// server/[evo]/index.tsx</span>
+
+<span class="token string">'use client'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">Props</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  params<span class="token operator">:</span> <span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">EvoPage</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> params <span class="token punctuation">&#125;</span><span class="token operator">:</span> Props<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// const params = usePathname();</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[EvoPage] params: '</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+ <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        This <span class="token keyword">is</span> Client Component<span class="token punctuation">.</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="參考資料-1"><a href="#參考資料-1" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZlcmNlbC9uZXh0LmpzL2lzc3Vlcy80NjczNQ==">[NEXT-1049] use client with generateStaticParams will opt out of static generation #46735<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZlcmNlbC9uZXh0LmpzL2lzc3Vlcy80ODAyMg==">[NEXT-1030] output: ‘export’ with use client in dynamic routes doesn’t work #48022<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZlcmNlbC9uZXh0LmpzL2lzc3Vlcy81NDM5Mw==">App Router with output: export does not support useParams() on client #54393<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueXVhbnN1ZG9uZy5uZXQvZG9jdW1lbnQvTmV4dEpzLzM1LiVFOSU5RCU5OSVFNiU4MCU4MSVFNSVBRiVCQyVFNSU4NyVCQS5odG1s">NextJs-静态导出<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDMyMjI2MQ==">Day 19 - Next.js 13 App Router 動態路由 Dynamic Routes &amp; getStaticParams()<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 ]]></content>
       <categories>

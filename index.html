@@ -310,7 +310,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/nextjs-window-error/" class="post-title-link" itemprop="url">【學習筆記】如何修復 "Window is not defined" error in Next.js</a>
+            <a href="/nextjs-window-error/" class="post-title-link" itemprop="url">【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&「use client & missing generateStaticParams() error」</a>
         </h2>
 
         <div class="post-meta">
@@ -319,10 +319,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2024-03-18 17:47:01 / 修改時間：17:48:22" itemprop="dateCreated datePublished" datetime="2024-03-18T17:47:01+08:00">2024-03-18</time>
+              <time title="創建時間：2024-03-18 17:47:01" itemprop="dateCreated datePublished" datetime="2024-03-18T17:47:01+08:00">2024-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-04-29 17:17:00" itemprop="dateModified" datetime="2024-04-29T17:17:00+08:00">2024-04-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -342,13 +348,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>917</span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 分鐘</span>
+              <span>3 分鐘</span>
             </span>
 
         </div>
@@ -360,12 +366,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>事情發生在開發 Next.js APP，要實作 Google 登入驗證，需要使用 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL1dpbmRvdw==">Window<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQVBJL0RvY3VtZW50">Document<i class="fa fa-external-link-alt"></i></span> 物件時，發現程式會報出以下錯誤：</p>
-<pre class="line-numbers language-none"><code class="language-none">ReferenceError: window is not defined
-
-or
-
-ReferenceError: document is not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇主要用來記錄 Next.js 開發過程採的坑，後續也會不定期更新：</p>
+<ul>
+<li>問題一：如何修復 <code>&quot;Window is not defined&quot;</code> error</li>
+<li>問題二：在 use client 頁面實作動態路由顯示 <code>missing generateStaticParams()</code> error</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/nextjs-window-error/#more" rel="contents">
