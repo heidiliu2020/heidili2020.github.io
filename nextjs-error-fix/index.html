@@ -30,15 +30,15 @@
 
   <meta name="description" content="前言這篇主要用來記錄 Next.js 開發過程採的坑，後續也會不定期更新：  問題一：如何修復 &quot;Window is not defined&quot; error 問題二：在 use client 頁面實作動態路由顯示 missing generateStaticParams() error">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&amp;「use client &amp; missing generateStaticParams() error」">
-<meta property="og:url" content="https://heidiliu2020.github.io/nextjs-window-error/index.html">
+<meta property="og:title" content="【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」、「use client &amp; missing generateStaticParams() error」">
+<meta property="og:url" content="https://heidiliu2020.github.io/nextjs-error-fix/index.html">
 <meta property="og:site_name" content="前端新米">
 <meta property="og:description" content="前言這篇主要用來記錄 Next.js 開發過程採的坑，後續也會不定期更新：  問題一：如何修復 &quot;Window is not defined&quot; error 問題二：在 use client 頁面實作動態路由顯示 missing generateStaticParams() error">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://hackmd.io/_uploads/HJ8MieYbA.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/S1xrigt-A.png">
 <meta property="article:published_time" content="2024-03-18T09:47:01.000Z">
-<meta property="article:modified_time" content="2024-04-29T09:17:00.852Z">
+<meta property="article:modified_time" content="2024-04-29T09:24:00.125Z">
 <meta property="article:author" content="Heidi Liu">
 <meta property="article:tag" content="Front-End">
 <meta property="article:tag" content="React">
@@ -46,7 +46,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hackmd.io/_uploads/HJ8MieYbA.png">
 
-<link rel="canonical" href="https://heidiliu2020.github.io/nextjs-window-error/">
+<link rel="canonical" href="https://heidiliu2020.github.io/nextjs-error-fix/">
 
 
 <script id="page-configurations">
@@ -59,7 +59,7 @@
   };
 </script>
 
-  <title>【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&「use client & missing generateStaticParams() error」 | 前端新米</title>
+  <title>【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」、「use client & missing generateStaticParams() error」 | 前端新米</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6F0SL2XTQY"></script>
     <script data-pjax>
@@ -212,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/nextjs-window-error/">
+    <link itemprop="mainEntityOfPage" href="https://heidiliu2020.github.io/nextjs-error-fix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/65410665?s=460&u=887bd602944dcf78b90f3a880b03aec4e086728a&v=4">
@@ -225,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&「use client & missing generateStaticParams() error」
+          【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」、「use client & missing generateStaticParams() error」
         </h1>
 
         <div class="post-meta">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-04-29 17:17:00" itemprop="dateModified" datetime="2024-04-29T17:17:00+08:00">2024-04-29</time>
+                <time title="修改時間：2024-04-29 17:24:00" itemprop="dateModified" datetime="2024-04-29T17:24:00+08:00">2024-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,7 +345,7 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
 <h3 id="發生原因-1"><a href="#發生原因-1" class="headerlink" title="發生原因"></a>發生原因</h3><p>但在 Next.js 若想要實現 Dynamic Routes（動態路由），必須加上 <code>generateStaticParams()</code> 方法，這段 function 只能在 Server Component 執行，在 Client Component 並不支援。</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvYXBwL2J1aWxkaW5nLXlvdXItYXBwbGljYXRpb24vZGVwbG95aW5nL3N0YXRpYy1leHBvcnRzI3Vuc3VwcG9ydGVkLWZlYXR1cmVz">官方文件（Deploying: Static Exports | Next.js）<i class="fa fa-external-link-alt"></i></span> 也提到 App Routing 若想要 Dynamic Routes 必須搭配「只能在 SSR 運行的 <code>generateStaticParams()</code>」：</p>
 <p><img src="https://hackmd.io/_uploads/S1xrigt-A.png" alt="unsupported"></p>
-<h3 id="如何解決？-1"><a href="#如何解決？-1" class="headerlink" title="如何解決？"></a>如何解決？</h3><p>如果想要輸出 SPA，又希望能在 <code>&#39;use client&#39;</code> 情境中實現動態路由，則元件拆成兩個部分實作：</p>
+<h3 id="如何解決？-1"><a href="#如何解決？-1" class="headerlink" title="如何解決？"></a>如何解決？</h3><p>如果想要輸出 SPA，又希望能在 <code>&#39;use client&#39;</code> 情境中實現動態路由，則需要將元件拆成兩個部分實作：</p>
 <ul>
 <li>在 Server Component 引入 <code>generateStaticParams()</code> 方法，以實現動態路由</li>
 <li>接著引入 Client Component，即可使用 Hooks</li>
@@ -377,21 +377,22 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
 <pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// server/[evo]/index.tsx</span>
 
 <span class="token string">'use client'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">Props</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   params<span class="token operator">:</span> <span class="token punctuation">&#123;</span> evo<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">EvoPage</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> params <span class="token punctuation">&#125;</span><span class="token operator">:</span> Props<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token comment">// const params = usePathname();</span>
   <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'[EvoPage] params: '</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>data<span class="token punctuation">,</span> setData<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     
- <span class="token keyword">return</span> <span class="token punctuation">(</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
     <span class="token operator">&lt;</span>div<span class="token operator">></span>
         This <span class="token keyword">is</span> Client Component<span class="token punctuation">.</span>
     <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <h3 id="參考資料-1"><a href="#參考資料-1" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
@@ -686,9 +687,9 @@ window.addEventListener('pjax:success', () => {
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://heidiliu2020.github.io/nextjs-window-error/";
-    this.page.identifier = "nextjs-window-error/";
-    this.page.title = "【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」&「use client & missing generateStaticParams() error」";
+    this.page.url = "https://heidiliu2020.github.io/nextjs-error-fix/";
+    this.page.identifier = "nextjs-error-fix/";
+    this.page.title = "【學習筆記】Next.js 錯誤修復紀錄： 「Window is not defined」、「use client & missing generateStaticParams() error」";
     this.language = "zh_TW"; 
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
