@@ -5583,7 +5583,7 @@ items<span class="token punctuation">.</span>duck <span class="token operator">=
 <span class="token comment">// "2"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="for…of：遍歷「陣列」的-value"><a href="#for…of：遍歷「陣列」的-value" class="headerlink" title="for…of：遍歷「陣列」的 value"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvU3RhdGVtZW50cy9mb3IuLi5vZg==">for…of<i class="fa fa-external-link-alt"></i></span>：遍歷「陣列」的 value</h2><p>語法如下：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span>variable <span class="token keyword">of</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span>variable <span class="token keyword">of</span> array<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// 遍歷的是 value</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
