@@ -32583,4 +32583,93 @@ ReferenceError: document is not defined<span aria-hidden="true" class="line-numb
         <tag>Next.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【學習筆記】JavaScript 的浮點數計算、平方根</title>
+    <url>/javascript-floating-number/</url>
+    <content><![CDATA[<p>最近又開始用 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZXdhcnMuY29tL2Rhc2hib2FyZA==">Codewars<i class="fa fa-external-link-alt"></i></span> 來練習刷題，也嘗試開一個 Repository：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlaWRpbGl1MjAyMC9jb2Rld2Fycy1jaGFsbGVuZ2Vz">codewars-challenges<i class="fa fa-external-link-alt"></i></span> 記錄作答結果，蠻喜歡這種能夠慢慢升級的感覺，答題結束還能參考其他人的解法，才恍然大悟原來還有更簡潔的思路。</p>
+<p>發現自己對於一些 JavaScript 函式使用還是不太熟，把之前寫過的筆記重新複習過，本篇主要整理 JS 常見的內建函式，列表如下：</p>
+<span id="more"></span>
+
+<ul>
+<li>Math.floor(x)：無條件捨去，回傳「小於等於」所給數字的最大整數</li>
+<li>Bitwise NOT (~)：位元反向運算子（波浪號）</li>
+<li>Math.ceil(x)：無條件進位，回傳「大於等於」所給數字的最小整數</li>
+<li>Math.round(x)：四捨五入</li>
+<li>toFixed(x)：四捨六入五留雙</li>
+<li>Math.sqrt(x)：返回一個數的平方根</li>
+<li>Math.abs(x)：返回一個數的絕對值</li>
+</ul>
+<h2 id="Math-floor-x-：無條件捨去，回傳「小於等於」所給數字的最大整數"><a href="#Math-floor-x-：無條件捨去，回傳「小於等於」所給數字的最大整數" class="headerlink" title="Math.floor(x)：無條件捨去，回傳「小於等於」所給數字的最大整數"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aC9mbG9vcg==">Math.floor(x)<i class="fa fa-external-link-alt"></i></span>：無條件捨去，回傳「小於等於」所給數字的最大整數</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 0</span>
+Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 4</span>
+Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">7.004</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 7</span>
+Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// -1</span>
+Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// -4</span>
+Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">7.004</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// -8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Bitwise-NOT-：位元反向運算子（波浪號）"><a href="#Bitwise-NOT-：位元反向運算子（波浪號）" class="headerlink" title="Bitwise NOT (~)：位元反向運算子（波浪號）"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvT3BlcmF0b3JzL0JpdHdpc2VfTk9U">Bitwise NOT<i class="fa fa-external-link-alt"></i></span> (<code>~</code>)：位元反向運算子（波浪號）</h2><ul>
+<li>Bitwise NOT（<code>~</code>）作用是將數字 <code>x</code> 轉換為 <code>-(x + 1)</code></li>
+<li>Double Bitwise NOT(<code>~~</code>)：雙位元元反向運算子（兩個波浪號），對正數的作用類似 <code>Math.floor(x)</code> 的無條件捨去，但對負數則結果不同</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">~</span><span class="token number">10</span>    <span class="token comment">// -11</span>
+<span class="token operator">~</span><span class="token operator">-</span><span class="token number">10</span>   <span class="token comment">// 9</span>
+<span class="token operator">~</span><span class="token number">10.5</span>  <span class="token comment">// -11</span>
+<span class="token operator">~</span><span class="token operator">-</span><span class="token number">10.5</span> <span class="token comment">// 9</span>
+
+<span class="token operator">~</span><span class="token operator">~</span><span class="token number">10</span>    <span class="token comment">// 10</span>
+<span class="token operator">~</span><span class="token operator">~</span><span class="token operator">-</span><span class="token number">10</span>   <span class="token comment">// -10</span>
+<span class="token operator">~</span><span class="token operator">~</span><span class="token number">10.5</span>  <span class="token comment">// 10</span>
+<span class="token operator">~</span><span class="token operator">~</span><span class="token operator">-</span><span class="token number">10.5</span> <span class="token comment">// -10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Math-ceil-x-：無條件進位，回傳「大於等於」所給數字的最小整數"><a href="#Math-ceil-x-：無條件進位，回傳「大於等於」所給數字的最小整數" class="headerlink" title="Math.ceil(x)：無條件進位，回傳「大於等於」所給數字的最小整數"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aC9jZWls">Math.ceil(x)<i class="fa fa-external-link-alt"></i></span>：無條件進位，回傳「大於等於」所給數字的最小整數</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token number">.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 1</span>
+Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 4</span>
+Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token number">7.004</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 8</span>
+Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// -0</span>
+Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">7.004</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// -7</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Math-round-x-：四捨五入"><a href="#Math-round-x-：四捨五入" class="headerlink" title="Math.round(x)：四捨五入"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aC9yb3VuZA==">Math.round(x)<i class="fa fa-external-link-alt"></i></span>：四捨五入</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token number">20.49</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 20</span>
+Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token number">20.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 21</span>
+Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">20.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// -20</span>
+Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">20.51</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// -21</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="toFixed-x-：四捨六入五留雙"><a href="#toFixed-x-：四捨六入五留雙" class="headerlink" title="toFixed(x)：四捨六入五留雙"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTnVtYmVyL3RvRml4ZWQ=">toFixed(x)<i class="fa fa-external-link-alt"></i></span>：四捨六入五留雙</h2><ul>
+<li>以字串返回，精確至「小數點後」的數字，小數部分依指定長度補充零</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.23</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// '1.23'</span>
+<span class="token number">1.234</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.23'</span>
+<span class="token number">1.235</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.24'</span>
+<span class="token number">1.236</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.24'</span>
+<span class="token number">1.244</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.24'</span>
+<span class="token number">1.245</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.25'</span>
+<span class="token number">1.246</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// '1.25'</span>
+
+<span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>     <span class="token comment">// '36.0000'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="Math-sqrt-x-：返回一個數的平方根"><a href="#Math-sqrt-x-：返回一個數的平方根" class="headerlink" title="Math.sqrt(x)：返回一個數的平方根"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aC9zcXJ0">Math.sqrt(x)<i class="fa fa-external-link-alt"></i></span>：返回一個數的平方根</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 1.4142135623730951</span>
+Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 2</span>
+Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// NaN</span>
+Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Math-abs-x-：返回一個數的絕對值"><a href="#Math-abs-x-：返回一個數的絕對值" class="headerlink" title="Math.abs(x)：返回一個數的絕對值"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTWF0aC9hYnM=">Math.abs(x)<i class="fa fa-external-link-alt"></i></span>：返回一個數的絕對值</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">difference</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">difference</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 2</span>
+<span class="token function">difference</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 2</span>
+<span class="token function">difference</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wamNoZW5kZXIuZGV2L2phdmFzY3JpcHQvanMtb3BlcmF0b3Iv">[JS] JavaScript 運算子（Operator）<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5hdWEuY29tLnR3L2Jsb2dnZXIvP1BpZD0xMTcz">JavaScript 四捨五入、無條件捨去、無條件進位<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1bGkudHcvMjAyMi8wMy8xNC9qYXZhc2NyaXB0LW51bWJlci8=">使用 JavaScript 的數字時的常見錯誤<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>Front-End</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
 </search>
