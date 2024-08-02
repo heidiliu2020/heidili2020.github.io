@@ -55,12 +55,12 @@ date: 2021-10-11 13:16:00
 - Object-oriented-features 物件導向特性
 - Compile-time errors 編譯錯誤
 
-具體而言，TypeScript 和 JavsCript 的差別在哪呢？以下舉簡單的例子說明：
+具體而言，TypeScript 和 JavaScript 的差別在哪呢？以下舉簡單的例子說明：
 
 原生 JavaScript：
 
 ```javascript=
-function sayHello {
+function sayHello(person) {
     return 'Hello, ' + person;
 }
 

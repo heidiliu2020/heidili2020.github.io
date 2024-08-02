@@ -158,7 +158,7 @@ for (const index in items) {
 語法如下：
 
 ```javascript=
-for (variable in object) {
+for (variable of array) {
   // 遍歷的是 value
 }
 ```
